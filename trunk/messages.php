@@ -3,11 +3,6 @@
  * @author ivan@lanin.org
  *
  */
-$dsn['host'] = 'localhost';
-$dsn['name'] = 'kateglo';
-$dsn['user'] = 'root';
-$dsn['pass'] = 'raz68bdg';
-
 $msg = array(
 	'search' => 'Cari',
 	'new_flag' => '***baru***',
