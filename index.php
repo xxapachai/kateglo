@@ -8,6 +8,7 @@ ini_set('include_path', $base_dir . '/pear/');
 define(LF, "\n");
 
 require_once('config.php');
+require_once('messages.php');
 require_once('class_db.php');
 require_once('class_form.php');
 
@@ -70,7 +71,7 @@ function show_phrase()
 				merge_phrase_list($phrase['root'], 'root_phrase'));
 		}
 		$return .= '</table>' . LF;
-		
+
 		// definition
 		$return .= sprintf('<h2>%1$s</h2>' . LF, $msg['definition']);
 		$defs = $phrase['definition'];
@@ -87,7 +88,7 @@ function show_phrase()
 			}
 			$return .= '</ol>' . LF;
 		}
-		
+
 		// relation and derivation
 		$return .= show_phrase_rd($phrase, 'relation', 'related_phrase');
 		$return .= show_phrase_rd($phrase, 'derivation', 'derived_phrase');
@@ -158,10 +159,10 @@ function show_form()
 	if (!$phrase) $is_new = true;
 	$url = './?phrase=' . ($phrase ? $_GET['phrase'] : '') . '&action=form';
 	if ($is_new) $phrase['phrase'] = $_GET['phrase'];
-	
+
 	$form = new form('phrase_form', null, $url);
 	$form->setup();
-	
+
 	// main elements
 	$form->addElement('text', 'phrase', $msg['phrase'],
 		array('size' => 40, 'maxlength' => '255'));
@@ -176,9 +177,9 @@ function show_form()
 	$return .= $form->beginForm();
 	$title = !$is_new ? $phrase['phrase'] :
 		($_GET['phrase'] ? $_GET['phrase'] : $msg['new_flag']);
-	$return .= sprintf('<h1>%1$s</h1>', $title);	
+	$return .= sprintf('<h1>%1$s</h1>', $title);
 	$return .= sprintf('<p><a href="%1$s">%2$s</a></p>',
-		$is_new ? './' : './?phrase=' . $_GET['phrase'], $msg['cancel']);	
+		$is_new ? './' : './?phrase=' . $_GET['phrase'], $msg['cancel']);
 	$template = '<table>
 		<tr><td>%1$s:</td><td>%2$s</td></tr>
 		<tr><td>%3$s:</td><td>%4$s</td>
@@ -193,38 +194,38 @@ function show_form()
 	// definition
 	$return .= show_sub_form(&$form, &$phrase,
 		array(
-			'def_uid' => array('type' => 'hidden'), 
+			'def_uid' => array('type' => 'hidden'),
 			'def_num' => array('type' => 'text', 'width' => '1%',
-				'option1' => array('size' => 3, 'maxlength' => 5)), 
+				'option1' => array('size' => 3, 'maxlength' => 5)),
 			'discipline' => array('type' => 'select', 'width' => '1%',
-				'option1' => $db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name')), 
+				'option1' => $db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name')),
 			'def_text' => array('type' => 'text', 'width' => '50%',
 				'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
 			'sample' => array('type' => 'text', 'width' => '50%',
 				'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
 		'definition', 'definition', 'def_count');
-	
+
 	// relation
 	$return .= show_sub_form(&$form, &$phrase,
 		array(
-			'rel_uid' => array('type' => 'hidden'), 
+			'rel_uid' => array('type' => 'hidden'),
 			'rel_type' => array('type' => 'select', 'width' => '1%',
-				'option1' => $db->get_row_assoc('SELECT * FROM relation_type', 'rel_type', 'rel_type_name')), 
+				'option1' => $db->get_row_assoc('SELECT * FROM relation_type', 'rel_type', 'rel_type_name')),
 			'related_phrase' => array('type' => 'text', 'width' => '99%',
 				'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
 		'relation', 'all_relation', 'rel_count');
-	
+
 	// derivation
 	$return .= show_sub_form(&$form, &$phrase,
 		array(
-			'drv_uid' => array('type' => 'hidden'), 
+			'drv_uid' => array('type' => 'hidden'),
 			'drv_type' => array('type' => 'select', 'width' => '1%',
-				'option1' => $db->get_row_assoc('SELECT * FROM derivation_type', 'drv_type', 'drv_type_name')), 
+				'option1' => $db->get_row_assoc('SELECT * FROM derivation_type', 'drv_type', 'drv_type_name')),
 			'derived_phrase' => array('type' => 'text', 'width' => '99%',
 				'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
 		'derivation', 'all_derivation', 'drv_count');
-		
-	
+
+
 	// end
 	$form->applyFilter('__ALL__', 'trim');
 	$return .= $def_hidden;
@@ -279,7 +280,7 @@ function show_sub_form(&$form, &$phrase, $field_def, $name, $phrase_field, $coun
 	$hidden_field .= '<input name="' . $count_name . '" type="hidden" value="' . $def_count . '" />' . LF;
 	$return .= '</table>' . LF;
 	$return .= $hidden_field;
-	return($return);	
+	return($return);
 }
 
 /**
@@ -303,7 +304,7 @@ function show_search()
 
 /**
  * Get phrase
- * 
+ *
  * @return Phrase structure
  */
 function get_phrase()
@@ -326,11 +327,11 @@ function get_phrase()
 			$db->_db->quote($_GET['phrase']), $db->_db->quote($class_name));
 		$rows = $db->get_rows($query);
 		$phrase['definition'] = $rows;
-		
+
 		// derivation and relation
 		get_phrase_rd(&$phrase, 'derivation', 'drv_type', 'derived_phrase');
 		get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase');
-		
+
 		// root phrase
 		$query = sprintf('SELECT a.*
 			FROM derivation a
@@ -387,7 +388,7 @@ function get_phrase_rd(&$phrase, $table, $key_field, $sort_phrase, $reverse = fa
 
 /**
  * Save phrase update
- * 
+ *
  * @return unknown_type
  */
 function save_form()
@@ -423,14 +424,14 @@ function save_form()
 	}
 	//die($query);
 	$db->exec($query);
-	
+
 	save_sub_form('definition', 'def_uid', 'def_count', 'phrase',
 		array('def_num', 'def_text'), array('discipline', 'sample'));
 	save_sub_form('relation', 'rel_uid', 'rel_count', 'root_phrase',
 		array('rel_type', 'related_phrase'));
 	save_sub_form('derivation', 'drv_uid', 'drv_count', 'root_phrase',
 		array('drv_type', 'derived_phrase'));
-		
+
 	redir('./?phrase=' . $_POST['phrase']);
 }
 
@@ -447,7 +448,7 @@ function save_sub_form($table, $uid, $count_field, $phrase_field, $required, $op
 	{
 		$sql_field = '';
 		$sql_value = '';
-		$sql_update = ''; 
+		$sql_update = '';
 		$posted_uid = $uid . '_' . $i;
 		// check if any of the fields are empty
 		$is_empty = false;
