@@ -1,16 +1,18 @@
 <?php
 /**
- * @author ivan@lanin.org
+ * Common database function wrapper
  *
+ * @author ivan@lanin.org
  */
 require_once('MDB2.php');
+
 class db
 {
 	var $dsn;
 	var $num_rows;
 
 	var $_db;
-	
+
 	/**
 	 * @param $dsn
 	 * @return Void
@@ -27,7 +29,7 @@ class db
 	 * Return array of rows and columns:
 	 * - Rows are zero-based index array
 	 * - Each contains associative array of columns
-	 *  
+	 *
 	 * @param $query string
 	 * @return Array of rows
 	 */
@@ -40,7 +42,7 @@ class db
 
 	/**
 	 * Return first row of result as associative array of columns
-	 *  
+	 *
 	 * @param $query string
 	 * @return Array of columns
 	 */
@@ -52,33 +54,38 @@ class db
 
 	/**
 	 * Return all row as associative array of key and value
-	 *  
+	 *
 	 * @param $query string
 	 * @return Array of columns
 	 */
 	function get_row_assoc($query, $key, $value, $has_empty = true)
 	{
 		$rows = $this->get_rows($query);
-		if ($has_empty) $return[''] = '';
+		if ($has_empty) $ret[''] = '';
 		if ($this->num_rows > 0)
 		{
 			for ($i = 0; $i < $this->num_rows; $i++)
 			{
-				$return[$rows[$i][$key]] = $rows[$i][$value];
+				$ret[$rows[$i][$key]] = $rows[$i][$value];
 			}
 		}
-		return($return);
+		return($ret);
 	}
-	
+
 	/**
 	 * Execute a query
-	 * 
+	 *
 	 * @param $query
 	 * @return unknown_type
 	 */
 	function exec($query)
 	{
 		$this->_db->exec($query);
+	}
+
+	function quote($value)
+	{
+		return($this->_db->quote($value));
 	}
 };
 ?>

@@ -1,41 +1,46 @@
 <?php
 /**
- * @author ivan@lanin.org
+ * Common form function wrapper
  *
+ * @author ivan@lanin.org
  */
 require_once('HTML/QuickForm.php');
+
 class form extends HTML_QuickForm
 {
+	var $msg;
+
     /**
      * @return unknown_type
      */
-    function setup()
+    function setup($msg)
     {
-    	$this->setJsWarnings('Ada kesalahan pada informasi yang dimasukkan.', 'Harap perbaiki isian tersebut.');
+		$this->msg = $msg;
+    	$this->setJsWarnings($msg['form_err_pre'], $msg['form_err_post']);
     }
-    
+
 	/**
 	 * @param $element
 	 * @return HTML code of the element
 	 */
-	function getElementHtml($element)
+	function get_element($element)
 	{
 		return($this->getElement($element)->toHtml());
 	}
-	
+
 	/**
 	 * @return unknown_type
 	 */
-	function beginForm()
+	function begin_form()
 	{
 		$form_array = $this->toArray();
 		return('<form' . $form_array['attributes'] . '>' . LF);
 	}
-	
+
 	/**
 	 * @return unknown_type
 	 */
-	function endForm()
+	function end_form()
 	{
 		$form_array = $this->toArray();
 		return($form_array['javascript']. LF . '</form>' . LF);
