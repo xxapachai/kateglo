@@ -16,7 +16,6 @@ The license for Kateglo is GFL which should be found in the source code.
 
 So much to be listed :)
 
-* Login and logs
 * Dynamic addition of definition, etc
 * One phrase has different lexical class
 * Reference
@@ -34,6 +33,7 @@ So much to be listed :)
 
 === 0.0.2 (13 May 2009) ===
 
+* Implement basic logging
 * Implement basic authentication
 * Trim submitted value before quoting
 * Class for phrase
