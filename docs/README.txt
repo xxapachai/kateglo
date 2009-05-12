@@ -6,6 +6,12 @@ words KAmus (dictionary), TEsaurus (thesaurus), and GLOsarium (glossary).
 
 The license for Kateglo is GFL which should be found in the source code.
 
+== Credits ==
+
+* Ivan Lanin <ivan at lanin dot org>
+* Romi Hardiyanto
+* All Bahtera mailing list members
+
 == To do ==
 
 So much to be listed :)
