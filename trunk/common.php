@@ -41,28 +41,57 @@ function login($username = null, $status = null, &$auth = null)
  */
 function show_header()
 {
-	global $msg, $auth;
+	global $msg, $auth, $db;
+	global $_GET;
 
 	$form = new form('search_form', 'get');
 	$form->setup($msg);
-	$form->addElement('text', 'phrase', $msg['enter_phrase']);
-	$form->addElement('submit', 'search', $msg['search']);
+	$form->addElement('text', 'phrase', $msg['enter_phrase'], array('style'=>'height:20px;'));
+	$form->addElement('select', 'mod', null,
+		array('dict' => 'Kamus', 'glo' => 'Glosarium'),
+		array('style'=>'height:20px;', 'onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
+		);
+	$form->addElement('select', 'dc', null,
+		$db->get_row_assoc('SELECT discipline, discipline_name FROM discipline', 'discipline', 'discipline_name'),
+		array('style'=>'height:20px;' . ($_GET['mod'] != 'glo' ? 'display:none;' : ''))
+		);
+	$form->addElement('select', 'lang', null,
+		$db->get_row_assoc('SELECT lang, lang_name FROM language', 'lang', 'lang_name'),
+		array('style'=>'height:20px;' . ($_GET['mod'] != 'glo' ? 'display:none;' : ''))
+		);
+	$form->addElement('submit', 'search', $msg['search_button']);
 
-	// navigation
-	$ret .= '<div style="float:right;">';
-	$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['home'], './');
-	$ret .= ' | ';
-	if ($auth->checkAuth())
-		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['logout'], './?mod=auth&action=logout');
-	else
-		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=auth&action=login');
-	$ret .= '</div>';
+	$ret .= $form->begin_form();
+	$ret .= '<table cellpadding="0" cellspacing="0" width="100%"><tr>' . LF;
+
+	// logo
+	$ret .= '<td width="1%">' . LF;
+	$ret .= '<a href="./"><img src="images/logo.png" width="32" height="32" alt="Kateglo" title="Kateglo" /></a>' . LF;
+	$ret .= '</td>' . LF;
 
 	// search form
-	$ret .= $form->begin_form();
-	$ret .= $form->get_element('phrase');
-	$ret .= $form->get_element('search');
+	$ret .= '<td><table cellpadding="0" cellspacing="0"><tr>' . LF;
+	$template = '<td style="padding-right:2px;">%1$s</td>' . LF;
+	$ret .= sprintf($template, $form->get_element('search'));
+	$ret .= sprintf($template, $form->get_element('phrase'));
+	$ret .= sprintf($template, $msg['search_in']);
+	$ret .= sprintf($template, $form->get_element('mod'));
+	$ret .= sprintf($template, $form->get_element('dc'));
+	$ret .= sprintf($template, $form->get_element('lang'));
+	$ret .= '</tr></table></td>' . LF;
+
+	// navigation
+	$ret .= '<td align="right">' . LF;
+	if ($auth->checkAuth())
+		$ret .= sprintf('<strong>%3$s</strong> | <a href="%2$s">%1$s</a>' . LF,
+			$msg['logout'], './?mod=auth&action=logout', $auth->getUsername());
+	else
+		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=auth&action=login');
+	$ret .= '</td>' . LF;
+
+	$ret .= '</tr></table>' . LF;
 	$ret .= $form->end_form();
+
 	return($ret);
 }
 ?>

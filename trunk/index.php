@@ -13,6 +13,10 @@ $base_dir = dirname(__FILE__);
 $is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 $title = APP_NAME;
 ini_set('include_path', $base_dir . '/pear/');
+foreach ($_GET as $key => $val)
+{
+	$_GET[$key] = trim($val);
+}
 
 require_once('config.php');
 require_once('messages.php');
@@ -24,6 +28,7 @@ require_once('class_logger.php');
 require_once('Auth.php');
 
 require_once('class_phrase.php');
+require_once('class_glossary.php');
 
 // initialization
 $db = new db;
@@ -40,42 +45,67 @@ $auth = new Auth(
 $auth->start();
 $logger = new logger(&$db, &$auth);
 $logger->log();
-if ($_GET['mod'] == 'auth' && $_GET['action'] == 'logout')
-{
-	$auth->logout();
-	redir('./?');
-}
-
-// phrase class
-$phrase = new phrase;
-$phrase->db = $db;
-$phrase->msg = $msg;
-$phrase->auth = $auth;
 
 // process
-if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form') {
-	$phrase->save_form();
+switch ($_GET['mod'])
+{
+	case 'auth':
+		if ($_GET['action'] == 'logout')
+		{
+			$auth->logout();
+			redir('./?');
+		}
+		break;
+	case 'dict':
+		$phrase = new phrase;
+		$phrase->db = $db;
+		$phrase->msg = $msg;
+		$phrase->auth = $auth;
+		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form') {
+			$phrase->save_form();
+		}
+		break;
+	case 'glo':
+		$glossary = new glossary(&$db, &$auth, $msg);
+		break;
 }
 
 // display
+$has_content = false;
 $body .= show_header();
-if ($_GET['mod'] == 'auth' && $_GET['action'] == 'login')
+switch ($_GET['mod'])
 {
-	$body .= login();
-}
-else
-{
-	if ($_GET['action'] == 'form')
-		$body .= $phrase->show_form();
-	else
-	{
-		if ($_GET['phrase'])
-			$body .= $phrase->show_phrase();
+	case 'dict':
+		if ($_GET['action'] == 'form')
+		{
+			$has_content = true;
+			$body .= $phrase->show_form();
+		}
 		else
-			$body .= str_replace("\n", '<br />', file_get_contents('./docs/README.txt'));
-	}
-	if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
+		{
+			if ($_GET['phrase'])
+			{
+				$has_content = true;
+				$body .= $phrase->show_phrase();
+			}
+		}
+		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
+		break;
+	case 'glo':
+		$has_content = true;
+		$body .= $glossary->show_result();
+		break;
+	case 'auth':
+		if ($_GET['action'] == 'login')
+		{
+			$has_content = true;
+			$body .= login();
+		}
+		break;
 }
+// if no content
+if (!$has_content)
+	$body .= str_replace("\n", '<br />', file_get_contents('./docs/README.txt'));
 
 // render
 $ret .= '<html>' . LF;

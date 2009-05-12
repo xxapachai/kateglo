@@ -12,8 +12,10 @@ $msg = array(
 	'definition' => 'Definisi',
 	'delete' => 'hapus',
 	'derivation' => 'Bentukan',
+	'discipline' => 'Bidang',
 
 	'edit' => 'ubah',
+	'en' => 'Bahasa Inggris',
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
 
@@ -22,6 +24,8 @@ $msg = array(
 	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
 
 	'home' => 'Beranda',
+
+	'id' => 'Bahasa Indonesia',
 
 	'lex_class' => 'Kelas kata',
 	'login' => 'Masuk',
@@ -41,7 +45,8 @@ $msg = array(
 	'root_phrase' => 'Akar kata',
 
 	'save' => 'Simpan',
-	'search' => 'Cari frasa',
+	'search_button' => 'Cari frasa',
+	'search_in' => ' dalam ',
 
 	'username' => 'Pengguna',
 );
