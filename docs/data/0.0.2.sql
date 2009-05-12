@@ -71,3 +71,68 @@ select root_phrase, derived_phrase, 'c' from derivation where drv_type = 'c';
 
 drop table if exists derivation_type;
 drop table if exists derivation;
+
+truncate table discipline;
+insert into discipline (discipline, discipline_name) values ('admpub', 'Administrasi publik');
+insert into discipline (discipline, discipline_name) values ('avi', 'Aviasi');
+insert into discipline (discipline, discipline_name) values ('bio', 'Biologi');
+insert into discipline (discipline, discipline_name) values ('ekon', 'Ekonomi');
+insert into discipline (discipline, discipline_name) values ('fis', 'Fisika');
+insert into discipline (discipline, discipline_name) values ('kim', 'Kimia');
+insert into discipline (discipline, discipline_name) values ('ling', 'Linguistik');
+insert into discipline (discipline, discipline_name) values ('mat', 'Matematika');
+insert into discipline (discipline, discipline_name) values ('or', 'Olahraga');
+insert into discipline (discipline, discipline_name) values ('par', 'Pariwisata');
+insert into discipline (discipline, discipline_name) values ('pol', 'Politik');
+insert into discipline (discipline, discipline_name) values ('seni', 'Seni');
+insert into discipline (discipline, discipline_name) values ('ti', 'Teknologi informasi');
+
+drop table if exists translation;
+
+/*==============================================================*/
+/* Table: translation                                           */
+/*==============================================================*/
+create table translation
+(
+   tr_uid               int not null auto_increment,
+   phrase               varchar(255) not null,
+   translation          varchar(255) not null,
+   discipline           varchar(16),
+   lang                 varchar(16) not null default 'en',
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (tr_uid)
+);
+
+/*==============================================================*/
+/* Index: phrase                                                */
+/*==============================================================*/
+create index phrase on translation
+(
+   phrase
+);
+
+/*==============================================================*/
+/* Index: translation                                           */
+/*==============================================================*/
+create index translation on translation
+(
+   translation
+);
+
+drop table if exists language;
+
+/*==============================================================*/
+/* Table: language                                              */
+/*==============================================================*/
+create table language
+(
+   lang                 varchar(16) not null,
+   lang_name            varchar(255),
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (lang)
+);
+
+insert into language (lang, lang_name) values ('en', 'Bahasa Inggris');
+insert into language (lang, lang_name) values ('id', 'Bahasa Indonesia');

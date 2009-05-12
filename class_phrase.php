@@ -22,13 +22,13 @@ class phrase
 		{
 			if ($phrase)
 				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-					sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
+					sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
 					$this->msg['edit']
 				);
 			else
 			{
 				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-					sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
+					sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
 					$this->msg['new']
 				);
 			}
@@ -107,7 +107,7 @@ class phrase
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
-				$ret .= sprintf('<a href="./?phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
+				$ret .= sprintf('<a href="./?mod=dict&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
 				$ret .= ($i < $count - 1) ? ', ': '';
 			}
 		}
@@ -126,7 +126,7 @@ class phrase
 		global $_GET;
 		$phrase = $this->get_phrase();
 		if (!$phrase) $is_new = true;
-		$url = './?phrase=' . ($phrase ? $_GET['phrase'] : '') . '&action=form';
+		$url = './?mod=dict&action=form&phrase=' . ($phrase ? $_GET['phrase'] : '') . '';
 		if ($is_new) $phrase['phrase'] = $_GET['phrase'];
 
 		$form = new form('phrase_form', null, $url);
@@ -150,7 +150,7 @@ class phrase
 
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
 		$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-			$is_new ? './' : './?phrase=' . $_GET['phrase'], $this->msg['cancel']);
+			'./?mod=dict' . ($is_new ? '' : '&phrase=' . $_GET['phrase']), $this->msg['cancel']);
 		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
@@ -353,7 +353,7 @@ class phrase
 		$this->save_sub_form('relation', 'rel_uid', 'rel_count', 'root_phrase',
 			array('rel_type', 'related_phrase'));
 
-		redir('./?phrase=' . $_POST['phrase']);
+		redir('./?mod=dict&phrase=' . $_POST['phrase']);
 	}
 
 	/**

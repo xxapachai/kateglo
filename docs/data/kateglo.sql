@@ -1,186 +1,187 @@
---
--- Database: `kateglo`
---
+drop table if exists definition;
 
--- --------------------------------------------------------
+drop table if exists discipline;
 
---
--- Table structure for table `definition`
---
+drop table if exists language;
 
-DROP TABLE IF EXISTS `definition`;
-CREATE TABLE IF NOT EXISTS `definition` (
-  `def_uid` int(11) NOT NULL AUTO_INCREMENT,
-  `phrase` varchar(255) NOT NULL,
-  `def_num` tinyint(4) NOT NULL DEFAULT '1',
-  `def_text` varchar(4000) NOT NULL,
-  `discipline` varchar(16) DEFAULT NULL,
-  `sample` varchar(4000) DEFAULT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`def_uid`)
+drop table if exists lexical_class;
+
+drop table if exists phrase;
+
+drop table if exists relation;
+
+drop table if exists relation_type;
+
+drop table if exists sys_action;
+
+drop table if exists sys_session;
+
+drop table if exists sys_user;
+
+drop table if exists translation;
+
+/*==============================================================*/
+/* Table: definition                                            */
+/*==============================================================*/
+create table definition
+(
+   def_uid              int not null auto_increment,
+   phrase               varchar(255) not null,
+   def_num              tinyint not null default 1,
+   discipline           varchar(16),
+   def_text             varchar(4000) not null,
+   sample               varchar(4000),
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (def_uid)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `derivation`
---
-
-DROP TABLE IF EXISTS `derivation`;
-CREATE TABLE IF NOT EXISTS `derivation` (
-  `drv_uid` int(11) NOT NULL AUTO_INCREMENT,
-  `root_phrase` varchar(255) NOT NULL,
-  `derived_phrase` varchar(255) NOT NULL,
-  `drv_type` varchar(16) NOT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`drv_uid`)
+/*==============================================================*/
+/* Table: discipline                                            */
+/*==============================================================*/
+create table discipline
+(
+   discipline           varchar(16) not null,
+   discipline_name      varchar(255) not null,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (discipline)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `derivation_type`
---
-
-DROP TABLE IF EXISTS `derivation_type`;
-CREATE TABLE IF NOT EXISTS `derivation_type` (
-  `drv_type` varchar(16) NOT NULL COMMENT 'a=affix; c=compound',
-  `drv_type_name` varchar(255) NOT NULL,
-  `sort_order` tinyint(4) NOT NULL DEFAULT '1',
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`drv_type`)
+/*==============================================================*/
+/* Table: language                                              */
+/*==============================================================*/
+create table language
+(
+   lang                 varchar(16) not null,
+   lang_name            varchar(255),
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (lang)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `discipline`
---
-
-DROP TABLE IF EXISTS `discipline`;
-CREATE TABLE IF NOT EXISTS `discipline` (
-  `discipline` varchar(16) NOT NULL,
-  `discipline_name` varchar(255) NOT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`discipline`)
+/*==============================================================*/
+/* Table: lexical_class                                         */
+/*==============================================================*/
+create table lexical_class
+(
+   lex_class            varchar(16) not null,
+   lex_class_name       varchar(255) not null,
+   sort_order           tinyint not null default 1,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (lex_class)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `lexical_class`
---
-
-DROP TABLE IF EXISTS `lexical_class`;
-CREATE TABLE IF NOT EXISTS `lexical_class` (
-  `lex_class` varchar(16) NOT NULL,
-  `lex_class_name` varchar(255) NOT NULL,
-  `sort_order` tinyint(4) NOT NULL DEFAULT '1',
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`lex_class`)
+/*==============================================================*/
+/* Table: phrase                                                */
+/*==============================================================*/
+create table phrase
+(
+   phrase               varchar(255) not null,
+   lex_class            varchar(16) not null,
+   pronounciation       varchar(4000),
+   etymology            varchar(4000),
+   actual_phrase        varchar(255),
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (phrase)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `phrase`
---
-
-DROP TABLE IF EXISTS `phrase`;
-CREATE TABLE IF NOT EXISTS `phrase` (
-  `phrase` varchar(255) NOT NULL,
-  `lex_class` varchar(16) NOT NULL,
-  `pronounciation` varchar(4000) DEFAULT NULL,
-  `etymology` varchar(4000) DEFAULT NULL,
-  `actual_phrase` varchar(255) DEFAULT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`phrase`)
+/*==============================================================*/
+/* Table: relation                                              */
+/*==============================================================*/
+create table relation
+(
+   rel_uid              int not null auto_increment,
+   root_phrase          varchar(255) not null,
+   related_phrase       varchar(255) not null,
+   rel_type             varchar(16) not null,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (rel_uid)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `relation`
---
-
-DROP TABLE IF EXISTS `relation`;
-CREATE TABLE IF NOT EXISTS `relation` (
-  `rel_uid` int(11) NOT NULL AUTO_INCREMENT,
-  `root_phrase` varchar(255) NOT NULL,
-  `related_phrase` varchar(255) NOT NULL,
-  `rel_type` varchar(16) NOT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`rel_uid`)
+/*==============================================================*/
+/* Table: relation_type                                         */
+/*==============================================================*/
+create table relation_type
+(
+   rel_type             varchar(16) not null comment 's=synonym, a=antonym, o=other',
+   rel_type_name        varchar(255) not null,
+   sort_order           tinyint not null default 1,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (rel_type)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `relation_type`
---
-
-DROP TABLE IF EXISTS `relation_type`;
-CREATE TABLE IF NOT EXISTS `relation_type` (
-  `rel_type` varchar(16) NOT NULL COMMENT 's=synonym, a=antonym, o=other',
-  `rel_type_name` varchar(255) NOT NULL,
-  `sort_order` tinyint(4) NOT NULL DEFAULT '1',
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`rel_type`)
+/*==============================================================*/
+/* Table: sys_action                                            */
+/*==============================================================*/
+create table sys_action
+(
+   ses_id               varchar(32) not null,
+   action_time          datetime not null,
+   action_type          varchar(16),
+   module               varchar(16),
+   description          varchar(4000),
+   primary key (action_time, ses_id)
 );
 
--- --------------------------------------------------------
-
---
--- Table structure for table `sys_action`
---
-
-DROP TABLE IF EXISTS `sys_action`;
-CREATE TABLE IF NOT EXISTS `sys_action` (
-  `ses_uid` int(11) NOT NULL,
-  `action_time` datetime NOT NULL,
-  `action_type` varchar(16) DEFAULT NULL,
-  `module` varchar(16) DEFAULT NULL,
-  `description` varchar(4000) DEFAULT NULL,
-  PRIMARY KEY (`ses_uid`,`action_time`)
+/*==============================================================*/
+/* Table: sys_session                                           */
+/*==============================================================*/
+create table sys_session
+(
+   ses_id               varchar(32) not null,
+   ip_address           varchar(16) not null,
+   user_id              varchar(32),
+   started              datetime,
+   ended                datetime,
+   primary key (ses_id)
 );
 
--- --------------------------------------------------------
+/*==============================================================*/
+/* Table: sys_user                                              */
+/*==============================================================*/
+create table sys_user
+(
+   user_id              varchar(32) not null,
+   pass_key             varchar(32) not null,
+   full_name            varchar(255),
+   last_access          datetime,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (user_id)
+);
 
---
--- Table structure for table `sys_session`
---
+/*==============================================================*/
+/* Table: translation                                           */
+/*==============================================================*/
+create table translation
+(
+   tr_uid               int not null auto_increment,
+   phrase               varchar(255) not null,
+   translation          varchar(255) not null,
+   discipline           varchar(16),
+   lang                 varchar(16) not null default 'en',
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (tr_uid)
+);
 
-DROP TABLE IF EXISTS `sys_session`;
-CREATE TABLE IF NOT EXISTS `sys_session` (
-  `ses_uid` int(11) NOT NULL AUTO_INCREMENT,
-  `ip_address` varchar(16) DEFAULT NULL,
-  `user_id` varchar(16) DEFAULT NULL,
-  `started` datetime DEFAULT NULL,
-  `ended` datetime DEFAULT NULL,
-  PRIMARY KEY (`ses_uid`)
-) AUTO_INCREMENT=1 ;
+/*==============================================================*/
+/* Index: phrase                                                */
+/*==============================================================*/
+create index phrase on translation
+(
+   phrase
+);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `sys_user`
---
-
-DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE IF NOT EXISTS `sys_user` (
-  `user_id` varchar(16) NOT NULL,
-  `full_name` varchar(255) DEFAULT NULL,
-  `pass_key` varchar(16) DEFAULT NULL,
-  `last_access` datetime DEFAULT NULL,
-  `updated` datetime DEFAULT NULL,
-  `updater` varchar(16) NOT NULL,
-  PRIMARY KEY (`user_id`)
+/*==============================================================*/
+/* Index: translation                                           */
+/*==============================================================*/
+create index translation on translation
+(
+   translation
 );

@@ -17,6 +17,8 @@ CC-BY-SA.
 
 Terlalu banyak untuk dituliskan :)
 
+* Statistik pencarian frasa
+* Statistik pengguna teraktif
 * Penambahan definisi secara dinamis (AJAX?)
 * Satu frasa yang memiliki dua kategori
 * Entri untuk referensi
@@ -34,6 +36,9 @@ Terlalu banyak untuk dituliskan :)
 
 === 0.0.2 (13 Mei 2009) ===
 
+* Glosarium sederhana ditambahkan
+* Log deskripsi diperpendek menjadi hanya nama skrip dan querystring
+* Favicon dan logo
 * Menggabungkan relasi dan turunan menjadi tesaurus
 * Implementasi log dasar
 * Implementasi otentikasi dasar
