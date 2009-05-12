@@ -19,11 +19,15 @@ $msg = array(
 
 	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.',
 	'form_err_post' => 'Harap perbaiki kesalahan tersebut.',
+	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
 
 	'home' => 'Beranda',
 
 	'lex_class' => 'Kelas kata',
 	'login' => 'Masuk',
+	'login_success' => 'Anda telah berhasil masuk. Silakan lanjutkan.',
+	'login_welcome' => 'Silakan masukkan nama pengguna dan kata sandi Anda.',
+	'login_failed' => 'Nama pengguna atau kata sandi Anda salah.',
 	'logout' => 'Keluar',
 
 	'new_flag' => '***baru***',
@@ -32,7 +36,7 @@ $msg = array(
 	'phrase' => 'Frasa',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
 
-	'relation' => 'Kaitan',
+	'thesaurus' => 'Tesaurus',
 	'required_alert' => '%1$s harus diisi',
 	'root_phrase' => 'Akar kata',
 

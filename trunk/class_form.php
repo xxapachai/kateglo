@@ -17,6 +17,7 @@ class form extends HTML_QuickForm
     {
 		$this->msg = $msg;
     	$this->setJsWarnings($msg['form_err_pre'], $msg['form_err_post']);
+    	$this->setRequiredNote($msg['form_required']);
     }
 
 	/**
