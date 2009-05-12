@@ -66,7 +66,7 @@ function show_header()
 
 	// logo
 	$ret .= '<td width="1%">' . LF;
-	$ret .= '<a href="./"><img src="images/logo.png" width="32" height="32" alt="Kateglo" title="Kateglo" /></a>' . LF;
+	$ret .= '<a href="./"><img src="images/logo.png" width="32" height="32" border="0" alt="Kateglo" title="Kateglo" /></a>' . LF;
 	$ret .= '</td>' . LF;
 
 	// search form
