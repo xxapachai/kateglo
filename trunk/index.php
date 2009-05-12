@@ -1,47 +1,61 @@
 <?
 /**
- * @author ivan@lanin.org
- *
+ * Entry point of application
  */
+
+// constants
+define(LF, "\n"); // line break
+define(APP_NAME, 'Kateglo'); // application name
+define(APP_VERSION, 'v0.0.1'); // application name
+
+// variables
 $base_dir = dirname(__FILE__);
+$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
+$title = APP_NAME;
 ini_set('include_path', $base_dir . '/pear/');
-define(LF, "\n");
 
 require_once('config.php');
 require_once('messages.php');
 require_once('class_db.php');
 require_once('class_form.php');
 
-// variables
-$phrase = $_GET['phrase'];
-$operator = $_GET['operator'];
-$action = $_GET['action'];
-$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
-
 // connect to database
 $db = new db;
 $db->connect($dsn);
 
-// display accordingly
+// process
 if ($is_post) {
 	save_form();
 }
-$html .= '<link rel="stylesheet" href="./common.css" type="text/css" />
-';
-$html .= show_search();
+
+// display
+$body .= show_search();
 if ($_GET['action'] == 'form')
-{
-	$html .= show_form();
-}
+	$body .= show_form();
 else
 {
 	if ($_GET['phrase'])
+		$body .= show_phrase();
+	else
 	{
-		$html .= show_phrase();
+		$body .= str_replace("\n", '<br />', file_get_contents('./docs/README.txt'));
 	}
 }
+if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
 
-echo($html);
+// render
+$return .= '<html>' . LF;
+$return .= '<head>' . LF;
+$return .= '<title>' . $title . '</title>' . LF;
+$return .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
+$return .= '</head>' . LF;
+$return .= '<body>' . LF;
+$return .= $body;
+$return .= sprintf('<p align="right"><a href="%2$s">%1$s %3$s</a></p>' . LF,
+	APP_NAME, './docs/README.txt', APP_VERSION);
+$return .= '</body>' . LF;
+$return .= '</html>' . LF;
+echo($return);
 
 /**
  * @return unknown_type
@@ -293,6 +307,7 @@ function show_search()
 	$form->setup();
 	$form->addElement('text', 'phrase', $msg['enter_phrase']);
 	$form->addElement('submit', 'search', $msg['search']);
+	$return .= sprintf('<span style="float:right;"><a href="%2$s">%1$s</a></span>', $msg['home'], './');
 	$return .= $form->beginForm();
 	$return .= $form->getElementHtml('phrase');
 	$return .= $form->getElementHtml('search');
