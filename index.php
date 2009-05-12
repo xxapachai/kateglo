@@ -16,17 +16,20 @@ ini_set('include_path', $base_dir . '/pear/');
 
 require_once('config.php');
 require_once('messages.php');
+
 require_once('common.php');
 require_once('class_db.php');
 require_once('class_form.php');
-require_once('class_phrase.php');
+require_once('class_logger.php');
 require_once('Auth.php');
+
+require_once('class_phrase.php');
 
 // initialization
 $db = new db;
 $db->connect($dsn);
 
-// authentication
+// authentication & and logging
 $auth = new Auth(
 	'MDB2', array(
 		'dsn' => $db->dsn,
@@ -35,6 +38,8 @@ $auth = new Auth(
 		'passwordcol' => "pass_key"
 	), 'login');
 $auth->start();
+$logger = new logger(&$db, &$auth);
+$logger->log();
 if ($_GET['mod'] == 'auth' && $_GET['action'] == 'logout')
 {
 	$auth->logout();
