@@ -56,3 +56,18 @@ create table sys_action
    description          varchar(4000),
    primary key (action_time, ses_id)
 );
+
+insert into relation_type (rel_type, rel_type_name, sort_order) values ('f', 'Imbuhan', 4);
+insert into relation_type (rel_type, rel_type_name, sort_order) values ('c', 'Majemuk', 5);
+update relation_type set rel_type_name = 'Berkaitan' where rel_type = 'r';
+
+delete from relation where rel_type in ('f', 'c');
+
+insert into relation (root_phrase, related_phrase, rel_type)
+select root_phrase, derived_phrase, 'f' from derivation where drv_type = 'a';
+
+insert into relation (root_phrase, related_phrase, rel_type)
+select root_phrase, derived_phrase, 'c' from derivation where drv_type = 'c';
+
+drop table if exists derivation_type;
+drop table if exists derivation;

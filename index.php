@@ -53,13 +53,13 @@ $phrase->msg = $msg;
 $phrase->auth = $auth;
 
 // process
-if ($is_post && $auth->checkAuth()) {
+if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form') {
 	$phrase->save_form();
 }
 
 // display
-$body .= $phrase->show_search();
-if ($_GET['mod'] == 'auth' && $_GET['action'] == 'login' & !$auth->checkAuth())
+$body .= show_header();
+if ($_GET['mod'] == 'auth' && $_GET['action'] == 'login')
 {
 	$body .= login();
 }

@@ -65,17 +65,14 @@ class phrase
 			}
 
 			// relation and derivation
-			$ret .= $this->show_phrase_rd($phrase, 'relation', 'related_phrase');
-			$ret .= $this->show_phrase_rd($phrase, 'derivation', 'derived_phrase');
+			$ret .= $this->show_relation($phrase, 'relation', 'related_phrase');
 		}
 		else
 		{
 			$ret .= sprintf('<p>%1$s</p>', sprintf($this->msg['phrase_na'], $_GET['phrase']));
 			// derivation and relation
-			$this->get_phrase_rd(&$phrase, 'derivation', 'drv_type', 'derived_phrase', true);
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase', true);
-			$ret .= $this->show_phrase_rd($phrase, 'relation', 'root_phrase');
-			$ret .= $this->show_phrase_rd($phrase, 'derivation', 'root_phrase');
+			$ret .= $this->show_relation($phrase, 'relation', 'root_phrase');
 		}
 		return($ret);
 	}
@@ -83,12 +80,12 @@ class phrase
 	/**
 	 * @return unknown_type
 	 */
-	function show_phrase_rd($phrase, $type_name, $col_name)
+	function show_relation($phrase, $type_name, $col_name)
 	{
 		// derivation
 		$type_count = count($phrase[$type_name]);
 		$col_width = round(100 / $type_count) . '%';
-		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$type_name]);
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['thesaurus']);
 		$ret .= '<ol>' . LF;
 		foreach ($phrase[$type_name] as $type_key => $type)
 		{
@@ -166,13 +163,14 @@ class phrase
 				'def_uid' => array('type' => 'hidden'),
 				'def_num' => array('type' => 'text', 'width' => '1%',
 					'option1' => array('size' => 3, 'maxlength' => 5)),
-				'discipline' => array('type' => 'select', 'width' => '1%',
-					'option1' => $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name')),
 				'def_text' => array('type' => 'text', 'width' => '50%',
 					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
 				'sample' => array('type' => 'text', 'width' => '50%',
-					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
-			'definition', 'definition', 'def_count');
+					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
+				'discipline' => array('type' => 'select', 'width' => '1%',
+					'option1' => $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name')),
+				),
+			'definition', 'definition', 'definition', 'def_count');
 
 		// relation
 		$ret .= $this->show_sub_form(&$form, &$phrase,
@@ -182,18 +180,7 @@ class phrase
 					'option1' => $this->db->get_row_assoc('SELECT * FROM relation_type', 'rel_type', 'rel_type_name')),
 				'related_phrase' => array('type' => 'text', 'width' => '99%',
 					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
-			'relation', 'all_relation', 'rel_count');
-
-		// derivation
-		$ret .= $this->show_sub_form(&$form, &$phrase,
-			array(
-				'drv_uid' => array('type' => 'hidden'),
-				'drv_type' => array('type' => 'select', 'width' => '1%',
-					'option1' => $this->db->get_row_assoc('SELECT * FROM derivation_type', 'drv_type', 'drv_type_name')),
-				'derived_phrase' => array('type' => 'text', 'width' => '99%',
-					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))),
-			'derivation', 'all_derivation', 'drv_count');
-
+			'relation', 'thesaurus', 'all_relation', 'rel_count');
 
 		// end
 		$form->applyFilter('__ALL__', 'trim');
@@ -209,7 +196,7 @@ class phrase
 	/**
 	 * @return unknown_type
 	 */
-	function show_sub_form(&$form, &$phrase, $field_def, $name, $phrase_field, $count_name)
+	function show_sub_form(&$form, &$phrase, $field_def, $name, $heading, $phrase_field, $count_name)
 	{
 		// definition
 		$hidden_field = '';
@@ -219,7 +206,7 @@ class phrase
 		$defs[] = $new_def;
 		$defs[] = $new_def;
 		$def_count = count($defs);
-		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$name]);
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$heading]);
 		$ret .= '<table>' . LF;
 		if ($defs)
 		{
@@ -252,34 +239,6 @@ class phrase
 	}
 
 	/**
-	 * @return Search form HTML
-	 */
-	function show_search()
-	{
-		$form = new form('search_form', 'get');
-		$form->setup($this->msg);
-		$form->addElement('text', 'phrase', $this->msg['enter_phrase']);
-		$form->addElement('submit', 'search', $this->msg['search']);
-
-		// navigation
-		$ret .= '<div style="float:right;">';
-		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['home'], './');
-		$ret .= ' | ';
-		if ($this->auth->checkAuth())
-			$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['logout'], './?mod=auth&action=logout');
-		else
-			$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['login'], './?mod=auth&action=login');
-		$ret .= '</div>';
-
-		// search form
-		$ret .= $form->begin_form();
-		$ret .= $form->get_element('phrase');
-		$ret .= $form->get_element('search');
-		$ret .= $form->end_form();
-		return($ret);
-	}
-
-	/**
 	 * Get phrase
 	 *
 	 * @return Phrase structure
@@ -305,17 +264,7 @@ class phrase
 			$phrase['definition'] = $rows;
 
 			// derivation and relation
-			$this->get_phrase_rd(&$phrase, 'derivation', 'drv_type', 'derived_phrase');
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase');
-
-			// root phrase
-			$query = sprintf('SELECT a.*
-				FROM derivation a
-				WHERE a.derived_phrase = %1$s
-				ORDER BY a.root_phrase',
-				$this->db->quote($_GET['phrase']));
-			$rows = $this->db->get_rows($query);
-			$phrase['root'] = $rows;
 		}
 		return($phrase);
 	}
@@ -403,8 +352,6 @@ class phrase
 			array('def_num', 'def_text'), array('discipline', 'sample'));
 		$this->save_sub_form('relation', 'rel_uid', 'rel_count', 'root_phrase',
 			array('rel_type', 'related_phrase'));
-		$this->save_sub_form('derivation', 'drv_uid', 'drv_count', 'root_phrase',
-			array('drv_type', 'derived_phrase'));
 
 		redir('./?phrase=' . $_POST['phrase']);
 	}

@@ -34,6 +34,7 @@ Terlalu banyak untuk dituliskan :)
 
 === 0.0.2 (13 Mei 2009) ===
 
+* Menggabungkan relasi dan turunan menjadi tesaurus
 * Implementasi log dasar
 * Implementasi otentikasi dasar
 * Memangkas nilai terkirim sebelum memberi kutipan
