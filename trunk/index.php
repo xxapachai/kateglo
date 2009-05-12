@@ -82,6 +82,9 @@ $ret .= '<html>' . LF;
 $ret .= '<head>' . LF;
 $ret .= '<title>' . $title . '</title>' . LF;
 $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
+$ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
+$ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
+
 $ret .= '</head>' . LF;
 $ret .= '<body>' . LF;
 $ret .= $body;
