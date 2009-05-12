@@ -1,44 +1,45 @@
 = Kateglo =
 
-Kateglo is an open source dictionary-thesaurus-glossary web application
-for Indonesian language. The name is taken from abbreviation of Indonesian
-words KAmus (dictionary), TEsaurus (thesaurus), and GLOsarium (glossary).
+Kateglo adalah aplikasi web sumber terbuka untuk kamus, tesaurus, dan
+glosarium bahasa Indonesia. Namanya diambil dari singkatan unsur layanannya,
+KAmus, TEsaurus, dan GLOsarium.
 
-The license for Kateglo is GFL which should be found in the source code.
+Lisensi kode sumber Kateglo adalah GFL, sedangkan lisensi isinya adalah
+CC-BY-SA.
 
-== Credits ==
+== Kredit ==
 
 * Ivan Lanin - ivan at lanin dot org
 * Romi Hardiyanto
-* All Bahtera mailing list members - http://groups.yahoo.com/group/bahtera
+* Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
-== To do ==
+== Daftar pekerjaan ==
 
-So much to be listed :)
+Terlalu banyak untuk dituliskan :)
 
-* Dynamic addition of definition, etc
-* One phrase has different lexical class
-* Reference
-* Translation
+* Penambahan definisi secara dinamis (AJAX?)
+* Satu frasa yang memiliki dua kategori
+* Entri untuk referensi
+* Terjemahan
 
-== Coding standards ==
+== Standar kode ==
 
-* Use all lower case with underscore as word separator.
-* Function, condition, loop, etc should use bracket in separate line.
-* If block body only contain one line, bracket should be avoided.
-* Use tab for coding alignment.
-* Try to limit code line to 76 character (with tab = 4 char).
+* Gunakan huruf kecil dengan garis bawah sebagai pemisah kata.
+* Gunakan kurung kurawa pada baris terpisah untuk blok fungsi, kondisi, dll.
+* Jika blok hanya berisi satu baris, hindari kurung kurawa.
+* Gunakan tab untuk mengatur indentasi kode.
+* Batasi baris (termasuk indentasi) hingga 76 karakter.
 
-== Version history ==
+== Riwayat revisi ==
 
-=== 0.0.2 (13 May 2009) ===
+=== 0.0.2 (13 Mei 2009) ===
 
-* Implement basic logging
-* Implement basic authentication
-* Trim submitted value before quoting
-* Class for phrase
+* Implementasi log dasar
+* Implementasi otentikasi dasar
+* Memangkas nilai terkirim sebelum memberi kutipan
+* Kelas untuk frasa
 
-=== 0.0.1 (12 May 2009) ===
+=== 0.0.1 (12 Mei 2009) ===
 
-* 2009-05-12 First trimmed down version release and put into source control.
-* 2009-05-09 Started as concept through YM chat.
+* 2009-05-12 Versi pertama dirilis dan dimasukkan kendali sumber.
+* 2009-05-09 Konsep didiskusikan melalui obrolan YM.
