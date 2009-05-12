@@ -17,7 +17,6 @@ The license for Kateglo is GFL which should be found in the source code.
 So much to be listed :)
 
 * Login and logs
-* Class for phrase
 * Dynamic addition of definition, etc
 * One phrase has different lexical class
 * Reference
@@ -32,6 +31,12 @@ So much to be listed :)
 * Try to limit code line to 76 character (with tab = 4 char).
 
 == Version history ==
+
+=== 0.0.2 (13 May 2009) ===
+
+* Implement basic authentication
+* Trim submitted value before quoting
+* Class for phrase
 
 === 0.0.1 (12 May 2009) ===
 

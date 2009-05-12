@@ -85,7 +85,7 @@ class db
 
 	function quote($value)
 	{
-		return($this->_db->quote($value));
+		return($this->_db->quote(trim($value)));
 	}
 };
 ?>

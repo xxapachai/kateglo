@@ -5,6 +5,7 @@
 class phrase
 {
 	var $db;
+	var $auth;
 	var $msg;
 
 	/**
@@ -17,18 +18,20 @@ class phrase
 		$phrase = $this->get_phrase();
 
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
-		if ($phrase)
-			$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-				sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
-				$this->msg['edit']
-			);
-		else
+		if ($this->auth->checkAuth())
 		{
-			$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-				sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
-				$this->msg['new']
-			);
-			$ret .= sprintf('<p>%1$s</p>', sprintf($this->msg['phrase_na'], $_GET['phrase']));
+			if ($phrase)
+				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
+					sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
+					$this->msg['edit']
+				);
+			else
+			{
+				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
+					sprintf('./?phrase=%1$s&action=form', $_GET['phrase']),
+					$this->msg['new']
+				);
+			}
 		}
 
 		if ($phrase)
@@ -67,6 +70,7 @@ class phrase
 		}
 		else
 		{
+			$ret .= sprintf('<p>%1$s</p>', sprintf($this->msg['phrase_na'], $_GET['phrase']));
 			// derivation and relation
 			$this->get_phrase_rd(&$phrase, 'derivation', 'drv_type', 'derived_phrase', true);
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase', true);
@@ -256,12 +260,21 @@ class phrase
 		$form->setup($this->msg);
 		$form->addElement('text', 'phrase', $this->msg['enter_phrase']);
 		$form->addElement('submit', 'search', $this->msg['search']);
-		$ret .= sprintf('<span style="float:right;"><a href="%2$s">%1$s</a></span>' . LF, $this->msg['home'], './');
+
+		// navigation
+		$ret .= '<div style="float:right;">';
+		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['home'], './');
+		$ret .= ' | ';
+		if ($this->auth->checkAuth())
+			$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['logout'], './?mod=auth&action=logout');
+		else
+			$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $this->msg['login'], './?mod=auth&action=login');
+		$ret .= '</div>';
+
+		// search form
 		$ret .= $form->begin_form();
 		$ret .= $form->get_element('phrase');
 		$ret .= $form->get_element('search');
-		// $ret .= sprintf('<a href="%2$s">%1$s</a>' . LF,
-		//	$this->msg['add_phrase'], './?action=form');
 		$ret .= $form->end_form();
 		return($ret);
 	}

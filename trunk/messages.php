@@ -18,14 +18,17 @@ $msg = array(
 	'etymology' => 'Etimologi',
 
 	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.',
-	'form_err_post' => 'Harap perbaiki isian tersebut.',
+	'form_err_post' => 'Harap perbaiki kesalahan tersebut.',
 
 	'home' => 'Beranda',
 
 	'lex_class' => 'Kelas kata',
+	'login' => 'Masuk',
+	'logout' => 'Keluar',
 
 	'new_flag' => '***baru***',
 
+	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
 
@@ -35,5 +38,7 @@ $msg = array(
 
 	'save' => 'Simpan',
 	'search' => 'Cari frasa',
+
+	'username' => 'Pengguna',
 );
 ?>
