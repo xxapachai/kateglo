@@ -8,13 +8,20 @@ The license for Kateglo is GFL which should be found in the source code.
 
 == Credits ==
 
-* Ivan Lanin <ivan at lanin dot org>
+* Ivan Lanin - ivan at lanin dot org
 * Romi Hardiyanto
-* All Bahtera mailing list members
+* All Bahtera mailing list members - http://groups.yahoo.com/group/bahtera
 
 == To do ==
 
 So much to be listed :)
+
+* Login and logs
+* Class for phrase
+* Dynamic addition of definition, etc
+* One phrase has different lexical class
+* Reference
+* Translation
 
 == Coding standards ==
 
@@ -26,5 +33,7 @@ So much to be listed :)
 
 == Version history ==
 
-2009-05-09 Started as concept through YM chat.
-2009-05-12 First trimmed down version release and put into source control.
+=== 0.0.1 (12 May 2009) ===
+
+* 2009-05-12 First trimmed down version release and put into source control.
+* 2009-05-09 Started as concept through YM chat.
