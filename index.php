@@ -100,9 +100,29 @@ switch ($_GET['mod'])
 			$body .= login();
 		break;
 	default:
+		$searches = $db->get_rows('SELECT phrase FROM searched_phrase
+			ORDER BY search_count DESC LIMIT 0, 5;');
+		if ($searches)
+		{
+			$search_result = '';
+			$tmp = '<strong>%1$s</strong> [<a href="?mod=dict&phrase=%1$s">%2$s</a>, '
+				. '<a href="?mod=glo&phrase=%1$s">%3$s</a>]';
+			for ($i = 0; $i < $db->num_rows; $i++)
+			{
+				if ($db->num_rows > 2)
+					$search_result .= $search_result ? ', ' : '';
+				if ($i == $db->num_rows - 1 && $db->num_rows > 1)
+					$search_result .= ' dan ';
+				$search_result .= sprintf($tmp, $searches[$i]['phrase'],
+					$msg['dict_short'], $msg['glo_short']);
+			}
+		}
+		else
+			$search_result = $msg['no_most_searched'];
+
 		$dict_count = $db->get_row_value('SELECT COUNT(*) FROM phrase;');
 		$glo_count = $db->get_row_value('SELECT COUNT(*) FROM translation;');
-		$body .= sprintf($msg['welcome'], $dict_count, $glo_count);
+		$body .= sprintf($msg['welcome'], $dict_count, $glo_count, $search_result);
 		break;
 }
 

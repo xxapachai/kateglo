@@ -12,6 +12,7 @@ $msg = array(
 	'definition' => 'Definisi',
 	'delete' => 'hapus',
 	'derivation' => 'Bentukan',
+	'dict_short' => 'k',
 	'discipline' => 'Bidang',
 
 	'edit' => 'ubah',
@@ -22,6 +23,8 @@ $msg = array(
 	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.',
 	'form_err_post' => 'Harap perbaiki kesalahan tersebut.',
 	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
+
+	'glo_short' => 'g',
 
 	'home' => 'Beranda',
 
@@ -36,6 +39,7 @@ $msg = array(
 	'logout' => 'Keluar',
 
 	'new_flag' => '***baru***',
+	'no_most_searched' => '(belum ada)',
 
 	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s data.',
 	'page_prev' => 'Sebelumnya',
@@ -57,7 +61,7 @@ $msg = array(
 	'welcome' => '<div align="center">
 		<p><big>Selamat datang di Kateglo - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
 		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
-		<p>Saat ini terdapat <strong>%1$s</strong> entri dalam kamus dan tesaurus serta <strong>%2$s</strong> entri dalam glosarium.</p>
+		<p>Saat ini terdapat <strong>%1$s</strong> entri dalam kamus dan tesaurus serta <strong>%2$s</strong> entri dalam glosarium.<br />Frasa yang paling banyak dicari adalah %3$s.</p>
 		</div>',
 );
 ?>

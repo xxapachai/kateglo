@@ -19,7 +19,9 @@ class logger
 
 	function log()
 	{
-		global $_SERVER;
+		global $_SERVER, $_GET;
+
+		// log session
 		$query = sprintf('INSERT INTO sys_session (ses_id, ip_address,
 			user_id, started) VALUES (\'%1$s\', \'%2$s\', \'%3$s\', NOW());',
 			$this->ses_id, $_SERVER['REMOTE_ADDR'], $this->auth->getUsername());
@@ -30,6 +32,20 @@ class logger
 			description) VALUES (\'%1$s\', NOW(), \'%2$s\');',
 			$this->ses_id, $description);
 		$this->db->exec($query);
+
+		// log searched phrase
+		if ($_GET['phrase'])
+		{
+			$_GET['phrase'] = trim($_GET['phrase']);
+			$query = sprintf('INSERT INTO searched_phrase (phrase)
+				VALUES (\'%1$s\');', $_GET['phrase']);
+			$this->db->exec($query);
+			$query = sprintf('UPDATE searched_phrase SET
+				search_count = search_count + 1, last_searched = NOW()
+				WHERE phrase = %1$s;',
+				$this->db->quote($_GET['phrase']));
+			$this->db->exec($query);
+		}
 	}
 }
 ?>
