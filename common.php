@@ -46,18 +46,18 @@ function show_header()
 
 	$form = new form('search_form', 'get');
 	$form->setup($msg);
-	$form->addElement('text', 'phrase', $msg['enter_phrase'], array('style'=>'height:20px;'));
+	$form->addElement('text', 'phrase', $msg['enter_phrase']);
 	$form->addElement('select', 'mod', null,
 		array('dict' => 'Kamus', 'glo' => 'Glosarium'),
-		array('style'=>'height:20px;', 'onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
+		array('onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
 		);
 	$form->addElement('select', 'dc', null,
 		$db->get_row_assoc('SELECT discipline, discipline_name FROM discipline', 'discipline', 'discipline_name'),
-		array('style'=>'height:20px;' . ($_GET['mod'] != 'glo' ? 'display:none;' : ''))
+		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
 		);
 	$form->addElement('select', 'lang', null,
 		$db->get_row_assoc('SELECT lang, lang_name FROM language', 'lang', 'lang_name'),
-		array('style'=>'height:20px;' . ($_GET['mod'] != 'glo' ? 'display:none;' : ''))
+		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
 		);
 	$form->addElement('submit', 'search', $msg['search_button']);
 
@@ -70,8 +70,8 @@ function show_header()
 	$ret .= '</td>' . LF;
 
 	// search form
-	$ret .= '<td><table cellpadding="0" cellspacing="0"><tr>' . LF;
 	$template = '<td style="padding-right:2px;">%1$s</td>' . LF;
+	$ret .= '<td><table cellpadding="0" cellspacing="0"><tr>' . LF;
 	$ret .= sprintf($template, $form->get_element('search'));
 	$ret .= sprintf($template, $form->get_element('phrase'));
 	$ret .= sprintf($template, $msg['search_in']);
@@ -92,6 +92,17 @@ function show_header()
 	$ret .= '</tr></table>' . LF;
 	$ret .= $form->end_form();
 
+	return($ret);
+}
+
+/**
+ * @return Search form HTML
+ */
+function read_doc($file_name)
+{
+	$file_url = './docs/' . $file_name;
+	if (file_exists($file_url))
+		$ret = nl2br(htmlentities(file_get_contents($file_url)));
 	return($ret);
 }
 ?>

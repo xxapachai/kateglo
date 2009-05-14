@@ -52,15 +52,16 @@ class glossary
 			$where .= $where ? ' AND ' : ' WHERE ';
 			$where .= ' a.discipline = \'' . $discipline . '\' ';
 		}
-		$query = 'SELECT a.translation, a.phrase, b.discipline_name
-			FROM translation a LEFT JOIN discipline b
+		$cols = 'a.translation, a.phrase, b.discipline_name';
+		$from = 'FROM translation a LEFT JOIN discipline b
 			ON a.discipline = b.discipline ' . $where . '
-			ORDER BY translation LIMIT 0, 50;';
+			ORDER BY translation';
 		//echo($query);
-		$rows = $this->db->get_rows($query);
+		$rows = $this->db->get_rows_paged($cols, $from);
 		if ($this->db->num_rows > 0)
 		{
-			$ret .= '<table width="100%">' . LF;
+			$ret .= $this->db->get_page_nav();
+			$ret .= '<table width="100%" class="list">' . LF;
 			$ret .= '<tr>' . LF;
 			$tmp = '<th>%1$s</th>' . LF;;
 			$ret .= sprintf($tmp, $this->msg['en'], '40');
@@ -77,6 +78,7 @@ class glossary
 				$ret .= '</tr>' . LF;
 			}
 			$ret .= '<table>' . LF;
+			$ret .= $this->db->get_page_nav();
 		}
 		else
 			$ret = 'Frasa tidak ditemukan.';

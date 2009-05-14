@@ -5,8 +5,8 @@
 
 // constants
 define(LF, "\n"); // line break
-define(APP_NAME, 'Kateglo'); // application name
-define(APP_VERSION, 'v0.0.2'); // application name
+define(APP_NAME, 'Kateglo (Beta)'); // application name
+define(APP_VERSION, 'v0.0.3'); // application name
 
 // variables
 $base_dir = dirname(__FILE__);
@@ -33,6 +33,7 @@ require_once('class_glossary.php');
 // initialization
 $db = new db;
 $db->connect($dsn);
+$db->msg = $msg;
 
 // authentication & and logging
 $auth = new Auth(
@@ -71,41 +72,39 @@ switch ($_GET['mod'])
 }
 
 // display
-$has_content = false;
 $body .= show_header();
 switch ($_GET['mod'])
 {
 	case 'dict':
 		if ($_GET['action'] == 'form')
 		{
-			$has_content = true;
 			$body .= $phrase->show_form();
 		}
 		else
 		{
 			if ($_GET['phrase'])
 			{
-				$has_content = true;
 				$body .= $phrase->show_phrase();
 			}
 		}
 		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
 		break;
 	case 'glo':
-		$has_content = true;
 		$body .= $glossary->show_result();
+		break;
+	case 'doc':
+		$body .= read_doc($_GET['doc']);
 		break;
 	case 'auth':
 		if ($_GET['action'] == 'login')
-		{
-			$has_content = true;
 			$body .= login();
-		}
+		break;
+	default:
+		$dict_count = $db->get_row_value('SELECT COUNT(*) FROM phrase;');
+		$glo_count = $db->get_row_value('SELECT COUNT(*) FROM translation;');
+		$body .= sprintf($msg['welcome'], $dict_count, $glo_count);
 		break;
 }
-// if no content
-if (!$has_content)
-	$body .= str_replace("\n", '<br />', file_get_contents('./docs/README.txt'));
 
 // render
 $ret .= '<html>' . LF;
@@ -118,8 +117,8 @@ $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-ico
 $ret .= '</head>' . LF;
 $ret .= '<body>' . LF;
 $ret .= $body;
-$ret .= sprintf('<p align="right"><a href="%2$s">%1$s %3$s</a></p>' . LF,
-	APP_NAME, './docs/README.txt', APP_VERSION);
+$ret .= sprintf('<p><span style="float:right;"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
+	APP_NAME, './?mod=doc&doc=README.txt', APP_VERSION);
 $ret .= '</body>' . LF;
 $ret .= '</html>' . LF;
 echo($ret);
