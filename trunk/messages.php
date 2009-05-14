@@ -28,6 +28,7 @@ $msg = array(
 	'id' => 'Bahasa Indonesia',
 
 	'lex_class' => 'Kelas kata',
+	'license' => 'Lisensi',
 	'login' => 'Masuk',
 	'login_success' => 'Anda telah berhasil masuk. Silakan lanjutkan.',
 	'login_welcome' => 'Silakan masukkan nama pengguna dan kata sandi Anda.',
@@ -36,6 +37,9 @@ $msg = array(
 
 	'new_flag' => '***baru***',
 
+	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s data.',
+	'page_prev' => 'Sebelumnya',
+	'page_next' => 'Berikutnya',
 	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
@@ -49,5 +53,11 @@ $msg = array(
 	'search_in' => ' dalam ',
 
 	'username' => 'Pengguna',
+
+	'welcome' => '<div align="center">
+		<p><big>Selamat datang di Kateglo - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
+		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
+		<p>Saat ini terdapat <strong>%1$s</strong> entri dalam kamus dan tesaurus serta <strong>%2$s</strong> entri dalam glosarium.</p>
+		</div>',
 );
 ?>
