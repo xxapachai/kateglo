@@ -7,34 +7,6 @@ KAmus, TEsaurus, dan GLOsarium.
 Lisensi kode sumber Kateglo adalah GFL, sedangkan lisensi isinya adalah
 CC-BY-SA.
 
-== Daftar pekerjaan ==
-
-Terlalu banyak untuk dituliskan :)
-
-=== Umum ===
-
-* Halaman muka yang lebih menarik
-* Statistik pencarian frasa
-
-=== Kamus ===
-
-* Penambahan definisi secara dinamis (AJAX?)
-* Satu frasa yang memiliki dua kategori
-* Entri untuk referensi
-* Terjemahan
-* Parser untuk data KBBI
-
-=== Glosarium ===
-
-* Editing
-* Penambahan
-
-=== Pengguna ===
-
-* Statistik pengguna teraktif
-* Preferensi pengguna
-* Ganti kata sandi
-
 == Kredit ==
 
 * Ivan Lanin - ivan at lanin dot org
@@ -49,10 +21,26 @@ Terlalu banyak untuk dituliskan :)
 * Gunakan tab untuk mengatur indentasi kode.
 * Batasi baris (termasuk indentasi) hingga 76 karakter.
 
+== Daftar pekerjaan ==
+
+Terlalu banyak untuk dituliskan :)
+
+* Penambahan definisi secara dinamis (AJAX?)
+* Satu frasa yang memiliki dua kategori
+* Entri untuk referensi
+* Entri terjemahan untuk kamus
+* Parser untuk data KBBI
+* Penambahan dan penyuntingan glosarium
+* Statistik pengguna teraktif
+* Preferensi pengguna
+* Ganti kata sandi
+
 == Riwayat revisi ==
 
 === 0.0.3 (14 Mei 2009) ===
 
+* Halaman muka yang sesuai
+* Statistik pencarian frasa
 * mod=doc untuk membaca dokumen
 * Pembagian halaman untuk hasil pencarian
 
