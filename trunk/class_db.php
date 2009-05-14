@@ -6,7 +6,7 @@
  */
 require_once('MDB2.php');
 
-define(DB_RECORD_PER_PAGE, 30);
+define(DB_RECORD_PER_PAGE, 50);
 
 class db
 {
