@@ -6,7 +6,7 @@
 // constants
 define(LF, "\n"); // line break
 define(APP_NAME, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.3'); // application name
+define(APP_VERSION, 'v0.0.4'); // application name
 
 // variables
 $base_dir = dirname(__FILE__);
