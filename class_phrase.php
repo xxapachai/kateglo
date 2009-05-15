@@ -18,7 +18,7 @@ class phrase
 		$phrase = $this->get_phrase();
 
 		// kbbi header
-		$ret .= '<table cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
+		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
 
 		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
@@ -90,7 +90,7 @@ class phrase
 	{
 		$kbbi = new kbbi();
 		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
-		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['kbbi_ref']);
+		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
 		$ret .= $kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 		$ret .= '</td></tr></table>' . LF;
 
@@ -170,7 +170,7 @@ class phrase
 
 
 		// kbbi header
-		$ret .= '<table cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
+		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
 
 		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);

@@ -30,7 +30,7 @@ $msg = array(
 
 	'id' => 'Bahasa Indonesia',
 
-	'kbbi_ref' => 'Rujukan KBBI',
+	'kbbi_ref' => '<a href="http://pusatbahasa.diknas.go.id/kbbi/">Rujukan KBBI</a>',
 	'keyword' => 'Kata kunci',
 
 	'lex_class' => 'Kelas kata',
