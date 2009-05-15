@@ -35,6 +35,8 @@ class glossary
 		$msg2 = ($lang == 'id') ? 'en' : 'id';
 		$phrase1 = ($lang == 'id') ? 'phrase' : 'translation';
 		$phrase2 = ($lang == 'id') ? 'translation' : 'phrase';
+		$wp1 = 'wp' . $msg1;
+		$wp2 = 'wp' . $msg2;
 		if ($phrase)
 		{
 			$where .= $where ? ' AND ' : ' WHERE ';
@@ -58,7 +60,7 @@ class glossary
 			$where .= $where ? ' AND ' : ' WHERE ';
 			$where .= ' a.discipline = \'' . $discipline . '\' ';
 		}
-		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source';
+		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
 		$from = 'FROM translation a LEFT JOIN discipline b
 			ON a.discipline = b.discipline ' . $where . '
 			ORDER BY ' . $phrase1;
@@ -99,17 +101,24 @@ class glossary
 					'&dc=' . $row['discipline'];
 				$ret .= '<tr valign="top">' . LF;
 				$ret .= sprintf($tmp, ($this->db->pager['rbegin'] + $i) . '.', 'left');
-				$ret .= sprintf($tmp, $row[$phrase1], 'left');
-				$ret .= sprintf($tmp, $row[$phrase2], 'left');
+				if ($row[$wp1])
+					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase1], $msg1, $row[$wp1]), 'left');
+				else
+					$ret .= sprintf($tmp, $row[$phrase1], 'left');
+				if ($row[$wp2])
+					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase2], $msg2, $row[$wp2]), 'left');
+				else
+					$ret .= sprintf($tmp, $row[$phrase2], 'left');
 				$ret .= sprintf($tmp, $this->parse_keywords($row['phrase']), 'left');
 				if ($_GET['dc'])
 					$ret .= sprintf($tmp, $row['discipline_name'], 'center');
 				else
 					$ret .= sprintf($tmp, sprintf('<a href="%1$s">%2$s</a>', $discipline, $row['discipline_name']), 'center');
+				$ret .= sprintf($tmp, $row['ref_source'], 'center');
+				// operation
 				if ($this->auth->checkAuth())
 					$ret .= sprintf($tmp,
 						sprintf('<a href="%1$s">%2$s</a>', $url, $this->msg['edit']), 'left');
-				$ret .= sprintf($tmp, $row['ref_source'], 'center');
 				$ret .= '</tr>' . LF;
 				$i++;
 			}
@@ -140,13 +149,17 @@ class glossary
 		$form->setup($this->msg);
 		$form->addElement('text', 'translation', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'phrase', $this->msg['id'], array('size' => 40, 'maxlength' => '255'));
-		$form->addElement('select', 'discipline', $this->msg['discipline'],  $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name'));
+		$form->addElement('select', 'discipline', $this->msg['discipline'], $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name'));
+		$form->addElement('select', 'ref_source', $this->msg['ref_source'], $this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
+		$form->addElement('text', 'wpen', $this->msg['wpen'], array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'wpid', $this->msg['wpid'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('hidden', 'tr_uid');
 		$form->addElement('hidden', 'is_new', $is_new);
 		$form->addElement('submit', 'save', $this->msg['save']);
 		$form->addRule('phrase', sprintf($this->msg['required_alert'], $this->msg['id']), 'required', null, 'client');
 		$form->addRule('translation', sprintf($this->msg['required_alert'], $this->msg['en']), 'required', null, 'client');
 		$form->addRule('discipline', sprintf($this->msg['required_alert'], $this->msg['discipline']), 'required', null, 'client');
+		$form->addRule('ref_source', sprintf($this->msg['required_alert'], $this->msg['ref_source']), 'required', null, 'client');
 		$form->setDefaults($this->entry);
 
 		$ret .= $form->toHtml();
@@ -198,6 +211,9 @@ class glossary
 					phrase = %1$s,
 					translation = %2$s,
 					discipline = %3$s,
+					ref_source = %6$s,
+					wpid = %7$s,
+					wpen = %8$s,
 					updater = %4$s,
 					updated = NOW()
 				WHERE tr_uid = %5$s;',
@@ -205,18 +221,24 @@ class glossary
 				$this->db->quote($_POST['translation']),
 				$this->db->quote($_POST['discipline']),
 				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['tr_uid'])
+				$this->db->quote($_POST['tr_uid']),
+				$this->db->quote($_POST['ref_source']),
+				$this->db->quote($_POST['wpid']),
+				$this->db->quote($_POST['wpen'])
 			);
 		}
 		else
 		{
 			$query = sprintf('INSERT INTO translation (phrase, translation,
-				discipline, updater, updated)
-				VALUES (%1$s, %2$s, %3$s, %4$s, NOW());',
+				discipline, ref_source, wpid, wpen, updater, updated)
+				VALUES (%1$s, %2$s, %3$s, %5$s, %6$s, %7$s, %4$s, NOW());',
 				$this->db->quote($_POST['phrase']),
 				$this->db->quote($_POST['translation']),
 				$this->db->quote($_POST['discipline']),
-				$this->db->quote($this->auth->getUsername())
+				$this->db->quote($this->auth->getUsername()),
+				$this->db->quote($_POST['ref_source']),
+				$this->db->quote($_POST['wpid']),
+				$this->db->quote($_POST['wpen'])
 			);
 		}
 		//die($query);

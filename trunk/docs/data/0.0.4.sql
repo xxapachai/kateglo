@@ -43,5 +43,6 @@ alter table translation add wpen varchar(255) after wpid;
 
 insert into ref_source (ref_source, ref_source_name) values ('Pusba', 'Pusat Bahasa');
 insert into ref_source (ref_source, ref_source_name) values ('SM', 'Sofia Mansoor');
+insert into ref_source (ref_source, ref_source_name) values ('Bahtera', 'Bahtera');
 
 update translation set ref_source = 'Pusba' where isnull(ref_source);
