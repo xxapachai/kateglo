@@ -25,21 +25,28 @@ CC-BY-SA.
 
 Terlalu banyak untuk dituliskan :)
 
-* Penambahan definisi secara dinamis (AJAX?)
-* Satu frasa yang memiliki dua kategori
-* Entri untuk referensi
-* Entri terjemahan untuk kamus
 * Parser otomatis untuk data KBBI
-* Penambahan dan penyuntingan glosarium
 * Statistik pengguna teraktif
+* Pendaftaran pengguna
 * Preferensi pengguna
 * Ganti kata sandi
-* Pembalikan rujukan untuk data yang ditemukan
+* Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
+* Satu frasa yang memiliki dua kelas kata
+* Penambahan definisi secara dinamis (AJAX?)
+* Satu kotak pencarian umum (pencarian detil untuk yang lain)
+* Rujukan ke Wikipedia
+* Entri untuk referensi
+* Penambahan/penyuntingan glosarium secara sekaligus
 
 == Riwayat revisi ==
 
 === 0.0.4 (15 Mei 2009) ===
 
+* Sumber glosarium
+* Daftar glosarium terkait pada entri kamus
+* Fungsi pengubahan data pembaru dan waktu pembaruan untuk entri kamus dan glosarium
+* Penambahan dan penyuntingan glosarium sederhana
+* Melengkapi kelas kata menjadi 7: nomina, verba, adjektiva, adverbia, pronomina, numeralia, lain-lain
 * Kata kunci di glosarium yang merujuk ke entri kamus
 * Rujukan ke KBBI di kamus
 

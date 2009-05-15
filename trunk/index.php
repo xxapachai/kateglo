@@ -63,12 +63,20 @@ switch ($_GET['mod'])
 		$phrase->db = $db;
 		$phrase->msg = $msg;
 		$phrase->auth = $auth;
-		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form') {
+		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
 			$phrase->save_form();
-		}
 		break;
 	case 'glo':
 		$glossary = new glossary(&$db, &$auth, $msg);
+		switch ($_GET['action'])
+		{
+			case 'form':
+				if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
+					$glossary->save_form();
+				break;
+			default:
+				break;
+		}
 		break;
 }
 
@@ -91,7 +99,16 @@ switch ($_GET['mod'])
 		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
 		break;
 	case 'glo':
-		$body .= $glossary->show_result();
+		switch ($_GET['action'])
+		{
+			case 'form':
+				$body .= $glossary->show_form();
+				break;
+			default:
+				$body .= $glossary->show_result();
+				break;
+		}
+		$title = $msg['glossary'] . ' - ' . $title;
 		break;
 	case 'doc':
 		$body .= read_doc($_GET['doc']);

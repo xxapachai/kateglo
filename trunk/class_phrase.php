@@ -81,11 +81,22 @@ class phrase
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase', true);
 			$ret .= $this->show_relation($phrase, 'relation', 'root_phrase');
 		}
+
+		// glosarium
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['glossary']);
+		$_GET['lang'] = 'id';
+		$glossary = new glossary(&$this->db, &$this->auth, $this->msg);
+		$glossary->sublist = true;
+		$ret .= $glossary->show_result();
+
 		$ret .= $this->show_kbbi();
 
 		return($ret);
 	}
 
+	/**
+	 * Show KBBI reference
+	 */
 	function show_kbbi()
 	{
 		$kbbi = new kbbi();
@@ -208,7 +219,6 @@ class phrase
 			'relation', 'thesaurus', 'all_relation', 'rel_count');
 
 		// end
-		$form->applyFilter('__ALL__', 'trim');
 		$ret .= $def_hidden;
 		$ret .= '<input name="is_new" type="hidden" value="' . $is_new . '" />' . LF;
 		$ret .= sprintf('<p>%1$s</p>', $form->get_element('save'));
@@ -358,20 +368,25 @@ class phrase
 					phrase = %2$s,
 					etymology = %3$s,
 					lex_class = %4$s
-				WHERE phrase = %1$s',
+					updater = %5$s,
+					updated = NOW()
+				WHERE phrase = %1$s;',
 				$this->db->quote($old_key),
 				$this->db->quote($new_key),
 				$this->db->quote($_POST['etymology']),
-				$this->db->quote($_POST['lex_class'])
+				$this->db->quote($_POST['lex_class']),
+				$this->db->quote($this->auth->getUsername())
 			);
 		}
 		else
 		{
-			$query = sprintf('INSERT INTO phrase (phrase, etymology, lex_class)
-				VALUES (%1$s, %2$s, %3$s)',
+			$query = sprintf('INSERT INTO phrase (phrase, etymology,
+				lex_class, updater, updated)
+				VALUES (%1$s, %2$s, %3$s, %4$s, NOW());',
 				$this->db->quote($new_key),
 				$this->db->quote($_POST['etymology']),
-				$this->db->quote($_POST['lex_class'])
+				$this->db->quote($_POST['lex_class']),
+				$this->db->quote($this->auth->getUsername())
 			);
 		}
 		//die($query);
@@ -411,6 +426,9 @@ class phrase
 				$sql_value .= ' , ' . $this->db->quote($value);
 				$sql_update .=  ' , ' . $field . ' = ' . $this->db->quote($value);
 			}
+			$sql_field .= ' , updated, updater';
+			$sql_value .= ' , NOW(), ' . $this->db->quote($this->auth->getUsername());
+			$sql_update .=  ' , updated = NOW(), updater = ' . $this->db->quote($this->auth->getUsername());
 			// if not empty, update or add new
 			if (!$is_empty)
 			{
