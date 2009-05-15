@@ -17,6 +17,10 @@ class phrase
 
 		$phrase = $this->get_phrase();
 
+		// kbbi header
+		$ret .= '<table cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
+
+		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
 		if ($this->auth->checkAuth())
 		{
@@ -34,8 +38,10 @@ class phrase
 			}
 		}
 
+		// found?
 		if ($phrase)
 		{
+
 			$template = '<tr><td>%1$s:</td><td>%2$s</td></tr>' . LF;
 			$ret .= '<table>' . LF;
 			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
@@ -46,6 +52,7 @@ class phrase
 					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
 			}
 			$ret .= '</table>' . LF;
+
 
 			// definition
 			$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['definition']);
@@ -74,6 +81,19 @@ class phrase
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase', true);
 			$ret .= $this->show_relation($phrase, 'relation', 'root_phrase');
 		}
+		$ret .= $this->show_kbbi();
+
+		return($ret);
+	}
+
+	function show_kbbi()
+	{
+		$kbbi = new kbbi();
+		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['kbbi_ref']);
+		$ret .= $kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+		$ret .= '</td></tr></table>' . LF;
+
 		return($ret);
 	}
 
@@ -148,6 +168,11 @@ class phrase
 			($_GET['phrase'] ? $_GET['phrase'] : $this->msg['new_flag']);
 		$template = '<tr><td>%1$s:</td><td>%2$s</td></tr>' . LF;
 
+
+		// kbbi header
+		$ret .= '<table cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
+
+		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
 		$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
 			'./?mod=dict' . ($is_new ? '' : '&phrase=' . $_GET['phrase']), $this->msg['cancel']);
@@ -190,6 +215,10 @@ class phrase
 		$ret .= $form->end_form();
 		//var_dump($form->toArray());
 		//die();
+
+		// kbbi definition
+		$ret .= $this->show_kbbi();
+
 		return($ret);
 	}
 
