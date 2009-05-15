@@ -149,7 +149,7 @@ class glossary
 		$form->setup($this->msg);
 		$form->addElement('text', 'translation', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'phrase', $this->msg['id'], array('size' => 40, 'maxlength' => '255'));
-		$form->addElement('select', 'discipline', $this->msg['discipline'], $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name'));
+		$form->addElement('select', 'discipline', $this->msg['discipline'], $this->db->get_row_assoc('SELECT * FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name'));
 		$form->addElement('select', 'ref_source', $this->msg['ref_source'], $this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
 		$form->addElement('text', 'wpen', $this->msg['wpen'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'wpid', $this->msg['wpid'], array('size' => 40, 'maxlength' => '255'));
