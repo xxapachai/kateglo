@@ -30,6 +30,9 @@ $msg = array(
 
 	'id' => 'Bahasa Indonesia',
 
+	'kbbi_ref' => 'Rujukan KBBI',
+	'keyword' => 'Kata kunci',
+
 	'lex_class' => 'Kelas kata',
 	'license' => 'Lisensi',
 	'login' => 'Masuk',

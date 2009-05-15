@@ -29,6 +29,7 @@ require_once('Auth.php');
 
 require_once('class_phrase.php');
 require_once('class_glossary.php');
+require_once('class_kbbi.php');
 
 // initialization
 $db = new db;

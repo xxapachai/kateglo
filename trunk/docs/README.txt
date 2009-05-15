@@ -29,13 +29,19 @@ Terlalu banyak untuk dituliskan :)
 * Satu frasa yang memiliki dua kategori
 * Entri untuk referensi
 * Entri terjemahan untuk kamus
-* Parser untuk data KBBI
+* Parser otomatis untuk data KBBI
 * Penambahan dan penyuntingan glosarium
 * Statistik pengguna teraktif
 * Preferensi pengguna
 * Ganti kata sandi
+* Pembalikan rujukan untuk data yang ditemukan
 
 == Riwayat revisi ==
+
+=== 0.0.4 (15 Mei 2009) ===
+
+* Kata kunci di glosarium yang merujuk ke entri kamus
+* Rujukan ke KBBI di kamus
 
 === 0.0.3 (14 Mei 2009) ===
 
