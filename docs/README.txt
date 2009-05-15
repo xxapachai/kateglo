@@ -34,7 +34,6 @@ Terlalu banyak untuk dituliskan :)
 * Satu frasa yang memiliki dua kelas kata
 * Penambahan definisi secara dinamis (AJAX?)
 * Satu kotak pencarian umum (pencarian detil untuk yang lain)
-* Rujukan ke Wikipedia
 * Entri untuk referensi
 * Penambahan/penyuntingan glosarium secara sekaligus
 
@@ -42,6 +41,7 @@ Terlalu banyak untuk dituliskan :)
 
 === 0.0.4 (15 Mei 2009) ===
 
+* Rujukan ke Wikipedia untuk glosarium
 * Sumber glosarium
 * Daftar glosarium terkait pada entri kamus
 * Fungsi pengubahan data pembaru dan waktu pembaruan untuk entri kamus dan glosarium
