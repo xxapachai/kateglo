@@ -46,3 +46,40 @@ insert into ref_source (ref_source, ref_source_name) values ('SM', 'Sofia Mansoo
 insert into ref_source (ref_source, ref_source_name) values ('Bahtera', 'Bahtera');
 
 update translation set ref_source = 'Pusba' where isnull(ref_source);
+
+-- Bidang
+
+insert into discipline (discipline, discipline_name) values ('agri', 'Pertanian');
+insert into discipline (discipline, discipline_name) values ('ars', 'Arsitektur');
+insert into discipline (discipline, discipline_name) values ('asur', 'Asuransi');
+insert into discipline (discipline, discipline_name) values ('bank', 'Perbankan');
+insert into discipline (discipline, discipline_name) values ('edu', 'Pendidikan');
+insert into discipline (discipline, discipline_name) values ('el', 'Elektronika');
+insert into discipline (discipline, discipline_name) values ('foto', 'Fotografi');
+insert into discipline (discipline, discipline_name) values ('geo', 'Geologi');
+insert into discipline (discipline, discipline_name) values ('ikan', 'Perikanan');
+insert into discipline (discipline, discipline_name) values ('kapal', 'Perkapalan');
+insert into discipline (discipline, discipline_name) values ('konstruksi', 'Konstruksi');
+insert into discipline (discipline, discipline_name) values ('kristen', 'Kristen');
+insert into discipline (discipline, discipline_name) values ('lelang', 'Pelelangan');
+insert into discipline (discipline, discipline_name) values ('keu', 'Keuangan');
+insert into discipline (discipline, discipline_name) values ('migas', 'Minyak & gas');
+insert into discipline (discipline, discipline_name) values ('mil', 'Militer');
+insert into discipline (discipline, discipline_name) values ('ms', 'Mesin');
+insert into discipline (discipline, discipline_name) values ('otomotif', 'Otomotif');
+insert into discipline (discipline, discipline_name) values ('par', 'Pariwisata');
+insert into discipline (discipline, discipline_name) values ('paten', 'Paten');
+insert into discipline (discipline, discipline_name) values ('pajak', 'Pajak');
+insert into discipline (discipline, discipline_name) values ('pelayaran', 'Pelayaran');
+insert into discipline (discipline, discipline_name) values ('pol', 'Kepolisian');
+insert into discipline (discipline, discipline_name) values ('psi', 'Psikologi');
+insert into discipline (discipline, discipline_name) values ('religi', 'Agama');
+insert into discipline (discipline, discipline_name) values ('saham', 'Saham');
+insert into discipline (discipline, discipline_name) values ('stat', 'Statistika');
+insert into discipline (discipline, discipline_name) values ('tek', 'Teknik');
+insert into discipline (discipline, discipline_name) values ('ternak', 'Peternakan');
+insert into discipline (discipline, discipline_name) values ('tmb', 'Tambang');
+insert into discipline (discipline, discipline_name) values ('trans', 'Transportasi');
+insert into discipline (discipline, discipline_name) values ('-belum', '*Belum berkategori*');
+
+update translation set ref_source = 'SM' where isnull(ref_source);
