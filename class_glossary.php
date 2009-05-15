@@ -9,6 +9,8 @@ class glossary
 	var $db;
 	var $auth;
 	var $msg;
+	var $entry;
+	var $sublist = false;
 
 	/**
 	 *
@@ -29,6 +31,10 @@ class glossary
 		$phrase = trim($_GET['phrase']);
 		$discipline = trim($_GET['dc']);
 		$lang = trim($_GET['lang']);
+		$msg1 = ($lang == 'id') ? 'id' : 'en';
+		$msg2 = ($lang == 'id') ? 'en' : 'id';
+		$phrase1 = ($lang == 'id') ? 'phrase' : 'translation';
+		$phrase2 = ($lang == 'id') ? 'translation' : 'phrase';
 		if ($phrase)
 		{
 			$where .= $where ? ' AND ' : ' WHERE ';
@@ -52,45 +58,107 @@ class glossary
 			$where .= $where ? ' AND ' : ' WHERE ';
 			$where .= ' a.discipline = \'' . $discipline . '\' ';
 		}
-		$cols = 'a.translation, a.phrase, b.discipline_name';
+		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source';
 		$from = 'FROM translation a LEFT JOIN discipline b
 			ON a.discipline = b.discipline ' . $where . '
-			ORDER BY translation';
-		//echo($query);
+			ORDER BY ' . $phrase1;
+		echo($query);
 		$rows = $this->db->get_rows_paged($cols, $from);
+		$create = sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
+			$this->get_url_param(array('search', 'action', 'uid', 'mod')),
+			$this->msg['new']);
 		if ($this->db->num_rows > 0)
 		{
+			$ret .= '<p>';
+			if ($this->auth->checkAuth()) $ret .= $create . ' | ';
 			$ret .= $this->db->get_page_nav();
-			$ret .= '<table width="100%" class="list">' . LF;
+			$ret .= '</p>' . LF;
+
+			$ret .= '<table class="list" width="100%">' . LF;
+
+			// header
 			$ret .= '<tr>' . LF;
 			$tmp = '<th width="%2$s%%">%1$s</th>' . LF;;
-			$ret .= sprintf($tmp, $this->msg['en'], '30');
-			$ret .= sprintf($tmp, $this->msg['id'], '30');
-			$ret .= sprintf($tmp, $this->msg['discipline'], '10');
+			$ret .= sprintf($tmp, '&nbsp;', '1');
+			$ret .= sprintf($tmp, $this->msg[$msg1], '25');
+			$ret .= sprintf($tmp, $this->msg[$msg2], '25');
 			$ret .= sprintf($tmp, $this->msg['keyword'], '30');
+			$ret .= sprintf($tmp, $this->msg['discipline'], '10');
+			$ret .= sprintf($tmp, $this->msg['ref_source'], '10');
+			if ($this->auth->checkAuth())
+				$ret .= sprintf($tmp, '&nbsp;', '1');
 			$ret .= '</tr>' . LF;
-			$tmp = '<td>%1$s</td>' . LF;;
+
+			// rows
+			$tmp = '<td align="%2$s">%1$s</td>' . LF;;
 			foreach ($rows as $row)
 			{
-				$ret .= '<tr>' . LF;
-				$ret .= sprintf($tmp, $row['translation']);
-				$ret .= sprintf($tmp, $row['phrase']);
-				$ret .= sprintf($tmp, $row['discipline_name']);
-				$ret .= sprintf($tmp, $this->parse_keywords($row['phrase']));
+				$url = './' . $this->get_url_param(array('search', 'action', 'uid', 'mod')) .
+					'&action=form&mod=glo&uid=' . $row['tr_uid'];
+				$discipline = './' . $this->get_url_param(array('search', 'action', 'uid', 'dc')).
+					'&dc=' . $row['discipline'];
+				$ret .= '<tr valign="top">' . LF;
+				$ret .= sprintf($tmp, ($this->db->pager['rbegin'] + $i) . '.', 'left');
+				$ret .= sprintf($tmp, $row[$phrase1], 'left');
+				$ret .= sprintf($tmp, $row[$phrase2], 'left');
+				$ret .= sprintf($tmp, $this->parse_keywords($row['phrase']), 'left');
+				if ($_GET['dc'])
+					$ret .= sprintf($tmp, $row['discipline_name'], 'center');
+				else
+					$ret .= sprintf($tmp, sprintf('<a href="%1$s">%2$s</a>', $discipline, $row['discipline_name']), 'center');
+				if ($this->auth->checkAuth())
+					$ret .= sprintf($tmp,
+						sprintf('<a href="%1$s">%2$s</a>', $url, $this->msg['edit']), 'left');
+				$ret .= sprintf($tmp, $row['ref_source'], 'center');
 				$ret .= '</tr>' . LF;
+				$i++;
 			}
-			$ret .= '<table>' . LF;
+			$ret .= '</table>' . LF;
+
+			$ret .= '<p>';
+			if ($this->auth->checkAuth()) $ret .= $create . ' | ';
 			$ret .= $this->db->get_page_nav();
+			$ret .= '</p>' . LF;
 		}
 		else
-			$ret = 'Frasa tidak ditemukan.';
+			$ret = '<p>Frasa tidak ditemukan.</p>' . LF;
 
 		return($ret);
 	}
 
+	/**
+	 *
+	 */
+	function show_form()
+	{
+		$query = 'SELECT a.* FROM translation a
+			WHERE a.tr_uid = ' . $this->db->quote($_GET['uid']);
+		$this->entry = $this->db->get_row($query);
+		$is_new = is_array($this->entry);
+
+		$form = new form('entry_form', null, './' . $this->get_url_param());
+		$form->setup($this->msg);
+		$form->addElement('text', 'translation', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'phrase', $this->msg['id'], array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('select', 'discipline', $this->msg['discipline'],  $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name'));
+		$form->addElement('hidden', 'tr_uid');
+		$form->addElement('hidden', 'is_new', $is_new);
+		$form->addElement('submit', 'save', $this->msg['save']);
+		$form->addRule('phrase', sprintf($this->msg['required_alert'], $this->msg['id']), 'required', null, 'client');
+		$form->addRule('translation', sprintf($this->msg['required_alert'], $this->msg['en']), 'required', null, 'client');
+		$form->addRule('discipline', sprintf($this->msg['required_alert'], $this->msg['discipline']), 'required', null, 'client');
+		$form->setDefaults($this->entry);
+
+		$ret .= $form->toHtml();
+		return($ret);
+	}
+
+	/**
+	 *
+	 */
 	function parse_keywords($string)
 	{
-		$keywords = preg_split("/[\s,-;\(\)]+/", $string);
+		$keywords = preg_split("/[\s,-;\'(\)]+/", $string);
 		$clean_key = array();
 		foreach($keywords as $word)
 		{
@@ -111,6 +179,72 @@ class glossary
 			}
 		}
 		return($keyword);
+	}
+
+	/**
+	 * Save glossary
+	 *
+	 * @return unknown_type
+	 */
+	function save_form()
+	{
+		global $_GET, $_POST;
+		$is_new = (!$_POST['is_new']);
+		// main
+		if (!$is_new)
+		{
+			$query = sprintf(
+				'UPDATE translation SET
+					phrase = %1$s,
+					translation = %2$s,
+					discipline = %3$s,
+					updater = %4$s,
+					updated = NOW()
+				WHERE tr_uid = %5$s;',
+				$this->db->quote($_POST['phrase']),
+				$this->db->quote($_POST['translation']),
+				$this->db->quote($_POST['discipline']),
+				$this->db->quote($this->auth->getUsername()),
+				$this->db->quote($_POST['tr_uid'])
+			);
+		}
+		else
+		{
+			$query = sprintf('INSERT INTO translation (phrase, translation,
+				discipline, updater, updated)
+				VALUES (%1$s, %2$s, %3$s, %4$s, NOW());',
+				$this->db->quote($_POST['phrase']),
+				$this->db->quote($_POST['translation']),
+				$this->db->quote($_POST['discipline']),
+				$this->db->quote($this->auth->getUsername())
+			);
+		}
+		//die($query);
+		$this->db->exec($query);
+
+		// redirect
+		redir('./' . $this->get_url_param(array('action', 'uid')));
+	}
+
+	function get_url_param($exclude = null)
+	{
+		global $_GET;
+		$ret = '';
+		foreach ($_GET as $key => $val)
+		{
+			$is_excluded = false;
+			$is_excluded = (trim($val) == '');
+			if ($exclude)
+				if (in_array($key, $exclude))
+					$is_excluded = true;
+			if (!$is_excluded)
+			{
+				$ret .= $ret ? '&' : '?';
+				$ret .= $key . '=' . $val;
+			}
+		}
+		if (!$ret) $ret = '?';
+		return($ret);
 	}
 };
 ?>

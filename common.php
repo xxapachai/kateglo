@@ -52,11 +52,11 @@ function show_header()
 		array('onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
 		);
 	$form->addElement('select', 'dc', null,
-		$db->get_row_assoc('SELECT discipline, discipline_name FROM discipline', 'discipline', 'discipline_name'),
+		$db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name'),
 		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
 		);
 	$form->addElement('select', 'lang', null,
-		$db->get_row_assoc('SELECT lang, lang_name FROM language', 'lang', 'lang_name'),
+		$db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name'),
 		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
 		);
 	$form->addElement('submit', 'search', $msg['search_button']);
