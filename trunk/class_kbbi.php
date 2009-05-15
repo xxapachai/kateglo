@@ -32,7 +32,7 @@ class kbbi
 		if ($this->param['dftkata'])
 		{
 			$words = explode(';', $this->param['dftkata']);
-			$ret .= 'Ditemukan ' . count($words) . ' entri<hr size="1" />' . LF;
+			// $ret .= 'Ditemukan ' . count($words) . ' entri<hr size="1" />' . LF;
 			foreach ($words as $word)
 			{
 				$ret .= $this->define($word) . '' . LF;
