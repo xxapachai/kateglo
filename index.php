@@ -66,6 +66,9 @@ switch ($_GET['mod'])
 		$dictionary = new dictionary(&$db, &$auth, $msg);
 		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
 			$dictionary->save_form();
+		// redirect if none found. psycological effect
+		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$dictionary->get_list())
+			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
 		break;
 	case 'glo':
 		$glossary = new glossary(&$db, &$auth, $msg);
