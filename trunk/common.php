@@ -51,7 +51,7 @@ function show_header()
 	$form->setup($msg);
 	$form->addElement('text', 'phrase', $msg['enter_phrase']);
 	$form->addElement('select', 'mod', null,
-		array('glo' => 'Glosarium', 'dict' => 'Kamus'),
+		array('dict' => 'Kamus', 'glo' => 'Glosarium'),
 		array('onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
 		);
 	$form->addElement('select', 'dc', null,
