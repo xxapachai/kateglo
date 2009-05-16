@@ -13,7 +13,7 @@ untuk lisensi GNU GPL.
 == Kredit ==
 
 * Ivan Lanin - ivan at lanin dot org
-* Romi Hardiyanto
+* Romi Hardiyanto - romihardiyanto at gmail dot com
 * Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
 == Standar kode pemrograman ==
@@ -27,6 +27,7 @@ untuk lisensi GNU GPL.
 == Daftar pekerjaan ==
 
 * Parser otomatis untuk data KBBI
+* Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Pendaftaran pengguna
 * Preferensi pengguna
 * Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
@@ -36,11 +37,18 @@ untuk lisensi GNU GPL.
 * Entri untuk referensi
 * Penambahan/penyuntingan glosarium secara sekaligus
 * Statistik pengguna teraktif
+* API atau antarmuka pemrograman aplikasi
+* ki = kiasan?
+* Kata hari ini
 
 == Riwayat revisi ==
 
 === 0.0.5 (16 Mei 2009) ===
 
+* Menampilkan daftar kata yang ada dalam kamus
+* Memasukkan peribahasa sebagai salah satu unsur tesaurus
+* Log dibatasi hanya $_SERVER['QUERY_STRING']
+* Kelas phrase -> dictionary
 * Penggantian kata sandi pengguna
 
 === 0.0.4 (15 Mei 2009) ===

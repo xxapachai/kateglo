@@ -25,7 +25,7 @@ require_once('class_form.php');
 require_once('class_logger.php');
 require_once('class_user.php');
 require_once('Auth.php');
-require_once('class_phrase.php');
+require_once('class_dictionary.php');
 require_once('class_glossary.php');
 require_once('class_kbbi.php');
 
@@ -63,12 +63,9 @@ switch ($_GET['mod'])
 		}
 		break;
 	case 'dict':
-		$phrase = new phrase;
-		$phrase->db = $db;
-		$phrase->msg = $msg;
-		$phrase->auth = $auth;
+		$dictionary = new dictionary(&$db, &$auth, $msg);
 		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
-			$phrase->save_form();
+			$dictionary->save_form();
 		break;
 	case 'glo':
 		$glossary = new glossary(&$db, &$auth, $msg);
@@ -90,11 +87,19 @@ $body .= show_header();
 switch ($_GET['mod'])
 {
 	case 'dict':
-		if ($_GET['action'] == 'form')
-			$body .= $phrase->show_form();
-		else
-			if ($_GET['phrase'])
-				$body .= $phrase->show_phrase();
+		switch ($_GET['action'])
+		{
+			case 'view':
+				$body .= $dictionary->show_phrase();
+				break;
+			case 'form':
+				$body .= $dictionary->show_form();
+				break;
+			default:
+				$body .= $dictionary->show_list();
+				break;
+		}
+		$title = $msg['dictionary'] . ' - ' . $title;
 		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
 		break;
 	case 'glo':
@@ -129,7 +134,7 @@ switch ($_GET['mod'])
 		if ($searches)
 		{
 			$search_result = '';
-			$tmp = '<strong>%1$s</strong> [<a href="?mod=dict&phrase=%1$s">%2$s</a>, '
+			$tmp = '<strong>%1$s</strong> [<a href="?mod=dict&action=view&phrase=%1$s">%2$s</a>, '
 				. '<a href="?mod=glo&phrase=%1$s">%3$s</a>]';
 			for ($i = 0; $i < $db->num_rows; $i++)
 			{

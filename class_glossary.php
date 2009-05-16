@@ -13,12 +13,12 @@ class glossary
 	var $sublist = false;
 
 	/**
-	 *
+	 * Constructor
 	 */
 	function glossary(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
+		$this->db = &$db;
+		$this->auth = &$auth;
 		$this->msg = $msg;
 	}
 
@@ -64,11 +64,13 @@ class glossary
 		$from = 'FROM translation a LEFT JOIN discipline b
 			ON a.discipline = b.discipline ' . $where . '
 			ORDER BY ' . $phrase1;
-		echo($query);
 		$rows = $this->db->get_rows_paged($cols, $from);
 		$create = sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
 			$this->get_url_param(array('search', 'action', 'uid', 'mod')),
 			$this->msg['new']);
+
+		if (!$this->sublist)
+			$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
 		if ($this->db->num_rows > 0)
 		{
 			$ret .= '<p>';
@@ -183,7 +185,7 @@ class glossary
 		}
 		sort($clean_key);
 		// cleaned key
-		$url = '<a href="./?mod=dict&phrase=%1$s">%1$s</a>';
+		$url = '<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>';
 		foreach($clean_key as $word)
 		{
 			{

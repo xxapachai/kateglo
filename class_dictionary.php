@@ -2,14 +2,56 @@
 /**
  * Phrase class
  */
-class phrase
+class dictionary
 {
 	var $db;
 	var $auth;
 	var $msg;
 
 	/**
-	 * @return unknown_type
+	 * Constructor
+	 */
+	function dictionary(&$db, &$auth, $msg)
+	{
+		$this->db = &$db;
+		$this->auth = &$auth;
+		$this->msg = $msg;
+	}
+
+	/**
+	 * Show list of words
+	 */
+	function show_list()
+	{
+		$cols = 'a.phrase';
+		$from = 'FROM phrase a ';
+		if ($_GET['phrase'])
+			$from .= 'WHERE a.phrase LIKE \'%' . $this->db->quote($_GET['phrase'], null, false) . '%\'';
+		$from .= 'ORDER BY a.phrase ';
+		$rows = $this->db->get_rows_paged($cols, $from);
+
+
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
+		if ($this->db->num_rows > 0)
+		{
+			$ret .= '<p>';
+			$ret .= $this->db->get_page_nav();
+			$ret .= '</p>' . LF;
+			$ret .= '<ul>' . LF;
+			foreach ($rows as $row)
+			{
+				$tmp = '<li><a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a></li>' . LF;
+				$ret .= sprintf($tmp, $row['phrase']);
+			}
+			$ret .= '</ul>' . LF;
+		}
+		else
+			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dict&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);
+		return($ret);
+	}
+
+	/**
+	 * Get dictionary detail page
 	 */
 	function show_phrase()
 	{
@@ -24,18 +66,10 @@ class phrase
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
 		if ($this->auth->checkAuth())
 		{
-			if ($phrase)
-				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-					sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
-					$this->msg['edit']
-				);
-			else
-			{
-				$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-					sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
-					$this->msg['new']
-				);
-			}
+			$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
+				sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
+				$this->msg[$phrase ? 'edit' : 'add']
+			);
 		}
 
 		// found?
@@ -138,7 +172,7 @@ class phrase
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
-				$ret .= sprintf('<a href="./?mod=dict&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
+				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
 				$ret .= ($i < $count - 1) ? ', ': '';
 			}
 		}
