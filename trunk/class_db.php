@@ -149,9 +149,9 @@ class db
 		$this->_db->exec($query);
 	}
 
-	function quote($value)
+	function quote($value, $type = null, $quote = true, $escape_wildcards = false)
 	{
-		return($this->_db->quote(trim($value)));
+		return($this->_db->quote(trim($value), $type, $quote, $escape_wildcards));
 	}
 
 	function get_page_nav()

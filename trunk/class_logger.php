@@ -12,8 +12,8 @@ class logger
 
 	function logger(&$db, &$auth)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
+		$this->db = &$db;
+		$this->auth = &$auth;
 		$this->ses_id = session_id();
 	}
 
@@ -26,11 +26,9 @@ class logger
 			user_id, started) VALUES (\'%1$s\', \'%2$s\', \'%3$s\', NOW());',
 			$this->ses_id, $_SERVER['REMOTE_ADDR'], $this->auth->getUsername());
 		$this->db->exec($query);
-		$description = sprintf('%1$s?%2$s',
-			$_SERVER['SCRIPT_NAME'], $_SERVER['QUERY_STRING']);
 		$query = sprintf('INSERT INTO sys_action (ses_id, action_time,
 			description) VALUES (\'%1$s\', NOW(), \'%2$s\');',
-			$this->ses_id, $description);
+			$this->ses_id, $_SERVER['QUERY_STRING']);
 		$this->db->exec($query);
 
 		// log searched phrase
