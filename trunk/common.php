@@ -17,32 +17,10 @@ function redir($url)
 	header('Location:' . $url);
 }
 
-/**
- * Login form
- *
- * TODO: Move to class_user
- */
-function login($username = null, $status = null, &$auth = null)
+function login()
 {
-	global $msg, $auth;
-
-	$welcome = $auth->checkAuth() ? 'login_success' : 'login_welcome';
-	$welcome = $msg[$welcome];
-	if ($status < 0) $welcome = $msg['login_failed'] . ' ' . $welcome;
-	$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
-
-	if (!$auth->checkAuth())
-	{
-		$form = new form('login_form', null, './?mod=auth&action=login');
-		$form->setup($msg);
-		$form->addElement('text', 'username', $msg['username']);
-		$form->addElement('password', 'password', $msg['password']);
-		$form->addElement('submit', null, $msg['login']);
-		$form->addRule('username', sprintf($msg['required_alert'], $msg['username']), 'required', null, 'client');
-		$form->addRule('password', sprintf($msg['required_alert'], $msg['password']), 'required', null, 'client');
-		$ret .= $form->toHtml();
-	}
-	return($ret);
+	global $user;
+	return($user->login_form());
 }
 
 /**
@@ -57,7 +35,7 @@ function show_header()
 	$form->setup($msg);
 	$form->addElement('text', 'phrase', $msg['enter_phrase']);
 	$form->addElement('select', 'mod', null,
-		array('dict' => 'Kamus', 'glo' => 'Glosarium'),
+		array('glo' => 'Glosarium', 'dict' => 'Kamus'),
 		array('onchange'=>'this.form.elements[\'dc\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');this.form.elements[\'lang\'].style.display = (this.value == \'glo\' ? \'block\' : \'none\');')
 		);
 	$form->addElement('select', 'dc', null,

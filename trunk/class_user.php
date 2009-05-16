@@ -22,6 +22,30 @@ class user
 	}
 
 	/**
+	 * Login form
+	 */
+	function login_form($username = null, $status = null, &$auth = null)
+	{
+		$welcome = $this->auth->checkAuth() ? 'login_success' : 'login_welcome';
+		$welcome = $this->msg[$welcome];
+		if ($status < 0) $welcome = $this->msg['login_failed'] . ' ' . $welcome;
+		$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
+
+		if (!$this->auth->checkAuth())
+		{
+			$form = new form('login_form', null, './?mod=auth&action=login');
+			$form->setup($this->msg);
+			$form->addElement('text', 'username', $this->msg['username']);
+			$form->addElement('password', 'password', $this->msg['password']);
+			$form->addElement('submit', null, $this->msg['login']);
+			$form->addRule('username', sprintf($this->msg['required_alert'], $this->msg['username']), 'required', null, 'client');
+			$form->addRule('password', sprintf($this->msg['required_alert'], $this->msg['password']), 'required', null, 'client');
+			$ret .= $form->toHtml();
+		}
+		return($ret);
+	}
+
+	/**
 	 * Process password change
 	 */
 	function change_password()

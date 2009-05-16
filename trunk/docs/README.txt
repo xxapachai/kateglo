@@ -26,6 +26,7 @@ untuk lisensi GNU GPL.
 
 == Daftar pekerjaan ==
 
+* Klasifikasi Roget untuk glosarium (Femmy)
 * Parser otomatis untuk data KBBI
 * Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Pendaftaran pengguna
@@ -43,8 +44,11 @@ untuk lisensi GNU GPL.
 
 == Riwayat revisi ==
 
+=== 0.0.6 (17 Mei 2009) ===
+
 === 0.0.5 (16 Mei 2009) ===
 
+* Formulir login dipindahkan ke class_user
 * Menampilkan daftar kata yang ada dalam kamus
 * Memasukkan peribahasa sebagai salah satu unsur tesaurus
 * Log dibatasi hanya $_SERVER['QUERY_STRING']

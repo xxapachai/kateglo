@@ -6,7 +6,7 @@
 $msg = array(
 	'actual_phrase' => 'Alihkan ke',
 
-	'cancel' => 'batal',
+	'cancel' => 'Batal',
 	'change_pwd' => 'Ubah kata sandi',
 
 	'definition' => 'Definisi',
@@ -74,8 +74,8 @@ $msg = array(
 
 	'username' => 'Pengguna',
 
-	'welcome' => '<div align="center" style="padding: 50px 0px;">
-		<p><big>Selamat datang di Kateglo - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
+	'welcome' => '<div align="center" style="padding: 20px 0px;">
+		<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
 		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
 		<p>Saat ini terdapat <strong>%2$s</strong> entri dalam <a href="./?mod=glo">glosarium</a> serta <strong>%1$s</strong> entri dalam <a href="./?mod=dict">kamus dan tesaurus</a>.</p>
 		</div>',

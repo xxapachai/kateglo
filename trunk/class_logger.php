@@ -12,8 +12,8 @@ class logger
 
 	function logger(&$db, &$auth)
 	{
-		$this->db = &$db;
-		$this->auth = &$auth;
+		$this->db = $db;
+		$this->auth = $auth;
 		$this->ses_id = session_id();
 	}
 
