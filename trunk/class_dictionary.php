@@ -19,6 +19,19 @@ class dictionary
 	}
 
 	/**
+	 * Get list of words
+	 */
+	function get_list()
+	{
+		global $_GET;
+		$query = 'SELECT COUNT(*) FROM phrase a WHERE a.phrase
+			LIKE \'%' . $this->db->quote($_GET['phrase'], null, false) . '%\';';
+		$count = $this->db->get_row_value($query);
+		$ret = $_GET['phrase'] ? $count : true;
+		return($ret);
+	}
+
+	/**
 	 * Show list of words
 	 */
 	function show_list()
