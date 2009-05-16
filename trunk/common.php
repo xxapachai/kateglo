@@ -3,6 +3,10 @@
  * Library of common functions
  */
 
+define(PROCESS_NONE, 0); // mark no process
+define(PROCESS_SUCCEED, 1); // mark process succeed
+define(PROCESS_FAILED, 2); // mark process failed
+
 /**
  * Redirect to a certain URL page
  *
@@ -13,6 +17,11 @@ function redir($url)
 	header('Location:' . $url);
 }
 
+/**
+ * Login form
+ *
+ * TODO: Move to class_user
+ */
 function login($username = null, $status = null, &$auth = null)
 {
 	global $msg, $auth;
@@ -33,7 +42,7 @@ function login($username = null, $status = null, &$auth = null)
 		$form->addRule('password', sprintf($msg['required_alert'], $msg['password']), 'required', null, 'client');
 		$ret .= $form->toHtml();
 	}
-		return($ret);
+	return($ret);
 }
 
 /**
@@ -83,8 +92,13 @@ function show_header()
 	// navigation
 	$ret .= '<td align="right">' . LF;
 	if ($auth->checkAuth())
-		$ret .= sprintf('<strong>%3$s</strong> | <a href="%2$s">%1$s</a>' . LF,
-			$msg['logout'], './?mod=auth&action=logout', $auth->getUsername());
+	{
+		$ret .= sprintf('<strong>%3$s</strong> | <a href="%5$s">%4$s</a> | <a href="%2$s">%1$s</a>' . LF,
+			$msg['logout'], './?mod=auth&action=logout',
+			$auth->getUsername(),
+			$msg['change_pwd'], './?mod=auth&action=password'
+		);
+	}
 	else
 		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=auth&action=login');
 	$ret .= '</td>' . LF;

@@ -4,8 +4,11 @@ Kateglo adalah aplikasi web sumber terbuka untuk kamus, tesaurus, dan
 glosarium bahasa Indonesia. Namanya diambil dari singkatan unsur layanannya,
 KAmus, TEsaurus, dan GLOsarium.
 
-Lisensi kode sumber Kateglo adalah GFL, sedangkan lisensi isinya adalah
+Lisensi kode sumber Kateglo adalah GPL, sedangkan lisensi isinya adalah
 CC-BY-SA.
+
+Silakan baca INSTALL.txt untuk petunjuk instalasi aplikasi dan LICENSE.txt
+untuk lisensi GNU GPL.
 
 == Kredit ==
 
@@ -13,7 +16,7 @@ CC-BY-SA.
 * Romi Hardiyanto
 * Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
-== Standar kode ==
+== Standar kode pemrograman ==
 
 * Gunakan huruf kecil dengan garis bawah sebagai pemisah kata.
 * Gunakan kurung kurawa pada baris terpisah untuk blok fungsi, kondisi, dll.
@@ -23,21 +26,22 @@ CC-BY-SA.
 
 == Daftar pekerjaan ==
 
-Terlalu banyak untuk dituliskan :)
-
 * Parser otomatis untuk data KBBI
-* Statistik pengguna teraktif
 * Pendaftaran pengguna
 * Preferensi pengguna
-* Ganti kata sandi
 * Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
 * Satu frasa yang memiliki dua kelas kata
 * Penambahan definisi secara dinamis (AJAX?)
 * Satu kotak pencarian umum (pencarian detil untuk yang lain)
 * Entri untuk referensi
 * Penambahan/penyuntingan glosarium secara sekaligus
+* Statistik pengguna teraktif
 
 == Riwayat revisi ==
+
+=== 0.0.5 (16 Mei 2009) ===
+
+* Penggantian kata sandi pengguna
 
 === 0.0.4 (15 Mei 2009) ===
 

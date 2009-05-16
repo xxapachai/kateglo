@@ -7,6 +7,7 @@ $msg = array(
 	'actual_phrase' => 'Alihkan ke',
 
 	'cancel' => 'batal',
+	'change_pwd' => 'Ubah kata sandi',
 
 	'definition' => 'Definisi',
 	'delete' => 'Hapus',
@@ -19,8 +20,8 @@ $msg = array(
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
 
-	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.',
-	'form_err_post' => 'Harap perbaiki kesalahan tersebut.',
+	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.' . "\n",
+	'form_err_post' => "\n" . 'Harap perbaiki kesalahan tersebut.',
 	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
 
 	'glo_short' => 'g',
@@ -51,6 +52,13 @@ $msg = array(
 	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
+	'pwd_current' => 'Kata sandi sekarang',
+	'pwd_new' => 'Kata sandi baru',
+	'pwd_retype' => 'Ketik ulang kata sandi baru',
+	'pwd_nomatch' => 'Kata sandi baru dan pengetikan ulangnya tak sama',
+	'pwd_welcome' => 'Silakan masukkan kata sandi sekarang untuk verifikasi dan kata sandi baru yang diinginkan.',
+	'pwd_chg_failed' => 'Perubahan kata sandi tak berhasil dilakukan.',
+	'pwd_chg_succeed' => 'Perubahan kata sandi berhasil dilakukan.',
 
 	'required_alert' => '%1$s harus diisi',
 	'ref_source' => 'Sumber',
@@ -59,6 +67,7 @@ $msg = array(
 	'save' => 'Simpan',
 	'search_button' => 'Cari frasa',
 	'search_in' => ' dalam ',
+	'submit' => 'Kirim',
 
 	'thesaurus' => 'Tesaurus',
 
