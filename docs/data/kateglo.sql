@@ -1,3 +1,5 @@
+-- Last updated: 2009-05-16 08:52
+
 drop table if exists definition;
 
 drop table if exists discipline;
@@ -8,9 +10,13 @@ drop table if exists lexical_class;
 
 drop table if exists phrase;
 
+drop table if exists ref_source;
+
 drop table if exists relation;
 
 drop table if exists relation_type;
+
+drop table if exists searched_phrase;
 
 drop table if exists sys_action;
 
@@ -89,6 +95,19 @@ create table phrase
 );
 
 /*==============================================================*/
+/* Table: ref_source                                            */
+/*==============================================================*/
+create table ref_source
+(
+   ref_source           varchar(16) not null,
+   ref_source_name      varchar(255) not null,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (ref_source)
+)
+comment = "Reference source";
+
+/*==============================================================*/
 /* Table: relation                                              */
 /*==============================================================*/
 create table relation
@@ -113,6 +132,17 @@ create table relation_type
    updated              datetime,
    updater              varchar(32) not null,
    primary key (rel_type)
+);
+
+/*==============================================================*/
+/* Table: searched_phrase                                       */
+/*==============================================================*/
+create table searched_phrase
+(
+   phrase               varchar(255) not null,
+   search_count         int not null default 0,
+   last_searched        datetime not null,
+   primary key (phrase)
 );
 
 /*==============================================================*/
@@ -165,6 +195,9 @@ create table translation
    translation          varchar(255) not null,
    discipline           varchar(16),
    lang                 varchar(16) not null default 'en',
+   ref_source           varchar(16),
+   wpid                 varchar(255),
+   wpen                 varchar(255),
    updated              datetime,
    updater              varchar(32) not null,
    primary key (tr_uid)

@@ -6,7 +6,7 @@
 // constants
 define(LF, "\n"); // line break
 define(APP_NAME, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.4'); // application name
+define(APP_VERSION, 'v0.0.5'); // application version. See README.txt
 
 // variables
 $base_dir = dirname(__FILE__);
@@ -14,19 +14,17 @@ $is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 $title = APP_NAME;
 ini_set('include_path', $base_dir . '/pear/');
 foreach ($_GET as $key => $val)
-{
 	$_GET[$key] = trim($val);
-}
 
+// includes
 require_once('config.php');
 require_once('messages.php');
-
 require_once('common.php');
 require_once('class_db.php');
 require_once('class_form.php');
 require_once('class_logger.php');
+require_once('class_user.php');
 require_once('Auth.php');
-
 require_once('class_phrase.php');
 require_once('class_glossary.php');
 require_once('class_kbbi.php');
@@ -49,13 +47,19 @@ $logger = new logger(&$db, &$auth);
 $logger->log();
 
 // process
+// TODO: This should be automatically perform, using method_exists, perhaps?
 switch ($_GET['mod'])
 {
 	case 'auth':
-		if ($_GET['action'] == 'logout')
+		$user = new user(&$db, &$auth, $msg);
+		switch ($_GET['action'])
 		{
-			$auth->logout();
-			redir('./?');
+			case 'logout':
+				$auth->logout();
+				redir('./?');
+			case 'password':
+				if ($is_post) $user->change_password();
+				break;
 		}
 		break;
 	case 'dict':
@@ -81,21 +85,16 @@ switch ($_GET['mod'])
 }
 
 // display
+// TODO: This should be automatically perform, using method_exists, perhaps?
 $body .= show_header();
 switch ($_GET['mod'])
 {
 	case 'dict':
 		if ($_GET['action'] == 'form')
-		{
 			$body .= $phrase->show_form();
-		}
 		else
-		{
 			if ($_GET['phrase'])
-			{
 				$body .= $phrase->show_phrase();
-			}
-		}
 		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
 		break;
 	case 'glo':
@@ -114,8 +113,15 @@ switch ($_GET['mod'])
 		$body .= read_doc($_GET['doc']);
 		break;
 	case 'auth':
-		if ($_GET['action'] == 'login')
-			$body .= login();
+		switch ($_GET['action'])
+		{
+			case 'login':
+				$body .= login();
+				break;
+			case 'password':
+				$body .= $user->change_password_form();
+				break;
+		}
 		break;
 	default:
 		$searches = $db->get_rows('SELECT phrase FROM searched_phrase
@@ -151,7 +157,6 @@ $ret .= '<title>' . $title . '</title>' . LF;
 $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
-
 $ret .= '</head>' . LF;
 $ret .= '<body>' . LF;
 $ret .= $body;
