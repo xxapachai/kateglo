@@ -6,7 +6,7 @@
 // constants
 define(LF, "\n"); // line break
 define(APP_NAME, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.5'); // application version. See README.txt
+define(APP_VERSION, 'v0.0.6'); // application version. See README.txt
 
 // variables
 $base_dir = dirname(__FILE__);
@@ -35,6 +35,7 @@ $db->connect($dsn);
 $db->msg = $msg;
 
 // authentication & and logging
+$user = new user(&$db, &$auth, $msg);
 $auth = new Auth(
 	'MDB2', array(
 		'dsn' => $db->dsn,
@@ -51,7 +52,6 @@ $logger->log();
 switch ($_GET['mod'])
 {
 	case 'auth':
-		$user = new user(&$db, &$auth, $msg);
 		switch ($_GET['action'])
 		{
 			case 'logout':
@@ -163,9 +163,8 @@ $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
 $ret .= '</head>' . LF;
-$ret .= '<body>' . LF;
 $ret .= $body;
-$ret .= sprintf('<p><span style="float:right;"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
+$ret .= sprintf('<p style="margin-top:20px;"><span style="float:right;"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
 	APP_NAME, './?mod=doc&doc=README.txt', APP_VERSION);
 $ret .= '</body>' . LF;
 $ret .= '</html>' . LF;

@@ -17,8 +17,8 @@ class glossary
 	 */
 	function glossary(&$db, &$auth, $msg)
 	{
-		$this->db = &$db;
-		$this->auth = &$auth;
+		$this->db = $db;
+		$this->auth = $auth;
 		$this->msg = $msg;
 	}
 
@@ -65,16 +65,20 @@ class glossary
 			ON a.discipline = b.discipline ' . $where . '
 			ORDER BY ' . $phrase1;
 		$rows = $this->db->get_rows_paged($cols, $from);
-		$create = sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
-			$this->get_url_param(array('search', 'action', 'uid', 'mod')),
-			$this->msg['new']);
 
+		// header and new button
 		if (!$this->sublist)
+		{
 			$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
+			if ($this->auth->checkAuth())
+				$ret .= sprintf('<p>%1$s</p>' . LF,
+					sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
+						$this->get_url_param(array('search', 'action', 'uid', 'mod')),
+						$this->msg['new']));
+		}
 		if ($this->db->num_rows > 0)
 		{
 			$ret .= '<p>';
-			if ($this->auth->checkAuth()) $ret .= $create . ' | ';
 			$ret .= $this->db->get_page_nav();
 			$ret .= '</p>' . LF;
 
@@ -127,7 +131,6 @@ class glossary
 			$ret .= '</table>' . LF;
 
 			$ret .= '<p>';
-			if ($this->auth->checkAuth()) $ret .= $create . ' | ';
 			$ret .= $this->db->get_page_nav();
 			$ret .= '</p>' . LF;
 		}

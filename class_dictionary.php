@@ -13,8 +13,8 @@ class dictionary
 	 */
 	function dictionary(&$db, &$auth, $msg)
 	{
-		$this->db = &$db;
-		$this->auth = &$auth;
+		$this->db = $db;
+		$this->auth = $auth;
 		$this->msg = $msg;
 	}
 
@@ -32,11 +32,17 @@ class dictionary
 
 
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
-		if ($this->db->num_rows > 0)
+		if ($this->auth->checkAuth())
 		{
 			$ret .= '<p>';
-			$ret .= $this->db->get_page_nav();
+			$ret .= sprintf('<a href="%1$s">%2$s</a>',
+				'./?mod=dict&action=form',
+				$this->msg['new']);
 			$ret .= '</p>' . LF;
+		}
+		if ($this->db->num_rows > 0)
+		{
+			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 			$ret .= '<ul>' . LF;
 			foreach ($rows as $row)
 			{
@@ -44,6 +50,7 @@ class dictionary
 				$ret .= sprintf($tmp, $row['phrase']);
 			}
 			$ret .= '</ul>' . LF;
+			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 		}
 		else
 			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dict&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);
@@ -66,10 +73,24 @@ class dictionary
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
 		if ($this->auth->checkAuth())
 		{
-			$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-				sprintf('./?mod=dict&action=form&phrase=%1$s', $_GET['phrase']),
-				$this->msg[$phrase ? 'edit' : 'add']
-			);
+			$ret .= '<p>';
+			if ($phrase)
+			{
+				$ret .= sprintf('<a href="%1$s">%2$s</a>',
+					sprintf('./?mod=dict&action=form', $_GET['phrase']),
+					$this->msg['new']
+					);
+				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
+					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
+					$this->msg['edit']);
+			}
+			else
+			{
+				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
+					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
+					$this->msg['new']);
+			}
+			$ret .= '</p>' . LF;
 		}
 
 		// found?
