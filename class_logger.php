@@ -21,6 +21,11 @@ class logger
 	{
 		global $_SERVER, $_GET;
 
+		$agent = $_SERVER['HTTP_USER_AGENT'];
+
+		// exceptions
+		if (strpos($agent, 'Googlebot')) return;
+
 		// log session
 		$query = sprintf('INSERT INTO sys_session (ses_id, ip_address,
 			user_id, user_agent, started) VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', NOW());',
