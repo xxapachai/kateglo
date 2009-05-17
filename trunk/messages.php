@@ -64,6 +64,7 @@ $msg = array(
 	'required_alert' => '%1$s harus diisi',
 	'ref_source' => 'Sumber',
 	'root_phrase' => 'Akar kata',
+	'roget_class' => 'Klasifikasi Roget',
 
 	'save' => 'Simpan',
 	'search_button' => 'Cari frasa',
