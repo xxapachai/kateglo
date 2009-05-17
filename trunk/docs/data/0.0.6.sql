@@ -23,3 +23,7 @@ alter table phrase add roget_class varchar(16) after lex_class;
 alter table sys_session add user_agent varchar(255) after user_id;
 alter table sys_session add last datetime;
 alter table sys_session add page_view tinyint not null default 0;
+
+insert into ref_source (ref_source, ref_source_name) values ('DS', 'Daisy Subakti');
+
+update translation set ref_source = 'DS', discipline = 'huk' where isnull(ref_source);

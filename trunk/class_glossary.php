@@ -30,6 +30,7 @@ class glossary
 		global $_GET;
 		$phrase = trim($_GET['phrase']);
 		$discipline = trim($_GET['dc']);
+		$src = trim($_GET['src']);
 		$lang = trim($_GET['lang']);
 		$msg1 = ($lang == 'id') ? 'id' : 'en';
 		$msg2 = ($lang == 'id') ? 'en' : 'id';
@@ -60,9 +61,16 @@ class glossary
 			$where .= $where ? ' AND ' : ' WHERE ';
 			$where .= ' a.discipline = \'' . $discipline . '\' ';
 		}
+		if ($src)
+		{
+			$where .= $where ? ' AND ' : ' WHERE ';
+			$where .= ' a.ref_source = \'' . $src . '\' ';
+		}
 		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
-		$from = 'FROM translation a LEFT JOIN discipline b
-			ON a.discipline = b.discipline ' . $where . '
+		$from = 'FROM translation a
+			LEFT JOIN discipline b ON a.discipline = b.discipline
+			LEFT JOIN ref_source c ON a.ref_source = c.ref_source
+			' . $where . '
 			ORDER BY ' . $phrase1;
 		$rows = $this->db->get_rows_paged($cols, $from);
 
@@ -176,7 +184,7 @@ class glossary
 	 */
 	function parse_keywords($string)
 	{
-		$keywords = preg_split("/[\s,-;\'(\)]+/", $string);
+		$keywords = preg_split("/[\s,-;=\'(\)]+/", $string);
 		$clean_key = array();
 		foreach($keywords as $word)
 		{
