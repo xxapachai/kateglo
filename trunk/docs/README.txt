@@ -49,6 +49,8 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 === 0.0.6 (17 Mei 2009) ===
 
+* Log jenis agen penjelajah dan waktu terakhir akses serta jumlah tampilan
+  halaman untuk statistik
 * Kredit untuk Femmy Syahrani
 * Perubahan lisensi isi ke CC-BY-NC-SA
 

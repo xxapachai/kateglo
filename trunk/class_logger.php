@@ -23,12 +23,22 @@ class logger
 
 		// log session
 		$query = sprintf('INSERT INTO sys_session (ses_id, ip_address,
-			user_id, started) VALUES (\'%1$s\', \'%2$s\', \'%3$s\', NOW());',
-			$this->ses_id, $_SERVER['REMOTE_ADDR'], $this->auth->getUsername());
+			user_id, user_agent, started) VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', NOW());',
+			$this->ses_id, $_SERVER['REMOTE_ADDR'],
+			$this->auth->getUsername(), $_SERVER['HTTP_USER_AGENT']
+			);
 		$this->db->exec($query);
+		// log page view
 		$query = sprintf('INSERT INTO sys_action (ses_id, action_time,
 			description) VALUES (\'%1$s\', NOW(), \'%2$s\');',
 			$this->ses_id, $_SERVER['QUERY_STRING']);
+		$this->db->exec($query);
+		// update session data
+		$query = sprintf('UPDATE sys_session
+			SET last = NOW(), page_view = page_view + 1
+			WHERE ses_id = \'%1$s\';',
+			$this->ses_id
+			);
 		$this->db->exec($query);
 
 		// log searched phrase
