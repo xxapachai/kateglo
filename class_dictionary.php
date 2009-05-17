@@ -99,7 +99,7 @@ class dictionary
 			}
 			else
 			{
-				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
+				$ret .= sprintf('<a href="%1$s">%2$s</a>',
 					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
 					$this->msg['new']);
 			}
@@ -114,6 +114,7 @@ class dictionary
 			$ret .= '<table>' . LF;
 			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
 			$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
+			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			if ($phrase['root'])
 			{
 				$ret .= sprintf($template, $this->msg['root_phrase'],
@@ -236,6 +237,8 @@ class dictionary
 			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('select', 'lex_class', $this->msg['lex_class'],
 			$this->db->get_row_assoc('SELECT * FROM lexical_class', 'lex_class', 'lex_class_name'));
+		$form->addElement('select', 'roget_class', $this->msg['roget_class'],
+			$this->db->get_row_assoc('SELECT *, CONCAT(roget_class, \' - \', roget_name) roget_class_name FROM roget_class', 'roget_class', 'roget_class_name'));
 		$form->addElement('text', 'etymology', $this->msg['etymology'],
 			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('submit', 'save', $this->msg['save']);
@@ -259,6 +262,7 @@ class dictionary
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
 		$ret .= sprintf($template, $this->msg['etymology'], $form->get_element('etymology'));
+		$ret .= sprintf($template, $this->msg['roget_class'], $form->get_element('roget_class'));
 		$ret .= '</table>' . LF;
 
 		// definition
@@ -354,21 +358,25 @@ class dictionary
 	{
 		global $_GET;
 		// phrase
-		$query = sprintf('SELECT a.*, b.lex_class_name FROM phrase a, lexical_class b
-			WHERE a.lex_class = b.lex_class AND a.phrase = %1$s',
+		$query = sprintf('SELECT a.*, b.lex_class_name, c.roget_name
+			FROM phrase a
+				INNER JOIN lexical_class b ON a.lex_class = b.lex_class
+				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
+			WHERE a.phrase = %1$s',
 			$this->db->quote($_GET['phrase']));
 		$phrase = $this->db->get_row($query);
 		if ($phrase)
 		{
 			// definition
 			$query = sprintf('SELECT a.*, b.discipline_name
-				FROM definition a LEFT JOIN discipline b
-				ON a.discipline = b.discipline
+				FROM definition a
+					INNER JOIN discipline b ON a.discipline = b.discipline
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
 				$this->db->quote($_GET['phrase']), $this->db->quote($class_name));
 			$rows = $this->db->get_rows($query);
 			$phrase['definition'] = $rows;
+			//var_dump($rows);
 
 			// derivation and relation
 			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase');
