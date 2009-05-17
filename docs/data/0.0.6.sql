@@ -20,3 +20,6 @@ create table roget_class
 
 
 alter table phrase add roget_class varchar(16) after lex_class;
+alter table sys_session add user_agent varchar(255) after user_id;
+alter table sys_session add last datetime;
+alter table sys_session add page_view tinyint not null default 0;

@@ -5,7 +5,7 @@ glosarium bahasa Indonesia. Namanya diambil dari singkatan unsur layanannya,
 KAmus, TEsaurus, dan GLOsarium.
 
 Lisensi kode sumber Kateglo adalah GPL, sedangkan lisensi isinya adalah
-CC-BY-SA. Kode sumber program dapat diunduh dari repositori publik:
+CC-BY-NC-SA. Kode sumber program dapat diunduh dari repositori publik:
 
 	http://www.bahtera.org/svn/kateglo/
 
@@ -15,7 +15,8 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Kredit ==
 
 * Ivan Lanin - ivan at lanin dot org
-* Romi Hardiyanto - romihardiyanto at gmail dot com
+* Romi Hardiyanto - http://www.ewesewes.web.id
+* Femmy Syahrani - http://femmy.multiply.com
 * Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
 == Standar kode pemrograman ==

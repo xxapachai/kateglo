@@ -167,7 +167,7 @@ $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
 $ret .= '</head>' . LF;
 $ret .= $body;
-$ret .= sprintf('<p style="margin-top:20px;"><span style="float:right;"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
+$ret .= sprintf('<p style="margin-top:20px;"><span style="float:right;"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-nc-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
 	APP_NAME, './?mod=doc&doc=README.txt', APP_VERSION);
 $ret .= '</body>' . LF;
 $ret .= '</html>' . LF;
