@@ -49,6 +49,9 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 === 0.0.6 (17 Mei 2009) ===
 
+* Kredit untuk Femmy Syahrani
+* Perubahan lisensi isi ke CC-BY-NC-SA
+
 === 0.0.5 (16 Mei 2009) ===
 
 * Formulir login dipindahkan ke class_user
