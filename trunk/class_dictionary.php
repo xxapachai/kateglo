@@ -370,7 +370,7 @@ class dictionary
 			// definition
 			$query = sprintf('SELECT a.*, b.discipline_name
 				FROM definition a
-					INNER JOIN discipline b ON a.discipline = b.discipline
+					LEFT JOIN discipline b ON a.discipline = b.discipline
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
 				$this->db->quote($_GET['phrase']), $this->db->quote($class_name));
@@ -465,7 +465,6 @@ class dictionary
 				$this->db->quote($this->auth->getUsername())
 			);
 		}
-		//die($query);
 		$this->db->exec($query);
 
 		$this->save_sub_form('definition', 'def_uid', 'def_count', 'phrase',
@@ -473,7 +472,8 @@ class dictionary
 		$this->save_sub_form('relation', 'rel_uid', 'rel_count', 'root_phrase',
 			array('rel_type', 'related_phrase'));
 
-		redir('./?mod=dict&phrase=' . $_POST['phrase']);
+		//die();
+		redir('./?mod=dict&action=view&phrase=' . $_POST['phrase']);
 	}
 
 	/**
