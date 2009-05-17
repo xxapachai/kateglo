@@ -46,6 +46,7 @@ $msg = array(
 	'new' => 'Buat baru',
 	'new_flag' => '***baru***',
 	'no_most_searched' => '(belum ada)',
+	'na' => 'Belum tersedia.',
 
 	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s entri.',
 	'page_prev' => 'Sebelumnya',

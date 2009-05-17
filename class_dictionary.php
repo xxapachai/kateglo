@@ -139,6 +139,8 @@ class dictionary
 				}
 				$ret .= '</ol>' . LF;
 			}
+			else
+				$ret .= '<p>' . $this->msg['na']. '</p>' . LF;
 
 			// relation and derivation
 			$ret .= $this->show_relation($phrase, 'relation', 'related_phrase');

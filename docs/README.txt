@@ -19,13 +19,13 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 * Femmy Syahrani - http://femmy.multiply.com
 * Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
-== Standar kode pemrograman ==
+== Standar kode program ==
 
 * Gunakan huruf kecil dengan garis bawah sebagai pemisah kata.
 * Gunakan kurung kurawa pada baris terpisah untuk blok fungsi, kondisi, dll.
 * Jika blok hanya berisi satu baris, hindari kurung kurawa.
-* Gunakan tab untuk mengatur indentasi kode.
-* Batasi baris (termasuk indentasi) hingga 76 karakter.
+* Gunakan tab (4 karakter) untuk mengatur indentasi kode.
+* Usahakan batasi baris (termasuk indentasi) hingga 76 karakter.
 
 == Daftar pekerjaan ==
 
@@ -49,6 +49,8 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 === 0.0.6 (17 Mei 2009) ===
 
+* Klasifikasi Roget dimasukkan ke dalam entri
+* Pengalihan otomatis untuk pencarian kamus jika tidak ditemukan data
 * Log jenis agen penjelajah dan waktu terakhir akses serta jumlah tampilan
   halaman untuk statistik
 * Kredit untuk Femmy Syahrani
