@@ -26,4 +26,4 @@ alter table sys_session add page_view tinyint not null default 0;
 
 insert into ref_source (ref_source, ref_source_name) values ('DS', 'Daisy Subakti');
 
-update translation set ref_source = 'DS', discipline = 'huk' where isnull(ref_source);
+update translation set ref_source = 'DS', discipline = 'huk' where isnull(ref_source); -- 6428

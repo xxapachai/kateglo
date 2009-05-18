@@ -10,6 +10,8 @@ class kbbi
 	var $param;
 	var $mode;
 	var $query;
+	var $entries;
+
 	//$modes = array('sama dengan', 'diawali', 'memuat');
 
 	/*
@@ -96,6 +98,7 @@ class kbbi
 		if (is_array($match))
 		{
 			$def = trim($match[2]);
+			$this->entries[] = $def;
 			$def = str_replace('<br>', '<br><br>', $def);
 			$return = $def;
 			return($return);

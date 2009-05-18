@@ -25,6 +25,7 @@ class logger
 
 		// exceptions
 		if (strpos($agent, 'Googlebot')) return;
+		if (strpos($agent, 'CC Metadata Scaper')) return;
 
 		// log session
 		$query = sprintf('INSERT INTO sys_session (ses_id, ip_address,
@@ -40,9 +41,9 @@ class logger
 		$this->db->exec($query);
 		// update session data
 		$query = sprintf('UPDATE sys_session
-			SET last = NOW(), page_view = page_view + 1
+			SET last = NOW(), page_view = page_view + 1, user_id = \'%2$s\'
 			WHERE ses_id = \'%1$s\';',
-			$this->ses_id
+			$this->ses_id, $this->auth->getUsername()
 			);
 		$this->db->exec($query);
 
