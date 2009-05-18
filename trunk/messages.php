@@ -17,7 +17,7 @@ $msg = array(
 	'discipline' => 'Bidang',
 
 	'edit' => 'Ubah',
-	'en' => 'Bahasa Inggris',
+	'en' => 'Bahasa Asing',
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
 
