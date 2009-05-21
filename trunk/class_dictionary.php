@@ -7,6 +7,8 @@ class dictionary
 	var $db;
 	var $auth;
 	var $msg;
+	var $kbbi;
+	var $phrase;
 
 	/**
 	 * Constructor
@@ -55,14 +57,24 @@ class dictionary
 		}
 		if ($this->db->num_rows > 0)
 		{
+			$mark = ceil($this->db->num_rows / 3);
+			$j = 1;
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
-			$ret .= '<ul>' . LF;
+			$ret .= '<table width="100%"><tr valign="top">' . LF;
 			foreach ($rows as $row)
 			{
+				$i++;
+				if ($j == $i)
+				{
+					if ($i > 1) $ret .= '</ol></td>' . LF;
+					$ret .= '<td width="33%"><ol start="' . ($this->db->pager['rbegin'] + $i - 1) . '">' . LF;
+					$j += $mark;
+				}
 				$tmp = '<li><a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a></li>' . LF;
 				$ret .= sprintf($tmp, $row['phrase']);
 			}
-			$ret .= '</ul>' . LF;
+			$ret .= '</ol></td>' . LF;
+			$ret .= '</tr></table>' . LF;
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 		}
 		else
@@ -77,7 +89,12 @@ class dictionary
 	{
 		global $_GET;
 
+		$this->phrase = $this->get_phrase();
+		$this->kbbi = new kbbi();
+		$this->kbbi->parse($_GET['phrase']);
+		if ($this->kbbi->found) $this->save_kbbi();
 		$phrase = $this->get_phrase();
+		$this->phrase = $phrase;
 
 		// kbbi header
 		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
@@ -113,13 +130,14 @@ class dictionary
 			$template = '<tr><td>%1$s:</td><td>%2$s</td></tr>' . LF;
 			$ret .= '<table>' . LF;
 			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
+			$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
 			$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
-			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			if ($phrase['root'])
 			{
 				$ret .= sprintf($template, $this->msg['root_phrase'],
 					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
 			}
+			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			$ret .= '</table>' . LF;
 
 
@@ -170,13 +188,79 @@ class dictionary
 	 */
 	function show_kbbi()
 	{
-		$kbbi = new kbbi();
 		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
 		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
-		$ret .= $kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 		$ret .= '</td></tr></table>' . LF;
 
 		return($ret);
+	}
+
+	/**
+	 * Save KBBI
+	 */
+	function save_kbbi()
+	{
+		global $_GET;
+		if ($this->kbbi->clean_entries)
+		{
+			foreach($this->kbbi->clean_entries as $key => $value)
+			{
+				// phrase
+				$query = sprintf(
+					'INSERT INTO phrase (phrase) VALUES (%1$s);',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
+
+				// update phrase
+				$query = sprintf(
+					'UPDATE phrase SET lex_class = %2$s, phrase_type = %3$s, pronounciation = %4$s WHERE phrase = %1$s;',
+					$this->db->quote($key),
+					$this->db->quote($value['lex_class']),
+					$this->db->quote($value['type']),
+					$this->db->quote($value['pron'])
+				);
+				$this->db->exec($query);
+
+				// relation
+				if ($value['type'] != 'r')
+				{
+					$query = sprintf(
+						'INSERT INTO relation (root_phrase, related_phrase, rel_type)
+							VALUES (%1$s, %2$s, %3$s);',
+						$this->db->quote($_GET['phrase']),
+						$this->db->quote($key),
+						$this->db->quote($value['type'])
+					);
+					$this->db->exec($query);
+				}
+				$this->db->exec($query);
+
+				// definition
+				$query = sprintf(
+					'SELECT COUNT(*) FROM definition WHERE phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$current_def = $this->db->get_row_value($query);
+				if ($current_def == 0 && $value['definitions'])
+				{
+					foreach ($value['definitions'] as $def_key => $def_val)
+					{
+						$query = sprintf(
+							'INSERT INTO definition (phrase, def_num, def_text, sample)
+								VALUES (%1$s, %2$s, %3$s, %4$s);',
+							$this->db->quote($key),
+							$this->db->quote($def_val['index']),
+							$this->db->quote($def_val['text']),
+							$this->db->quote($def_val['sample'])
+						);
+						$this->db->exec($query);
+					}
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -362,13 +446,27 @@ class dictionary
 		// phrase
 		$query = sprintf('SELECT a.*, b.lex_class_name, c.roget_name
 			FROM phrase a
-				INNER JOIN lexical_class b ON a.lex_class = b.lex_class
+				LEFT JOIN lexical_class b ON a.lex_class = b.lex_class
 				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
 			WHERE a.phrase = %1$s',
-			$this->db->quote($_GET['phrase']));
+			$this->db->quote($_GET['phrase'])
+		);
 		$phrase = $this->db->get_row($query);
 		if ($phrase)
 		{
+			// root
+			if ($phrase['type'] != 'r')
+			{
+				$query = sprintf('SELECT a.root_phrase, a.rel_type
+					FROM relation a
+					WHERE a.related_phrase = %1$s
+					ORDER BY a.root_phrase',
+					$this->db->quote($_GET['phrase'])
+				);
+				$rows = $this->db->get_rows($query);
+				$phrase['root'] = $rows;
+			}
+
 			// definition
 			$query = sprintf('SELECT a.*, b.discipline_name
 				FROM definition a

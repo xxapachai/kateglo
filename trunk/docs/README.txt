@@ -30,11 +30,9 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Daftar pekerjaan ==
 
 * Klasifikasi Roget untuk glosarium (Femmy)
-* Parser otomatis untuk data KBBI
 * Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Pendaftaran pengguna
 * Preferensi pengguna
-* Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
 * Satu frasa yang memiliki dua kelas kata
 * Penambahan definisi secara dinamis (AJAX?)
 * Satu kotak pencarian umum (pencarian detil untuk yang lain)
@@ -45,7 +43,19 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 * ki = kiasan?
 * Kata hari ini
 
+== Bug yang diketahui ==
+
+* Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
+  menghasilkan kata lain. Contoh "kau" sulit diakses jika ada kata "kaum"
+* Algoritma parser KBBI belum efisien
+
 == Riwayat revisi ==
+
+=== 0.0.7 (21 Mei 2009) ===
+
+* Perubahan tampilan daftar
+* Parser otomatis untuk data KBBI
+* Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
 
 === 0.0.6 (17 Mei 2009) ===
 
