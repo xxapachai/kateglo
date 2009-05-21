@@ -154,7 +154,7 @@ class db
 		return($this->_db->quote(trim($value), $type, $quote, $escape_wildcards));
 	}
 
-	function get_page_nav()
+	function get_page_nav($dictionary = false)
 	{
 		global $_GET;
 
@@ -174,6 +174,10 @@ class db
 		if ($add_page_var) $url .= '&p=%1$s';
 
 		// return
+		if ($dictionary && $_GET['phrase'])
+		{
+			$ret .= sprintf($this->msg['dict_search'] . ' ', $_GET['phrase']);
+		}
 		$ret .= sprintf($this->msg['page_nav'],
 			$this->pager['rbegin'],
 			$this->pager['rend'],

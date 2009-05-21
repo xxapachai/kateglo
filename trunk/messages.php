@@ -13,6 +13,7 @@ $msg = array(
 	'delete' => 'Hapus',
 	'derivation' => 'Bentukan',
 	'dictionary' => 'Kamus',
+	'dict_search' => 'Hasil pencarian <strong>"<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>"</strong>.',
 	'dict_short' => 'k',
 	'discipline' => 'Bidang',
 

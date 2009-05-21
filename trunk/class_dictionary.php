@@ -59,7 +59,7 @@ class dictionary
 		{
 			$mark = ceil($this->db->num_rows / 3);
 			$j = 1;
-			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
+			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
 			$ret .= '<table width="100%"><tr valign="top">' . LF;
 			foreach ($rows as $row)
 			{
@@ -75,7 +75,7 @@ class dictionary
 			}
 			$ret .= '</ol></td>' . LF;
 			$ret .= '</tr></table>' . LF;
-			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
+			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
 		}
 		else
 			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dict&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);

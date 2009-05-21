@@ -47,12 +47,17 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 * Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
   menghasilkan kata lain. Contoh "kau" sulit diakses jika ada kata "kaum"
+  --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 * Algoritma parser KBBI belum efisien
+* "uang" tidak bisa diparsing
+* sufiks "1" pada kata gabungan
+* Akar kata yang sama dengan frasanya
 
 == Riwayat revisi ==
 
 === 0.0.7 (21 Mei 2009) ===
 
+* Menampilkan frasa yang dicari di navigasi halaman hasil pencarian.
 * Perubahan tampilan daftar
 * Parser otomatis untuk data KBBI
 * Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
