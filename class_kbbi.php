@@ -76,8 +76,8 @@ class kbbi
 			'<input type="hidden" name="MORE" value="(.+)" >.+' .
 			'<input type="hidden" name="HEAD" value="(.+)" >/s';
 		preg_match($pattern, $result, $match);
-	//	var_dump($match);
-	//	echo('<br />');
+//		var_dump($result);
+//		echo('<br />');
 		if (is_array($match))
 		{
 			if ($match[2] == 1)
