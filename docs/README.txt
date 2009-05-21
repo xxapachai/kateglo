@@ -57,6 +57,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 === 0.0.7 (21 Mei 2009) ===
 
+* Parser untuk sinonim
 * Perbaikan bug jika frasa pencarian mengandung karakter escape sql
 * Menampilkan frasa yang dicari di navigasi halaman hasil pencarian.
 * Perubahan tampilan daftar
