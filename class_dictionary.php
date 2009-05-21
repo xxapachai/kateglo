@@ -477,7 +477,7 @@ class dictionary
 			{
 				$query = sprintf('SELECT a.root_phrase, a.rel_type
 					FROM relation a
-					WHERE a.related_phrase = %1$s
+					WHERE a.related_phrase = %1$s AND a.rel_type IN (\'f\', \'c\')
 					ORDER BY a.root_phrase',
 					$this->db->quote($_GET['phrase'])
 				);
