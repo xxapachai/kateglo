@@ -53,6 +53,7 @@ $msg = array(
 	'page_next' => 'Berikutnya',
 	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
+	'pronounciation' => 'Pelafalan',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
 	'pwd_current' => 'Kata sandi sekarang',
 	'pwd_new' => 'Kata sandi baru',
