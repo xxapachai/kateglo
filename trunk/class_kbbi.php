@@ -172,6 +172,7 @@ class kbbi
 			foreach ($this->clean_entries as &$clean)
 			{
 				$this->parse_info(&$clean);
+				$this->parse_synonym(&$clean);
 			}
 		}
 	}
@@ -399,6 +400,29 @@ class kbbi
 			}
 		}
 		if (!$clean['lex_class']) $clean['lex_class'] = $this->last_lex;
+	}
+
+	/**
+	 */
+	function parse_synonym(&$clean)
+	{
+		if ($clean['definitions'])
+		{
+			foreach ($clean['definitions'] as $def_key => $def)
+			{
+				$def_items = explode(';', $def['text']);
+				if ($def_items)
+				{
+					foreach ($def_items as $def_item)
+					{
+						$def_item = trim($def_item);
+						$space_count = substr_count($def_item, ' ');
+						if ($space_count < 1)
+							$clean['synonyms'][] = $def_item;
+					}
+				}
+			}
+		}
 	}
 
 };

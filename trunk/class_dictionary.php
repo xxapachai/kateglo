@@ -258,6 +258,22 @@ class dictionary
 						$this->db->exec($query);
 					}
 				}
+
+				// synonyms
+				if ($value['synonyms'])
+				{
+//					var_dump($value['synonyms']);
+					foreach ($value['synonyms'] as $synonym)
+					{
+						$query = sprintf(
+							'INSERT INTO relation (root_phrase, related_phrase, rel_type)
+								VALUES (%1$s, %2$s, \'s\');',
+							$this->db->quote($key),
+							$this->db->quote($synonym)
+						);
+						$this->db->exec($query);
+					}
+				}
 			}
 		}
 
