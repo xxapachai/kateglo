@@ -271,6 +271,22 @@ class kbbi
 				$entry['word'] = trim($is_compound ? $compound : $word);
 			}
 
+			// trailing _
+			if (substr($entry['word'], -1) == $delim)
+			{
+				$entry['word'] = trim(substr($entry['word'], 0, strlen($entry['word']) - 1));
+				$entry['idx'] = 1;
+				$word = $entry['word'];
+			}
+
+			// trailing _1
+			if (substr($entry['word'], -2) == $delim . '1')
+			{
+				$entry['word'] = trim(substr($entry['word'], 0, strlen($entry['word']) - 2));
+				$entry['idx'] = 1;
+				$word = $entry['word'];
+			}
+
 			// if -- found
 			if (strpos($entry['a1'], '--') !== false)
 			{
@@ -290,20 +306,10 @@ class kbbi
 			if (!$entry['raw_key']) $entry['pb'] = 'pb';
 			$entry['word'] = trim(str_replace(' ', $delim, $entry['word']));
 
-			// trailing _
-			if (substr($entry['word'], -1) == $delim)
-			{
-				$entry['word'] = trim(substr($entry['word'], 0, strlen($entry['word']) - 1));
-				$entry['idx'] = 1;
-				$word = $entry['word'];
-			}
-			// trailing _1
-			if (substr($entry['word'], -2) == $delim . '1')
-			{
-				$entry['word'] = trim(substr($entry['word'], 0, strlen($entry['word']) - 2));
-				$entry['idx'] = 1;
-				$word = $entry['word'];
-			}
+			// first entry: hack for "hitam"
+			if ($j == 0)
+				$root = $word;
+
 			// index
 			if (is_numeric($entry['a1'])) $entry['idx'] = trim($entry['a1']);
 
