@@ -17,7 +17,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 * Ivan Lanin - ivan at lanin dot org
 * Romi Hardiyanto - http://www.ewesewes.web.id
 * Femmy Syahrani - http://femmy.multiply.com
-* Anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
+* Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
 == Standar kode program ==
 
@@ -46,7 +46,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Bug yang diketahui ==
 
 * Algoritma parser KBBI belum efisien
-* "uang" tidak bisa diparsing
+* Kesalahan parsing: "uang", "tuju"
 * sufiks "1" pada kata gabungan
 * Akar kata yang sama dengan frasanya
 * Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
