@@ -448,9 +448,11 @@ class dictionary
 			FROM phrase a
 				LEFT JOIN lexical_class b ON a.lex_class = b.lex_class
 				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
-			WHERE a.phrase = %1$s',
+			WHERE a.phrase = %1$s;',
 			$this->db->quote($_GET['phrase'])
 		);
+//		echo($query);
+
 		$phrase = $this->db->get_row($query);
 		if ($phrase)
 		{

@@ -41,8 +41,8 @@ class glossary
 		if ($phrase)
 		{
 			$where .= $where ? ' AND ' : ' WHERE ';
-			$lang_id = 'a.phrase LIKE \'%' . $phrase . '%\'';
-			$lang_en = 'a.translation LIKE \'%' . $phrase . '%\'';
+			$lang_id = 'a.phrase LIKE \'%' . $this->db->quote($phrase, null, false) . '%\'';
+			$lang_en = 'a.translation LIKE \'%' .  $this->db->quote($phrase, null, false) . '%\'';
 			switch ($lang)
 			{
 				case 'en':

@@ -151,7 +151,9 @@ class db
 
 	function quote($value, $type = null, $quote = true, $escape_wildcards = false)
 	{
-		return($this->_db->quote(trim($value), $type, $quote, $escape_wildcards));
+		$ret = $this->_db->quote(trim($value), $type, true, $escape_wildcards);
+		if ($ret && !$quote) $ret = substr($ret, 1, strlen($ret) - 2);
+		return($ret);
 	}
 
 	function get_page_nav($dictionary = false)
