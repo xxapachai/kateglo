@@ -132,12 +132,12 @@ class dictionary
 			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
 			$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
 			$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
+			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			if ($phrase['root'])
 			{
 				$ret .= sprintf($template, $this->msg['root_phrase'],
 					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
 			}
-			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			$ret .= '</table>' . LF;
 
 

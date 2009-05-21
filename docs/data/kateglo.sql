@@ -1,4 +1,4 @@
--- Last updated: 2009-05-16 08:52
+-- Last updated: 2009-05-22 06:33
 
 drop table if exists definition;
 
@@ -10,11 +10,15 @@ drop table if exists lexical_class;
 
 drop table if exists phrase;
 
+drop table if exists phrase_type;
+
 drop table if exists ref_source;
 
 drop table if exists relation;
 
 drop table if exists relation_type;
+
+drop table if exists roget_class;
 
 drop table if exists searched_phrase;
 
@@ -85,13 +89,28 @@ create table lexical_class
 create table phrase
 (
    phrase               varchar(255) not null,
+   phrase_type          varchar(16) not null default 'r' comment 'r=root; f=affix; c=compond',
    lex_class            varchar(16) not null,
+   roget_class          varchar(16),
    pronounciation       varchar(4000),
    etymology            varchar(4000),
    actual_phrase        varchar(255),
    updated              datetime,
    updater              varchar(32) not null,
    primary key (phrase)
+);
+
+/*==============================================================*/
+/* Table: phrase_type                                           */
+/*==============================================================*/
+create table phrase_type
+(
+   phrase_type          varchar(16) not null comment 'r=root; f=affix; c=compond',
+   phrase_type_name     varchar(255) not null,
+   sort_order           tinyint not null default 1,
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (phrase_type)
 );
 
 /*==============================================================*/
@@ -118,7 +137,18 @@ create table relation
    rel_type             varchar(16) not null,
    updated              datetime,
    updater              varchar(32) not null,
-   primary key (rel_uid)
+   primary key (rel_uid),
+   key AK_relation_unique ()
+);
+
+/*==============================================================*/
+/* Index: relation_unique                                       */
+/*==============================================================*/
+create unique index relation_unique on relation
+(
+   root_phrase,
+   related_phrase,
+   rel_type
 );
 
 /*==============================================================*/
@@ -135,14 +165,33 @@ create table relation_type
 );
 
 /*==============================================================*/
+/* Table: roget_class                                           */
+/*==============================================================*/
+create table roget_class
+(
+   roget_class          varchar(16) not null,
+   number               varchar(16),
+   suffix               varchar(16),
+   roget_name           varchar(255),
+   english_name         varchar(255),
+   asterix              varchar(16),
+   caret                varchar(16),
+   class_num            tinyint,
+   division_num         tinyint,
+   section_num          tinyint,
+   primary key (roget_class)
+);
+
+/*==============================================================*/
 /* Table: searched_phrase                                       */
 /*==============================================================*/
 create table searched_phrase
 (
    phrase               varchar(255) not null,
+   phrase_type          varchar(16) not null comment 'r=root; f=affix; c=compond',
    search_count         int not null default 0,
    last_searched        datetime not null,
-   primary key (phrase)
+   primary key (phrase, phrase_type)
 );
 
 /*==============================================================*/
@@ -166,8 +215,11 @@ create table sys_session
    ses_id               varchar(32) not null,
    ip_address           varchar(16) not null,
    user_id              varchar(32),
+   user_agent           varchar(255),
    started              datetime,
    ended                datetime,
+   last                 datetime,
+   page_view            tinyint not null default 0,
    primary key (ses_id)
 );
 
