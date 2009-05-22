@@ -97,6 +97,8 @@ create table phrase
    actual_phrase        varchar(255),
    updated              datetime,
    updater              varchar(32) not null,
+   created              datetime,
+   creator              varchar(32) not null,
    primary key (phrase)
 );
 

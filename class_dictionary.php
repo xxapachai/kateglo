@@ -208,14 +208,17 @@ class dictionary
 			{
 				// phrase
 				$query = sprintf(
-					'INSERT INTO phrase (phrase) VALUES (%1$s);',
+					'INSERT INTO phrase (phrase, created) VALUES (%1$s, NOW());',
 					$this->db->quote($key)
 				);
 				$this->db->exec($query);
 
 				// update phrase
 				$query = sprintf(
-					'UPDATE phrase SET lex_class = %2$s, phrase_type = %3$s, pronounciation = %4$s WHERE phrase = %1$s;',
+					'UPDATE phrase SET
+						lex_class = %2$s, phrase_type = %3$s,
+						pronounciation = %4$s, updated = NOW()
+					WHERE phrase = %1$s;',
 					$this->db->quote($key),
 					$this->db->quote($value['lex_class']),
 					$this->db->quote($value['type']),
