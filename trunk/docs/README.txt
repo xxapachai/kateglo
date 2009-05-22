@@ -46,14 +46,18 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Bug yang diketahui ==
 
 * Algoritma parser KBBI belum efisien
-* Kesalahan parsing: "uang", "tuju"
-* sufiks "1" pada kata gabungan
+* Kesalahan parsing KBBI: "uang", "tuju", "jabat"
+* Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
 * Akar kata yang sama dengan frasanya
 * Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
   menghasilkan kata lain. Contoh "kau" sulit diakses jika ada kata "kaum"
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.8 (22 Mei 2009) ===
+
+* Log waktu pembuatan entri kamus secara otomatis
 
 === 0.0.7 (21 Mei 2009) ===
 
