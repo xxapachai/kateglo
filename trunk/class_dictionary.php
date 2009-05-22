@@ -132,6 +132,7 @@ class dictionary
 			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
 			$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
 			$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
+			$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
 			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			if ($phrase['root'])
 			{
@@ -208,7 +209,7 @@ class dictionary
 			{
 				// phrase
 				$query = sprintf(
-					'INSERT INTO phrase (phrase, created) VALUES (%1$s, NOW());',
+					'INSERT INTO phrase (phrase, created, ref_source) VALUES (%1$s, NOW(), \'Pusba\');',
 					$this->db->quote($key)
 				);
 				$this->db->exec($query);
@@ -342,6 +343,8 @@ class dictionary
 			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('select', 'lex_class', $this->msg['lex_class'],
 			$this->db->get_row_assoc('SELECT * FROM lexical_class', 'lex_class', 'lex_class_name'));
+		$form->addElement('select', 'ref_source', $this->msg['ref_source'],
+			$this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
 		$form->addElement('select', 'roget_class', $this->msg['roget_class'],
 			$this->db->get_row_assoc('SELECT *, CONCAT(roget_class, \' - \', roget_name) roget_class_name FROM roget_class', 'roget_class', 'roget_class_name'));
 		$form->addElement('text', 'etymology', $this->msg['etymology'],
@@ -367,6 +370,7 @@ class dictionary
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
 		$ret .= sprintf($template, $this->msg['etymology'], $form->get_element('etymology'));
+		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('ref_source'));
 		$ret .= sprintf($template, $this->msg['roget_class'], $form->get_element('roget_class'));
 		$ret .= '</table>' . LF;
 
@@ -404,6 +408,7 @@ class dictionary
 		//die();
 
 		// kbbi definition
+		$this->kbbi = new kbbi();
 		$ret .= $this->show_kbbi();
 
 		return($ret);
@@ -463,10 +468,11 @@ class dictionary
 	{
 		global $_GET;
 		// phrase
-		$query = sprintf('SELECT a.*, b.lex_class_name, c.roget_name
+		$query = sprintf('SELECT a.*, b.lex_class_name, c.roget_name, d.ref_source_name
 			FROM phrase a
 				LEFT JOIN lexical_class b ON a.lex_class = b.lex_class
 				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
+				LEFT JOIN ref_source d ON a.ref_source = d.ref_source
 			WHERE a.phrase = %1$s;',
 			$this->db->quote($_GET['phrase'])
 		);
@@ -564,7 +570,8 @@ class dictionary
 				'UPDATE phrase SET
 					phrase = %2$s,
 					etymology = %3$s,
-					lex_class = %4$s
+					lex_class = %4$s,
+					ref_source = %6$s,
 					updater = %5$s,
 					updated = NOW()
 				WHERE phrase = %1$s;',
@@ -572,20 +579,23 @@ class dictionary
 				$this->db->quote($new_key),
 				$this->db->quote($_POST['etymology']),
 				$this->db->quote($_POST['lex_class']),
-				$this->db->quote($this->auth->getUsername())
+				$this->db->quote($this->auth->getUsername()),
+				$this->db->quote($_POST['ref_source'])
 			);
 		}
 		else
 		{
 			$query = sprintf('INSERT INTO phrase (phrase, etymology,
-				lex_class, updater, updated)
-				VALUES (%1$s, %2$s, %3$s, %4$s, NOW());',
+				lex_class, ref_source, updater, updated)
+				VALUES (%1$s, %2$s, %3$s, %5$s, %4$s, NOW());',
 				$this->db->quote($new_key),
 				$this->db->quote($_POST['etymology']),
 				$this->db->quote($_POST['lex_class']),
-				$this->db->quote($this->auth->getUsername())
+				$this->db->quote($this->auth->getUsername()),
+				$this->db->quote($_POST['ref_source'])
 			);
 		}
+		//die($query);
 		$this->db->exec($query);
 
 		$this->save_sub_form('definition', 'def_uid', 'def_count', 'phrase',
