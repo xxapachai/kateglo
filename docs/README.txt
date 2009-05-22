@@ -9,6 +9,11 @@ CC-BY-NC-SA. Kode sumber program dapat diunduh dari repositori publik:
 
 	http://www.bahtera.org/svn/kateglo/
 
+Sebagian isi Kateglo diambil dari Pusat Bahasa Departemen Pendidikan Nasional
+Indonesia. Isi Kateglo yang berasal dari sana ditandai dengan "Pusba" atau
+"Pusat Bahasa". Hak cipta untuk semua isi dari Pusat Bahasa tetap merupakan
+hak cipta dari Pusat Bahasa dan dipergunakan di Kateglo dengan seizin Pusba.
+
 Setelah mengunduh aplikasi, silakan baca INSTALL.txt di direktori docs untuk
 petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
@@ -18,6 +23,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 * Romi Hardiyanto - http://www.ewesewes.web.id
 * Femmy Syahrani - http://femmy.multiply.com
 * Steven Haryanto - http://steven.blogs.masterweb.net
+* Pusat Bahasa - http://pusatbahasa.diknas.go.id
 * Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
 == Standar kode program ==
