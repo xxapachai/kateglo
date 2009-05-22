@@ -94,6 +94,7 @@ create table phrase
    roget_class          varchar(16),
    pronounciation       varchar(4000),
    etymology            varchar(4000),
+   ref_source           varchar(16),
    actual_phrase        varchar(255),
    updated              datetime,
    updater              varchar(32) not null,

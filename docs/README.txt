@@ -17,6 +17,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 * Ivan Lanin - ivan at lanin dot org
 * Romi Hardiyanto - http://www.ewesewes.web.id
 * Femmy Syahrani - http://femmy.multiply.com
+* Steven Haryanto - http://steven.blogs.masterweb.net
 * Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
 
 == Standar kode program ==
@@ -29,15 +30,15 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 == Daftar pekerjaan ==
 
+* Satu kotak pencarian umum (pencarian detil untuk yang lain)
 * Klasifikasi Roget untuk glosarium (Femmy)
 * Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Pendaftaran pengguna
 * Preferensi pengguna
 * Satu frasa yang memiliki dua kelas kata
-* Penambahan definisi secara dinamis (AJAX?)
-* Satu kotak pencarian umum (pencarian detil untuk yang lain)
-* Entri untuk referensi
 * Penambahan/penyuntingan glosarium secara sekaligus
+* Entri untuk referensi
+* Penambahan definisi secara dinamis (AJAX?)
 * Statistik pengguna teraktif
 * API atau antarmuka pemrograman aplikasi
 * ki = kiasan?
@@ -46,7 +47,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Bug yang diketahui ==
 
 * Algoritma parser KBBI belum efisien
-* Kesalahan parsing KBBI: "uang", "tuju", "jabat"
+* Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
 * Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
 * Akar kata yang sama dengan frasanya
 * Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
@@ -57,6 +58,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 
 === 0.0.8 (22 Mei 2009) ===
 
+* Penambahan phrase.ref_source
 * Log waktu pembuatan entri kamus secara otomatis
 
 === 0.0.7 (21 Mei 2009) ===
