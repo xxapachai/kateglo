@@ -262,6 +262,14 @@ class kbbi
 						// syntax like U, u
 						$tmp_phrase = trim(preg_replace('/,.+$/U', '', $tmp_phrase));
 
+						// syntax like ? apotek
+						$tmp_def1 = trim(preg_replace('/^\?\s*(.+)$/U', '\1', $tmp_def));
+						if ($tmp_def1 != $tmp_def)
+						{
+							$tmp_def = 'lihat ' . $tmp_def1;
+							$tmp_pair[$i][$j]['see'] = $tmp_def1;
+						}
+
 						// write
 						if ($tmp_phrase) $tmp_pair[$i][$j]['phrase'] = $tmp_phrase;
 						if ($tmp_def) $tmp_pair[$i][$j]['def'] = $tmp_def;
