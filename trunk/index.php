@@ -112,7 +112,7 @@ switch ($_GET['mod'])
 				$body .= $glossary->show_form();
 				break;
 			default:
-				$body .= $glossary->show_result();
+				$body .= $glossary->show_main();
 				break;
 		}
 		$title = $msg['glossary'] . ' - ' . $title;

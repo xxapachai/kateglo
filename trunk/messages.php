@@ -27,6 +27,8 @@ $msg = array(
 	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
 
 	'glo_short' => 'g',
+	'glo_by_discipline' => 'Menurut bidang:',
+	'glo_by_source' => 'Menurut sumber:',
 	'glossary' => 'Glosarium',
 
 	'home' => 'Beranda',

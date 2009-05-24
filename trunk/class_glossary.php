@@ -25,6 +25,65 @@ class glossary
 	/**
 	 *
 	 */
+	function show_main()
+	{
+		global $_GET;
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
+		// if there's phrase
+		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
+		{
+			$ret .= $this->show_result();
+		}
+		// nothing, show main page
+		else
+		{
+//			$ret .= '<table width="100%"><tr valign="top">' . LF;
+//			$ret .= '<td width="50%">' . LF;
+			$ret .= '<p><strong>' . $this->msg['glo_by_discipline'] . '</strong></p>' . LF;
+			$rows = $this->db->get_rows('SELECT * FROM discipline ORDER BY discipline;');
+			if ($row_count = $this->db->num_rows)
+			{
+//				$ret .= '<ol>' . LF;
+				$ret .= '<blockquote>' . LF;
+				$i = 0;
+				foreach ($rows as $row)
+				{
+					if ($i > 0) $ret .= ', ';
+					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a>',
+						$row['discipline_name'], $row['discipline']);
+					$i++;
+				}
+				$ret .= '</blockquote>' . LF;
+//				$ret .= '</ol>' . LF;
+			}
+//			$ret .= '</td>' . LF;
+//			$ret .= '<td width="50%">' . LF;
+			$ret .= '<p><strong>' . $this->msg['glo_by_source'] . '</strong></p>' . LF;
+			$rows = $this->db->get_rows('SELECT * FROM ref_source ORDER BY ref_source_name;');
+			if ($row_count = $this->db->num_rows)
+			{
+//				$ret .= '<ol>' . LF;
+				$ret .= '<blockquote>' . LF;
+				$i = 0;
+				foreach ($rows as $row)
+				{
+					if ($i > 0) $ret .= ', ';
+					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a>',
+						$row['ref_source_name'], $row['ref_source']);
+					$i++;
+				}
+				$ret .= '</blockquote>' . LF;
+//				$ret .= '</ol>' . LF;
+			}
+//			$ret .= '</td>' . LF;
+//			$ret .= '</tr></table>' . LF;
+		}
+		return($ret);
+	}
+
+	/**
+	 *
+	 */
 	function show_result()
 	{
 		global $_GET;
@@ -77,7 +136,6 @@ class glossary
 		// header and new button
 		if (!$this->sublist)
 		{
-			$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
 			if ($this->auth->checkAuth())
 				$ret .= sprintf('<p>%1$s</p>' . LF,
 					sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
@@ -111,7 +169,7 @@ class glossary
 			{
 				$url = './' . $this->get_url_param(array('search', 'action', 'uid', 'mod')) .
 					'&action=form&mod=glo&uid=' . $row['tr_uid'];
-				$discipline = './' . $this->get_url_param(array('search', 'action', 'uid', 'dc')).
+				$discipline = './' . $this->get_url_param(array('search', 'uid', 'dc')).
 					'&dc=' . $row['discipline'];
 				$ret .= '<tr valign="top">' . LF;
 				$ret .= sprintf($tmp, ($this->db->pager['rbegin'] + $i) . '.', 'left');
@@ -144,7 +202,6 @@ class glossary
 		}
 		else
 			$ret = '<p>Frasa tidak ditemukan.</p>' . LF;
-
 		return($ret);
 	}
 
