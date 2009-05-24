@@ -57,13 +57,20 @@ sebaiknya berhati-hati menggunakannya.
 
 * Algoritma parser KBBI belum efisien
 * Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
+  --> Diperbaiki pada versi 0.0.9
 * Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
+  --> Diperbaiki pada versi 0.0.9
 * Akar kata yang sama dengan frasanya
+  --> Diperbaiki pada versi 0.0.9
 * Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
   menghasilkan kata lain. Contoh "kau" sulit diakses jika ada kata "kaum"
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.9 (25 Mei 2009) ===
+
+* Perbaikan logika parsing KBBI
 
 === 0.0.8 (22 Mei 2009) ===
 
