@@ -150,11 +150,24 @@ class dictionary
 				$ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
-					$ret .= sprintf('<li>%2$s%1$s%3$s</li>' . LF,
-						$def['def_text'],
-						$def['discipline'] ? '<em>(' . $def['discipline'] . ')</em> ' : '',
-						$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : ''
-					);
+					$ret .= '<li>';
+					if ($def['see'])
+					{
+						$ret .= sprintf('lihat <a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+							$def['see'],
+							$def['see']
+						);
+					}
+					else
+					{
+						$ret .= sprintf('%4$s%2$s%1$s%3$s',
+							$def['def_text'],
+							$def['discipline'] ? '<em>(' . $def['discipline'] . ')</em> ' : '',
+							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
+							$def['lex_class'] ? '<em>' . $def['lex_class'] . '</em> ' : ''
+						);
+					}
+					$ret .= '</li>' . LF;
 				}
 				$ret .= '</ol>' . LF;
 			}
@@ -203,9 +216,9 @@ class dictionary
 	function save_kbbi()
 	{
 		global $_GET;
-		if ($this->kbbi->clean_entries)
+		if ($this->kbbi->defs)
 		{
-			foreach($this->kbbi->clean_entries as $key => $value)
+			foreach($this->kbbi->defs as $key => $value)
 			{
 				// phrase
 				$query = sprintf(
@@ -241,6 +254,13 @@ class dictionary
 				}
 				$this->db->exec($query);
 
+				// delete definition. use when needed
+//				$query = sprintf(
+//					'DELETE FROM definition WHERE phrase = %1$s;',
+//					$this->db->quote($key)
+//				);
+//				$this->db->exec($query);
+
 				// definition
 				$query = sprintf(
 					'SELECT COUNT(*) FROM definition WHERE phrase = %1$s;',
@@ -252,12 +272,15 @@ class dictionary
 					foreach ($value['definitions'] as $def_key => $def_val)
 					{
 						$query = sprintf(
-							'INSERT INTO definition (phrase, def_num, def_text, sample)
-								VALUES (%1$s, %2$s, %3$s, %4$s);',
+							'INSERT INTO definition (phrase, def_num, lex_class, discipline, def_text, sample, see)
+								VALUES (%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s);',
 							$this->db->quote($key),
 							$this->db->quote($def_val['index']),
+							$this->db->quote($def_val['lex_class']),
+							$this->db->quote($def_val['info']),
 							$this->db->quote($def_val['text']),
-							$this->db->quote($def_val['sample'])
+							$this->db->quote($def_val['sample']),
+							$this->db->quote($def_val['see'])
 						);
 						$this->db->exec($query);
 					}
@@ -313,13 +336,14 @@ class dictionary
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
+				$ret .= ($i == 0) ? '<br />': '';
 				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
-				$ret .= ($i < $count - 1) ? ', ': '';
+				$ret .= ($i < $count - 1) ? '; ': '';
 			}
 		}
 		else
 		{
-			$ret = '-';
+			$ret = '';
 		}
 		return($ret);
 	}
@@ -481,6 +505,7 @@ class dictionary
 		$phrase = $this->db->get_row($query);
 		if ($phrase)
 		{
+			$_GET['phrase'] = $phrase['phrase'];
 			// root
 			if ($phrase['type'] != 'r')
 			{
