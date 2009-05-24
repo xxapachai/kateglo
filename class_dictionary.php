@@ -336,7 +336,7 @@ class dictionary
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
-				$ret .= ($i == 0) ? '<br />': '';
+				// $ret .= ($i == 0) ? '<br />': '';
 				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
 				$ret .= ($i < $count - 1) ? '; ': '';
 			}
