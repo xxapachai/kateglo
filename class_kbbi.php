@@ -534,5 +534,32 @@ class kbbi
 		}
 	}
 
+	function get_local()
+	{
+		global $_SERVER;
+
+		// get local file
+		$url = 'http://127.0.0.1/kateglo/sandbox/kbbi3-2001-big.html';
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		// parse
+		preg_match_all('/<p>LEMA:(.+)( \(\d+\))?<br>/sU', $result, $matches);
+		$ret = array();
+		foreach ($matches[1] as $phrase)
+		{
+			$i++;
+			$phrase = trim($phrase);
+			$ret[] = $phrase;
+//			if (is_array($ret))
+//			{
+//				if (!in_array($phrase, $ret)) $ret[] = $phrase;
+//			}
+		}
+		return($ret);
+	}
 };
 ?>

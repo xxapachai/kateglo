@@ -56,6 +56,8 @@ sebaiknya berhati-hati menggunakannya.
 == Bug yang diketahui ==
 
 * Algoritma parser KBBI belum efisien
+* Kesalahan parsing KBBI: "kokoh" -> redirection
+* Kesalahan parsing KBBI: "lepas" -> format salah
 * Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
   --> Diperbaiki pada versi 0.0.9
 * Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
@@ -70,6 +72,7 @@ sebaiknya berhati-hati menggunakannya.
 
 === 0.0.9 (25 Mei 2009) ===
 
+* Perubahan halaman utama glosarium
 * Perbaikan logika parsing KBBI
 
 === 0.0.8 (22 Mei 2009) ===
