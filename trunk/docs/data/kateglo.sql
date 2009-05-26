@@ -1,4 +1,4 @@
--- Last updated: 2009-05-22 06:33
+-- Last updated: 2009-05-26 20:37
 
 drop table if exists definition;
 
@@ -24,6 +24,8 @@ drop table if exists searched_phrase;
 
 drop table if exists sys_action;
 
+drop table if exists sys_comment;
+
 drop table if exists sys_session;
 
 drop table if exists sys_user;
@@ -38,9 +40,11 @@ create table definition
    def_uid              int not null auto_increment,
    phrase               varchar(255) not null,
    def_num              tinyint not null default 1,
+   lex_class            varchar(16),
    discipline           varchar(16),
    def_text             varchar(4000) not null,
    sample               varchar(4000),
+   see                  varchar(255),
    updated              datetime,
    updater              varchar(32) not null,
    primary key (def_uid)
@@ -208,6 +212,19 @@ create table sys_action
    module               varchar(16),
    description          varchar(4000),
    primary key (action_time, ses_id)
+);
+
+/*==============================================================*/
+/* Table: sys_comment                                           */
+/*==============================================================*/
+create table sys_comment
+(
+   comment_id           int not null auto_increment,
+   ses_id               varchar(32),
+   sender_name          varchar(255) not null,
+   sender_email         varchar(255) not null,
+   comment_text         varchar(4000),
+   primary key (comment_id)
 );
 
 /*==============================================================*/

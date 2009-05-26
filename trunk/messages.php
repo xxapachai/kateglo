@@ -8,6 +8,13 @@ $msg = array(
 
 	'cancel' => 'Batal',
 	'change_pwd' => 'Ubah kata sandi',
+	'comment' => 'Komentar',
+	'comment_link' => 'Komentar?',
+	'comment_text' => 'Isi komentar',
+	'comment_sender' => 'Nama pengirim',
+	'comment_email' => 'Email pengirim',
+	'comment_sent' => 'Komentar Anda telah kami terima. Terima kasih.',
+	'comment_welcome' => 'Silakan kirimkan saran, kritik, koreksi, atau komentar Anda melalui formulir berikut.',
 
 	'definition' => 'Definisi',
 	'delete' => 'Hapus',
@@ -18,6 +25,7 @@ $msg = array(
 	'discipline' => 'Bidang',
 
 	'edit' => 'Ubah',
+	'email_invalid' => 'Alamat email yang dimasukkan tidak valid',
 	'en' => 'Bahasa Asing',
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
@@ -80,11 +88,9 @@ $msg = array(
 
 	'username' => 'Pengguna',
 
-	'welcome' => '<div align="center" style="padding: 20px 0px;">
-		<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
+	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
 		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
-		<p>Saat ini terdapat <strong>%2$s</strong> entri dalam <a href="./?mod=glo">glosarium</a> serta <strong>%1$s</strong> entri dalam <a href="./?mod=dict">kamus dan tesaurus</a>.</p>
-		</div>',
+		<p>Saat ini terdapat <strong>%2$s</strong> entri dalam <a href="./?mod=glo">glosarium</a> serta <strong>%1$s</strong> entri dalam <a href="./?mod=dict">kamus dan tesaurus</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
 );
