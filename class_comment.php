@@ -40,8 +40,36 @@ class comment
 	 */
 	function show()
 	{
+		global $_GET;
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['comment']);
-		$ret .= $this->show_form();
+		if ($_GET['action'] == 'view')
+			$ret .= $this->show_list();
+		else
+			$ret .= $this->show_form();
+		return($ret);
+	}
+
+
+	/**
+	 *
+	 */
+	function show_list()
+	{
+		$cols = 'sender_name, sender_email, comment_text';
+		$from = 'FROM sys_comment
+			ORDER BY comment_id DESC';
+		$rows = $this->db->get_rows_paged($cols, $from);
+		if ($this->db->num_rows > 0)
+		{
+			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
+			foreach ($rows as $row)
+			{
+				$ret .= '<p><b>' . $row['sender_name'] . '</b></p>' . LF;
+				$ret .= '<p>' . LF;
+				$ret .= nl2br(strip_tags($row['comment_text'])) . LF;
+				$ret .= '</p>' . LF;
+			}
+		}
 		return($ret);
 	}
 
