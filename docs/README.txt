@@ -22,7 +22,7 @@ sebaiknya berhati-hati menggunakannya.
 
 == Kredit ==
 
-* Ivan Lanin - ivan at lanin dot org
+* Ivan Lanin - http://ivan.lanin.org
 * Romi Hardiyanto - http://www.ewesewes.web.id
 * Femmy Syahrani - http://femmy.multiply.com
 * Steven Haryanto - http://steven.blogs.masterweb.net
@@ -69,6 +69,11 @@ sebaiknya berhati-hati menggunakannya.
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.10 (26 Mei 2009) ===
+
+* Sepuluh frasa sembarang
+* Formulir komentar
 
 === 0.0.9 (25 Mei 2009) ===
 

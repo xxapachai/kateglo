@@ -355,6 +355,7 @@ class kbbi
 					'pd' => 'pada',
 					'sbg' => 'sebagai',
 					'spt' => 'seperti',
+					'thd' => 'terhadap',
 					'tsb' => 'tersebut',
 					'tt' => 'tentang',
 					'yg' => 'yang',

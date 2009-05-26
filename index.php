@@ -6,7 +6,7 @@
 // constants
 define(LF, "\n"); // line break
 define(APP_NAME, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.9'); // application version. See README.txt
+define(APP_VERSION, 'v0.0.10'); // application version. See README.txt
 
 // variables
 $base_dir = dirname(__FILE__);
@@ -28,6 +28,7 @@ require_once('Auth.php');
 require_once('class_dictionary.php');
 require_once('class_glossary.php');
 require_once('class_kbbi.php');
+require_once('class_comment.php');
 
 // initialization
 $db = new db;
@@ -61,6 +62,10 @@ switch ($_GET['mod'])
 				if ($is_post) $user->change_password();
 				break;
 		}
+		break;
+	case 'comment':
+		$comment = new comment(&$db, &$auth, $msg);
+		$comment->process();
 		break;
 	case 'dict':
 		$dictionary = new dictionary(&$db, &$auth, $msg);
@@ -117,8 +122,13 @@ switch ($_GET['mod'])
 		}
 		$title = $msg['glossary'] . ' - ' . $title;
 		break;
+	case 'comment':
+		$body .= $comment->show();
+		$title = $msg['comment'] . ' - ' . $title;
+		break;
 	case 'doc':
 		$body .= read_doc($_GET['doc']);
+		$title = $_GET['doc'] . ' - ' . $title;
 		break;
 	case 'auth':
 		switch ($_GET['action'])
@@ -132,6 +142,7 @@ switch ($_GET['mod'])
 		}
 		break;
 	default:
+		// statistics
 		$searches = $db->get_rows('SELECT phrase FROM searched_phrase
 			ORDER BY search_count DESC LIMIT 0, 5;');
 		if ($searches)
@@ -154,7 +165,27 @@ switch ($_GET['mod'])
 
 		$dict_count = $db->get_row_value('SELECT COUNT(*) FROM phrase;');
 		$glo_count = $db->get_row_value('SELECT COUNT(*) FROM translation;');
-		$body .= sprintf($msg['welcome'], $dict_count, $glo_count, $search_result);
+
+		// welcome
+		$body .= '<div align="center" style="padding: 10px 0px;">' . LF;
+		$body .= sprintf($msg['welcome'] . LF, $dict_count, $glo_count, $search_result);
+
+		// random
+		$query = 'SELECT phrase FROM phrase
+			WHERE (LEFT(phrase, 2) != \'a \' AND LEFT(phrase, 2) != \'b \')
+			AND NOT ISNULL(updated)
+			ORDER BY RAND() LIMIT 10;';
+		$random_words = $db->get_rows($query);
+		$url = './?mod=dict&action=view&phrase=';
+		$body .= '<p>' . LF;
+		foreach ($random_words as $random_word)
+		{
+			$body .= sprintf('<a href="%2$s%1$s" style="padding: 0px 5px;">%1$s</a>' . LF, $random_word['phrase'], $url);
+		}
+
+		$body .= '</p>' . LF;
+		$body .= '</div>' . LF;
+
 		break;
 }
 
@@ -167,8 +198,22 @@ $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
 $ret .= '</head>' . LF;
 $ret .= $body;
-$ret .= sprintf('<p style="margin-top:20px;"><span style="float:right;"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="./images/cc-by-nc-sa.png" /></a></span><a href="%2$s">%1$s %3$s</a></p>' . LF,
-	APP_NAME, './?mod=doc&doc=README.txt', APP_VERSION);
+$ret .= sprintf('<p>' .
+	'<span style="float:right;">' .
+	'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
+	'<img alt="Creative Commons License" style="border-width:0" ' .
+	'src="./images/cc-by-nc-sa.png" />' .
+	'</a></span>' .
+	'<a href="%2$s">%1$s %3$s</a>' .
+	'. ' .
+	'<a href="%4$s">%5$s</a>' .
+	'</p>' . LF,
+	APP_NAME,
+	'./?mod=doc&doc=README.txt',
+	APP_VERSION,
+	'./?mod=comment',
+	$msg['comment_link']
+);
 $ret .= '</body>' . LF;
 $ret .= '</html>' . LF;
 echo($ret);
