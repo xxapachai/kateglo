@@ -14,3 +14,11 @@ set a.glossary_count = (SELECT COUNT(b.tr_uid) FROM translation b WHERE a.discip
 
 update ref_source a
 set a.glossary_count = (SELECT COUNT(b.tr_uid) FROM translation b WHERE a.ref_source = b.ref_source);
+
+delete from phrase where phrase = '(pd) umum nya';
+delete from definition where phrase = '(pd) umum nya';
+delete from relation where related_phrase = '(pd) umum nya';
+
+delete from phrase where phrase = '3 a';
+update definition set phrase = 'ligatur' where phrase = '3 a';
+delete from relation where related_phrase = '3 a';

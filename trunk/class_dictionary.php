@@ -154,7 +154,7 @@ class dictionary extends page
 		$this->phrase = $this->get_phrase();
 		$phrase = $this->phrase;
 		$this->kbbi = new kbbi($this->msg);
-		if ($this->auto_update || !$phrase)
+		if (!$phrase['created'])
 		{
 			$this->kbbi->parse($_GET['phrase']);
 			if ($this->kbbi->found) $this->save_kbbi();
