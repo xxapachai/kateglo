@@ -5,13 +5,13 @@
 
 // constants
 define(LF, "\n"); // line break
-define(APP_NAME, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.10'); // application version. See README.txt
+define(APP_NAME, 'Kateglo - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
+define(APP_SHORT, 'Kateglo (Beta)'); // application name
+define(APP_VERSION, 'v0.0.11'); // application version. See README.txt
 
 // variables
 $base_dir = dirname(__FILE__);
 $is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
-$title = APP_NAME;
 ini_set('include_path', $base_dir . '/pear/');
 foreach ($_GET as $key => $val)
 	$_GET[$key] = trim($val);
@@ -20,15 +20,11 @@ foreach ($_GET as $key => $val)
 require_once('config.php');
 require_once('messages.php');
 require_once('common.php');
+require_once('Auth.php');
 require_once('class_db.php');
 require_once('class_form.php');
 require_once('class_logger.php');
-require_once('class_user.php');
-require_once('Auth.php');
-require_once('class_dictionary.php');
-require_once('class_glossary.php');
-require_once('class_kbbi.php');
-require_once('class_comment.php');
+require_once('class_page.php');
 
 // initialization
 $db = new db;
@@ -36,7 +32,6 @@ $db->connect($dsn);
 $db->msg = $msg;
 
 // authentication & and logging
-$user = new user(&$db, &$auth, $msg);
 $auth = new Auth(
 	'MDB2', array(
 		'dsn' => $db->dsn,
@@ -48,154 +43,42 @@ $auth->start();
 $logger = new logger(&$db, &$auth);
 $logger->log();
 
+// define mod
+$mods = array(
+	'user'=>'user', 'comment'=>'comment', 'dict'=>'dictionary',
+	'glo'=>'glossary', 'home'=>'home', 'doc'=>'doc'
+);
+$_GET['mod'] = strtolower($_GET['mod']);
+if (!array_key_exists($_GET['mod'], $mods)) $_GET['mod'] = 'home';
+$mod = $_GET['mod'];
+
 // process
-// TODO: This should be automatically perform, using method_exists, perhaps?
-switch ($_GET['mod'])
-{
-	case 'auth':
-		switch ($_GET['action'])
-		{
-			case 'logout':
-				$auth->logout();
-				redir('./?');
-			case 'password':
-				if ($is_post) $user->change_password();
-				break;
-		}
-		break;
-	case 'comment':
-		$comment = new comment(&$db, &$auth, $msg);
-		$comment->process();
-		break;
-	case 'dict':
-		$dictionary = new dictionary(&$db, &$auth, $msg);
-		if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
-			$dictionary->save_form();
-		// redirect if none found. psycological effect
-		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$dictionary->get_list())
-			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
-		break;
-	case 'glo':
-		$glossary = new glossary(&$db, &$auth, $msg);
-		switch ($_GET['action'])
-		{
-			case 'form':
-				if ($is_post && $auth->checkAuth() && $_GET['action'] == 'form')
-					$glossary->save_form();
-				break;
-			default:
-				break;
-		}
-		break;
-}
+$module = $mods[$mod];
+require_once('class_' . $module . '.php');
+$page = new $module(&$db, &$auth, $msg);
+$page->process();
 
 // display
-// TODO: This should be automatically perform, using method_exists, perhaps?
 $body .= show_header();
-switch ($_GET['mod'])
+$body .= $page->show();
+if (!$page->title)
 {
-	case 'dict':
-		switch ($_GET['action'])
-		{
-			case 'view':
-				$body .= $dictionary->show_phrase();
-				break;
-			case 'form':
-				$body .= $dictionary->show_form();
-				break;
-			default:
-				$body .= $dictionary->show_list();
-				break;
-		}
-		$title = $msg['dictionary'] . ' - ' . $title;
-		if ($_GET['phrase']) $title = $_GET['phrase'] . ' - ' . $title;
-		break;
-	case 'glo':
-		switch ($_GET['action'])
-		{
-			case 'form':
-				$body .= $glossary->show_form();
-				break;
-			default:
-				$body .= $glossary->show_main();
-				break;
-		}
-		$title = $msg['glossary'] . ' - ' . $title;
-		break;
-	case 'comment':
-		$body .= $comment->show();
-		$title = $msg['comment'] . ' - ' . $title;
-		break;
-	case 'doc':
-		$body .= read_doc($_GET['doc']);
-		$title = $_GET['doc'] . ' - ' . $title;
-		break;
-	case 'auth':
-		switch ($_GET['action'])
-		{
-			case 'login':
-				$body .= login();
-				break;
-			case 'password':
-				$body .= $user->change_password_form();
-				break;
-		}
-		break;
-	default:
-		// statistics
-		$searches = $db->get_rows('SELECT phrase FROM searched_phrase
-			ORDER BY search_count DESC LIMIT 0, 5;');
-		if ($searches)
-		{
-			$search_result = '';
-			$tmp = '<strong>%1$s</strong> [<a href="?mod=dict&action=view&phrase=%1$s">%2$s</a>, '
-				. '<a href="?mod=glo&phrase=%1$s">%3$s</a>]';
-			for ($i = 0; $i < $db->num_rows; $i++)
-			{
-				if ($db->num_rows > 2)
-					$search_result .= $search_result ? ', ' : '';
-				if ($i == $db->num_rows - 1 && $db->num_rows > 1)
-					$search_result .= ' dan ';
-				$search_result .= sprintf($tmp, $searches[$i]['phrase'],
-					$msg['dict_short'], $msg['glo_short']);
-			}
-		}
-		else
-			$search_result = $msg['no_most_searched'];
-
-		$dict_count = $db->get_row_value('SELECT COUNT(*) FROM phrase;');
-		$glo_count = $db->get_row_value('SELECT COUNT(*) FROM translation;');
-
-		// welcome
-		$body .= '<div align="center" style="padding: 10px 0px;">' . LF;
-		$body .= sprintf($msg['welcome'] . LF, $dict_count, $glo_count, $search_result);
-
-		// random
-		$query = 'SELECT phrase FROM phrase
-			WHERE (LEFT(phrase, 2) != \'a \' AND LEFT(phrase, 2) != \'b \')
-			AND NOT ISNULL(updated)
-			ORDER BY RAND() LIMIT 10;';
-		$random_words = $db->get_rows($query);
-		$url = './?mod=dict&action=view&phrase=';
-		$body .= '<p>' . LF;
-		foreach ($random_words as $random_word)
-		{
-			$body .= sprintf('<a href="%2$s%1$s" style="padding: 0px 5px;">%1$s</a>' . LF, $random_word['phrase'], $url);
-		}
-
-		$body .= '</p>' . LF;
-		$body .= '</div>' . LF;
-
-		break;
+	if ($msg[$module]) $page->title = $msg[$module];
+	if ($_GET['phrase']) $page->title = $_GET['phrase'] . ' - ' . $page->title;
 }
+$title = $page->title ? $page->title . ' - ' . APP_NAME : APP_NAME;
 
 // render
 $ret .= '<html>' . LF;
 $ret .= '<head>' . LF;
 $ret .= '<title>' . $title . '</title>' . LF;
+if ($keywords = $page->get_keywords())
+	$ret .= '<meta name="keywords" content="' . $keywords . '" />' . LF;
+if ($description = $page->get_description())
+	$ret .= '<meta name="description" content="' . $description . '" />' . LF;
 $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
-$ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
-$ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">' . LF;
+$ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
+$ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '</head>' . LF;
 $ret .= $body;
 $ret .= sprintf('<p>' .
@@ -208,7 +91,7 @@ $ret .= sprintf('<p>' .
 	'. ' .
 	'<a href="%4$s">%5$s</a>' .
 	'</p>' . LF,
-	APP_NAME,
+	APP_SHORT,
 	'./?mod=doc&doc=README.txt',
 	APP_VERSION,
 	'./?mod=comment',

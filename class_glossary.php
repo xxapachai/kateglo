@@ -4,11 +4,12 @@
  *
  *
  */
-class glossary
+class glossary extends page
 {
 	var $db;
 	var $auth;
 	var $msg;
+	var $title;
 	var $entry;
 	var $sublist = false;
 
@@ -20,6 +21,43 @@ class glossary
 		$this->db = $db;
 		$this->auth = $auth;
 		$this->msg = $msg;
+	}
+
+	/**
+	 *
+	 */
+	function process()
+	{
+		global $_GET;
+		global $_SERVER;
+		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
+		switch ($_GET['action'])
+		{
+			case 'form':
+				if ($is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
+					$this->save_form();
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 *
+	 */
+	function show()
+	{
+		global $_GET;
+		switch ($_GET['action'])
+		{
+			case 'form':
+				$ret .= $this->show_form();
+				break;
+			default:
+				$ret .= $this->show_main();
+				break;
+		}
+		return($ret);
 	}
 
 	/**
@@ -201,7 +239,7 @@ class glossary
 			$ret .= '</p>' . LF;
 		}
 		else
-			$ret = '<p>Frasa tidak ditemukan.</p>' . LF;
+			$ret = '<p>' . $this->msg['nf'] . '</p>' . LF;
 		return($ret);
 	}
 
