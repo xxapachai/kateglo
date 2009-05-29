@@ -66,6 +66,7 @@ class glossary extends page
 	function show_main()
 	{
 		global $_GET;
+
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
 		// if there's phrase
 		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
@@ -75,13 +76,11 @@ class glossary extends page
 		// nothing, show main page
 		else
 		{
-//			$ret .= '<table width="100%"><tr valign="top">' . LF;
-//			$ret .= '<td width="50%">' . LF;
+			$is_main = true;
 			$ret .= '<p><strong>' . $this->msg['glo_by_discipline'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM discipline ORDER BY discipline;');
 			if ($row_count = $this->db->num_rows)
 			{
-//				$ret .= '<ol>' . LF;
 				$ret .= '<blockquote>' . LF;
 				$i = 0;
 				foreach ($rows as $row)
@@ -92,15 +91,11 @@ class glossary extends page
 					$i++;
 				}
 				$ret .= '</blockquote>' . LF;
-//				$ret .= '</ol>' . LF;
 			}
-//			$ret .= '</td>' . LF;
-//			$ret .= '<td width="50%">' . LF;
 			$ret .= '<p><strong>' . $this->msg['glo_by_source'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM ref_source ORDER BY ref_source_name;');
 			if ($row_count = $this->db->num_rows)
 			{
-//				$ret .= '<ol>' . LF;
 				$ret .= '<blockquote>' . LF;
 				$i = 0;
 				foreach ($rows as $row)
@@ -111,11 +106,19 @@ class glossary extends page
 					$i++;
 				}
 				$ret .= '</blockquote>' . LF;
-//				$ret .= '</ol>' . LF;
 			}
-//			$ret .= '</td>' . LF;
-//			$ret .= '</tr></table>' . LF;
 		}
+
+		// search
+		if (!$sublist)
+		{
+			$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+			$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
+			$ret .= $this->show_search();
+			$ret .= '</fieldset>' . LF;
+		}
+
+		// return
 		return($ret);
 	}
 
@@ -138,8 +141,13 @@ class glossary extends page
 		if ($phrase)
 		{
 			$where .= $where ? ' AND ' : ' WHERE ';
-			$lang_id = 'a.phrase LIKE \'%' . $this->db->quote($phrase, null, false) . '%\'';
-			$lang_en = 'a.translation LIKE \'%' .  $this->db->quote($phrase, null, false) . '%\'';
+
+			$op_open = ($_GET['op'] == '2') ? '[[:<:]]' : ($_GET['op'] == '3' ? '' : '%');
+			$op_close = ($_GET['op'] == '2') ? '[[:>:]]' : ($_GET['op'] == '3' ? '' : '%');
+			$op_type = ($_GET['op'] == '2') ? 'REGEXP' : ($_GET['op'] == '3' ? '=' : 'LIKE');
+			$op_template = 'a.%1$s %2$s \'%3$s%4$s%5$s\'';
+			$lang_id = sprintf($op_template, 'phrase', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
+			$lang_en = sprintf($op_template, 'translation', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
 			switch ($lang)
 			{
 				case 'en':
@@ -163,6 +171,7 @@ class glossary extends page
 			$where .= $where ? ' AND ' : ' WHERE ';
 			$where .= ' a.ref_source = \'' . $src . '\' ';
 		}
+		if ($this->sublist) $this->db->defaults['rperpage'] = 20;
 		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
 		$from = 'FROM translation a
 			LEFT JOIN discipline b ON a.discipline = b.discipline
@@ -246,6 +255,43 @@ class glossary extends page
 	/**
 	 *
 	 */
+	function show_search()
+	{
+		$form = new form('search_glo', 'get');
+		$form->setup($msg);
+		$form->addElement('hidden', 'mod', 'glo');
+		$form->addElement('text', 'phrase', $this->msg['phrase']);
+		$form->addElement('select', 'dc', $this->msg['discipline'],
+			$this->db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name')
+			);
+		$form->addElement('select', 'lang', $this->msg['lang'],
+			$this->db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name')
+			);
+		$form->addElement('select', 'src', $this->msg['ref_source'],
+			$this->db->get_row_assoc('SELECT ref_source, ref_source_name FROM ref_source', 'ref_source', 'ref_source_name')
+			);
+		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
+		$form->addElement('submit', 'search', $this->msg['search_button']);
+
+		$template = '%1$s: %2$s ' . LF;
+		$ret .= $form->begin_form();
+		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
+		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
+		$ret .= '<br />';
+		$ret .= sprintf($template, $this->msg['discipline'], $form->get_element('dc'));
+		$ret .= sprintf($template, $this->msg['lang'], $form->get_element('lang'));
+		$ret .= '<br />';
+		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('src'));
+		$ret .= $form->get_element('mod');
+		$ret .= $form->get_element('search');
+		$ret .= $form->end_form();
+
+		return($ret);
+	}
+
+	/**
+	 *
+	 */
 	function show_form()
 	{
 		$query = 'SELECT a.* FROM translation a
@@ -272,34 +318,6 @@ class glossary extends page
 
 		$ret .= $form->toHtml();
 		return($ret);
-	}
-
-	/**
-	 *
-	 */
-	function parse_keywords($string)
-	{
-		$keywords = preg_split("/[\s,-;=\'(\)]+/", $string);
-		$clean_key = array();
-		foreach($keywords as $word)
-		{
-			$word = trim($word);
-			if ($word && !in_array($word, $clean_key))
-			{
-				$clean_key[] = $word;
-			}
-		}
-		sort($clean_key);
-		// cleaned key
-		$url = '<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>';
-		foreach($clean_key as $word)
-		{
-			{
-				$keyword .= $keyword ? '; ' : '';
-				$keyword .= sprintf($url, $word);
-			}
-		}
-		return($keyword);
 	}
 
 	/**
@@ -356,6 +374,9 @@ class glossary extends page
 		redir('./' . $this->get_url_param(array('action', 'uid')));
 	}
 
+	/**
+	 *
+	 */
 	function get_url_param($exclude = null)
 	{
 		global $_GET;
@@ -376,5 +397,32 @@ class glossary extends page
 		if (!$ret) $ret = '?';
 		return($ret);
 	}
-};
+
+	/**
+	 *
+	 */
+	function parse_keywords($string)
+	{
+		$keywords = preg_split("/[\s,-;=\'(\)]+/", $string);
+		$clean_key = array();
+		foreach($keywords as $word)
+		{
+			$word = trim($word);
+			if ($word && !in_array($word, $clean_key))
+			{
+				$clean_key[] = $word;
+			}
+		}
+		sort($clean_key);
+		// cleaned key
+		$url = '<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>';
+		foreach($clean_key as $word)
+		{
+			{
+				$keyword .= $keyword ? '; ' : '';
+				$keyword .= sprintf($url, $word);
+			}
+		}
+		return($keyword);
+	}};
 ?>

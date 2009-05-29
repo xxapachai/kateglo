@@ -52,26 +52,7 @@ function show_header()
 	$form = new form('search_form', 'get');
 	$form->setup($msg);
 	$form->addElement('text', 'phrase', $msg['enter_phrase']);
-	$form->addElement('select', 'mod', null,
-		array('dict' => 'Kamus', 'glo' => 'Glosarium'),
-		array('onchange' =>
-			'display = (this.value == \'glo\' ? \'block\' : \'none\');' .
-			'this.form.elements[\'dc\'].style.display = display;' .
-			'this.form.elements[\'lang\'].style.display = display;'
-		));
-	$form->addElement('select', 'dc', null,
-		$db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name'),
-		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
-		);
-	$form->addElement('select', 'lang', null,
-		$db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name'),
-		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
-		);
-//			'this.form.elements[\'src\'].style.display = display;')
-//	$form->addElement('select', 'src', null,
-//		$db->get_row_assoc('SELECT ref_source, ref_source_name FROM ref_source', 'ref_source', 'ref_source_name'),
-//		array('style'=>($_GET['mod'] != 'glo' ? 'display:none;' : ''))
-//		);
+	$form->addElement('select', 'mod', null, array('dict' => 'Kamus', 'glo' => 'Glosarium'));
 	$form->addElement('submit', 'search', $msg['search_button']);
 
 	$ret .= $form->begin_form();
@@ -89,9 +70,6 @@ function show_header()
 	$ret .= sprintf($template, $form->get_element('phrase'));
 	$ret .= sprintf($template, $msg['search_in']);
 	$ret .= sprintf($template, $form->get_element('mod'));
-	$ret .= sprintf($template, $form->get_element('dc'));
-	$ret .= sprintf($template, $form->get_element('lang'));
-	//$ret .= sprintf($template, $form->get_element('src'));
 	$ret .= '</tr></table></td>' . LF;
 
 	// navigation
