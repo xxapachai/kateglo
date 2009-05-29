@@ -87,8 +87,8 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= ', ';
-					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a>',
-						$row['discipline_name'], $row['discipline']);
+					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a> (%3$s)',
+						$row['discipline_name'], $row['discipline'], $row['glossary_count']);
 					$i++;
 				}
 				$ret .= '</blockquote>' . LF;
@@ -106,8 +106,8 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= ', ';
-					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a>',
-						$row['ref_source_name'], $row['ref_source']);
+					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a> (%3$s)',
+						$row['ref_source_name'], $row['ref_source'], $row['glossary_count']);
 					$i++;
 				}
 				$ret .= '</blockquote>' . LF;

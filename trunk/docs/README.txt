@@ -71,6 +71,7 @@ sebaiknya berhati-hati menggunakannya.
 
 === 0.0.11 (29 Mei 2009) ===
 
+* Jumlah entri untuk kategori disiplin atau sumber
 * Pencarian sinonim, antonim, kata terkait terbalik
 * Pembubuhan keterangan kelas kata pada entri tesaurus
 * Pranala ke kelas kata pada definisi kamus

@@ -61,7 +61,7 @@ $page->process();
 // display
 $body .= show_header();
 $body .= $page->show();
-if (!$page->title)
+if (!$page->title && $mod != 'home')
 {
 	if ($msg[$module]) $page->title = $msg[$module];
 	if ($_GET['phrase']) $page->title = $_GET['phrase'] . ' - ' . $page->title;

@@ -475,7 +475,7 @@ class dictionary extends page
 		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
 		$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-			'./?mod=dict' . ($is_new ? '' : '&phrase=' . $_GET['phrase']), $this->msg['cancel']);
+			'./?mod=dict' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']), $this->msg['cancel']);
 		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
