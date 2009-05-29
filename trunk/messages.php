@@ -34,6 +34,7 @@ $msg = array(
 	'form_err_post' => "\n" . 'Harap perbaiki kesalahan tersebut.',
 	'form_required' => '<span style="font-size:80%;"><span style="color:#ff0000;">*</span><span> harus diisi</span>',
 
+	'get_kbbi' => 'Ambil dari KBBI',
 	'glo_short' => 'g',
 	'glo_by_discipline' => 'Menurut bidang:',
 	'glo_by_source' => 'Menurut sumber:',
