@@ -4,11 +4,12 @@
  *
  *
  */
-class comment
+class comment extends page
 {
 	var $db;
 	var $auth;
 	var $msg;
+	var $title;
 	var $status = 0; // 0=normal; 1=post
 
 	/**

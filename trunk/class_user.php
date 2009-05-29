@@ -2,12 +2,13 @@
 /**
  * User class for user related operation
  */
-class user
+class user extends page
 {
 
 	var $db; // database object
 	var $auth; // authentication object
 	var $msg; // messages string
+	var $title;
 	var $status;
 
 	/**
@@ -22,25 +23,38 @@ class user
 	}
 
 	/**
-	 * Login form
+	 *
 	 */
-	function login_form($username = null, $status = null, &$auth = null)
+	function process()
 	{
-		$welcome = $this->auth->checkAuth() ? 'login_success' : 'login_welcome';
-		$welcome = $this->msg[$welcome];
-		if ($status < 0) $welcome = $this->msg['login_failed'] . ' ' . $welcome;
-		$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
-
-		if (!$this->auth->checkAuth())
+		global $_GET;
+		global $_SERVER;
+		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
+		switch ($_GET['action'])
 		{
-			$form = new form('login_form', null, './?mod=auth&action=login');
-			$form->setup($this->msg);
-			$form->addElement('text', 'username', $this->msg['username']);
-			$form->addElement('password', 'password', $this->msg['password']);
-			$form->addElement('submit', null, $this->msg['login']);
-			$form->addRule('username', sprintf($this->msg['required_alert'], $this->msg['username']), 'required', null, 'client');
-			$form->addRule('password', sprintf($this->msg['required_alert'], $this->msg['password']), 'required', null, 'client');
-			$ret .= $form->toHtml();
+			case 'logout':
+				$this->auth->logout();
+				redir('./?');
+			case 'password':
+				if ($is_post) $this->user->change_password();
+				break;
+		}
+	}
+
+	/**
+	 *
+	 */
+	function show()
+	{
+		global $_GET;
+		switch ($_GET['action'])
+		{
+			case 'login':
+				$ret .= login();
+				break;
+			case 'password':
+				$ret .= $this->change_password_form();
+				break;
 		}
 		return($ret);
 	}
@@ -85,12 +99,13 @@ class user
 				$msg = $this->msg['pwd_chg_failed'] . ' ' . $msg;
 			if ($this->status == PROCESS_SUCCEED)
 				$msg = $this->msg['pwd_chg_succeed'];
+			$ret .= sprintf('<h1>' . $this->msg['change_pwd'] . '</h1>') . LF;
 			$ret .= sprintf('<p>' . $msg . '</p>') . LF;
 
 			// form
 			if ($this->status != PROCESS_SUCCEED)
 			{
-				$form = new form('change_password_form', null, './?mod=auth&action=password');
+				$form = new form('change_password_form', null, './?mod=user&action=password');
 				$form->setup($this->msg);
 				$form->addElement('password', 'pwd_current', $this->msg['pwd_current']);
 				$form->addElement('password', 'pwd_new', $this->msg['pwd_new']);

@@ -10,6 +10,7 @@
  */
 class kbbi
 {
+	var $msg;
 	var $param;
 	var $defs;
 	var $mode;
@@ -23,6 +24,14 @@ class kbbi
 	var $_pair; // temporary
 
 	//$modes = array('sama dengan', 'diawali', 'memuat');
+
+	/**
+	 * Constructor
+	 */
+	function kbbi($msg = null)
+	{
+		if ($msg) $this->msg = $msg;
+	}
 
 	/*
 	 * Get result from KBBI
@@ -53,7 +62,7 @@ class kbbi
 		}
 		else
 		{
-			$ret .= 'Tidak ditemukan entri yang sesuai.' . LF;
+			$ret .= $this->msg['nf'] . LF;
 		}
 		return($ret);
 	}

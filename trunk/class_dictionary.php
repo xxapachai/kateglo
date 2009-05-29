@@ -2,22 +2,75 @@
 /**
  * Phrase class
  */
-class dictionary
+require_once('class_kbbi.php');
+require_once('class_glossary.php');
+class dictionary extends page
 {
-	var $db;
-	var $auth;
-	var $msg;
 	var $kbbi;
 	var $phrase;
 
 	/**
-	 * Constructor
+	 *
 	 */
-	function dictionary(&$db, &$auth, $msg)
+	function process()
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		global $_GET;
+		global $_SERVER;
+		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
+		if ($is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
+			$this->save_form();
+		// redirect if none found. psycological effect
+		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$this->get_list())
+			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
+	}
+
+	/**
+	 *
+	 */
+	function show()
+	{
+		global $_GET;
+		switch ($_GET['action'])
+		{
+			case 'view':
+				$ret .= $this->show_phrase();
+				break;
+			case 'form':
+				$ret .= $this->show_form();
+				break;
+			default:
+				$ret .= $this->show_list();
+				break;
+		}
+		return($ret);
+	}
+
+	/**
+	 * Get list of words
+	 */
+	function get_keywords()
+	{
+		if ($this->phrase)
+		{
+			$keywords[] = $this->phrase['phrase'];
+			if ($relations = $this->phrase['all_relation'])
+			{
+				foreach($relations as $relation)
+				{
+					$keywords[] = $relation['related_phrase'];
+				}
+			}
+		}
+		// process keywords
+		if ($keywords)
+		{
+			foreach($keywords as $keyword)
+			{
+				$ret .= $ret ? ', ' : '';
+				$ret .= $keyword;
+			}
+		}
+		return($ret);
 	}
 
 	/**
@@ -90,7 +143,7 @@ class dictionary
 		global $_GET;
 
 		$this->phrase = $this->get_phrase();
-		$this->kbbi = new kbbi();
+		$this->kbbi = new kbbi($this->msg);
 		$this->kbbi->parse($_GET['phrase']);
 		if ($this->kbbi->found) $this->save_kbbi();
 		$phrase = $this->get_phrase();
@@ -127,30 +180,19 @@ class dictionary
 		if ($phrase)
 		{
 
-			$template = '<tr><td>%1$s:</td><td>%2$s</td></tr>' . LF;
-			$ret .= '<table>' . LF;
-			$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
-			$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
-			$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
-			$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
-			$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
-			if ($phrase['root'])
-			{
-				$ret .= sprintf($template, $this->msg['root_phrase'],
-					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
-			}
-			$ret .= '</table>' . LF;
-
+			$template = '<p><strong>%1$s:</strong></p><blockquote>%2$s</blockquote>' . LF;
 
 			// definition
-			$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['definition']);
 			$defs = $phrase['definition'];
+			$def_count = count($defs);
+			$ret .= '<p><strong>' . $this->msg['definition']. ':</strong></p>' . LF;
 			if ($defs)
 			{
-				$ret .= '<ol>' . LF;
+				if ($def_count == 1) $ret .= '<blockquote>';
+				if ($def_count > 1) $ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
-					$ret .= '<li>';
+					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{
 						$ret .= sprintf('lihat <a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
@@ -167,12 +209,31 @@ class dictionary
 							$def['lex_class'] ? '<em>' . $def['lex_class'] . '</em> ' : ''
 						);
 					}
-					$ret .= '</li>' . LF;
+					if ($def_count > 1) $ret .= '</li>' . LF;
 				}
-				$ret .= '</ol>' . LF;
+				if ($def_count > 1) $ret .= '</ol>' . LF;
+				if ($def_count == 1) $ret .= '</blockquote>' . LF;
 			}
 			else
 				$ret .= '<p>' . $this->msg['na']. '</p>' . LF;
+
+			// misc
+			if ($phrase['lex_class_name'])
+				$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
+			if ($phrase['pronounciation'])
+				$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
+			if ($phrase['etymology'])
+				$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
+
+			if ($phrase['root'])
+			{
+				$ret .= sprintf($template, $this->msg['root_phrase'],
+					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
+			}
+			if ($phrase['roget_class'])
+				$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
+			if ($phrase['ref_source'])
+				$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
 
 			// relation and derivation
 			$ret .= $this->show_relation($phrase, 'relation', 'related_phrase');
@@ -315,14 +376,21 @@ class dictionary
 		$type_count = count($phrase[$type_name]);
 		$col_width = round(100 / $type_count) . '%';
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['thesaurus']);
-		$ret .= '<ol>' . LF;
+		if (!$phrase['all_' . $type_name])
+		{
+			$ret .= $this->msg['na'];
+			return($ret);
+		}
 		foreach ($phrase[$type_name] as $type_key => $type)
 		{
-			$ret .= sprintf('<li><strong>%1$s:</strong> ', $type['name']);
-			$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1);
-			$ret .= '</li>' . LF;
+			if (count($type) > 1)
+			{
+				$ret .= sprintf('<p><strong>%1$s:</strong></p>' . LF, $type['name']);
+				$ret .= '<blockquote>' . LF;
+				$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1);
+				$ret .= '</blockquote>' . LF;
+			}
 		}
-		$ret .= '</ol>' . LF;
 		return($ret);
 	}
 
@@ -403,9 +471,13 @@ class dictionary
 			array(
 				'def_uid' => array('type' => 'hidden'),
 				'def_num' => array('type' => 'text', 'width' => '1%',
-					'option1' => array('size' => 3, 'maxlength' => 5)),
+					'option1' => array('size' => 1, 'maxlength' => 5)),
+				'lex_class' => array('type' => 'text', 'width' => '1%',
+					'option1' => array('size' => 1, 'maxlength' => 5)),
 				'def_text' => array('type' => 'text', 'width' => '50%',
 					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
+				'see' => array('type' => 'text', 'width' => '5%',
+					'option1' => array('size' => 10, 'maxlength' => 255)),
 				'sample' => array('type' => 'text', 'width' => '50%',
 					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
 				'discipline' => array('type' => 'select', 'width' => '1%',
@@ -623,10 +695,15 @@ class dictionary
 		//die($query);
 		$this->db->exec($query);
 
-		$this->save_sub_form('definition', 'def_uid', 'def_count', 'phrase',
-			array('def_num', 'def_text'), array('discipline', 'sample'));
-		$this->save_sub_form('relation', 'rel_uid', 'rel_count', 'root_phrase',
-			array('rel_type', 'related_phrase'));
+		$this->save_sub_form(
+			'definition', 'def_uid', 'def_count', 'phrase',
+			array('def_num', 'def_text'),
+			array('discipline', 'sample', 'see', 'lex_class')
+		);
+		$this->save_sub_form(
+			'relation', 'rel_uid', 'rel_count', 'root_phrase',
+			array('rel_type', 'related_phrase')
+		);
 
 		//die();
 		redir('./?mod=dict&action=view&phrase=' . $_POST['phrase']);

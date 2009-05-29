@@ -58,6 +58,7 @@ $msg = array(
 	'new_flag' => '***baru***',
 	'no_most_searched' => '(belum ada)',
 	'na' => 'Belum tersedia.',
+	'nf' => 'Tidak ditemukan.',
 
 	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s entri.',
 	'page_prev' => 'Sebelumnya',
@@ -88,7 +89,7 @@ $msg = array(
 
 	'username' => 'Pengguna',
 
-	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
+	'welcome' => '<p><big>Selamat datang di Kateglo - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
 		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
 		<p>Saat ini terdapat <strong>%2$s</strong> entri dalam <a href="./?mod=glo">glosarium</a> serta <strong>%1$s</strong> entri dalam <a href="./?mod=dict">kamus dan tesaurus</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',

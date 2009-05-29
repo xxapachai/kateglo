@@ -40,8 +40,6 @@ sebaiknya berhati-hati menggunakannya.
 == Daftar pekerjaan ==
 
 * Satu kotak pencarian umum (pencarian detil untuk yang lain)
-* Klasifikasi Roget untuk glosarium (Femmy)
-* Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Pendaftaran pengguna
 * Preferensi pengguna
 * Satu frasa yang memiliki dua kelas kata
@@ -50,6 +48,7 @@ sebaiknya berhati-hati menggunakannya.
 * Penambahan definisi secara dinamis (AJAX?)
 * Statistik pengguna teraktif
 * API atau antarmuka pemrograman aplikasi
+* Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * ki = kiasan?
 * Kata hari ini
 
@@ -69,6 +68,13 @@ sebaiknya berhati-hati menggunakannya.
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.11 (29 Mei 2009) ===
+
+* Penambahan tag meta "keywords" untuk halaman
+* Kelas page sebagai kelas induk
+* Perubahan tampilan halaman kamus
+* Pengaturan komponen menjadi kelas page
 
 === 0.0.10 (26 Mei 2009) ===
 

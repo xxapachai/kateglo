@@ -19,15 +19,17 @@ function redir($url)
 
 function login($username = null, $status = null, &$auth = null)
 {
-	global $msg, $auth;
+	global $msg, $auth, $is_post;
 	$welcome = $auth->checkAuth() ? 'login_success' : 'login_welcome';
 	$welcome = $msg[$welcome];
-	if ($status < 0) $welcome = $msg['login_failed'] . ' ' . $welcome;
+	if ($is_post && !$auth->checkAuth()) $welcome = $msg['login_failed'] . ' ' . $welcome;
+
+	$ret .= '<h1>' . $msg['login'] . '</h1>' . LF;
 	$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
 
 	if (!$auth->checkAuth())
 	{
-		$form = new form('login_form', null, './?mod=auth&action=login');
+		$form = new form('login_form', null, './?mod=user&action=login');
 		$form->setup($msg);
 		$form->addElement('text', 'username', $msg['username']);
 		$form->addElement('password', 'password', $msg['password']);
@@ -97,13 +99,13 @@ function show_header()
 	if ($auth->checkAuth())
 	{
 		$ret .= sprintf('<strong>%3$s</strong> | <a href="%5$s">%4$s</a> | <a href="%2$s">%1$s</a>' . LF,
-			$msg['logout'], './?mod=auth&action=logout',
+			$msg['logout'], './?mod=user&action=logout',
 			$auth->getUsername(),
-			$msg['change_pwd'], './?mod=auth&action=password'
+			$msg['change_pwd'], './?mod=user&action=password'
 		);
 	}
 	else
-		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=auth&action=login');
+		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=user&action=login');
 	$ret .= '</td>' . LF;
 
 	$ret .= '</tr></table>' . LF;
