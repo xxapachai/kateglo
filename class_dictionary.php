@@ -8,6 +8,7 @@ class dictionary extends page
 {
 	var $kbbi;
 	var $phrase;
+	var $auto_update = true;
 
 	/**
 	 *
@@ -144,8 +145,11 @@ class dictionary extends page
 
 		$this->phrase = $this->get_phrase();
 		$this->kbbi = new kbbi($this->msg);
-		$this->kbbi->parse($_GET['phrase']);
-		if ($this->kbbi->found) $this->save_kbbi();
+		if ($this->auto_update)
+		{
+			$this->kbbi->parse($_GET['phrase']);
+			if ($this->kbbi->found) $this->save_kbbi();
+		}
 		$phrase = $this->get_phrase();
 		$this->phrase = $phrase;
 
@@ -202,11 +206,16 @@ class dictionary extends page
 					}
 					else
 					{
+						$lex_name = $def['lex_class'];
+						if ($def['lex_class_ref'])
+							$lex_name = sprintf('<a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+								$def['lex_class'],
+								$def['lex_class_ref']);
 						$ret .= sprintf('%4$s%2$s%1$s%3$s',
 							$def['def_text'],
 							$def['discipline'] ? '<em>(' . $def['discipline'] . ')</em> ' : '',
 							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
-							$def['lex_class'] ? '<em>' . $def['lex_class'] . '</em> ' : ''
+							$def['lex_class'] ? '<em>' . $lex_name . '</em> ' : ''
 						);
 					}
 					if ($def_count > 1) $ret .= '</li>' . LF;
@@ -219,7 +228,14 @@ class dictionary extends page
 
 			// misc
 			if ($phrase['lex_class_name'])
-				$ret .= sprintf($template, $this->msg['lex_class'], $phrase['lex_class_name']);
+			{
+				$lex_name = $phrase['lex_class_name'];
+				if ($phrase['lex_class_ref'])
+					$lex_name = sprintf('<a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+						$phrase['lex_class_name'],
+						$phrase['lex_class_ref']);
+				$ret .= sprintf($template, $this->msg['lex_class'], $lex_name);
+			}
 			if ($phrase['pronounciation'])
 				$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
 			if ($phrase['etymology'])
@@ -387,7 +403,7 @@ class dictionary extends page
 			{
 				$ret .= sprintf('<p><strong>%1$s:</strong></p>' . LF, $type['name']);
 				$ret .= '<blockquote>' . LF;
-				$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1);
+				$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1, true);
 				$ret .= '</blockquote>' . LF;
 			}
 		}
@@ -397,7 +413,7 @@ class dictionary extends page
 	/**
 	 * Merge phrase list with comma
 	 */
-	function merge_phrase_list($phrases, $col_name, $count = null)
+	function merge_phrase_list($phrases, $col_name, $count = null, $show_lex = false)
 	{
 		if (is_null($count)) $count = count($phrases);
 		if ($count > 0)
@@ -406,6 +422,8 @@ class dictionary extends page
 			{
 				// $ret .= ($i == 0) ? '<br />': '';
 				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
+				if ($show_lex && $phrases[$i]['lex_class'])
+					$ret .= ' (' . $phrases[$i]['lex_class'] . ')';
 				$ret .= ($i < $count - 1) ? '; ': '';
 			}
 		}
@@ -564,7 +582,9 @@ class dictionary extends page
 	{
 		global $_GET;
 		// phrase
-		$query = sprintf('SELECT a.*, b.lex_class_name, c.roget_name, d.ref_source_name
+		$query = sprintf('
+			SELECT a.*, b.lex_class_name, c.roget_name,
+				d.ref_source_name, b.lex_class_ref
 			FROM phrase a
 				LEFT JOIN lexical_class b ON a.lex_class = b.lex_class
 				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
@@ -592,9 +612,10 @@ class dictionary extends page
 			}
 
 			// definition
-			$query = sprintf('SELECT a.*, b.discipline_name
+			$query = sprintf('SELECT a.*, b.discipline_name, c.lex_class_ref
 				FROM definition a
 					LEFT JOIN discipline b ON a.discipline = b.discipline
+					LEFT JOIN lexical_class c ON a.lex_class = c.lex_class
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
 				$this->db->quote($_GET['phrase']), $this->db->quote($class_name));
@@ -621,28 +642,73 @@ class dictionary extends page
 			$sort_phrase = $where_field;
 			$where_field = $temp;
 		}
+
 		// relation
-		$query = sprintf('SELECT a.*, b.%3$s_name
-			FROM %2$s a, %2$s_type b
-			WHERE a.%3$s = b.%3$s AND a.%5$s = %1$s
-			ORDER BY b.sort_order, a.%4$s',
+		$query = sprintf('
+			SELECT a.*, b.%3$s_name, c.lex_class
+			FROM %2$s a
+				INNER JOIN %2$s_type b ON a.%3$s = b.%3$s
+				LEFT JOIN phrase c ON a.%4$s = c.phrase
+			WHERE a.%5$s = %1$s
+			ORDER BY b.sort_order, a.%4$s;',
 			$this->db->quote($_GET['phrase']),
 			$table,
 			$key_field,
 			$sort_phrase,
 			$where_field);
 		$rows = $this->db->get_rows($query);
-		$query = sprintf('SELECT %2$s, %2$s_name FROM %1$s_type ORDER BY sort_order',
+		//echo($query);
+
+		if (!$reverse)
+		{
+			$query = sprintf('
+				SELECT a.related_phrase root_phrase,
+					a.root_phrase related_phrase, a.rel_type, b.%3$s_name, c.lex_class
+				FROM %2$s a
+					INNER JOIN %2$s_type b ON a.%3$s = b.%3$s
+					LEFT JOIN phrase c ON a.%5$s = c.phrase
+				WHERE a.%4$s = %1$s AND a.rel_type IN (\'s\', \'a\', \'r\')
+				ORDER BY b.sort_order, a.%4$s;',
+				$this->db->quote($_GET['phrase']),
+				$table,
+				$key_field,
+				$sort_phrase,
+				$where_field);
+			$rows2 = $this->db->get_rows($query);
+			//die($query);
+		}
+
+		// divide into each category
+		$query = sprintf('SELECT %2$s, %2$s_name FROM %1$s_type ORDER BY sort_order;',
 			$table, $key_field);
 		$types = $this->db->get_rows($query);
-		// divide into each category
 		foreach ($types as $type)
 		{
+			$inserted = null;
 			$type_key = $type[$key_field];
 			foreach ($rows as $row)
+			{
 				if ($row[$key_field] == $type[$key_field])
+				{
 					$phrase[$table][$type_key][] = $row;
+					$inserted[] = $row[$key_field];
+				}
+			}
 			$phrase[$table][$type_key]['name'] = $type[$key_field . '_name'];
+
+			// reverse
+			if ($rows2)
+			{
+				foreach ($rows2 as $row)
+				{
+					if ($row[$key_field] == $type[$key_field])
+					{
+						if (!is_array($inserted)) $inserted = array();
+						if (!in_array($row[$key_field], $inserted))
+							$phrase[$table][$type_key][] = $row;
+					}
+				}
+			}
 		}
 		// bulk
 		foreach ($rows as $row)

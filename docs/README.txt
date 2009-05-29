@@ -71,6 +71,9 @@ sebaiknya berhati-hati menggunakannya.
 
 === 0.0.11 (29 Mei 2009) ===
 
+* Pencarian sinonim, antonim, kata terkait terbalik
+* Pembubuhan keterangan kelas kata pada entri tesaurus
+* Pranala ke kelas kata pada definisi kamus
 * Penambahan tag meta "keywords" untuk halaman
 * Kelas page sebagai kelas induk
 * Perubahan tampilan halaman kamus
