@@ -71,6 +71,9 @@ class comment extends page
 				$ret .= '</p>' . LF;
 			}
 		}
+		else
+			$ret .= '<p>' . $this->msg['na'] . '</p>' . LF;
+
 		return($ret);
 	}
 

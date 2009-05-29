@@ -47,6 +47,7 @@ $msg = array(
 	'kbbi_ref' => '<a href="http://pusatbahasa.diknas.go.id/kbbi/">Rujukan KBBI</a>',
 	'keyword' => 'Kata kunci',
 
+	'lang' => 'Bahasa',
 	'lex_class' => 'Kelas kata',
 	'license' => 'Lisensi',
 	'login' => 'Masuk log',
@@ -82,6 +83,8 @@ $msg = array(
 	'roget_class' => 'Klasifikasi Roget',
 
 	'save' => 'Simpan',
+	'search' => 'Pencarian',
+	'search_op' => 'Operator',
 	'search_button' => 'Cari frasa',
 	'search_in' => ' dalam ',
 	'submit' => 'Kirim',

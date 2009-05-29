@@ -6,16 +6,24 @@
  */
 require_once('MDB2.php');
 
-define(DB_RECORD_PER_PAGE, 50);
-
 class db
 {
 	var $dsn;
 	var $msg;
 	var $num_rows;
 	var $pager;        // pager values
+	var $defaults = array(
+		'rperpage' => 50,
+	);
 
 	var $_db;
+
+	/**
+	 * Constructor
+	 */
+	function db()
+	{
+	}
 
 	/**
 	 * @param $dsn
@@ -65,7 +73,7 @@ class db
 		if (!$is_reset) $this->pager['rperpage'] = round($this->pager['rperpage'], 0);
 		if (!$is_reset) $is_reset = ($this->pager['rperpage'] < 0);
 		if ($is_reset)
-			$this->pager['rperpage'] = DB_RECORD_PER_PAGE;
+			$this->pager['rperpage'] = $this->defaults['rperpage'];
 		if ($this->pager['rperpage'] == 0)
 			$this->pager['rperpage'] = $this->pager['rcount'];
 		if ($_GET['rpp']) $_GET['rpp'] = $this->pager['rperpage'];
