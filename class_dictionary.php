@@ -8,7 +8,7 @@ class dictionary extends page
 {
 	var $kbbi;
 	var $phrase;
-	var $auto_update = true;
+	var $auto_update = false;
 
 	/**
 	 *
@@ -20,6 +20,14 @@ class dictionary extends page
 		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 		if ($is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
 			$this->save_form();
+		// refresh KBBI
+		if ($_GET['phrase'] && $_GET['action'] == 'kbbi')
+		{
+			$this->kbbi = new kbbi($this->msg);
+			$this->kbbi->parse($_GET['phrase']);
+			if ($this->kbbi->found) $this->save_kbbi();
+			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
+		}
 		// redirect if none found. psycological effect
 		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$this->get_list())
 			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
@@ -144,14 +152,15 @@ class dictionary extends page
 		global $_GET;
 
 		$this->phrase = $this->get_phrase();
+		$phrase = $this->phrase;
 		$this->kbbi = new kbbi($this->msg);
-		if ($this->auto_update)
+		if ($this->auto_update || !$phrase)
 		{
 			$this->kbbi->parse($_GET['phrase']);
 			if ($this->kbbi->found) $this->save_kbbi();
+			$this->phrase = $this->get_phrase();
+			$phrase = $this->phrase;
 		}
-		$phrase = $this->get_phrase();
-		$this->phrase = $phrase;
 
 		// kbbi header
 		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
@@ -170,6 +179,9 @@ class dictionary extends page
 				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
 					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
 					$this->msg['edit']);
+				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
+					'./?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
+					$this->msg['get_kbbi']);
 			}
 			else
 			{
@@ -691,7 +703,7 @@ class dictionary extends page
 				if ($row[$key_field] == $type[$key_field])
 				{
 					$phrase[$table][$type_key][] = $row;
-					$inserted[] = $row[$key_field];
+					$inserted[] = $row[$sort_phrase];
 				}
 			}
 			$phrase[$table][$type_key]['name'] = $type[$key_field . '_name'];
@@ -704,7 +716,7 @@ class dictionary extends page
 					if ($row[$key_field] == $type[$key_field])
 					{
 						if (!is_array($inserted)) $inserted = array();
-						if (!in_array($row[$key_field], $inserted))
+						if (!in_array($row[$sort_phrase], $inserted))
 							$phrase[$table][$type_key][] = $row;
 					}
 				}
