@@ -16,6 +16,7 @@ class kbbi
 	var $mode;
 	var $query;
 	var $found = false;
+	var $online = true;
 	var $auto_parse = false;
 	var $raw_entries; // individual match from kbbi
 	var $parsed_entries; // parsed value
@@ -50,7 +51,7 @@ class kbbi
 			'dftkata' => '',
 		);
 		$this->get_words();
-		if ($this->param['dftkata'])
+		if ($this->online && $this->param['dftkata'])
 		{
 			$words = explode(';', $this->param['dftkata']);
 			// $ret .= 'Ditemukan ' . count($words) . ' entri<hr size="1" />' . LF;
@@ -130,6 +131,7 @@ class kbbi
 	 */
 	function get_curl($url, $data)
 	{
+		if (!$this->online) return;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -504,6 +506,7 @@ class kbbi
 				if (in_array($info, array('n', 'v', 'a', 'adv', 'p', 'num', 'pron')))
 				{
 					if ($info == 'a') $info = 'adj';
+					if ($info == 'p') $info = 'l';
 					$lexical .= $lexical ? ', ' : '';
 					$lexical .= $info;
 				}
