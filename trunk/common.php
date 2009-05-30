@@ -102,4 +102,15 @@ function read_doc($file_name)
 		$ret = nl2br(htmlentities(file_get_contents($file_url)));
 	return($ret);
 }
+
+function get_external_stat()
+{
+	$ret .= '<!-- GoStats JavaScript Based Code -->';
+	$ret .= '<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>';
+	$ret .= '<script type="text/javascript">_gos=\'gostats.com\';_goa=728945;_got=5;_goi=1;_goz=0;_gol=\'web traffic software\';_GoStatsRun();</script>';
+	$ret .= '<noscript><a target="_blank" title="web traffic software" href="http://gostats.com"><img alt="web traffic software" src="http://gostats.com/bin/count/a_728945/t_5/i_1/counter.png"  style="border-width:0" /></a></noscript>';
+	$ret .= '<!-- End GoStats JavaScript Based Code -->' . LF;
+	$ret .= '<script type="text/javascript"> var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E")); </script> <script type="text/javascript"> try { var pageTracker = _gat._getTracker("UA-2254800-2"); pageTracker._trackPageview(); } catch(err) {}</script>';
+	return($ret);
+}
 ?>
