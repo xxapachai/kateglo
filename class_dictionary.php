@@ -67,11 +67,11 @@ class dictionary extends page
 			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
 			$ret .= '<blockquote>' . LF;
 			$i = 0;
+			$ret .= '<a href="./?mod=dict&idx=-">-</a>';
 			for ($i = 65; $i <= 90; $i++)
 			{
-				if ($i > 65) $ret .= '; ';
-				$ret .= sprintf('<a href="./?mod=dict&idx=%1$s">%1$s</a>',
-					chr($i));
+				$ret .= '; ';
+				$ret .= sprintf('<a href="./?mod=dict&idx=%1$s">%1$s</a>', chr($i));
 			}
 			$ret .= '</blockquote>' . LF;
 			$ret .= '<p><strong>' . $this->msg['dict_by_lex'] . '</strong></p>' . LF;
