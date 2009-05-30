@@ -54,10 +54,12 @@ sebaiknya berhati-hati menggunakannya.
 
 == Bug yang diketahui ==
 
-* Kesalahan KBBI: alur
+* Penyimpanan jika mengganti frasa gagal
+* Kesalahan KBBI: alur, apa
 * Algoritma parser KBBI belum efisien
 * Kesalahan parsing KBBI: "kokoh" -> redirection
 * Kesalahan parsing KBBI: "lepas" -> format salah
+
 * Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
   --> Diperbaiki pada versi 0.0.9
 * Kesalahan parsing KBBI: sufiks "1" pada kata gabungan

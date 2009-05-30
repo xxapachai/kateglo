@@ -8,7 +8,6 @@ class dictionary extends page
 {
 	var $kbbi;
 	var $phrase;
-	var $auto_update = false;
 
 	/**
 	 *
@@ -188,6 +187,9 @@ class dictionary extends page
 				$ret .= sprintf('<a href="%1$s">%2$s</a>',
 					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
 					$this->msg['new']);
+				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
+					'./?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
+					$this->msg['get_kbbi']);
 			}
 			$ret .= '</p>' . LF;
 		}
@@ -311,7 +313,11 @@ class dictionary extends page
 			{
 				// phrase
 				$query = sprintf(
-					'INSERT INTO phrase (phrase) VALUES (%1$s, NOW(), \'Pusba\');',
+					'INSERT INTO phrase SET
+						phrase = %1$s,
+						created = NOW(),
+						ref_source = \'Pusba\'
+					;',
 					$this->db->quote($key)
 				);
 				$this->db->exec($query);
@@ -319,8 +325,12 @@ class dictionary extends page
 				// update phrase
 				$query = sprintf(
 					'UPDATE phrase SET
-						lex_class = %2$s, phrase_type = %3$s,
-						pronounciation = %4$s, created = NOW(), updated = NOW(), ref_source = \'Pusba\'
+						lex_class = %2$s,
+						phrase_type = %3$s,
+						pronounciation = %4$s,
+						updated = NOW(),
+						created = NOW(),
+						ref_source = \'Pusba\'
 					WHERE phrase = %1$s;',
 					$this->db->quote($key),
 					$this->db->quote($value['lex_class']),

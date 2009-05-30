@@ -28,3 +28,15 @@ delete from relation where related_phrase = '3 a';
 update definition set phrase = '-wan' where phrase = '-man';
 delete from definition where phrase = '-wan';
 delete from relation where root_phrase = '-wan';
+
+-- apa
+
+delete from phrase where phrase = 'buat';
+delete from definition where phrase = 'buat';
+delete from relation where related_phrase = 'buat';
+delete from relation where root_phrase = 'buat';
+
+update phrase set phrase = 'apa boleh buat' where phrase = 'apa boleh';
+update definition set phrase = 'apa boleh buat' where phrase = 'apa boleh';
+update relation set related_phrase = 'apa boleh buat' where related_phrase = 'apa boleh';
+update relation set root_phrase = 'apa boleh buat' where root_phrase = 'apa boleh';
