@@ -5,7 +5,7 @@
 
 // constants
 define(LF, "\n"); // line break
-define(APP_NAME, 'Kateglo - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
+define(APP_NAME, 'Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
 define(APP_SHORT, 'Kateglo (Beta)'); // application name
 define(APP_VERSION, 'v0.0.12'); // application version. See README.txt
 
@@ -61,12 +61,13 @@ $page->process();
 // display
 $body .= show_header();
 $body .= $page->show();
+$title = ($mod == 'home') ? APP_NAME : APP_SHORT;
 if (!$page->title && $mod != 'home')
 {
 	if ($msg[$module]) $page->title = $msg[$module];
 	if ($_GET['phrase']) $page->title = $_GET['phrase'] . ' - ' . $page->title;
 }
-$title = $page->title ? $page->title . ' - ' . APP_NAME : APP_NAME;
+$title = $page->title ? $page->title . ' - ' . $title : $title;
 
 // render
 $ret .= '<html>' . LF;

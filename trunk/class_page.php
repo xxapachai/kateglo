@@ -7,6 +7,7 @@ class page
 	var $db;
 	var $auth;
 	var $msg;
+	var $title;
 
 	/**
 	 * Constructor

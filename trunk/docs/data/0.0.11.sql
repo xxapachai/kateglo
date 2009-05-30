@@ -40,3 +40,11 @@ update phrase set phrase = 'apa boleh buat' where phrase = 'apa boleh';
 update definition set phrase = 'apa boleh buat' where phrase = 'apa boleh';
 update relation set related_phrase = 'apa boleh buat' where related_phrase = 'apa boleh';
 update relation set root_phrase = 'apa boleh buat' where root_phrase = 'apa boleh';
+
+-- barometer
+
+delete from relation where related_phrase = 'mutlak' and ;
+update phrase set phrase = 'apa boleh buat' where phrase = 'apa boleh';
+update definition set phrase = 'apa boleh buat' where phrase = 'apa boleh';
+update relation set related_phrase = 'apa boleh buat' where related_phrase = 'apa boleh';
+update relation set root_phrase = 'apa boleh buat' where root_phrase = 'apa boleh';
