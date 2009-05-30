@@ -81,6 +81,7 @@ $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '</head>' . LF;
+$ret .= '</head>' . LF;
 $ret .= $body;
 $ret .= sprintf('<p>' .
 	'<span style="float:right;">' .
@@ -98,6 +99,15 @@ $ret .= sprintf('<p>' .
 	'./?mod=comment',
 	$msg['comment_link']
 );
+// stats
+if ($allow_stat)
+{
+	$ret .= '<!-- GoStats JavaScript Based Code -->';
+	$ret .= '<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>';
+	$ret .= '<script type="text/javascript">_gos=\'gostats.com\';_goa=728945;_got=5;_goi=1;_goz=0;_gol=\'web traffic software\';_GoStatsRun();</script>';
+	$ret .= '<noscript><a target="_blank" title="web traffic software" href="http://gostats.com"><img alt="web traffic software" src="http://gostats.com/bin/count/a_728945/t_5/i_1/counter.png"  style="border-width:0" /></a></noscript>';
+	$ret .= '<!-- End GoStats JavaScript Based Code -->' . LF;
+}
 $ret .= '</body>' . LF;
 $ret .= '</html>' . LF;
 echo($ret);
