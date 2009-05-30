@@ -107,6 +107,7 @@ function get_external_stat()
 {
 
 	// gostats
+	$ret .= '<div style="display:none !important;">' . LF;
 	$ret .= '<!-- GoStats JavaScript Based Code -->';
 	$ret .= '<script type="text/javascript" src="http://gostats.com/js/counter.js"></script>';
 	$ret .= '<script type="text/javascript">_gos=\'gostats.com\';_goa=728945;_got=5;_goi=1;_goz=0;_gol=\'web traffic software\';_GoStatsRun();</script>';
@@ -122,6 +123,7 @@ function get_external_stat()
 	// sitemeter
 	$ret .= '<!-- Site Meter --> <script type="text/javascript" src="http://s18.sitemeter.com/js/counter.js?site=s18kateglo"> </script> <noscript> <a href="http://s18.sitemeter.com/stats.asp?site=s18kateglo" target="_top"> <img src="http://s18.sitemeter.com/meter.asp?site=s18kateglo" alt="Site Meter" border="0" style="display:none;" /></a> </noscript> <!-- Copyright (c)2009 Site Meter -->' . LF;
 
+	$ret .= '</div>' . LF;
 	return($ret);
 }
 ?>
