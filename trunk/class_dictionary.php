@@ -339,6 +339,12 @@ class dictionary extends page
 				);
 				$this->db->exec($query);
 
+				// delete relation. use when needed
+				$query = sprintf(
+					'DELETE FROM relation WHERE root_phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
 				// relation
 				if ($value['type'] != 'r')
 				{
@@ -354,11 +360,11 @@ class dictionary extends page
 				$this->db->exec($query);
 
 				// delete definition. use when needed
-//				$query = sprintf(
-//					'DELETE FROM definition WHERE phrase = %1$s;',
-//					$this->db->quote($key)
-//				);
-//				$this->db->exec($query);
+				$query = sprintf(
+					'DELETE FROM definition WHERE phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
 
 				// definition
 				$query = sprintf(
