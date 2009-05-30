@@ -1,8 +1,10 @@
--- Last updated: 2009-05-30 12:41
+-- Last updated: 2009-05-30 22:36
 
 drop table if exists definition;
 
 drop table if exists discipline;
+
+drop table if exists glossary;
 
 drop table if exists language;
 
@@ -29,8 +31,6 @@ drop table if exists sys_comment;
 drop table if exists sys_session;
 
 drop table if exists sys_user;
-
-drop table if exists translation;
 
 /*==============================================================*/
 /* Table: definition                                            */
@@ -61,6 +61,56 @@ create table discipline
    updated              datetime,
    updater              varchar(32) not null,
    primary key (discipline)
+);
+
+/*==============================================================*/
+/* Table: glossary                                              */
+/*==============================================================*/
+create table glossary
+(
+   glo_uid              int not null auto_increment,
+   phrase               varchar(255) not null,
+   original             varchar(255) not null,
+   discipline           varchar(16),
+   lang                 varchar(16) not null default 'en',
+   ref_source           varchar(16),
+   wpid                 varchar(255),
+   wpen                 varchar(255),
+   updated              datetime,
+   updater              varchar(32) not null,
+   primary key (glo_uid)
+);
+
+/*==============================================================*/
+/* Index: phrase                                                */
+/*==============================================================*/
+create index phrase on glossary
+(
+   phrase
+);
+
+/*==============================================================*/
+/* Index: original_phrase                                       */
+/*==============================================================*/
+create index original_phrase on glossary
+(
+   original
+);
+
+/*==============================================================*/
+/* Index: discipline                                            */
+/*==============================================================*/
+create index discipline on glossary
+(
+   discipline
+);
+
+/*==============================================================*/
+/* Index: ref_source                                            */
+/*==============================================================*/
+create index ref_source on glossary
+(
+   ref_source
 );
 
 /*==============================================================*/
@@ -258,54 +308,4 @@ create table sys_user
    updated              datetime,
    updater              varchar(32) not null,
    primary key (user_id)
-);
-
-/*==============================================================*/
-/* Table: translation                                           */
-/*==============================================================*/
-create table translation
-(
-   tr_uid               int not null auto_increment,
-   phrase               varchar(255) not null,
-   translation          varchar(255) not null,
-   discipline           varchar(16),
-   lang                 varchar(16) not null default 'en',
-   ref_source           varchar(16),
-   wpid                 varchar(255),
-   wpen                 varchar(255),
-   updated              datetime,
-   updater              varchar(32) not null,
-   primary key (tr_uid)
-);
-
-/*==============================================================*/
-/* Index: phrase                                                */
-/*==============================================================*/
-create index phrase on translation
-(
-   phrase
-);
-
-/*==============================================================*/
-/* Index: translation                                           */
-/*==============================================================*/
-create index translation on translation
-(
-   translation
-);
-
-/*==============================================================*/
-/* Index: discipline                                            */
-/*==============================================================*/
-create index discipline on translation
-(
-   discipline
-);
-
-/*==============================================================*/
-/* Index: ref_source                                            */
-/*==============================================================*/
-create index ref_source on translation
-(
-   ref_source
 );
