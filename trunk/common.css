@@ -5,6 +5,7 @@ textarea { font-family: Arial, sans-serif; }
 table.list { border-collapse: collapse; border-bottom: solid 2px #DDD;}
 table.list td { border-bottom: solid 1px #DDD; padding: 2px 5px; }
 table.list th { background: #DDD; padding: 2px 5px; }
-a { text-decoration: none; }
+a { text-decoration: none; color: #00F; }
 a:hover { text-decoration: underline; }
 form { margin: 0px; padding: 0px; }
+legend { font-weight: bold; }

@@ -49,50 +49,11 @@ class dictionary extends page
 				$ret .= $this->show_form();
 				break;
 			default:
+				$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
+				$ret .= $this->show_search();
 				$ret .= $this->show_list();
 				break;
 		}
-		return($ret);
-	}
-
-	/**
-	 * Get list of words
-	 */
-	function get_keywords()
-	{
-		if ($this->phrase)
-		{
-			$keywords[] = $this->phrase['phrase'];
-			if ($relations = $this->phrase['all_relation'])
-			{
-				foreach($relations as $relation)
-				{
-					$keywords[] = $relation['related_phrase'];
-				}
-			}
-		}
-		// process keywords
-		if ($keywords)
-		{
-			foreach($keywords as $keyword)
-			{
-				$ret .= $ret ? ', ' : '';
-				$ret .= $keyword;
-			}
-		}
-		return($ret);
-	}
-
-	/**
-	 * Get list of words
-	 */
-	function get_list()
-	{
-		global $_GET;
-		$query = 'SELECT COUNT(*) FROM phrase a WHERE a.phrase
-			LIKE \'%' . $this->db->quote($_GET['phrase'], null, false) . '%\';';
-		$count = $this->db->get_row_value($query);
-		$ret = $_GET['phrase'] ? $count : true;
 		return($ret);
 	}
 
@@ -101,15 +62,52 @@ class dictionary extends page
 	 */
 	function show_list()
 	{
-		$cols = 'a.phrase';
-		$from = 'FROM phrase a ';
-		if ($_GET['phrase'])
-			$from .= 'WHERE a.phrase LIKE \'%' . $this->db->quote($_GET['phrase'], null, false) . '%\'';
-		$from .= 'ORDER BY a.phrase ';
-		$rows = $this->db->get_rows_paged($cols, $from);
+		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'])
+		{
+			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
+			$ret .= '<blockquote>' . LF;
+			$i = 0;
+			for ($i = 65; $i <= 90; $i++)
+			{
+				if ($i > 65) $ret .= '; ';
+				$ret .= sprintf('<a href="./?mod=dict&idx=%1$s">%1$s</a>',
+					chr($i));
+			}
+			$ret .= '</blockquote>' . LF;
+			$ret .= '<p><strong>' . $this->msg['dict_by_lex'] . '</strong></p>' . LF;
+			$rows = $this->db->get_rows('SELECT * FROM lexical_class ORDER BY sort_order;');
+			if ($row_count = $this->db->num_rows)
+			{
+				$ret .= '<blockquote>' . LF;
+				$i = 0;
+				foreach ($rows as $row)
+				{
+					if ($i > 0) $ret .= '; ';
+					$ret .= sprintf('<a href="./?mod=dict&lex=%2$s">%1$s</a>',
+						$row['lex_class_name'], $row['lex_class']);
+					$i++;
+				}
+				$ret .= '</blockquote>' . LF;
+			}
+			$ret .= '<p><strong>' . $this->msg['dict_by_type'] . '</strong></p>' . LF;
+			$rows = $this->db->get_rows('SELECT * FROM phrase_type ORDER BY sort_order;');
+			if ($row_count = $this->db->num_rows)
+			{
+				$ret .= '<blockquote>' . LF;
+				$i = 0;
+				foreach ($rows as $row)
+				{
+					if ($i > 0) $ret .= '; ';
+					$ret .= sprintf('<a href="./?mod=dict&type=%2$s">%1$s</a>',
+						$row['phrase_type_name'], $row['phrase_type']);
+					$i++;
+				}
+				$ret .= '</blockquote>' . LF;
+			}
+			return($ret);
+		}
 
-
-		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
+		// menu
 		if ($this->auth->checkAuth())
 		{
 			$ret .= '<p>';
@@ -118,6 +116,41 @@ class dictionary extends page
 				$this->msg['new']);
 			$ret .= '</p>' . LF;
 		}
+
+		// get result
+		$op_open = ($_GET['op'] == '2') ? '[[:<:]]' : ($_GET['op'] == '3' ? '' : '%');
+		$op_close = ($_GET['op'] == '2') ? '[[:>:]]' : ($_GET['op'] == '3' ? '' : '%');
+		$op_type = ($_GET['op'] == '2') ? 'REGEXP' : ($_GET['op'] == '3' ? '=' : 'LIKE');
+		$op_template = 'a.%1$s %2$s \'%3$s%4$s%5$s\'';
+		if ($_GET['phrase'])
+		{
+			$where .= $where ? ' AND ' : ' WHERE ';
+			$where .= sprintf($op_template, 'phrase', $op_type, $op_open,
+				$this->db->quote($_GET['phrase'], null, false), $op_close);
+		}
+		if ($_GET['lex'])
+		{
+			$where .= $where ? ' AND ' : ' WHERE ';
+			$where .= ' a.lex_class = ' . $this->db->quote($_GET['lex']) . ' ';
+		}
+		if ($_GET['type'])
+		{
+			$where .= $where ? ' AND ' : ' WHERE ';
+			$where .= ' a.phrase_type =' . $this->db->quote($_GET['type']) . ' ';
+		}
+		if ($_GET['idx'])
+		{
+			$_GET['idx'] = substr($_GET['idx'], 0, 1);
+			$where .= $where ? ' AND ' : ' WHERE ';
+			$where .= ' LEFT(a.phrase, 1) = ' . $this->db->quote($_GET['idx']) . ' ';
+		}
+
+		$cols = 'a.phrase';
+		$from = 'FROM phrase a ' . $where . ' ';
+		$from .= 'ORDER BY a.phrase ';
+		$rows = $this->db->get_rows_paged($cols, $from);
+
+		// result
 		if ($this->db->num_rows > 0)
 		{
 			$mark = ceil($this->db->num_rows / 3);
@@ -268,14 +301,14 @@ class dictionary extends page
 				$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
 
 			// relation and derivation
-			$ret .= $this->show_relation($phrase, 'relation', 'related_phrase');
+			$ret .= $this->show_relation($phrase, 'related_phrase');
 		}
 		else
 		{
 			$ret .= sprintf('<p>%1$s</p>', sprintf($this->msg['phrase_na'], $_GET['phrase']));
 			// derivation and relation
-			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase', true);
-			$ret .= $this->show_relation($phrase, 'relation', 'root_phrase');
+			$this->get_relation(&$phrase, 'related_phrase', true);
+			$ret .= $this->show_relation($phrase, 'root_phrase');
 		}
 
 		// glosarium
@@ -291,135 +324,12 @@ class dictionary extends page
 	}
 
 	/**
-	 * Show KBBI reference
-	 */
-	function show_kbbi()
-	{
-		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
-		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
-		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
-		$ret .= '</td></tr></table>' . LF;
-
-		return($ret);
-	}
-
-	/**
-	 * Save KBBI
-	 */
-	function save_kbbi()
-	{
-		global $_GET;
-		if ($this->kbbi->defs)
-		{
-			foreach($this->kbbi->defs as $key => $value)
-			{
-				// phrase
-				$query = sprintf(
-					'INSERT INTO phrase SET
-						phrase = %1$s,
-						created = NOW(),
-						ref_source = \'Pusba\'
-					;',
-					$this->db->quote($key)
-				);
-				$this->db->exec($query);
-
-				// update phrase
-				$query = sprintf(
-					'UPDATE phrase SET
-						lex_class = %2$s,
-						phrase_type = %3$s,
-						pronounciation = %4$s,
-						updated = NOW(),
-						created = NOW(),
-						ref_source = \'Pusba\'
-					WHERE phrase = %1$s;',
-					$this->db->quote($key),
-					$this->db->quote($value['lex_class']),
-					$this->db->quote($value['type']),
-					$this->db->quote($value['pron'])
-				);
-				$this->db->exec($query);
-
-				// delete relation. use when needed
-				$query = sprintf(
-					'DELETE FROM relation WHERE root_phrase = %1$s;',
-					$this->db->quote($key)
-				);
-				$this->db->exec($query);
-				// relation
-				if ($value['type'] != 'r')
-				{
-					$query = sprintf(
-						'INSERT INTO relation (root_phrase, related_phrase, rel_type)
-							VALUES (%1$s, %2$s, %3$s);',
-						$this->db->quote($_GET['phrase']),
-						$this->db->quote($key),
-						$this->db->quote($value['type'])
-					);
-					$this->db->exec($query);
-				}
-				$this->db->exec($query);
-
-				// delete definition. use when needed
-				$query = sprintf(
-					'DELETE FROM definition WHERE phrase = %1$s;',
-					$this->db->quote($key)
-				);
-				$this->db->exec($query);
-
-				// definition
-				$query = sprintf(
-					'SELECT COUNT(*) FROM definition WHERE phrase = %1$s;',
-					$this->db->quote($key)
-				);
-				$current_def = $this->db->get_row_value($query);
-				if ($current_def == 0 && $value['definitions'])
-				{
-					foreach ($value['definitions'] as $def_key => $def_val)
-					{
-						$query = sprintf(
-							'INSERT INTO definition (phrase, def_num, lex_class, discipline, def_text, sample, see)
-								VALUES (%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s);',
-							$this->db->quote($key),
-							$this->db->quote($def_val['index']),
-							$this->db->quote($def_val['lex_class']),
-							$this->db->quote($def_val['info']),
-							$this->db->quote($def_val['text']),
-							$this->db->quote($def_val['sample']),
-							$this->db->quote($def_val['see'])
-						);
-						$this->db->exec($query);
-					}
-				}
-
-				// synonyms
-				if ($value['synonyms'])
-				{
-//					var_dump($value['synonyms']);
-					foreach ($value['synonyms'] as $synonym)
-					{
-						$query = sprintf(
-							'INSERT INTO relation (root_phrase, related_phrase, rel_type)
-								VALUES (%1$s, %2$s, \'s\');',
-							$this->db->quote($key),
-							$this->db->quote($synonym)
-						);
-						$this->db->exec($query);
-					}
-				}
-			}
-		}
-
-	}
-
-	/**
 	 * @return unknown_type
 	 */
-	function show_relation($phrase, $type_name, $col_name)
+	function show_relation($phrase, $col_name)
 	{
 		// derivation
-		$type_count = count($phrase[$type_name]);
+		$type_count = count($phrase['relation']);
 		$col_width = round(100 / $type_count) . '%';
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['thesaurus']);
 		if ($phrase['relation']['relation_all'] == 0)
@@ -427,7 +337,7 @@ class dictionary extends page
 			$ret .= $this->msg['na'];
 			return($ret);
 		}
-		foreach ($phrase[$type_name] as $type_key => $type)
+		foreach ($phrase['relation'] as $type_key => $type)
 		{
 			if (count($type) > 1)
 			{
@@ -436,30 +346,6 @@ class dictionary extends page
 				$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1, true);
 				$ret .= '</blockquote>' . LF;
 			}
-		}
-		return($ret);
-	}
-
-	/**
-	 * Merge phrase list with comma
-	 */
-	function merge_phrase_list($phrases, $col_name, $count = null, $show_lex = false)
-	{
-		if (is_null($count)) $count = count($phrases);
-		if ($count > 0)
-		{
-			for ($i = 0; $i < $count; $i++)
-			{
-				// $ret .= ($i == 0) ? '<br />': '';
-				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
-				if ($show_lex && $phrases[$i]['lex_class'])
-					$ret .= ' (' . $phrases[$i]['lex_class'] . ')';
-				$ret .= ($i < $count - 1) ? '; ': '';
-			}
-		}
-		else
-		{
-			$ret = '';
 		}
 		return($ret);
 	}
@@ -604,6 +490,82 @@ class dictionary extends page
 	}
 
 	/**
+	 *
+	 */
+	function show_search()
+	{
+		$form = new form('search_dict', 'get');
+		$form->setup($msg);
+		$form->addElement('hidden', 'mod', 'dict');
+		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
+		$form->addElement('text', 'phrase', $this->msg['phrase']);
+		$form->addElement('select', 'lex', $this->msg['lex_class'],
+			$this->db->get_row_assoc('SELECT lex_class, lex_class_name FROM lexical_class ORDER BY sort_order', 'lex_class', 'lex_class_name')
+			);
+		$form->addElement('select', 'type', $this->msg['phrase_type'],
+			$this->db->get_row_assoc('SELECT phrase_type, phrase_type_name FROM phrase_type ORDER BY sort_order', 'phrase_type', 'phrase_type_name')
+			);
+		$form->addElement('submit', 'search', $this->msg['search_button']);
+
+		$template = '%1$s: %2$s ' . LF;
+		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+		$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
+		$ret .= $form->begin_form();
+		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
+		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
+		$ret .= '<br />';
+		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex'));
+		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('type'));
+		$ret .= $form->get_element('mod');
+		$ret .= $form->get_element('search');
+		$ret .= $form->end_form();
+		$ret .= '</fieldset>' . LF;
+
+		return($ret);
+	}
+
+	/**
+	 * Get list of words
+	 */
+	function get_keywords()
+	{
+		if ($this->phrase)
+		{
+			$keywords[] = $this->phrase['phrase'];
+			if ($relations = $this->phrase['all_relation'])
+			{
+				foreach($relations as $relation)
+				{
+					$keywords[] = $relation['related_phrase'];
+				}
+			}
+		}
+		// process keywords
+		if ($keywords)
+		{
+			foreach($keywords as $keyword)
+			{
+				$ret .= $ret ? ', ' : '';
+				$ret .= $keyword;
+			}
+		}
+		return($ret);
+	}
+
+	/**
+	 * Get list of words
+	 */
+	function get_list()
+	{
+		global $_GET;
+		$query = 'SELECT COUNT(*) FROM phrase a WHERE a.phrase
+			LIKE \'%' . $this->db->quote($_GET['phrase'], null, false) . '%\';';
+		$count = $this->db->get_row_value($query);
+		$ret = $_GET['phrase'] ? $count : true;
+		return($ret);
+	}
+
+	/**
 	 * Get phrase
 	 *
 	 * @return Phrase structure
@@ -654,7 +616,7 @@ class dictionary extends page
 			//var_dump($rows);
 
 			// derivation and relation
-			$this->get_phrase_rd(&$phrase, 'relation', 'rel_type', 'related_phrase');
+			$this->get_relation(&$phrase, 'related_phrase');
 		}
 		return($phrase);
 	}
@@ -662,7 +624,7 @@ class dictionary extends page
 	/**
 	 * @return unknown_type
 	 */
-	function get_phrase_rd(&$phrase, $table, $key_field, $sort_phrase, $reverse = false)
+	function get_relation(&$phrase, $sort_phrase, $reverse = false)
 	{
 		global $_GET;
 		$where_field = 'root_phrase';
@@ -675,15 +637,15 @@ class dictionary extends page
 
 		// relation
 		$query = sprintf('
-			SELECT a.*, b.%3$s_name, c.lex_class
+			SELECT a.*, b.rel_type_name, c.lex_class
 			FROM %2$s a
-				INNER JOIN %2$s_type b ON a.%3$s = b.%3$s
+				INNER JOIN relation_type b ON a.rel_type = b.rel_type
 				LEFT JOIN phrase c ON a.%4$s = c.phrase
 			WHERE a.%5$s = %1$s
 			ORDER BY b.sort_order, a.%4$s;',
 			$this->db->quote($_GET['phrase']),
-			$table,
-			$key_field,
+			'relation',
+			'rel_type',
 			$sort_phrase,
 			$where_field);
 		$rows = $this->db->get_rows($query);
@@ -693,15 +655,15 @@ class dictionary extends page
 		{
 			$query = sprintf('
 				SELECT a.related_phrase root_phrase,
-					a.root_phrase related_phrase, a.rel_type, b.%3$s_name, c.lex_class
-				FROM %2$s a
-					INNER JOIN %2$s_type b ON a.%3$s = b.%3$s
+					a.root_phrase related_phrase, a.rel_type, b.rel_type_name, c.lex_class
+				FROM relation a
+					INNER JOIN relation_type b ON a.rel_type = b.rel_type
 					LEFT JOIN phrase c ON a.%5$s = c.phrase
 				WHERE a.%4$s = %1$s AND a.rel_type IN (\'s\', \'a\', \'r\')
 				ORDER BY b.sort_order, a.%4$s;',
 				$this->db->quote($_GET['phrase']),
-				$table,
-				$key_field,
+				'relation',
+				'rel_type',
 				$sort_phrase,
 				$where_field);
 			$rows2 = $this->db->get_rows($query);
@@ -709,49 +671,48 @@ class dictionary extends page
 		}
 
 		// divide into each category
-		$phrase[$table]['relation_direct'] = 0;
-		$phrase[$table]['relation_reverse'] = 0;
-		$query = sprintf('SELECT %2$s, %2$s_name FROM %1$s_type ORDER BY sort_order;',
-			$table, $key_field);
+		$phrase['relation']['relation_direct'] = 0;
+		$phrase['relation']['relation_reverse'] = 0;
+		$query = 'SELECT rel_type, rel_type_name FROM relation_type ORDER BY sort_order;';
 		$types = $this->db->get_rows($query);
 		foreach ($types as $type)
 		{
 			$inserted = null;
-			$type_key = $type[$key_field];
+			$type_key = $type['rel_type'];
 			foreach ($rows as $row)
 			{
-				if ($row[$key_field] == $type[$key_field])
+				if ($row['rel_type'] == $type['rel_type'])
 				{
-					$phrase[$table]['relation_direct']++;
-					$phrase[$table][$type_key][] = $row;
+					$phrase['relation']['relation_direct']++;
+					$phrase['relation'][$type_key][] = $row;
 					$inserted[] = $row[$sort_phrase];
 				}
 			}
-			$phrase[$table][$type_key]['name'] = $type[$key_field . '_name'];
+			$phrase['relation'][$type_key]['name'] = $type['rel_type_name'];
 
 			// reverse
 			if ($rows2)
 			{
 				foreach ($rows2 as $row)
 				{
-					if ($row[$key_field] == $type[$key_field])
+					if ($row['rel_type'] == $type['rel_type'])
 					{
 						if (!is_array($inserted)) $inserted = array('');
 						if (!in_array($row[$sort_phrase], $inserted))
 						{
-							$phrase[$table]['relation_reverse']++;
-							$phrase[$table][$type_key][] = $row;
+							$phrase['relation']['relation_reverse']++;
+							$phrase['relation'][$type_key][] = $row;
 						}
 					}
 				}
 			}
 		}
-		$phrase[$table]['relation_all'] = $phrase[$table]['relation_direct'];
-		$phrase[$table]['relation_all'] += $phrase[$table]['relation_reverse'];
+		$phrase['relation']['relation_all'] = $phrase['relation']['relation_direct'];
+		$phrase['relation']['relation_all'] += $phrase['relation']['relation_reverse'];
 
 		// bulk
 		foreach ($rows as $row)
-			$phrase['all_' . $table][] = $row;
+			$phrase['all_relation'][] = $row;
 	}
 
 	/**
@@ -887,5 +848,153 @@ class dictionary extends page
 			}
 		}
 	}
+
+	/**
+	 * Merge phrase list with comma
+	 */
+	function merge_phrase_list($phrases, $col_name, $count = null, $show_lex = false)
+	{
+		if (is_null($count)) $count = count($phrases);
+		if ($count > 0)
+		{
+			for ($i = 0; $i < $count; $i++)
+			{
+				// $ret .= ($i == 0) ? '<br />': '';
+				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
+				if ($show_lex && $phrases[$i]['lex_class'])
+					$ret .= ' (' . $phrases[$i]['lex_class'] . ')';
+				$ret .= ($i < $count - 1) ? '; ': '';
+			}
+		}
+		else
+		{
+			$ret = '';
+		}
+		return($ret);
+	}
+
+	/**
+	 * Show KBBI reference
+	 */
+	function show_kbbi()
+	{
+		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
+		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
+		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+		$ret .= '</td></tr></table>' . LF;
+
+		return($ret);
+	}
+
+	/**
+	 * Save KBBI
+	 */
+	function save_kbbi()
+	{
+		global $_GET;
+		if ($this->kbbi->defs)
+		{
+			foreach($this->kbbi->defs as $key => $value)
+			{
+				// phrase
+				$query = sprintf(
+					'INSERT INTO phrase SET
+						phrase = %1$s,
+						created = NOW(),
+						ref_source = \'Pusba\'
+					;',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
+
+				// update phrase
+				$query = sprintf(
+					'UPDATE phrase SET
+						lex_class = %2$s,
+						phrase_type = %3$s,
+						pronounciation = %4$s,
+						updated = NOW(),
+						created = NOW(),
+						ref_source = \'Pusba\'
+					WHERE phrase = %1$s;',
+					$this->db->quote($key),
+					$this->db->quote($value['lex_class']),
+					$this->db->quote($value['type']),
+					$this->db->quote($value['pron'])
+				);
+				$this->db->exec($query);
+
+				// delete relation. use when needed
+				$query = sprintf(
+					'DELETE FROM relation WHERE root_phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
+				// relation
+				if ($value['type'] != 'r')
+				{
+					$query = sprintf(
+						'INSERT INTO relation (root_phrase, related_phrase, rel_type)
+							VALUES (%1$s, %2$s, %3$s);',
+						$this->db->quote($_GET['phrase']),
+						$this->db->quote($key),
+						$this->db->quote($value['type'])
+					);
+					$this->db->exec($query);
+				}
+				$this->db->exec($query);
+
+				// delete definition. use when needed
+				$query = sprintf(
+					'DELETE FROM definition WHERE phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$this->db->exec($query);
+
+				// definition
+				$query = sprintf(
+					'SELECT COUNT(*) FROM definition WHERE phrase = %1$s;',
+					$this->db->quote($key)
+				);
+				$current_def = $this->db->get_row_value($query);
+				if ($current_def == 0 && $value['definitions'])
+				{
+					foreach ($value['definitions'] as $def_key => $def_val)
+					{
+						$query = sprintf(
+							'INSERT INTO definition (phrase, def_num, lex_class, discipline, def_text, sample, see)
+								VALUES (%1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s);',
+							$this->db->quote($key),
+							$this->db->quote($def_val['index']),
+							$this->db->quote($def_val['lex_class']),
+							$this->db->quote($def_val['info']),
+							$this->db->quote($def_val['text']),
+							$this->db->quote($def_val['sample']),
+							$this->db->quote($def_val['see'])
+						);
+						$this->db->exec($query);
+					}
+				}
+
+				// synonyms
+				if ($value['synonyms'])
+				{
+//					var_dump($value['synonyms']);
+					foreach ($value['synonyms'] as $synonym)
+					{
+						$query = sprintf(
+							'INSERT INTO relation (root_phrase, related_phrase, rel_type)
+								VALUES (%1$s, %2$s, \'s\');',
+							$this->db->quote($key),
+							$this->db->quote($synonym)
+						);
+						$this->db->exec($query);
+					}
+				}
+			}
+		}
+
+	}
+
 };
 ?>

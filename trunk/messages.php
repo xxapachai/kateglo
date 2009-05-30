@@ -22,6 +22,9 @@ $msg = array(
 	'dictionary' => 'Kamus',
 	'dict_search' => 'Hasil pencarian <strong>"<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>"</strong>.',
 	'dict_short' => 'k',
+	'dict_by_lex' => 'Menurut kelas kata:',
+	'dict_by_type' => 'Menurut tipe frasa:',
+	'dict_by_letter' => 'Menurut abjad:',
 	'discipline' => 'Bidang',
 
 	'edit' => 'Ubah',
@@ -67,6 +70,7 @@ $msg = array(
 	'page_next' => 'Berikutnya',
 	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
+	'phrase_type' => 'Tipe frasa',
 	'pronounciation' => 'Pelafalan',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
 	'pwd_current' => 'Kata sandi sekarang',
