@@ -7,7 +7,7 @@
 define(LF, "\n"); // line break
 define(APP_NAME, 'Kateglo - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
 define(APP_SHORT, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.11'); // application version. See README.txt
+define(APP_VERSION, 'v0.0.12'); // application version. See README.txt
 
 // variables
 $base_dir = dirname(__FILE__);

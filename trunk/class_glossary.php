@@ -68,6 +68,16 @@ class glossary extends page
 		global $_GET;
 
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
+
+		// search
+		if (!$sublist)
+		{
+			$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+			$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
+			$ret .= $this->show_search();
+			$ret .= '</fieldset>' . LF;
+		}
+
 		// if there's phrase
 		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
 		{
@@ -107,15 +117,6 @@ class glossary extends page
 				}
 				$ret .= '</blockquote>' . LF;
 			}
-		}
-
-		// search
-		if (!$sublist)
-		{
-			$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
-			$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
-			$ret .= $this->show_search();
-			$ret .= '</fieldset>' . LF;
 		}
 
 		// return
