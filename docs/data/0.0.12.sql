@@ -9,6 +9,22 @@ update definition set phrase = 'tani' where phrase = '2tani';
 delete from relation where related_phrase = '2tani';
 delete from phrase where phrase = '2tani';
 
+-- (pun lah)
+
+update phrase set phrase = 'pun lah' where phrase = '(pun lah)';
+update definition set phrase = 'pun lah' where phrase = '(pun lah)';
+update relation set related_phrase = 'pun lah' where related_phrase = '(pun lah)';
+update definition set phrase = 'pun' where phrase = 'pun lah';
+delete from phrase where phrase = 'pun lah';
+delete from relation where related_phrase = 'pun lah';
+
+-- meng-
+
+update phrase set phrase = 'me-' where phrase = 'meng-';
+update definition set phrase = 'me-' where phrase = 'meng-';
+update relation set related_phrase = 'me-' where related_phrase = 'meng-';
+update relation set root_phrase = 'me-' where root_phrase = 'meng-';
+
 -- rename
 
 rename table translation to glossary;
