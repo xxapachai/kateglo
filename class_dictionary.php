@@ -41,6 +41,8 @@ class dictionary extends page
 		switch ($_GET['action'])
 		{
 			case 'view':
+				if ($_GET['phrase'])
+					$this->title = $this->msg['definition'] . ' ' . $_GET['phrase'];
 				$ret .= $this->show_phrase();
 				break;
 			case 'form':
