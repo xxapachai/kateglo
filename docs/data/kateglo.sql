@@ -1,4 +1,4 @@
--- Last updated: 2009-05-26 20:37
+-- Last updated: 2009-05-30 12:41
 
 drop table if exists definition;
 
@@ -39,7 +39,7 @@ create table definition
 (
    def_uid              int not null auto_increment,
    phrase               varchar(255) not null,
-   def_num              tinyint not null default 1,
+   def_num              int not null default 1,
    lex_class            varchar(16),
    discipline           varchar(16),
    def_text             varchar(4000) not null,
@@ -57,6 +57,7 @@ create table discipline
 (
    discipline           varchar(16) not null,
    discipline_name      varchar(255) not null,
+   glossary_count       int not null default 0,
    updated              datetime,
    updater              varchar(32) not null,
    primary key (discipline)
@@ -81,7 +82,8 @@ create table lexical_class
 (
    lex_class            varchar(16) not null,
    lex_class_name       varchar(255) not null,
-   sort_order           tinyint not null default 1,
+   lex_class_ref        varchar(255) comment 'Referensi ke nama kelas',
+   sort_order           int not null default 1,
    updated              datetime,
    updater              varchar(32) not null,
    primary key (lex_class)
@@ -114,7 +116,7 @@ create table phrase_type
 (
    phrase_type          varchar(16) not null comment 'r=root; f=affix; c=compond',
    phrase_type_name     varchar(255) not null,
-   sort_order           tinyint not null default 1,
+   sort_order           int not null default 1,
    updated              datetime,
    updater              varchar(32) not null,
    primary key (phrase_type)
@@ -127,6 +129,7 @@ create table ref_source
 (
    ref_source           varchar(16) not null,
    ref_source_name      varchar(255) not null,
+   glossary_count       int not null default 0,
    updated              datetime,
    updater              varchar(32) not null,
    primary key (ref_source)
@@ -165,7 +168,7 @@ create table relation_type
 (
    rel_type             varchar(16) not null comment 's=synonym, a=antonym, o=other',
    rel_type_name        varchar(255) not null,
-   sort_order           tinyint not null default 1,
+   sort_order           int not null default 1,
    updated              datetime,
    updater              varchar(32) not null,
    primary key (rel_type)
@@ -183,9 +186,9 @@ create table roget_class
    english_name         varchar(255),
    asterix              varchar(16),
    caret                varchar(16),
-   class_num            tinyint,
-   division_num         tinyint,
-   section_num          tinyint,
+   class_num            int,
+   division_num         int,
+   section_num          int,
    primary key (roget_class)
 );
 
@@ -239,7 +242,7 @@ create table sys_session
    started              datetime,
    ended                datetime,
    last                 datetime,
-   page_view            tinyint not null default 0,
+   page_view            int not null default 0,
    primary key (ses_id)
 );
 
@@ -289,4 +292,20 @@ create index phrase on translation
 create index translation on translation
 (
    translation
+);
+
+/*==============================================================*/
+/* Index: discipline                                            */
+/*==============================================================*/
+create index discipline on translation
+(
+   discipline
+);
+
+/*==============================================================*/
+/* Index: ref_source                                            */
+/*==============================================================*/
+create index ref_source on translation
+(
+   ref_source
 );

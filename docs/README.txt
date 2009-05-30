@@ -54,6 +54,7 @@ sebaiknya berhati-hati menggunakannya.
 
 == Bug yang diketahui ==
 
+* Kesalahan KBBI: alur
 * Algoritma parser KBBI belum efisien
 * Kesalahan parsing KBBI: "kokoh" -> redirection
 * Kesalahan parsing KBBI: "lepas" -> format salah
@@ -68,6 +69,12 @@ sebaiknya berhati-hati menggunakannya.
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.12 (30 Mei 2009) ===
+
+* Perubahan letak kotak pencarian glosarium menjadi di atas
+* Perbaikan bug untuk menampilkan relasi terbalik
+* Perbaikan bug untuk pemberian tanda tanggal pembuatan entri
 
 === 0.0.11 (29 Mei 2009) ===
 

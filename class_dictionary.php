@@ -311,7 +311,7 @@ class dictionary extends page
 			{
 				// phrase
 				$query = sprintf(
-					'INSERT INTO phrase (phrase, created, ref_source) VALUES (%1$s, NOW(), \'Pusba\');',
+					'INSERT INTO phrase (phrase) VALUES (%1$s, NOW(), \'Pusba\');',
 					$this->db->quote($key)
 				);
 				$this->db->exec($query);
@@ -320,7 +320,7 @@ class dictionary extends page
 				$query = sprintf(
 					'UPDATE phrase SET
 						lex_class = %2$s, phrase_type = %3$s,
-						pronounciation = %4$s, updated = NOW()
+						pronounciation = %4$s, created = NOW(), updated = NOW(), ref_source = \'Pusba\'
 					WHERE phrase = %1$s;',
 					$this->db->quote($key),
 					$this->db->quote($value['lex_class']),
@@ -404,7 +404,7 @@ class dictionary extends page
 		$type_count = count($phrase[$type_name]);
 		$col_width = round(100 / $type_count) . '%';
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['thesaurus']);
-		if (!$phrase['all_' . $type_name])
+		if ($phrase['relation']['relation_all'] == 0)
 		{
 			$ret .= $this->msg['na'];
 			return($ret);
@@ -691,6 +691,8 @@ class dictionary extends page
 		}
 
 		// divide into each category
+		$phrase[$table]['relation_direct'] = 0;
+		$phrase[$table]['relation_reverse'] = 0;
 		$query = sprintf('SELECT %2$s, %2$s_name FROM %1$s_type ORDER BY sort_order;',
 			$table, $key_field);
 		$types = $this->db->get_rows($query);
@@ -702,6 +704,7 @@ class dictionary extends page
 			{
 				if ($row[$key_field] == $type[$key_field])
 				{
+					$phrase[$table]['relation_direct']++;
 					$phrase[$table][$type_key][] = $row;
 					$inserted[] = $row[$sort_phrase];
 				}
@@ -715,13 +718,19 @@ class dictionary extends page
 				{
 					if ($row[$key_field] == $type[$key_field])
 					{
-						if (!is_array($inserted)) $inserted = array();
+						if (!is_array($inserted)) $inserted = array('');
 						if (!in_array($row[$sort_phrase], $inserted))
+						{
+							$phrase[$table]['relation_reverse']++;
 							$phrase[$table][$type_key][] = $row;
+						}
 					}
 				}
 			}
 		}
+		$phrase[$table]['relation_all'] = $phrase[$table]['relation_direct'];
+		$phrase[$table]['relation_all'] += $phrase[$table]['relation_reverse'];
+
 		// bulk
 		foreach ($rows as $row)
 			$phrase['all_' . $table][] = $row;

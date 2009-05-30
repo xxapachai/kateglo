@@ -22,3 +22,9 @@ delete from relation where related_phrase = '(pd) umum nya';
 delete from phrase where phrase = '3 a';
 update definition set phrase = 'ligatur' where phrase = '3 a';
 delete from relation where related_phrase = '3 a';
+
+-- wan
+
+update definition set phrase = '-wan' where phrase = '-man';
+delete from definition where phrase = '-wan';
+delete from relation where root_phrase = '-wan';
