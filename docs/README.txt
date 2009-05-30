@@ -39,7 +39,6 @@ sebaiknya berhati-hati menggunakannya.
 
 == Daftar pekerjaan ==
 
-* Satu kotak pencarian umum (pencarian detil untuk yang lain)
 * Pendaftaran pengguna
 * Preferensi pengguna
 * Satu frasa yang memiliki dua kelas kata
@@ -74,6 +73,8 @@ sebaiknya berhati-hati menggunakannya.
 
 === 0.0.12 (30 Mei 2009) ===
 
+* Halaman utama untuk kamus dan pencarian detil kamus
+* Mengganti nama tabel "translation" menjadi "glossary"
 * Perubahan letak kotak pencarian glosarium menjadi di atas
 * Perbaikan bug untuk menampilkan relasi terbalik
 * Perbaikan bug untuk pemberian tanda tanggal pembuatan entri

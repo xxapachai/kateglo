@@ -48,23 +48,30 @@ class home extends page
 
 		// stat count
 		$dict_count = $this->db->get_row_value('SELECT COUNT(*) FROM phrase;');
-		$glo_count = $this->db->get_row_value('SELECT COUNT(*) FROM translation;');
+		$glo_count = $this->db->get_row_value('SELECT COUNT(*) FROM glossary;');
 
 		// welcome
 		$ret .= '<div align="center" style="padding: 10px 0px;">' . LF;
 		$ret .= sprintf($this->msg['welcome'] . LF, $dict_count, $glo_count, $search_result);
 
 		// random
-		$query = 'SELECT phrase FROM phrase
+		$query = 'SELECT phrase, lex_class FROM phrase
 			WHERE (LEFT(phrase, 2) != \'a \' AND LEFT(phrase, 2) != \'b \')
-			AND NOT ISNULL(updated)
+			AND NOT ISNULL(updated) AND NOT ISNULL(lex_class)
 			ORDER BY RAND() LIMIT 10;';
 		$random_words = $this->db->get_rows($query);
 		$url = './?mod=dict&action=view&phrase=';
 		$ret .= '<p>' . LF;
 		foreach ($random_words as $random_word)
 		{
-			$ret .= sprintf('<a href="%2$s%1$s" style="padding: 0px 5px;">%1$s</a>' . LF, $random_word['phrase'], $url);
+			$ret .= '<span style="padding: 0px 5px;">';
+			$ret .= sprintf('<a href="%1$s%2$s">%2$s</a>%3$s',
+				$url,
+				$random_word['phrase'],
+				''
+			);
+//				($random_word['lex_class'] ? ' (' . $random_word['lex_class'] . ')' : '')
+			$ret .= '</span>' . LF;
 		}
 
 		$ret .= '</p>' . LF;

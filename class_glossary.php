@@ -72,10 +72,7 @@ class glossary extends page
 		// search
 		if (!$sublist)
 		{
-			$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
-			$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
 			$ret .= $this->show_search();
-			$ret .= '</fieldset>' . LF;
 		}
 
 		// if there's phrase
@@ -95,7 +92,7 @@ class glossary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= ', ';
+					if ($i > 0) $ret .= '; ';
 					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a> (%3$s)',
 						$row['discipline_name'], $row['discipline'], $row['glossary_count']);
 					$i++;
@@ -110,7 +107,7 @@ class glossary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= ', ';
+					if ($i > 0) $ret .= '; ';
 					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a> (%3$s)',
 						$row['ref_source_name'], $row['ref_source'], $row['glossary_count']);
 					$i++;
@@ -135,8 +132,8 @@ class glossary extends page
 		$lang = trim($_GET['lang']);
 		$msg1 = ($lang == 'id') ? 'id' : 'en';
 		$msg2 = ($lang == 'id') ? 'en' : 'id';
-		$phrase1 = ($lang == 'id') ? 'phrase' : 'translation';
-		$phrase2 = ($lang == 'id') ? 'translation' : 'phrase';
+		$phrase1 = ($lang == 'id') ? 'phrase' : 'original';
+		$phrase2 = ($lang == 'id') ? 'original' : 'phrase';
 		$wp1 = 'wp' . $msg1;
 		$wp2 = 'wp' . $msg2;
 		if ($phrase)
@@ -148,7 +145,7 @@ class glossary extends page
 			$op_type = ($_GET['op'] == '2') ? 'REGEXP' : ($_GET['op'] == '3' ? '=' : 'LIKE');
 			$op_template = 'a.%1$s %2$s \'%3$s%4$s%5$s\'';
 			$lang_id = sprintf($op_template, 'phrase', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
-			$lang_en = sprintf($op_template, 'translation', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
+			$lang_en = sprintf($op_template, 'original', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
 			switch ($lang)
 			{
 				case 'en':
@@ -173,8 +170,8 @@ class glossary extends page
 			$where .= ' a.ref_source = \'' . $src . '\' ';
 		}
 		if ($this->sublist) $this->db->defaults['rperpage'] = 20;
-		$cols = 'a.translation, a.phrase, b.discipline_name, a.tr_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
-		$from = 'FROM translation a
+		$cols = 'a.original, a.phrase, b.discipline_name, a.glo_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
+		$from = 'FROM glossary a
 			LEFT JOIN discipline b ON a.discipline = b.discipline
 			LEFT JOIN ref_source c ON a.ref_source = c.ref_source
 			' . $where . '
@@ -216,7 +213,7 @@ class glossary extends page
 			foreach ($rows as $row)
 			{
 				$url = './' . $this->get_url_param(array('search', 'action', 'uid', 'mod')) .
-					'&action=form&mod=glo&uid=' . $row['tr_uid'];
+					'&action=form&mod=glo&uid=' . $row['glo_uid'];
 				$discipline = './' . $this->get_url_param(array('search', 'uid', 'dc')).
 					'&dc=' . $row['discipline'];
 				$ret .= '<tr valign="top">' . LF;
@@ -275,6 +272,8 @@ class glossary extends page
 		$form->addElement('submit', 'search', $this->msg['search_button']);
 
 		$template = '%1$s: %2$s ' . LF;
+		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+		$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
 		$ret .= $form->begin_form();
 		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
@@ -286,6 +285,7 @@ class glossary extends page
 		$ret .= $form->get_element('mod');
 		$ret .= $form->get_element('search');
 		$ret .= $form->end_form();
+		$ret .= '</fieldset>' . LF;
 
 		return($ret);
 	}
@@ -295,24 +295,24 @@ class glossary extends page
 	 */
 	function show_form()
 	{
-		$query = 'SELECT a.* FROM translation a
-			WHERE a.tr_uid = ' . $this->db->quote($_GET['uid']);
+		$query = 'SELECT a.* FROM glossary a
+			WHERE a.glo_uid = ' . $this->db->quote($_GET['uid']);
 		$this->entry = $this->db->get_row($query);
 		$is_new = is_array($this->entry);
 
 		$form = new form('entry_form', null, './' . $this->get_url_param());
 		$form->setup($this->msg);
-		$form->addElement('text', 'translation', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'original', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'phrase', $this->msg['id'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('select', 'discipline', $this->msg['discipline'], $this->db->get_row_assoc('SELECT * FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name'));
 		$form->addElement('select', 'ref_source', $this->msg['ref_source'], $this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
 		$form->addElement('text', 'wpen', $this->msg['wpen'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'wpid', $this->msg['wpid'], array('size' => 40, 'maxlength' => '255'));
-		$form->addElement('hidden', 'tr_uid');
+		$form->addElement('hidden', 'glo_uid');
 		$form->addElement('hidden', 'is_new', $is_new);
 		$form->addElement('submit', 'save', $this->msg['save']);
 		$form->addRule('phrase', sprintf($this->msg['required_alert'], $this->msg['id']), 'required', null, 'client');
-		$form->addRule('translation', sprintf($this->msg['required_alert'], $this->msg['en']), 'required', null, 'client');
+		$form->addRule('original', sprintf($this->msg['required_alert'], $this->msg['en']), 'required', null, 'client');
 		$form->addRule('discipline', sprintf($this->msg['required_alert'], $this->msg['discipline']), 'required', null, 'client');
 		$form->addRule('ref_source', sprintf($this->msg['required_alert'], $this->msg['ref_source']), 'required', null, 'client');
 		$form->setDefaults($this->entry);
@@ -334,21 +334,21 @@ class glossary extends page
 		if (!$is_new)
 		{
 			$query = sprintf(
-				'UPDATE translation SET
+				'UPDATE glossary SET
 					phrase = %1$s,
-					translation = %2$s,
+					original = %2$s,
 					discipline = %3$s,
 					ref_source = %6$s,
 					wpid = %7$s,
 					wpen = %8$s,
 					updater = %4$s,
 					updated = NOW()
-				WHERE tr_uid = %5$s;',
+				WHERE glo_uid = %5$s;',
 				$this->db->quote($_POST['phrase']),
-				$this->db->quote($_POST['translation']),
+				$this->db->quote($_POST['original']),
 				$this->db->quote($_POST['discipline']),
 				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['tr_uid']),
+				$this->db->quote($_POST['glo_uid']),
 				$this->db->quote($_POST['ref_source']),
 				$this->db->quote($_POST['wpid']),
 				$this->db->quote($_POST['wpen'])
@@ -356,11 +356,11 @@ class glossary extends page
 		}
 		else
 		{
-			$query = sprintf('INSERT INTO translation (phrase, translation,
+			$query = sprintf('INSERT INTO glossary (phrase, original,
 				discipline, ref_source, wpid, wpen, updater, updated)
 				VALUES (%1$s, %2$s, %3$s, %5$s, %6$s, %7$s, %4$s, NOW());',
 				$this->db->quote($_POST['phrase']),
-				$this->db->quote($_POST['translation']),
+				$this->db->quote($_POST['original']),
 				$this->db->quote($_POST['discipline']),
 				$this->db->quote($this->auth->getUsername()),
 				$this->db->quote($_POST['ref_source']),
