@@ -65,6 +65,8 @@ class kbbi
 		{
 			$ret .= $this->msg['nf'] . LF;
 		}
+
+		// return
 		return($ret);
 	}
 
@@ -119,6 +121,22 @@ class kbbi
 		if (is_array($match))
 		{
 			$def = trim($match[2]);
+			// manual fixes
+			if ($query == 'air')
+				$def = preg_replace('/minuman[\s]+(<br>)+terbuat/U', 'minuman terbuat', $def);
+			if ($query == 'minyak')
+				$def = str_replace('<br><i>--</i><b> adas manis</b>', '<br>--<b> adas manis</b>', $def);
+			if ($query == 'kepala')
+				$def = str_replace('suka sekali; --<b>', 'suka sekali;' . LF . '<br>--<b>', $def);
+			if ($query == 'induk')
+				$def = str_replace('<br>--</i><b> bako', '<br>--<b> bako', $def);
+			if ($query == 'harta')
+				$def = preg_replace('/oleh[\s]+(<br>)+mempelai laki/U', 'oleh mempelai laki', $def);
+			if ($query == 'alur')
+				$def = preg_replace('/alur[\s]+(<br>)+kedua/U', 'alur kedua', $def);
+			if ($query == 'hutan')
+				$def = preg_replace('/hutan[\s]+(<br>)+guna/U', 'hutan guna', $def);
+			// enter
 			$this->raw_entries[] = $def;
 			$def = str_replace('<br>', '<br><br>', $def);
 			$return = $def;
