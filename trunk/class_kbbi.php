@@ -116,7 +116,7 @@ class kbbi
 		$data .= 'DFTKATA=%2$s&HEAD=0&KATA=%2$s&MORE=0&OPKODE=1&PARAM=&PERINTAH2=Tampilkan';
 		$data .= sprintf($data, '1', $query);
 		$result = $this->get_curl($url, $data);
-		$pattern = '/(<p style=\'margin-left:\.5in;text-indent:-\.5in\'>)(.+)(<\/p>)/s';
+		$pattern = '/(<p style=\'margin-left:\.5in;text-indent:-\.5in\'>)(.+)(<\/(p|BODY)>)/s';
 		preg_match($pattern, $result, $match);
 		if (is_array($match))
 		{
@@ -167,7 +167,12 @@ class kbbi
 	 */
 	function parse($phrase)
 	{
-		// curl
+		// prepare def
+		$this->found = false;
+		$kbbi_data = '';
+		unset($this->raw_entries);
+
+		// query kbbi
 		$this->query($phrase, 1);
 		if ($this->found)
 		{
@@ -181,6 +186,30 @@ class kbbi
 
 		// parse into lines and process
 		$lines = preg_split('/[\n|\r](?:<br>)*(?:<\/i>)*/', $kbbi_data);
+
+		// try redirect: pair with no space
+		if (is_array($lines))
+		{
+			if (count($lines) == 1)
+			{
+				$redir_string = str_replace('&#183;', '', strip_tags($lines[0]));
+				$redir_pair = explode('?', $redir_string);
+				if (count($redir_pair) == 2)
+				{
+					$redir_from = trim($redir_pair[0]);
+					$redir_to = trim($redir_pair[1]);
+					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
+					{
+						$this->defs[$redir_from]['actual'] = $redir_to;
+						$this->defs[$redir_from]['definitions'][]
+							= array('index' => 1, 'text' => $redir_to, 'see' => $redir_to);
+						return;
+					}
+				}
+			}
+		}
+
+		// normal
 		if (is_array($lines))
 		{
 			// process each line

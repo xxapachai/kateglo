@@ -24,7 +24,7 @@ class dictionary extends page
 		{
 			$this->kbbi = new kbbi($this->msg);
 			$this->kbbi->parse($_GET['phrase']);
-			if ($this->kbbi->found) $this->save_kbbi();
+			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
 			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
 		}
 		// redirect if none found. psycological effect
@@ -191,7 +191,7 @@ class dictionary extends page
 		if (!$phrase['created'])
 		{
 			$this->kbbi->parse($_GET['phrase']);
-			if ($this->kbbi->found) $this->save_kbbi();
+			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
 			$this->phrase = $this->get_phrase();
 			$phrase = $this->phrase;
 		}
@@ -371,12 +371,19 @@ class dictionary extends page
 			$this->db->get_row_assoc('SELECT * FROM lexical_class', 'lex_class', 'lex_class_name'));
 		$form->addElement('select', 'ref_source', $this->msg['ref_source'],
 			$this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
+		$form->addElement('select', 'phrase_type', $this->msg['phrase_type'],
+			$this->db->get_row_assoc('SELECT * FROM phrase_type ORDER BY sort_order', 'phrase_type', 'phrase_type_name'));
 		$form->addElement('select', 'roget_class', $this->msg['roget_class'],
 			$this->db->get_row_assoc('SELECT *, CONCAT(roget_class, \' - \', roget_name) roget_class_name FROM roget_class', 'roget_class', 'roget_class_name'));
 		$form->addElement('text', 'etymology', $this->msg['etymology'],
 			array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'pronounciation', $this->msg['pronounciation'],
+			array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'actual_phrase', $this->msg['actual_phrase'],
+			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('submit', 'save', $this->msg['save']);
 		$form->addRule('phrase', sprintf($this->msg['required_alert'], $this->msg['phrase']), 'required', null, 'client');
+		$form->addRule('phrase_type', sprintf($this->msg['required_alert'], $this->msg['phrase_type']), 'required', null, 'client');
 		$form->addRule('lex_class', sprintf($this->msg['required_alert'], $this->msg['lex_class']), 'required', null, 'client');
 		$form->setDefaults($phrase);
 		$ret .= $form->begin_form();
@@ -385,16 +392,16 @@ class dictionary extends page
 		$template = '<tr><td>%1$s:</td><td>%2$s</td></tr>' . LF;
 
 
-		// kbbi header
-		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
-
 		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
 		$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
 			'./?mod=dict' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']), $this->msg['cancel']);
 		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
+		$ret .= sprintf($template, $this->msg['actual_phrase'], $form->get_element('actual_phrase'));
+		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('phrase_type'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
+		$ret .= sprintf($template, $this->msg['pronounciation'], $form->get_element('pronounciation'));
 		$ret .= sprintf($template, $this->msg['etymology'], $form->get_element('etymology'));
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('ref_source'));
 		$ret .= sprintf($template, $this->msg['roget_class'], $form->get_element('roget_class'));
@@ -408,14 +415,14 @@ class dictionary extends page
 					'option1' => array('size' => 1, 'maxlength' => 5)),
 				'lex_class' => array('type' => 'text', 'width' => '1%',
 					'option1' => array('size' => 1, 'maxlength' => 5)),
-				'def_text' => array('type' => 'text', 'width' => '50%',
-					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
-				'see' => array('type' => 'text', 'width' => '5%',
-					'option1' => array('size' => 10, 'maxlength' => 255)),
-				'sample' => array('type' => 'text', 'width' => '50%',
-					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
 				'discipline' => array('type' => 'text', 'width' => '1%',
 					'option1' => array('size' => 5, 'maxlength' => 15)),
+				'see' => array('type' => 'text', 'width' => '5%',
+					'option1' => array('size' => 8, 'maxlength' => 255)),
+				'def_text' => array('type' => 'text', 'width' => '50%',
+					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
+				'sample' => array('type' => 'text', 'width' => '50%',
+					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
 				),
 			'definition', 'definition', 'definition', 'def_count');
 
@@ -434,12 +441,14 @@ class dictionary extends page
 		$ret .= '<input name="is_new" type="hidden" value="' . $is_new . '" />' . LF;
 		$ret .= sprintf('<p>%1$s</p>', $form->get_element('save'));
 		$ret .= $form->end_form();
+
+		// kbbi
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['kbbi_ref']);
+		$this->kbbi = new kbbi($this->msg);
+		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+
 		//var_dump($form->toArray());
 		//die();
-
-		// kbbi definition
-		$this->kbbi = new kbbi();
-		$ret .= $this->show_kbbi();
 
 		return($ret);
 	}
@@ -736,40 +745,41 @@ class dictionary extends page
 		$old_key = $_GET['phrase'];
 		$new_key = $_POST['phrase'];
 		// main
-		if (!$is_new)
-		{
-			$query = sprintf(
-				'UPDATE phrase SET
-					phrase = %2$s,
-					etymology = %3$s,
-					lex_class = %4$s,
-					ref_source = %6$s,
-					updater = %5$s,
-					updated = NOW()
-				WHERE phrase = %1$s;',
-				$this->db->quote($old_key),
-				$this->db->quote($new_key),
-				$this->db->quote($_POST['etymology']),
-				$this->db->quote($_POST['lex_class']),
-				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['ref_source'])
+		$query = $is_new ? 'INSERT INTO' : 'UPDATE';
+		$query .= ' phrase SET ';
+		$query .= sprintf('
+			phrase = %1$s,
+			phrase_type = %2$s,
+			lex_class = %3$s,
+			pronounciation = %4$s,
+			etymology = %5$s,
+			ref_source = %6$s,
+			roget_class = %7$s,
+			updater = %8$s,
+			updated = NOW()',
+			$this->db->quote($new_key),
+			$this->db->quote($_POST['phrase_type']),
+			$this->db->quote($_POST['lex_class']),
+			$this->db->quote($_POST['pronounciation']),
+			$this->db->quote($_POST['etymology']),
+			$this->db->quote($_POST['ref_source']),
+			$this->db->quote($_POST['roget_class']),
+			$this->db->quote($this->auth->getUsername())
+		);
+		if ($is_new)
+			$query .= sprintf(',
+				creator = %1$s,
+				created = NOW();',
+				$this->db->quote($this->auth->getUsername())
 			);
-		}
 		else
-		{
-			$query = sprintf('INSERT INTO phrase (phrase, etymology,
-				lex_class, ref_source, updater, updated)
-				VALUES (%1$s, %2$s, %3$s, %5$s, %4$s, NOW());',
-				$this->db->quote($new_key),
-				$this->db->quote($_POST['etymology']),
-				$this->db->quote($_POST['lex_class']),
-				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['ref_source'])
+			$query .= sprintf(' WHERE phrase = %1$s;',
+				$this->db->quote($old_key)
 			);
-		}
 		//die($query);
 		$this->db->exec($query);
 
+		// subform
 		$this->save_sub_form(
 			'definition', 'def_uid', 'def_count', 'phrase',
 			array('def_num', 'def_text'),
@@ -780,8 +790,26 @@ class dictionary extends page
 			array('rel_type', 'related_phrase')
 		);
 
-		//die();
-		redir('./?mod=dict&action=view&phrase=' . $_POST['phrase']);
+		// reverse relation
+		if (!$is_new && ($old_key != $new_key))
+		{
+			$query = sprintf('UPDATE relation
+				SET related_phrase = %1$s WHERE related_phrase = %2$s;',
+				$this->db->quote($new_key),
+				$this->db->quote($old_key)
+			);
+			$this->db->exec($query);
+		}
+
+		// update count
+		$query = 'UPDATE phrase a SET a.def_count = (
+			SELECT COUNT(b.def_uid) FROM definition b
+			WHERE a.phrase = b.phrase)
+			WHERE a.phrase = ' . $this->db->quote($new_key) . ';';
+		$this->db->exec($query);
+
+		// redirect
+		redir('./?mod=dict&action=view&phrase=' . $new_key);
 	}
 
 	/**
@@ -898,9 +926,8 @@ class dictionary extends page
 	/**
 	 * Save KBBI
 	 */
-	function save_kbbi()
+	function save_kbbi($phrase)
 	{
-		global $_GET;
 		if ($this->kbbi->defs)
 		{
 			foreach($this->kbbi->defs as $key => $value)
@@ -919,9 +946,10 @@ class dictionary extends page
 				// update phrase
 				$query = sprintf(
 					'UPDATE phrase SET
-						lex_class = %2$s,
-						phrase_type = %3$s,
+						lex_class = IFNULL(%2$s, \'l\'),
+						phrase_type = IFNULL(%3$s, \'\'),
 						pronounciation = %4$s,
+						actual_phrase = %5$s,
 						updated = NOW(),
 						created = NOW(),
 						ref_source = \'Pusba\'
@@ -929,9 +957,11 @@ class dictionary extends page
 					$this->db->quote($key),
 					$this->db->quote($value['lex_class']),
 					$this->db->quote($value['type']),
-					$this->db->quote($value['pron'])
+					$this->db->quote($value['pron']),
+					$this->db->quote($value['actual'])
 				);
 				$this->db->exec($query);
+				//die($query . '<br />');
 
 				// delete relation. use when needed
 				$query = sprintf(
@@ -939,13 +969,14 @@ class dictionary extends page
 					$this->db->quote($key)
 				);
 				$this->db->exec($query);
+
 				// relation
 				if ($value['type'] != 'r')
 				{
 					$query = sprintf(
 						'INSERT INTO relation (root_phrase, related_phrase, rel_type)
 							VALUES (%1$s, %2$s, %3$s);',
-						$this->db->quote($_GET['phrase']),
+						$this->db->quote($phrase),
 						$this->db->quote($key),
 						$this->db->quote($value['type'])
 					);
@@ -960,13 +991,8 @@ class dictionary extends page
 				);
 				$this->db->exec($query);
 
-				// definition
-				$query = sprintf(
-					'SELECT COUNT(*) FROM definition WHERE phrase = %1$s;',
-					$this->db->quote($key)
-				);
-				$current_def = $this->db->get_row_value($query);
-				if ($current_def == 0 && $value['definitions'])
+				// definitions
+				if ($value['definitions'])
 				{
 					foreach ($value['definitions'] as $def_key => $def_val)
 					{
@@ -1000,6 +1026,15 @@ class dictionary extends page
 						$this->db->exec($query);
 					}
 				}
+
+				// update count
+				$query = 'UPDATE phrase a SET a.def_count = (
+					SELECT COUNT(b.def_uid) FROM definition b
+					WHERE a.phrase = b.phrase)
+					WHERE a.phrase = ' . $this->db->quote($key) . ';';
+				//echo($query . '<br />');
+				$this->db->exec($query);
+
 			}
 		}
 
