@@ -17,6 +17,8 @@ $msg = array(
 	'comment_welcome' => 'Silakan kirimkan saran, kritik, koreksi, atau komentar Anda melalui formulir berikut.',
 
 	'definition' => 'Definisi',
+	'def_num' => 'Nomor',
+	'def_text' => 'Definisi',
 	'delete' => 'Hapus',
 	'derivation' => 'Bentukan',
 	'dictionary' => 'Kamus',
@@ -81,12 +83,16 @@ $msg = array(
 	'pwd_chg_failed' => 'Perubahan kata sandi tak berhasil dilakukan.',
 	'pwd_chg_succeed' => 'Perubahan kata sandi berhasil dilakukan.',
 
+	'rel_type' => 'Kaitan',
+	'related_phrase' => 'Frasa terkait',
 	'required_alert' => '%1$s harus diisi',
 	'ref_source' => 'Sumber',
 	'root_phrase' => 'Akar kata',
 	'roget_class' => 'Klasifikasi Roget',
 
+	'sample' => 'Contoh',
 	'save' => 'Simpan',
+	'see' => 'Lihat',
 	'search' => 'Pencarian',
 	'search_op' => 'Operator',
 	'search_button' => 'Cari frasa',

@@ -1,0 +1,1 @@
+select a.phrase, count(*) from phrase a, definition b where a.phrase = b.phrase group by a.phrase order by 2 desc;

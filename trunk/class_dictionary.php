@@ -414,8 +414,8 @@ class dictionary extends page
 					'option1' => array('size' => 10, 'maxlength' => 255)),
 				'sample' => array('type' => 'text', 'width' => '50%',
 					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
-				'discipline' => array('type' => 'select', 'width' => '1%',
-					'option1' => $this->db->get_row_assoc('SELECT * FROM discipline', 'discipline', 'discipline_name')),
+				'discipline' => array('type' => 'text', 'width' => '1%',
+					'option1' => array('size' => 5, 'maxlength' => 15)),
 				),
 			'definition', 'definition', 'definition', 'def_count');
 
@@ -459,6 +459,16 @@ class dictionary extends page
 		$def_count = count($defs);
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$heading]);
 		$ret .= '<table>' . LF;
+		// header
+		$ret .= '<tr>' . LF;
+		foreach ($field_def as $field_key => $field)
+		{
+			if ($field['type'] != 'hidden')
+				$ret .= sprintf('<th width="%2$s">%1$s</th>' . LF,
+					$this->msg[$field_key], $field['width']);
+		}
+		$ret .= '</tr>' . LF;
+		// data
 		if ($defs)
 		{
 			for ($i = 0; $i < $def_count; $i++)
@@ -604,9 +614,8 @@ class dictionary extends page
 			}
 
 			// definition
-			$query = sprintf('SELECT a.*, b.discipline_name, c.lex_class_ref
+			$query = sprintf('SELECT a.*, c.lex_class_ref
 				FROM definition a
-					LEFT JOIN discipline b ON a.discipline = b.discipline
 					LEFT JOIN lexical_class c ON a.lex_class = c.lex_class
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
