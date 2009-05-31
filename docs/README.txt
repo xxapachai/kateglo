@@ -59,7 +59,6 @@ Kateglo.
 
 * Pendaftaran pengguna
 * Preferensi pengguna
-* Satu frasa yang memiliki dua kelas kata
 * Penambahan/penyuntingan glosarium secara sekaligus
 * Entri untuk referensi
 * Penambahan definisi secara dinamis (AJAX?)
@@ -88,6 +87,14 @@ Kateglo.
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.13 (31 Mei 2009) ===
+
+* Isian frasa aktual untuk kesalahan ejaan
+* Datawarehousing jumlah definisi per frase
+* Perbaikan parsing KBBI: "uang"
+* Satu frasa yang memiliki dua kelas kata ditangani dengan lex_class pada
+  masing-masing definisi. Kelas utama tetap diperlukan.
 
 === 0.0.12 (30 Mei 2009) ===
 
