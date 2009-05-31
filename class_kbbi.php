@@ -171,6 +171,7 @@ class kbbi
 		$this->found = false;
 		$kbbi_data = '';
 		unset($this->raw_entries);
+		unset($this->defs);
 
 		// query kbbi
 		$this->query($phrase, 1);
@@ -188,26 +189,26 @@ class kbbi
 		$lines = preg_split('/[\n|\r](?:<br>)*(?:<\/i>)*/', $kbbi_data);
 
 		// try redirect: pair with no space
-		if (is_array($lines))
-		{
-			if (count($lines) == 1)
-			{
-				$redir_string = str_replace('&#183;', '', strip_tags($lines[0]));
-				$redir_pair = explode('?', $redir_string);
-				if (count($redir_pair) == 2)
-				{
-					$redir_from = trim($redir_pair[0]);
-					$redir_to = trim($redir_pair[1]);
-					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
-					{
-						$this->defs[$redir_from]['actual'] = $redir_to;
-						$this->defs[$redir_from]['definitions'][]
-							= array('index' => 1, 'text' => $redir_to, 'see' => $redir_to);
-						return;
-					}
-				}
-			}
-		}
+//		if (is_array($lines))
+//		{
+//			if (count($lines) == 1)
+//			{
+//				$redir_string = str_replace('&#183;', '', strip_tags($lines[0]));
+//				$redir_pair = explode('?', $redir_string);
+//				if (count($redir_pair) == 2)
+//				{
+//					$redir_from = trim($redir_pair[0]);
+//					$redir_to = trim($redir_pair[1]);
+//					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
+//					{
+//						$this->defs[$redir_from]['actual'] = $redir_to;
+//						$this->defs[$redir_from]['definitions'][]
+//							= array('index' => 1, 'text' => $redir_to, 'see' => $redir_to);
+//						return;
+//					}
+//				}
+//			}
+//		}
 
 		// normal
 		if (is_array($lines))

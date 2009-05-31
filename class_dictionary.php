@@ -140,9 +140,14 @@ class dictionary extends page
 		}
 		if ($_GET['idx'])
 		{
-			$_GET['idx'] = substr($_GET['idx'], 0, 1);
 			$where .= $where ? ' AND ' : ' WHERE ';
-			$where .= ' LEFT(a.phrase, 1) = ' . $this->db->quote($_GET['idx']) . ' ';
+			$_GET['idx'] = substr($_GET['idx'], 0, 1);
+			$idx_ascii = ord($_GET['idx']);
+			if (($idx_ascii >= 65 && $idx_ascii <= 90) ||
+				($idx_ascii >= 97 && $idx_ascii <= 122))
+				$where .= ' LEFT(a.phrase, 1) = ' . $this->db->quote($_GET['idx']) . ' ';
+			else
+				$where .= ' LEFT(a.phrase, 1) REGEXP \'^[^[:alpha:]]\' ';
 		}
 
 		$cols = 'a.phrase';
