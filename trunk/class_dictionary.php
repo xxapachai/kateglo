@@ -312,12 +312,12 @@ class dictionary extends page
 			if ($phrase['proverbs'])
 			{
 				$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['proverb']);
-				$ret .= '<dl>' . LF;
+				$ret .= '<ul>' . LF;
 				foreach ($phrase['proverbs'] as $proverb)
 				{
-					$ret .= sprintf('<dt>%1$s</dt><dd>%2$s</dd>' . LF, $proverb['proverb'], $proverb['meaning']);
+					$ret .= sprintf('<li><em>%1$s</em>: %2$s</li>' . LF, $proverb['proverb'], $proverb['meaning']);
 				}
-				$ret .= '</dl>' . LF;
+				$ret .= '</ul>' . LF;
 			}
 
 		}
