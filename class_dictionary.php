@@ -657,7 +657,6 @@ class dictionary extends page
 				ORDER BY a.proverb',
 				$this->db->quote($_GET['phrase']));
 			$rows = $this->db->get_rows($query);
-			echo($query);
 			$phrase['proverbs'] = $rows;
 
 			//var_dump($rows);
