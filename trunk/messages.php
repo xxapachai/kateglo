@@ -76,6 +76,7 @@ $msg = array(
 	'phrase' => 'Frasa',
 	'phrase_type' => 'Tipe frasa',
 	'pronounciation' => 'Pelafalan',
+	'proverb' => 'Peribahasa',
 	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
 	'pwd_current' => 'Kata sandi sekarang',
 	'pwd_new' => 'Kata sandi baru',
