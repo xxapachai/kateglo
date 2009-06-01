@@ -139,6 +139,8 @@ class kbbi
 				$def = preg_replace('/hutan[\s]+(<br>)+guna/U', 'hutan guna', $def);
 			if ($query == 'lemah (1)')
 				$def = preg_replace('/el[\s]+(<br>)+oknya/U', 'eloknya', $def);
+			if ($query == 'lepas')
+				$def = preg_replace('/tempatnya la[\s]+(<br>)+gi/U', 'tempatnya lagi', $def);
 			if ($query == 'lampu')
 				$def = str_replace('mati); --<b> atret', 'mati);' . LF . '<br>--<b> atret', $def);
 

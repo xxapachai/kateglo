@@ -3,6 +3,7 @@ select a.phrase, count(*) from phrase a, definition b where a.phrase = b.phrase 
 select phrase, def_count from phrase where def_count = 0 order by phrase;
 
 delete from relation where root_phrase = related_phrase;
+delete from phrase where phrase like 'perusahaan%' and def_count = 0;
 
 alter table phrase add def_count int not null default 0 after ref_source;
 
