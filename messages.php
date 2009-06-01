@@ -68,8 +68,10 @@ $msg = array(
 	'nf' => 'Tidak ditemukan.',
 
 	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s entri.',
-	'page_prev' => 'Sebelumnya',
-	'page_next' => 'Berikutnya',
+	'page_first' => '&lt;&lt;',
+	'page_prev' => '&lt;',
+	'page_next' => '&gt;',
+	'page_last' => '&gt;&gt;',
 	'password' => 'Kata sandi',
 	'phrase' => 'Frasa',
 	'phrase_type' => 'Tipe frasa',

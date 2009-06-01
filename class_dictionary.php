@@ -969,6 +969,18 @@ class dictionary extends page
 				//die($query . '<br />');
 
 				// delete relation. use when needed
+//				$query = sprintf(
+//					'DELETE FROM phrase WHERE phrase IN
+//						(SELECT related_phrase FROM relation WHERE root_phrase = %1$s);',
+//					$this->db->quote($key)
+//				);
+//				$this->db->exec($query);
+//				$query = sprintf(
+//					'DELETE FROM definition WHERE phrase IN
+//						(SELECT related_phrase FROM relation WHERE root_phrase = %1$s);',
+//					$this->db->quote($key)
+//				);
+//				$this->db->exec($query);
 				$query = sprintf(
 					'DELETE FROM relation WHERE root_phrase = %1$s;',
 					$this->db->quote($key)

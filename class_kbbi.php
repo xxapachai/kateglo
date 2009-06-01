@@ -121,6 +121,7 @@ class kbbi
 		if (is_array($match))
 		{
 			$def = trim($match[2]);
+
 			// manual fixes
 			if ($query == 'air')
 				$def = preg_replace('/minuman[\s]+(<br>)+terbuat/U', 'minuman terbuat', $def);
@@ -136,6 +137,11 @@ class kbbi
 				$def = preg_replace('/alur[\s]+(<br>)+kedua/U', 'alur kedua', $def);
 			if ($query == 'hutan')
 				$def = preg_replace('/hutan[\s]+(<br>)+guna/U', 'hutan guna', $def);
+			if ($query == 'lemah (1)')
+				$def = preg_replace('/el[\s]+(<br>)+oknya/U', 'eloknya', $def);
+			if ($query == 'lampu')
+				$def = str_replace('mati); --<b> atret', 'mati);' . LF . '<br>--<b> atret', $def);
+
 			// enter
 			$this->raw_entries[] = $def;
 			$def = str_replace('<br>', '<br><br>', $def);
@@ -175,6 +181,7 @@ class kbbi
 
 		// query kbbi
 		$this->query($phrase, 1);
+		//$this->get_local($phrase);
 		if ($this->found)
 		{
 			foreach ($this->raw_entries as $value)
@@ -184,48 +191,76 @@ class kbbi
 			}
 		}
 		else return;
+		// hack v
+		if (strtolower($phrase) == 'v')
+			$kbbi_data = str_replace('<b>V</b>, v', '<b>V, v</b>', $kbbi_data);
+		if (strtolower($phrase) == 'amnesia')
+		{
+			$kbbi_data = str_replace('<b>/</b>', '/', $kbbi_data);
+			$kbbi_data = str_replace('/</b>', '</b>/', $kbbi_data);
+		}
+		//die($kbbi_data);
+
 
 		// parse into lines and process
 		$lines = preg_split('/[\n|\r](?:<br>)*(?:<\/i>)*/', $kbbi_data);
 
 		// try redirect: pair with no space
-//		if (is_array($lines))
-//		{
-//			if (count($lines) == 1)
-//			{
-//				$redir_string = str_replace('&#183;', '', strip_tags($lines[0]));
-//				$redir_pair = explode('?', $redir_string);
-//				if (count($redir_pair) == 2)
-//				{
-//					$redir_from = trim($redir_pair[0]);
-//					$redir_to = trim($redir_pair[1]);
-//					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
-//					{
-//						$this->defs[$redir_from]['actual'] = $redir_to;
-//						$this->defs[$redir_from]['definitions'][]
-//							= array('index' => 1, 'text' => $redir_to, 'see' => $redir_to);
-//						return;
-//					}
-//				}
-//			}
-//		}
+		if (is_array($lines))
+		{
+			if (count($lines) == 1)
+			{
+				$redir_string = str_replace('&#183;', '', strip_tags($lines[0]));
+				$redir_pair = explode('?', $redir_string);
+				if (count($redir_pair) == 2)
+				{
+					$redir_from = trim($redir_pair[0]);
+					$redir_to = trim($redir_pair[1]);
+					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
+					{
+						$this->defs[$redir_from]['actual'] = $redir_to;
+						$this->defs[$redir_from]['definitions'][]
+							= array('index' => 1, 'text' => $redir_to, 'see' => $redir_to);
+						return;
+					}
+				}
+			}
+		}
 
 		// normal
 		if (is_array($lines))
 		{
-			// process each line
 			$line_count = count($lines);
+
+			// process each line
 			for ($i = 0; $i < $line_count; $i++)
 			{
 				// assume type
 				$tmp_type = 'r';
+
+				// hack for me- peng-
+				$pattern = '/\(<b>.+<\/b>\)/U';
+				if ($line_count == 1 && preg_match($pattern, $lines[0]))
+					$lines[0] = preg_replace($pattern, '', $lines[0]);
+
+				// hack for redirect
+				if ($line_count == 2 && strpos($lines[$i], '</b>') === false && strpos($lines[$i], '?') !== false)
+					$lines[$i] = str_replace('?', '</b>?', $lines[$i]);
+
+				// hack, found in titik
+				if (strpos($lines[$i], '--</i><b>') !== false)
+					$lines[$i] = str_replace('--</i><b>', '--<b>', $lines[$i]);
 
 				$pattern = '/([-|~]*<b>.+<\/b>)/U';
 				$match = preg_split($pattern, $lines[$i], -1,
 					PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 				$lines[$i] = $match;
 
+//				var_dump($lines[$i]);
+//				die();
+
 				$line_count2 = count($match);
+
 				// normal statement always paired
 				if ($line_count2 > 1)
 				{
@@ -239,7 +274,8 @@ class kbbi
 						// check pair 1 - word or index
 						$pair1 = str_replace('&#183;', '', $pair1); // remove &#183; suku kata
 						$pair1 = preg_replace('/<sup>\d+<\/sup>/', '', $pair1); // remove superscript
-						preg_match('/^[-|~]*<b>.+<\/b>$/', $pair1, $match_bold);
+
+						preg_match('/^[-|~]*<b>[-]*.+<\/b>$/', $pair1, $match_bold);
 						if (count($match_bold) > 0)
 						{
 							$pair1 = strip_tags($pair1);
@@ -291,8 +327,11 @@ class kbbi
 						// clean up definition
 						if ($tmp_def == ',') unset($tmp_def);
 						if ($tmp_def) $tmp_def = strip_tags($tmp_def);
-						if (strpos($tmp_phrase, '--') !== false) $tmp_type = 'c';
-						if (strpos($tmp_phrase, '~') !== false) $tmp_type = 'c';
+						if ($i > 0)
+						{
+							if (strpos($tmp_phrase, '--') !== false) $tmp_type = 'c';
+							if (strpos($tmp_phrase, '~') !== false) $tmp_type = 'c';
+						}
 
 						// parse info
 						if ($tmp_pair[$i][$j]['info'] != '')
@@ -328,6 +367,14 @@ class kbbi
 							$tmp_def = 'lihat ' . $tmp_def1;
 							$tmp_pair[$i][$j]['see'] = $tmp_def1;
 						}
+
+						// phrase contains comma ,
+						if (strpos($tmp_phrase, ',') !== false)
+							$tmp_phrase = trim(str_replace(',', '', $tmp_phrase));
+
+						// phrase contains backslash /
+						if (strpos($tmp_phrase, '/') !== false)
+							$tmp_phrase = trim(str_replace('/', '', $tmp_phrase));
 
 						// write
 						if ($tmp_phrase) $tmp_pair[$i][$j]['phrase'] = $tmp_phrase;
@@ -378,6 +425,10 @@ class kbbi
 			}
 		}
 
+//		var_dump($tmp_pair);
+//		die();
+
+		// cleansing
 		$this->_pair = $tmp_pair;
 		$pair_count = count($tmp_pair);
 		for ($i = 0; $i < $pair_count; $i++)
@@ -385,15 +436,93 @@ class kbbi
 			$pair_count2 = count($tmp_pair[$i]);
 			for ($j = 0; $j < $pair_count2; $j++)
 			{
+				$def = $tmp_pair[$i][$j]['def'];
+				$phrase = $tmp_pair[$i][$j]['phrase'];
+				$see = $tmp_pair[$i][$j]['see'];
+
 				// ilmu: fisika
-				if ($tmp_pair[$i][$j]['def'] == ';' && $tmp_pair[$i][$j - 1]['def'] = 'lihat')
+				if ($def == ';' && $tmp_pair[$i][$j - 1]['def'] = 'lihat')
 				{
 					$tmp_pair[$i][$j - 1]['def'] = 'lihat ' . $tmp_pair[$i][$j]['phrase'];
 					$tmp_pair[$i][$j - 1]['see'] = $tmp_pair[$i][$j]['phrase'];
 					unset($tmp_pair[$i][$j]);
 				}
+				// redirect with number in front
+				$pattern = '/^lihat (\? )?\d/U';
+				if (preg_match($pattern, $def))
+				{
+					$def = preg_replace($pattern, '', $def);
+					$tmp_pair[$i][$j]['def'] = $def;
+					$tmp_pair[$i][$j]['see'] = $def;
+				}
+				// redirect with ? in front
+				$pattern = '/^lihat \?/U';
+				if (preg_match($pattern, $def))
+				{
+					$def = preg_replace($pattern, '', $def);
+					$tmp_pair[$i][$j]['def'] = trim($def);
+					$tmp_pair[$i][$j]['see'] = trim($def);
+				}
+				// redirect
+				$pattern = '/^lihat /U';
+				if (preg_match($pattern, $def))
+				{
+					$def = preg_replace($pattern, '', $def);
+					$tmp_pair[$i][$j]['def'] = trim($def);
+					$tmp_pair[$i][$j]['see'] = trim($def);
+				}
+				// phrase: buang
+				if ($phrase == '-hamil')
+					$tmp_pair[$i][$j]['phrase'] = '- hamil';
+
+				// phrase: banter
+				if ($phrase == ', - biola')
+					$tmp_pair[$i][$j]['phrase'] = '- biola';
+				if ($tmp_pair[$i][$j]['see'] == ', - biola')
+				{
+					$tmp_pair[$i][$j]['see'] = 'membanter biola';
+					$tmp_pair[$i][$j]['def'] = 'membanter biola';
+				}
+
+				// phrase: telang
+				if ($phrase == '(bunga -- )')
+					$tmp_pair[$i][$j]['phrase'] = 'bunga telang';
+				if ($see == '(bunga -- )')
+					$tmp_pair[$i][$j]['see'] = 'bunga telang';
+
+				// phrase: jiwa
+				if ($phrase == '(jiwa)')
+					$tmp_pair[$i][$j]['phrase'] = 'menarungkan jiwa';
+				if ($see == '(jiwa)')
+					$tmp_pair[$i][$j]['see'] = 'menarungkan jiwa';
+
+				// phrase: pun lah
+				if ($phrase == '(pun lah)')
+					$tmp_pair[$i][$j]['phrase'] = 'pun lah';
+				if ($see == '(pun lah)')
+					$tmp_pair[$i][$j]['see'] = 'pun lah';
+
+				// phrase: galah
+				if ($phrase == '(main) -- panjang')
+					$tmp_pair[$i][$j]['phrase'] = '-- panjang';
+
+				// phrase: bracket: tik, roboh, seliwer
+				$pattern = '/^\(([^\)]+)\) ?/U';
+				if (preg_match($pattern, $phrase))
+				{
+					$phrase = preg_replace($pattern, '\1', $phrase);
+					$tmp_pair[$i][$j]['phrase'] = $phrase;
+				}
+				if (preg_match($pattern, $see))
+				{
+					$see = preg_replace($pattern, '\1', $see);
+					$tmp_pair[$i][$j]['see'] = $see;
+				}
 			}
 		}
+
+//		var_dump($tmp_pair);
+//		die();
 
 		// put into array
 		$i = 0;
@@ -428,23 +557,39 @@ class kbbi
 						$phrase_def['def'] = preg_replace($pattern, $value, $phrase_def['def']);
 				}
 
-				// fixing
+				// fixing, watch for extra space after - in phrase
+				if ($phrase_def['phrase'] == '-gelembung')
+					$phrase_def['phrase'] = '- gelembung';
+				if ($phrase_def['phrase'] == '-rektor')
+					$phrase_def['phrase'] = '- rektor';
+
 				if ($phrase_def['sample'])
 					$phrase_def['sample'] = preg_replace('/;$/U', '', $phrase_def['sample']);
 				if ($phrase_def['def'])
 					$phrase_def['def'] = preg_replace('/;$/U', '', $phrase_def['def']);
+				//echo($phrase_def['phrase']);
 				if ($phrase_def['phrase'])
-					$phrase_def['phrase'] = preg_replace('/^- /U', '-- ', $phrase_def['phrase']);
+					$phrase_def['phrase'] = preg_replace('/^-+ /U', '-- ', $phrase_def['phrase']);
+				//echo(' ; ' . $phrase_def['phrase'] . LF);
 
 				// root word
 				$tmp_phrase = $phrase_def['proverb'] ? $phrase_def['proverb'] : $phrase_def['phrase'];
-				if (strpos($tmp_phrase, '--') !== false || strpos($tmp_phrase, '~') !== false)
+				$is_last = true;
+
+				if (strpos($tmp_phrase, '~') !== false)
 				{
-					$tmp_phrase = str_replace('--', $last_phrase, $tmp_phrase);
 					$tmp_phrase = str_replace('~', $last_phrase, $tmp_phrase);
+					$is_last = false;
 				}
-				else
+				if (preg_match('/^--/', $tmp_phrase) || preg_match('/--$/', $tmp_phrase))
+				{
+					$tmp_phrase = preg_replace('/--/', $last_phrase, $tmp_phrase);
+					$is_last = false;
+				}
+				if ($is_last)
+				{
 					if ($tmp_phrase && !$phrase_def['proverb']) $last_phrase = $tmp_phrase;
+				}
 
 				// see if it's a compound word
 				if ($phrase_def['type'] == 'c')
@@ -507,10 +652,15 @@ class kbbi
 			}
 		}
 
+//		var_dump($this->defs);
+//		die();
+
 		// final
 		$i = 0;
 		foreach ($this->defs as $def_key => &$def)
 		{
+			// the first one is always an r
+			if ($i == 0) $def['type'] == 'r';
 			// affix
 			if ($i > 0 && $def['type'] == 'r') $def['type'] = 'f';
 			// last type
@@ -595,7 +745,7 @@ class kbbi
 		}
 	}
 
-	function get_local()
+	function get_local($phrase)
 	{
 		global $_SERVER;
 
@@ -608,19 +758,18 @@ class kbbi
 		curl_close($ch);
 
 		// parse
-		preg_match_all('/<p>LEMA:(.+)( \(\d+\))?<br>/sU', $result, $matches);
+		preg_match_all('/<p>LEMA:' . $phrase . '(?: \(\d+\))?<br>[\n|\r](.+)[\n|\r]<\/p>/sU', $result, $matches);
 		$ret = array();
-		foreach ($matches[1] as $phrase)
+		$this->found = count($matches[1]);
+		if ($this->found)
 		{
-			$i++;
-			$phrase = trim($phrase);
-			$ret[] = $phrase;
-//			if (is_array($ret))
-//			{
-//				if (!in_array($phrase, $ret)) $ret[] = $phrase;
-//			}
+			foreach ($matches[1] as $raw_match)
+			{
+				$i++;
+				$raw_match = trim($raw_match);
+				$this->raw_entries[] = $raw_match;
+			}
 		}
-		return($ret);
 	}
 };
 ?>

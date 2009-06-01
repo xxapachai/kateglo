@@ -195,15 +195,25 @@ class db
 		if ($this->pager['pcount'] > 1)
 		{
 			$ret .= ' ';
-			$tmp = '<span style="padding: 0px 5px;"><a href="%2$s">%1$s</a></span>';
-			$tmp2 = '<span style="padding: 0px 5px;"><strong>%1$s</span></strong>';
+			$tmp = '<span style="padding: 0px 3px;"><a href="%2$s">%1$s</a></span>';
+			$tmp2 = '<span style="padding: 0px 3px;"><strong>%1$s</span></strong>';
 			$max = $this->pager['pcurrent'] + 9;
+			$min = $this->pager['pcurrent'] - 9;
+			if ($min < 1) $min = 1;
 			if ($max > $this->pager['pcount']) $max = $this->pager['pcount'];
 			// previous
 			if ($this->pager['pcurrent'] > 1)
+			{
+				$ret .= sprintf($tmp, $this->msg['page_first'],
+					sprintf($url, 1));
 				$ret .= sprintf($tmp, $this->msg['page_prev'],
 					sprintf($url, $this->pager['pcurrent'] - 1));
+			}
 			// pages
+			for ($i = $min; $i < $this->pager['pcurrent']; $i++)
+			{
+				$ret .= sprintf($tmp, $i, sprintf($url, $i));
+			}
 			for ($i = $this->pager['pcurrent']; $i <= $max; $i++)
 			{
 				if ($i == $this->pager['pcurrent'])
@@ -213,8 +223,12 @@ class db
 			}
 			// next
 			if ($this->pager['pcurrent'] < $this->pager['pcount'])
+			{
 				$ret .= sprintf($tmp, $this->msg['page_next'],
 					sprintf($url, $this->pager['pcurrent'] + 1));
+				$ret .= sprintf($tmp, $this->msg['page_last'],
+					sprintf($url, $this->pager['pcount']));
+			}
 		}
 		return($ret);
 	}
