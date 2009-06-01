@@ -87,6 +87,10 @@ Kateglo.
 
 == Riwayat revisi ==
 
+=== 0.0.14 (01 Juni 2009) ===
+
+* Peribahasa
+
 === 0.0.13 (31 Mei 2009) ===
 
 * Isian frasa aktual untuk kesalahan ejaan
