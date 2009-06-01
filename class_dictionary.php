@@ -307,6 +307,19 @@ class dictionary extends page
 
 			// relation and derivation
 			$ret .= $this->show_relation($phrase, 'related_phrase');
+
+			// peribahasa
+			if ($phrase['proverbs'])
+			{
+				$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['proverb']);
+				$ret .= '<dl>' . LF;
+				foreach ($phrase['proverbs'] as $proverb)
+				{
+					$ret .= sprintf('<dt>%1$s</dt><dd>%2$s</dd>' . LF, $proverb['proverb'], $proverb['meaning']);
+				}
+				$ret .= '</dl>' . LF;
+			}
+
 		}
 		else
 		{
@@ -636,6 +649,17 @@ class dictionary extends page
 				$this->db->quote($_GET['phrase']), $this->db->quote($class_name));
 			$rows = $this->db->get_rows($query);
 			$phrase['definition'] = $rows;
+
+			// definition
+			$query = sprintf('SELECT a.*
+				FROM proverb a
+				WHERE a.prv_type = 1 AND a.phrase = %1$s
+				ORDER BY a.proverb',
+				$this->db->quote($_GET['phrase']));
+			$rows = $this->db->get_rows($query);
+			echo($query);
+			$phrase['proverbs'] = $rows;
+
 			//var_dump($rows);
 
 			// derivation and relation
