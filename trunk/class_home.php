@@ -49,10 +49,11 @@ class home extends page
 		// stat count
 		$dict_count = $this->db->get_row_value('SELECT COUNT(*) FROM phrase;');
 		$glo_count = $this->db->get_row_value('SELECT COUNT(*) FROM glossary;');
+		$prv_count = $this->db->get_row_value('SELECT COUNT(*) FROM proverb WHERE prv_type = 1;');
 
 		// welcome
 		$ret .= '<div align="center" style="padding: 10px 0px;">' . LF;
-		$ret .= sprintf($this->msg['welcome'] . LF, $dict_count, $glo_count, $search_result);
+		$ret .= sprintf($this->msg['welcome'] . LF, $dict_count, $glo_count, $prv_count, $search_result);
 
 		// random
 		$query = 'SELECT phrase, lex_class FROM phrase
