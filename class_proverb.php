@@ -4,22 +4,22 @@
  *
  *
  */
-class comment extends page
+class proverb extends page
 {
 	var $db;
 	var $auth;
 	var $msg;
 	var $title;
-	var $status = 0; // 0=normal; 1=post
 
 	/**
 	 * Constructor
 	 */
-	function comment(&$db, &$auth, $msg)
+	function proverb(&$db, &$auth, $msg)
 	{
 		$this->db = $db;
 		$this->auth = $auth;
 		$this->msg = $msg;
+		$this->db->defaults['rperpage'] = 20;
 	}
 
 	/**
@@ -42,11 +42,11 @@ class comment extends page
 	function show()
 	{
 		global $_GET;
-		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['comment']);
-		if ($_GET['action'] == 'view')
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['proverb']);
+//		if ($_GET['action'] == 'view')
+//		else
+//			$ret .= $this->show_form();
 			$ret .= $this->show_list();
-		else
-			$ret .= $this->show_form();
 		return($ret);
 	}
 
@@ -56,19 +56,19 @@ class comment extends page
 	 */
 	function show_list()
 	{
-		$cols = 'sender_name, sender_email, comment_text';
-		$from = 'FROM sys_comment
-			ORDER BY comment_id DESC';
+		$cols = 'proverb, meaning';
+		$from = 'FROM proverb WHERE prv_type = 1
+			ORDER BY proverb ASC';
 		$rows = $this->db->get_rows_paged($cols, $from);
 		if ($this->db->num_rows > 0)
 		{
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 			foreach ($rows as $row)
 			{
-				$ret .= '<p><b>' . $row['sender_name'] . '</b></p>' . LF;
-				$ret .= '<p>' . LF;
-				$ret .= nl2br(strip_tags($row['comment_text'])) . LF;
-				$ret .= '</p>' . LF;
+				$ret .= '<p><b>' . $row['proverb'] . '</b></p>' . LF;
+				$ret .= '<blockquote>' . LF;
+				$ret .= nl2br(strip_tags($row['meaning'])) . LF;
+				$ret .= '</blockquote>' . LF;
 			}
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 		}

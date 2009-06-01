@@ -46,7 +46,7 @@ $logger->log();
 // define mod
 $mods = array(
 	'user'=>'user', 'comment'=>'comment', 'dict'=>'dictionary',
-	'glo'=>'glossary', 'home'=>'home', 'doc'=>'doc'
+	'glo'=>'glossary', 'home'=>'home', 'doc'=>'doc', 'proverb'=>'proverb'
 );
 $_GET['mod'] = strtolower($_GET['mod']);
 if (!array_key_exists($_GET['mod'], $mods)) $_GET['mod'] = 'home';
