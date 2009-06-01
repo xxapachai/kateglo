@@ -5,6 +5,11 @@ select phrase, def_count from phrase where def_count = 0 order by phrase;
 delete from relation where root_phrase = related_phrase;
 delete from phrase where phrase like 'perusahaan%' and def_count = 0;
 
+-- clean up functions
+delete from definition where phrase not in (select phrase from phrase);
+delete from relation where related_phrase not in (select phrase from phrase);
+delete from relation where root_phrase not in (select phrase from phrase);
+
 alter table phrase add def_count int not null default 0 after ref_source;
 
 create index phrase on definition (phrase);

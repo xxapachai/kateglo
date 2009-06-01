@@ -23,6 +23,7 @@ class kbbi
 	var $clean_entries; // parsed individual
 	var $last_lex; // last lexical class
 	var $_pair; // temporary
+	var $proverbs;
 
 	//$modes = array('sama dengan', 'diawali', 'memuat');
 
@@ -143,6 +144,8 @@ class kbbi
 				$def = preg_replace('/tempatnya la[\s]+(<br>)+gi/U', 'tempatnya lagi', $def);
 			if ($query == 'lampu')
 				$def = str_replace('mati); --<b> atret', 'mati);' . LF . '<br>--<b> atret', $def);
+			if ($query == 'beri tahu')
+				$def = str_replace('ri</b> <b>ta', 'ri ta', $def);
 
 			// enter
 			$this->raw_entries[] = $def;
@@ -180,6 +183,7 @@ class kbbi
 		$kbbi_data = '';
 		unset($this->raw_entries);
 		unset($this->defs);
+		unset($this->proverbs);
 
 		// query kbbi
 		$this->query($phrase, 1);
@@ -201,6 +205,15 @@ class kbbi
 			$kbbi_data = str_replace('<b>/</b>', '/', $kbbi_data);
 			$kbbi_data = str_replace('/</b>', '</b>/', $kbbi_data);
 		}
+		if (strtolower($phrase) == 'amnesia')
+		{
+			$kbbi_data = str_replace('<b>/</b>', '/', $kbbi_data);
+			$kbbi_data = str_replace('/</b>', '</b>/', $kbbi_data);
+		}
+		if (strtolower($phrase) == 'data')
+		{
+			$kbbi_data = str_replace('<b>- data</b> <b>1', '<b>-- data 1</b>', $kbbi_data);
+		}
 		//die($kbbi_data);
 
 
@@ -218,7 +231,10 @@ class kbbi
 				{
 					$redir_from = trim($redir_pair[0]);
 					$redir_to = trim($redir_pair[1]);
-					if ((strpos($redir_from, ' ') === false) && (strpos($redir_to, ' ') === false))
+					$is_redir = (strpos($redir_from, ' ') === false);
+					$is_redir = $is_redir && (strpos($redir_to, ' ') === false);
+					$is_redir = $is_redir || ($phrase == 'bilau');
+					if ($is_redir)
 					{
 						$this->defs[$redir_from]['actual'] = $redir_to;
 						$this->defs[$redir_from]['definitions'][]
@@ -273,11 +289,12 @@ class kbbi
 						$tmp_def = '';
 						$tmp_sample = '';
 
-						// check pair 1 - word or index
+						// remove unnecessary elements
 						$pair1 = str_replace('&#183;', '', $pair1); // remove &#183; suku kata
 						$pair1 = preg_replace('/<sup>\d+<\/sup>/', '', $pair1); // remove superscript
+						preg_match('/^[-|~]*<b>.+<\/b>$/', $pair1, $match_bold);
 
-						preg_match('/^[-|~]*<b>[-]*.+<\/b>$/', $pair1, $match_bold);
+						// check pair 1 - word or index
 						if (count($match_bold) > 0)
 						{
 							$pair1 = strip_tags($pair1);
@@ -537,6 +554,7 @@ class kbbi
 				$abbrev = array(
 					'dl' => 'dalam',
 					'dng' => 'dengan',
+					'dl' => 'dalam',
 					'dr' => 'dari',
 					'dp' => 'daripada',
 					'kpd' => 'kepada',
@@ -557,6 +575,8 @@ class kbbi
 						$phrase_def['sample'] = preg_replace($pattern, $value, $phrase_def['sample']);
 					if ($phrase_def['def'])
 						$phrase_def['def'] = preg_replace($pattern, $value, $phrase_def['def']);
+					if ($phrase_def['proverb'])
+						$phrase_def['proverb'] = preg_replace($pattern, $value, $phrase_def['proverb']);
 				}
 
 				// fixing, watch for extra space after - in phrase
@@ -630,7 +650,8 @@ class kbbi
 				{
 					$proverb_index = count($defs['proverbs']);
 					if ($phrase_def['proverb'])
-						$defs['proverbs'][$proverb_index]['proverb'] = $phrase_def['proverb'];
+						$defs['proverbs'][$proverb_index]['proverb'] =
+							str_replace('--', $phrase_def['phrase'], $phrase_def['proverb']);
 					if ($phrase_def['def'])
 						$defs['proverbs'][$proverb_index]['def'] = $phrase_def['def'];
 				}
@@ -687,10 +708,16 @@ class kbbi
 					$def_item['index'] = $j;
 				}
 			}
+			// proverbs
+			if ($def['proverbs'])
+			{
+				$this->proverbs[$def_key] = $def['proverbs'];
+			}
 			// increment
 			$i++;
 		}
-
+//		var_dump($this->proverbs);
+//		die();
 	}
 
 	function parse_info_lexical(&$item)
