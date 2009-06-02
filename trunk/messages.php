@@ -36,6 +36,7 @@ $msg = array(
 	'en' => 'Bahasa Asing',
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
+	'external_ref' => 'Pranala luar',
 
 	'form_err_pre' => 'Ada kesalahan pada informasi yang dimasukkan.' . "\n",
 	'form_err_post' => "\n" . 'Harap perbaiki kesalahan tersebut.',
@@ -54,6 +55,7 @@ $msg = array(
 	'kbbi_ref' => '<a href="http://pusatbahasa.diknas.go.id/kbbi/">Rujukan KBBI</a>',
 	'keyword' => 'Kata kunci',
 
+	'label' => 'Label',
 	'lang' => 'Bahasa',
 	'lex_class' => 'Kelas kata',
 	'license' => 'Lisensi',
