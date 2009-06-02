@@ -65,7 +65,7 @@ class comment extends page
 	{
 		$this->db->defaults['rperpage'] = 10;
 		$cols = 'a.*';
-		$from = 'FROM sys_comment a
+		$from = 'FROM sys_comment a WHERE status = 1
 			ORDER BY a.sent_date DESC';
 		$rows = $this->db->get_rows_paged($cols, $from);
 		if ($this->db->num_rows > 0)
