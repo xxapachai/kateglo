@@ -87,6 +87,7 @@ Kateglo.
 
 === 0.0.15 (02 Juni 2009) ===
 
+* Umum: Mengganti semua istilah "frasa" menjadi "lema" (lebih umum)
 * Kamus: Pranala luar
 * Komentar: Tautan untuk melihat daftar komentar yang sudah masuk
 * Glosarium: Nama bidang ditambahkan pada judul halaman

@@ -26,15 +26,15 @@ $msg = array(
 	'dictionary' => 'Kamus',
 	'dict_search' => 'Hasil pencarian <strong>"<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>"</strong>.',
 	'dict_short' => 'k',
-	'dict_by_lex' => 'Menurut kelas kata:',
-	'dict_by_type' => 'Menurut tipe frasa:',
+	'dict_by_lex' => 'Menurut kelas:',
+	'dict_by_type' => 'Menurut tipe:',
 	'dict_by_letter' => 'Menurut abjad:',
 	'discipline' => 'Bidang',
 
 	'edit' => 'Ubah',
 	'email_invalid' => 'Alamat email tidak valid',
 	'en' => 'Bahasa Asing',
-	'enter_phrase' => 'Masukkan frasa',
+	'enter_phrase' => 'Masukkan lema',
 	'etymology' => 'Etimologi',
 	'external_ref' => 'Pranala luar',
 
@@ -57,7 +57,7 @@ $msg = array(
 
 	'label' => 'Label',
 	'lang' => 'Bahasa',
-	'lex_class' => 'Kelas kata',
+	'lex_class' => 'Kelas',
 	'license' => 'Lisensi',
 	'login' => 'Masuk log',
 	'login_success' => 'Anda telah berhasil masuk. Silakan lanjutkan.',
@@ -78,11 +78,11 @@ $msg = array(
 	'page_next' => '&gt;',
 	'page_last' => '&gt;&gt;',
 	'password' => 'Kata sandi',
-	'phrase' => 'Frasa',
-	'phrase_type' => 'Tipe frasa',
+	'phrase' => 'Lema',
+	'phrase_type' => 'Tipe',
 	'pronounciation' => 'Pelafalan',
 	'proverb' => 'Peribahasa',
-	'phrase_na' => 'Frasa yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai frase ini.',
+	'phrase_na' => 'Lema yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai lama ini.',
 	'pwd_current' => 'Kata sandi sekarang',
 	'pwd_new' => 'Kata sandi baru',
 	'pwd_retype' => 'Ketik ulang kata sandi baru',
@@ -92,7 +92,7 @@ $msg = array(
 	'pwd_chg_succeed' => 'Perubahan kata sandi berhasil dilakukan.',
 
 	'rel_type' => 'Kaitan',
-	'related_phrase' => 'Frasa terkait',
+	'related_phrase' => 'Lema terkait',
 	'required_alert' => '%1$s harus diisi',
 	'ref_source' => 'Sumber',
 	'root_phrase' => 'Akar kata',
@@ -103,7 +103,7 @@ $msg = array(
 	'see' => 'Lihat',
 	'search' => 'Pencarian',
 	'search_op' => 'Operator',
-	'search_button' => 'Cari frasa',
+	'search_button' => 'Cari',
 	'search_in' => ' dalam ',
 	'submit' => 'Kirim',
 
@@ -114,7 +114,7 @@ $msg = array(
 	'username' => 'Pengguna',
 
 	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
-		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari frasa yang Anda inginkan.</p>
+		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari lema yang Anda inginkan.</p>
 		<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glo">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dict">kamus dan tesaurus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
