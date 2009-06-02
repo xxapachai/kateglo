@@ -1,8 +1,10 @@
--- Last updated: 2009-05-30 22:36
+-- Last updated: 2009-06-02 16:58
 
 drop table if exists definition;
 
 drop table if exists discipline;
+
+drop table if exists external_ref;
 
 drop table if exists glossary;
 
@@ -13,6 +15,8 @@ drop table if exists lexical_class;
 drop table if exists phrase;
 
 drop table if exists phrase_type;
+
+drop table if exists proverb;
 
 drop table if exists ref_source;
 
@@ -46,8 +50,16 @@ create table definition
    sample               varchar(4000),
    see                  varchar(255),
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (def_uid)
+);
+
+/*==============================================================*/
+/* Index: phrase                                                */
+/*==============================================================*/
+create index phrase on definition
+(
+   phrase
 );
 
 /*==============================================================*/
@@ -59,8 +71,22 @@ create table discipline
    discipline_name      varchar(255) not null,
    glossary_count       int not null default 0,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (discipline)
+);
+
+/*==============================================================*/
+/* Table: external_ref                                          */
+/*==============================================================*/
+create table external_ref
+(
+   ext_uid              int not null auto_increment,
+   phrase               varchar(255) not null,
+   label                varchar(255),
+   url                  varchar(255) not null,
+   updated              datetime,
+   updater              varchar(32),
+   primary key (ext_uid)
 );
 
 /*==============================================================*/
@@ -77,7 +103,7 @@ create table glossary
    wpid                 varchar(255),
    wpen                 varchar(255),
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (glo_uid)
 );
 
@@ -121,7 +147,7 @@ create table language
    lang                 varchar(16) not null,
    lang_name            varchar(255),
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (lang)
 );
 
@@ -135,7 +161,7 @@ create table lexical_class
    lex_class_ref        varchar(255) comment 'Referensi ke nama kelas',
    sort_order           int not null default 1,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (lex_class)
 );
 
@@ -151,11 +177,13 @@ create table phrase
    pronounciation       varchar(4000),
    etymology            varchar(4000),
    ref_source           varchar(16),
+   def_count            int not null default 0,
    actual_phrase        varchar(255),
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    created              datetime,
-   creator              varchar(32) not null,
+   creator              varchar(32),
+   proverb_updated      datetime,
    primary key (phrase)
 );
 
@@ -168,8 +196,23 @@ create table phrase_type
    phrase_type_name     varchar(255) not null,
    sort_order           int not null default 1,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (phrase_type)
+);
+
+/*==============================================================*/
+/* Table: proverb                                               */
+/*==============================================================*/
+create table proverb
+(
+   prv_uid              int not null auto_increment,
+   phrase               varchar(255) not null,
+   proverb              varchar(4000) not null,
+   meaning              varchar(4000),
+   prv_type             int default 0 comment '0=wrong; 1=proverb; 2=kiasan',
+   updated              datetime,
+   updater              varchar(32),
+   primary key (prv_uid)
 );
 
 /*==============================================================*/
@@ -181,7 +224,7 @@ create table ref_source
    ref_source_name      varchar(255) not null,
    glossary_count       int not null default 0,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (ref_source)
 )
 comment = "Reference source";
@@ -196,7 +239,7 @@ create table relation
    related_phrase       varchar(255) not null,
    rel_type             varchar(16) not null,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (rel_uid),
    key AK_relation_unique ()
 );
@@ -220,7 +263,7 @@ create table relation_type
    rel_type_name        varchar(255) not null,
    sort_order           int not null default 1,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (rel_type)
 );
 
@@ -276,7 +319,11 @@ create table sys_comment
    ses_id               varchar(32),
    sender_name          varchar(255) not null,
    sender_email         varchar(255) not null,
+   url                  varchar(255),
+   status               tinyint not null default 0 comment '0=hidden; 1=show',
+   sent_date            datetime not null,
    comment_text         varchar(4000),
+   response             varchar(4000),
    primary key (comment_id)
 );
 
@@ -306,6 +353,6 @@ create table sys_user
    full_name            varchar(255),
    last_access          datetime,
    updated              datetime,
-   updater              varchar(32) not null,
+   updater              varchar(32),
    primary key (user_id)
 );

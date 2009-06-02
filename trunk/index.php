@@ -21,10 +21,10 @@ require_once('config.php');
 require_once('messages.php');
 require_once('common.php');
 require_once('Auth.php');
-require_once('class_db.php');
-require_once('class_form.php');
-require_once('class_logger.php');
-require_once('class_page.php');
+require_once('classes/class_db.php');
+require_once('classes/class_form.php');
+require_once('classes/class_logger.php');
+require_once('classes/class_page.php');
 
 // initialization
 $db = new db;
@@ -54,7 +54,7 @@ $mod = $_GET['mod'];
 
 // process
 $module = $mods[$mod];
-require_once('class_' . $module . '.php');
+require_once('classes/class_' . $module . '.php');
 $page = new $module(&$db, &$auth, $msg);
 $page->process();
 
