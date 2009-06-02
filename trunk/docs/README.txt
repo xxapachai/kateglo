@@ -85,6 +85,10 @@ Kateglo.
 
 == Riwayat revisi ==
 
+=== 0.0.16 (03 Juni 2009) ===
+
+* Kamus: Menambahkan secara otomatis pranala luar ke Wikipedia (id dan en)
+
 === 0.0.15 (02 Juni 2009) ===
 
 * Umum: Mengganti semua istilah "frasa" menjadi "lema" (lebih umum)
