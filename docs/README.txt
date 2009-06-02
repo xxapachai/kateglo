@@ -57,16 +57,15 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Pendaftaran pengguna
-* Preferensi pengguna
-* Penambahan/penyuntingan glosarium secara sekaligus
-* Entri untuk referensi
-* Penambahan definisi secara dinamis (AJAX?)
-* Statistik pengguna teraktif
-* API atau antarmuka pemrograman aplikasi
-* Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
-* ki = kiasan?
-* Kata hari ini
+* Kamus: Penambahan definisi secara dinamis (AJAX?)
+* Kamus: entri untuk referensi
+* Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
+* Kamus: ki = kiasan?
+* Glosarium: penambahan/penyuntingan secara sekaligus
+* Pengguna: pendaftaran dan preferensi
+* Umum: Statistik pengguna teraktif
+* Umum: API/antarmuka pemrograman aplikasi
+* Umum: Kata hari ini
 
 == Bug yang diketahui ==
 
@@ -86,6 +85,14 @@ Kateglo.
   --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
 
 == Riwayat revisi ==
+
+=== 0.0.15 (02 Juni 2009) ===
+
+* Komentar: Tautan untuk melihat daftar komentar yang sudah masuk
+* Glosarium: Nama bidang ditambahkan pada judul halaman
+* Pengguna: Informasi tambahan pada formulir masuk log
+* Umum: Statistik eksternal dari sitemeter dan statcounter dibuang.
+* Umum: read_doc dipindahkan ke kelas doc
 
 === 0.0.14 (01 Juni 2009) ===
 
@@ -169,9 +176,11 @@ Kateglo.
 * Rujukan ke Wikipedia untuk glosarium
 * Sumber glosarium
 * Daftar glosarium terkait pada entri kamus
-* Fungsi pengubahan data pembaru dan waktu pembaruan untuk entri kamus dan glosarium
+* Fungsi pengubahan data pembaru dan waktu pembaruan untuk entri kamus dan
+  glosarium
 * Penambahan dan penyuntingan glosarium sederhana
-* Melengkapi kelas kata menjadi 7: nomina, verba, adjektiva, adverbia, pronomina, numeralia, lain-lain
+* Melengkapi kelas kata menjadi 7: nomina, verba, adjektiva, adverbia,
+  pronomina, numeralia, lain-lain
 * Kata kunci di glosarium yang merujuk ke entri kamus
 * Rujukan ke KBBI di kamus
 

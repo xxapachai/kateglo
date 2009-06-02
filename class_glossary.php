@@ -9,7 +9,6 @@ class glossary extends page
 	var $db;
 	var $auth;
 	var $msg;
-	var $title;
 	var $entry;
 	var $sublist = false;
 
@@ -67,13 +66,19 @@ class glossary extends page
 	{
 		global $_GET;
 
-		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['glossary']);
+		// title
+		$this->title = $this->msg['glossary'];
+		$disciplines = $this->db->get_row_assoc('
+			SELECT discipline, discipline_name
+			FROM discipline ORDER BY discipline_name;',
+			'discipline', 'discipline_name');
+		if (array_key_exists($_GET['dc'], $disciplines))
+			$this->title .= ' ' . $disciplines[$_GET['dc']];
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->title);
 
 		// search
 		if (!$sublist)
-		{
 			$ret .= $this->show_search();
-		}
 
 		// if there's phrase
 		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
@@ -126,6 +131,7 @@ class glossary extends page
 	function show_result()
 	{
 		global $_GET;
+
 		$phrase = trim($_GET['phrase']);
 		$discipline = trim($_GET['dc']);
 		$src = trim($_GET['src']);

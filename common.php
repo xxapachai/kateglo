@@ -25,6 +25,7 @@ function login($username = null, $status = null, &$auth = null)
 	if ($is_post && !$auth->checkAuth()) $welcome = $msg['login_failed'] . ' ' . $welcome;
 
 	$ret .= '<h1>' . $msg['login'] . '</h1>' . LF;
+	$ret .= sprintf('<p>%1$s</p>' . LF, $msg['login_beta']);
 	$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
 
 	if (!$auth->checkAuth())
@@ -92,21 +93,8 @@ function show_header()
 	return($ret);
 }
 
-/**
- * @return Search form HTML
- */
-function read_doc($file_name)
-{
-	$file_url = './docs/' . $file_name;
-	if (file_exists($file_url))
-		$ret = nl2br(htmlentities(file_get_contents($file_url)));
-	return($ret);
-}
-
 function get_external_stat()
 {
-
-	$ret .= '<div style="display:none !important;">' . LF;
 
 	// gostats
 	$ret .= '<!-- GoStats JavaScript Based Code -->';
@@ -118,13 +106,6 @@ function get_external_stat()
 	// google analytics
 	$ret .= '<script type="text/javascript"> var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E")); </script> <script type="text/javascript"> try { var pageTracker = _gat._getTracker("UA-2254800-2"); pageTracker._trackPageview(); } catch(err) {}</script>' . LF;
 
-	// statcounter
-	// $ret .= '<!-- Start of StatCounter Code --> <script type="text/javascript"> var sc_project=4786656; var sc_invisible=1; var sc_partition=54; var sc_click_stat=1; var sc_security="f8096c17"; </script><script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="counter for blogspot" href="http://www.statcounter.com/blogger/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/4786656/0/f8096c17/1/" alt="counter for blogspot" style="display:none;" /></a></div></noscript> <!-- End of StatCounter Code -->' . LF;
-
-	// sitemeter
-	$ret .= '<!-- Site Meter --> <script type="text/javascript" src="http://s18.sitemeter.com/js/counter.js?site=s18kateglo"> </script> <noscript> <a href="http://s18.sitemeter.com/stats.asp?site=s18kateglo" target="_top"> <img src="http://s18.sitemeter.com/meter.asp?site=s18kateglo" alt="Site Meter" border="0" style="display:none;" /></a> </noscript> <!-- Copyright (c)2009 Site Meter -->' . LF;
-
-	$ret .= '</div>' . LF;
 	return($ret);
 }
 ?>
