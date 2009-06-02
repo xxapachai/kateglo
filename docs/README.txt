@@ -17,7 +17,7 @@ petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
 == Lisensi isi ==
 
 Lisensi isi Kateglo adalah CC-BY-NC-SA kecuali yang disebutkan di bawah ini.
-Detil lisensi CC-BY-NC-SA dapat dilihat di:
+Detail lisensi CC-BY-NC-SA dapat dilihat di:
 
 	http://creativecommons.org/licenses/by-nc-sa/3.0/
 
@@ -110,7 +110,7 @@ Kateglo.
 
 * Beberapa perbaikan manual untuk pemilahan entri KBBI:
   air, minyak, kepala, induk, harta, alur, hutan
-* Halaman utama untuk kamus dan pencarian detil kamus
+* Halaman utama untuk kamus dan pencarian detail kamus
 * Mengganti nama tabel "translation" menjadi "glossary"
 * Perubahan letak kotak pencarian glosarium menjadi di atas
 * Perbaikan bug untuk menampilkan relasi terbalik
