@@ -305,6 +305,22 @@ class dictionary extends page
 			if ($phrase['ref_source'])
 				$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
 
+			// reference
+			if ($phrase['reference'])
+			{
+				$ret .= '<p><strong>' . $this->msg['external_ref']. ':</strong></p>' . LF;
+				$ret .= '<ul>' . LF;
+				foreach ($phrase['reference'] as $reference)
+				{
+					$ret .= sprintf(
+						'<li><a href="%2$s">%1$s</a></li>' . LF,
+						$reference['label'] ? $reference['label'] : $reference['url'],
+						$reference['url']
+					);
+				}
+				$ret .= '</ul>' . LF;
+			}
+
 			// relation and derivation
 			$ret .= $this->show_relation($phrase, 'related_phrase');
 
@@ -444,6 +460,17 @@ class dictionary extends page
 				),
 			'definition', 'definition', 'definition', 'def_count');
 
+		// reference
+		$ret .= $this->show_sub_form(&$form, &$phrase,
+			array(
+				'ext_uid' => array('type' => 'hidden'),
+				'url' => array('type' => 'text', 'width' => '50%',
+					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%')),
+				'label' => array('type' => 'text', 'width' => '50%',
+					'option1' => array('size' => 50, 'maxlength' => 255, 'style' => 'width:100%'))
+			),
+			'external_ref', 'external_ref', 'reference', 'ext_count');
+
 		// relation
 		$ret .= $this->show_sub_form(&$form, &$phrase,
 			array(
@@ -485,13 +512,13 @@ class dictionary extends page
 		$defs[] = $new_def;
 		$def_count = count($defs);
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$heading]);
-		$ret .= '<table>' . LF;
+		$ret .= '<table width="100%">' . LF;
 		// header
 		$ret .= '<tr>' . LF;
 		foreach ($field_def as $field_key => $field)
 		{
 			if ($field['type'] != 'hidden')
-				$ret .= sprintf('<th width="%2$s">%1$s</th>' . LF,
+				$ret .= sprintf('<th width="%2$s" style="background: #DDD;">%1$s</th>' . LF,
 					$this->msg[$field_key], $field['width']);
 		}
 		$ret .= '</tr>' . LF;
@@ -509,8 +536,11 @@ class dictionary extends page
 					$form->setDefaults(array($field_name => $defs[$i][$field_key]));
 					if ($field['type'] != 'hidden')
 					{
-						$ret .= sprintf('<td width="%2$s">%1$s</td>' . LF,
-							$form->get_element($field_name), $field['width']);
+						$ret .= sprintf('<td width="%2$s" style="background: %3$s;">%1$s</td>' . LF,
+							$form->get_element($field_name),
+							$field['width'],
+							($i % 2 == 0) ? '#FFF' : '#EEE'
+						);
 					}
 					else
 					{
@@ -646,11 +676,21 @@ class dictionary extends page
 					LEFT JOIN lexical_class c ON a.lex_class = c.lex_class
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
-				$this->db->quote($_GET['phrase']), $this->db->quote($class_name));
+				$this->db->quote($_GET['phrase']), $this->db->quote($class_name)
+			);
 			$rows = $this->db->get_rows($query);
 			$phrase['definition'] = $rows;
 
-			// definition
+			// external reference
+			$query = sprintf('SELECT a.*
+				FROM external_ref a
+				WHERE a.phrase = %1$s',
+				$this->db->quote($_GET['phrase'])
+			);
+			$rows = $this->db->get_rows($query);
+			$phrase['reference'] = $rows;
+
+			// proverb
 			$query = sprintf('SELECT a.*
 				FROM proverb a
 				WHERE a.prv_type = 1 AND a.phrase = %1$s
@@ -812,6 +852,11 @@ class dictionary extends page
 			'definition', 'def_uid', 'def_count', 'phrase',
 			array('def_num', 'def_text'),
 			array('discipline', 'sample', 'see', 'lex_class')
+		);
+		$this->save_sub_form(
+			'external_ref', 'ext_uid', 'ext_count', 'phrase',
+			array('url'),
+			array('label')
 		);
 		$this->save_sub_form(
 			'relation', 'rel_uid', 'rel_count', 'root_phrase',

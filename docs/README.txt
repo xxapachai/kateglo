@@ -58,7 +58,6 @@ Kateglo.
 == Daftar pekerjaan ==
 
 * Kamus: Penambahan definisi secara dinamis (AJAX?)
-* Kamus: entri untuk referensi
 * Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Kamus: ki = kiasan?
 * Glosarium: penambahan/penyuntingan secara sekaligus
@@ -88,6 +87,7 @@ Kateglo.
 
 === 0.0.15 (02 Juni 2009) ===
 
+* Kamus: Pranala luar
 * Komentar: Tautan untuk melihat daftar komentar yang sudah masuk
 * Glosarium: Nama bidang ditambahkan pada judul halaman
 * Pengguna: Informasi tambahan pada formulir masuk log
