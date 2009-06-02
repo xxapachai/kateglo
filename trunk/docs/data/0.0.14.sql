@@ -22,3 +22,5 @@ create table proverb
 update proverb set prv_type = 0;
 update proverb set prv_type = 2 where proverb regexp ', ki$';
 update proverb set prv_type = 1 where prv_type != 2 and not isnull(meaning);
+
+update proverb set proverb = replace(proverb, '-', phrase) where proverb regexp '^-' and prv_type = 1

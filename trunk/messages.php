@@ -10,6 +10,8 @@ $msg = array(
 	'change_pwd' => 'Ubah kata sandi',
 	'comment' => 'Komentar',
 	'comment_link' => 'Komentar?',
+	'comment_list' => 'Lihat komentar',
+	'comment_entry' => 'Kirim komentar',
 	'comment_text' => 'Isi komentar',
 	'comment_sender' => 'Nama pengirim',
 	'comment_email' => 'Email pengirim',
@@ -30,7 +32,7 @@ $msg = array(
 	'discipline' => 'Bidang',
 
 	'edit' => 'Ubah',
-	'email_invalid' => 'Alamat email yang dimasukkan tidak valid',
+	'email_invalid' => 'Alamat email tidak valid',
 	'en' => 'Bahasa Asing',
 	'enter_phrase' => 'Masukkan frasa',
 	'etymology' => 'Etimologi',
@@ -58,7 +60,8 @@ $msg = array(
 	'login' => 'Masuk log',
 	'login_success' => 'Anda telah berhasil masuk. Silakan lanjutkan.',
 	'login_welcome' => 'Silakan masukkan nama pengguna dan kata sandi Anda.',
-	'login_failed' => 'Nama pengguna atau kata sandi Anda salah.',
+	'login_failed' => '<strong>Nama pengguna atau kata sandi Anda salah</strong>.',
+	'login_beta' => 'Pada versi beta ini, fasilitas pendaftaran pengguna belum tersedia dan pengguna yang bisa masuk log hanyalah beberapa orang penguji versi beta.',
 	'logout' => 'Keluar log',
 
 	'new' => 'Buat baru',
@@ -104,6 +107,8 @@ $msg = array(
 
 	'thesaurus' => 'Tesaurus',
 
+	'url' => 'Situs web',
+	'url_invalid' => 'Alamat situs tidak valid',
 	'username' => 'Pengguna',
 
 	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
