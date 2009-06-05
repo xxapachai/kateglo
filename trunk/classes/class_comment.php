@@ -6,10 +6,7 @@
  */
 class comment extends page
 {
-	var $db;
-	var $auth;
-	var $msg;
-	var $title;
+
 	var $status = 0; // 0=normal; 1=post
 
 	/**
@@ -17,9 +14,7 @@ class comment extends page
 	 */
 	function comment(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		parent::page(&$db, &$auth, $msg);
 	}
 
 	/**
@@ -28,8 +23,7 @@ class comment extends page
 	function process()
 	{
 		global $_SERVER;
-		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
-		if ($is_post)
+		if ($this->is_post)
 		{
 			$this->save_form();
 			$this->status = 1;
@@ -42,13 +36,18 @@ class comment extends page
 	function show()
 	{
 		global $_GET;
+		$actions = array(
+			'comment_list' => array('url' => './?mod=comment&action=view'),
+			'comment_entry' => array('url' => './?mod=comment'),
+		);
+
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['comment']);
+		$ret .= $this->get_action_buttons($actions,
+			($_GET['action'] == 'view' ? array('comment_entry') : array('comment_list')));
 		if ($_GET['action'] == 'view')
 			$ret .= $this->show_list();
 		else
 			$ret .= $this->show_form();
-		$menu = $_GET['action'] == 'view' ? 'comment_entry' : 'comment_list';
-		$action = $_GET['action'] == 'view' ? '' : '&action=view';
 		$ret .= sprintf('<p><a href="%2$s">%1$s</a></p>' . LF,
 			$this->msg[$menu],
 			'./?mod=comment' . $action
@@ -101,7 +100,7 @@ class comment extends page
 	 */
 	function show_form()
 	{
-		$url_pattern = '/^http(s?):\/\/([\w-]+\.)+[\w-]+(\/[\w-\.\/\?%&=]*)?$/';
+		$url_pattern = '/^http(s?):\/\/([\w-]+\.)+[\w-]+(\/[\w-\.\/\?\+%&=]*)?$/';
 		$form = new form('entry_form', null, './?mod=comment');
 		$form->setup($this->msg);
 

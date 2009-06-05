@@ -4,11 +4,10 @@
  *
  *
  */
+require_once('class_mediawiki.php');
 class glossary extends page
 {
-	var $db;
-	var $auth;
-	var $msg;
+
 	var $entry;
 	var $sublist = false;
 
@@ -17,9 +16,7 @@ class glossary extends page
 	 */
 	function glossary(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		parent::page(&$db, &$auth, $msg);
 	}
 
 	/**
@@ -29,11 +26,10 @@ class glossary extends page
 	{
 		global $_GET;
 		global $_SERVER;
-		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 		switch ($_GET['action'])
 		{
 			case 'form':
-				if ($is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
+				if ($this->is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
 					$this->save_form();
 				break;
 			default:
@@ -74,17 +70,26 @@ class glossary extends page
 			'discipline', 'discipline_name');
 		if (array_key_exists($_GET['dc'], $disciplines))
 			$this->title .= ' ' . $disciplines[$_GET['dc']];
+
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->title);
 
-		// search
-		if (!$sublist)
+		// new button and search
+		$actions = array(
+			'new' => array('url' => './' .
+				$this->get_url_param(array('search', 'action', 'uid', 'mod')) .
+				'&mod=glo&action=form'
+			),
+		);
+		if (!$this->sublist)
+		{
+			if ($this->auth->checkAuth())
+				$ret .= $this->get_action_buttons($actions);
 			$ret .= $this->show_search();
+		}
 
 		// if there's phrase
 		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
-		{
 			$ret .= $this->show_result();
-		}
 		// nothing, show main page
 		else
 		{
@@ -97,12 +102,12 @@ class glossary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= '; ';
+					if ($i > 0) $ret .= '; ' . LF;
 					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a> (%3$s)',
 						$row['discipline_name'], $row['discipline'], $row['glossary_count']);
 					$i++;
 				}
-				$ret .= '</blockquote>' . LF;
+				$ret .= LF. '</blockquote>' . LF;
 			}
 			$ret .= '<p><strong>' . $this->msg['glo_by_source'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM ref_source ORDER BY ref_source_name;');
@@ -112,12 +117,12 @@ class glossary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= '; ';
+					if ($i > 0) $ret .= '; ' . LF;
 					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a> (%3$s)',
 						$row['ref_source_name'], $row['ref_source'], $row['glossary_count']);
 					$i++;
 				}
-				$ret .= '</blockquote>' . LF;
+				$ret .= LF. '</blockquote>' . LF;
 			}
 		}
 
@@ -184,17 +189,23 @@ class glossary extends page
 			ORDER BY ' . $phrase1;
 		$rows = $this->db->get_rows_paged($cols, $from);
 
-		// header and new button
-		if (!$this->sublist)
-		{
-			if ($this->auth->checkAuth())
-				$ret .= sprintf('<p>%1$s</p>' . LF,
-					sprintf('<a href="./%1$s&action=form&mod=glo">%2$s</a>',
-						$this->get_url_param(array('search', 'action', 'uid', 'mod')),
-						$this->msg['new']));
-		}
 		if ($this->db->num_rows > 0)
 		{
+
+			// get wikipedia definition, only do it when no definition
+			$i = 0;
+			foreach ($rows as $row)
+			{
+				if (!$row['wpen'])
+				{
+					$lemma[] = $row['original'];
+					$idx[$row['original']][] = $i;
+				}
+				$i++;
+			}
+			$this->get_wikipedia($lemma, $idx, &$rows);
+
+			// print
 			$ret .= '<p>';
 			$ret .= $this->db->get_page_nav();
 			$ret .= '</p>' . LF;
@@ -215,9 +226,12 @@ class glossary extends page
 			$ret .= '</tr>' . LF;
 
 			// rows
+			$i = 0;
 			$tmp = '<td align="%2$s">%1$s</td>' . LF;;
 			foreach ($rows as $row)
 			{
+				$lemma[] = $row['original'];
+				$uid[] = $row['glo_uid'];
 				$url = './' . $this->get_url_param(array('search', 'action', 'uid', 'mod')) .
 					'&action=form&mod=glo&uid=' . $row['glo_uid'];
 				$discipline = './' . $this->get_url_param(array('search', 'uid', 'dc')).
@@ -283,10 +297,10 @@ class glossary extends page
 		$ret .= $form->begin_form();
 		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
-		$ret .= '<br />';
+		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['discipline'], $form->get_element('dc'));
 		$ret .= sprintf($template, $this->msg['lang'], $form->get_element('lang'));
-		$ret .= '<br />';
+		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('src'));
 		$ret .= $form->get_element('mod');
 		$ret .= $form->get_element('search');
@@ -304,7 +318,7 @@ class glossary extends page
 		$query = 'SELECT a.* FROM glossary a
 			WHERE a.glo_uid = ' . $this->db->quote($_GET['uid']);
 		$this->entry = $this->db->get_row($query);
-		$is_new = is_array($this->entry);
+		$is_new = !is_array($this->entry);
 
 		$form = new form('entry_form', null, './' . $this->get_url_param());
 		$form->setup($this->msg);
@@ -323,6 +337,10 @@ class glossary extends page
 		$form->addRule('ref_source', sprintf($this->msg['required_alert'], $this->msg['ref_source']), 'required', null, 'client');
 		$form->setDefaults($this->entry);
 
+		$ret .= sprintf('<h1>%1$s</h1>' . LF,
+			($is_new ? $this->msg['new'] : $this->msg['edit']) .
+			' - ' . $this->msg['glossary']
+		);
 		$ret .= $form->toHtml();
 		return($ret);
 	}
@@ -336,48 +354,36 @@ class glossary extends page
 	{
 		global $_GET, $_POST;
 		$is_new = (!$_POST['is_new']);
-		// main
+
+		// construct query
+		$query = ($is_new ? 'INSERT INTO' : 'UPDATE') . ' glossary SET ';
+		$query .= sprintf('
+			phrase = %1$s,
+			original = %2$s,
+			discipline = %3$s,
+			ref_source = %4$s,
+			wpid = %5$s,
+			wpen = %6$s,
+			updater = %7$s,
+			updated = NOW()',
+			$this->db->quote($_POST['phrase']),
+			$this->db->quote($_POST['original']),
+			$this->db->quote($_POST['discipline']),
+			$this->db->quote($_POST['ref_source']),
+			$this->db->quote($_POST['wpid']),
+			$this->db->quote($_POST['wpen']),
+			$this->db->quote($this->auth->getUsername())
+			);
 		if (!$is_new)
-		{
-			$query = sprintf(
-				'UPDATE glossary SET
-					phrase = %1$s,
-					original = %2$s,
-					discipline = %3$s,
-					ref_source = %6$s,
-					wpid = %7$s,
-					wpen = %8$s,
-					updater = %4$s,
-					updated = NOW()
-				WHERE glo_uid = %5$s;',
-				$this->db->quote($_POST['phrase']),
-				$this->db->quote($_POST['original']),
-				$this->db->quote($_POST['discipline']),
-				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['glo_uid']),
-				$this->db->quote($_POST['ref_source']),
-				$this->db->quote($_POST['wpid']),
-				$this->db->quote($_POST['wpen'])
+			$query .= sprintf(' WHERE glo_uid = %1$s;',
+				$this->db->quote($_POST['glo_uid'])
 			);
-		}
-		else
-		{
-			$query = sprintf('INSERT INTO glossary (phrase, original,
-				discipline, ref_source, wpid, wpen, updater, updated)
-				VALUES (%1$s, %2$s, %3$s, %5$s, %6$s, %7$s, %4$s, NOW());',
-				$this->db->quote($_POST['phrase']),
-				$this->db->quote($_POST['original']),
-				$this->db->quote($_POST['discipline']),
-				$this->db->quote($this->auth->getUsername()),
-				$this->db->quote($_POST['ref_source']),
-				$this->db->quote($_POST['wpid']),
-				$this->db->quote($_POST['wpen'])
-			);
-		}
-		//die($query);
+
+		die($query);
 		$this->db->exec($query);
 
 		// redirect
+		$_GET['phrase'] = $_POST['phrase'];
 		redir('./' . $this->get_url_param(array('action', 'uid')));
 	}
 
@@ -431,5 +437,50 @@ class glossary extends page
 			}
 		}
 		return($keyword);
-	}};
+	}
+
+	function get_wikipedia($lemma, $idx, &$rows)
+	{
+		$mw = new mediawiki('en');
+		$pages = $mw->get_page_info($lemma);
+		$i = 0;
+
+		foreach ($pages as $key => $page)
+		{
+			if ($page['status'] == 1)
+			{
+				// UIDs
+				$uids = '';
+				foreach ($idx[$key] as $uid)
+				{
+					$uids .= $uids ? ', ' : '';
+					$uids .= $rows[$uid]['glo_uid'];
+				}
+
+				// english wikipedia
+				$query = sprintf(
+					'UPDATE glossary SET wpen = %1$s WHERE IN (%2$s);',
+					$this->db->quote($page['to']),
+					$uids
+				);
+				$this->db->exec($query);
+				foreach ($idx[$key] as $uid)
+					$rows[$uid]['wpen'] = $page['to'];
+				if (is_array($page['langlinks']))
+					if (array_key_exists('id', $page['langlinks']))
+					{
+						$query = sprintf(
+							'UPDATE glossary SET wpid = %1$s WHERE glo_uid IN (%2$s);',
+							$this->db->quote($page['langlinks']['id']),
+							$uids
+						);
+						$this->db->exec($query);
+					foreach ($idx[$key] as $uid)
+						$rows[$uid]['wpid'] = $page['langlinks']['id'];
+					}
+			}
+			$i++;
+		}
+	}
+};
 ?>

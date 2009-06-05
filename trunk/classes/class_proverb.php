@@ -6,19 +6,13 @@
  */
 class proverb extends page
 {
-	var $db;
-	var $auth;
-	var $msg;
-	var $title;
 
 	/**
 	 * Constructor
 	 */
 	function proverb(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		parent::page(&$db, &$auth, $msg);
 		$this->db->defaults['rperpage'] = 20;
 	}
 

@@ -1,15 +1,15 @@
 = Kateglo =
 
-Kateglo adalah aplikasi web sumber terbuka untuk kamus, tesaurus, dan
-glosarium bahasa Indonesia. Namanya diambil dari singkatan unsur layanannya,
-KAmus, TEsaurus, dan GLOsarium.
+Kateglo adalah aplikasi dan layanan web sumber dan isi terbuka untuk kamus,
+tesaurus, dan glosarium bahasa Indonesia. Namanya diambil dari akronim unsur
+layanannya: ka(mus), te(saurus), dan glo(sarium).
 
 == Lisensi aplikasi ==
 
 Lisensi kode sumber Kateglo adalah GPL. Kode sumber program dapat diunduh
 dari repositori publik:
 
-	http://www.bahtera.org/svn/kateglo/
+	http://bahtera.org/svn/kateglo/
 
 Setelah mengunduh aplikasi, silakan baca INSTALL.txt di direktori docs untuk
 petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
@@ -49,6 +49,7 @@ Kateglo.
 
 == Standar kode program ==
 
+* Prinsip dasar tampilan dan kode adalah sederhana dan mudah.
 * Gunakan huruf kecil dengan garis bawah sebagai pemisah kata.
 * Gunakan kurung kurawa pada baris terpisah untuk blok fungsi, kondisi, dll.
 * Jika blok hanya berisi satu baris, hindari kurung kurawa.
@@ -57,10 +58,12 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Penambahan definisi secara dinamis (AJAX?)
+* Kamus: Penambahan definisi secara dinamis
 * Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
-* Kamus: ki = kiasan?
-* Glosarium: penambahan/penyuntingan secara sekaligus
+* Kamus: Simpanan lokal data KBBI
+* Kamus: Pelajari info-info yang tersedia dari KBBI
+* Glosarium: Penambahan/penyuntingan secara sekaligus
+* Glosarium: Pembuatan tautan otomatis untuk lema yang ditemukan di Wikipedia
 * Pengguna: pendaftaran dan preferensi
 * Umum: Statistik pengguna teraktif
 * Umum: API/antarmuka pemrograman aplikasi
@@ -73,17 +76,12 @@ Kateglo.
 * Algoritma parser KBBI belum efisien
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
-* Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
-  --> Diperbaiki pada versi 0.0.9
-* Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
-  --> Diperbaiki pada versi 0.0.9
-* Akar kata yang sama dengan frasanya
-  --> Diperbaiki pada versi 0.0.9
-* Suatu kata tertentu yang belum ada di kamus sulit dicari jika pencarian
-  menghasilkan kata lain. Contoh "kau" sulit diakses jika ada kata "kaum"
-  --> Diselesaikan dengan menampilkan pranala ke frasa yang dicari.
-
 == Riwayat revisi ==
+
+=== 0.0.17 (04 Juni 2009) ===
+
+* Glosarium: Pencarian rujukan otomatis dari Wikipedia
+* Umum: Tampilan tombol operasi
 
 === 0.0.16 (03 Juni 2009) ===
 
@@ -143,6 +141,10 @@ Kateglo.
 
 * Perubahan halaman utama glosarium
 * Perbaikan logika parsing KBBI
+* Perbaikan Kesalahan parsing KBBI: "uang", "tuju", "jabat", "areal"
+* Perbaikan Kesalahan parsing KBBI: sufiks "1" pada kata gabungan
+* Perbaikan akar kata yang sama dengan frasanya
+* Menampilkan pranala ke frasa yang dicari di hasil pencarian
 
 === 0.0.8 (22 Mei 2009) ===
 

@@ -26,7 +26,7 @@ class form extends HTML_QuickForm
 	 */
 	function get_element($element)
 	{
-		return($this->getElement($element)->toHtml());
+		return(preg_replace('/^\t+/m', '', $this->getElement($element)->toHtml()));
 	}
 
 	/**
@@ -45,6 +45,14 @@ class form extends HTML_QuickForm
 	{
 		$form_array = $this->toArray();
 		return($form_array['javascript']. LF . '</form>' . LF);
+	}
+
+	/**
+	 * Strip tabs from original toHtml
+	 */
+	function toHtml()
+	{
+		return(preg_replace('/^\t+/m', '', parent::toHtml()));
 	}
 }
 ?>

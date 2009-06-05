@@ -5,10 +5,6 @@
 class user extends page
 {
 
-	var $db; // database object
-	var $auth; // authentication object
-	var $msg; // messages string
-	var $title;
 	var $status;
 
 	/**
@@ -16,9 +12,7 @@ class user extends page
 	 */
 	function user(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		parent::page(&$db, &$auth, $msg);
 		$this->status = PROCESS_NONE;
 	}
 
@@ -29,14 +23,13 @@ class user extends page
 	{
 		global $_GET;
 		global $_SERVER;
-		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 		switch ($_GET['action'])
 		{
 			case 'logout':
 				$this->auth->logout();
 				redir('./?');
 			case 'password':
-				if ($is_post) $this->user->change_password();
+				if ($this->is_post) $this->user->change_password();
 				break;
 		}
 	}

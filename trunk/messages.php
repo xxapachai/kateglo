@@ -82,7 +82,7 @@ $msg = array(
 	'phrase_type' => 'Tipe',
 	'pronounciation' => 'Pelafalan',
 	'proverb' => 'Peribahasa',
-	'phrase_na' => 'Lema yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai lama ini.',
+	'phrase_na' => 'Lema yang dicari tidak ditemukan, namun berikut adalah data lain yang ditemukan mengenai lema ini.',
 	'pwd_current' => 'Kata sandi sekarang',
 	'pwd_new' => 'Kata sandi baru',
 	'pwd_retype' => 'Ketik ulang kata sandi baru',
@@ -113,9 +113,9 @@ $msg = array(
 	'url_invalid' => 'Alamat situs tidak valid',
 	'username' => 'Pengguna',
 
-	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - <strong>ka</strong>mus, <strong>te</strong>saurus, dan <strong>glo</strong>sarium bahasa Indonesia.</big></p>
-		<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari lema yang Anda inginkan.</p>
-		<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glo">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dict">kamus dan tesaurus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
+	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia.</big></p>' . LF .
+		'<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari lema yang Anda inginkan.</p>' . LF .
+		'<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glo">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dict">kamus dan tesaurus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
 );

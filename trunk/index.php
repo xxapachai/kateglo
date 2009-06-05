@@ -2,19 +2,16 @@
 /**
  * Entry point of application
  */
-
 // constants
-define(LF, "\n"); // line break
+define(APP_VERSION, 'v0.0.17'); // application version. See README.txt
 define(APP_NAME, 'Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
 define(APP_SHORT, 'Kateglo (Beta)'); // application name
-define(APP_VERSION, 'v0.0.16'); // application version. See README.txt
+define(LF, "\n"); // line break
 
 // variables
 $base_dir = dirname(__FILE__);
-$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 ini_set('include_path', $base_dir . '/pear/');
-foreach ($_GET as $key => $val)
-	$_GET[$key] = trim($val);
+foreach ($_GET as $key => $val) $_GET[$key] = trim($val);
 
 // includes
 require_once('config.php');
@@ -86,7 +83,7 @@ $ret .= $body;
 $ret .= sprintf('<p>' .
 	'<span style="float:right;">' .
 	'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
-	'<img alt="Creative Commons License" style="border-width:0" ' .
+	'<img title="%6$s" alt="%6$s" style="border-width:0" ' .
 	'src="./images/cc-by-nc-sa.png" />' .
 	'</a></span>' .
 	'<a href="%2$s">%1$s %3$s</a>' .
@@ -97,7 +94,8 @@ $ret .= sprintf('<p>' .
 	'./?mod=doc&doc=README.txt',
 	APP_VERSION,
 	'./?mod=comment',
-	$msg['comment_link']
+	$msg['comment_link'],
+	'CC-BY-NC-SA'
 );
 // stats
 if ($allow_stat) $ret .= get_external_stat();
