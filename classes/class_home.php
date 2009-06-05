@@ -5,19 +5,12 @@
 class home extends page
 {
 
-	var $db;
-	var $auth;
-	var $msg;
-	var $title;
-
 	/**
 	 * Constructor
 	 */
 	function home(&$db, &$auth, $msg)
 	{
-		$this->db = $db;
-		$this->auth = $auth;
-		$this->msg = $msg;
+		parent::page(&$db, &$auth, $msg);
 	}
 
 	/**

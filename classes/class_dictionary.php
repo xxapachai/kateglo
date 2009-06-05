@@ -8,6 +8,15 @@ class dictionary extends page
 {
 	var $kbbi;
 	var $phrase;
+	var $online = true;
+
+	/**
+	 * Constructor
+	 */
+	function dictionary(&$db, &$auth, $msg)
+	{
+		parent::page(&$db, &$auth, $msg);
+	}
 
 	/**
 	 *
@@ -16,8 +25,7 @@ class dictionary extends page
 	{
 		global $_GET;
 		global $_SERVER;
-		$is_post = ($_SERVER['REQUEST_METHOD'] == 'POST');
-		if ($is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
+		if ($this->is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
 			$this->save_form();
 		// refresh KBBI
 		if ($_GET['phrase'] && $_GET['action'] == 'kbbi')
@@ -50,6 +58,14 @@ class dictionary extends page
 				break;
 			default:
 				$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
+				// menu
+				if ($this->auth->checkAuth())
+				{
+					$actions = array(
+						'new' => array('url' => './?mod=dict&action=form'),
+					);
+					$ret .= $this->get_action_buttons($actions);
+				}
 				$ret .= $this->show_search();
 				$ret .= $this->show_list();
 				break;
@@ -62,6 +78,8 @@ class dictionary extends page
 	 */
 	function show_list()
 	{
+
+		// index or phrase
 		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'])
 		{
 			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
@@ -70,10 +88,10 @@ class dictionary extends page
 			$ret .= '<a href="./?mod=dict&idx=-">-</a>';
 			for ($i = 65; $i <= 90; $i++)
 			{
-				$ret .= '; ';
+				$ret .= '; ' . LF;
 				$ret .= sprintf('<a href="./?mod=dict&idx=%1$s">%1$s</a>', chr($i));
 			}
-			$ret .= '</blockquote>' . LF;
+			$ret .= LF . '</blockquote>' . LF;
 			$ret .= '<p><strong>' . $this->msg['dict_by_lex'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM lexical_class ORDER BY sort_order;');
 			if ($row_count = $this->db->num_rows)
@@ -82,12 +100,12 @@ class dictionary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= '; ';
+					if ($i > 0) $ret .= '; ' . LF;
 					$ret .= sprintf('<a href="./?mod=dict&lex=%2$s">%1$s</a>',
 						$row['lex_class_name'], $row['lex_class']);
 					$i++;
 				}
-				$ret .= '</blockquote>' . LF;
+				$ret .= LF . '</blockquote>' . LF;
 			}
 			$ret .= '<p><strong>' . $this->msg['dict_by_type'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM phrase_type ORDER BY sort_order;');
@@ -97,24 +115,14 @@ class dictionary extends page
 				$i = 0;
 				foreach ($rows as $row)
 				{
-					if ($i > 0) $ret .= '; ';
+					if ($i > 0) $ret .= '; ' . LF;
 					$ret .= sprintf('<a href="./?mod=dict&type=%2$s">%1$s</a>',
 						$row['phrase_type_name'], $row['phrase_type']);
 					$i++;
 				}
-				$ret .= '</blockquote>' . LF;
+				$ret .= LF . '</blockquote>' . LF;
 			}
 			return($ret);
-		}
-
-		// menu
-		if ($this->auth->checkAuth())
-		{
-			$ret .= '<p>';
-			$ret .= sprintf('<a href="%1$s">%2$s</a>',
-				'./?mod=dict&action=form',
-				$this->msg['new']);
-			$ret .= '</p>' . LF;
 		}
 
 		// get result
@@ -201,44 +209,31 @@ class dictionary extends page
 			$phrase = $this->phrase;
 		}
 
+		// header
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
+
 		// kbbi header
 		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
 
-		// header
-		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
 		if ($this->auth->checkAuth())
 		{
-			$ret .= '<p>';
-			if ($phrase)
-			{
-				$ret .= sprintf('<a href="%1$s">%2$s</a>',
-					sprintf('./?mod=dict&action=form', $_GET['phrase']),
-					$this->msg['new']
-					);
-				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
-					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
-					$this->msg['edit']);
-				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
-					'./?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
-					$this->msg['get_kbbi']);
-			}
-			else
-			{
-				$ret .= sprintf('<a href="%1$s">%2$s</a>',
-					'./?mod=dict&action=form&phrase=' . $_GET['phrase'],
-					$this->msg['new']);
-				$ret .= sprintf(' | <a href="%1$s">%2$s</a>',
-					'./?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
-					$this->msg['get_kbbi']);
-			}
-			$ret .= '</p>' . LF;
+			$actions = array(
+				'new' => array(
+					'url' => './?mod=dict&action=form',
+				),
+				'edit' => array(
+					'url' => './?mod=dict&action=form&phrase=' . $_GET['phrase'],
+				),
+				'get_kbbi' => array(
+					'url' => './?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
+				),
+			);
+			$ret .= $this->get_action_buttons($actions, $phrase ? null : array('new', 'get_kbbi'));
 		}
 
 		// found?
 		if ($phrase)
 		{
-
-			$template = '<p><strong>%1$s:</strong></p><blockquote>%2$s</blockquote>' . LF;
 
 			// definition
 			$defs = $phrase['definition'];
@@ -281,6 +276,7 @@ class dictionary extends page
 				$ret .= '<p>' . $this->msg['na']. '</p>' . LF;
 
 			// misc
+			$template = '<p><strong>%1$s:</strong></p>' . LF . '<blockquote>%2$s</blockquote>' . LF;
 			if ($phrase['lex_class_name'])
 			{
 				$lex_name = $phrase['lex_class_name'];
@@ -368,7 +364,7 @@ class dictionary extends page
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['thesaurus']);
 		if ($phrase['relation']['relation_all'] == 0)
 		{
-			$ret .= $this->msg['na'];
+			$ret .= '<p>' . $this->msg['nf']. '</p>' . LF;
 			return($ret);
 		}
 		foreach ($phrase['relation'] as $type_key => $type)
@@ -428,8 +424,14 @@ class dictionary extends page
 
 		// header
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
-		$ret .= sprintf('<p><a href="%1$s">%2$s</a></p>' . LF,
-			'./?mod=dict' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']), $this->msg['cancel']);
+
+		$actions = array(
+			'cancel' => array(
+				'url' => './?mod=dict' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']),
+			),
+		);
+		$ret .= $this->get_action_buttons($actions);
+
 		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['actual_phrase'], $form->get_element('actual_phrase'));
@@ -580,7 +582,7 @@ class dictionary extends page
 		$ret .= $form->begin_form();
 		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
-		$ret .= '<br />';
+		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex'));
 		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('type'));
 		$ret .= $form->get_element('mod');
@@ -813,8 +815,7 @@ class dictionary extends page
 		$old_key = $_GET['phrase'];
 		$new_key = $_POST['phrase'];
 		// main
-		$query = $is_new ? 'INSERT INTO' : 'UPDATE';
-		$query .= ' phrase SET ';
+		$query = ($is_new ? 'INSERT INTO' : 'UPDATE') . ' phrase SET ';
 		$query .= sprintf('
 			phrase = %1$s,
 			phrase_type = %2$s,
@@ -990,7 +991,8 @@ class dictionary extends page
 	{
 		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
 		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
-		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+		if ($this->online)
+			$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 		$ret .= '</td></tr></table>' . LF;
 
 		return($ret);

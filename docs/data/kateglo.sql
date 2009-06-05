@@ -184,6 +184,7 @@ create table phrase
    created              datetime,
    creator              varchar(32),
    proverb_updated      datetime,
+   wikipedia_updated    datetime,
    primary key (phrase)
 );
 

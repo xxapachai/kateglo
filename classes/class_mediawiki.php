@@ -30,6 +30,7 @@ class mediawiki
 	 */
 	function get_page_info($titles)
 	{
+		if (!is_array($titles)) return;
 		foreach ($titles as $title)
 		{
 			$title_var .= $title_var ? '|' : '';
@@ -90,9 +91,10 @@ class mediawiki
 				{
 					foreach ($lang_ret['query']['pages'] as $key => $value)
 					{
-						if ($value['langlinks'])
+						if ($value['langlinks'] !== null)
 						{
-							$pages[$value['title']]['langlinks'] = $value['langlinks'];
+							foreach ($value['langlinks'] as $lang)
+								$pages[$value['title']]['langlinks'][$lang['lang']] = $lang['*'];
 						}
 					}
 				}
@@ -103,7 +105,9 @@ class mediawiki
 			foreach ($titles as $title)
 			{
 				$key = $title;
-				if (array_key_exists($key, $normalized)) $key = $normalized[$key];
+				if (is_array($normalized))
+					if (array_key_exists($key, $normalized))
+						$key = $normalized[$key];
 				if (array_key_exists($key, $pages))
 				{
 					$ret[$title] = array(

@@ -25,7 +25,7 @@ function login($username = null, $status = null, &$auth = null)
 	if ($is_post && !$auth->checkAuth()) $welcome = $msg['login_failed'] . ' ' . $welcome;
 
 	$ret .= '<h1>' . $msg['login'] . '</h1>' . LF;
-	$ret .= sprintf('<p>%1$s</p>' . LF, $msg['login_beta']);
+	if (!$auth->checkAuth()) $ret .= sprintf('<p>%1$s</p>' . LF, $msg['login_beta']);
 	$ret .= sprintf('<p>%1$s</p>' . LF, $welcome);
 
 	if (!$auth->checkAuth())
