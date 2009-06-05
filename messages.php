@@ -5,6 +5,7 @@
  */
 $msg = array(
 	'all' => 'Semua',
+	'all_entry' => 'Lihat semua entri',
 	'actual_phrase' => 'Alihkan ke',
 
 	'cancel' => 'Batal',

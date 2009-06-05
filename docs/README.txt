@@ -80,6 +80,8 @@ Kateglo.
 
 === 0.0.17 (04 Juni 2009) ===
 
+* Kamus & Glosarium: Pranala untuk melihat semua entri
+* Kamus & Glosarium: Pencarian semua entri
 * Glosarium: Pencarian rujukan otomatis dari Wikipedia
 * Umum: Tampilan tombol operasi
 

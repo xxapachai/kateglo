@@ -94,6 +94,10 @@ class glossary extends page
 		else
 		{
 			$is_main = true;
+			$ret .= sprintf('<p><strong><a href="%1$s">%2$s</a></strong></p>' . LF,
+				'./?mod=glo&srch=all', $this->msg['all_entry']
+			);
+
 			$ret .= '<p><strong>' . $this->msg['glo_by_discipline'] . '</strong></p>' . LF;
 			$rows = $this->db->get_rows('SELECT * FROM discipline ORDER BY discipline;');
 			if ($row_count = $this->db->num_rows)
