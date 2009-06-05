@@ -82,6 +82,10 @@ class dictionary extends page
 		// index or phrase
 		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'] && !$_GET['srch'])
 		{
+			$ret .= sprintf('<p><strong><a href="%1$s">%2$s</a></strong></p>' . LF,
+				'./?mod=dict&srch=all', $this->msg['all_entry']
+			);
+
 			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
 			$ret .= '<blockquote>' . LF;
 			$i = 0;
