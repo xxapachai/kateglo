@@ -80,7 +80,7 @@ class dictionary extends page
 	{
 
 		// index or phrase
-		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'])
+		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'] && !$_GET['srch'])
 		{
 			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
 			$ret .= '<blockquote>' . LF;
@@ -569,12 +569,16 @@ class dictionary extends page
 		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
 		$form->addElement('text', 'phrase', $this->msg['phrase']);
 		$form->addElement('select', 'lex', $this->msg['lex_class'],
-			$this->db->get_row_assoc('SELECT lex_class, lex_class_name FROM lexical_class ORDER BY sort_order', 'lex_class', 'lex_class_name')
+			$this->db->get_row_assoc(
+				'SELECT lex_class, lex_class_name FROM lexical_class ORDER BY sort_order',
+				'lex_class', 'lex_class_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'type', $this->msg['phrase_type'],
-			$this->db->get_row_assoc('SELECT phrase_type, phrase_type_name FROM phrase_type ORDER BY sort_order', 'phrase_type', 'phrase_type_name')
+			$this->db->get_row_assoc(
+				'SELECT phrase_type, phrase_type_name FROM phrase_type ORDER BY sort_order',
+				'phrase_type', 'phrase_type_name', $this->msg['all'])
 			);
-		$form->addElement('submit', 'search', $this->msg['search_button']);
+		$form->addElement('submit', 'srch', $this->msg['search_button']);
 
 		$template = '%1$s: %2$s ' . LF;
 		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
@@ -586,7 +590,7 @@ class dictionary extends page
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex'));
 		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('type'));
 		$ret .= $form->get_element('mod');
-		$ret .= $form->get_element('search');
+		$ret .= $form->get_element('srch');
 		$ret .= $form->end_form();
 		$ret .= '</fieldset>' . LF;
 

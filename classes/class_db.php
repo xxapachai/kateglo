@@ -120,10 +120,10 @@ class db
 	 * @param $query string
 	 * @return Array of columns
 	 */
-	function get_row_assoc($query, $key, $value, $has_empty = true)
+	function get_row_assoc($query, $key, $value, $has_empty = ' ')
 	{
 		$rows = $this->get_rows($query);
-		if ($has_empty) $ret[''] = '';
+		if ($has_empty) $ret[''] = $has_empty;
 		if ($this->num_rows > 0)
 		{
 			for ($i = 0; $i < $this->num_rows; $i++)
