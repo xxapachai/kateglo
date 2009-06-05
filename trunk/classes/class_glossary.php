@@ -185,7 +185,7 @@ class glossary extends page
 			$where .= ' a.ref_source = \'' . $src . '\' ';
 		}
 		if ($this->sublist) $this->db->defaults['rperpage'] = 20;
-		$cols = 'a.original, a.phrase, b.discipline_name, a.glo_uid, a.discipline, a.ref_source, a.wpid, a.wpen';
+		$cols = 'a.original, a.phrase, b.discipline_name, a.glo_uid, a.discipline, a.ref_source, a.wpid, a.wpen, a.wikipedia_updated';
 		$from = 'FROM glossary a
 			LEFT JOIN discipline b ON a.discipline = b.discipline
 			LEFT JOIN ref_source c ON a.ref_source = c.ref_source
@@ -195,25 +195,35 @@ class glossary extends page
 
 		if ($this->db->num_rows > 0)
 		{
-
 			// get wikipedia definition, only do it when no definition
 			$i = 0;
+			$wp_uid = '';
 			foreach ($rows as $row)
 			{
-				if (!$row['wpen'])
+				if (!$row['wikipedia_updated'])
 				{
-					$lemma_en[] = $row['original'];
-					$idx_en[$row['original']][] = $i;
-				}
-				if (!$row['wpid'])
-				{
-					$lemma_id[] = $row['phrase'];
-					$idx_id[$row['phrase']][] = $i;
+					if (!$row['wpen'])
+					{
+						$lemma_en[] = $row['original'];
+						$idx_en[$row['original']][] = $i;
+					}
+					if (!$row['wpid'])
+					{
+						$lemma_id[] = $row['phrase'];
+						$idx_id[$row['phrase']][] = $i;
+					}
+					$wp_uid .= $wp_uid ? ', ' : '';
+					$wp_uid .= $row['glo_uid'];
 				}
 				$i++;
 			}
-			$this->get_wikipedia('en', $lemma_en, $idx_en, &$rows);
-			$this->get_wikipedia('id', $lemma_id, $idx_id, &$rows);
+			if ($wp_uid)
+			{
+				$this->get_wikipedia('en', $lemma_en, $idx_en, &$rows);
+				$this->get_wikipedia('id', $lemma_id, $idx_id, &$rows);
+				$query = 'UPDATE glossary SET wikipedia_updated = NOW() WHERE glo_uid IN (' . $wp_uid . ');';
+				$this->db->exec($query);
+			}
 
 			// print
 			$ret .= '<p>';
@@ -473,7 +483,7 @@ class glossary extends page
 
 				// english wikipedia
 				$query = sprintf(
-					'UPDATE glossary SET wp%3$s = %1$s WHERE IN (%2$s);',
+					'UPDATE glossary SET wp%3$s = %1$s WHERE glo_uid IN (%2$s);',
 					$this->db->quote($page['to']),
 					$uids,
 					$wp
@@ -481,18 +491,6 @@ class glossary extends page
 				$this->db->exec($query);
 				foreach ($idx[$key] as $uid)
 					$rows[$uid]['wp' . $wp] = $page['to'];
-//				if (is_array($page['langlinks']))
-//					if (array_key_exists('id', $page['langlinks']))
-//					{
-//						$query = sprintf(
-//							'UPDATE glossary SET wpid = %1$s WHERE glo_uid IN (%2$s);',
-//							$this->db->quote($page['langlinks']['id']),
-//							$uids
-//						);
-//						$this->db->exec($query);
-//					foreach ($idx[$key] as $uid)
-//						$rows[$uid]['wpid'] = $page['langlinks']['id'];
-//					}
 			}
 			$i++;
 		}

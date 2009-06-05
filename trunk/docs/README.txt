@@ -79,7 +79,8 @@ Kateglo.
 
 === 0.0.18 (05 Juni 2009) ===
 
-* Kamus: Update data info dari KBBI untuk yang belum tersedia
+* Glosarium: Menambahkan wikipedia_updated untuk efisiensi proses
+* Kamus: Memperbarui data info dari KBBI untuk yang belum tersedia
 * Sistem: Tabel cache untuk menampung data KBBI
 * Kamus: Menambahkan kolom info dan notes untuk tambahan informasi
 
