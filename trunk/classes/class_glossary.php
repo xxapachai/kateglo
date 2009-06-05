@@ -198,12 +198,18 @@ class glossary extends page
 			{
 				if (!$row['wpen'])
 				{
-					$lemma[] = $row['original'];
-					$idx[$row['original']][] = $i;
+					$lemma_en[] = $row['original'];
+					$idx_en[$row['original']][] = $i;
+				}
+				if (!$row['wpid'])
+				{
+					$lemma_id[] = $row['phrase'];
+					$idx_id[$row['phrase']][] = $i;
 				}
 				$i++;
 			}
-			$this->get_wikipedia($lemma, $idx, &$rows);
+			$this->get_wikipedia('en', $lemma_en, $idx_en, &$rows);
+			$this->get_wikipedia('id', $lemma_id, $idx_id, &$rows);
 
 			// print
 			$ret .= '<p>';
@@ -439,9 +445,9 @@ class glossary extends page
 		return($keyword);
 	}
 
-	function get_wikipedia($lemma, $idx, &$rows)
+	function get_wikipedia($wp, $lemma, $idx, &$rows)
 	{
-		$mw = new mediawiki('en');
+		$mw = new mediawiki($wp);
 		$pages = $mw->get_page_info($lemma);
 		$i = 0;
 
@@ -459,25 +465,26 @@ class glossary extends page
 
 				// english wikipedia
 				$query = sprintf(
-					'UPDATE glossary SET wpen = %1$s WHERE IN (%2$s);',
+					'UPDATE glossary SET wp%3$s = %1$s WHERE IN (%2$s);',
 					$this->db->quote($page['to']),
-					$uids
+					$uids,
+					$wp
 				);
 				$this->db->exec($query);
 				foreach ($idx[$key] as $uid)
-					$rows[$uid]['wpen'] = $page['to'];
-				if (is_array($page['langlinks']))
-					if (array_key_exists('id', $page['langlinks']))
-					{
-						$query = sprintf(
-							'UPDATE glossary SET wpid = %1$s WHERE glo_uid IN (%2$s);',
-							$this->db->quote($page['langlinks']['id']),
-							$uids
-						);
-						$this->db->exec($query);
-					foreach ($idx[$key] as $uid)
-						$rows[$uid]['wpid'] = $page['langlinks']['id'];
-					}
+					$rows[$uid]['wp' . $wp] = $page['to'];
+//				if (is_array($page['langlinks']))
+//					if (array_key_exists('id', $page['langlinks']))
+//					{
+//						$query = sprintf(
+//							'UPDATE glossary SET wpid = %1$s WHERE glo_uid IN (%2$s);',
+//							$this->db->quote($page['langlinks']['id']),
+//							$uids
+//						);
+//						$this->db->exec($query);
+//					foreach ($idx[$key] as $uid)
+//						$rows[$uid]['wpid'] = $page['langlinks']['id'];
+//					}
 			}
 			$i++;
 		}
