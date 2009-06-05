@@ -387,7 +387,7 @@ class dictionary extends page
 	{
 		global $_GET;
 		$phrase = $this->get_phrase();
-		if (!$phrase) $is_new = true;
+		$is_new = $phrase ? 0 : 1;
 		$url = './?mod=dict&action=form&phrase=' . ($phrase ? $_GET['phrase'] : '') . '';
 		if ($is_new) $phrase['phrase'] = $_GET['phrase'];
 

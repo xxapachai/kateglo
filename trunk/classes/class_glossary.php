@@ -324,7 +324,7 @@ class glossary extends page
 		$query = 'SELECT a.* FROM glossary a
 			WHERE a.glo_uid = ' . $this->db->quote($_GET['uid']);
 		$this->entry = $this->db->get_row($query);
-		$is_new = !is_array($this->entry);
+		$is_new = is_array($this->entry) ? 0 : 1;
 
 		$form = new form('entry_form', null, './' . $this->get_url_param());
 		$form->setup($this->msg);
@@ -359,7 +359,7 @@ class glossary extends page
 	function save_form()
 	{
 		global $_GET, $_POST;
-		$is_new = (!$_POST['is_new']);
+		$is_new = ($_POST['is_new'] == 1);
 
 		// construct query
 		$query = ($is_new ? 'INSERT INTO' : 'UPDATE') . ' glossary SET ';
@@ -385,7 +385,7 @@ class glossary extends page
 				$this->db->quote($_POST['glo_uid'])
 			);
 
-		die($query);
+		// die($query);
 		$this->db->exec($query);
 
 		// redirect
