@@ -10,6 +10,7 @@
  */
 class kbbi
 {
+	var $db;
 	var $msg;
 	var $param;
 	var $defs;
@@ -18,6 +19,7 @@ class kbbi
 	var $found = false;
 	var $online = true;
 	var $auto_parse = false;
+	var $force_refresh = false;
 	var $raw_entries; // individual match from kbbi
 	var $parsed_entries; // parsed value
 	var $clean_entries; // parsed individual
@@ -30,8 +32,9 @@ class kbbi
 	/**
 	 * Constructor
 	 */
-	function kbbi($msg = null)
+	function kbbi($msg = null, &$db = null)
 	{
+		if ($db) $this->db = $db;
 		if ($msg) $this->msg = $msg;
 	}
 
@@ -40,6 +43,15 @@ class kbbi
 	 */
 	function query($query, $mode)
 	{
+		if ($ret = $this->get_cache($query))
+		{
+			if (!$this->force_refresh)
+			{
+				return($ret);
+			}
+		}
+
+		$ret = '';
 		$this->query = $query;
 		$this->mode = $mode;
 		$this->param = array(
@@ -55,16 +67,17 @@ class kbbi
 		if ($this->online && $this->param['dftkata'])
 		{
 			$words = explode(';', $this->param['dftkata']);
-			// $ret .= 'Ditemukan ' . count($words) . ' entri<hr size="1" />' . LF;
 			foreach ($words as $word)
 			{
 				$ret .= $this->define($word) . '' . LF;
 			}
 			$this->found = true;
+			$this->save_cache($query, $ret);
 		}
 		else
 		{
 			$ret .= $this->msg['nf'] . LF;
+			$this->save_cache($query, null);
 		}
 
 		// return
@@ -180,6 +193,7 @@ class kbbi
 	{
 		// prepare def
 		$this->found = false;
+		$this->force_refresh = true;
 		$kbbi_data = '';
 		unset($this->raw_entries);
 		unset($this->defs);
@@ -774,6 +788,8 @@ class kbbi
 		}
 	}
 
+	/**
+	 */
 	function get_local($phrase)
 	{
 		global $_SERVER;
@@ -800,5 +816,36 @@ class kbbi
 			}
 		}
 	}
+
+	/**
+	 */
+	function get_cache($phrase)
+	{
+		$query = sprintf('SELECT content FROM sys_cache
+			WHERE phrase = %1$s;',
+			$this->db->quote($phrase));
+		return($this->db->get_row_value($query));
+	}
+
+	/**
+	 */
+	function save_cache($phrase, $cache)
+	{
+		$query = sprintf('DELETE FROM sys_cache
+			WHERE cache_type = \'kbbi\' AND phrase = %1$s;',
+			$this->db->quote($phrase)
+		);
+		$this->db->exec($query);
+		$query = sprintf('INSERT INTO sys_cache SET
+			cache_type = \'kbbi\',
+			updated = NOW(),
+			phrase = %1$s,
+			content = %2$s;',
+			$this->db->quote($phrase),
+			$this->db->quote($cache)
+		);
+		$this->db->exec($query);
+	}
+
 };
 ?>

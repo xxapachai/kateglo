@@ -237,7 +237,7 @@ class glossary extends page
 
 			// rows
 			$i = 0;
-			$tmp = '<td align="%2$s">%1$s</td>' . LF;;
+			$tmp = '<td align="%2$s"%3$s>%1$s</td>' . LF;;
 			foreach ($rows as $row)
 			{
 				$lemma[] = $row['original'];
@@ -247,25 +247,25 @@ class glossary extends page
 				$discipline = './' . $this->get_url_param(array('search', 'uid', 'dc')).
 					'&dc=' . $row['discipline'];
 				$ret .= '<tr valign="top">' . LF;
-				$ret .= sprintf($tmp, ($this->db->pager['rbegin'] + $i) . '.', 'left');
+				$ret .= sprintf($tmp, ($this->db->pager['rbegin'] + $i) . '.', 'left', '');
 				if ($row[$wp1])
-					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase1], $msg1, $row[$wp1]), 'left');
+					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase1], $msg1, $row[$wp1]), 'left', '');
 				else
-					$ret .= sprintf($tmp, $row[$phrase1], 'left');
+					$ret .= sprintf($tmp, $row[$phrase1], 'left', '');
 				if ($row[$wp2])
-					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase2], $msg2, $row[$wp2]), 'left');
+					$ret .= sprintf($tmp, sprintf('<a href="http://%2$s.wikipedia.org/wiki/%3$s">%1$s</a>', $row[$phrase2], $msg2, $row[$wp2]), 'left', '');
 				else
-					$ret .= sprintf($tmp, $row[$phrase2], 'left');
-				$ret .= sprintf($tmp, $this->parse_keywords($row['phrase']), 'left');
+					$ret .= sprintf($tmp, $row[$phrase2], 'left', '');
+				$ret .= sprintf($tmp, $this->parse_keywords($row['phrase']), 'left', '');
 				if ($_GET['dc'])
-					$ret .= sprintf($tmp, $row['discipline_name'], 'center');
+					$ret .= sprintf($tmp, $row['discipline_name'], 'center', 'nowrap="nowrap"');
 				else
-					$ret .= sprintf($tmp, sprintf('<a href="%1$s">%2$s</a>', $discipline, $row['discipline_name']), 'center');
-				$ret .= sprintf($tmp, $row['ref_source'], 'center');
+					$ret .= sprintf($tmp, sprintf('<a href="%1$s">%2$s</a>', $discipline, $row['discipline_name']), 'center', 'nowrap="nowrap"');
+				$ret .= sprintf($tmp, $row['ref_source'], 'center', '');
 				// operation
 				if ($this->auth->checkAuth())
 					$ret .= sprintf($tmp,
-						sprintf('<a href="%1$s">%2$s</a>', $url, $this->msg['edit']), 'left');
+						sprintf('<a href="%1$s">%2$s</a>', $url, $this->msg['edit']), 'left', '');
 				$ret .= '</tr>' . LF;
 				$i++;
 			}
@@ -451,9 +451,13 @@ class glossary extends page
 
 	function get_wikipedia($wp, $lemma, $idx, &$rows)
 	{
+		global $is_offline;
+		if ($is_offline) return;
+
 		$mw = new mediawiki($wp);
 		$pages = $mw->get_page_info($lemma);
 		$i = 0;
+		if (!is_array($pages)) return;
 
 		foreach ($pages as $key => $page)
 		{

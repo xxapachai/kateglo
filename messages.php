@@ -53,6 +53,7 @@ $msg = array(
 	'home' => 'Beranda',
 
 	'id' => 'Bahasa Indonesia',
+	'info' => 'Informasi',
 
 	'kbbi_ref' => '<a href="http://pusatbahasa.diknas.go.id/kbbi/">Rujukan KBBI</a>',
 	'keyword' => 'Kata kunci',
@@ -69,6 +70,7 @@ $msg = array(
 	'logout' => 'Keluar log',
 
 	'new' => 'Buat baru',
+	'notes' => 'Catatan',
 	'new_flag' => '***baru***',
 	'no_most_searched' => '(belum ada)',
 	'na' => 'Belum tersedia.',

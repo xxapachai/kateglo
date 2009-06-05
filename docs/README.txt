@@ -60,7 +60,6 @@ Kateglo.
 
 * Kamus: Penambahan definisi secara dinamis
 * Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
-* Kamus: Simpanan lokal data KBBI
 * Kamus: Pelajari info-info yang tersedia dari KBBI
 * Glosarium: Penambahan/penyuntingan secara sekaligus
 * Glosarium: Pembuatan tautan otomatis untuk lema yang ditemukan di Wikipedia
@@ -77,6 +76,12 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.0.18 (05 Juni 2009) ===
+
+* Kamus: Update data info dari KBBI untuk yang belum tersedia
+* Sistem: Tabel cache untuk menampung data KBBI
+* Kamus: Menambahkan kolom info dan notes untuk tambahan informasi
 
 === 0.0.17 (04 Juni 2009) ===
 
