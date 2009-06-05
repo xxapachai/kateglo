@@ -70,6 +70,8 @@ Kateglo.
 
 == Bug yang diketahui ==
 
+* Frasa "limut" mengandung "lin"
+* Frasa "virus" mengandung "visa"
 * Penyimpanan jika mengganti frasa gagal
 * Kesalahan KBBI: alur, apa
 * Algoritma parser KBBI belum efisien
@@ -79,6 +81,7 @@ Kateglo.
 
 === 0.0.18 (05 Juni 2009) ===
 
+* Perbaikan parser KBBI untuk membuang angka
 * Glosarium: Menambahkan wikipedia_updated untuk efisiensi proses
 * Kamus: Memperbarui data info dari KBBI untuk yang belum tersedia
 * Sistem: Tabel cache untuk menampung data KBBI

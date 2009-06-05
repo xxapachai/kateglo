@@ -349,6 +349,8 @@ class kbbi
 						}
 
 						// phrase that contains number
+						$tmp_pair[$i][$j]['phrase'] = preg_replace('/^(\d+)/U', '', $tmp_pair[$i][$j]['phrase']);
+
 						$tmp_phrase = $tmp_pair[$i][$j]['phrase'];
 						preg_match('/^(.+) (\d+)$/U', $tmp_phrase, $phrase_num);
 						if (count($phrase_num) > 0)
@@ -467,11 +469,18 @@ class kbbi
 		for ($i = 0; $i < $pair_count; $i++)
 		{
 			$pair_count2 = count($tmp_pair[$i]);
+
 			for ($j = 0; $j < $pair_count2; $j++)
 			{
+				// phrase that contains only one letter
+				if ($j > 0 && strlen($tmp_pair[$i][$j]['phrase']) <= 1)
+					unset($tmp_pair[$i][$j]['phrase']);
+
+				// temporary
 				$def = $tmp_pair[$i][$j]['def'];
 				$phrase = $tmp_pair[$i][$j]['phrase'];
 				$see = $tmp_pair[$i][$j]['see'];
+
 
 				// ilmu: fisika
 				if ($def == ';' && $tmp_pair[$i][$j - 1]['def'] = 'lihat')
