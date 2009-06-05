@@ -263,7 +263,7 @@ class dictionary extends page
 				if ($def_count > 1) $ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
-					if ($i == 0) $discipline = $phrase['info'];
+					$discipline = ($i == 0) ? $phrase['info'] : '';
 					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{

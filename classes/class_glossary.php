@@ -459,6 +459,9 @@ class glossary extends page
 		return($keyword);
 	}
 
+	/**
+	 *
+	 */
 	function get_wikipedia($wp, $lemma, $idx, &$rows)
 	{
 		global $is_offline;
