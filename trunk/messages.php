@@ -4,6 +4,7 @@
  *
  */
 $msg = array(
+	'all' => 'Semua',
 	'actual_phrase' => 'Alihkan ke',
 
 	'cancel' => 'Batal',

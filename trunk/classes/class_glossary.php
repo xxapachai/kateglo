@@ -88,7 +88,7 @@ class glossary extends page
 		}
 
 		// if there's phrase
-		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'])
+		if ($_GET['phrase'] || $_GET['dc'] || $_GET['src'] || $_GET['srch'])
 			$ret .= $this->show_result();
 		// nothing, show main page
 		else
@@ -286,16 +286,16 @@ class glossary extends page
 		$form->addElement('hidden', 'mod', 'glo');
 		$form->addElement('text', 'phrase', $this->msg['phrase']);
 		$form->addElement('select', 'dc', $this->msg['discipline'],
-			$this->db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name')
+			$this->db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'lang', $this->msg['lang'],
-			$this->db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name')
+			$this->db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'src', $this->msg['ref_source'],
-			$this->db->get_row_assoc('SELECT ref_source, ref_source_name FROM ref_source', 'ref_source', 'ref_source_name')
+			$this->db->get_row_assoc('SELECT ref_source, ref_source_name FROM ref_source', 'ref_source', 'ref_source_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
-		$form->addElement('submit', 'search', $this->msg['search_button']);
+		$form->addElement('submit', 'srch', $this->msg['search_button']);
 
 		$template = '%1$s: %2$s ' . LF;
 		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
@@ -309,7 +309,7 @@ class glossary extends page
 		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('src'));
 		$ret .= $form->get_element('mod');
-		$ret .= $form->get_element('search');
+		$ret .= $form->get_element('srch');
 		$ret .= $form->end_form();
 		$ret .= '</fieldset>' . LF;
 
