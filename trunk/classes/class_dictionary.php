@@ -8,7 +8,6 @@ class dictionary extends page
 {
 	var $kbbi;
 	var $phrase;
-	var $online = true;
 
 	/**
 	 * Constructor
@@ -30,7 +29,7 @@ class dictionary extends page
 		// refresh KBBI
 		if ($_GET['phrase'] && $_GET['action'] == 'kbbi')
 		{
-			$this->kbbi = new kbbi($this->msg);
+			$this->kbbi = new kbbi($this->msg, &$this->db);
 			$this->kbbi->parse($_GET['phrase']);
 			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
 			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
@@ -204,11 +203,26 @@ class dictionary extends page
 
 		$this->phrase = $this->get_phrase();
 		$phrase = $this->phrase;
-		$this->kbbi = new kbbi($this->msg);
+		$this->kbbi = new kbbi($this->msg, &$this->db);
+
+		// if it's not marked created
 		if (!$phrase['created'])
 		{
+			$this->kbbi->force_refresh = true;
 			$this->kbbi->parse($_GET['phrase']);
 			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
+			$this->kbbi->force_refresh = false;
+			$this->phrase = $this->get_phrase();
+			$phrase = $this->phrase;
+		}
+
+		// if it's not marked created
+		if (!$phrase['kbbi_updated'])
+		{
+			$this->kbbi->force_refresh = true;
+			$this->kbbi->parse($_GET['phrase']);
+			if ($this->kbbi->found) $this->save_kbbi2($_GET['phrase']);
+			$this->kbbi->force_refresh = false;
 			$this->phrase = $this->get_phrase();
 			$phrase = $this->phrase;
 		}
@@ -249,6 +263,7 @@ class dictionary extends page
 				if ($def_count > 1) $ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
+					$discipline = $phrase['info'];
 					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{
@@ -259,6 +274,11 @@ class dictionary extends page
 					}
 					else
 					{
+						if ($def['discipline'])
+						{
+							$discipline .= $discipline ? ', ' : '';
+							$discipline .= $def['discipline'];
+						}
 						$lex_name = $def['lex_class'];
 						if ($def['lex_class_ref'])
 							$lex_name = sprintf('<a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
@@ -266,7 +286,7 @@ class dictionary extends page
 								$def['lex_class_ref']);
 						$ret .= sprintf('%4$s%2$s%1$s%3$s',
 							$def['def_text'],
-							$def['discipline'] ? '<em>(' . $def['discipline'] . ')</em> ' : '',
+							$discipline ? '<em>(' . $discipline . ')</em> ' : '',
 							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
 							$def['lex_class'] ? '<em>' . $lex_name . '</em> ' : ''
 						);
@@ -415,6 +435,10 @@ class dictionary extends page
 			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'actual_phrase', $this->msg['actual_phrase'],
 			array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'info', $this->msg['info'],
+			array('size' => 40, 'maxlength' => '255'));
+		$form->addElement('text', 'notes', $this->msg['notes'],
+			array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('submit', 'save', $this->msg['save']);
 		$form->addRule('phrase', sprintf($this->msg['required_alert'], $this->msg['phrase']), 'required', null, 'client');
 		$form->addRule('phrase_type', sprintf($this->msg['required_alert'], $this->msg['phrase_type']), 'required', null, 'client');
@@ -441,10 +465,12 @@ class dictionary extends page
 		$ret .= sprintf($template, $this->msg['actual_phrase'], $form->get_element('actual_phrase'));
 		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('phrase_type'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
+		$ret .= sprintf($template, $this->msg['info'], $form->get_element('info'));
 		$ret .= sprintf($template, $this->msg['pronounciation'], $form->get_element('pronounciation'));
 		$ret .= sprintf($template, $this->msg['etymology'], $form->get_element('etymology'));
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('ref_source'));
 		$ret .= sprintf($template, $this->msg['roget_class'], $form->get_element('roget_class'));
+		$ret .= sprintf($template, $this->msg['notes'], $form->get_element('notes'));
 		$ret .= '</table>' . LF;
 
 		// definition
@@ -495,7 +521,7 @@ class dictionary extends page
 
 		// kbbi
 		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['kbbi_ref']);
-		$this->kbbi = new kbbi($this->msg);
+		$this->kbbi = new kbbi($this->msg, &$this->db);
 		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 
 		//var_dump($form->toArray());
@@ -832,7 +858,9 @@ class dictionary extends page
 			etymology = %5$s,
 			ref_source = %6$s,
 			roget_class = %7$s,
-			updater = %8$s,
+			info = %8$s,
+			notes = %9$s,
+			updater = %10$s,
 			updated = NOW()',
 			$this->db->quote($new_key),
 			$this->db->quote($_POST['phrase_type']),
@@ -841,6 +869,8 @@ class dictionary extends page
 			$this->db->quote($_POST['etymology']),
 			$this->db->quote($_POST['ref_source']),
 			$this->db->quote($_POST['roget_class']),
+			$this->db->quote($_POST['info']),
+			$this->db->quote($_POST['notes']),
 			$this->db->quote($this->auth->getUsername())
 		);
 		if ($is_new)
@@ -997,9 +1027,10 @@ class dictionary extends page
 	 */
 	function show_kbbi()
 	{
+		global $is_offline;
 		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
 		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
-		if ($this->online)
+		if (!$is_offline)
 			$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 		$ret .= '</td></tr></table>' . LF;
 
@@ -1011,6 +1042,9 @@ class dictionary extends page
 	 */
 	function save_kbbi($phrase)
 	{
+		global $is_offline;
+		if ($is_offline) return;
+
 		if ($this->kbbi->defs)
 		{
 			foreach($this->kbbi->defs as $key => $value)
@@ -1033,7 +1067,9 @@ class dictionary extends page
 						phrase_type = IFNULL(%3$s, \'\'),
 						pronounciation = %4$s,
 						actual_phrase = %5$s,
+						info = %6$s,
 						updated = NOW(),
+						kbbi_updated = NOW(),
 						created = NOW(),
 						ref_source = \'Pusba\'
 					WHERE phrase = %1$s;',
@@ -1041,7 +1077,8 @@ class dictionary extends page
 					$this->db->quote($value['lex_class']),
 					$this->db->quote($value['type']),
 					$this->db->quote($value['pron']),
-					$this->db->quote($value['actual'])
+					$this->db->quote($value['actual']),
+					$this->db->quote($value['info'])
 				);
 				$this->db->exec($query);
 				//die($query . '<br />');
@@ -1135,5 +1172,30 @@ class dictionary extends page
 
 	}
 
+	/**
+	 * Save KBBI (selected)
+	 */
+	function save_kbbi2($phrase)
+	{
+		global $is_offline;
+		if ($is_offline) return;
+
+		if ($this->kbbi->defs)
+		{
+			foreach($this->kbbi->defs as $key => $value)
+			{
+				// update phrase
+				$query = sprintf(
+					'UPDATE phrase SET
+						info = %2$s,
+						kbbi_updated = NOW()
+					WHERE phrase = %1$s;',
+					$this->db->quote($key),
+					$this->db->quote($value['info'])
+				);
+				$this->db->exec($query);
+			}
+		}
+	}
 };
 ?>
