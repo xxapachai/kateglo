@@ -861,7 +861,8 @@ class dictionary extends page
 			roget_class = %7$s,
 			info = %8$s,
 			notes = %9$s,
-			updater = %10$s,
+			actual_phrase = %10$s,
+			updater = %11$s,
 			updated = NOW()',
 			$this->db->quote($new_key),
 			$this->db->quote($_POST['phrase_type']),
@@ -872,6 +873,7 @@ class dictionary extends page
 			$this->db->quote($_POST['roget_class']),
 			$this->db->quote($_POST['info']),
 			$this->db->quote($_POST['notes']),
+			$this->db->quote($_POST['actual_phrase']),
 			$this->db->quote($this->auth->getUsername())
 		);
 		if ($is_new)
