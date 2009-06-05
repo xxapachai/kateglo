@@ -1,6 +1,7 @@
 alter table phrase add info varchar(255) comment 'Additional information' after actual_phrase;
 alter table phrase add notes varchar(4000) comment 'Additional information' after info;
 alter table phrase add kbbi_updated datetime after wikipedia_updated;
+alter table glossary add wikipedia_updated datetime;
 
 drop table if exists sys_cache;
 
