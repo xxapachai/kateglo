@@ -139,6 +139,8 @@ class kbbi
 			// manual fixes
 			if ($query == 'air')
 				$def = preg_replace('/minuman[\s]+(<br>)+terbuat/U', 'minuman terbuat', $def);
+			if ($query == 'tarik')
+				$def = preg_replace('/menyenangkan[\s]+(<br>)+\(menggirangkan/U', 'menyenangkan (menggirangkan', $def);
 			if ($query == 'minyak')
 				$def = str_replace('<br><i>--</i><b> adas manis</b>', '<br>--<b> adas manis</b>', $def);
 			if ($query == 'kepala')
