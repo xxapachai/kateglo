@@ -252,7 +252,7 @@ class dictionary extends page
 		// found?
 		if ($phrase)
 		{
-
+			$i = 0;
 			// definition
 			$defs = $phrase['definition'];
 			$def_count = count($defs);
@@ -263,7 +263,7 @@ class dictionary extends page
 				if ($def_count > 1) $ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
-					$discipline = $phrase['info'];
+					if ($i == 0) $discipline = $phrase['info'];
 					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{
@@ -292,6 +292,7 @@ class dictionary extends page
 						);
 					}
 					if ($def_count > 1) $ret .= '</li>' . LF;
+					$i++;
 				}
 				if ($def_count > 1) $ret .= '</ol>' . LF;
 				if ($def_count == 1) $ret .= '</blockquote>' . LF;
