@@ -81,6 +81,7 @@ Kateglo.
 
 === 0.0.18 (05 Juni 2009) ===
 
+* Glosarium: Pemecah kata kunci dibatasi untuk semua yang bukan alfanum
 * Perbaikan parser KBBI untuk membuang angka
 * Glosarium: Menambahkan wikipedia_updated untuk efisiensi proses
 * Kamus: Memperbarui data info dari KBBI untuk yang belum tersedia

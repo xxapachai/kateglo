@@ -432,11 +432,11 @@ class glossary extends page
 	}
 
 	/**
-	 *
+	 * Valid: alphanum and underscore
 	 */
 	function parse_keywords($string)
 	{
-		$keywords = preg_split("/[\s,-;=\'(\)]+/", $string);
+		$keywords = preg_split("/[^\w]+/", $string);
 		$clean_key = array();
 		foreach($keywords as $word)
 		{
