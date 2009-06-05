@@ -61,3 +61,5 @@ delete from relation where related_phrase in ('1 bertarung dng');
 delete from relation where root_phrase in ('1 bertarung dng');
 
 delete from phrase where phrase in ('2');
+
+select * from phrase where phrase regexp '[^[:alpha:]| |-]';
