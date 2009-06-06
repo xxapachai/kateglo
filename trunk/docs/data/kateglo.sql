@@ -1,4 +1,4 @@
--- Last updated: 2009-06-02 16:58
+-- Last updated: 2009-06-06 08:44
 
 drop table if exists definition;
 
@@ -28,7 +28,11 @@ drop table if exists roget_class;
 
 drop table if exists searched_phrase;
 
+drop table if exists sys_abbrev;
+
 drop table if exists sys_action;
+
+drop table if exists sys_cache;
 
 drop table if exists sys_comment;
 
@@ -104,6 +108,7 @@ create table glossary
    wpen                 varchar(255),
    updated              datetime,
    updater              varchar(32),
+   wikipedia_updated    datetime,
    primary key (glo_uid)
 );
 
@@ -179,12 +184,15 @@ create table phrase
    ref_source           varchar(16),
    def_count            int not null default 0,
    actual_phrase        varchar(255),
+   info                 varchar(255) comment 'Additional information',
+   notes                varchar(4000) comment 'Additional notes',
    updated              datetime,
    updater              varchar(32),
    created              datetime,
    creator              varchar(32),
    proverb_updated      datetime,
    wikipedia_updated    datetime,
+   kbbi_updated         datetime,
    primary key (phrase)
 );
 
@@ -299,6 +307,19 @@ create table searched_phrase
 );
 
 /*==============================================================*/
+/* Table: sys_abbrev                                            */
+/*==============================================================*/
+create table sys_abbrev
+(
+   abbrev               varchar(16) not null,
+   label                varchar(255),
+   type                 varchar(16) comment 'lang, discipline, usage',
+   updated              datetime,
+   updater              varchar(32),
+   primary key (abbrev)
+);
+
+/*==============================================================*/
 /* Table: sys_action                                            */
 /*==============================================================*/
 create table sys_action
@@ -309,6 +330,19 @@ create table sys_action
    module               varchar(16),
    description          varchar(4000),
    primary key (action_time, ses_id)
+);
+
+/*==============================================================*/
+/* Table: sys_cache                                             */
+/*==============================================================*/
+create table sys_cache
+(
+   cache_uid            int not null auto_increment,
+   cache_type           varchar(16) not null comment 'kbbi',
+   updated              datetime not null,
+   phrase               varchar(255),
+   content              text,
+   primary key (cache_uid)
 );
 
 /*==============================================================*/

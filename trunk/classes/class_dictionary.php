@@ -32,11 +32,11 @@ class dictionary extends page
 			$this->kbbi = new kbbi($this->msg, &$this->db);
 			$this->kbbi->parse($_GET['phrase']);
 			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
-			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
+			redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
 		}
 		// redirect if none found. psycological effect
 		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$this->get_list())
-			redir('./?mod=dict&action=view&phrase=' . $_GET['phrase']);
+			redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
 	}
 
 	/**
@@ -61,7 +61,7 @@ class dictionary extends page
 				if ($this->auth->checkAuth())
 				{
 					$actions = array(
-						'new' => array('url' => './?mod=dict&action=form'),
+						'new' => array('url' => './?mod=dictionary&action=form'),
 					);
 					$ret .= $this->get_action_buttons($actions);
 				}
@@ -82,17 +82,17 @@ class dictionary extends page
 		if (!$_GET['phrase'] && !$_GET['lex'] && !$_GET['type'] && !$_GET['idx'] && !$_GET['srch'])
 		{
 			$ret .= sprintf('<p><strong><a href="%1$s">%2$s</a></strong></p>' . LF,
-				'./?mod=dict&srch=all', $this->msg['all_entry']
+				'./?mod=dictionary&srch=all', $this->msg['all_entry']
 			);
 
 			$ret .= '<p><strong>' . $this->msg['dict_by_letter'] . '</strong></p>' . LF;
 			$ret .= '<blockquote>' . LF;
 			$i = 0;
-			$ret .= '<a href="./?mod=dict&idx=-">-</a>';
+			$ret .= '<a href="./?mod=dictionary&idx=-">-</a>';
 			for ($i = 65; $i <= 90; $i++)
 			{
 				$ret .= '; ' . LF;
-				$ret .= sprintf('<a href="./?mod=dict&idx=%1$s">%1$s</a>', chr($i));
+				$ret .= sprintf('<a href="./?mod=dictionary&idx=%1$s">%1$s</a>', chr($i));
 			}
 			$ret .= LF . '</blockquote>' . LF;
 			$ret .= '<p><strong>' . $this->msg['dict_by_lex'] . '</strong></p>' . LF;
@@ -104,7 +104,7 @@ class dictionary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=dict&lex=%2$s">%1$s</a>',
+					$ret .= sprintf('<a href="./?mod=dictionary&lex=%2$s">%1$s</a>',
 						$row['lex_class_name'], $row['lex_class']);
 					$i++;
 				}
@@ -119,7 +119,7 @@ class dictionary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=dict&type=%2$s">%1$s</a>',
+					$ret .= sprintf('<a href="./?mod=dictionary&type=%2$s">%1$s</a>',
 						$row['phrase_type_name'], $row['phrase_type']);
 					$i++;
 				}
@@ -182,7 +182,7 @@ class dictionary extends page
 					$ret .= '<td width="33%"><ol start="' . ($this->db->pager['rbegin'] + $i - 1) . '">' . LF;
 					$j += $mark;
 				}
-				$tmp = '<li><a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a></li>' . LF;
+				$tmp = '<li><a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a></li>' . LF;
 				$ret .= sprintf($tmp, $row['phrase']);
 			}
 			$ret .= '</ol></td>' . LF;
@@ -190,7 +190,7 @@ class dictionary extends page
 			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
 		}
 		else
-			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dict&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);
+			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dictionary&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);
 		return($ret);
 	}
 
@@ -200,6 +200,9 @@ class dictionary extends page
 	function show_phrase()
 	{
 		global $_GET;
+
+		$lex_classes = $this->db->get_row_assoc(
+			'SELECT * FROM lexical_class', 'lex_class', 'lex_class_name');
 
 		$this->phrase = $this->get_phrase();
 		$phrase = $this->phrase;
@@ -237,13 +240,13 @@ class dictionary extends page
 		{
 			$actions = array(
 				'new' => array(
-					'url' => './?mod=dict&action=form',
+					'url' => './?mod=dictionary&action=form',
 				),
 				'edit' => array(
-					'url' => './?mod=dict&action=form&phrase=' . $_GET['phrase'],
+					'url' => './?mod=dictionary&action=form&phrase=' . $_GET['phrase'],
 				),
 				'get_kbbi' => array(
-					'url' => './?mod=dict&action=kbbi&phrase=' . $_GET['phrase'],
+					'url' => './?mod=dictionary&action=kbbi&phrase=' . $_GET['phrase'],
 				),
 			);
 			$ret .= $this->get_action_buttons($actions, $phrase ? null : array('new', 'get_kbbi'));
@@ -267,7 +270,7 @@ class dictionary extends page
 					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{
-						$ret .= sprintf('lihat <a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+						$ret .= sprintf('lihat <a href="./?mod=dictionary&action=view&phrase=%2$s">%1$s</a>',
 							$def['see'],
 							$def['see']
 						);
@@ -280,13 +283,17 @@ class dictionary extends page
 							$discipline .= $def['discipline'];
 						}
 						$lex_name = $def['lex_class'];
+						$lex_title = $lex_classes[$def['lex_class']];
 						if ($def['lex_class_ref'])
-							$lex_name = sprintf('<a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+							$lex_name = sprintf(
+								'<a href="./?mod=dictionary&action=view&phrase=%2$s" title="%3$s">%1$s</a>',
 								$def['lex_class'],
-								$def['lex_class_ref']);
+								$def['lex_class_ref'],
+								$lex_title
+							);
 						$ret .= sprintf('%4$s%2$s%1$s%3$s',
 							$def['def_text'],
-							$discipline ? '<em>(' . $discipline . ')</em> ' : '',
+							$discipline ? '<em>(' . $this->get_abbrev($discipline) . ')</em> ' : '',
 							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
 							$def['lex_class'] ? '<em>' . $lex_name . '</em> ' : ''
 						);
@@ -306,7 +313,7 @@ class dictionary extends page
 			{
 				$lex_name = $phrase['lex_class_name'];
 				if ($phrase['lex_class_ref'])
-					$lex_name = sprintf('<a href="./?mod=dict&action=view&phrase=%2$s">%1$s</a>',
+					$lex_name = sprintf('<a href="./?mod=dictionary&action=view&phrase=%2$s">%1$s</a>',
 						$phrase['lex_class_name'],
 						$phrase['lex_class_ref']);
 				$ret .= sprintf($template, $this->msg['lex_class'], $lex_name);
@@ -413,7 +420,7 @@ class dictionary extends page
 		global $_GET;
 		$phrase = $this->get_phrase();
 		$is_new = $phrase ? 0 : 1;
-		$url = './?mod=dict&action=form&phrase=' . ($phrase ? $_GET['phrase'] : '') . '';
+		$url = './?mod=dictionary&action=form&phrase=' . ($phrase ? $_GET['phrase'] : '') . '';
 		if ($is_new) $phrase['phrase'] = $_GET['phrase'];
 
 		$form = new form('phrase_form', null, $url);
@@ -456,7 +463,7 @@ class dictionary extends page
 
 		$actions = array(
 			'cancel' => array(
-				'url' => './?mod=dict' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']),
+				'url' => './?mod=dictionary' . ($is_new ? '' : '&action=view&phrase=' . $_GET['phrase']),
 			),
 		);
 		$ret .= $this->get_action_buttons($actions);
@@ -596,7 +603,7 @@ class dictionary extends page
 	{
 		$form = new form('search_dict', 'get');
 		$form->setup($msg);
-		$form->addElement('hidden', 'mod', 'dict');
+		$form->addElement('hidden', 'mod', 'dictionary');
 		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
 		$form->addElement('text', 'phrase', $this->msg['phrase']);
 		$form->addElement('select', 'lex', $this->msg['lex_class'],
@@ -611,13 +618,12 @@ class dictionary extends page
 			);
 		$form->addElement('submit', 'srch', $this->msg['search_button']);
 
-		$template = '%1$s: %2$s ' . LF;
-		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+		$template = '<span class="search_param">%1$s: %2$s</span>' . LF;
+		$ret .= '<fieldset>' . LF;
 		$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
 		$ret .= $form->begin_form();
 		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
-		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex'));
 		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('type'));
 		$ret .= $form->get_element('mod');
@@ -924,7 +930,7 @@ class dictionary extends page
 		$this->db->exec($query);
 
 		// redirect
-		redir('./?mod=dict&action=view&phrase=' . $new_key);
+		redir('./?mod=dictionary&action=view&phrase=' . $new_key);
 	}
 
 	/**
@@ -1006,15 +1012,20 @@ class dictionary extends page
 	 */
 	function merge_phrase_list($phrases, $col_name, $count = null, $show_lex = false)
 	{
+		$lex_classes = $this->db->get_row_assoc(
+			'SELECT * FROM lexical_class', 'lex_class', 'lex_class_name');
 		if (is_null($count)) $count = count($phrases);
 		if ($count > 0)
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
 				// $ret .= ($i == 0) ? '<br />': '';
-				$ret .= sprintf('<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
+				$ret .= sprintf('<a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
 				if ($show_lex && $phrases[$i]['lex_class'])
-					$ret .= ' (' . $phrases[$i]['lex_class'] . ')';
+					$ret .= sprintf(' (<span title="%1$s">%2$s</span>)',
+						$lex_classes[$phrases[$i]['lex_class']],
+						$phrases[$i]['lex_class']
+					);
 				$ret .= ($i < $count - 1) ? '; ': '';
 			}
 		}
@@ -1022,6 +1033,35 @@ class dictionary extends page
 		{
 			$ret = '';
 		}
+		return($ret);
+	}
+
+	/**
+	 * Get abbreviation
+	 */
+	function get_abbrev($source)
+	{
+		$abbrevs = $this->db->get_row_assoc(
+			'SELECT * FROM sys_abbrev', 'abbrev', 'label');
+		$sources = explode(', ', $source);
+		if (is_array($sources))
+		{
+			$count = count($sources);
+			for ($i = 0; $i < $count; $i++)
+			{
+				$src = $sources[$i];
+				if ($i > 0) $ret .= ', ';
+				if (array_key_exists($src, $abbrevs))
+					$ret .= sprintf('<span title="%1$s">%2$s</span>',
+						$abbrevs[$src],
+						$src
+					);
+				else
+					$ret .= $src;
+			}
+		}
+		else
+			$ret = $source;
 		return($ret);
 	}
 

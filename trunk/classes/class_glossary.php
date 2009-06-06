@@ -77,7 +77,7 @@ class glossary extends page
 		$actions = array(
 			'new' => array('url' => './' .
 				$this->get_url_param(array('search', 'action', 'uid', 'mod')) .
-				'&mod=glo&action=form'
+				'&mod=glossary&action=form'
 			),
 		);
 		if (!$this->sublist)
@@ -95,7 +95,7 @@ class glossary extends page
 		{
 			$is_main = true;
 			$ret .= sprintf('<p><strong><a href="%1$s">%2$s</a></strong></p>' . LF,
-				'./?mod=glo&srch=all', $this->msg['all_entry']
+				'./?mod=glossary&srch=all', $this->msg['all_entry']
 			);
 
 			$ret .= '<p><strong>' . $this->msg['glo_by_discipline'] . '</strong></p>' . LF;
@@ -107,7 +107,7 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=glo&dc=%2$s">%1$s</a> (%3$s)',
+					$ret .= sprintf('<a href="./?mod=glossary&dc=%2$s">%1$s</a> (%3$s)',
 						$row['discipline_name'], $row['discipline'], $row['glossary_count']);
 					$i++;
 				}
@@ -122,7 +122,7 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=glo&src=%2$s">%1$s</a> (%3$s)',
+					$ret .= sprintf('<a href="./?mod=glossary&src=%2$s">%1$s</a> (%3$s)',
 						$row['ref_source_name'], $row['ref_source'], $row['glossary_count']);
 					$i++;
 				}
@@ -253,7 +253,7 @@ class glossary extends page
 				$lemma[] = $row['original'];
 				$uid[] = $row['glo_uid'];
 				$url = './' . $this->get_url_param(array('search', 'action', 'uid', 'mod')) .
-					'&action=form&mod=glo&uid=' . $row['glo_uid'];
+					'&action=form&mod=glossary&uid=' . $row['glo_uid'];
 				$discipline = './' . $this->get_url_param(array('search', 'uid', 'dc')).
 					'&dc=' . $row['discipline'];
 				$ret .= '<tr valign="top">' . LF;
@@ -297,32 +297,37 @@ class glossary extends page
 	{
 		$form = new form('search_glo', 'get');
 		$form->setup($msg);
-		$form->addElement('hidden', 'mod', 'glo');
-		$form->addElement('text', 'phrase', $this->msg['phrase']);
+		$form->addElement('hidden', 'mod', 'glossary');
+		$form->addElement('text', 'phrase', $this->msg['phrase'],
+			array('size' => 15, 'maxlength' => 255));
 		$form->addElement('select', 'dc', $this->msg['discipline'],
-			$this->db->get_row_assoc('SELECT discipline, discipline_name FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name', $this->msg['all'])
+			$this->db->get_row_assoc('SELECT discipline, discipline_name
+				FROM discipline ORDER BY discipline_name',
+				'discipline', 'discipline_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'lang', $this->msg['lang'],
-			$this->db->get_row_assoc('SELECT lang, lang_name FROM language ORDER BY lang', 'lang', 'lang_name', $this->msg['all'])
+			$this->db->get_row_assoc('SELECT lang, lang_name
+				FROM language ORDER BY lang',
+				'lang', 'lang_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'src', $this->msg['ref_source'],
-			$this->db->get_row_assoc('SELECT ref_source, ref_source_name FROM ref_source', 'ref_source', 'ref_source_name', $this->msg['all'])
+			$this->db->get_row_assoc('SELECT ref_source, ref_source_name
+				FROM ref_source',
+				'ref_source', 'ref_source_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
 		$form->addElement('submit', 'srch', $this->msg['search_button']);
 
-		$template = '%1$s: %2$s ' . LF;
-		$ret .= '<fieldset style="border: solid 1px #999;">' . LF;
+		$template = '<span class="search_param">%1$s: %2$s</span>' . LF;
+		$ret .= '<fieldset>' . LF;
 		$ret .= '<legend>' . $this->msg['search'] . '</legend>' . LF;
 		$ret .= $form->begin_form();
+		$ret .= $form->get_element('mod');
 		$ret .= sprintf($template, $this->msg['search_op'], $form->get_element('op'));
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
-		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['discipline'], $form->get_element('dc'));
 		$ret .= sprintf($template, $this->msg['lang'], $form->get_element('lang'));
-		$ret .= '<br />' . LF;
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('src'));
-		$ret .= $form->get_element('mod');
 		$ret .= $form->get_element('srch');
 		$ret .= $form->end_form();
 		$ret .= '</fieldset>' . LF;
@@ -448,7 +453,7 @@ class glossary extends page
 		}
 		sort($clean_key);
 		// cleaned key
-		$url = '<a href="./?mod=dict&action=view&phrase=%1$s">%1$s</a>';
+		$url = '<a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a>';
 		foreach($clean_key as $word)
 		{
 			{
