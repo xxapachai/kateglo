@@ -8,6 +8,10 @@ table.list th { background: #DDD; padding: 2px 5px; }
 a { text-decoration: none; color: #00F; }
 a:hover { text-decoration: underline; }
 form { margin: 0px; padding: 0px; }
+fieldset { border: solid 1px #999; }
 legend { font-weight: bold; }
 
 .action_button { padding: 2px 8px; background: #999; color: #FFF; }
+.search_param { white-space:nowrap; }
+.footer { padding-top: 20px; }
+.welcome { text-align: center; padding: 20px 0px 0px 0px; }

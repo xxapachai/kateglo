@@ -3,7 +3,7 @@
  * Entry point of application
  */
 // constants
-define(APP_VERSION, 'v0.0.18'); // application version. See README.txt
+define(APP_VERSION, 'v0.0.19'); // application version. See README.txt
 define(APP_NAME, 'Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
 define(APP_SHORT, 'Kateglo (Beta)'); // application name
 define(LF, "\n"); // line break
@@ -42,17 +42,17 @@ $logger->log();
 
 // define mod
 $mods = array(
-	'user'=>'user', 'comment'=>'comment', 'dict'=>'dictionary',
-	'glo'=>'glossary', 'home'=>'home', 'doc'=>'doc', 'proverb'=>'proverb'
+	'user', 'comment', 'dictionary', 'glossary', 'home', 'doc', 'proverb'
 );
 $_GET['mod'] = strtolower($_GET['mod']);
-if (!array_key_exists($_GET['mod'], $mods)) $_GET['mod'] = 'home';
+if ($_GET['mod'] == 'dict') $_GET['mod'] = 'dictionary'; // backward
+if ($_GET['mod'] == 'glo') $_GET['mod'] = 'glossary'; // backward
+if (!in_array($_GET['mod'], $mods)) $_GET['mod'] = 'home';
 $mod = $_GET['mod'];
 
 // process
-$module = $mods[$mod];
-require_once('classes/class_' . $module . '.php');
-$page = new $module(&$db, &$auth, $msg);
+require_once('classes/class_' . $mod . '.php');
+$page = new $mod(&$db, &$auth, $msg);
 $page->process();
 
 // display
@@ -80,7 +80,7 @@ $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-ico
 $ret .= '</head>' . LF;
 $ret .= '</head>' . LF;
 $ret .= $body;
-$ret .= sprintf('<p>' .
+$ret .= sprintf('<p class="footer">' .
 	'<span style="float:right;">' .
 	'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
 	'<img title="%6$s" alt="%6$s" style="border-width:0" ' .

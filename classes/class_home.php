@@ -45,7 +45,7 @@ class home extends page
 		$prv_count = $this->db->get_row_value('SELECT COUNT(*) FROM proverb WHERE prv_type = 1;');
 
 		// welcome
-		$ret .= '<div align="center" style="padding: 10px 0px;">' . LF;
+		$ret .= '<div class="welcome">' . LF;
 		$ret .= sprintf($this->msg['welcome'] . LF, $dict_count, $glo_count, $prv_count, $search_result);
 
 		// random

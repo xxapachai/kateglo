@@ -58,11 +58,9 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Penambahan definisi secara dinamis
 * Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
-* Kamus: Pelajari info-info yang tersedia dari KBBI
+* Kamus: Penambahan definisi secara dinamis
 * Glosarium: Penambahan/penyuntingan secara sekaligus
-* Glosarium: Pembuatan tautan otomatis untuk lema yang ditemukan di Wikipedia
 * Pengguna: pendaftaran dan preferensi
 * Umum: Statistik pengguna teraktif
 * Umum: API/antarmuka pemrograman aplikasi
@@ -78,6 +76,10 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.0.19 (06 Juni 2009) ===
+
+* Kamus: Singkatan-singkatan dalam info
 
 === 0.0.18 (05 Juni 2009) ===
 

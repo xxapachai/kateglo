@@ -17,7 +17,6 @@ class kbbi
 	var $mode;
 	var $query;
 	var $found = false;
-	var $online = true;
 	var $auto_parse = false;
 	var $force_refresh = false;
 	var $raw_entries; // individual match from kbbi
@@ -43,6 +42,8 @@ class kbbi
 	 */
 	function query($query, $mode)
 	{
+		global $is_offline;
+
 		if ($ret = $this->get_cache($query))
 		{
 			if (!$this->force_refresh)
@@ -64,7 +65,7 @@ class kbbi
 			'dftkata' => '',
 		);
 		$this->get_words();
-		if ($this->online && $this->param['dftkata'])
+		if (!$is_offline && $this->param['dftkata'])
 		{
 			$words = explode(';', $this->param['dftkata']);
 			foreach ($words as $word)
@@ -175,7 +176,9 @@ class kbbi
 	 */
 	function get_curl($url, $data)
 	{
-		if (!$this->online) return;
+		global $is_offline;
+
+		if ($is_offline) return;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
