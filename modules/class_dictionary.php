@@ -2,7 +2,7 @@
 /**
  * Phrase class
  */
-require_once($base_dir . '/classes/class_kbbi.php');
+require_once($base_dir . '/modules/class_kbbi.php');
 require_once($base_dir . '/modules/class_glossary.php');
 class dictionary extends page
 {
