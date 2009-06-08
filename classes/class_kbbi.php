@@ -142,12 +142,6 @@ class kbbi
 				$def = preg_replace('/minuman[\s]+(<br>)+terbuat/U', 'minuman terbuat', $def);
 			if ($query == 'tarik')
 				$def = preg_replace('/menyenangkan[\s]+(<br>)+\(menggirangkan/U', 'menyenangkan (menggirangkan', $def);
-			if ($query == 'minyak')
-				$def = str_replace('<br><i>--</i><b> adas manis</b>', '<br>--<b> adas manis</b>', $def);
-			if ($query == 'kepala')
-				$def = str_replace('suka sekali; --<b>', 'suka sekali;' . LF . '<br>--<b>', $def);
-			if ($query == 'induk')
-				$def = str_replace('<br>--</i><b> bako', '<br>--<b> bako', $def);
 			if ($query == 'harta')
 				$def = preg_replace('/oleh[\s]+(<br>)+mempelai laki/U', 'oleh mempelai laki', $def);
 			if ($query == 'alur')
@@ -158,6 +152,12 @@ class kbbi
 				$def = preg_replace('/el[\s]+(<br>)+oknya/U', 'eloknya', $def);
 			if ($query == 'lepas')
 				$def = preg_replace('/tempatnya la[\s]+(<br>)+gi/U', 'tempatnya lagi', $def);
+			if ($query == 'minyak')
+				$def = str_replace('<br><i>--</i><b> adas manis</b>', '<br>--<b> adas manis</b>', $def);
+			if ($query == 'kepala')
+				$def = str_replace('suka sekali; --<b>', 'suka sekali;' . LF . '<br>--<b>', $def);
+			if ($query == 'induk')
+				$def = str_replace('<br>--</i><b> bako', '<br>--<b> bako', $def);
 			if ($query == 'lampu')
 				$def = str_replace('mati); --<b> atret', 'mati);' . LF . '<br>--<b> atret', $def);
 			if ($query == 'beri tahu')
@@ -219,11 +219,6 @@ class kbbi
 		// hack v
 		if (strtolower($phrase) == 'v')
 			$kbbi_data = str_replace('<b>V</b>, v', '<b>V, v</b>', $kbbi_data);
-		if (strtolower($phrase) == 'amnesia')
-		{
-			$kbbi_data = str_replace('<b>/</b>', '/', $kbbi_data);
-			$kbbi_data = str_replace('/</b>', '</b>/', $kbbi_data);
-		}
 		if (strtolower($phrase) == 'amnesia')
 		{
 			$kbbi_data = str_replace('<b>/</b>', '/', $kbbi_data);
