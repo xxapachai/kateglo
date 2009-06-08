@@ -2,8 +2,8 @@
 /**
  * Phrase class
  */
-require_once('class_kbbi.php');
-require_once('class_glossary.php');
+require_once($base_dir . '/classes/class_kbbi.php');
+require_once($base_dir . '/modules/class_glossary.php');
 class dictionary extends page
 {
 	var $kbbi;
