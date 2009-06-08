@@ -4,7 +4,7 @@
  *
  *
  */
-require_once('class_mediawiki.php');
+require_once($base_dir . '/classes/class_mediawiki.php');
 class glossary extends page
 {
 

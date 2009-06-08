@@ -2,26 +2,20 @@
 /**
  * Entry point of application
  */
-// constants
-define(APP_VERSION, 'v0.0.19'); // application version. See README.txt
-define(APP_NAME, 'Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia'); // application name
-define(APP_SHORT, 'Kateglo (Beta)'); // application name
-define(LF, "\n"); // line break
-
-// variables
+// base dir
 $base_dir = dirname(__FILE__);
 ini_set('include_path', $base_dir . '/pear/');
-foreach ($_GET as $key => $val) $_GET[$key] = trim($val);
 
 // includes
-require_once('config.php');
-require_once('messages.php');
+require_once($base_dir . '/config/settings.php');
+require_once($base_dir . '/config/config.php');
+require_once($base_dir . '/config/messages.php');
 require_once('common.php');
 require_once('Auth.php');
-require_once('classes/class_db.php');
-require_once('classes/class_form.php');
-require_once('classes/class_logger.php');
-require_once('classes/class_page.php');
+require_once($base_dir . '/classes/class_db.php');
+require_once($base_dir . '/classes/class_form.php');
+require_once($base_dir . '/classes/class_logger.php');
+require_once($base_dir . '/classes/class_page.php');
 
 // initialization
 $db = new db;
@@ -51,7 +45,7 @@ if (!in_array($_GET['mod'], $mods)) $_GET['mod'] = 'home';
 $mod = $_GET['mod'];
 
 // process
-require_once('classes/class_' . $mod . '.php');
+require_once($base_dir . '/modules/class_' . $mod . '.php');
 $page = new $mod(&$db, &$auth, $msg);
 $page->process();
 
