@@ -24,8 +24,8 @@ class home extends page
 		if ($searches)
 		{
 			$search_result = '';
-			$tmp = '<strong>%1$s</strong> [<a href="?mod=dict&action=view&phrase=%1$s">%2$s</a>, '
-				. '<a href="?mod=glo&phrase=%1$s">%3$s</a>]';
+			$tmp = '<strong>%1$s</strong> [<a href="?mod=dictionary&action=view&phrase=%1$s">%2$s</a>, '
+				. '<a href="?mod=glossary&phrase=%1$s">%3$s</a>]';
 			for ($i = 0; $i < $this->db->num_rows; $i++)
 			{
 				if ($this->db->num_rows > 2)
@@ -54,7 +54,7 @@ class home extends page
 			AND NOT ISNULL(updated) AND NOT ISNULL(lex_class)
 			ORDER BY RAND() LIMIT 10;';
 		$random_words = $this->db->get_rows($query);
-		$url = './?mod=dict&action=view&phrase=';
+		$url = './?mod=dictionary&action=view&phrase=';
 		$ret .= '<p>' . LF;
 		foreach ($random_words as $random_word)
 		{
