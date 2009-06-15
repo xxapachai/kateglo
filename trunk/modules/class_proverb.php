@@ -50,9 +50,13 @@ class proverb extends page
 	 */
 	function show_list()
 	{
+		global $_GET;
+		if ($_GET['phrase'])
+			$where .= sprintf('AND proverb LIKE \'%%%1$s%%\' ',
+				$this->db->quote($_GET['phrase'], null, false));
 		$cols = 'proverb, meaning';
-		$from = 'FROM proverb WHERE prv_type = 1
-			ORDER BY proverb ASC';
+		$from = 'FROM proverb WHERE prv_type = 1 ' . $where .
+			'ORDER BY proverb ASC';
 		$rows = $this->db->get_rows_paged($cols, $from);
 		if ($this->db->num_rows > 0)
 		{

@@ -55,7 +55,7 @@ $body .= $page->show();
 $title = ($mod == 'home') ? APP_NAME : APP_SHORT;
 if (!$page->title && $mod != 'home')
 {
-	if ($msg[$module]) $page->title = $msg[$module];
+	if ($msg[$mod]) $page->title = $msg[$mod];
 	if ($_GET['phrase']) $page->title = $_GET['phrase'] . ' - ' . $page->title;
 }
 $title = $page->title ? $page->title . ' - ' . $title : $title;
