@@ -9,7 +9,7 @@ layanannya: ka(mus), te(saurus), dan glo(sarium).
 Lisensi kode sumber Kateglo adalah GPL. Kode sumber program dapat diunduh
 dari repositori publik:
 
-	http://bahtera.org/svn/kateglo/
+	http://code.google.com/p/kateglo/
 
 Setelah mengunduh aplikasi, silakan baca INSTALL.txt di direktori docs untuk
 petunjuk instalasi aplikasi dan LICENSE.txt untuk lisensi GNU GPL.
@@ -76,6 +76,11 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.0.20 (14 Juni 2009) ===
+
+* Pencarian untuk peribahasa (sumber: Gianto)
+* Perbaikan bug judul halaman
 
 === 0.0.19 (06 Juni 2009) ===
 

@@ -54,8 +54,11 @@ function show_header()
 	$form->setup($msg);
 	$form->addElement('text', 'phrase', $msg['enter_phrase'],
 		array('size' => 15, 'maxlength' => 255));
-	$form->addElement('select', 'mod', null,
-		array('dictionary' => $msg['dictionary'], 'glossary' => $msg['glossary']));
+	$form->addElement('select', 'mod', null, array(
+		'dictionary' => $msg['dictionary'],
+		'glossary' => $msg['glossary'],
+		'proverb' => $msg['proverb'],
+	));
 	$form->addElement('submit', 'search', $msg['search_button']);
 
 	$ret .= $form->begin_form();
