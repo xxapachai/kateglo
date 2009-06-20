@@ -1,4 +1,4 @@
--- Last updated: 2009-06-06 08:44
+-- Last updated: 2009-06-20 23:58
 
 drop table if exists definition;
 
@@ -11,6 +11,8 @@ drop table if exists glossary;
 drop table if exists language;
 
 drop table if exists lexical_class;
+
+drop table if exists new_lemma;
 
 drop table if exists phrase;
 
@@ -39,6 +41,8 @@ drop table if exists sys_comment;
 drop table if exists sys_session;
 
 drop table if exists sys_user;
+
+drop table if exists translation;
 
 /*==============================================================*/
 /* Table: definition                                            */
@@ -171,6 +175,18 @@ create table lexical_class
 );
 
 /*==============================================================*/
+/* Table: new_lemma                                             */
+/*==============================================================*/
+create table new_lemma
+(
+   new_lemma            varchar(255) not null,
+   glossary_count       int not null default 0,
+   is_exists            tinyint not null default 0,
+   is_valid             tinyint not null default 0,
+   primary key (new_lemma)
+);
+
+/*==============================================================*/
 /* Table: phrase                                                */
 /*==============================================================*/
 create table phrase
@@ -231,6 +247,9 @@ create table ref_source
 (
    ref_source           varchar(16) not null,
    ref_source_name      varchar(255) not null,
+   dictionary           tinyint default 0,
+   glossary             tinyint default 0,
+   translation          tinyint default 0,
    glossary_count       int not null default 0,
    updated              datetime,
    updater              varchar(32),
@@ -390,4 +409,15 @@ create table sys_user
    updated              datetime,
    updater              varchar(32),
    primary key (user_id)
+);
+
+/*==============================================================*/
+/* Table: translation                                           */
+/*==============================================================*/
+create table translation
+(
+   lemma                varchar(255) not null,
+   ref_source           varchar(16) not null,
+   translation          varchar(4000),
+   primary key (lemma, ref_source)
 );

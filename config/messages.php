@@ -112,6 +112,7 @@ $msg = array(
 	'submit' => 'Kirim',
 
 	'thesaurus' => 'Tesaurus',
+	'translation' => 'Terjemahan',
 
 	'url' => 'Situs web',
 	'url_invalid' => 'Alamat situs tidak valid',

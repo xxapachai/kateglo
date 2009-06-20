@@ -46,6 +46,8 @@ Kateglo.
 * Steven Haryanto - http://steven.blogs.masterweb.net
 * Pusat Bahasa - http://pusatbahasa.diknas.go.id
 * Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
+* Ebta Setiawan, ebsoft - http://ebsoft.web.id/
+* Ardhan Madras, gkamus - http://gkamus.sourceforge.net/
 
 == Standar kode program ==
 
@@ -81,10 +83,11 @@ Kateglo.
 
 === 0.0.21 (20 Juni 2009) ===
 
-* Pengelompokan tipe imbuhan
-* Tampilkan hanya pengalihan jika suatu lema hanya merupakan pengalihan
-* Imbuhan dan majemuk digabungkan menjadi kata turunan. Nantinya akan
-  terdiri dari imbuhan, ulang, majemuk
+* Kamus: Penghapusan lema
+* Kamus: Pengelompokan tipe imbuhan
+* Kamus: Tampilkan hanya pengalihan untuk lema yang hanya pengalihan
+* Kamus: Imbuhan dan majemuk digabungkan menjadi kata turunan. Nantinya
+  akan terdiri dari imbuhan, ulang, majemuk
 * Perbaikan bug: Data KBBI dari entri yang berbeda dipisahkan dengan br
 
 === 0.0.20 (14 Juni 2009) ===
