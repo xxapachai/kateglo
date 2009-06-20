@@ -83,7 +83,8 @@ Kateglo.
 
 === 0.0.21 (20 Juni 2009) ===
 
-* Kamus: Penghapusan lema
+* Kamus: Fitur terjemahan
+* Kamus: Penghapusan lema pada bagian admin
 * Kamus: Pengelompokan tipe imbuhan
 * Kamus: Tampilkan hanya pengalihan untuk lema yang hanya pengalihan
 * Kamus: Imbuhan dan majemuk digabungkan menjadi kata turunan. Nantinya
