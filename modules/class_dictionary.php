@@ -256,8 +256,18 @@ class dictionary extends page
 		if ($phrase)
 		{
 			$i = 0;
-			// definition
-			$defs = $phrase['definition'];
+
+			// definition: get from actual phrase or definition
+			if ($phrase['actual_phrase'])
+				$defs = array(array(
+					'def_num' => 1,
+					'def_text' => $phrase['actual_phrase'],
+					'see' => $phrase['actual_phrase'],
+				));
+			else
+				$defs = $phrase['definition'];
+
+			// show definition
 			$def_count = count($defs);
 			$ret .= '<p><strong>' . $this->msg['definition']. ':</strong></p>' . LF;
 			if ($defs)
@@ -705,7 +715,7 @@ class dictionary extends page
 			{
 				$query = sprintf('SELECT a.root_phrase, a.rel_type
 					FROM relation a
-					WHERE a.related_phrase = %1$s AND a.rel_type IN (\'f\', \'c\')
+					WHERE a.related_phrase = %1$s AND a.rel_type = \'d\'
 					ORDER BY a.root_phrase',
 					$this->db->quote($_GET['phrase'])
 				);
