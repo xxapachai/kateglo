@@ -24,18 +24,36 @@ class dictionary extends page
 	{
 		global $_GET;
 		global $_SERVER;
-		if ($this->is_post && $this->auth->checkAuth() && $_GET['action'] == 'form')
-			$this->save_form();
-		// refresh KBBI
-		if ($_GET['phrase'] && $_GET['action'] == 'kbbi')
+		$redirect = true;
+		// process depending on action
+		switch ($_GET['action'])
 		{
-			$this->kbbi = new kbbi($this->msg, &$this->db);
-			$this->kbbi->parse($_GET['phrase']);
-			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
-			redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
+			case 'form':
+				if ($this->is_post && $this->auth->checkAuth())
+					$this->save_form();
+				break;
+			case 'delete':
+				if ($_GET['phrase'])
+				{
+					$this->delete($_GET['phrase']);
+					redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
+				}
+				break;
+			case 'kbbi':
+				if ($_GET['phrase'])
+				{
+					$this->kbbi = new kbbi($this->msg, &$this->db);
+					$this->kbbi->parse($_GET['phrase']);
+					if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
+					redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
+				}
+				break;
+			case 'view':
+				$redirect = false;
+				break;
 		}
 		// redirect if none found. psycological effect
-		if ($_GET['phrase'] && ($_GET['action'] != 'view') && !$this->get_list())
+		if ($_GET['phrase'] && $redirect && !$this->get_list())
 			redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
 	}
 
@@ -245,6 +263,9 @@ class dictionary extends page
 				'edit' => array(
 					'url' => './?mod=dictionary&action=form&phrase=' . $_GET['phrase'],
 				),
+				'delete' => array(
+					'url' => './?mod=dictionary&action=delete&phrase=' . $_GET['phrase'],
+				),
 				'get_kbbi' => array(
 					'url' => './?mod=dictionary&action=kbbi&phrase=' . $_GET['phrase'],
 				),
@@ -374,6 +395,18 @@ class dictionary extends page
 				$ret .= '</ul>' . LF;
 			}
 
+			// translation
+			if ($phrase['translations'])
+			{
+				$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['translation']);
+				$ret .= '<ul>' . LF;
+				foreach ($phrase['translations'] as $translation)
+				{
+					$ret .= sprintf('<li><em>%1$s</em>: %2$s</li>' . LF, $translation['ref_source'], $translation['translation']);
+				}
+				$ret .= '</ul>' . LF;
+			}
+
 		}
 		else
 		{
@@ -442,7 +475,7 @@ class dictionary extends page
 		$form->addElement('select', 'lex_class', $this->msg['lex_class'],
 			$this->db->get_row_assoc('SELECT * FROM lexical_class', 'lex_class', 'lex_class_name'));
 		$form->addElement('select', 'ref_source', $this->msg['ref_source'],
-			$this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
+			$this->db->get_row_assoc('SELECT * FROM ref_source WHERE dictionary = 1', 'ref_source', 'ref_source_name'));
 		$form->addElement('select', 'phrase_type', $this->msg['phrase_type'],
 			$this->db->get_row_assoc('SELECT * FROM phrase_type ORDER BY sort_order', 'phrase_type', 'phrase_type_name'));
 		$form->addElement('select', 'roget_class', $this->msg['roget_class'],
@@ -751,6 +784,15 @@ class dictionary extends page
 				$this->db->quote($_GET['phrase']));
 			$rows = $this->db->get_rows($query);
 			$phrase['proverbs'] = $rows;
+
+			// translation
+			$query = sprintf('SELECT a.*
+				FROM translation a
+				WHERE a.lemma = %1$s',
+				$this->db->quote($_GET['phrase'])
+			);
+			$rows = $this->db->get_rows($query);
+			$phrase['translations'] = $rows;
 
 			//var_dump($rows);
 
@@ -1073,6 +1115,24 @@ class dictionary extends page
 		else
 			$ret = $source;
 		return($ret);
+	}
+
+	/**
+	 * Delete lemma
+	 */
+	function delete($lemma)
+	{
+		$queries = array(
+			'delete from phrase where phrase = %1$s;',
+			'delete from definition where phrase = %1$s;',
+			'delete from relation where root_phrase = %1$s;',
+			'delete from relation where related_phrase = %1$s;',
+		);
+		foreach ($queries as $query)
+		{
+			$query = sprintf($query, $this->db->quote($lemma));
+			$this->db->exec($query);
+		}
 	}
 
 	/**

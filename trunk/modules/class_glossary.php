@@ -114,7 +114,7 @@ class glossary extends page
 				$ret .= LF. '</blockquote>' . LF;
 			}
 			$ret .= '<p><strong>' . $this->msg['glo_by_source'] . '</strong></p>' . LF;
-			$rows = $this->db->get_rows('SELECT * FROM ref_source ORDER BY ref_source_name;');
+			$rows = $this->db->get_rows('SELECT * FROM ref_source WHERE glossary = 1 ORDER BY ref_source_name;');
 			if ($row_count = $this->db->num_rows)
 			{
 				$ret .= '<blockquote>' . LF;
@@ -312,7 +312,7 @@ class glossary extends page
 			);
 		$form->addElement('select', 'src', $this->msg['ref_source'],
 			$this->db->get_row_assoc('SELECT ref_source, ref_source_name
-				FROM ref_source',
+				FROM ref_source WHERE glossary = 1',
 				'ref_source', 'ref_source_name', $this->msg['all'])
 			);
 		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
@@ -350,7 +350,7 @@ class glossary extends page
 		$form->addElement('text', 'original', $this->msg['en'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'phrase', $this->msg['id'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('select', 'discipline', $this->msg['discipline'], $this->db->get_row_assoc('SELECT * FROM discipline ORDER BY discipline_name', 'discipline', 'discipline_name'));
-		$form->addElement('select', 'ref_source', $this->msg['ref_source'], $this->db->get_row_assoc('SELECT * FROM ref_source', 'ref_source', 'ref_source_name'));
+		$form->addElement('select', 'ref_source', $this->msg['ref_source'], $this->db->get_row_assoc('SELECT * FROM ref_source WHERE glossary = 1', 'ref_source', 'ref_source_name'));
 		$form->addElement('text', 'wpen', $this->msg['wpen'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('text', 'wpid', $this->msg['wpid'], array('size' => 40, 'maxlength' => '255'));
 		$form->addElement('hidden', 'glo_uid');
