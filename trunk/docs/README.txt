@@ -58,8 +58,10 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Penambahan ungkapan sebagai unsur tesaurus -> contohnya apa ya?
 * Kamus: Penambahan definisi secara dinamis
+* Kamus: Ungkapan
+* Kamus: Singkatan
+* Kamus: Negara
 * Glosarium: Penambahan/penyuntingan secara sekaligus
 * Pengguna: pendaftaran dan preferensi
 * Umum: Statistik pengguna teraktif
@@ -76,6 +78,14 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.0.21 (20 Juni 2009) ===
+
+* Pengelompokan tipe imbuhan
+* Tampilkan hanya pengalihan jika suatu lema hanya merupakan pengalihan
+* Imbuhan dan majemuk digabungkan menjadi kata turunan. Nantinya akan
+  terdiri dari imbuhan, ulang, majemuk
+* Perbaikan bug: Data KBBI dari entri yang berbeda dipisahkan dengan br
 
 === 0.0.20 (14 Juni 2009) ===
 

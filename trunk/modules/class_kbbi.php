@@ -70,6 +70,7 @@ class kbbi
 			$words = explode(';', $this->param['dftkata']);
 			foreach ($words as $word)
 			{
+				$ret .= $ret ? '<br><br>' : '';
 				$ret .= $this->define($word) . '' . LF;
 			}
 			$this->found = true;
@@ -736,6 +737,8 @@ class kbbi
 			{
 				$this->proverbs[$def_key] = $def['proverbs'];
 			}
+			// fix rel_type
+			if ($def['type'] != 'r') $def['type'] = 'd';
 			// increment
 			$i++;
 		}
