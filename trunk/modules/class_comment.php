@@ -72,17 +72,22 @@ class comment extends page
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 			foreach ($rows as $row)
 			{
+				$sender = strip_tags($row['sender_name']);
+				if ($row['url'])
+					$sender = '<a href="' . $row['url'] . '">' . $sender . '</a>';
+				$ret .= '<div class="comment_block">' . LF;
 				$ret .= sprintf(
 					'<p><strong>%1$s</strong> (%2$s UTC)</p>' . LF,
-					strip_tags($row['sender_name']),
+					$sender,
 					$row['sent_date']
 				);
 				$ret .= '<p>' . LF;
 				$ret .= nl2br(strip_tags($row['comment_text'])) . LF;
 				$ret .= '</p>' . LF;
+				$ret .= '</div>' . LF;
 				if ($row['response'])
 				{
-					$ret .= '<blockquote style="font-style:italic;">' . LF;
+					$ret .= '<blockquote class="response_block">' . LF;
 					$ret .= nl2br(strip_tags($row['response'])) . LF;
 					$ret .= '</blockquote>' . LF;
 				}

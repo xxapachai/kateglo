@@ -55,6 +55,15 @@ table.list th {
 .welcome {
 	 text-align: center; padding: 20px 0px 0px 0px;
 }
-
+.comment_block {
+	 border: solid 1px #DDD;
+	 margin-bottom: 20px;
+	 background: #EFEFEF;
+	 padding: 0px 15px;
+}
+.response_block {
+	font-style:italic;
+	margin-bottom: 20px;
+}
 /* == IDs == */
 
