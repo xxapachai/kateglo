@@ -32,6 +32,7 @@ $mod = $_GET['mod'];
 // shortcut
 $_GET['mod'] = 'dictionary';
 $_GET['action'] = 'view';
+$_GET['format'] = ($_GET['format'] == 'json') ? 'json' : 'xml';
 
 // process
 require_once($base_dir . '/modules/class_' . $mod . '.php');
@@ -39,17 +40,37 @@ $page = new $mod(&$db, &$auth, $msg);
 $page->process();
 if ($apiData = $page->getAPI())
 {
-	$ret .= '<?xml version="1.0"?>' . LF;
-	$ret .= '<api status="' . ($apiData ? 1 : 0) . '">' . LF;
-	if ($apiData) $ret .= arrayToXML(&$apiData);
-	$ret .= '</api>' . LF;
-	header('Content-type: text/xml');
+	$ret = ($_GET['format'] == 'json') ? outputJSON($apiData) : outputXML($apiData);
 }
 else
 {
-	$ret = 'Ini adalah API sederhana untuk Kateglo hanya untuk mengakses kamus. Gunakan dengan format seperti http://bahtera.org/kateglo/api.php?phrase=lema_yang_dicari. Silakan pelajari sendiri keluaran XML yang dihasilkan.';
+	$ret = 'Ini adalah API sederhana untuk Kateglo hanya untuk mengakses kamus. Gunakan dengan format seperti http://bahtera.org/kateglo/api.php?format=[xml|json]&phrase=[lema_yang_dicari]. Silakan pelajari sendiri keluaran XML atau JSON yang dihasilkan.';
 }
 echo($ret);
+
+/**
+ * output XML
+ */
+function outputXML(&$apiData)
+{
+	$ret .= '<?xml version="1.0"?>' . LF;
+	$ret .= '<kateglo status="1">' . LF;
+	$ret .= arrayToXML(&$apiData);
+	$ret .= '</kateglo>' . LF;
+	header('Content-type: text/xml');
+	return($ret);
+}
+
+/**
+ * output JSON
+ */
+function outputJSON(&$apiData)
+{
+	$data = array('kateglo'=>$apiData);
+	$ret .= json_encode($data);
+	header('Content-type: application/json');
+	return($ret);
+}
 
 /**
  * Array to XML

@@ -4,6 +4,7 @@
  */
 require_once($base_dir . '/modules/class_kbbi.php');
 require_once($base_dir . '/modules/class_glossary.php');
+//require_once($base_dir . '/modules/class_opentran.php');
 class dictionary extends page
 {
 	var $kbbi;
@@ -1064,6 +1065,11 @@ class dictionary extends page
 			);
 			$rows = $this->db->get_rows($query);
 			$phrase['translations'] = $rows;
+
+			// opentran
+//			$opentran = new opentran();
+//			if ($translation = $opentran->translate($_GET['phrase']))
+//				$phrase['translations'][] = $translation;
 
 			// derivation and relation
 			$this->get_relation(&$phrase, 'related_phrase');
