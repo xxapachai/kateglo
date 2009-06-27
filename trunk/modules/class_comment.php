@@ -38,9 +38,9 @@ class comment extends page
 		global $_GET;
 		$actions = array(
 			'comment_list' => array('url' => './?mod=comment&action=view'),
-			'comment_entry' => array('url' => './?mod=comment'),
+			'comment_entry' => array('url' => './?mod=comment&action=form'),
 		);
-
+		if ($_GET['action'] != 'form') $_GET['action'] = 'view';
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['comment']);
 		$ret .= $this->get_action_buttons($actions,
 			($_GET['action'] == 'view' ? array('comment_entry') : array('comment_list')));
