@@ -79,8 +79,10 @@ $ret .= sprintf('<p class="footer">' .
 	'<img title="%6$s" alt="%6$s" style="border-width:0" ' .
 	'src="./images/cc-by-nc-sa.png" />' .
 	'</a></span>' .
-	'<a href="%2$s">%1$s %3$s</a>' .
-	'. ' .
+	'<a href="%2$s">%3$s</a>' .
+	'&nbsp;&#183;&nbsp;' .
+	'<a href="%7$s">API</a>' .
+	'&nbsp;&#183;&nbsp;' .
 	'<a href="%4$s">%5$s</a>' .
 	'</p>' . LF,
 	APP_SHORT,
@@ -88,7 +90,8 @@ $ret .= sprintf('<p class="footer">' .
 	APP_VERSION,
 	'./?mod=comment',
 	$msg['comment_link'],
-	'CC-BY-NC-SA'
+	'CC-BY-NC-SA',
+	'./api.php'
 );
 // stats
 if ($allow_stat) $ret .= get_external_stat();
