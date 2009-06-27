@@ -82,7 +82,8 @@ Kateglo.
 
 === 0.01.20090627 (27 Juni 2009) ===
 
-* Umum: API/antarmuka pemrograman aplikasi sederhana untuk kamus
+* Kamus: Tambahan terjemahan dari open-tran. Masih non-aktif.
+* Umum: API sederhana untuk kamus (format JSON, XML)
 * Umum: Menambahkan operator pencarian "diawali" dan "diakhiri"
 * Umum: Mengganti sistem penomoran versi - dua digit untuk minor dan tanggal
   untuk build
