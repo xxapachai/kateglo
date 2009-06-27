@@ -7,6 +7,7 @@ $msg = array(
 	'all' => 'Semua',
 	'all_entry' => 'Lihat semua entri',
 	'actual_phrase' => 'Alihkan ke',
+	'add_row' => 'Tambah baris',
 
 	'cancel' => 'Batal',
 	'change_pwd' => 'Ubah kata sandi',
@@ -109,6 +110,11 @@ $msg = array(
 	'search_op' => 'Operator',
 	'search_button' => 'Cari',
 	'search_in' => ' dalam ',
+	'search_1' => 'Mirip',
+	'search_2' => 'Memuat',
+	'search_3' => 'Persis',
+	'search_4' => 'Diawali',
+	'search_5' => 'Diakhiri',
 	'submit' => 'Kirim',
 
 	'thesaurus' => 'Tesaurus',

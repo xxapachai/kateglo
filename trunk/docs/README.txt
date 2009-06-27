@@ -60,7 +60,6 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Penambahan definisi secara dinamis
 * Kamus: Ungkapan
 * Kamus: Singkatan
 * Kamus: Negara
@@ -80,6 +79,16 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.01.20090627 (27 Juni 2009) ===
+
+* Umum: Menambahkan operator pencarian "diawali" dan "diakhiri"
+* Umum: Mengganti sistem penomoran versi - dua digit untuk minor dan tanggal
+  untuk build
+* Umum: Penggantian jenis huruf menjadi Trebuchet MS
+* Kamus: Caching data KBBI lengkap
+* Kamus: Penambahan definisi secara dinamis
+* Umum: Mulai menggunakan jquery
 
 === 0.0.21 (20 Juni 2009) ===
 
@@ -170,7 +179,7 @@ Kateglo.
 * Sepuluh frasa sembarang
 * Formulir komentar
 
-=== 0.0.9 (25 Mei 2009) ===
+=== 0.0.09 (25 Mei 2009) ===
 
 * Perubahan halaman utama glosarium
 * Perbaikan logika parsing KBBI
@@ -179,12 +188,12 @@ Kateglo.
 * Perbaikan akar kata yang sama dengan frasanya
 * Menampilkan pranala ke frasa yang dicari di hasil pencarian
 
-=== 0.0.8 (22 Mei 2009) ===
+=== 0.0.08 (22 Mei 2009) ===
 
 * Penambahan phrase.ref_source
 * Log waktu pembuatan entri kamus secara otomatis
 
-=== 0.0.7 (21 Mei 2009) ===
+=== 0.0.07 (21 Mei 2009) ===
 
 * Parser untuk sinonim
 * Perbaikan bug jika frasa pencarian mengandung karakter escape sql
@@ -193,7 +202,7 @@ Kateglo.
 * Parser otomatis untuk data KBBI
 * Pembalikan rujukan untuk data yang ditemukan (imbuhan, majemuk)
 
-=== 0.0.6 (17 Mei 2009) ===
+=== 0.0.06 (17 Mei 2009) ===
 
 * Klasifikasi Roget dimasukkan ke dalam entri
 * Pengalihan otomatis untuk pencarian kamus jika tidak ditemukan data
@@ -202,7 +211,7 @@ Kateglo.
 * Kredit untuk Femmy Syahrani
 * Perubahan lisensi isi ke CC-BY-NC-SA
 
-=== 0.0.5 (16 Mei 2009) ===
+=== 0.0.05 (16 Mei 2009) ===
 
 * Formulir login dipindahkan ke class_user
 * Menampilkan daftar kata yang ada dalam kamus
@@ -211,7 +220,7 @@ Kateglo.
 * Kelas phrase -> dictionary
 * Penggantian kata sandi pengguna
 
-=== 0.0.4 (15 Mei 2009) ===
+=== 0.0.04 (15 Mei 2009) ===
 
 * Rujukan ke Wikipedia untuk glosarium
 * Sumber glosarium
@@ -224,14 +233,14 @@ Kateglo.
 * Kata kunci di glosarium yang merujuk ke entri kamus
 * Rujukan ke KBBI di kamus
 
-=== 0.0.3 (14 Mei 2009) ===
+=== 0.0.03 (14 Mei 2009) ===
 
 * Halaman muka yang sesuai
 * Statistik pencarian frasa
 * mod=doc untuk membaca dokumen
 * Pembagian halaman untuk hasil pencarian
 
-=== 0.0.2 (13 Mei 2009) ===
+=== 0.0.02 (13 Mei 2009) ===
 
 * Glosarium sederhana ditambahkan
 * Log deskripsi diperpendek menjadi hanya nama skrip dan querystring
@@ -242,7 +251,7 @@ Kateglo.
 * Memangkas nilai terkirim sebelum memberi kutipan
 * Kelas untuk frasa
 
-=== 0.0.1 (12 Mei 2009) ===
+=== 0.0.01 (12 Mei 2009) ===
 
 * 2009-05-12 Versi pertama dirilis dan dimasukkan kendali sumber.
 * 2009-05-09 Konsep didiskusikan melalui obrolan YM.

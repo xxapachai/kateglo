@@ -1,4 +1,4 @@
--- Last updated: 2009-06-20 23:58
+-- 2009-06-27 12:00
 
 drop table if exists definition;
 
@@ -7,6 +7,8 @@ drop table if exists discipline;
 drop table if exists external_ref;
 
 drop table if exists glossary;
+
+drop table if exists kbbi;
 
 drop table if exists language;
 
@@ -146,6 +148,16 @@ create index discipline on glossary
 create index ref_source on glossary
 (
    ref_source
+);
+
+/*==============================================================*/
+/* Table: kbbi                                                  */
+/*==============================================================*/
+create table kbbi
+(
+   lemma                varchar(255) collate latin1_bin not null,
+   content              text,
+   primary key (lemma)
 );
 
 /*==============================================================*/
@@ -361,7 +373,8 @@ create table sys_cache
    updated              datetime not null,
    phrase               varchar(255),
    content              text,
-   primary key (cache_uid)
+   primary key (cache_uid),
+   key phrase_ak (cache_type, phrase)
 );
 
 /*==============================================================*/
