@@ -60,14 +60,14 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Ungkapan
+* Kamus: Ungkapan/Idiom
 * Kamus: Singkatan
 * Kamus: Negara
 * Glosarium: Penambahan/penyuntingan secara sekaligus
 * Pengguna: pendaftaran dan preferensi
 * Umum: Statistik pengguna teraktif
-* Umum: API/antarmuka pemrograman aplikasi
 * Umum: Kata hari ini
+* Umum: API lanjut untuk tiap modul. Format JSON, PHP.
 
 == Bug yang diketahui ==
 
@@ -82,6 +82,7 @@ Kateglo.
 
 === 0.01.20090627 (27 Juni 2009) ===
 
+* Umum: API/antarmuka pemrograman aplikasi sederhana untuk kamus
 * Umum: Menambahkan operator pencarian "diawali" dan "diakhiri"
 * Umum: Mengganti sistem penomoran versi - dua digit untuk minor dan tanggal
   untuk build
