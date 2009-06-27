@@ -1065,8 +1065,6 @@ class dictionary extends page
 			$rows = $this->db->get_rows($query);
 			$phrase['translations'] = $rows;
 
-			//var_dump($rows);
-
 			// derivation and relation
 			$this->get_relation(&$phrase, 'related_phrase');
 		}
@@ -1581,5 +1579,14 @@ class dictionary extends page
 			}
 		}
 	}
+
+	/**
+	 * Get API
+	 */
+	function getAPI()
+	{
+		return($this->get_phrase());
+	}
+
 };
 ?>

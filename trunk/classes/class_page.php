@@ -37,6 +37,14 @@ class page
 	}
 
 	/**
+	 * Get API data
+	 */
+	function getAPI()
+	{
+		return;
+	}
+
+	/**
 	 * Keywords
 	 */
 	function get_keywords()
