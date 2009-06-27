@@ -44,7 +44,13 @@ if ($apiData = $page->getAPI())
 }
 else
 {
-	$ret = 'Ini adalah API sederhana untuk Kateglo hanya untuk mengakses kamus. Gunakan dengan format seperti http://bahtera.org/kateglo/api.php?format=[xml|json]&phrase=[lema_yang_dicari]. Silakan pelajari sendiri keluaran XML atau JSON yang dihasilkan.';
+	$ret = '<p>Antarmuka pemrograman aplikasi (API) yang (masih) sangat sederhana ini dibuat untuk memungkinkan para pengembang memanfaatkan data yang disediakan oleh Kateglo. Untuk tahap awal, baru modul kamus yang dapat diakses dengan API ini.</p>
+	<p>Gunakan format</p>
+	<blockquote>http://bahtera.org/kateglo/api.php?format=[xml|json]&phrase=[lema_yang_dicari].</blockquote></p>
+	<p>Contoh:</p>
+	<blockquote><a href="api.php?format=xml&phrase=kata">http://bahtera.org/kateglo/api.php?format=xml&phrase=kata</a><br /><a href="api.php?format=json&phrase=bahtera">http://bahtera.org/kateglo/api.php?format=json&phrase=bahtera</a></blockquote>
+	<p>Silakan pelajari sendiri dulu keluaran XML atau JSON yang dihasilkan karena dokumentasi masih belum sempat dibuat.</p>
+	<p>API ini disediakan dengan apa adanya, dan ada kemungkinan akan berubah format.</p>';
 }
 echo($ret);
 
