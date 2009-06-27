@@ -71,7 +71,8 @@ class dictionary extends page
 				$ret .= $this->show_phrase();
 				break;
 			case 'form':
-				$ret .= $this->show_form();
+				if ($this->auth->checkAuth())
+					$ret .= $this->show_form();
 				break;
 			default:
 				$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['dictionary']);
@@ -147,9 +148,17 @@ class dictionary extends page
 		}
 
 		// get result
-		$op_open = ($_GET['op'] == '2') ? '[[:<:]]' : ($_GET['op'] == '3' ? '' : '%');
-		$op_close = ($_GET['op'] == '2') ? '[[:>:]]' : ($_GET['op'] == '3' ? '' : '%');
-		$op_type = ($_GET['op'] == '2') ? 'REGEXP' : ($_GET['op'] == '3' ? '=' : 'LIKE');
+		$operators = array(
+			'1' => array('type'=>'LIKE', 'open'=>'%', 'close'=>'%'),
+			'2' => array('type'=>'REGEXP', 'open'=>'[[:<:]]', 'close'=>'[[:>:]]'),
+			'3' => array('type'=>'=', 'open'=>'', 'close'=>''),
+			'4' => array('type'=>'LIKE', 'open'=>'', 'close'=>'%'),
+			'5' => array('type'=>'LIKE', 'open'=>'%', 'close'=>''),
+		);
+		if (!array_key_exists($_GET['op'], $operators)) $_GET['op'] = '1';
+		$op_open = $operators[$_GET['op']]['open'];
+		$op_close = $operators[$_GET['op']]['close'];
+		$op_type = $operators[$_GET['op']]['type'];
 		$op_template = 'a.%1$s %2$s \'%3$s%4$s%5$s\'';
 		if ($_GET['phrase'])
 		{
@@ -196,14 +205,14 @@ class dictionary extends page
 				$i++;
 				if ($j == $i)
 				{
-					if ($i > 1) $ret .= '</ol></td>' . LF;
-					$ret .= '<td width="33%"><ol start="' . ($this->db->pager['rbegin'] + $i - 1) . '">' . LF;
+					if ($i > 1) $ret .= '</ul></td>' . LF;
+					$ret .= '<td width="33%"><ul start="' . ($this->db->pager['rbegin'] + $i - 1) . '">' . LF;
 					$j += $mark;
 				}
 				$tmp = '<li><a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a></li>' . LF;
 				$ret .= sprintf($tmp, $row['phrase']);
 			}
-			$ret .= '</ol></td>' . LF;
+			$ret .= '</ul></td>' . LF;
 			$ret .= '</tr></table>' . LF;
 			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
 		}
@@ -429,6 +438,223 @@ class dictionary extends page
 	}
 
 	/**
+	 * Alternate display
+	 */
+	function show_phrase2()
+	{
+		global $_GET;
+
+		$lex_classes = $this->db->get_row_assoc(
+			'SELECT * FROM lexical_class', 'lex_class', 'lex_class_name');
+
+		$this->phrase = $this->get_phrase();
+		$phrase = $this->phrase;
+		$this->kbbi = new kbbi($this->msg, &$this->db);
+
+		// if it's not marked created
+		if (!$phrase['created'])
+		{
+			$this->kbbi->force_refresh = true;
+			$this->kbbi->parse($_GET['phrase']);
+			if ($this->kbbi->found) $this->save_kbbi($_GET['phrase']);
+			$this->kbbi->force_refresh = false;
+			$this->phrase = $this->get_phrase();
+			$phrase = $this->phrase;
+		}
+
+		// if it's not marked created
+		if (!$phrase['kbbi_updated'])
+		{
+			$this->kbbi->force_refresh = true;
+			$this->kbbi->parse($_GET['phrase']);
+			if ($this->kbbi->found) $this->save_kbbi2($_GET['phrase']);
+			$this->kbbi->force_refresh = false;
+			$this->phrase = $this->get_phrase();
+			$phrase = $this->phrase;
+		}
+
+		// header
+		$ret .= sprintf('<h1>%1$s</h1>' . LF, $_GET['phrase']);
+
+		// kbbi header
+		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
+
+		if ($this->auth->checkAuth())
+		{
+			$actions = array(
+				'new' => array(
+					'url' => './?mod=dictionary&action=form',
+				),
+				'edit' => array(
+					'url' => './?mod=dictionary&action=form&phrase=' . $_GET['phrase'],
+				),
+				'delete' => array(
+					'url' => './?mod=dictionary&action=delete&phrase=' . $_GET['phrase'],
+				),
+				'get_kbbi' => array(
+					'url' => './?mod=dictionary&action=kbbi&phrase=' . $_GET['phrase'],
+				),
+			);
+			$ret .= $this->get_action_buttons($actions, $phrase ? null : array('new', 'get_kbbi'));
+		}
+
+		// found?
+		if ($phrase)
+		{
+			$i = 0;
+
+			// definition: get from actual phrase or definition
+			if ($phrase['actual_phrase'])
+				$defs = array(array(
+					'def_num' => 1,
+					'def_text' => $phrase['actual_phrase'],
+					'see' => $phrase['actual_phrase'],
+				));
+			else
+				$defs = $phrase['definition'];
+
+			$ret .= '<p>';
+			$ret .= sprintf('<strong>%1$s</strong> ', $phrase['phrase']);
+			if ($phrase['pronounciation'])
+				$ret .= sprintf(' /%2$s/ ', $this->msg['pronounciation'], $phrase['pronounciation']);
+			if ($phrase['lex_class_name'])
+			{
+				$lex_name = $phrase['lex_class_name'];
+				if ($phrase['lex_class_ref'])
+					$lex_name = sprintf('<a href="./?mod=dictionary&action=view&phrase=%2$s">%1$s</a>',
+						$phrase['lex_class_name'],
+						$phrase['lex_class_ref']);
+				$ret .= sprintf(' <em>%2$s</em> ', $this->msg['lex_class'], strtolower($lex_name));
+			}
+
+			// show definition
+			$def_count = count($defs);
+			if ($defs)
+			{
+				foreach ($defs as $def)
+				{
+					$discipline = ($i == 0) ? $phrase['info'] : '';
+					if ($def_count > 1) $ret .= '<strong>' . ($i + 1) . '.</strong> ';
+					if ($def['see'])
+					{
+						$ret .= sprintf('lihat <b><a href="./?mod=dictionary&action=view&phrase=%2$s">%1$s</a></b>',
+							$def['see'],
+							$def['see']
+						);
+					}
+					else
+					{
+						if ($def['discipline'])
+						{
+							$discipline .= $discipline ? ', ' : '';
+							$discipline .= $def['discipline'];
+						}
+						$lex_name = $def['lex_class'];
+						$lex_title = $lex_classes[$def['lex_class']];
+						if ($def['lex_class_ref'])
+							$lex_name = sprintf(
+								'<a href="./?mod=dictionary&action=view&phrase=%2$s" title="%3$s">%1$s</a>',
+								$def['lex_class'],
+								$def['lex_class_ref'],
+								$lex_title
+							);
+						$ret .= sprintf('%4$s%2$s%1$s%3$s',
+							$def['def_text'],
+							$discipline ? '<em>(' . $this->get_abbrev($discipline) . ')</em> ' : '',
+							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
+							$def['lex_class'] ? '<em>' . $lex_name . '</em> ' : ''
+						);
+					}
+					if ($def_count > 1) $ret .= '; ';
+					$i++;
+				}
+			}
+			else
+				$ret .= $this->msg['na'];
+			$ret .= '</p>' . LF;
+
+			// misc
+			$template = '<p><b>%1$s:</b><br />' . LF . '%2$s</p>' . LF;
+			$template = '<dl><dt>%1$s:</dt><dd>' . LF . '%2$s</dd></dl>' . LF;
+			$template = '<p><em>%1$s:</em> ' . LF . '%2$s</p>' . LF;
+
+			if ($phrase['etymology'])
+				$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
+			if ($phrase['root'])
+			{
+				$ret .= sprintf($template, $this->msg['root_phrase'],
+					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
+			}
+			if ($phrase['roget_class'])
+				$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
+			if ($phrase['ref_source'])
+				$ret .= sprintf($template, $this->msg['ref_source'], $phrase['ref_source_name']);
+
+			// reference
+			if ($phrase['reference'])
+			{
+				$ret .= '<p>' . $this->msg['external_ref']. ':</p>' . LF;
+				$ret .= '<ul>' . LF;
+				foreach ($phrase['reference'] as $reference)
+				{
+					$ret .= sprintf(
+						'<li><a href="%2$s">%1$s</a></li>' . LF,
+						$reference['label'] ? $reference['label'] : $reference['url'],
+						$reference['url']
+					);
+				}
+				$ret .= '</ul>' . LF;
+			}
+
+			// relation and derivation
+			$ret .= $this->show_relation($phrase, 'related_phrase');
+
+			// peribahasa
+			if ($phrase['proverbs'])
+			{
+				$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['proverb']);
+				$ret .= '<ul>' . LF;
+				foreach ($phrase['proverbs'] as $proverb)
+				{
+					$ret .= sprintf('<li><em>%1$s</em>: %2$s</li>' . LF, $proverb['proverb'], $proverb['meaning']);
+				}
+				$ret .= '</ul>' . LF;
+			}
+
+			// translation
+			if ($phrase['translations'])
+			{
+				$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['translation']);
+				$ret .= '<ul>' . LF;
+				foreach ($phrase['translations'] as $translation)
+				{
+					$ret .= sprintf('<li><em>%1$s</em>: %2$s</li>' . LF, $translation['ref_source'], $translation['translation']);
+				}
+				$ret .= '</ul>' . LF;
+			}
+
+		}
+		else
+		{
+			$ret .= sprintf('<p>%1$s</p>', sprintf($this->msg['phrase_na'], $_GET['phrase']));
+			// derivation and relation
+			$this->get_relation(&$phrase, 'related_phrase', true);
+			$ret .= $this->show_relation($phrase, 'root_phrase');
+		}
+
+		// glosarium
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg['glossary']);
+		$_GET['lang'] = 'id';
+		$glossary = new glossary(&$this->db, &$this->auth, $this->msg);
+		$glossary->sublist = true;
+		$ret .= $glossary->show_result();
+
+		$ret .= $this->show_kbbi();
+
+		return($ret);
+	}
+
+	/**
 	 * @return unknown_type
 	 */
 	function show_relation($phrase, $col_name)
@@ -502,6 +728,8 @@ class dictionary extends page
 
 
 		// header
+		$ret .= '<script src="js/jquery.js"></script>' . LF;
+		$ret .= '<script src="js/common.js"></script>' . LF;
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $title);
 
 		$actions = array(
@@ -511,17 +739,26 @@ class dictionary extends page
 		);
 		$ret .= $this->get_action_buttons($actions);
 
+		$ret .= '<table width="100%">' . LF;
+		$ret .= '<tr valign="top">' . LF;
+		$ret .= '<td width="50%">' . LF;
 		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['phrase'], $form->get_element('phrase'));
 		$ret .= sprintf($template, $this->msg['actual_phrase'], $form->get_element('actual_phrase'));
 		$ret .= sprintf($template, $this->msg['phrase_type'], $form->get_element('phrase_type'));
 		$ret .= sprintf($template, $this->msg['lex_class'], $form->get_element('lex_class'));
 		$ret .= sprintf($template, $this->msg['info'], $form->get_element('info'));
+		$ret .= '</table>' . LF;
+		$ret .= '</td><td width="50%">' . LF;
+		$ret .= '<table>' . LF;
 		$ret .= sprintf($template, $this->msg['pronounciation'], $form->get_element('pronounciation'));
 		$ret .= sprintf($template, $this->msg['etymology'], $form->get_element('etymology'));
 		$ret .= sprintf($template, $this->msg['ref_source'], $form->get_element('ref_source'));
 		$ret .= sprintf($template, $this->msg['roget_class'], $form->get_element('roget_class'));
 		$ret .= sprintf($template, $this->msg['notes'], $form->get_element('notes'));
+		$ret .= '</table>' . LF;
+		$ret .= '</td>' . LF;
+		$ret .= '</tr>' . LF;
 		$ret .= '</table>' . LF;
 
 		// definition
@@ -565,7 +802,6 @@ class dictionary extends page
 			'relation', 'thesaurus', 'all_relation', 'rel_count');
 
 		// end
-		$ret .= $def_hidden;
 		$ret .= '<input name="is_new" type="hidden" value="' . $is_new . '" />' . LF;
 		$ret .= sprintf('<p>%1$s</p>', $form->get_element('save'));
 		$ret .= $form->end_form();
@@ -592,11 +828,24 @@ class dictionary extends page
 		$new_def = $field_def;
 		foreach ($new_def as $key => $val) $new_def[$key] = '';
 		$defs[] = $new_def;
-		$defs[] = $new_def;
 		$def_count = count($defs);
-		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$heading]);
-		$ret .= '<table width="100%">' . LF;
+
+		foreach ($field_def as $field_key => $field)
+			$elms .= ($elms ? ', ' : '') . $field_key;
+
+		// dynamic row
+		$ret .= '<script>' . LF;
+		$ret .= '$(function(){' . LF;
+		$ret .= '$(\'#add_' . $name . '\').click(function() {' . LF;
+		$ret .= 'add_row(\'#' . $name . '\', \'' . $elms . '\', \'' . $count_name . '\');' . LF;
+		$ret .= '});' . LF;
+		$ret .= '});' . LF;
+		$ret .= '</script>' . LF;
+
 		// header
+		$ret .= sprintf('<h2>%1$s</h2>' . LF, $this->msg[$heading]);
+		$ret .= '<p><span id="add_' . $name . '" class="action_button">' . $this->msg['add_row'] . '</span></p>' . LF;
+		$ret .= '<table id="' . $name . '" width="100%">' . LF;
 		$ret .= '<tr>' . LF;
 		foreach ($field_def as $field_key => $field)
 		{
@@ -605,37 +854,51 @@ class dictionary extends page
 					$this->msg[$field_key], $field['width']);
 		}
 		$ret .= '</tr>' . LF;
+
 		// data
 		if ($defs)
 		{
 			for ($i = 0; $i < $def_count; $i++)
 			{
 				$def = $defs[$i];
-				$ret .= '<tr>' . LF;
+				// hidden fields
+				$hidden_field = '';
 				foreach ($field_def as $field_key => $field)
 				{
-					$field_name = $field_key . '_' . $i;
-					$form->addElement($field['type'], $field_name, $this->msg['number'], $field['option1']);
-					$form->setDefaults(array($field_name => $defs[$i][$field_key]));
+					if ($field['type'] == 'hidden')
+					{
+						$field_name = $field_key . '_' . $i;
+						$field['option1']['id'] = $field_name;
+						$form->addElement($field['type'], $field_name, $this->msg['number'], $field['option1']);
+						$form->setDefaults(array($field_name => $defs[$i][$field_key]));
+						$hidden_field .= $form->get_element($field_name) . LF;
+					}
+				}
+				$ret .= '<tr>' . LF;
+				// visible fields
+				foreach ($field_def as $field_key => $field)
+				{
 					if ($field['type'] != 'hidden')
 					{
-						$ret .= sprintf('<td width="%2$s" style="background: %3$s;">%1$s</td>' . LF,
-							$form->get_element($field_name),
-							$field['width'],
-							($i % 2 == 0) ? '#FFF' : '#EEE'
-						);
-					}
-					else
-					{
-						$hidden_field .= $form->get_element($field_name) . LF;
+						$field_name = $field_key . '_' . $i;
+						$field['option1']['id'] = $field_name;
+						$form->addElement($field['type'], $field_name, $this->msg['number'], $field['option1']);
+						$form->setDefaults(array($field_name => $defs[$i][$field_key]));
+						$ret .= '<td width="' . $field['width'] . '">' . LF;
+						if ($hidden_field)
+						{
+							$ret .= $hidden_field;
+							$hidden_field = '';
+						}
+						$ret .= $form->get_element($field_name) . LF;
+						$ret .= '</td>' . LF;
 					}
 				}
 				$ret .= '</tr>' . LF;
 			}
 		}
-		$hidden_field .= '<input name="' . $count_name . '" type="hidden" value="' . $def_count . '" />' . LF;
 		$ret .= '</table>' . LF;
-		$ret .= $hidden_field;
+		$ret .= '<input name="' . $count_name . '" id="' . $count_name . '" type="hidden" value="' . $def_count . '" />' . LF;
 		return($ret);
 	}
 
@@ -644,10 +907,18 @@ class dictionary extends page
 	 */
 	function show_search()
 	{
+		$operators = array(
+			'1' => $this->msg['search_1'],
+			'2' => $this->msg['search_2'],
+			'3' => $this->msg['search_3'],
+			'4' => $this->msg['search_4'],
+			'5' => $this->msg['search_5'],
+		);
+
 		$form = new form('search_dict', 'get');
 		$form->setup($msg);
 		$form->addElement('hidden', 'mod', 'dictionary');
-		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
+		$form->addElement('select', 'op', null, $operators);
 		$form->addElement('text', 'phrase', $this->msg['phrase']);
 		$form->addElement('select', 'lex', $this->msg['lex_class'],
 			$this->db->get_row_assoc(
@@ -945,7 +1216,7 @@ class dictionary extends page
 				$this->db->quote($old_key)
 			);
 		//die($query);
-		$this->db->exec($query);
+		//$this->db->exec($query);
 
 		// subform
 		$this->save_sub_form(

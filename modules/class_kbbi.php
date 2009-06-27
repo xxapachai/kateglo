@@ -44,13 +44,10 @@ class kbbi
 	{
 		global $is_offline;
 
+		// try to get cache, return if found
 		if ($ret = $this->get_cache($query))
-		{
 			if (!$this->force_refresh)
-			{
 				return($ret);
-			}
-		}
 
 		$ret = '';
 		$this->query = $query;

@@ -107,7 +107,7 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=glossary&dc=%2$s">%1$s</a> (%3$s)',
+					$ret .= sprintf('<a href="./?mod=glossary&dc=%2$s">%1$s</a>',
 						$row['discipline_name'], $row['discipline'], $row['glossary_count']);
 					$i++;
 				}
@@ -122,7 +122,7 @@ class glossary extends page
 				foreach ($rows as $row)
 				{
 					if ($i > 0) $ret .= '; ' . LF;
-					$ret .= sprintf('<a href="./?mod=glossary&src=%2$s">%1$s</a> (%3$s)',
+					$ret .= sprintf('<a href="./?mod=glossary&src=%2$s">%1$s</a>',
 						$row['ref_source_name'], $row['ref_source'], $row['glossary_count']);
 					$i++;
 				}
@@ -155,9 +155,17 @@ class glossary extends page
 		{
 			$where .= $where ? ' AND ' : ' WHERE ';
 
-			$op_open = ($_GET['op'] == '2') ? '[[:<:]]' : ($_GET['op'] == '3' ? '' : '%');
-			$op_close = ($_GET['op'] == '2') ? '[[:>:]]' : ($_GET['op'] == '3' ? '' : '%');
-			$op_type = ($_GET['op'] == '2') ? 'REGEXP' : ($_GET['op'] == '3' ? '=' : 'LIKE');
+			$operators = array(
+				'1' => array('type'=>'LIKE', 'open'=>'%', 'close'=>'%'),
+				'2' => array('type'=>'REGEXP', 'open'=>'[[:<:]]', 'close'=>'[[:>:]]'),
+				'3' => array('type'=>'=', 'open'=>'', 'close'=>''),
+				'4' => array('type'=>'LIKE', 'open'=>'', 'close'=>'%'),
+				'5' => array('type'=>'LIKE', 'open'=>'%', 'close'=>''),
+			);
+			if (!array_key_exists($_GET['op'], $operators)) $_GET['op'] = '1';
+			$op_open = $operators[$_GET['op']]['open'];
+			$op_close = $operators[$_GET['op']]['close'];
+			$op_type = $operators[$_GET['op']]['type'];
 			$op_template = 'a.%1$s %2$s \'%3$s%4$s%5$s\'';
 			$lang_id = sprintf($op_template, 'phrase', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
 			$lang_en = sprintf($op_template, 'original', $op_type, $op_open, $this->db->quote($phrase, null, false), $op_close);
@@ -295,6 +303,14 @@ class glossary extends page
 	 */
 	function show_search()
 	{
+		$operators = array(
+			'1' => $this->msg['search_1'],
+			'2' => $this->msg['search_2'],
+			'3' => $this->msg['search_3'],
+			'4' => $this->msg['search_4'],
+			'5' => $this->msg['search_5'],
+		);
+
 		$form = new form('search_glo', 'get');
 		$form->setup($msg);
 		$form->addElement('hidden', 'mod', 'glossary');
@@ -315,7 +331,7 @@ class glossary extends page
 				FROM ref_source WHERE glossary = 1',
 				'ref_source', 'ref_source_name', $this->msg['all'])
 			);
-		$form->addElement('select', 'op', null, array('1' => 'Mirip', '2' => 'Memuat', '3' => 'Persis'));
+		$form->addElement('select', 'op', null, $operators);
 		$form->addElement('submit', 'srch', $this->msg['search_button']);
 
 		$template = '<span class="search_param">%1$s: %2$s</span>' . LF;
