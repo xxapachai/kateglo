@@ -60,7 +60,9 @@ if (!$page->title && $mod != 'home')
 $title = $page->title ? $page->title . ' - ' . $title : $title;
 
 // render
-$ret .= '<html>' . LF;
+$ret .= '<?xml version="1.0" encoding="utf-8"?>' . LF;
+$ret .= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . LF;
+$ret .= '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">' . LF;
 $ret .= '<head>' . LF;
 $ret .= '<title>' . $title . '</title>' . LF;
 if ($keywords = $page->get_keywords())
@@ -72,9 +74,13 @@ $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . 
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '</head>' . LF;
 $ret .= '<body>' . LF;
+if ($mod == 'home') $ret .= '<div id="home">' . LF;
 $ret .= show_header();
+$ret .= '<div id="content">' . LF;
 $ret .= $body;
+$ret .= '</div>' . LF;
 $ret .= show_footer();
+if ($mod == 'home') $ret .= '</div>' . LF;
 
 // stats
 if ($allow_stat) $ret .= get_external_stat();
