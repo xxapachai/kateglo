@@ -50,7 +50,6 @@ $page = new $mod(&$db, &$auth, $msg);
 $page->process();
 
 // display
-$body .= show_header();
 $body .= $page->show();
 $title = ($mod == 'home') ? APP_NAME : APP_SHORT;
 if (!$page->title && $mod != 'home')
@@ -72,27 +71,11 @@ $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '</head>' . LF;
+$ret .= '<body>' . LF;
+$ret .= show_header();
 $ret .= $body;
-$ret .= sprintf('<p class="footer">' .
-	'<span style="float:right;">' .
-	'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
-	'<img title="%6$s" alt="%6$s" style="border-width:0" ' .
-	'src="./images/cc-by-nc-sa.png" />' .
-	'</a></span>' .
-	'<a href="%2$s">%3$s</a>' .
-	'&nbsp;&#183;&nbsp;' .
-	'<a href="%7$s">API</a>' .
-	'&nbsp;&#183;&nbsp;' .
-	'<a href="%4$s">%5$s</a>' .
-	'</p>' . LF,
-	APP_SHORT,
-	'./?mod=doc&doc=README.txt',
-	APP_VERSION,
-	'./?mod=comment',
-	$msg['comment_link'],
-	'CC-BY-NC-SA',
-	'./api.php'
-);
+$ret .= show_footer();
+
 // stats
 if ($allow_stat) $ret .= get_external_stat();
 $ret .= '</body>' . LF;

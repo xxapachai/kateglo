@@ -80,6 +80,11 @@ Kateglo.
 
 == Riwayat revisi ==
 
+=== 0.01.20090628 (28 Juni 2009) ===
+
+* Umum: Alternatif logo dan tampilan. Nonaktif.
+* Kamus: Menambahkan KTG_TIMEOUT = 15 untuk membatasi waktu uji coba mengambil data dari KBBI
+
 === 0.01.20090627 (27 Juni 2009) ===
 
 * Kamus: Tambahan terjemahan dari open-tran. Masih non-aktif.

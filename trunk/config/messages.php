@@ -126,7 +126,7 @@ $msg = array(
 
 	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia.</big></p>' . LF .
 		'<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari lema yang Anda inginkan.</p>' . LF .
-		'<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glossary">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dictionary">kamus dan tesaurus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
+		'<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glossary">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dictionary">kamus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
 );
