@@ -221,7 +221,7 @@ function show_footer()
 		APP_SHORT,
 		'./?mod=doc&doc=README.txt',
 		APP_VERSION,
-		'./?mod=comment',
+		'http://bahtera.org/blog/kateglo/',
 		$msg['comment_link'],
 		'CC-BY-NC-SA',
 		'./api.php'
