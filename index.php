@@ -36,7 +36,7 @@ $logger->log();
 
 // define mod
 $mods = array(
-	'user', 'comment', 'dictionary', 'glossary', 'home', 'doc', 'proverb'
+	'user', 'dictionary', 'glossary', 'home', 'doc', 'proverb'
 );
 $_GET['mod'] = strtolower($_GET['mod']);
 if ($_GET['mod'] == 'dict') $_GET['mod'] = 'dictionary'; // backward
