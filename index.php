@@ -72,6 +72,7 @@ if ($description = $page->get_description())
 $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
+$ret .= '<link rel="search" type="application/opensearchdescription+xml" href="./opensearch_desc.php" title="Kateglo" /> ' . LF;
 $ret .= '</head>' . LF;
 $ret .= '<body>' . LF;
 if ($mod == 'home') $ret .= '<div id="home">' . LF;
