@@ -38,10 +38,13 @@ aplikasi akan dapat berjalan normal jika dipasang di tempat lain. Tidak ada
 jaminan juga mengenai ketepatan data yang ada pada situs atau cadangan data
 Kateglo.
 
-== Kredit ==
+== Pengembang ==
 
 * Ivan Lanin - http://ivan.lanin.org
 * Romi Hardiyanto - http://www.ewesewes.web.id
+
+== Kredit ==
+
 * Femmy Syahrani - http://femmy.multiply.com
 * Steven Haryanto - http://steven.blogs.masterweb.net
 * Pusat Bahasa - http://pusatbahasa.diknas.go.id
@@ -79,6 +82,10 @@ Kateglo.
 * Kesalahan parsing KBBI: "kokoh", "lepas", "limut", "serok", "galah"
 
 == Riwayat revisi ==
+
+=== 0.01.20090704 (04 Juli 2009) ===
+
+* Dukungan opensearch http://www.opensearch.org/Home
 
 === 0.01.20090628 (28 Juni 2009) ===
 
