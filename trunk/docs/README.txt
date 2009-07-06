@@ -49,8 +49,9 @@ Kateglo.
 * Steven Haryanto - http://steven.blogs.masterweb.net
 * Pusat Bahasa - http://pusatbahasa.diknas.go.id
 * Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
-* Ebta Setiawan, ebsoft - http://ebsoft.web.id/
-* Ardhan Madras, gkamus - http://gkamus.sourceforge.net/
+* Ebta Setiawan, ebsoft - http://ebsoft.web.id/ (Entri terjemahan)
+* Ardhan Madras, gkamus - http://gkamus.sourceforge.net/ (Entri terjemahan)
+* Kai Armstrong - http://edlindustries.com (BlackBerry launcher)
 
 == Standar kode program ==
 
