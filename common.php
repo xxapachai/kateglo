@@ -45,7 +45,7 @@ function login($username = null, $status = null, &$auth = null)
 /**
  * @return Search form HTML
  */
-function show_header_old()
+function show_header()
 {
 	global $msg, $auth, $db;
 	global $_GET;
@@ -101,36 +101,27 @@ function show_header_old()
 /**
  * @return Search form HTML
  */
-function show_header()
+function show_header2()
 {
 	global $msg, $auth, $db;
 	global $_GET;
-
-	$mods =  array(
-		'dictionary' => $msg['dictionary'],
-		'glossary' => $msg['glossary'],
-		'proverb' => $msg['proverb'],
-	);
-	$navMenu .= sprintf('<a href="./">%1$s</a>', $msg['home']);
-	foreach ($mods as $key => $mod)
-	{
-		$navMenu .='&nbsp;&nbsp;&nbsp;';
-		$navMenu .= sprintf('<a href="./?mod=%1$s">%2$s</a>', $key, $mod);
-	}
 
 	$form = new form('search_form', 'get');
 	$form->setup($msg);
 	$form->addElement('text', 'phrase', $msg['enter_phrase'],
 		array('size' => 20, 'maxlength' => 255));
-	$form->addElement('select', 'mod', null, $mods);
+	$form->addElement('select', 'mod', null, array(
+		'dictionary' => $msg['dictionary'],
+		'glossary' => $msg['glossary'],
+		'proverb' => $msg['proverb'],
+	));
 	$form->addElement('submit', 'search', $msg['search_button']);
 
 	$ret .= $form->begin_form();
-	// logo
-	$ret .= '<div id="header">' . LF;
 	$ret .= '<table cellpadding="0" cellspacing="0" width="100%"><tr>' . LF;
+	// logo
 	$ret .= '<td width="1%">' . LF;
-	$ret .= '<a href="./"><img src="images/kateglo40.png" width="129" height="40" border="0" alt="Kateglo" title="Kateglo" /></a>' . LF;
+	$ret .= '<a href="./"><img src="images/kateglo50.png" width="162" height="50" border="0" alt="Kateglo" title="Kateglo" /></a>' . LF;
 	$ret .= '</td>' . LF;
 
 	// search form
@@ -142,28 +133,22 @@ function show_header()
 	$ret .= sprintf($template, $form->get_element('search'));
 	$ret .= '</tr></table></td>' . LF;
 	$ret .= '</tr></table>' . LF;
-	$ret .= '</div>' . LF;
 
 	// navigation
-	$ret .= '<div id="navbar">' . LF;
-	$ret .= '<table cellpadding="0" cellspacing="0" width="100%"><tr>' . LF;
-	$ret .= '<td>' . LF;
-	$ret .= $navMenu;
-	$ret .= '</td>' . LF;
-	$ret .= '<td align="right">' . LF;
-	if ($auth->checkAuth())
-	{
-		$ret .= sprintf('%3$s&nbsp;&nbsp;&nbsp;<a href="%5$s">%4$s</a>&nbsp;&nbsp;&nbsp;<a href="%2$s">%1$s</a>' . LF,
-			$msg['logout'], './?mod=user&action=logout',
-			$auth->getUsername(),
-			$msg['change_pwd'], './?mod=user&action=password'
-		);
-	}
-	else
-		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=user&action=login');
-	$ret .= '</td>' . LF;
-	$ret .= '</tr></table>' . LF;
-	$ret .= '</div>' . LF;
+//	$ret .= '<table cellpadding="0" cellspacing="0" width="100%"><tr>' . LF;
+//	$ret .= '<td align="right">' . LF;
+//	if ($auth->checkAuth())
+//	{
+//		$ret .= sprintf('<strong>%3$s</strong> | <a href="%5$s">%4$s</a> | <a href="%2$s">%1$s</a>' . LF,
+//			$msg['logout'], './?mod=user&action=logout',
+//			$auth->getUsername(),
+//			$msg['change_pwd'], './?mod=user&action=password'
+//		);
+//	}
+//	else
+//		$ret .= sprintf('<a href="%2$s">%1$s</a>' . LF, $msg['login'], './?mod=user&action=login');
+//	$ret .= '</td>' . LF;
+//	$ret .= '</tr></table>' . LF;
 
 	$ret .= $form->end_form();
 
@@ -173,7 +158,7 @@ function show_header()
 /**
  * Footer
  */
-function show_footer_old()
+function show_footer()
 {
 	global $msg;
 	$ret .= sprintf('<p class="footer">' .
@@ -202,31 +187,29 @@ function show_footer_old()
 /**
  * Footer
  */
-function show_footer()
+function show_footer2()
 {
 	global $msg;
-	$ret .= '<div id="footer">' . LF;
-	$ret .= sprintf('<p>' .
+	$ret .= sprintf('<p class="footer">' .
 		'<span style="float:right;">' .
 		'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
 		'<img title="%6$s" alt="%6$s" style="border-width:0" ' .
 		'src="./images/cc-by-nc-sa.png" />' .
 		'</a></span>' .
 		'<a href="%2$s">%3$s</a>' .
-		'&nbsp;&nbsp;&nbsp;' .
+		'&nbsp;&#183;&nbsp;' .
 		'<a href="%7$s">API</a>' .
-		'&nbsp;&nbsp;&nbsp;' .
+		'&nbsp;&#183;&nbsp;' .
 		'<a href="%4$s">%5$s</a>' .
 		'</p>' . LF,
 		APP_SHORT,
 		'./?mod=doc&doc=README.txt',
 		APP_VERSION,
-		'http://bahtera.org/blog/kateglo/',
+		'./?mod=comment',
 		$msg['comment_link'],
 		'CC-BY-NC-SA',
 		'./api.php'
 	);
-	$ret .= '</div>' . LF;
 	return($ret);
 }
 

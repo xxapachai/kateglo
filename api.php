@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * API entry point
  */

@@ -10,7 +10,7 @@ $msg = array(
 	'add_row' => 'Tambah baris',
 
 	'cancel' => 'Batal',
-	'change_pwd' => 'Kata sandi',
+	'change_pwd' => 'Ubah kata sandi',
 	'comment' => 'Komentar',
 	'comment_link' => 'Komentar?',
 	'comment_list' => 'Lihat komentar',
@@ -109,7 +109,7 @@ $msg = array(
 	'search' => 'Pencarian',
 	'search_op' => 'Operator',
 	'search_button' => 'Cari',
-	'search_in' => ' di ',
+	'search_in' => ' dalam ',
 	'search_1' => 'Mirip',
 	'search_2' => 'Memuat',
 	'search_3' => 'Persis',
@@ -124,8 +124,8 @@ $msg = array(
 	'url_invalid' => 'Alamat situs tidak valid',
 	'username' => 'Pengguna',
 
-	'welcome' => '<p><big>Selamat datang di <strong>Kateglo (Beta)</strong> - <a href="./?mod=dictionary&action=view&phrase=kamus">kamus</a>, <a href="./?mod=dictionary&action=view&phrase=tesaurus">tesaurus</a>, dan <a href="./?mod=dictionary&action=view&phrase=glosarium">glosarium</a> bahasa Indonesia.</big></p>' . LF .
-		'<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari <a href="./?mod=dictionary&action=view&phrase=lema">lema</a> yang Anda inginkan.</p>' . LF .
+	'welcome' => '<p><big>Selamat datang di Kateglo (Beta) - kamus, tesaurus, dan glosarium bahasa Indonesia.</big></p>' . LF .
+		'<p>Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari lema yang Anda inginkan.</p>' . LF .
 		'<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glossary">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dictionary">kamus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
