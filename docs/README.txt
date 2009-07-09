@@ -38,20 +38,16 @@ aplikasi akan dapat berjalan normal jika dipasang di tempat lain. Tidak ada
 jaminan juga mengenai ketepatan data yang ada pada situs atau cadangan data
 Kateglo.
 
-== Pengembang ==
+== Kredit ==
 
 * Ivan Lanin - http://ivan.lanin.org
 * Romi Hardiyanto - http://www.ewesewes.web.id
-
-== Kredit ==
-
 * Femmy Syahrani - http://femmy.multiply.com
 * Steven Haryanto - http://steven.blogs.masterweb.net
 * Pusat Bahasa - http://pusatbahasa.diknas.go.id
 * Seluruh anggota milis Bahtera - http://groups.yahoo.com/group/bahtera
-* Ebta Setiawan, ebsoft - http://ebsoft.web.id/ (Entri terjemahan)
-* Ardhan Madras, gkamus - http://gkamus.sourceforge.net/ (Entri terjemahan)
-* Kai Armstrong - http://edlindustries.com (BlackBerry launcher)
+* Ebta Setiawan, ebsoft - http://ebsoft.web.id/
+* Ardhan Madras, gkamus - http://gkamus.sourceforge.net/
 
 == Standar kode program ==
 
@@ -64,14 +60,14 @@ Kateglo.
 
 == Daftar pekerjaan ==
 
-* Kamus: Ungkapan/Idiom
+* Kamus: Ungkapan
 * Kamus: Singkatan
 * Kamus: Negara
 * Glosarium: Penambahan/penyuntingan secara sekaligus
 * Pengguna: pendaftaran dan preferensi
 * Umum: Statistik pengguna teraktif
+* Umum: API/antarmuka pemrograman aplikasi
 * Umum: Kata hari ini
-* Umum: API lanjut untuk tiap modul. Format JSON, PHP.
 
 == Bug yang diketahui ==
 
@@ -84,20 +80,8 @@ Kateglo.
 
 == Riwayat revisi ==
 
-=== 0.01.20090704 (04 Juli 2009) ===
-
-* Dukungan opensearch http://www.opensearch.org/Home
-
-=== 0.01.20090628 (28 Juni 2009) ===
-
-* Umum: Tampilan baru
-* Umum: Alternatif logo dan tampilan. Nonaktif.
-* Kamus: Menambahkan KTG_TIMEOUT = 15 untuk membatasi waktu uji coba mengambil data dari KBBI
-
 === 0.01.20090627 (27 Juni 2009) ===
 
-* Kamus: Tambahan terjemahan dari open-tran. Masih non-aktif.
-* Umum: API sederhana untuk kamus (format JSON, XML)
 * Umum: Menambahkan operator pencarian "diawali" dan "diakhiri"
 * Umum: Mengganti sistem penomoran versi - dua digit untuk minor dan tanggal
   untuk build

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Entry point of application
  */
@@ -36,7 +36,7 @@ $logger->log();
 
 // define mod
 $mods = array(
-	'user', 'dictionary', 'glossary', 'home', 'doc', 'proverb'
+	'user', 'comment', 'dictionary', 'glossary', 'home', 'doc', 'proverb'
 );
 $_GET['mod'] = strtolower($_GET['mod']);
 if ($_GET['mod'] == 'dict') $_GET['mod'] = 'dictionary'; // backward
@@ -50,6 +50,7 @@ $page = new $mod(&$db, &$auth, $msg);
 $page->process();
 
 // display
+$body .= show_header();
 $body .= $page->show();
 $title = ($mod == 'home') ? APP_NAME : APP_SHORT;
 if (!$page->title && $mod != 'home')
@@ -60,9 +61,7 @@ if (!$page->title && $mod != 'home')
 $title = $page->title ? $page->title . ' - ' . $title : $title;
 
 // render
-$ret .= '<?xml version="1.0" encoding="utf-8"?>' . LF;
-$ret .= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . LF;
-$ret .= '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">' . LF;
+$ret .= '<html>' . LF;
 $ret .= '<head>' . LF;
 $ret .= '<title>' . $title . '</title>' . LF;
 if ($keywords = $page->get_keywords())
@@ -72,17 +71,25 @@ if ($description = $page->get_description())
 $ret .= '<link rel="stylesheet" href="./common.css" type="text/css" />' . LF;
 $ret .= '<link rel="icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
 $ret .= '<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />' . LF;
-$ret .= '<link rel="search" type="application/opensearchdescription+xml" href="./opensearch_desc.php" title="Kateglo" /> ' . LF;
 $ret .= '</head>' . LF;
-$ret .= '<body>' . LF;
-if ($mod == 'home') $ret .= '<div id="home">' . LF;
-$ret .= show_header();
-$ret .= '<div id="content">' . LF;
 $ret .= $body;
-$ret .= '</div>' . LF;
-$ret .= show_footer();
-if ($mod == 'home') $ret .= '</div>' . LF;
-
+$ret .= sprintf('<p class="footer">' .
+	'<span style="float:right;">' .
+	'<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">' .
+	'<img title="%6$s" alt="%6$s" style="border-width:0" ' .
+	'src="./images/cc-by-nc-sa.png" />' .
+	'</a></span>' .
+	'<a href="%2$s">%1$s %3$s</a>' .
+	'. ' .
+	'<a href="%4$s">%5$s</a>' .
+	'</p>' . LF,
+	APP_SHORT,
+	'./?mod=doc&doc=README.txt',
+	APP_VERSION,
+	'./?mod=comment',
+	$msg['comment_link'],
+	'CC-BY-NC-SA'
+);
 // stats
 if ($allow_stat) $ret .= get_external_stat();
 $ret .= '</body>' . LF;

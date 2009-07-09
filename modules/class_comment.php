@@ -38,9 +38,9 @@ class comment extends page
 		global $_GET;
 		$actions = array(
 			'comment_list' => array('url' => './?mod=comment&action=view'),
-			'comment_entry' => array('url' => './?mod=comment&action=form'),
+			'comment_entry' => array('url' => './?mod=comment'),
 		);
-		if ($_GET['action'] != 'form') $_GET['action'] = 'view';
+
 		$ret .= sprintf('<h1>%1$s</h1>' . LF, $this->msg['comment']);
 		$ret .= $this->get_action_buttons($actions,
 			($_GET['action'] == 'view' ? array('comment_entry') : array('comment_list')));
@@ -72,22 +72,17 @@ class comment extends page
 			$ret .= '<p>' . $this->db->get_page_nav() . '</p>' . LF;
 			foreach ($rows as $row)
 			{
-				$sender = strip_tags($row['sender_name']);
-				if ($row['url'])
-					$sender = '<a href="' . $row['url'] . '">' . $sender . '</a>';
-				$ret .= '<div class="comment_block">' . LF;
 				$ret .= sprintf(
 					'<p><strong>%1$s</strong> (%2$s UTC)</p>' . LF,
-					$sender,
+					strip_tags($row['sender_name']),
 					$row['sent_date']
 				);
 				$ret .= '<p>' . LF;
 				$ret .= nl2br(strip_tags($row['comment_text'])) . LF;
 				$ret .= '</p>' . LF;
-				$ret .= '</div>' . LF;
 				if ($row['response'])
 				{
-					$ret .= '<blockquote class="response_block">' . LF;
+					$ret .= '<blockquote style="font-style:italic;">' . LF;
 					$ret .= nl2br(strip_tags($row['response'])) . LF;
 					$ret .= '</blockquote>' . LF;
 				}
