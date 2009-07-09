@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Entry point of application
  */
