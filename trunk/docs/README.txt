@@ -84,6 +84,10 @@ Kateglo.
 
 == Riwayat revisi ==
 
+=== 0.01.20090923 (23 September 2009) ===
+
+* Beranda: Menambahkan bagian "salah eja"
+
 === 0.01.20090704 (04 Juli 2009) ===
 
 * Dukungan opensearch http://www.opensearch.org/Home

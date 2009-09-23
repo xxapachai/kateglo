@@ -76,6 +76,7 @@ $msg = array(
 	'no_most_searched' => '(belum ada)',
 	'na' => 'Belum tersedia.',
 	'nf' => 'Tidak ditemukan.',
+	'not' => 'bukan',
 
 	'page_nav' => 'Menampilkan %1$s - %2$s dari %3$s entri.',
 	'page_first' => '&lt;&lt;',
@@ -102,6 +103,7 @@ $msg = array(
 	'ref_source' => 'Sumber',
 	'root_phrase' => 'Akar kata',
 	'roget_class' => 'Klasifikasi Roget',
+	'random_lemma' => 'Lema acak',
 
 	'sample' => 'Contoh',
 	'save' => 'Simpan',
@@ -129,5 +131,6 @@ $msg = array(
 		'<p>Saat ini terdapat <strong>%2$s</strong> entri <a href="./?mod=glossary">glosarium</a>, <strong>%1$s</strong> entri <a href="./?mod=dictionary">kamus</a>, serta <strong>%3$s</strong> entri <a href="./?mod=proverb">peribahasa</a>.</p>',
 	'wpid' => 'Wikipedia bahasa Indonesia',
 	'wpen' => 'Wikipedia bahasa Inggris',
+	'wrong_spelling' => 'Salah eja',
 );
 ?>

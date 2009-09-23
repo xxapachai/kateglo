@@ -48,17 +48,18 @@ class home extends page
 		$ret .= '<div id="welcome">' . LF;
 		$ret .= sprintf($this->msg['welcome'] . LF, $dict_count, $glo_count, $prv_count, $search_result);
 
-		// random
+		// random lemma
 		$query = 'SELECT phrase, lex_class FROM phrase
 			WHERE (LEFT(phrase, 2) != \'a \' AND LEFT(phrase, 2) != \'b \')
 			AND NOT ISNULL(updated) AND NOT ISNULL(lex_class)
 			ORDER BY RAND() LIMIT 10;';
 		$random_words = $this->db->get_rows($query);
 		$url = './?mod=dictionary&action=view&phrase=';
-		$ret .= '<p>' . LF;
+		$ret .= '<p style="padding-top:10px;">' . LF;
+		$ret .= '<strong>' . $this->msg['random_lemma'] . ':</strong><br />' . LF;
 		foreach ($random_words as $random_word)
 		{
-			$ret .= '<span style="padding: 0px 5px;">';
+			$ret .= '<span style="padding:0px 5px; white-space:nowrap;">';
 			$ret .= sprintf('<a href="%1$s%2$s">%2$s</a>%3$s',
 				$url,
 				$random_word['phrase'],
@@ -66,6 +67,30 @@ class home extends page
 			);
 //				($random_word['lex_class'] ? ' (' . $random_word['lex_class'] . ')' : '')
 			$ret .= '</span>' . LF;
+		}
+
+		// random redirect
+		$limit = 5;
+		$query = 'SELECT actual_phrase, phrase FROM phrase
+			WHERE NOT ISNULL(actual_phrase)
+			ORDER BY RAND() LIMIT ' . $limit . ';';
+		$random_redirs = $this->db->get_rows($query);
+		$url = './?mod=dictionary&action=view&phrase=';
+		$ret .= '<p style="padding-top:10px;">' . LF;
+		$ret .= '<strong>' . $this->msg['wrong_spelling'] . ':</strong><br />' . LF;
+		$i = 0;
+		foreach ($random_redirs as $random_redir)
+		{
+			$ret .= '<span style="padding:0px 5px; white-space:nowrap;">';
+			$ret .= sprintf('<a href="%1$s%2$s">%2$s</a> %4$s <a href="%1$s%3$s">%3$s</a>',
+				$url,
+				$random_redir['actual_phrase'],
+				$random_redir['phrase'],
+				$this->msg['not'],
+				''
+			);
+			$ret .= '</span>' . LF;
+			if ($i < $limit) $ret .= '<br />';
 		}
 
 		$ret .= '</p>' . LF;
