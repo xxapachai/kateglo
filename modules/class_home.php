@@ -73,6 +73,7 @@ class home extends page
 		$limit = 5;
 		$query = 'SELECT actual_phrase, phrase FROM phrase
 			WHERE LEFT(phrase, 1) != \'1\' AND LEFT(phrase, 1) != \'2\' AND LEFT(phrase, 1) != \'3\'
+			AND LEFT(actual_phrase, 1) != \'1\' AND LEFT(actual_phrase, 1) != \'2\' AND LEFT(actual_phrase, 1) != \'3\'
 			AND NOT ISNULL(actual_phrase)
 			ORDER BY RAND() LIMIT ' . $limit . ';';
 		$random_redirs = $this->db->get_rows($query);
