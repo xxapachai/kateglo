@@ -72,7 +72,8 @@ class home extends page
 		// random redirect
 		$limit = 5;
 		$query = 'SELECT actual_phrase, phrase FROM phrase
-			WHERE NOT ISNULL(actual_phrase)
+			WHERE (LEFT(phrase, 1) != \'1\' AND LEFT(phrase, 1) != \'2\')
+			AND NOT ISNULL(actual_phrase)
 			ORDER BY RAND() LIMIT ' . $limit . ';';
 		$random_redirs = $this->db->get_rows($query);
 		$url = './?mod=dictionary&action=view&phrase=';
