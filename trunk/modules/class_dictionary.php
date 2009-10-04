@@ -1220,7 +1220,7 @@ class dictionary extends page
 				$this->db->quote($old_key)
 			);
 		//die($query);
-		//$this->db->exec($query);
+		$this->db->exec($query);
 
 		// subform
 		$this->save_sub_form(
