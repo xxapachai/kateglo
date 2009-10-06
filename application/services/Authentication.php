@@ -16,7 +16,7 @@ namespace kateglo\application\services;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * This software consists of voluntary contributions made by many individuals
- * and is licensed under the GPL2. For more information, see
+ * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
 
@@ -34,7 +34,31 @@ namespace kateglo\application\services;
  */
 class Authentication {
 
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public static function hasIdentity(){
+		return false;
+	}
 	
+	/**
+	 * 
+	 * @return kateglo\application\models\User
+	 */
+	public static function getIdentity(){
+		return "";	
+	}
+	
+	/**
+	 * 
+	 * @param string $username
+	 * @param string $password
+	 * @throws kateglo\application\services\AuthenticationException
+	 */
+	public static function authenticate($username, $password){
+		
+	}
 }
 
 ?>
