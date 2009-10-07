@@ -39,5 +39,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_last_login`) VALUES
-(2, 'ivanlanin', '93503abce539132319fbc36e51121786', '2009-10-06 12:57:20'),
-(3, 'rodin', 'eca6aa57fbe8f5905004c95318f561f6', '2009-10-06 12:57:20');
+(1, 'ivan@bahtera.org', MD5('ivan'), '2009-10-06 12:57:20'),
+(2, 'romihardiyanto@gmail.com', MD5('romi'), '2009-10-06 12:57:20'),
+(3, 'arthur@purnama.de', MD5('arthur'), CURRENT_TIMESTAMP);
