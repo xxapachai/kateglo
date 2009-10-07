@@ -18,7 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\domains;
 /**
  * 
  * 
@@ -41,9 +41,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->view->data = domains\User::getByUsername('arthur@purnama.de');
     }
 
 
 }
-
+?>

@@ -72,3 +72,4 @@ try {
 	//catch anything in log files
 	utilities\LogService::getInstance()->log($e->getTraceAsString(), 3);
 }
+?>
