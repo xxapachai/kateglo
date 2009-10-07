@@ -1,5 +1,5 @@
 <?php
-namespace \kateglo\application\authentication;
+namespace kateglo\application\helpers;
 /*
  *  $Id$
  *
@@ -98,11 +98,11 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 		$result = null;
 		if($userObj instanceof models\User){
 			if($userObj->getPassword() == md5($this->password)){
-				$userObj->setLastLogin(date("Y-m-d H:i:s"));
+				$userObj->setLastLogin(new \DateTime());
 				utilities\DataAccess::getEntityManager()->persist($userObj);
-				$result = new \Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $userObj, array("Authentication success!"));
+				$result = new \Zend_Auth_Result(\Zend_Auth_Result::SUCCESS, $userObj, array("Authentication success!"));
 			}else{
-				$result = new \Zend_Auth_Result(Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array("Authentication failed!"));
+				$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array("Authentication failed!"));
 			}
 		}else{
 			$result = new \Zend_Auth_Result(Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));

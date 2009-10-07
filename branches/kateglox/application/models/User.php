@@ -21,23 +21,24 @@ namespace kateglo\application\models;
  */
 
 /**
- * 
- * 
- * @Entity
- * @Table(name="user")
+ *  
  * 
  * @uses Exception
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ * 
+ * @Entity
+ * @Table(name="user")
  */
 class User {
 
 	/**
+	 * @var int
 	 * @Id
 	 * @Column(type="integer", name="user_id")
 	 * @GeneratedValue(strategy="AUTO")
@@ -45,19 +46,19 @@ class User {
 	private $id;
 	
 	/**
-	 * 
+	 * @var string
 	 * @Column(type="string", name="user_username", unique=true)
 	 */
 	private $username;
 	
 	/**
-	 * 
+	 * @var string
 	 * @Column(type="string", name="user_password")
 	 */
 	private $password;
 	
 	/**
-	 * 
+	 * @var DateTime
 	 * @Column(type="datetime", name="user_last_login")
 	 */
 	private $lastLogin;
@@ -70,51 +71,51 @@ class User {
 	}
 
 	/**
-	 * @return the $username
+	 * @return string
 	 */
 	function getUsername() {
 		return $this->username;
 	}
 
 	/**
-	 * @return the $password
+	 * @return string
 	 */
 	function getPassword() {
 		return $this->password;
 	}
 
 	/**
-	 * @return the $lastLogin
+	 * @return DateTime
 	 */
 	function getLastLogin() {
 		return $this->lastLogin;
 	}
 
 	/**
-	 * @param $id the $id to set
+	 * @param int $id
 	 */
 	function setId($id) {
 		$this->id = $id;
 	}
 
 	/**
-	 * @param $username the $username to set
+	 * @param string $username the $username to set
 	 */
 	function setUsername($username) {
 		$this->username = $username;
 	}
 
 	/**
-	 * @param $password the $password to set
+	 * @param string $password the $password to set
 	 */
 	function setPassword($password) {
 		$this->password = $password;
 	}
 
 	/**
-	 * @param $lastLogin the $lastLogin to set
+	 * @param DateTime $lastLogin the $lastLogin to set
 	 */
-	function setLastLogin($lastLogin) {
+	function setLastLogin(\DateTime $lastLogin) {
 		$this->lastLogin = $lastLogin;
 	}
 

@@ -43,12 +43,12 @@ class Configs {
 	/**
 	 *
 	 * @param $configObject Zend_Config_Ini
-	 * @return Configs
+	 * @return Zend_Config_Ini
 	 */
 	public static function getInstance(\Zend_Config_Ini $configObject = null) {
 		if ($configObject === null) {
-			if (! (static::$configs instanceof Configs)) {
-				throw new ConfigsException("Object not Instantiated");
+			if (! (static::$configs instanceof \Zend_Config_Ini)) {
+				throw new exceptions\ConfigsException("Object not Instantiated");
 			}
 		} else {
 			static::$configs=$configObject ;
