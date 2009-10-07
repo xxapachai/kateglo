@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\configs\exceptions;
 /*
  *  $Id$
  *
@@ -20,10 +20,8 @@ namespace kateglo\application\domains;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\utilities;
-use kateglo\application\models;
 /**
- * 
+ * Exception for Configs Class
  * 
  * @uses Exception
  * @package kateglo\application\configs
@@ -34,25 +32,8 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class User {
-	
-	/**
-	 * 
-	 * @param string $username
-	 * @return kateglo\application\models\User
-	 */
-	public static function getByUsername($username){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("select a from kateglo\application\models\User a where a.username = '$username'");        
-        $result = $query->getResult();
-        if(count($result) === 1){
-        	if(! ($result[0] instanceof models\User)){
-        		throw new \Exception("wrong result");
-        	}
-        }else{
-        	throw new \Exception("result not found");
-        }
-        
-        return $result[0];
-	}
+class ConfigsException extends \Exception {
+
 }
+
 ?>

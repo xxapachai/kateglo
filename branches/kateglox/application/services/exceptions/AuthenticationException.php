@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\configs;
+namespace kateglo\application\services\exceptions;
 /*
  *  $Id$
  *
@@ -16,24 +16,20 @@ namespace kateglo\application\configs;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * This software consists of voluntary contributions made by many individuals
- * and is licensed under the GPL 2.0. For more information, see
+ * and is licensed under the GPL2. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
 
 /**
- * Exception for Configs Class
  * 
- * @uses Exception
- * @package kateglo\application\configs
- * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
+ *
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GPL2
  * @link http://code.google.com/p/kateglo/
  * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
- * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class ConfigsException extends \Exception {
-
+class AuthenticationException extends \Exception{
+	
 }
-
 ?>

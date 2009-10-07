@@ -19,7 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\services\exceptions;
 /**
  * 
  * 
@@ -38,16 +38,16 @@ class Authentication {
 	 * 
 	 * @return boolean
 	 */
-	public static function hasIdentity(){
-		return false;
+	public function hasIdentity(){
+		return \Zend_Auth::getInstance()->hasIdentity();
 	}
 	
 	/**
 	 * 
 	 * @return kateglo\application\models\User
 	 */
-	public static function getIdentity(){
-		return "";	
+	public function getIdentity(){
+		return \Zend_Auth::getInstance()->getIdentity();	
 	}
 	
 	/**
@@ -56,8 +56,14 @@ class Authentication {
 	 * @param string $password
 	 * @throws kateglo\application\services\AuthenticationException
 	 */
-	public static function authenticate($username, $password){
+	public function authenticate($username, $password){
+		$auth = \Zend_Auth::getInstance();
 		
+		$result = $auth->authenticate(new AuthenticationAdapter($username, $password));
+		
+		if(!$result->isValid()){
+			throw new exceptions\AuthenticationException(implode("", $result->getMessages()));
+		}
 	}
 }
 
