@@ -19,6 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\helpers;
 use kateglo\application\services\exceptions;
 /**
  * 
@@ -52,6 +53,14 @@ class Authentication {
 	
 	/**
 	 * 
+	 * @return kateglo\application\models\User
+	 */
+	public function clearIdentity(){
+		return \Zend_Auth::getInstance()->clearIdentity();	
+	}
+	
+	/**
+	 * 
 	 * @param string $username
 	 * @param string $password
 	 * @throws kateglo\application\services\AuthenticationException
@@ -59,7 +68,7 @@ class Authentication {
 	public function authenticate($username, $password){
 		$auth = \Zend_Auth::getInstance();
 		
-		$result = $auth->authenticate(new AuthenticationAdapter($username, $password));
+		$result = $auth->authenticate(new helpers\AuthenticationAdapter($username, $password));
 		
 		if(!$result->isValid()){
 			throw new exceptions\AuthenticationException(implode("", $result->getMessages()));

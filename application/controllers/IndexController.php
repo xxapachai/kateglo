@@ -18,6 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\services;
 use kateglo\application\domains;
 /**
  * 
@@ -41,7 +42,10 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+    	$auth = new services\Authentication();
+    	$auth->authenticate('arthur@purnama.de', 'arthur');
         $this->view->data = domains\User::getByUsername('arthur@purnama.de');
+        $this->view->auth = $auth;
     }
 
 

@@ -43,7 +43,7 @@ class User {
 	 */
 	public static function getByUsername($username){
 		$query = utilities\DataAccess::getEntityManager()->createQuery("select a from kateglo\application\models\User a where a.username = '$username'");        
-        $result = $query->getResult();
+		$result = $query->getResult();
         if(count($result) === 1){
         	if(! ($result[0] instanceof models\User)){
         		throw new \Exception("wrong result");
