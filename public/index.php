@@ -4,20 +4,24 @@ use kateglo\application\configs;
 
 date_default_timezone_set ( "Europe/Berlin" );
 
+defined('DOCUMENT_ROOT')
+|| define('DOCUMENT_ROOT', realpath(dirname(__FILE__)))
+;
+
 defined('DOCTRINE_PATH')
-|| define('DOCTRINE_PATH', realpath(dirname(__FILE__) . '/../../doctrine/lib'))
+|| define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . '/../../doctrine/lib'))
 ;
 
 defined('ZF_PATH')
-|| define('ZF_PATH', realpath(dirname(__FILE__) . '/../../ZendFramework/library'))
+|| define('ZF_PATH', realpath(DOCUMENT_ROOT . '/../../ZendFramework/library'))
 ;
 
 defined('TAL_PATH')
-|| define('TAL_PATH', realpath(dirname(__FILE__) . '/../../phptal/classes'))
+|| define('TAL_PATH', realpath(DOCUMENT_ROOT . '/../../phptal/classes'))
 ;
 
 defined('KATEGLO_PATH')
-|| define('KATEGLO_PATH', realpath(dirname(__FILE__) . '/../../'))
+|| define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . '/../../'))
 ;
 
 defined('CONFIGS_PATH')
@@ -26,11 +30,11 @@ defined('CONFIGS_PATH')
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-|| define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+|| define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
 
 // Define application environment
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
@@ -70,6 +74,6 @@ try {
 
 } catch ( Exception $e ) {
 	//catch anything in log files
-	utilities\LogService::getInstance()->log($e->getTraceAsString(), 3);
+	utilities\LogService::getInstance()->log($e->getTraceAsString(), \Zend_Log::ERR);
 }
 ?>
