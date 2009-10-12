@@ -93,7 +93,7 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 	 * @return \Zend_Auth_Result
 	 */
 	public function authenticate(){
-		/* @var $userObj kateglo\application\models\User */
+		/*@var $userObj kateglo\application\models\User */
 		$userObj = domains\User::getByUsername($this->username);
 		$result = null;
 		if($userObj instanceof models\User){
