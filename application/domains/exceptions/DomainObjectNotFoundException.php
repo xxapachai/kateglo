@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\tests\application\utilities;
+namespace kateglo\application\domains\exceptions;
 /*
  *  $Id$
  *
@@ -19,51 +19,20 @@ namespace kateglo\tests\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\utilities;
-use Doctrine\ORM;
-/**
- *
- *
+ 
+ /**
+ * 
+ * 
  * @uses Exception
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-08
+ * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- */
-class DataAccessTest extends \PHPUnit_Framework_TestCase {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * 
-	 * @return void
-	 */
-	protected function setUp(){
-		
-	}
+ */ 
+class DomainObjectNotFoundException extends \Exception {
 
-	/**
-	 * 
-	 * @return void
-	 */
-	protected function tearDown(){
-		utilities\DataAccess::clearEntityManager();
-	}
-	
-	/**
-	 * 
-	 * @return void
-	 */
-	public function testGetEntityManager(){
-
-		$entityManager = utilities\DataAccess::getEntityManager();
-		if(!($entityManager instanceof ORM\EntityManager)){
-			fail("Data Access Failed");
-		}
-	}
 }
 ?>

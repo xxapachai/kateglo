@@ -69,7 +69,7 @@ $application = new Zend_Application(
 APPLICATION_ENV,
 APPLICATION_PATH . CONFIGS_PATH
 );
-
+\Zend_Auth::getInstance()->setStorage(new \Zend_Auth_Storage_Session());
 //instantiate autoloader for Doctrine and Kateglo
 new Doctrine\Common\ClassLoader ( );
 

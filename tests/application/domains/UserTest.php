@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\tests\application\utilities;
+namespace kateglo\tests\application\domains;
 /*
  *  $Id$
  *
@@ -20,8 +20,7 @@ namespace kateglo\tests\application\utilities;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\utilities;
-use Doctrine\ORM;
+use kateglo\application\domains;
 /**
  *
  *
@@ -29,41 +28,48 @@ use Doctrine\ORM;
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-08
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class DataAccessTest extends \PHPUnit_Framework_TestCase {
-	
+class UserTest extends \PHPUnit_Framework_TestCase {
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function setUp(){
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function tearDown(){
-		utilities\DataAccess::clearEntityManager();
+
 	}
-	
+
 	/**
-	 * 
+	 * @expectedException kateglo\application\domains\exceptions\DomainResultEmptyException
 	 * @return void
 	 */
-	public function testGetEntityManager(){
+	public function testGetByUsernameResultEmpty(){
+		domains\User::getByUsername('Undefined');
+	}
 
-		$entityManager = utilities\DataAccess::getEntityManager();
-		if(!($entityManager instanceof ORM\EntityManager)){
-			fail("Data Access Failed");
-		}
+	/**
+	 *
+	 * @return void
+	 */
+	public function testGetByUsername(){
+		/*@var $result kateglo\application\models\User */
+		$result = domains\User::getByUsername('arthur@purnama.de');
+		
+		$this->assertEquals('arthur@purnama.de', $result->getUsername());
+		$this->assertEquals(md5('arthur'), $result->getPassword());
 	}
 }
 ?>
