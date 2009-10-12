@@ -19,33 +19,35 @@ namespace kateglo\application\helpers;
  * and is licensed under the GPL2. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+
+use kateglo\application\domains\exceptions;
 use kateglo\application\domains;
 use kateglo\application\models;
 use kateglo\application\utilities;
 /**
- * 
+ *
  *
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GPL2
  * @link http://code.google.com/p/kateglo/
- * @since  
- * @version 
+ * @since
+ * @version
  * @author  Arthur Purnama <arthur@purnama.de>
  */
 class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
-	
+
 	/**
 	 * @var string
 	 */
 	private $username;
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
 	 */
 	private $password;
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $username
 	 * @param string $password
 	 */
@@ -53,50 +55,51 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 		$this->username = $username;
 		$this->password = $password;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $username
 	 */
 	public function setUsername($username){
 		$this->username = $username;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getUsername(){
 		return $this->username;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $password
 	 */
 	public function setPassword($password){
 		$this->password = $password;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getPassword(){
 		return $this->password;
 	}
-	
+
 	/**
 	 * Authenticate the given username and password.
 	 * if the user Authenticated, then set the last login date to current.
-	 * 
+	 *
 	 * @return \Zend_Auth_Result
 	 */
 	public function authenticate(){
-		/*@var $userObj kateglo\application\models\User */
-		$userObj = domains\User::getByUsername($this->username);
 		$result = null;
-		if($userObj instanceof models\User){
+		
+		try{
+			/*@var $userObj kateglo\application\models\User */
+			$userObj = domains\User::getByUsername($this->username);
 			if($userObj->getPassword() == md5($this->password)){
 				$userObj->setLastLogin(new \DateTime());
 				utilities\DataAccess::getEntityManager()->persist($userObj);
@@ -104,10 +107,12 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 			}else{
 				$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array("Authentication failed!"));
 			}
-		}else{
-			$result = new \Zend_Auth_Result(Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));
+		}catch (exceptions\DomainObjectNotFoundException $e){
+			$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));
+		}catch(exceptions\DomainResultEmptyException $e){
+			$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));
 		}
-		
+
 		return $result;
 	}
 }

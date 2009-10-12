@@ -37,6 +37,8 @@ namespace kateglo\application\models;
  */
 class User {
 
+	const CLASS_NAME = __CLASS__;
+	
 	/**
 	 * @var int
 	 * @Id

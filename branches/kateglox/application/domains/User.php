@@ -20,6 +20,7 @@ namespace kateglo\application\domains;
  * <http://code.google.com/p/kateglo/>.
  */
 
+use kateglo\application\domains\exceptions;
 use kateglo\application\utilities;
 use kateglo\application\models;
 /**
@@ -42,14 +43,14 @@ class User {
 	 * @return kateglo\application\models\User
 	 */
 	public static function getByUsername($username){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("select a from kateglo\application\models\User a where a.username = '$username'");        
+		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
 		$result = $query->getResult();
         if(count($result) === 1){
         	if(! ($result[0] instanceof models\User)){
-        		throw new \Exception("wrong result");
+        		throw new exceptions\DomainObjectNotFoundException("wrong result");
         	}
         }else{
-        	throw new \Exception("result not found");
+        	throw new exceptions\DomainResultEmptyException("result not found");
         }
         
         return $result[0];

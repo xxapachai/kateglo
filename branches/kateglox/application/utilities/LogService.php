@@ -20,7 +20,7 @@ namespace kateglo\application\utilities;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\configs\Configs;
+use kateglo\application\configs;
 /**
  * 
  * 
@@ -48,7 +48,7 @@ class LogService {
 	public static function getInstance(){
 		if(self::$logInstance === null){
 			self::$logInstance = new \Zend_Log();
-			self::$logInstance->addWriter(new \Zend_Log_Writer_Stream(Configs::getInstance()->getErrorLogFile()));
+			self::$logInstance->addWriter(new \Zend_Log_Writer_Stream(configs\Configs::getInstance()->errorLog));
 		}
 
 		return self::$logInstance;

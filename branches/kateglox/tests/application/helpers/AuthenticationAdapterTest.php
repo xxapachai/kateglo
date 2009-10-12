@@ -35,14 +35,13 @@ use kateglo\application\utilities;
  */
 class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 
-	const CLASS_NAME = __CLASS__;	
-	
+	const CLASS_NAME = __CLASS__;
+
 	/**
 	 *
 	 * @return void
 	 */
-	protected function setUp()
-	{
+	protected function setUp(){
 
 	}
 
@@ -50,8 +49,7 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 	 *
 	 * @return void
 	 */
-	protected function tearDown()
-	{
+	protected function tearDown(){
 		utilities\DataAccess::clearEntityManager();
 	}
 
@@ -69,7 +67,7 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 		}else{
 			$this->fail('Variable is not an Object');
 		}
-		
+
 	}
 
 	/**
