@@ -19,6 +19,12 @@ namespace kateglo\tests\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+
+use kateglo\application\models;
+
+use kateglo\application\utilities;
+
+use kateglo\application\services;
 /**
  *
  *
@@ -34,7 +40,7 @@ namespace kateglo\tests\application\services;
 class AuthenticationTest extends \PHPUnit_Framework_TestCase {
 
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
 	 *
 	 * @return void
@@ -50,7 +56,26 @@ class AuthenticationTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown()
 	{
+		utilities\DataAccess::clearEntityManager();
+		\Zend_Auth::getInstance()->clearIdentity();
+	}
 
+	/**
+	 *
+	 * @return void
+	 */
+	public function testNotHasIdentity(){
+		$auth = new services\Authentication();
+		$this->assertFalse($auth->hasIdentity());
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function testNotGetIdentity(){
+		$auth = new services\Authentication();
+		$this->assertNull($auth->getIdentity());
 	}
 
 	/**
@@ -58,7 +83,9 @@ class AuthenticationTest extends \PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	public function testHasIdentity(){
-
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'arthur');
+		$this->assertTrue($auth->hasIdentity());
 	}
 
 	/**
@@ -66,7 +93,13 @@ class AuthenticationTest extends \PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	public function testGetIdentity(){
-
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'arthur');
+		$this->assertTrue($auth->getIdentity() instanceof models\User);
+		/*@var $identity kateglo\application\models\User */
+		$identity = $auth->getIdentity();
+		$this->assertEquals('arthur@purnama.de', $identity->getUsername());
+		$this->assertEquals(md5('arthur'), $identity->getPassword());		
 	}
 
 	/**
@@ -74,15 +107,33 @@ class AuthenticationTest extends \PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	public function testClearIdentity(){
-
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'arthur');
+		$this->assertTrue($auth->getIdentity() instanceof models\User);
+		$auth->clearIdentity();
+		$this->assertFalse($auth->hasIdentity());
+		$this->assertNull($auth->getIdentity());
+		$this->assertFalse($auth->getIdentity() instanceof models\User);
 	}
 
+	/**
+     * @expectedException kateglo\application\services\exceptions\AuthenticationException
+     * @return void
+     */
+	public function testAuthenticateNotSucceeded(){
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'Undefined');
+	}
+	
 	/**
 	 *
 	 * @return void
 	 */
 	public function testAuthenticate(){
-
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'arthur');
+		$this->assertTrue($auth->getIdentity() instanceof models\User);
+		$this->assertTrue($auth->hasIdentity());
 	}
 }
 ?>

@@ -58,6 +58,7 @@ class TestSuite extends \PHPUnit_Framework_TestSuite {
 	}
 
 	public static function suite(){
+		session_start();
 		$suite = new TestSuite();
 		$suite->addTestSuite(helpers\AuthenticationAdapterTest::CLASS_NAME);
 		$suite->addTestSuite(services\AuthenticationTest::CLASS_NAME);

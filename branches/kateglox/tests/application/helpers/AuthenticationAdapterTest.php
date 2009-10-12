@@ -19,6 +19,8 @@ namespace kateglo\tests\application\helpers;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\helpers;
+use kateglo\application\utilities;
 /**
  *
  *
@@ -50,7 +52,7 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 	 */
 	protected function tearDown()
 	{
-
+		utilities\DataAccess::clearEntityManager();
 	}
 
 	/**
@@ -58,7 +60,16 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 	 * @return void
 	 */
 	public function testAuthenticateUserNotFound(){
-
+		$auth = new helpers\AuthenticationAdapter('Undefined', 'Undefined');
+		/*@var $result \Zend_Auth_Result */
+		$result = $auth->authenticate();
+		if($result instanceof \Zend_Auth_Result){
+			$this->assertEquals(\Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
+			$this->assertFalse($result->isValid());
+		}else{
+			$this->fail('Variable is not an Object');
+		}
+		
 	}
 
 	/**
@@ -66,7 +77,15 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 	 * @return void
 	 */
 	public function testAuthenticateWrongPassword(){
-
+		$auth = new helpers\AuthenticationAdapter('arthur@purnama.de', 'Undefined');
+		/*@var $result \Zend_Auth_Result */
+		$result = $auth->authenticate();
+		if($result instanceof \Zend_Auth_Result){
+			$this->assertEquals(\Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, $result->getCode());
+			$this->assertFalse($result->isValid());
+		}else{
+			$this->fail('Variable is not an Object');
+		}
 	}
 
 	/**
@@ -74,7 +93,19 @@ class AuthenticationAdapterTest extends \PHPUnit_Framework_TestCase{
 	 * @return void
 	 */
 	public function testAuthenticate(){
-
+		$auth = new helpers\AuthenticationAdapter('arthur@purnama.de', 'arthur');
+		/*@var $result \Zend_Auth_Result */
+		$result = $auth->authenticate();
+		if($result instanceof \Zend_Auth_Result){
+			$this->assertEquals(\Zend_Auth_Result::SUCCESS, $result->getCode());
+			$this->assertTrue($result->isValid());
+			/*@var $identity kateglo\application\models\User */
+			$identity = $result->getIdentity();
+			$this->assertEquals('arthur@purnama.de', $identity->getUsername());
+			$this->assertEquals(md5('arthur'), $identity->getPassword());
+		}else{
+			$this->fail('Variable is not an Object');
+		}
 	}
 }
 ?>

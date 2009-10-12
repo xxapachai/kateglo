@@ -73,6 +73,10 @@ class DataAccess {
 		}
 		return self::$entityManager;
 	}
+	
+	public static function clearEntityManager(){
+		self::$entityManager = null;
+	}
 }
 
 ?>
