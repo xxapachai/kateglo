@@ -23,8 +23,7 @@ namespace kateglo\application\models;
 /**
  *  
  * 
- * @uses Exception
- * @package kateglo\application\configs
+ * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since 2009-10-07
@@ -49,13 +48,13 @@ class User {
 	
 	/**
 	 * @var string
-	 * @Column(type="string", name="user_username", unique=true)
+	 * @Column(type="string", name="user_username", unique=true, length=255)
 	 */
 	private $username;
 	
 	/**
 	 * @var string
-	 * @Column(type="string", name="user_password")
+	 * @Column(type="string", name="user_password", length=255)
 	 */
 	private $password;
 	

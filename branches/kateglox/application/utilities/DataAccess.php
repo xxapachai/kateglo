@@ -28,8 +28,7 @@ use Doctrine\ORM;
 /**
  * 
  * 
- * @uses Exception
- * @package kateglo\application\configs
+ * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since  
@@ -41,9 +40,20 @@ class DataAccess {
 
 	/**
 	 * 
-	 * @var EntityManager
+	 * @var Doctrine\ORM\EntityManager
 	 */
 	private static $entityManager = null;
+	
+	/**
+	 * 
+	 * @var Doctrine\Common\Cache\ArrayCache
+	 */
+	private static $metadataCache = null;
+	/**
+	 * 
+	 * @var Doctrine\Common\Cache\ArrayCache
+	 */
+	private static $queryCache = null;
 	
 	/**
 	 * 
@@ -53,9 +63,7 @@ class DataAccess {
 	{
 
 		if(self::$entityManager == null){
-			
-        	$eventManager = new Common\EventManager(); 
-        	
+			        	
         	$params = array("driver"=> configs\Configs::getInstance()->database->adapter, 
         					"host" => configs\Configs::getInstance()->database->host,
         					"port" => configs\Configs::getInstance()->database->port,
@@ -63,13 +71,19 @@ class DataAccess {
         					"user" => configs\Configs::getInstance()->database->username,
         					"password" => configs\Configs::getInstance()->database->password);
         	
-        	$conn = DBAL\DriverManager::getConnection($params, null, $eventManager);
+        	$conn = DBAL\DriverManager::getConnection($params, null);
         	$conn->connect();
+        	if(self::$metadataCache == null){
+        		self::$metadataCache = new Cache\ArrayCache();
+        	}
+        	if(self::$queryCache == null){
+        		self::$queryCache = new Cache\ArrayCache();
+        	}
         	$config = new ORM\Configuration();
-      		$config->setMetadataCacheImpl(new Cache\ArrayCache());
-        	$config->setQueryCacheImpl(new Cache\ArrayCache());
+      		$config->setMetadataCacheImpl(self::$metadataCache);
+        	$config->setQueryCacheImpl(self::$queryCache);
         	
-        	self::$entityManager = \Doctrine\ORM\EntityManager::create($conn, $config, $eventManager);
+        	self::$entityManager = ORM\EntityManager::create($conn, $config);
 		}
 		return self::$entityManager;
 	}

@@ -27,11 +27,13 @@ use kateglo\application\utilities;
 /**
  *
  *
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GPL2
+ * @package kateglo\application\helpers
+ * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
- * @version
+ * @since  
+ * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
+ * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 

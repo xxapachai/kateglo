@@ -16,18 +16,20 @@ namespace kateglo\application\services\exceptions;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * This software consists of voluntary contributions made by many individuals
- * and is licensed under the GPL2. For more information, see
+ * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
 
 /**
  * 
  *
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GPL2
+ * @package kateglo\application\services\exceptions
+ * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
+ * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class AuthenticationException extends \Exception{
 	

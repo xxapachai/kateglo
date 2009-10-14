@@ -1,7 +1,4 @@
 <?php
-use kateglo\application\utilities;
-use kateglo\application\configs;
-
 date_default_timezone_set ( "Europe/Berlin" );
 
 defined('DOCUMENT_ROOT')
@@ -34,7 +31,7 @@ defined('APPLICATION_PATH')
 
 // Define application environment
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
+|| define('APPLICATION_ENV', 'linuxDevelopment');
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
@@ -53,8 +50,10 @@ require_once 'Zend/Application.php';
 require_once 'PHPTAL.php';
 
 /** Load Class for Doctrine and Kateglo */
-require_once 'Doctrine/Common/ClassLoader.php';
+require_once 'Doctrine/Common/GlobalClassLoader.php';
 
+use kateglo\application\utilities;
+use kateglo\application\configs;
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(
@@ -63,11 +62,11 @@ APPLICATION_PATH . CONFIGS_PATH
 );
 
 //instantiate autoloader for Doctrine and Kateglo
-new Doctrine\Common\ClassLoader ( );
+new Doctrine\Common\GlobalClassLoader ( );
 
 try {
 	// Initialize Configuration
-	configs\Configs::getInstance ( new Zend_Config_Ini ( APPLICATION_PATH . CONFIGS_PATH, APPLICATION_ENV ) );
+	configs\Configs::getInstance ( new \Zend_Config_Ini ( APPLICATION_PATH . CONFIGS_PATH, APPLICATION_ENV ) );
 
 	//run kateglo
 	$application->bootstrap()->run();
