@@ -30,8 +30,11 @@ defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
 
 // Define application environment
+//defined('APPLICATION_ENV')
+//|| define('APPLICATION_ENV', 'linuxDevelopment');
+
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', 'linuxDevelopment');
+|| define('APPLICATION_ENV', 'windowsDevelopment');
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
@@ -55,14 +58,18 @@ require_once 'Doctrine/Common/GlobalClassLoader.php';
 use kateglo\application\utilities;
 use kateglo\application\configs;
 
+//instantiate autoloader for Doctrine and Kateglo
+$classLoader = new Doctrine\Common\GlobalClassLoader ( );
+$classLoader->registerNamespace('Doctrine', realpath(DOCTRINE_PATH));
+$classLoader->registerNamespace('kateglo', realpath(KATEGLO_PATH));
+$classLoader->register();
+
 // Create application, bootstrap, and run
 $application = new Zend_Application(
 APPLICATION_ENV,
 APPLICATION_PATH . CONFIGS_PATH
 );
 
-//instantiate autoloader for Doctrine and Kateglo
-new Doctrine\Common\GlobalClassLoader ( );
 
 try {
 	// Initialize Configuration
