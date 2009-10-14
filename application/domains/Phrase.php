@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\configs;
+namespace kateglo\application\domains;
 /*
  *  $Id$
  *
@@ -19,43 +19,40 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs\exceptions;
+
+use kateglo\application\domains\exceptions;
+use kateglo\application\utilities;
+use kateglo\application\models;
 /**
- *
- *
- * @package kateglo\application\configs
+ * 
+ * 
+ * @package kateglo\application\domains
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Configs {
+class Phrase {
 	
 	/**
-	 *
-	 * @var Zend_Config_Ini
+	 * 
+	 * @param string $phrase
+	 * @return kateglo\application\models\Phrase
 	 */
-	private static $configs;
-
-	/**
-	 *
-	 * @param $configObject Zend_Config_Ini
-	 * @return Zend_Config_Ini
-	 */
-	public static function getInstance(\Zend_Config_Ini $configObject = null) {
-		if ($configObject === null) {
-			if (! (static::$configs instanceof \Zend_Config_Ini)) {
-				throw new exceptions\ConfigsException("Object not Instantiated");
-			}
-		} else {
-			static::$configs=$configObject ;
-		}
-
-		return static::$configs;
-
+	public static function getByPhrase($phrase){
+		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT p FROM ".models\Phrase::CLASS_NAME." p WHERE p.phrase = '$phrase'");        
+		$result = $query->getResult();
+        if(count($result) === 1){
+        	if(! ($result[0] instanceof models\Phrase)){
+        		throw new exceptions\DomainObjectNotFoundException("wrong result");
+        	}
+        }else{
+        	throw new exceptions\DomainResultEmptyException("result not found");
+        }
+        
+        return $result[0];
 	}
-
 }
 ?>

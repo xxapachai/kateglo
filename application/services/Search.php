@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\configs;
+namespace kateglo\application\services;
 /*
  *  $Id$
  *
@@ -19,43 +19,32 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs\exceptions;
+
+use kateglo\application\domains;
 /**
- *
- *
- * @package kateglo\application\configs
+ *  
+ * 
+ * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Configs {
+class Search {
+	
+	const CLASS_NAME = __CLASS__;
 	
 	/**
-	 *
-	 * @var Zend_Config_Ini
+	 * 
+	 * @param string $phrase
+	 * @return kateglo\application\models\Phrase
 	 */
-	private static $configs;
-
-	/**
-	 *
-	 * @param $configObject Zend_Config_Ini
-	 * @return Zend_Config_Ini
-	 */
-	public static function getInstance(\Zend_Config_Ini $configObject = null) {
-		if ($configObject === null) {
-			if (! (static::$configs instanceof \Zend_Config_Ini)) {
-				throw new exceptions\ConfigsException("Object not Instantiated");
-			}
-		} else {
-			static::$configs=$configObject ;
-		}
-
-		return static::$configs;
-
+	public function phrase($phrase){
+		$result = domains\Phrase::getByPhrase($phrase);
+		
+		return $result;
 	}
-
 }
 ?>

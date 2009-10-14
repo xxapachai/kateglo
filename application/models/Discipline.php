@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\configs;
+namespace kateglo\application\models;
 /*
  *  $Id$
  *
@@ -19,42 +19,94 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs\exceptions;
+
 /**
- *
- *
- * @package kateglo\application\configs
+ *  
+ * 
+ * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ * 
+ * @Entity
+ * @Table(name="discipline")
  */
-class Configs {
+class Discipline {
+	
+	const CLASS_NAME = __CLASS__;
 	
 	/**
-	 *
-	 * @var Zend_Config_Ini
+	 * @var int
+	 * @Id
+	 * @Column(type="integer", name="discipline_id")
+	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private static $configs;
-
+	private $id;
+	
 	/**
-	 *
-	 * @param $configObject Zend_Config_Ini
-	 * @return Zend_Config_Ini
+	 * @var string
+	 * @Column(type="string", name="discipline_name", unique=true, length=255)
 	 */
-	public static function getInstance(\Zend_Config_Ini $configObject = null) {
-		if ($configObject === null) {
-			if (! (static::$configs instanceof \Zend_Config_Ini)) {
-				throw new exceptions\ConfigsException("Object not Instantiated");
-			}
-		} else {
-			static::$configs=$configObject ;
-		}
-
-		return static::$configs;
-
+	private $discipline;
+	
+	/**
+	 * @var string
+	 * @Column(type="string", name="discipline_abbreviation", unique=true, length=255)
+	 */
+	private $abbreviation;
+	
+	/**
+	 * 
+	 * @param int $id
+	 * @return void
+	 */
+	public function setId($id){
+		$this->id = $id;
+	}
+	
+	/**
+	 * 
+	 * @return int
+	 */
+	public function getId(){
+		return $this->id;
+	}
+	
+	/**
+	 * 
+	 * @param string $discipline
+	 * @return void
+	 */
+	public function setDiscipline($discipline){
+		$this->discipline = $discipline;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getDiscipline(){
+		return $this->discipline;
+	}
+	
+	/**
+	 * 
+	 * @param string $abbreviation
+	 * @return void
+	 */
+	public function setAbbreviation($abbreviation){
+		$this->abbreviation = $abbreviation;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getAbbreviation(){
+		return $this->abbreviation;
 	}
 
 }

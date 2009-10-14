@@ -23,11 +23,10 @@ use kateglo\application\domains;
 /**
  * 
  * 
- * @uses Exception
- * @package kateglo\application\configs
+ * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since  2009-10-14
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
@@ -46,6 +45,9 @@ class IndexController extends Zend_Controller_Action
     	$auth->authenticate('arthur@purnama.de', 'arthur');
         $this->view->data = domains\User::getByUsername('arthur@purnama.de');
         $this->view->auth = $auth;
+        
+        $search = new services\Search();
+        $this->view->phrase = $search->phrase('abu');
     }
 
 
