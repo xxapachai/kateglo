@@ -1,9 +1,9 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 
-	/* Migrate PHRASE
+	/* Migrate PHRASE*/
 
 	$phraseType = array();
 	foreach($kateglox->query('SELECT * FROM phrase_type;') as $row) {
@@ -29,9 +29,9 @@ try {
 		print_r($row);
 	}
 	
-	*/
 	
-	/* MIGRATE PROVERB
+	
+	/* MIGRATE PROVERB*/
 	$phrase = array();
 	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
 		$phrase[$row['phrase_name']] = $row['phrase_id'];
@@ -46,9 +46,9 @@ try {
 	foreach($kateglox->query('SELECT COUNT(*) FROM proverb;') as $row) {
 		print_r($row);
 	}
-	*/
 	
-	/* MIGRATE RELATION
+	
+	/* MIGRATE RELATION */
 	$phrase = array();
 	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
 		$phrase[$row['phrase_name']] = $row['phrase_id'];
@@ -64,7 +64,7 @@ try {
 		$kateglox->query($sql);
 		echo $sql."\n";
 	}
-	*/
+	
 	
 	$phrase = array();
 	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
