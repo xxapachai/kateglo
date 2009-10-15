@@ -57,7 +57,7 @@ class DataAccess {
 	
 	/**
 	 * 
-	 * @return EntityManager
+	 * @return Doctrine\ORM\EntityManager
 	 */
 	public static function getEntityManager()
 	{
@@ -84,6 +84,7 @@ class DataAccess {
         	$config->setQueryCacheImpl(self::$queryCache);
         	
         	self::$entityManager = ORM\EntityManager::create($conn, $config);
+        	self::$entityManager->getConfiguration()->setAllowPartialObjects(false);
 		}
 		return self::$entityManager;
 	}

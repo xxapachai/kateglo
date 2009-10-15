@@ -34,7 +34,7 @@ use kateglo\application\models;
  * @Entity
  * @Table(name="relation")
  */
-class Proverb {
+class Relation {
 	
 	const CLASS_NAME = __CLASS__;
 	
