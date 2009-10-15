@@ -30,11 +30,11 @@ defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
 
 // Define application environment
-//defined('APPLICATION_ENV')
-//|| define('APPLICATION_ENV', 'linuxDevelopment');
-
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', 'windowsDevelopment');
+|| define('APPLICATION_ENV', 'linuxDevelopment');
+
+//defined('APPLICATION_ENV')
+//|| define('APPLICATION_ENV', 'windowsDevelopment');
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
