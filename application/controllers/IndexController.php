@@ -21,8 +21,8 @@
 use kateglo\application\services;
 use kateglo\application\domains;
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -34,21 +34,27 @@ use kateglo\application\domains;
 class IndexController extends Zend_Controller_Action
 {
 
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
+	public function init(){
+		/* Initialize action controller here */
+	}
 
-    public function indexAction()
-    {
-    	$auth = new services\Authentication();
-    	$auth->authenticate('arthur@purnama.de', 'arthur');
-        $this->view->data = domains\User::getByUsername('arthur@purnama.de');
-        $this->view->auth = $auth;
-        
-        $search = new services\Search();
-        $this->view->phrase = $search->phrase('abu');
-    }
+	public function indexAction(){
+		$auth = new services\Authentication();
+		$auth->authenticate('arthur@purnama.de', 'arthur');
+		$this->view->data = domains\User::getByUsername('arthur@purnama.de');
+		$this->view->auth = $auth;
+
+
+	}
+
+	public function searchAction(){
+		$request = $this->getRequest();
+		$text = urldecode($request->getParam('text'));
+		if($text !== ''){
+			$search = new services\Search();
+			$this->view->phrase = $search->phrase($text);
+		}
+	}
 
 
 }

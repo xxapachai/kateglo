@@ -20,13 +20,13 @@
  */
 
 /**
- * 
- * 
+ *
+ *
  * @uses Exception
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
@@ -34,6 +34,41 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+	/**
+	 * Run the application
+	 *
+	 * Checks to see that we have a default controller directory. If not, an
+	 * exception is thrown.
+	 *
+	 * If so, it registers the bootstrap with the 'bootstrap' parameter of
+	 * the front controller, and dispatches the front controller.
+	 *
+	 * @return void
+	 * @throws Zend_Application_Bootstrap_Exception
+	 */
+	public function run()
+	{
+		$front = $this->getResource('FrontController');
+		$router = $front->getRouter(); 
+		$route = new Zend_Controller_Router_Route('search/:text',
+			array(
+				'text'	 => '',
+		        'controller' => 'index',
+		        'action'     => 'search'
+	        )
+        );
+
+        $router->addRoute('user', $route);
+        $default = $front->getDefaultModule();
+        if (null === $front->getControllerDirectory($default)) {
+        	throw new Zend_Application_Bootstrap_Exception(
+                'No default controller directory registered with front controller'
+                );
+        }
+
+        $front->setParam('bootstrap', $this);
+        $front->dispatch();
+	}
 
 }
 

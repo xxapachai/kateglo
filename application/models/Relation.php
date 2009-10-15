@@ -55,7 +55,7 @@ class Relation {
 	
 	/**
 	 * @var kateglo\application\models\PhraseType
-	 * @ManyToOne(targetEntity="kateglo\application\models\Relation_type")
+	 * @ManyToOne(targetEntity="kateglo\application\models\RelationType")
 	 * @JoinColumn(name="relation_type_id", referencedColumnName="relation_type_id")
 	 */
 	private $type;

@@ -98,7 +98,7 @@ class PhraseType {
 	 * @return string
 	 */
 	public function getType(){
-		return $getType;
+		return $this->type;
 	}
 	
 /**
