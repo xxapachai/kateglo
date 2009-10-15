@@ -2,48 +2,44 @@
 date_default_timezone_set ( "Europe/Berlin" );
 
 defined('DOCUMENT_ROOT')
-|| define('DOCUMENT_ROOT', realpath(dirname(__FILE__)))
-;
+|| define('DOCUMENT_ROOT', realpath(dirname(__FILE__)));
+
+defined('DOCTRINE_PROXIES_PATH')
+|| define('DOCTRINE_PROXIES_PATH', realpath(DOCUMENT_ROOT . '/../proxies'));
 
 defined('DOCTRINE_PATH')
-|| define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . '/../../doctrine/lib'))
-;
+|| define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . '/../../doctrine/lib'));
 
 defined('ZF_PATH')
-|| define('ZF_PATH', realpath(DOCUMENT_ROOT . '/../../ZendFramework/library'))
-;
+|| define('ZF_PATH', realpath(DOCUMENT_ROOT . '/../../ZendFramework/library'));
 
 defined('TAL_PATH')
-|| define('TAL_PATH', realpath(DOCUMENT_ROOT . '/../../phptal/classes'))
-;
+|| define('TAL_PATH', realpath(DOCUMENT_ROOT . '/../../phptal/classes'));
 
 defined('KATEGLO_PATH')
-|| define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . '/../../'))
-;
+|| define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . '/../../'));
 
 defined('CONFIGS_PATH')
-|| define('CONFIGS_PATH', '/configs/application.ini')
-;
+|| define('CONFIGS_PATH', '/configs/application.ini');
 
 // Define path to application directory
 defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
 
 // Define application environment
-defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', 'linuxDevelopment');
-
 //defined('APPLICATION_ENV')
-//|| define('APPLICATION_ENV', 'windowsDevelopment');
+//|| define('APPLICATION_ENV', 'linuxDevelopment');
+defined('APPLICATION_ENV')
+|| define('APPLICATION_ENV', 'windowsDevelopment');
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
-	realpath(APPLICATION_PATH . '/../library'),
-	realpath(DOCTRINE_PATH),
-	realpath(ZF_PATH),
-	realpath(TAL_PATH),
-	realpath(KATEGLO_PATH),
-	get_include_path(),
+realpath(APPLICATION_PATH . '/../library'),
+realpath(DOCTRINE_PATH),
+realpath(ZF_PATH),
+realpath(TAL_PATH),
+realpath(KATEGLO_PATH),
+get_include_path(),
 )));
 
 /** Zend Application */

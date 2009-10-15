@@ -82,9 +82,10 @@ class DataAccess {
         	$config = new ORM\Configuration();
       		$config->setMetadataCacheImpl(self::$metadataCache);
         	$config->setQueryCacheImpl(self::$queryCache);
+        	$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
+        	$config->setProxyNamespace('kateglo\proxies');
         	
         	self::$entityManager = ORM\EntityManager::create($conn, $config);
-        	self::$entityManager->getConfiguration()->setAllowPartialObjects(false);
 		}
 		return self::$entityManager;
 	}

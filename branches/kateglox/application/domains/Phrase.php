@@ -23,6 +23,7 @@ namespace kateglo\application\domains;
 use kateglo\application\domains\exceptions;
 use kateglo\application\utilities;
 use kateglo\application\models;
+use Doctrine\ORM\Mapping;
 /**
  * 
  * 

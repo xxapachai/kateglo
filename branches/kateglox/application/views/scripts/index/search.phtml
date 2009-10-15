@@ -1,0 +1,35 @@
+<?php echo '<?xml version="1.0" encoding="encoding"'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=encoding" />
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+	<table border="1">
+		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;"><?php echo $this->phrase->getPhrase()."(".$this->phrase->getId().")";?></td></tr>
+		<tr><td style="font-weight: bold;">Type</td><td colspan="2"><?php echo $this->phrase->getType()->getType()."(".$this->phrase->getType()->getId().")";?></td></tr>
+		<tr><td style="font-weight: bold;">Lexical</td><td colspan="2"><?php echo $this->phrase->getLexical()->getLexical()."(".$this->phrase->getLexical()->getId().")";?></td></tr>
+		<tr><td colspan="3" style="font-weight: bold">Definitions</td></tr>
+		<?php $definitions = $this->phrase->getDefinitions();
+			foreach($definitions as $definition):
+		?>
+		<tr><td><?php echo $definition->getId();?></td><td colspan="2"><?php echo $definition->getDefinition();?></td></tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Proverbs</td></tr>
+		<?php $proverbs = $this->phrase->getProverbs();
+			foreach($proverbs as $proverb):
+		?>
+		<tr><td><?php echo $proverb->getId();?></td><td><?php echo $proverb->getProverb();?></td><td><?php echo $proverb->getMeaning();?></td></tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Relations</td></tr>
+		<?php $relations = $this->phrase->getRelations();
+			foreach($relations as $relation):
+		?>
+		<tr><td><?php echo $relation->getId();?></td><td colspan="2"><a href="<?php echo rawurlencode($relation->getRelation()->getPhrase()); ?>" /><?php echo $relation->getRelation()->getPhrase();?></td></tr>
+		<?php endforeach; ?>
+	</table>	
+</div>
+</body>
+</html>

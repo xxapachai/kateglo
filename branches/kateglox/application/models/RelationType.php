@@ -63,7 +63,7 @@ class RelationType {
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="type")
+	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="type", cascade={"persist"})
 	 */
 	private $relations;
 	
