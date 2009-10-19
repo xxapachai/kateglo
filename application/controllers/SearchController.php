@@ -18,56 +18,46 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\helpers;
+use kateglo\application\faces;
+use kateglo\application\services;
+use kateglo\application\domains;
 /**
  *
  *
- * @uses Exception
- * @package kateglo\application\configs
+ * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since  2009-10-14
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+class SearchController extends Zend_Controller_Action
 {
 
-	/**
-	 * Run the application
-	 *
-	 * Checks to see that we have a default controller directory. If not, an
-	 * exception is thrown.
-	 *
-	 * If so, it registers the bootstrap with the 'bootstrap' parameter of
-	 * the front controller, and dispatches the front controller.
-	 *
-	 * @return void
-	 * @throws Zend_Application_Bootstrap_Exception
-	 */
-	public function run()
-	{
-		$front = $this->getResource('FrontController');
-		$router = $front->getRouter(); 
-		$route = new Zend_Controller_Router_Route(':controller/:text',
-			array(
-				'text'	 => '',
-	        )
-        );
-
-        $router->addRoute('kateglo', $route);
-        $default = $front->getDefaultModule();
-        if (null === $front->getControllerDirectory($default)) {
-        	throw new Zend_Application_Bootstrap_Exception(
-                'No default controller directory registered with front controller'
-                );
-        }
-
-        $front->setParam('bootstrap', $this);
-        $front->dispatch();
+	public function init(){
+		/* Initialize action controller here */
 	}
 
+	public function indexAction(){
+		/*@var $request Zend_Controller_Request_Http */
+		$request = $this->getRequest();
+		$searchFaces = new faces\Search();
+		$this->view->search = $searchFaces;
+		if($request->isPost()){
+			$searchText = $request->getParam($searchFaces->getFieldName());
+			if($searchText !== '' || $searchText !== null){
+				header('location: '.$request->getBasePath().'/search/'.$searchText);
+			}
+		}else if($request->isGet()){
+			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
+			if($text !== ''){
+				$searchFaces->setFieldValue($text);
+				$searchService = new services\Search();
+				$this->view->phrase = $searchService->phrase($text);
+			}
+		}
+	}
 }
-
 ?>

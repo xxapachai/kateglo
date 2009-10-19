@@ -18,6 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\faces;
 use kateglo\application\services;
 use kateglo\application\domains;
 /**
@@ -39,23 +40,16 @@ class IndexController extends Zend_Controller_Action
 	}
 
 	public function indexAction(){
-		$auth = new services\Authentication();
-		$auth->authenticate('arthur@purnama.de', 'arthur');
-		$this->view->data = domains\User::getByUsername('arthur@purnama.de');
-		$this->view->auth = $auth;
-
-
-	}
-
-	public function searchAction(){
+		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
-		$text = urldecode($request->getParam('text'));
-		if($text !== ''){
-			$search = new services\Search();
-			$this->view->phrase = $search->phrase($text);
+		$search = new faces\Search();
+		$this->view->search = $search;
+		if($request->isPost()){
+			$searchText = $request->getParam($search->getFieldName());
+			if($searchText !== '' || $searchText !== null){
+				header('location: '.$request->getBasePath().'/search/'.$searchText);
+			}
 		}
 	}
-
-
 }
 ?>
