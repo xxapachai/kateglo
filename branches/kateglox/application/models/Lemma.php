@@ -34,16 +34,16 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="phrase")
+ * @Table(name="lemma")
  */
-class Phrase {
+class Lemma {
 
 	const CLASS_NAME = __CLASS__;
 
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="phrase_id")
+	 * @Column(type="integer", name="lemma_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
@@ -51,35 +51,27 @@ class Phrase {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="phrase_name", unique=true, length=255)
+	 * @Column(type="string", name="lemma_name", unique=true, length=255)
 	 */
-	private $phrase;
+	private $lemma;
 
 	/**
-	 * @var kateglo\application\models\PhraseType
-	 * @ManyToOne(targetEntity="kateglo\application\models\PhraseType")
-	 * @JoinColumn(name="phrase_type_id", referencedColumnName="phrase_type_id")
+	 * @var kateglo\application\models\Syllabel
+	 * @OneToOne(targetEntity="kateglo\application\models\Syllabel", mappedBy="lemma", cascade={"persist"})
 	 */
-	private $type;
-
+	private $syllabel;
+	
 	/**
-	 * @var kateglo\application\models\Lexical
-	 * @ManyToOne(targetEntity="kateglo\application\models\Lexical")
-	 * @JoinColumn(name="phrase_lexical_id", referencedColumnName="lexical_id")
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="lemmas", cascade={"persist"})
 	 */
-	private $lexical;
+	private $types;
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="phrase", cascade={"persist"})
 	 */
-	private $definitions;
-
-	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Proverb", mappedBy="phrase", cascade={"persist"})
-	 */
-	private $proverbs;
+	private $definitions;	
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
@@ -88,19 +80,11 @@ class Phrase {
 	private $relations;
 
 	public function __construct() {
+		$this->types = new collections\ArrayCollection();
 		$this->definitions = new collections\ArrayCollection();
-		$this->proverbs = new collections\ArrayCollection();
 		$this->relations = new collections\ArrayCollection();
 	}
 	
-	/**
-	 * 
-	 * @param int $id
-	 * @return void
-	 */
-	public function setId($id){
-		$this->id = $id;
-	}
 	
 	/**
 	 * 
@@ -112,55 +96,38 @@ class Phrase {
 	
 	/**
 	 * 
-	 * @param string $phrase
+	 * @param string $lemma
 	 * @return void
 	 */
-	public function setPhrase($phrase){
-		$this->phrase = $phrase;
+	public function setLemma($lemma){
+		$this->lemma = $lemma;
 	}
 	
 	/**
 	 * 
 	 * @return string
 	 */
-	public function getPhrase(){
-		return $this->phrase;
+	public function getLemma(){
+		return $this->lemma;
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\PhraseType $type
+	 * @param kateglo\application\models\Syllabel $syllabel
 	 * @return void
 	 */
-	public function setType(models\PhraseType $type){
-		$this->type = $type;
+	public function setSyllabel(models\Syllabel $syllabel){
+		$this->syllabel = $syllabel;
 	}
 	
 	/**
 	 *
-	 * @return kateglo\application\models\PhraseType
+	 * @return kateglo\application\models\Syllabel
 	 */
-	public function getType(){
-		return $this->type;
+	public function getSyllabel(){
+		return $this->syllabel;
 	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Lexical $lexical
-	 * @return void
-	 */
-	public function setLexical(models\Lexical $lexical){
-		$this->lexical = $lexical;
-	}
-	
-	/**
-	 * 
-	 * @return kateglo\application\models\Lexical
-	 */
-	public function getLexical(){
-		return $this->lexical;
-	}
-	
+		
 	/**
 	 * 
 	 * @param kateglo\application\models\Definition $definition
@@ -168,7 +135,7 @@ class Phrase {
 	 */
 	public function addDefinition(models\Definition $definition){
 		$this->definitions[] = $definition;
-		$definition->setPhrase($this);
+		$definition->setLemma($this);
 	}
 	
 	/**
@@ -180,7 +147,7 @@ class Phrase {
 		/*@var $removed kateglo\application\models\Definition */
 		$removed = $this->definitions->removeElement($definition);
         if ($removed !== null) {
-            $removed->removePhrase();
+            $removed->removeLemma();
         }
 	}
 	
@@ -191,31 +158,28 @@ class Phrase {
 	public function getDefinitions(){
 		return $this->definitions;
 	}
-	
+		
 	/**
 	 * 
-	 * @param kateglo\application\utilities\collections\ArrayCollection $proverbs
+	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
-	public function setProverbs(collections\ArrayCollection $proverbs){
-		$this->proverbs = $proverbs;
+	public function addRelation(models\Relation $relation){
+		$this->relations[] = $relation;
+		$relation->setLemma($this);
 	}
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function getProverbs(){
-		return $this->proverbs;
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\utilities\collections\ArrayCollection $relations
+	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
-	public function setRelations(collections\ArrayCollection $relations){
-		$this->relations = $relations;
+	public function removeRelation(models\Relation $relation){
+		/*@var $removed kateglo\application\models\Relation */
+		$removed = $this->relations->removeElement($relation);
+        if ($removed !== null) {
+            $removed->removeLemma();
+        }
 	}
 	
 	/**

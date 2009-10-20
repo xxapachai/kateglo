@@ -1,7 +1,7 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
 
 	/* Migrate LEMMA*/
 //	
@@ -140,18 +140,44 @@ try {
 //	}
 	
 	/* MIGRATE PROVERB*/
-//	$phrase = array();
-//	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
-//		$phrase[$row['phrase_name']] = $row['phrase_id'];
-//	}
+
+//	foreach($kateglo->query('select proverb.phrase as phrase from proverb left join phrase on phrase.phrase = proverb.phrase where phrase.phrase is null;') as $row) {
 //	
-//	foreach($kateglo->query('SELECT * FROM proverb ORDER BY prv_uid;') as $row) {
-//		$sql = "INSERT INTO proverb (proverb_phrase_id, proverb_text, proverb_meaning) VALUES (".$phrase[$row['phrase']].", '".$row['proverb']."', '".$row['meaning']."');";
+//		$sql = "INSERT INTO lemma (lemma_name) VALUES ('".$row['phrase']."' ); ";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//	
+//	}
+
+	
+//	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
+//			$relation = $lemmaRow['lemma_id'];
+//		}
+//		//insert into lemma
+//		$sql = "INSERT INTO lemma (lemma_name) VALUES ('".$row['proverb']."');";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		
+//		//get id
+//		$id = $kateglox->lastInsertId();
+//		echo $id."\n";
+//		
+//		//insert into definition
+//		$sql = "INSERT INTO definition (definition_lemma_id, definition_lexical_id, definition_text) VALUES (".$id.", 7, '".$row['meaning']."');";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		
+//		//insert into relation
+//		$sql = "INSERT INTO relation (relation_type, relation_parent_id, relation_child_id) VALUES (4, ".$relation.", ".$id.")";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		$sql = "INSERT INTO relation (relation_type, relation_child_id, relation_parent_id) VALUES (4, ".$relation.", ".$id.")";
 //		$kateglox->query($sql);
 //		echo $sql."\n";
 //	}
 //	
-//	foreach($kateglox->query('SELECT COUNT(*) FROM proverb;') as $row) {
+//	foreach($kateglox->query('SELECT COUNT(*) FROM lemma;') as $row) {
 //		print_r($row);
 //	}
 	
@@ -178,8 +204,6 @@ try {
 //		$kateglox->query('INSERT INTO relation_type (relation_type_name, relation_type_abbreviation) VALUES (\''.$i.'\', \''.$row['rel_type'].'\')');
 //		$i++;
 //	}
-//	
-	
 	
 //	$relationType = array();
 //	foreach($kateglox->query('SELECT * FROM relation_type;') as $row) {
@@ -204,7 +228,84 @@ try {
 //		echo $sql2."\n";
 //	}
 	
-
+	
+	/*Migrate DEFINITION SOURCE*/
+//	foreach($kateglo->query('select external_ref.phrase as phrase, def_text, url, label from external_ref left join phrase on phrase.phrase = external_ref.phrase left join definition on definition.phrase = phrase.phrase where external_ref.url like \'http://id.wikipedia.org%\';') as $row) {
+//		$sql = "INSERT INTO source (source_type_id, source_url, source_label) VALUES (4, '".$row['url']."', '".$row['label']."');";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		
+//		$id = $kateglox->lastInsertId();
+//		echo $id."\n";
+//		
+//		$lemmaId = '';
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."'") as $lemRow){
+//			$lemmaId = $lemRow['lemma_id'];
+//		}
+//		echo $lemmaId."\n";
+//		
+//		foreach($kateglox->query("SELECT * FROM definition WHERE definition_lemma_id = '".$lemmaId."'") as $defRow){
+//			$sql = "INSERT INTO definition_source (definition_id, source_id) VALUES (".$defRow['definition_id'].", ".$id.")";
+//			$kateglox->query($sql);
+//			echo $sql."\n";
+//		}
+//	}
+	
+	/*Migrate GLOSSARY SOURCE*/
+//	$discipline = array();
+//	foreach($kateglox->query('SELECT * FROM discipline;') as $row) {
+//		$abbrv = $row['discipline_abbreviation'];
+//		$id = $row['discipline_id'];
+//		$discipline[$abbrv] = $id;
+//	}
+//	$lemma = '';
+//	foreach($kateglox->query('SELECT * FROM lemma where lemma_name = \''.$row['glosphrase'].'\';') as $lem) {
+//		$lemma = $lem['lemma_id'];
+//	}
+//	
+//
+//	foreach($kateglo->query('select glossary.phrase as phrase, original, discipline, url, label from glossary left join external_ref on glossary.phrase = external_ref.phrase where external_ref.url like \'http://en.wikipedia.org%\';') as $row) {
+//		
+//		$id = '';
+//		foreach($kateglox->query("SELECT * from source WHERE source_url = '".$row['url']."'") as $soRow){
+//			$id = $soRow['source_id'];
+//			echo "source id: ".$id."\n";
+//		}
+//		
+//		$lemmaId = '';
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."'") as $lemRow){
+//			$lemmaId = $lemRow['lemma_id'];			
+//			echo "lemma id: ".$lemmaId."\n";
+//			
+//			$i = 0;
+//			foreach($kateglox->query("SELECT * FROM glossary WHERE glossary_lemma_id = ".$lemmaId.";") as $defRow){
+//				$i++;
+//			}
+//			
+//			if($i === 0){
+//				$sql = "INSERT INTO glossary (glossary_lemma_id, glossary_locale_id, glossary_discipline_id, glossary_name) VALUES ('".$lemmaId."', '1', '".$discipline[$row['discipline']]."', '".$row['original']."' ); ";
+//				$kateglox->query($sql);
+//				echo $sql."\n";
+//				
+//				$newGlossarId = $kateglox->lastInsertId();
+//				echo "new glossar id: ".$newGlossarId."\n";
+//				
+//				$sql = "INSERT INTO glossary_source (glossary_id, source_id) VALUES (".$newGlossarId.", ".$id.")";
+//				$kateglox->query($sql);
+//				echo $sql."\n";
+//			}else{
+//				foreach($kateglox->query("SELECT * FROM glossary WHERE glossary_lemma_id = ".$lemmaId.";") as $glosRow){
+//					$sql = "INSERT INTO glossary_source (glossary_id, source_id) VALUES (".$glosRow['glossary_id'].", ".$id.")";
+//					$kateglox->query($sql);
+//					echo $sql."\n";
+//				}
+//			}
+//		}
+//		
+//		attention there is source without relation!!!
+//		
+//	}
+	
 	$kateglo = null;
 	$kateglox = null;
 } catch (PDOException $e) {
