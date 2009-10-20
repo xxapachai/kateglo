@@ -60,18 +60,10 @@ class Lexical {
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Phrase", mappedBy="lexical", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="lexical", cascade={"persist"})
 	 */
-	private $phrases;
+	private $definitions;
 	
-	/**
-	 * 
-	 * @param int $id
-	 * @return void
-	 */
-	public function setId($id){
-		$this->id = $id;
-	}
 	
 	/**
 	 * 
@@ -115,21 +107,35 @@ class Lexical {
 		return $this->abbreviation;
 	}
 	
-	/**
-	 * 
-	 * @param kateglo\application\utilities\collections\ArrayCollection $phrases
-	 * @return void
-	 */
-	public function setPhrases(collections\ArrayCollection $phrases){
-		$this->phrases = $phrases;
-	}
-	
-	/**
-	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function getPhrases(){
-		return $this->phrases;
-	}
+   /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+	public function getDefinitions(){
+        return $this->definition;
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Definition $definition
+     * @return void
+     */
+    public function addDefinition(models\Definition $definition){
+        $this->definitions[] = $definition;
+        $definition->setLexical($this);
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Definition $definition
+     * @return void
+     */
+    public function removeDefinition(models\Definition $definition){
+    	/*@var $removed kateglo\application\models\Definition */
+        $removed = $this->definitions->removeElement($definition);
+        if ($removed !== null) {
+            $removed->removeLexical();
+        }
+    }
 }
 ?>

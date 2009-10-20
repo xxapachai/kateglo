@@ -20,9 +20,10 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models;
+use kateglo\applications\utilities\collections;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,14 +31,14 @@ use kateglo\application\models;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
  * @Table(name="definition")
  */
 class Definition {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
 	 * @var int
 	 * @Id
@@ -45,79 +46,163 @@ class Definition {
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-	
+
 	/**
-	 * @var kateglo\application\models\Phrase
-	 * @ManyToOne(targetEntity="kateglo\application\models\Phrase")
-	 * @JoinColumn(name="definition_phrase_id", referencedColumnName="phrase_id")
+	 * @var kateglo\application\models\Lemma
+	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinColumn(name="definition_lemma_id", referencedColumnName="lemma_id")
 	 */
-	private $phrase;
-	
+	private $lemma;
+
+	/**
+	 * @var kateglo\application\models\Lexical
+	 * @ManyToOne(targetEntity="kateglo\application\models\Lexical")
+	 * @JoinColumn(name="definition_lexical_id", referencedColumnName="lexical_id")
+	 */
+	private $lexical;
+
 	/**
 	 *
 	 * @var string
 	 * @Column(type="text", name="definition_text")
 	 */
 	private $definition;
+
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
+	 */
+	private $discipline;
 	
 	/**
 	 * 
-	 * @param int $id
 	 * @return void
 	 */
-	public function setId($id){
-		$this->id = $id;
+	public function __construct(){
+		$this->discipline = new collections\ArrayCollection();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getId(){
 		return $this->id;
 	}
-	
+
 	/**
 	 *
-	 * @param kateglo\application\models\Phrase $phrase
+	 * @param kateglo\application\models\Lemma $lemma
 	 * @return void
 	 */
-	public function setPhrase(models\Phrase $phrase){
-		$this->phrase = $phrase;
+	public function setLemma(models\Lemma $lemma){
+		$this->lemma = $lemma;
 	}
-	
+
 	/**
 	 *
-	 * @return kateglo\application\models\Phrase
+	 * @return kateglo\application\models\Lemma
 	 */
-	public function getPhrase(){
-		return $this->phrase;
+	public function getLemma(){
+		return $this->lemma;
 	}
-	
-	public function removePhrase() {
-        if ($this->phrase !== null) {
-        	/*@var $phrase kateglo\application\models\Phrase */
-            $phrase = $this->phrase;
-            $this->phrase = null;
-            $phrase->removeDefinition($this);
-        }
-    }
-	
+
 	/**
-	 * 
+	 *
+	 * @return void
+	 */
+	public function removeLemma() {
+		if ($this->lemma !== null) {
+			/*@var $phrase kateglo\application\models\Lemma */
+			$lemma = $this->lemma;
+			$this->lemma = null;
+			$lemma->removeDefinition($this);
+		}
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Lexical $lexical
+	 * @return void
+	 */
+	public function setLexical(models\Lexical $lexical){
+		$this->lexical = $lexical;
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\models\Lexical
+	 */
+	public function getLexical(){
+		return $this->lexical;
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeLexical() {
+		if ($this->lexical !== null) {
+			/*@var $phrase kateglo\application\models\Lexical */
+			$lexical = $this->lexical;
+			$this->lexical = null;
+			$lexical->removeDefinition($this);
+		}
+	}
+
+	/**
+	 *
 	 * @param string $definition
 	 * @return void
 	 */
 	public function setDefinition($definition){
 		$this->definition = $definition;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getDefinition(){
 		return $this->definition;
 	}
+	
+	/**
+	 * 
+	 * @param kateglo\application\models\Discipline $discipline
+	 * @return void
+	 */
+	public function setDiscipline(models\Discipline $discipline)
+    {
+        if (!$this->discipline->contains($discipline)) {
+        	if($this->discipline[0] instanceof models\Discipline){
+        		$this->removeDiscipline($this->discipline[0]);        		
+        	}
+            $this->discipline[0] = $discipline;
+            $discipline->addDefinition($this);
+        }
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Discipline $discipline
+     * @return void
+     */
+    public function removeDiscipline(models\Discipline $discipline)
+    {
+        $removed = $this->discipline->removeElement($discipline);
+        if ($removed !== null) {
+            $removed->removeDefinition($this);
+        }
+    }
+
+    /**
+     * 
+     * @return kateglo\application\models\Discipline
+     */
+    public function getDiscipline()
+    {
+        return $this->discipline[0];
+    }
 }
 ?>

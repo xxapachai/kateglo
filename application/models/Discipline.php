@@ -21,8 +21,8 @@ namespace kateglo\application\models;
  */
 
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,14 +30,14 @@ namespace kateglo\application\models;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
  * @Table(name="discipline")
  */
 class Discipline {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
 	 * @var int
 	 * @Id
@@ -45,69 +45,180 @@ class Discipline {
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-	
+
 	/**
 	 * @var string
 	 * @Column(type="string", name="discipline_name", unique=true, length=255)
 	 */
 	private $discipline;
-	
+
 	/**
 	 * @var string
 	 * @Column(type="string", name="discipline_abbreviation", unique=true, length=255)
 	 */
 	private $abbreviation;
+
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
+	 * @JoinTable(name="definition_discipline",
+	 *      joinColumns={@JoinColumn(name="discipline_id", referencedColumnName="discipline_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition_id")}
+	 *  )
+	 */
+	private $definitions;
 	
 	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="discipline", cascade={"persist"})
+	 */
+	private $glossaries;
+
+
+	/**
 	 * 
-	 * @param int $id
 	 * @return void
 	 */
-	public function setId($id){
-		$this->id = $id;
+	public function __construct(){
+		$this->definitions = new collections\ArrayCollection();
+		$this->glossaries = new collections\ArrayCollection();
 	}
 	
 	/**
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getId(){
 		return $this->id;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $discipline
 	 * @return void
 	 */
 	public function setDiscipline($discipline){
 		$this->discipline = $discipline;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getDiscipline(){
 		return $this->discipline;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $abbreviation
 	 * @return void
 	 */
 	public function setAbbreviation($abbreviation){
 		$this->abbreviation = $abbreviation;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getAbbreviation(){
 		return $this->abbreviation;
 	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Definition $definition
+	 * @return void
+	 */
+	public function addDefinition(models\Definition $definition){
+		$this->definitions[] = $definition;
+		$definition->setLemma($this);
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Definition $definition
+	 * @return void
+	 */
+	public function removeDefinition(models\Definition $definition){
+		/*@var $removed kateglo\application\models\Definition */
+		$removed = $this->definitions->removeElement($definition);
+		if ($removed !== null) {
+			$removed->removeLemma();
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getDefinitions(){
+		return $this->definitions;
+	}
+	
+	/**
+	 * 
+	 * @param kateglo\application\models\Definition $definition
+	 * @return void
+	 */	
+	public function addDefinition(models\Definition $definition){
+        if (!$this->definitions->contains($definition)) {
+            $this->definitions[] = $definition;
+            $definition->addDiscipline($this);
+        }
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Definition $definition
+     * @return void
+     */
+    public function removeDefinition(models\Definition $definition){
+        $removed = $this->definitions->removeElement($definition);
+        if ($removed !== null) {
+            $removed->removeDiscipline($this);
+        }
+    }
+
+    /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+    public function getDefinitions(){
+        return $this->definitions;
+    }
+    
+    /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+	public function getGlossaries(){
+        return $this->glossaries;
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Glossary $glossary
+     * @return void
+     */
+    public function addGlossary(models\Glossary $glossary){
+        $this->glossaries[] = $glossary;
+        $glossary->setDiscipline($this);
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Glossary $glossary
+     * @return void
+     */
+    public function removeGlossary(models\Glossary $glossary){
+    	/*@var $removed kateglo\application\models\Glossary */
+        $removed = $this->glossaries->removeElement($glossary);
+        if ($removed !== null) {
+            $removed->removeDiscipline();
+        }
+    }
 
 }
 ?>
