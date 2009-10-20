@@ -1,7 +1,7 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 
 	/* Migrate LEMMA*/
 //	
@@ -157,34 +157,54 @@ try {
 	
 	
 	/* MIGRATE RELATION */
-//	$phrase = array();
-//	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
-//		$phrase[$row['phrase_name']] = $row['phrase_id'];
+	
+//	$newLemma = array();
+//	foreach($kateglo->query('select rel_type, root_phrase,related_phrase from relation left join phrase pr on root_phrase = phrase left join phrase p on related_phrase = p.phrase where pr.phrase is not null and p.phrase is not null;') as $row) {
+//		$bum = $row;
+//		foreach($kateglox->query('SELECT lemma_id, lemma_name FROM lemma WHERE lemma_name = \''.$bum['root_phrase'].'\';') as $rowx) {
+//			if($rowx['lemma_id'] == ''){
+//				$kateglox->query('INSERT INTO lemma (lemma_name) VALUES (\''.$bum['root_phrase'].'\')');
+//			}
+//		}
+//		foreach($kateglox->query('SELECT lemma_id, lemma_name FROM lemma WHERE lemma_name = \''.$bum['related_phrase'].'\';') as $rowx) {
+//			if($rowx['lemma_id'] == ''){
+//				$kateglox->query('INSERT INTO lemma (lemma_name) VALUES (\''.$bum['related_phrase'].'\')');
+//			}
+//		}
+//	}
+//	$i = 1;
+//	foreach($kateglo->query('select DISTINCT(relation.rel_type) from relation left join relation_type on relation.rel_type = relation_type.rel_type where relation_type.rel_type is null;') as $row) {
+//		
+//		$kateglox->query('INSERT INTO relation_type (relation_type_name, relation_type_abbreviation) VALUES (\''.$i.'\', \''.$row['rel_type'].'\')');
+//		$i++;
 //	}
 //	
+	
+	
 //	$relationType = array();
 //	foreach($kateglox->query('SELECT * FROM relation_type;') as $row) {
 //		$relationType[$row['relation_type_abbreviation']] = $row['relation_type_id'];
 //	}
 //	
-//	foreach($kateglo->query('SELECT * FROM relation;') as $row) {
-//		$sql = "INSERT INTO relation (relation_type_id, relation_phrase_id, relation_phrase_relation) VALUES (".$relationType[$row['rel_type']].", ".$phrase[$row['root_phrase']].", ".$phrase[$row['related_phrase']].");";
+//	foreach($kateglo->query('select rel_type, root_phrase, pr.phrase, related_phrase, p.phrase from relation left join phrase pr on root_phrase = phrase left join phrase p on related_phrase = p.phrase where pr.phrase is not null and p.phrase is not null;') as $row) {
+//		$bum = $row;
+//		$rootPhrase = '';
+//		$relatedPhrase = '';
+//		foreach($kateglox->query('SELECT lemma_id, lemma_name FROM lemma WHERE lemma_name = \''.$bum['root_phrase'].'\';') as $rowx) {
+//			$rootPhrase = $rowx['lemma_id'];
+//		}
+//		foreach($kateglox->query('SELECT lemma_id, lemma_name FROM lemma WHERE lemma_name = \''.$bum['related_phrase'].'\';') as $rowx) {
+//			$relatedPhrase = $rowx['lemma_id'];
+//		}
+//		$sql = "INSERT INTO relation (relation_type_id, relation_parent_id, relation_child_id) VALUES (".$relationType[$row['rel_type']].", ".$rootPhrase.", ".$relatedPhrase.");";
+//		$sql2 = "INSERT INTO relation (relation_type_id, relation_child_id, relation_parent_id) VALUES (".$relationType[$row['rel_type']].", ".$rootPhrase.", ".$relatedPhrase.");";
 //		$kateglox->query($sql);
+//		$kateglox->query($sql2);
 //		echo $sql."\n";
+//		echo $sql2."\n";
 //	}
-//	
-//	
-//	$phrase = array();
-//	foreach($kateglox->query('SELECT phrase_id, phrase_name FROM phrase ORDER BY phrase_name;') as $row) {
-//		$phrase[$row['phrase_name']] = $row['phrase_id'];
-//	}
-//	
-//	foreach($kateglo->query('SELECT phrase, def_text FROM definition;') as $row) {
-//		$sql = "INSERT INTO definition (definition_phrase_id, definition_text) VALUES (".$phrase[$row['phrase']].", '".$row['def_text']."');";
-//		$kateglox->query($sql);
-//		echo $sql."\n";
-//	}
-//	
+	
+
 	$kateglo = null;
 	$kateglox = null;
 } catch (PDOException $e) {
