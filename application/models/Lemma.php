@@ -133,6 +133,40 @@ class Lemma {
 	public function getSyllabel(){
 		return $this->syllabel;
 	}
+	
+/**
+     * 
+     * @param kateglo\application\models\Type $type
+     * @return void
+     */
+	public function addType(models\Type $type){
+        if (!$this->types->contains($type)) {
+            $this->types[] = $type;
+            $type->addLemma($this);
+        }
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Type $type
+     * @return void
+     */
+    public function removeType(models\Type $type)
+    {
+        $removed = $this->sources->removeElement($type);
+        if ($removed !== null) {
+            $removed->removeLemma($this);
+        }
+    }
+
+    /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+    public function getTypes()
+    {
+        return $this->types;
+    }
 
 	/**
 	 *
@@ -192,8 +226,8 @@ class Lemma {
 	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getDefinitions(){
-		return $this->definitions;
+	public function getGlossaries(){
+		return $this->glossaries;
 	}
 
 	/**

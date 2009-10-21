@@ -217,8 +217,7 @@ class Glossary {
      * @param kateglo\application\models\Source $source
      * @return void
      */
-	public function addSource(models\Source $source)
-    {
+	public function addSource(models\Source $source){
         if (!$this->sources->contains($source)) {
             $this->sources[] = $source;
             $source->addGlossary($this);
@@ -228,10 +227,9 @@ class Glossary {
     /**
      * 
      * @param kateglo\application\models\Source $source
-     * @return source
+     * @return void
      */
-    public function removeSource(models\Source $source)
-    {
+    public function removeSource(models\Source $source){
         $removed = $this->sources->removeElement($source);
         if ($removed !== null) {
             $removed->removeGlossary($this);
@@ -242,8 +240,7 @@ class Glossary {
      * 
      * @return kateglo\application\helpers\collections\ArrayCollection
      */
-    public function getSources()
-    {
+    public function getSources(){
         return $this->sources;
     }
 }

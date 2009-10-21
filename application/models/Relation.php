@@ -39,8 +39,14 @@ class Relation {
 	const CLASS_NAME = __CLASS__;
 
 	/**
-	 * @var kateglo\application\models\Lemma
+	 * @var int
 	 * @Id
+	 * @Column(type="integer", name="relation_parent_id")
+	 */
+	private $id;
+	
+	/**
+	 * @var kateglo\application\models\Lemma
 	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
 	 * @JoinColumn(name="relation_parent_id", referencedColumnName="lemma_id")
 	 */

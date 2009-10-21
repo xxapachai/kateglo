@@ -34,7 +34,7 @@ use kateglo\application\utilities\collections;
  * @Entity
  * @Table(name="type")
  */
-class PhraseType {
+class Type {
 
 	const CLASS_NAME = __CLASS__;
 

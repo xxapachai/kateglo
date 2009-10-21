@@ -39,8 +39,15 @@ class Syllabel {
 	const CLASS_NAME = __CLASS__;
 
 	/**
+	 * 
+	 * @var int
+	 * @Id 
+	 * @Column(type="integer", name="syllabel_lemma_id")
+	 */
+	private $id;
+	
+	/**
 	 * @var kateglo\application\models\Lemma
-	 * @Id
 	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
 	 * @JoinColumn(name="syllabel_lemma_id", referencedColumnName="lemma_id")
 	 */
