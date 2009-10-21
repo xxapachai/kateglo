@@ -32,37 +32,37 @@ namespace kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="discipline")
+ * @Table(name="source")
  */
-class Discipline {
+class Source {
 
 	const CLASS_NAME = __CLASS__;
 
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="discipline_id")
+	 * @Column(type="integer", name="source_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 
 	/**
 	 * @var string
-	 * @Column(type="string", name="discipline_name", unique=true, length=255)
+	 * @Column(type="string", name="source_url", unique=true, length=255)
 	 */
-	private $discipline;
+	private $url;
 
 	/**
 	 * @var string
-	 * @Column(type="string", name="discipline_abbreviation", unique=true, length=255)
+	 * @Column(type="string", name="source_label", unique=true, length=255)
 	 */
-	private $abbreviation;
+	private $label;
 
 	/**
 	 * @var kateglo\application\helpers\collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
-	 * @JoinTable(name="definition_discipline",
-	 *      joinColumns={@JoinColumn(name="discipline_id", referencedColumnName="discipline_id")},
+	 * @JoinTable(name="definition_source",
+	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")},
 	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition_id")}
 	 *  )
 	 */
@@ -70,7 +70,11 @@ class Discipline {
 	
 	/**
 	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="discipline", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Glossary", cascade={"persist"})
+	 * @JoinTable(name="definition_discipline",
+	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="glossary_id", referencedColumnName="glossary_id")}
+	 *  )
 	 */
 	private $glossaries;
 
@@ -134,7 +138,7 @@ class Discipline {
 	public function addDefinition(models\Definition $definition){
         if (!$this->definitions->contains($definition)) {
             $this->definitions[] = $definition;
-            $definition->addDiscipline($this);
+            $definition->addSource($this);
         }
     }
 
@@ -146,7 +150,7 @@ class Discipline {
     public function removeDefinition(models\Definition $definition){
         $removed = $this->definitions->removeElement($definition);
         if ($removed !== null) {
-            $removed->removeDiscipline($this);
+            $removed->removeSource($this);
         }
     }
 
@@ -160,20 +164,14 @@ class Discipline {
     
     /**
      * 
-     * @return kateglo\application\helpers\collections\ArrayCollection
-     */
-	public function getGlossaries(){
-        return $this->glossaries;
-    }
-
-    /**
-     * 
      * @param kateglo\application\models\Glossary $glossary
      * @return void
      */
     public function addGlossary(models\Glossary $glossary){
-        $this->glossaries[] = $glossary;
-        $glossary->setDiscipline($this);
+    	if (!$this->glossaries->contains($glossary)) {
+            $this->glossaries[] = $glossary;
+            $glossary->addSource($this);
+        }
     }
 
     /**
@@ -185,8 +183,16 @@ class Discipline {
     	/*@var $removed kateglo\application\models\Glossary */
         $removed = $this->glossaries->removeElement($glossary);
         if ($removed !== null) {
-            $removed->removeDiscipline();
+            $removed->removeSource();
         }
+    }
+    
+    /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+	public function getGlossaries(){
+        return $this->glossaries;
     }
 
 }

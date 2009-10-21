@@ -76,6 +76,12 @@ class Glossary {
 	private $glossary;
 	
 	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
+     */
+    private $sources;
+	
+	/**
 	 * 
 	 * @return void
 	 */
@@ -204,6 +210,41 @@ class Glossary {
     public function getDiscipline()
     {
         return $this->discipline[0];
+    }
+    
+    /**
+     * 
+     * @param kateglo\application\models\Source $source
+     * @return void
+     */
+	public function addSource(models\Source $source)
+    {
+        if (!$this->sources->contains($source)) {
+            $this->sources[] = $source;
+            $source->addGlossary($this);
+        }
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Source $source
+     * @return source
+     */
+    public function removeSource(models\Source $source)
+    {
+        $removed = $this->sources->removeElement($source);
+        if ($removed !== null) {
+            $removed->removeGlossary($this);
+        }
+    }
+
+    /**
+     * 
+     * @return kateglo\application\helpers\collections\ArrayCollection
+     */
+    public function getSources()
+    {
+        return $this->sources;
     }
 }
 ?>

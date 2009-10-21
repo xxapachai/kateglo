@@ -73,9 +73,15 @@ class Definition {
 	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
 	 */
 	private $discipline;
-	
+
 	/**
-	 * 
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
+	 */
+	private $sources;
+
+	/**
+	 *
 	 * @return void
 	 */
 	public function __construct(){
@@ -166,43 +172,72 @@ class Definition {
 	public function getDefinition(){
 		return $this->definition;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Discipline $discipline
 	 * @return void
 	 */
-	public function setDiscipline(models\Discipline $discipline)
-    {
-        if (!$this->discipline->contains($discipline)) {
-        	if($this->discipline[0] instanceof models\Discipline){
-        		$this->removeDiscipline($this->discipline[0]);        		
-        	}
-            $this->discipline[0] = $discipline;
-            $discipline->addDefinition($this);
-        }
-    }
+	public function setDiscipline(models\Discipline $discipline){
+		if (!$this->discipline->contains($discipline)) {
+			if($this->discipline[0] instanceof models\Discipline){
+				$this->removeDiscipline($this->discipline[0]);
+			}
+			$this->discipline[0] = $discipline;
+			$discipline->addDefinition($this);
+		}
+	}
 
-    /**
-     * 
-     * @param kateglo\application\models\Discipline $discipline
-     * @return void
-     */
-    public function removeDiscipline(models\Discipline $discipline)
-    {
-        $removed = $this->discipline->removeElement($discipline);
-        if ($removed !== null) {
-            $removed->removeDefinition($this);
-        }
-    }
+	/**
+	 *
+	 * @param kateglo\application\models\Discipline $discipline
+	 * @return void
+	 */
+	public function removeDiscipline(models\Discipline $discipline){
+		$removed = $this->discipline->removeElement($discipline);
+		if ($removed !== null) {
+			$removed->removeDefinition($this);
+		}
+	}
 
-    /**
-     * 
-     * @return kateglo\application\models\Discipline
-     */
-    public function getDiscipline()
-    {
-        return $this->discipline[0];
-    }
+	/**
+	 *
+	 * @return kateglo\application\models\Discipline
+	 */
+	public function getDiscipline(){
+		return $this->discipline[0];
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Source $source
+	 * @return void
+	 */
+	public function addSource(models\Source $source){
+		if (!$this->sources->contains($source)) {
+			$this->sources[] = $source;
+			$source->addDefinition($this);
+		}
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Source $source
+	 * @return source
+	 */
+	public function removeSource(models\Source $source){
+		$removed = $this->sources->removeElement($source);
+		if ($removed !== null) {
+			$removed->removeDefinition($this);
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\helpers\collections\ArrayCollection
+	 */
+	public function getSources(){
+		return $this->sources;
+	}
 }
 ?>

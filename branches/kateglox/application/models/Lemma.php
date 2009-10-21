@@ -60,7 +60,7 @@ class Lemma {
 	 * @OneToOne(targetEntity="kateglo\application\models\Syllabel", mappedBy="lemma", cascade={"persist"})
 	 */
 	private $syllabel;
-	
+
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="lemmas", cascade={"persist"})
@@ -71,7 +71,13 @@ class Lemma {
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="lemma", cascade={"persist"})
 	 */
-	private $definitions;	
+	private $definitions;
+
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="lemma", cascade={"persist"})
+	 */
+	private $glossaries;
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
@@ -84,33 +90,33 @@ class Lemma {
 		$this->definitions = new collections\ArrayCollection();
 		$this->relations = new collections\ArrayCollection();
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getId(){
 		return $this->id;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $lemma
 	 * @return void
 	 */
 	public function setLemma($lemma){
 		$this->lemma = $lemma;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getLemma(){
 		return $this->lemma;
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Syllabel $syllabel
@@ -119,7 +125,7 @@ class Lemma {
 	public function setSyllabel(models\Syllabel $syllabel){
 		$this->syllabel = $syllabel;
 	}
-	
+
 	/**
 	 *
 	 * @return kateglo\application\models\Syllabel
@@ -127,9 +133,9 @@ class Lemma {
 	public function getSyllabel(){
 		return $this->syllabel;
 	}
-		
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
@@ -137,30 +143,61 @@ class Lemma {
 		$this->definitions[] = $definition;
 		$definition->setLemma($this);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
 	public function removeDefinition(models\Definition $definition){
 		/*@var $removed kateglo\application\models\Definition */
 		$removed = $this->definitions->removeElement($definition);
-        if ($removed !== null) {
-            $removed->removeLemma();
-        }
+		if ($removed !== null) {
+			$removed->removeLemma();
+		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function getDefinitions(){
 		return $this->definitions;
 	}
-		
+
 	/**
-	 * 
+	 *
+	 * @param kateglo\application\models\Glossary $glossary
+	 * @return void
+	 */
+	public function addGlossary(models\Glossary $glossary){
+		$this->glossaries[] = $glossary;
+		$glossary->setLemma($this);
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Definition $definition
+	 * @return void
+	 */
+	public function removeGlossary(models\Glossary $glossary){
+		/*@var $removed kateglo\application\models\Definition */
+		$removed = $this->glossaries->removeElement($glossary);
+		if ($removed !== null) {
+			$removed->removeLemma();
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getDefinitions(){
+		return $this->definitions;
+	}
+
+	/**
+	 *
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
@@ -168,22 +205,22 @@ class Lemma {
 		$this->relations[] = $relation;
 		$relation->setLemma($this);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
 	public function removeRelation(models\Relation $relation){
 		/*@var $removed kateglo\application\models\Relation */
 		$removed = $this->relations->removeElement($relation);
-        if ($removed !== null) {
-            $removed->removeLemma();
-        }
+		if ($removed !== null) {
+			$removed->removeLemma();
+		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function getRelations(){
