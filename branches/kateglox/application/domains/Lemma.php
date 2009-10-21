@@ -35,18 +35,18 @@ use Doctrine\ORM\Mapping;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Phrase {
+class Lemma {
 	
 	/**
 	 * 
-	 * @param string $phrase
-	 * @return kateglo\application\models\Phrase
+	 * @param string $lemma
+	 * @return kateglo\application\models\Lemma
 	 */
-	public static function getByPhrase($phrase){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT p FROM ".models\Phrase::CLASS_NAME." p WHERE p.phrase = '$phrase'");        
+	public static function getByLemma($lemma){
+		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.lemma = '$lemma'");        
 		$result = $query->getResult();
         if(count($result) === 1){
-        	if(! ($result[0] instanceof models\Phrase)){
+        	if(! ($result[0] instanceof models\Lemma)){
         		throw new exceptions\DomainObjectNotFoundException("wrong result");
         	}
         }else{

@@ -55,7 +55,7 @@ class SearchController extends Zend_Controller_Action
 			if($text !== ''){
 				$searchFaces->setFieldValue($text);
 				$searchService = new services\Search();
-				$this->view->phrase = $searchService->phrase($text);
+				$this->view->lemma = $searchService->lemma($text);
 			}
 		}
 	}

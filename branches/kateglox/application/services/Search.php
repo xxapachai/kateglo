@@ -38,11 +38,11 @@ class Search {
 	
 	/**
 	 * 
-	 * @param string $phrase
-	 * @return kateglo\application\models\Phrase
+	 * @param string $lemma
+	 * @return kateglo\application\models\Lemma
 	 */
-	public function phrase($phrase){
-		$result = domains\Phrase::getByPhrase($phrase);
+	public function lemma($lemma){
+		$result = domains\Lemma::getByLemma($lemma);
 		
 		return $result;
 	}
