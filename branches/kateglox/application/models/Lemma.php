@@ -69,13 +69,13 @@ class Lemma {
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="phrase", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="lemma", cascade={"persist"})
 	 */
 	private $definitions;	
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="phrase", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="lemma", cascade={"persist"})
 	 */
 	private $relations;
 
