@@ -119,16 +119,30 @@ class RelationType {
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\utilities\collections\ArrayCollection $relations
+	 *
+	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
-	public function setRelations(collections\ArrayCollection $relations){
-		$this->relations = $relations;
+	public function addRelation(models\Relation $relation){
+		$this->relations[] = $relation;
+		$relation->setType($this);
 	}
-	
+
 	/**
-	 * 
+	 *
+	 * @param kateglo\application\models\Relation $relation
+	 * @return void
+	 */
+	public function removeRelation(models\Relation $relation){
+		/*@var $removed kateglo\application\models\Relation */
+		$removed = $this->relations->removeElement($relation);
+		if ($removed !== null) {
+			$removed->removeLemma();
+		}
+	}
+
+	/**
+	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function getRelations(){
