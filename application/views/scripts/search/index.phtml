@@ -20,7 +20,7 @@ $search = $this->search;
 	<table border="1">
 		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;"><?php echo $this->lemma->getLemma()."(".$this->lemma->getId().")";?></td></tr>
 		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
-		<?php $definitions = $this->lemma->getTypes();
+		<?php $types = $this->lemma->getTypes();
 			foreach($types as $type):
 		?>
 		<tr><td><?php echo $type->getId();?></td><td colspan="2"><?php echo $type->getType();?></td></tr>
