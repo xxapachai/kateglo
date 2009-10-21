@@ -21,8 +21,8 @@ namespace kateglo\application\models;
  */
 use kateglo\application\utilities\collections;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,110 +30,123 @@ use kateglo\application\utilities\collections;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
- * @Table(name="phrase_type")
+ * @Table(name="type")
  */
 class PhraseType {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * 
+	 *
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="phrase_type_id")
+	 * @Column(type="integer", name="type_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
-	 * @Column(type="string", name="phrase_type_name", unique=true)
+	 * @Column(type="string", name="type_name", unique=true)
 	 */
 	private $type;
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
-	 * @Column(type="string", name="phrase_type_abbreviation", unique=true)
+	 * @Column(type="string", name="type_abbreviation", unique=true)
 	 */
 	private $abbreviation;
-	
+
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Phrase", mappedBy="type", cascade={"persist"})
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinTable(name="lemma_type",
+	 * 		joinColumns={@JoinColumn(name="type_id", referencedColumnName="type_id")},
+	 * 		inverseJoinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma_id")}
+	 * )
 	 */
-	private $phrases;
-	
+	private $lemmas;
+
 	/**
-	 * 
-	 * @param int $id
-	 * @return void
-	 */
-	public function setId($id){
-		$this->id = $id;
-	}
-	
-	/**
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getId(){
 		return $this->id;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $type
 	 * @return void
 	 */
 	public function setType($type){
 		$this->type = $type;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getType(){
 		return $this->type;
 	}
-	
-/**
-	 * 
+
+	/**
+	 *
 	 * @param string $abbreviation
 	 * @return void
 	 */
 	public function setAbbreviation($abbreviation){
 		$this->abbreviation = $abbreviation;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getAbbreviation(){
 		return $this->abbreviation;
 	}
-	
+
 	/**
 	 * 
-	 * @param kateglo\application\utilities\collections\ArrayCollection $phrases
+	 * @param kateglo\application\models\Lemma $lemma
 	 * @return void
 	 */
-	public function setPhrases(collections\ArrayCollection $phrases){
-		$this->phrases = $phrases;
+	public function addLemma(models\Lemma $lemma)
+	{
+		if (!$this->lemmas->contains($lemma)) {
+			$this->lemmas[] = $lemma;
+			$lemma->addType($this);
+		}
 	}
-	
+
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @param kateglo\application\models\Lemma $lemma
+	 * @return void
 	 */
-	public function getPhrases(){
-		return $this->phrases;
+	public function removeLEmma(models\Lemma $lemma)
+	{
+		$removed = $this->lemmas->removeElement($lemma);
+		if ($removed !== null) {
+			$removed->removeType($this);
+		}
 	}
-	
+
+	/**
+	 * 
+	 * @return kateglo\application\helpers\collections\ArrayCollection
+	 */
+	public function getCategories()
+	{
+		return $this->categories;
+	}
+
 }
 ?>

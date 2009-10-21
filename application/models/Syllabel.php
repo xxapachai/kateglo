@@ -21,8 +21,8 @@ namespace kateglo\application\models;
  */
 use kateglo\application\models;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,109 +30,61 @@ use kateglo\application\models;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
- * @Table(name="proverb")
+ * @Table(name="syllabel")
  */
-class Proverb {
-	
+class Syllabel {
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * @var int
+	 * @var kateglo\application\models\Lemma
 	 * @Id
-	 * @Column(type="integer", name="proverb_id")
-	 * @GeneratedValue(strategy="AUTO")
+	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinColumn(name="syllabel_lemma_id", referencedColumnName="lemma_id")
 	 */
-	private $id;
-	
-	/**
-	 * @var kateglo\application\models\Phrase
-	 * @ManyToOne(targetEntity="kateglo\application\models\Phrase")
-	 * @JoinColumn(name="proverb_phrase_id", referencedColumnName="phrase_id")
-	 */
-	private $phrase;
-	
+	private $lemma;
+
 	/**
 	 *
 	 * @var string
-	 * @Column(type="text", name="proverb_text")
+	 * @Column(type="string", name="syllabel_name", unique=true, length=255)
 	 */
-	private $proverb;
-	
+	private $syllabel;
+
 	/**
 	 *
-	 * @var string
-	 * @Column(type="text", name="proverb_meaning")
-	 */
-	private $meaning;
-	
-	/**
-	 * 
-	 * @param int $id
+	 * @param kateglo\application\models\Lemma $lemma
 	 * @return void
 	 */
-	public function setId($id){
-		$this->id = $id;
+	public function setLemma(models\Lemma $lemma){
+		$this->lemma = $lemma;
 	}
-	
-	/**
-	 * 
-	 * @return int
-	 */
-	public function getId(){
-		return $this->id;
-	}
-	
+
 	/**
 	 *
-	 * @param kateglo\application\models\Phrase $phrase
-	 * @return void
+	 * @return kateglo\application\models\Lemma
 	 */
-	public function setPhrase(models\Phrase $phrase){
-		$this->phrase = $phrase;
+	public function getLemma(){
+		return $this->lemma;
 	}
-	
+
 	/**
 	 *
-	 * @return kateglo\application\models\Phrase
-	 */
-	public function getPhrase(){
-		return $this->phrase;
-	}
-	
-	/**
-	 * 
-	 * @param string $proverb
+	 * @param string $syllabel
 	 * @return void
 	 */
-	public function setProverb($proverb){
-		$this->proverb = $proverb;
+	public function setSyllabel($syllabel){
+		$this->syllabel = $syllabel;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
-	public function getProverb(){
-		return $this->proverb;
-	}
-	
-	/**
-	 * 
-	 * @param string $meaning
-	 * @return void
-	 */
-	public function setMeaning($meaning){
-		$this->meaning = $meaning;
-	}
-	
-	/**
-	 * 
-	 * @return string
-	 */
-	public function getMeaning(){
-		return $this->meaning;
+	public function getSyllabel(){
+		return $this->syllabel;
 	}
 }
 ?>

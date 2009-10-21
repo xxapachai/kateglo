@@ -21,8 +21,8 @@ namespace kateglo\application\models;
  */
 use kateglo\application\models;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,109 +30,98 @@ use kateglo\application\models;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
  * @Table(name="relation")
  */
 class Relation {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * @var int
+	 * @var kateglo\application\models\Lemma
 	 * @Id
-	 * @Column(type="integer", name="relation_id")
-	 * @GeneratedValue(strategy="AUTO")
+	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinColumn(name="relation_parent_id", referencedColumnName="lemma_id")
 	 */
-	private $id;
-	
+	private $parent;
+
 	/**
-	 * @var kateglo\application\models\Phrase
-	 * @ManyToOne(targetEntity="kateglo\application\models\Phrase")
-	 * @JoinColumn(name="relation_phrase_id", referencedColumnName="phrase_id")
+	 * @var kateglo\application\models\Lemma
+	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinColumn(name="relation_child_id", referencedColumnName="id")
 	 */
-	private $phrase;
-	
+	private $child;
+
 	/**
-	 * @var kateglo\application\models\PhraseType
+	 * @var kateglo\application\models\RelationType
 	 * @ManyToOne(targetEntity="kateglo\application\models\RelationType")
 	 * @JoinColumn(name="relation_type_id", referencedColumnName="relation_type_id")
 	 */
 	private $type;
-	
-	/**
-	 * @var kateglo\application\models\Phrase
-	 * @ManyToOne(targetEntity="kateglo\application\models\Phrase")
-	 * @JoinColumn(name="relation_phrase_relation", referencedColumnName="phrase_id")
-	 */
-	private $relation;
-	
-	/**
-	 * 
-	 * @param int $id
-	 * @return void
-	 */
-	public function setId($id){
-		$this->id = $id;
-	}
-	
-	/**
-	 * 
-	 * @return int
-	 */
-	public function getId(){
-		return $this->id;
-	}
-	
+
 	/**
 	 *
-	 * @param kateglo\application\models\Phrase $phrase
+	 * @param kateglo\application\models\Lemma $parent
 	 * @return void
 	 */
-	public function setPhrase(models\Phrase $phrase){
-		$this->phrase = $phrase;
+	public function setParent(models\Lemma $parent){
+		$this->parent = $parent;
 	}
-	
+
 	/**
 	 *
 	 * @return kateglo\application\models\Phrase
 	 */
-	public function getPhrase(){
-		return $this->phrase;
+	public function getParent(){
+		return $this->parent;
 	}
 	
+	/**
+	 *
+	 * @param kateglo\application\models\Lemma $child
+	 * @return void
+	 */
+	public function setChild(models\Lemma $child){
+		$this->child = $child;
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\models\Lemma
+	 */
+	public function getChild(){
+		return $this->child;
+	}
+
 	/**
 	 *
 	 * @param kateglo\application\models\RelationType $type
 	 * @return void
 	 */
-	public function setType(models\RelationType $type){
+	public function setLemma(models\Type $type){
 		$this->type = $type;
 	}
-	
+
 	/**
 	 *
-	 * @return kateglo\application\models\Phrase
+	 * @return kateglo\application\models\Type
 	 */
 	public function getType(){
 		return $this->type;
 	}
-	
+
 	/**
 	 *
-	 * @param kateglo\application\models\Phrase $relation
 	 * @return void
 	 */
-	public function setRelation(models\Phrase $relation){
-		$this->relation = $relation;
-	}
-	
-	/**
-	 *
-	 * @return kateglo\application\models\Phrase
-	 */
-	public function getRelation(){
-		return $this->relation;
+	public function removeType() {
+		if ($this->type !== null) {
+			/*@var $phrase kateglo\application\models\RelationType */
+			$type = $this->type;
+			$this->type = null;
+			$type->removeRelation($this);
+		}
 	}
 }
 ?>
