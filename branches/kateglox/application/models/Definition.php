@@ -19,8 +19,8 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities\collections;
 use kateglo\application\models;
-use kateglo\applications\utilities\collections;
 /**
  *
  *
@@ -68,17 +68,9 @@ class Definition {
 	 */
 	private $definition;
 
-	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
-	 */
-	private $discipline;
 
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
-	 */
-	private $sources;
+
+
 
 	/**
 	 *

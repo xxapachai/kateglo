@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\utilities\collections;
+use kateglo\application\models;
 /**
  *  
  * 

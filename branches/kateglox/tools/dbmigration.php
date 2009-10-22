@@ -149,7 +149,22 @@ try {
 //	
 //	}
 
-	
+//	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
+//			$child = $lemmaRow['lemma_id'];
+//		}
+//		
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['proverb']."' ") as $lemmaRow){
+//			$parent = $lemmaRow['lemma_id'];
+//		}
+//		//insert into relation
+//		$sql = "INSERT INTO relation (relation_type_id, relation_parent_id, relation_child_id) VALUES (4, ".$parent.", ".$child.")";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		$sql = "INSERT INTO relation (relation_type_id, relation_child_id, relation_parent_id) VALUES (4, ".$parent.", ".$child.")";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//	}
 //	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
 //		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
 //			$relation = $lemmaRow['lemma_id'];

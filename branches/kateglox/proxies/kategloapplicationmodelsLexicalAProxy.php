@@ -29,11 +29,6 @@ namespace kateglo\proxies {
         public function __isInitialized__() { return $this->_loaded; }
 
         
-        public function setId($id) {
-            $this->_load();
-            return parent::setId($id);
-        }
-
         public function getId() {
             $this->_load();
             return parent::getId();
@@ -59,14 +54,19 @@ namespace kateglo\proxies {
             return parent::getAbbreviation();
         }
 
-        public function setPhrases(\kateglo\application\utilities\collections\ArrayCollection $phrases) {
+        public function getDefinitions() {
             $this->_load();
-            return parent::setPhrases($phrases);
+            return parent::getDefinitions();
         }
 
-        public function getPhrases() {
+        public function addDefinition(\kateglo\application\models\Definition $definition) {
             $this->_load();
-            return parent::getPhrases();
+            return parent::addDefinition($definition);
+        }
+
+        public function removeDefinition(\kateglo\application\models\Definition $definition) {
+            $this->_load();
+            return parent::removeDefinition($definition);
         }
 
 
@@ -74,7 +74,7 @@ namespace kateglo\proxies {
             if (!$this->_loaded) {
                 throw new \RuntimeException("Not fully loaded proxy can not be serialized.");
             }
-            return array('id', 'lexical', 'abbreviation', 'phrases');
+            return array('id', 'lexical', 'abbreviation', 'definitions');
         }
     }
 }

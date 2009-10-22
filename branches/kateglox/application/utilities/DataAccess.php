@@ -90,8 +90,21 @@ class DataAccess {
 		return self::$entityManager;
 	}
 	
+	/**
+	 * 
+	 * @return void
+	 */
 	public static function clearEntityManager(){
 		self::$entityManager = null;
+	}
+	
+	/**
+	 * 
+	 * @param Doctrine\ORM\EntityManager
+	 * @return void
+	 */
+	public static function setEntityManager(ORM\EntityManager $entityManager){
+		self::$entityManager = $entityManager;
 	}
 }
 

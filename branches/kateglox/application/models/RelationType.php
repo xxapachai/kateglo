@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\utilities\collections;
+use kateglo\application\models;
 /**
  *  
  * 
@@ -98,7 +99,7 @@ class RelationType {
 	 * @return string
 	 */
 	public function getType(){
-		return $getType;
+		return $this->type;
 	}
 	
 	/**

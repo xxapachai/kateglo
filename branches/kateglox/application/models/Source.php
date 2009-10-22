@@ -19,7 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\models;
 /**
  *
  *
@@ -58,25 +58,9 @@ class Source {
 	 */
 	private $label;
 
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
-	 * @JoinTable(name="definition_source",
-	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")},
-	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition_id")}
-	 *  )
-	 */
-	private $definitions;
 	
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Glossary", cascade={"persist"})
-	 * @JoinTable(name="definition_discipline",
-	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")},
-	 *      inverseJoinColumns={@JoinColumn(name="glossary_id", referencedColumnName="glossary_id")}
-	 *  )
-	 */
-	private $glossaries;
+	
+	
 
 
 	/**
