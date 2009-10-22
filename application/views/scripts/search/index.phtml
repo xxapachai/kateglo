@@ -35,7 +35,7 @@ $search = $this->search;
 		<?php $relations = $this->lemma->getRelations();
 			foreach($relations as $relation):
 		?>
-		<tr><td></td><td colspan="2"><a href="<?php echo rawurlencode($relation->getRelation()->getLemma()); ?>" /><?php echo $relation->getRelation()->getLemma();?></td></tr>
+		<tr><td><?php $type = $relation->getType(); if($type instanceof kateglo\application\models\RelationType)echo $type->getType(); else echo "empty";?></td><td colspan="2"><a href="<?php echo rawurlencode($relation->getChild()->getLemma()); ?>" /><?php echo $relation->getChild()->getLemma();?></td></tr>
 		<?php endforeach; ?>
 	</table>	
 </div>

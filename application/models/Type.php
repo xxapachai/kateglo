@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\utilities\collections;
+use kateglo\application\models;
 /**
  *
  *
@@ -61,15 +62,7 @@ class Type {
 	 */
 	private $abbreviation;
 
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinTable(name="lemma_type",
-	 * 		joinColumns={@JoinColumn(name="type_id", referencedColumnName="type_id")},
-	 * 		inverseJoinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma_id")}
-	 * )
-	 */
-	private $lemmas;
+	
 
 	/**
 	 *

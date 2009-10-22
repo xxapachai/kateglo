@@ -20,7 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models;
-use kateglo\applications\utilities\collections;
+use kateglo\application\utilities\collections;
 /**
  *
  *
@@ -75,11 +75,7 @@ class Glossary {
 	 */
 	private $glossary;
 	
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-     * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
-     */
-    private $sources;
+
 	
 	/**
 	 * 

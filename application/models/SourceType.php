@@ -19,10 +19,10 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\models;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -30,82 +30,82 @@ namespace kateglo\application\models;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
  * @Table(name="source_type")
  */
 class SourceType {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * 
+	 *
 	 * @var int
 	 * @Id
 	 * @Column(type="integer", name="source_type_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
 	 * @Column(type="string", name="source_type_name", unique=true, length=255)
 	 */
 	private $type;
-	
+
 	/**
-	 * 
+	 *
 	 * @var string
 	 * @Column(type="string", name="source_type_abbreviation", unique=true, length=255)
 	 */
 	private $abbreviation;
-	
-/**
-	 * 
+
+	/**
+	 *
 	 * @param int $id
 	 * @return void
 	 */
 	public function setId($id){
 		$this->id = $id;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getId(){
 		return $this->id;
 	}
-	
-/**
-	 * 
+
+	/**
+	 *
 	 * @param string $type
 	 * @return void
 	 */
 	public function setType($type){
 		$this->type = $type;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getType(){
 		return $getType;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $abbreviation
 	 * @return void
 	 */
 	public function setAbbreviation($abbreviation){
 		$this->abbreviation = $abbreviation;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getAbbreviation(){

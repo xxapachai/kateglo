@@ -41,7 +41,7 @@ class Relation {
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="relation_parent_id")
+	 * @Column(type="integer", name="relation_id")
 	 */
 	private $id;
 	
@@ -55,7 +55,7 @@ class Relation {
 	/**
 	 * @var kateglo\application\models\Lemma
 	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinColumn(name="relation_child_id", referencedColumnName="id")
+	 * @JoinColumn(name="relation_child_id", referencedColumnName="lemma_id")
 	 */
 	private $child;
 

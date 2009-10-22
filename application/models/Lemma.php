@@ -19,9 +19,8 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use  kateglo\application\models;
 use kateglo\application\utilities\collections;
-use kateglo\application\models;
 /**
  *
  *
@@ -61,11 +60,7 @@ class Lemma {
 	 */
 	private $syllabel;
 
-	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="lemmas", cascade={"persist"})
-	 */
-	private $types;
+
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
@@ -81,7 +76,7 @@ class Lemma {
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="lemma", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="parent", cascade={"persist"})
 	 */
 	private $relations;
 

@@ -59,9 +59,14 @@ namespace kateglo\proxies {
             return parent::getAbbreviation();
         }
 
-        public function setRelations(\kateglo\application\utilities\collections\ArrayCollection $relations) {
+        public function addRelation(\kateglo\application\models\Relation $relation) {
             $this->_load();
-            return parent::setRelations($relations);
+            return parent::addRelation($relation);
+        }
+
+        public function removeRelation(\kateglo\application\models\Relation $relation) {
+            $this->_load();
+            return parent::removeRelation($relation);
         }
 
         public function getRelations() {
