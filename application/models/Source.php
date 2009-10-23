@@ -57,10 +57,33 @@ class Source {
 	 * @Column(type="string", name="source_label", unique=true, length=255)
 	 */
 	private $label;
+	
+	/**
+	 * @var kateglo\application\models\SourceType
+	 * @ManyToOne(targetEntity="kateglo\application\models\SourceType")
+	 * @JoinColumn(name="source_type_id", referencedColumnName="source_type_id")
+	 */
+	private $type;
 
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
+	 * @JoinTable(name="definition_source",
+	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition")}
+	 *  )
+	 */
+	private $definitions;
 	
-	
-	
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Glossary", cascade={"persist"})
+	 * @JoinTable(name="definition_discipline",
+	 *      joinColumns={@JoinColumn(name="source_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@JoinColumn(name="glossary_id", referencedColumnName="glossary")}
+	 *  )
+	 */
+	private $glossaries;
 
 
 	/**
@@ -82,36 +105,66 @@ class Source {
 
 	/**
 	 *
-	 * @param string $discipline
+	 * @param string $url
 	 * @return void
 	 */
-	public function setDiscipline($discipline){
-		$this->discipline = $discipline;
+	public function setUrl($url){
+		$this->url = $url;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getDiscipline(){
-		return $this->discipline;
+	public function getUrl(){
+		return $this->url;
 	}
 
 	/**
 	 *
-	 * @param string $abbreviation
+	 * @param string $label
 	 * @return void
 	 */
-	public function setAbbreviation($abbreviation){
-		$this->abbreviation = $abbreviation;
+	public function setLabel($label){
+		$this->label = $label;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getAbbreviation(){
-		return $this->abbreviation;
+	public function getLabel(){
+		return $this->label;
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\SourceType $type
+	 * @return void
+	 */
+	public function setType(models\Type $type){
+		$this->type = $type;
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\models\SourceType
+	 */
+	public function getType(){
+		return $this->type;
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeType() {
+		if ($this->type !== null) {
+			/*@var $phrase kateglo\application\models\SourceType */
+			$type = $this->type;
+			$this->type = null;
+			$type->removeSource($this);
+		}
 	}
 	
 	/**

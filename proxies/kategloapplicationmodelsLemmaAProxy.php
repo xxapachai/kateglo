@@ -23,8 +23,8 @@ namespace kateglo\proxies {
                 unset($this->_owner);
                 unset($this->_assoc);
                 unset($this->_joinColumnValues);
-                $this->_loaded = true;
-            }
+                $this->_loaded = true;echo "load false ";
+            }else{echo "load true ";}
         }
         public function __isInitialized__() { return $this->_loaded; }
 
@@ -119,7 +119,7 @@ namespace kateglo\proxies {
             if (!$this->_loaded) {
                 throw new \RuntimeException("Not fully loaded proxy can not be serialized.");
             }
-            return array('id', 'lemma', 'syllabel', 'definitions', 'glossaries', 'relations');
+            return array('id', 'lemma', 'syllabel', 'types', 'definitions', 'glossaries', 'relations');
         }
     }
 }

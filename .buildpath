@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/ZendFramework"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/phptal"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/doctrine"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
-	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/doctrine"/>
-	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/phptal"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/ZendFramework"/>
 	<buildpathentry kind="src" path=""/>
-	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/PHPUnit"/>
 </buildpath>

@@ -58,7 +58,15 @@ class Discipline {
 	 */
 	private $abbreviation;
 
-
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
+	 * @JoinTable(name="definition_discipline",
+	 *      joinColumns={@JoinColumn(name="discipline_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition")}
+	 *  )
+	 */
+	private $definitions;
 	
 	/**
 	 * @var kateglo\application\helpers\collections\ArrayCollection
