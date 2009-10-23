@@ -35,7 +35,10 @@ $search = $this->search;
 		<?php $relations = $this->lemma->getRelations();
 			foreach($relations as $relation):
 		?>
-		<tr><td><?php $type = $relation->getType(); if($type instanceof kateglo\application\models\RelationType)echo $type->getType(); else echo "empty";?></td><td colspan="2"><a href="<?php echo rawurlencode($relation->getChild()->getLemma()); ?>" /><?php echo $relation->getChild()->getLemma();?></td></tr>
+		<tr><td><?php echo $relation->getType()->getType()." ".$relation->getType()->getId()." ".$relation->getType()->getAbbreviation();?></td>
+			<td colspan="2">
+				<a href="<?php echo rawurlencode($relation->getChild()->getLemma()); ?>" />
+				<?php echo $relation->getChild()->getLemma()." ".$relation->getChild()->getId();?></td></tr>
 		<?php endforeach; ?>
 	</table>	
 </div>

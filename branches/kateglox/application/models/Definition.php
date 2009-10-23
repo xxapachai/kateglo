@@ -68,7 +68,17 @@ class Definition {
 	 */
 	private $definition;
 
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
+	 */
+	private $discipline;
 
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
+	 */
+	private $sources;
 
 
 

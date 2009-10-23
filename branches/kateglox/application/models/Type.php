@@ -62,7 +62,15 @@ class Type {
 	 */
 	private $abbreviation;
 
-	
+	/**
+	 * @var kateglo\application\helpers\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinTable(name="lemma_type",
+	 * 		joinColumns={@JoinColumn(name="type_id", referencedColumnName="id")},
+	 * 		inverseJoinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma")}
+	 * )
+	 */
+	private $lemmas;
 
 	/**
 	 *

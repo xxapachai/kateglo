@@ -60,6 +60,11 @@ class Lemma {
 	 */
 	private $syllabel;
 
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="lemmas", cascade={"persist"})
+	 */
+	private $types;
 
 
 	/**
@@ -129,7 +134,7 @@ class Lemma {
 		return $this->syllabel;
 	}
 	
-/**
+	/**
      * 
      * @param kateglo\application\models\Type $type
      * @return void

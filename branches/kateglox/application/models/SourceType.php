@@ -60,6 +60,12 @@ class SourceType {
 	 * @Column(type="string", name="source_type_abbreviation", unique=true, length=255)
 	 */
 	private $abbreviation;
+	
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="type", cascade={"persist"})
+	 */
+	private $sources;
 
 	/**
 	 *
@@ -110,6 +116,37 @@ class SourceType {
 	 */
 	public function getAbbreviation(){
 		return $this->abbreviation;
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Source $source
+	 * @return void
+	 */
+	public function addSource(models\Source $source){
+		$this->sources[] = $source;
+		$source->setType($this);
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Source $source
+	 * @return void
+	 */
+	public function removeSource(models\Source $source){
+		/*@var $removed kateglo\application\models\Source */
+		$removed = $this->sources->removeElement($source);
+		if ($removed !== null) {
+			$removed->removeType();
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getSources(){
+		return $this->sources;
 	}
 }
 ?>

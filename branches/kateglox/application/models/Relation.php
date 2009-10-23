@@ -105,7 +105,7 @@ class Relation {
 	 * @param kateglo\application\models\RelationType $type
 	 * @return void
 	 */
-	public function setLemma(models\Type $type){
+	public function setType(models\Type $type){
 		$this->type = $type;
 	}
 
