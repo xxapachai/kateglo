@@ -70,11 +70,10 @@ class RelationType {
 	
 	/**
 	 * 
-	 * @param int $id
 	 * @return void
 	 */
-	public function setId($id){
-		$this->id = $id;
+	public function __construct(){
+		$relations = new collections\ArrayCollection();
 	}
 	
 	/**
@@ -85,7 +84,7 @@ class RelationType {
 		return $this->id;
 	}
 	
-/**
+	/**
 	 * 
 	 * @param string $type
 	 * @return void

@@ -105,13 +105,13 @@ class Relation {
 	 * @param kateglo\application\models\RelationType $type
 	 * @return void
 	 */
-	public function setType(models\Type $type){
+	public function setType(models\RelationType $type){
 		$this->type = $type;
 	}
 
 	/**
 	 *
-	 * @return kateglo\application\models\Type
+	 * @return kateglo\application\models\RelationType
 	 */
 	public function getType(){
 		return $this->type;

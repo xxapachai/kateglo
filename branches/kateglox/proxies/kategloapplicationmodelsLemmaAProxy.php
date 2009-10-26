@@ -23,8 +23,8 @@ namespace kateglo\proxies {
                 unset($this->_owner);
                 unset($this->_assoc);
                 unset($this->_joinColumnValues);
-                $this->_loaded = true;echo "load false ";
-            }else{echo "load true ";}
+                $this->_loaded = true;
+            }
         }
         public function __isInitialized__() { return $this->_loaded; }
 
