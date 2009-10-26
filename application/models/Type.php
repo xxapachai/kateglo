@@ -66,8 +66,8 @@ class Type {
 	 * @var kateglo\application\helpers\collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
 	 * @JoinTable(name="lemma_type",
-	 * 		joinColumns={@JoinColumn(name="type_id", referencedColumnName="id")},
-	 * 		inverseJoinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma")}
+	 * 		joinColumns={@JoinColumn(name="type_id", referencedColumnName="type_id")},
+	 * 		inverseJoinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma_id")}
 	 * )
 	 */
 	private $lemmas;
@@ -144,9 +144,9 @@ class Type {
 	 * 
 	 * @return kateglo\application\helpers\collections\ArrayCollection
 	 */
-	public function getCategories()
+	public function getLemmas()
 	{
-		return $this->categories;
+		return $this->lemmas;
 	}
 
 }

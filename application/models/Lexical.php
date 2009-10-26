@@ -65,6 +65,9 @@ class Lexical {
 	 */
 	private $definitions;
 	
+	public function __construct(){
+		$this->definitions = new collections\ArrayCollection();
+	}
 	
 	/**
 	 * 

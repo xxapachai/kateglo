@@ -67,13 +67,8 @@ class SourceType {
 	 */
 	private $sources;
 
-	/**
-	 *
-	 * @param int $id
-	 * @return void
-	 */
-	public function setId($id){
-		$this->id = $id;
+	public function __construct(){
+		$this->sources = new collections\ArrayCollection();
 	}
 
 	/**
