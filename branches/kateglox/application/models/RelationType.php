@@ -137,7 +137,7 @@ class RelationType {
 		/*@var $removed kateglo\application\models\Relation */
 		$removed = $this->relations->removeElement($relation);
 		if ($removed !== null) {
-			$removed->removeLemma();
+			$removed->removeType();
 		}
 	}
 
