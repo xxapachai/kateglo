@@ -72,6 +72,10 @@ class Type {
 	 */
 	private $lemmas;
 
+	public function __construct(){
+		$lemmas = new collections\ArrayCollection();
+	}
+	
 	/**
 	 *
 	 * @return int
@@ -132,7 +136,7 @@ class Type {
 	 * @param kateglo\application\models\Lemma $lemma
 	 * @return void
 	 */
-	public function removeLEmma(models\Lemma $lemma)
+	public function removeLemma(models\Lemma $lemma)
 	{
 		$removed = $this->lemmas->removeElement($lemma);
 		if ($removed !== null) {

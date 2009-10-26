@@ -88,6 +88,7 @@ class Definition {
 	 */
 	public function __construct(){
 		$this->discipline = new collections\ArrayCollection();
+		$this->sources = new collections\ArrayCollection();
 	}
 
 	/**
