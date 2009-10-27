@@ -42,6 +42,7 @@ class Relation {
 	 * @var int
 	 * @Id
 	 * @Column(type="integer", name="relation_id")
+	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 	
