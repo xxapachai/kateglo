@@ -46,27 +46,27 @@ class RelationType {
 	 * @Column(type="integer", name="relation_type_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * 
 	 * @var string
 	 * @Column(type="string", name="relation_type_name", unique=true, length=255)
 	 */
-	private $type;
+	protected $type;
 	
 	/**
 	 * 
 	 * @var string
 	 * @Column(type="string", name="relation_type_abbreviation", unique=true, length=255)
 	 */
-	private $abbreviation;
+	protected $abbreviation;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="type", cascade={"persist"})
 	 */
-	private $relations;
+	protected $relations;
 	
 	/**
 	 * 

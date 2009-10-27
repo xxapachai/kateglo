@@ -45,45 +45,45 @@ class Lemma {
 	 * @Column(type="integer", name="lemma_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="lemma_name", unique=true, length=255)
 	 */
-	private $lemma;
+	protected $lemma;
 
 	/**
 	 * @var kateglo\application\models\Syllabel
 	 * @OneToOne(targetEntity="kateglo\application\models\Syllabel", mappedBy="lemma", cascade={"persist"})
 	 */
-	private $syllabel;
+	protected $syllabel;
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="lemmas", cascade={"persist"})
 	 */
-	private $types;
+	protected $types;
 
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="lemma", cascade={"persist"})
 	 */
-	private $definitions;
+	protected $definitions;
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="lemma", cascade={"persist"})
 	 */
-	private $glossaries;
+	protected $glossaries;
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="parent", cascade={"persist"})
 	 */
-	private $relations;
+	protected $relations;
 
 	public function __construct() {
 		$this->types = new collections\ArrayCollection();
