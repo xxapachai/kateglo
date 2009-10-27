@@ -14,7 +14,7 @@ namespace kateglo\proxies {
             $this->_assoc = $assoc;
             $this->_owner = $owner;
             $this->_joinColumnValues = $joinColumnValues;
-            
+            parent::__construct();
         }
         private function _load() {
             if ( ! $this->_loaded) {
@@ -24,6 +24,12 @@ namespace kateglo\proxies {
                 unset($this->_assoc);
                 unset($this->_joinColumnValues);
                 $this->_loaded = true;
+                $exports = get_object_vars($this);
+				$this->id= $exports['id'];
+				$this->lexical= $exports['lexical'];
+				$this->abbreviation= $exports['abbreviation'];
+				$this->definitions= $exports['definitions'];
+                
             }
         }
         public function __isInitialized__() { return $this->_loaded; }
@@ -76,5 +82,6 @@ namespace kateglo\proxies {
             }
             return array('id', 'lexical', 'abbreviation', 'definitions');
         }
+        
     }
 }

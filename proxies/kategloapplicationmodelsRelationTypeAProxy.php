@@ -24,16 +24,17 @@ namespace kateglo\proxies {
                 unset($this->_assoc);
                 unset($this->_joinColumnValues);
                 $this->_loaded = true;
+                $exports = get_object_vars($this);
+				$this->id= $exports['id'];
+				$this->type= $exports['type'];
+				$this->abbreviation= $exports['abbreviation'];
+				$this->relations= $exports['relations'];
+                
             }
         }
         public function __isInitialized__() { return $this->_loaded; }
 
         
-        public function setId($id) {
-            $this->_load();
-            return parent::setId($id);
-        }
-
         public function getId() {
             $this->_load();
             return parent::getId();
@@ -81,5 +82,6 @@ namespace kateglo\proxies {
             }
             return array('id', 'type', 'abbreviation', 'relations');
         }
+        
     }
 }

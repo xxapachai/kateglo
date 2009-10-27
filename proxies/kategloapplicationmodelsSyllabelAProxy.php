@@ -24,6 +24,11 @@ namespace kateglo\proxies {
                 unset($this->_assoc);
                 unset($this->_joinColumnValues);
                 $this->_loaded = true;
+                $exports = get_object_vars($this);
+				$this->id= $exports['id'];
+				$this->lemma= $exports['lemma'];
+				$this->syllabel= $exports['syllabel'];
+                
             }
         }
         public function __isInitialized__() { return $this->_loaded; }
@@ -56,5 +61,6 @@ namespace kateglo\proxies {
             }
             return array('id', 'lemma', 'syllabel');
         }
+        
     }
 }
