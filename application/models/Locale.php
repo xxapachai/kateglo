@@ -33,103 +33,116 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="relation")
+ * @Table(name="locale")
  */
-class Relation {
+class Locale {
 
 	const CLASS_NAME = __CLASS__;
 
 	/**
+	 *
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="relation_id")
+	 * @Column(type="integer", name="locale_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
+
+	/**
+	 *
+	 * @var string
+	 * @Column(type="string", name="locale_name", unique=true, length=255)
+	 */
+	private $locale;
+
+	/**
+	 *
+	 * @var string
+	 * @Column(type="string", name="locale_abbreviation", unique=true, length=255)
+	 */
+	private $abbreviation;
 	
 	/**
-	 * @var kateglo\application\models\Lemma
-	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinColumn(name="relation_parent_id", referencedColumnName="lemma_id")
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="locale", cascade={"persist"})
 	 */
-	private $parent;
+	private $glossaries;
 
-	/**
-	 * @var kateglo\application\models\Lemma
-	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinColumn(name="relation_child_id", referencedColumnName="lemma_id")
-	 */
-	private $child;
-
-	/**
-	 * @var kateglo\application\models\RelationType
-	 * @ManyToOne(targetEntity="kateglo\application\models\RelationType")
-	 * @JoinColumn(name="relation_type_id", referencedColumnName="relation_type_id")
-	 */
-	private $type;
-
-	/**
-	 *
-	 * @param kateglo\application\models\Lemma $parent
-	 * @return void
-	 */
-	public function setParent(models\Lemma $parent){
-		$this->parent = $parent;
+	public function __construct(){
+		$this->glossaries = new collections\ArrayCollection();
 	}
 
 	/**
 	 *
-	 * @return kateglo\application\models\Phrase
+	 * @return int
 	 */
-	public function getParent(){
-		return $this->parent;
+	public function getId(){
+		return $this->id;
+	}
+
+	/**
+	 *
+	 * @param string $locale
+	 * @return void
+	 */
+	public function setLocale($locale){
+		$this->locale = $locale;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLocale(){
+		return $this->locale;
+	}
+
+	/**
+	 *
+	 * @param string $abbreviation
+	 * @return void
+	 */
+	public function setAbbreviation($abbreviation){
+		$this->abbreviation = $abbreviation;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getAbbreviation(){
+		return $this->abbreviation;
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Lemma $child
+	 * @param kateglo\application\models\Glossary $glossary
 	 * @return void
 	 */
-	public function setChild(models\Lemma $child){
-		$this->child = $child;
+	public function addGlossary(models\Glossary $glossary){
+		$this->glossaries[] = $glossary;
+		$glossary->setLocale($this);
 	}
 
 	/**
 	 *
-	 * @return kateglo\application\models\Lemma
-	 */
-	public function getChild(){
-		return $this->child;
-	}
-
-	/**
-	 *
-	 * @param kateglo\application\models\RelationType $type
+	 * @param kateglo\application\models\Glossary $glossary
 	 * @return void
 	 */
-	public function setType(models\RelationType $type){
-		$this->type = $type;
-	}
-
-	/**
-	 *
-	 * @return kateglo\application\models\RelationType
-	 */
-	public function getType(){
-		return $this->type;
-	}
-
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeType() {
-		if ($this->type !== null) {
-			/*@var $phrase kateglo\application\models\RelationType */
-			$type = $this->type;
-			$this->type = null;
-			$type->removeRelation($this);
+	public function removeGlossary(models\Glossary $glossary){
+		/*@var $removed kateglo\application\models\Glossary */
+		$removed = $this->glossaries->removeElement($glossary);
+		if ($removed !== null) {
+			$removed->removeLocale();
 		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getGlossaries(){
+		return $this->glossaries;
 	}
 }
 ?>
