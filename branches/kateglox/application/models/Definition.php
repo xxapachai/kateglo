@@ -70,13 +70,17 @@ class Definition {
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions", cascade={"persist"})
 	 */
 	private $discipline;
 
 	/**
 	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Source", cascade={"persist"})
+	 * @JoinTable(name="definition_source",
+	 *      joinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")}
+	 *  )
 	 */
 	private $sources;
 

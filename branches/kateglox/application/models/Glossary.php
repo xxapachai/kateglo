@@ -19,8 +19,8 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models;
 use kateglo\application\utilities\collections;
+use kateglo\application\models;
 /**
  *
  *
@@ -77,7 +77,11 @@ class Glossary {
 	
 	/**
 	 * @var kateglo\application\helpers\collections\ArrayCollection
-     * @ManyToMany(targetEntity="kateglo\application\models\Source", mappedBy="glossaries")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Source", cascade={"persist"})
+	 * @JoinTable(name="glossary_source",
+	 *      joinColumns={@JoinColumn(name="glossary_id", referencedColumnName="glossary_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="source_id", referencedColumnName="source_id")}
+	 *  )
      */
     private $sources;
 	
@@ -123,94 +127,86 @@ class Glossary {
 			/*@var $phrase kateglo\application\models\Lemma */
 			$lemma = $this->lemma;
 			$this->lemma = null;
-			$lemma->removeDefinition($this);
+			$lemma->removeGlossary($this);
 		}
 	}
 
 	/**
 	 *
-	 * @param kateglo\application\models\Lexical $lexical
+	 * @param string $locale
 	 * @return void
 	 */
-	public function setLexical(models\Lexical $lexical){
-		$this->lexical = $lexical;
-	}
-
-	/**
-	 *
-	 * @return kateglo\application\models\Lexical
-	 */
-	public function getLexical(){
-		return $this->lexical;
-	}
-
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeLexical() {
-		if ($this->lexical !== null) {
-			/*@var $phrase kateglo\application\models\Lexical */
-			$lexical = $this->lexical;
-			$this->lexical = null;
-			$lexical->removeDefinition($this);
-		}
-	}
-
-	/**
-	 *
-	 * @param string $definition
-	 * @return void
-	 */
-	public function setDefinition($definition){
-		$this->definition = $definition;
+	public function setLocale($locale){
+		$this->locale = $locale;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getDefinition(){
-		return $this->definition;
+	public function getLocale(){
+		return $this->locale;
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\models\Discipline $discipline
+	 *
 	 * @return void
 	 */
-	public function setDiscipline(models\Discipline $discipline)
-    {
-        if (!$this->discipline->contains($discipline)) {
-        	if($this->discipline[0] instanceof models\Discipline){
-        		$this->removeDiscipline($this->discipline[0]);        		
-        	}
-            $this->discipline[0] = $discipline;
-            $discipline->addDefinition($this);
-        }
-    }
+	public function removeLocale() {
+		if ($this->locale !== null) {
+			/*@var $phrase kateglo\application\models\Locale */
+			$locale = $this->locale;
+			$this->locale = null;
+			$locale->removeGlossary($this);
+		}
+	}
+	
+	/**
+	 *
+	 * @param string $discipline
+	 * @return void
+	 */
+	public function setDiscipline($discipline){
+		$this->discipline = $discipline;
+	}
 
-    /**
-     * 
-     * @param kateglo\application\models\Discipline $discipline
-     * @return void
-     */
-    public function removeDiscipline(models\Discipline $discipline)
-    {
-        $removed = $this->discipline->removeElement($discipline);
-        if ($removed !== null) {
-            $removed->removeDefinition($this);
-        }
-    }
+	/**
+	 *
+	 * @return string
+	 */
+	public function getDiscipline(){
+		return $this->discipline;
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeDiscipline() {
+		if ($this->discipline !== null) {
+			/*@var $phrase kateglo\application\models\Discipline */
+			$discipline = $this->discipline;
+			$this->discipline = null;
+			$discipline->removeGlossary($this);
+		}
+	}
+	
+	/**
+	 *
+	 * @param string $glossary
+	 * @return void
+	 */
+	public function setGlossary($glossary){
+		$this->glossary = $glossary;
+	}
 
-    /**
-     * 
-     * @return kateglo\application\models\Discipline
-     */
-    public function getDiscipline()
-    {
-        return $this->discipline[0];
-    }
+	/**
+	 *
+	 * @return string
+	 */
+	public function getGlossary(){
+		return $this->glossary;
+	}
     
     /**
      * 

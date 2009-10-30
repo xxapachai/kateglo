@@ -19,6 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities\collections;
 use kateglo\application\models;
 /**
  *
@@ -62,8 +63,8 @@ class Discipline {
 	 * @var kateglo\application\helpers\collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", cascade={"persist"})
 	 * @JoinTable(name="definition_discipline",
-	 *      joinColumns={@JoinColumn(name="discipline_id", referencedColumnName="id")},
-	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition")}
+	 *      joinColumns={@JoinColumn(name="discipline_id", referencedColumnName="discipline_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="definition_id", referencedColumnName="definition_id")}
 	 *  )
 	 */
 	private $definitions;
