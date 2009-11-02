@@ -1,0 +1,86 @@
+<?php echo '<?xml version="1.0" encoding="encoding"'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=encoding" />
+<title>Insert title here</title>
+</head>
+<body>
+<?php 
+/*@var $search kateglo\application\faces\Search */
+$search = $this->search;
+?>
+<div>
+	<form action="<?php echo $search->getFormAction(); ?>" method="<?php echo $search->getFormMethod();?>" >
+		<div>
+			<input type="text" name="<?php echo $search->getFieldName();?>" value="<?php echo $search->getFieldValue();?>"  />
+			<input type="submit" name="<?php echo $search->getButtonName();?>" value="<?php echo $search->getButtonValue();?>" />
+		</div> 
+	</form>
+	<table border="1">
+		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;"><?php echo $this->lemma->getLemma()."(".$this->lemma->getId().")";?></td></tr>
+		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
+		<?php $types = $this->lemma->getTypes();
+			foreach($types as $type):
+		?>
+		<tr><td><?php echo $type->getId();?></td><td colspan="2"><?php echo $type->getType();?></td></tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Definitions</td></tr>
+		<?php $definitions = $this->lemma->getDefinitions();
+			foreach($definitions as $definition):
+		?>
+		<tr><td><?php echo $definition->getId();?></td><td colspan="2"><?php echo $definition->getDefinition();?></td></tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Relations</td></tr>
+		<?php $relations = $this->lemma->getRelations();
+			foreach($relations as $relation):
+		?>
+		<tr><td><?php echo $relation->getType()->getType()." ".$relation->getType()->getId();?></td>
+			<td colspan="2">
+				<a href="<?php echo rawurlencode($relation->getChild()->getLemma()); ?>" />
+				<?php echo $relation->getChild()->getLemma()." ".$relation->getChild()->getId();?></td></tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Definitions</td></tr>
+		<?php $definitions = $this->lemma->getDefinitions();
+			foreach($definitions as $definition):
+		?>
+		<tr>
+			<td><?php echo $definition->getLexical()->getLexical()." ".$definition->getLexical()->getId();?></td>
+			<?php if($definition->getSources()->count() > 0) :?>
+			<td><?php echo $definition->getDefinition()." ".$definition->getId();?></td>
+			<td>
+				<?php $sources = $definition->getSources(); 
+					foreach($sources as $source):
+				?>
+				<div> <a href="<?php echo $source->getUrl();?>" ><?php echo $source->getLabel()." ".$source->getId()." ".$source->getType()->getType()."(".$source->getType()->getId().")";?></a> </div>
+				<?php endforeach;?>			
+			</td>
+			<?php else: ?>			
+			<td colspan="2"><?php echo $definition->getDefinition()." ".$definition->getId();?></td>
+			<?php endif;?>
+		</tr>
+		<?php endforeach; ?>
+		<tr><td colspan="3" style="font-weight: bold">Glossaries</td></tr>
+		<?php $glossaries = $this->lemma->getGlossaries();
+			foreach($glossaries as $glossary):
+		?>
+		<tr>
+			<td><?php echo $glossary->getDiscipline()->getDiscipline()." ".$glossary->getDiscipline()->getId();?></td>
+			<?php if($glossary->getSources()->count() > 0) :?>
+			<td><?php echo "(".$glossary->getLocale()->getLocale().")".$glossary->getGlossary()." ".$glossary->getId();?></td>
+			<td>
+				<?php $sources = $glossary->getSources(); 
+					foreach($sources as $source):
+				?>
+				<div> <a href="<?php echo $source->getUrl();?>" ><?php echo $source->getLabel()." ".$source->getId()." ".$source->getType()->getType()."(".$source->getType()->getId().")";?></a> </div>
+				<?php endforeach;?>			
+			</td>
+			<?php else: ?>			
+			<td colspan="2"><?php echo "(".$glossary->getLocale()->getLocale().")".$glossary->getGlossary()." ".$glossary->getId();?></td>
+			<?php endif;?>
+		</tr>
+		<?php endforeach; ?>
+	</table>	
+</div>
+</body>
+</html>

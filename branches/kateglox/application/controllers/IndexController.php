@@ -47,7 +47,7 @@ class IndexController extends Zend_Controller_Action
 		if($request->isPost()){
 			$searchText = $request->getParam($search->getFieldName());
 			if($searchText !== '' || $searchText !== null){
-				header('location: '.$request->getBasePath().'/search/'.$searchText);
+				header('location: '.$request->getBasePath().'/lemma/'.$searchText);
 			}
 		}
 	}
