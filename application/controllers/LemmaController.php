@@ -33,7 +33,7 @@ use kateglo\application\domains;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class SearchController extends Zend_Controller_Action
+class LemmaController extends Zend_Controller_Action
 {
 
 	public function init(){
@@ -48,7 +48,7 @@ class SearchController extends Zend_Controller_Action
 		if($request->isPost()){
 			$searchText = $request->getParam($searchFaces->getFieldName());
 			if($searchText !== '' || $searchText !== null){
-				header('location: '.$request->getBasePath().'/search/'.$searchText);
+				header('location: '.$request->getBasePath().'/lemma/'.$searchText);
 			}
 		}else if($request->isGet()){
 			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
