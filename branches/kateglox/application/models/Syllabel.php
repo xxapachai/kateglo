@@ -43,13 +43,13 @@ class Syllabel {
 	 * @var int
 	 * @Id 
 	 * @Column(type="integer", name="syllabel_lemma_id")
+	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
 	
 	/**
 	 * @var kateglo\application\models\Lemma
-	 * @OneToOne(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinColumn(name="syllabel_lemma_id", referencedColumnName="lemma_id")
+	 * @OneToOne(targetEntity="kateglo\application\models\Lemma", mappedBy="syllabel", cascade={"persist"})
 	 */
 	private $lemma;
 
