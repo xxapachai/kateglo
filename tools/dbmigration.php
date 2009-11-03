@@ -1,7 +1,7 @@
 <?php
 try {
 	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 	/* Migrate LEMMA*/
 //	
@@ -320,6 +320,32 @@ try {
 //		attention there is source without relation!!!
 //		
 //	}
+	
+	foreach($kateglo->query('select phrase, content from sys_cache order by content;') as $row) {
+		$content = trim($row['content']);
+		if(strpos($content, '<b>') === 0){
+			$getEnd = strpos($content, '</b>')-3;
+			$getRawSyllabel = substr($content, 3, $getEnd);
+			if(strpos($getRawSyllabel, '<sup>') === 0){
+				$getSupEnd = strpos($getRawSyllabel, '</sup>')+6;
+				$getSyllabel = substr($getRawSyllabel, $getSupEnd);				
+			}else{
+				$getSyllabel = $getRawSyllabel;
+			}
+			
+			$syllabel = strip_tags(html_entity_decode($getSyllabel, ENT_QUOTES, 'UTF-8'));
+			$getLemma = $kateglox->query('select lemma_id, lemma_name from lemma where lemma_name = \''.$row['phrase'].'\';');
+			if(count($getLemma) > 0){
+				foreach ($getLemma as $lemmaRow){
+					$sql = 'insert into syllabel (syllabel_lemma_id, syllabel_name) values ('.$lemmaRow['lemma_id'].', \''.$syllabel.'\')';
+					$kateglox->query($sql);
+					echo $sql."\n";
+				}
+			}else{
+				echo "NOT FOUND :".$syllabel."\n";
+			}
+		}
+	}
 	
 	$kateglo = null;
 	$kateglox = null;

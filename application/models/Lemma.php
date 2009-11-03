@@ -56,7 +56,8 @@ class Lemma {
 
 	/**
 	 * @var kateglo\application\models\Syllabel
-	 * @OneToOne(targetEntity="kateglo\application\models\Syllabel", mappedBy="lemma", cascade={"persist"})
+	 * @OneToOne(targetEntity="kateglo\application\models\Syllabel")
+	 * @JoinColumn(name="lemma_id", referencedColumnName="syllabel_lemma_id")
 	 */
 	protected $syllabel;
 

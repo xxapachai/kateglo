@@ -18,7 +18,7 @@ $search = $this->search;
 		</div> 
 	</form>
 	<table border="1">
-		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;"><?php echo $this->lemma->getLemma()."(".$this->lemma->getId().")";?></td></tr>
+		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;"><?php echo $this->lemma->getLemma()."(".$this->lemma->getId().") ".$this->lemma->getSyllabel()->getSyllabel();?></td></tr>
 		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
 		<?php $types = $this->lemma->getTypes();
 			foreach($types as $type):
