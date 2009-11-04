@@ -36,11 +36,8 @@ use kateglo\application\domains;
 class LemmaController extends Zend_Controller_Action
 {
 
-	public function init(){
-		/* Initialize action controller here */
-	}
-
 	public function indexAction(){
+		$getObj = $this;
 		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
 		$searchFaces = new faces\Search();
