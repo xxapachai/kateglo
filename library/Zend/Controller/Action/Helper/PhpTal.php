@@ -55,6 +55,7 @@ class Zend_Controller_Action_Helper_PhpTal extends Zend_Controller_Action_Helper
      */
     public function initView($path = null, $prefix = null, array $options = array())
     {
+    	$this->_viewSuffix = 'html';
         if (null === $this->view) {
             $this->setView(new Zend_View_PhpTal());
         }
