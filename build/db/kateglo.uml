@@ -1564,7 +1564,7 @@
 <XPD:ATTR name="Left" type="integer">476</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">180</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">181</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">121</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">134</XPD:ATTR>
 <XPD:REF name="Model">LDB3cf/rYkmirO0o+4REggAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="czhZvF4v1EaTVXvtP+pTAwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="239S9GeSqkWqz88R3ZCDUgAA">
@@ -1624,7 +1624,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">624,436;624,300</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">624,436;624,313</XPD:ATTR>
 <XPD:REF name="Model">MXEyvtnELkWCsAXoOoJ58gAA</XPD:REF>
 <XPD:REF name="Head">ljn+udohi0aljD2tjUKTlwAA</XPD:REF>
 <XPD:REF name="Tail">58o6Su1hJ0eYLYBTTZzklQAA</XPD:REF>
@@ -1771,7 +1771,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">544,452;544,300</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">544,452;544,313</XPD:ATTR>
 <XPD:REF name="Model">WJeIhha5CkOh0AJSLeoCIwAA</XPD:REF>
 <XPD:REF name="Head">ljn+udohi0aljD2tjUKTlwAA</XPD:REF>
 <XPD:REF name="Tail">j1azUlFfKkytkwofJM7NXwAA</XPD:REF>
@@ -1856,7 +1856,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">488,300;488,452</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">488,313;488,452</XPD:ATTR>
 <XPD:REF name="Model">eOS+Z9ZIFkqodR99mddW2wAA</XPD:REF>
 <XPD:REF name="Head">j1azUlFfKkytkwofJM7NXwAA</XPD:REF>
 <XPD:REF name="Tail">ljn+udohi0aljD2tjUKTlwAA</XPD:REF>
@@ -4163,7 +4163,7 @@
 <XPD:REF name="Associations[9]">ONXcOusNdUiJ0Wrb+h4LnwAA</XPD:REF>
 <XPD:REF name="Associations[10]">b7qMdrSTWkuGPfkGfzv6zQAA</XPD:REF>
 <XPD:REF name="Associations[11]">oNXJLIq0uE21vtpxXHp0ogAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">6</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">7</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="L4X1Y0FnYkGILaRXA17jugAA">
 <XPD:ATTR name="Name" type="string">id</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>
@@ -4193,6 +4193,11 @@
 <XPD:OBJ name="Attributes[5]" type="UMLAttribute" guid="HfokV/2IbEeRNUAFHscIAgAA">
 <XPD:ATTR name="Name" type="string">relations</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">Collection&lt;Relation&gt;</XPD:ATTR>
+<XPD:REF name="Owner">LDB3cf/rYkmirO0o+4REggAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[6]" type="UMLAttribute" guid="ezHZNQcriUef3hqZdkkGUwAA">
+<XPD:ATTR name="Name" type="string">glossaries</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">Collection&lt;Glossary&gt;</XPD:ATTR>
 <XPD:REF name="Owner">LDB3cf/rYkmirO0o+4REggAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
