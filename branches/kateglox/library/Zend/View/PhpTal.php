@@ -55,7 +55,7 @@ class Zend_View_PhpTal implements Zend_View_Interface
     // The following are PHPTAL-specific options: 
  
     /** @var string Character encoding */ 
-    private $_encoding = self::PHPTAL_DEFAULT_ENCODING; 
+    private $_encoding = 'UTF-8'; 
  
     /** @var string Output mode (XML or XHTML) */ 
     private $_outputMode = PHPTAL::XHTML; 
@@ -320,7 +320,7 @@ class Zend_View_PhpTal implements Zend_View_Interface
      *
      * @param string $encoding Character encoding (e.g., 'UTF-8')
      */ 
-    public function setEncoding($encoding = self::PHPTAL_DEFAULT_ENCODING) 
+    public function setEncoding($encoding = 'UTF-8') 
     { 
         $this->_engine->setEncoding($encoding); 
         $this->_encoding = $encoding; 

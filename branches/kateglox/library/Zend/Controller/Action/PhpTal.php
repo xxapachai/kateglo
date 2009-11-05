@@ -41,7 +41,8 @@ class Zend_Controller_Action_PhpTal extends Zend_Controller_Action {
 	}
 	
 	public function initView() {
-
+		$this->viewSuffix = 'html';
+		
         require_once 'Zend/View/Interface.php';
         if (isset($this->view) && ($this->view instanceof Zend_View_PhpTal)) {
             return $this->view;
