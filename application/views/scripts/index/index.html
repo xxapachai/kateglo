@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Title</title>
 </head>
 <body>
-<div>
-	<form tal:attributes="action search/getFormAction; method search/getFormMethod" >
-		<div>
-			<input type="text" style="width: 500px;" tal:attributes="name search/getFieldName; value search/getFieldValue"  />
-			<input type="submit" tal:attributes="name search/getButtonName; value search/getButtonValue" />
-		</div> 
-	</form>
-</div>
-<div tal:condition="php: hits.count() GT 0" tal:repeat="hit hits">
-	<div><a tal:define="global lemma hit/lemma" href="lemma/${lemma}">${lemma}</a></div>
-</div>
+	<div>
+		<form tal:attributes="action search/getFormAction; method search/getFormMethod" >
+			<div>
+				<input type="text" style="width: 500px;" tal:attributes="name search/getFieldName; value search/getFieldValue"  />
+				<input type="submit" tal:attributes="value search/getButtonValue" />
+			</div>
+			<div>
+				Search: <input checked="checked" type="radio" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+				&nbsp;&nbsp; &nbsp; <input type="radio" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
+			</div>
+		</form>
+	</div>
 </body>
 </html>
