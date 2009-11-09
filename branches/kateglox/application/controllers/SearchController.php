@@ -18,30 +18,52 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities\collections;
+use kateglo\application\configs;
 use kateglo\application\faces;
+use kateglo\application\services;
+use kateglo\application\domains;
 /**
  *
  *
- * @package kateglo\application\controllers
+ * @uses Exception
+ * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  2009-10-14
+ * @since 2009-11-09
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action
-{
+class SearchController extends Zend_Controller_Action {
 
-	public function init(){
-		/* Initialize action controller here */
-	}
+	const CLASS_NAME = __CLASS__;
 
-	public function indexAction(){
+	public function indexAction() {
 		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
 		$search = new faces\Search();
 		$this->view->search = $search;
+		$this->view->hits = new collections\ArrayCollection();
+		if($request->isGet()){
+			$searchText = $request->getParam($search->getFieldName());
+			$contextText = $request->getParam($search->getRadioName());
+			$search->setFieldValue($searchText);
+			$search->setCheckedRadio($contextText);
+			if($searchText !== '' || $searchText !== null){
+				if($contextText == $search->getLemmaRadioValue()){
+					$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
+					$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
+					$this->view->hits = new collections\ArrayCollection($index->find($query));
+				}else if($contextText == $search->getGlossaryRadioValue()){
+					$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
+					$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
+					$this->view->hits = new collections\ArrayCollection($index->find($query));	
+				}else{
+					header('location: '.$request->getBaseUrl());
+				}
+			}
+		}
 	}
 }
 ?>

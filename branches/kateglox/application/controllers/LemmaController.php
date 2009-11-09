@@ -37,23 +37,19 @@ class LemmaController extends Zend_Controller_Action
 {
 
 	public function indexAction(){
-		$getObj = $this;
 		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
 		$searchFaces = new faces\Search();
 		$this->view->search = $searchFaces;
-		if($request->isPost()){
-			$searchText = $request->getParam($searchFaces->getFieldName());
-			if($searchText !== '' || $searchText !== null){
-				header('location: '.$request->getBasePath().'/lemma/'.$searchText);
-			}
-		}else if($request->isGet()){
+		if($request->isGet()){
 			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
 			if($text !== ''){
 				$searchFaces->setFieldValue($text);
 				$searchService = new services\Search();
 				$this->view->lemma = $searchService->lemma($text);
 			}
+		}else{
+			header('location: '.$request->getBaseUrl());
 		}
 	}
 }

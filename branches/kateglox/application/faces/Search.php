@@ -34,14 +34,24 @@ namespace kateglo\application\faces;
  */ 
 class Search {
 	
-	private $fieldValue;
+	/**
+	 * 
+	 * @var string
+	 */
+	private $fieldValue = '';
+	
+	/**
+	 * 
+	 * @var string
+	 */
+	private $checkedRadio = 'lemma';
 	
 	/**
 	 * 
 	 * @return string
 	 */
 	public function getFormAction(){
-		return "";
+		return "/search";
 	}
 	
 	/**
@@ -49,7 +59,48 @@ class Search {
 	 * @return string
 	 */
 	public function getFormMethod(){
-		return helpers\HTTPMethod::POST;
+		return helpers\HTTPMethod::GET;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getRadioName(){
+		return "context";
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getLemmaRadioValue(){
+		return "lemma";
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getGlossaryRadioValue(){
+		return "glossary";
+	}
+	
+	/**
+	 * 
+	 * @param string $checkedRadio
+	 * @return void
+	 */
+	public function setCheckedRadio($checkedRadio){
+		$this->checkedRadio = $checkedRadio;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getCheckedRadio(){
+		return $this->checkedRadio;
 	}
 	
 	/**
@@ -57,7 +108,7 @@ class Search {
 	 * @return string
 	 */
 	public function getFieldName(){
-		return "searchText";
+		return "query";
 	}
 	
 	/**
