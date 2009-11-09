@@ -1,7 +1,7 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 
 	/* Migrate LEMMA*/
 //	

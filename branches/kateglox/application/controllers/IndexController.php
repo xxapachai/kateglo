@@ -18,6 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities\collections;
+use kateglo\application\configs;
 use kateglo\application\faces;
 use kateglo\application\services;
 use kateglo\application\domains;
@@ -44,10 +46,14 @@ class IndexController extends Zend_Controller_Action
 		$request = $this->getRequest();
 		$search = new faces\Search();
 		$this->view->search = $search;
+		$this->view->hits = new collections\ArrayCollection();
 		if($request->isPost()){
 			$searchText = $request->getParam($search->getFieldName());
-			if($searchText !== '' || $searchText !== null){
-				header('location: '.$request->getBasePath().'/lemma/'.$searchText);
+			$search->setFieldValue($searchText);
+			if($searchText !== '' || $searchText !== null){				
+				$lemmaIndex = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);				
+				$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText); 
+         		$this->view->hits = new collections\ArrayCollection($lemmaIndex->find($query));				
 			}
 		}
 	}
