@@ -1,7 +1,7 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
 
 	/* Migrate LEMMA*/
 //	
@@ -149,22 +149,7 @@ try {
 //	
 //	}
 
-//	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
-//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
-//			$child = $lemmaRow['lemma_id'];
-//		}
-//		
-//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['proverb']."' ") as $lemmaRow){
-//			$parent = $lemmaRow['lemma_id'];
-//		}
-//		//insert into relation
-//		$sql = "INSERT INTO relation (relation_type_id, relation_parent_id, relation_child_id) VALUES (4, ".$parent.", ".$child.")";
-//		$kateglox->query($sql);
-//		echo $sql."\n";
-//		$sql = "INSERT INTO relation (relation_type_id, relation_child_id, relation_parent_id) VALUES (4, ".$parent.", ".$child.")";
-//		$kateglox->query($sql);
-//		echo $sql."\n";
-//	}
+
 //	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
 //		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
 //			$relation = $lemmaRow['lemma_id'];
@@ -190,8 +175,29 @@ try {
 //		$sql = "INSERT INTO relation (relation_type, relation_child_id, relation_parent_id) VALUES (4, ".$relation.", ".$id.")";
 //		$kateglox->query($sql);
 //		echo $sql."\n";
+//		foreach($kateglox->query('SELECT * FROM lemma WHERE lemma_name = \''.$row['proverb'].'\'') as $lemma){
+//			$sql = 'INSERT INTO lemma_type (lemma_id, type_id) VALUES ('.$lemma['lemma_id'].', 4)';
+//			$kateglox->query($sql);
+//			echo $sql."\n";
+//		}
 //	}
 //	
+//	foreach($kateglo->query('SELECT * FROM proverb ORDER BY proverb;') as $row) {
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['phrase']."' ") as $lemmaRow){
+//			$child = $lemmaRow['lemma_id'];
+//		}
+//		
+//		foreach($kateglox->query("SELECT * FROM lemma WHERE lemma_name = '".$row['proverb']."' ") as $lemmaRow){
+//			$parent = $lemmaRow['lemma_id'];
+//		}
+//		//insert into relation
+//		$sql = "INSERT INTO relation (relation_type_id, relation_parent_id, relation_child_id) VALUES (4, ".$parent.", ".$child.")";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//		$sql = "INSERT INTO relation (relation_type_id, relation_child_id, relation_parent_id) VALUES (4, ".$parent.", ".$child.")";
+//		$kateglox->query($sql);
+//		echo $sql."\n";
+//	}
 //	foreach($kateglox->query('SELECT COUNT(*) FROM lemma;') as $row) {
 //		print_r($row);
 //	}
@@ -321,31 +327,32 @@ try {
 //		
 //	}
 	
-	foreach($kateglo->query('select phrase, content from sys_cache order by content;') as $row) {
-		$content = trim($row['content']);
-		if(strpos($content, '<b>') === 0){
-			$getEnd = strpos($content, '</b>')-3;
-			$getRawSyllabel = substr($content, 3, $getEnd);
-			if(strpos($getRawSyllabel, '<sup>') === 0){
-				$getSupEnd = strpos($getRawSyllabel, '</sup>')+6;
-				$getSyllabel = substr($getRawSyllabel, $getSupEnd);				
-			}else{
-				$getSyllabel = $getRawSyllabel;
-			}
-			
-			$syllabel = strip_tags(html_entity_decode($getSyllabel, ENT_QUOTES, 'UTF-8'));
-			$getLemma = $kateglox->query('select lemma_id, lemma_name from lemma where lemma_name = \''.$row['phrase'].'\';');
-			if(count($getLemma) > 0){
-				foreach ($getLemma as $lemmaRow){
-					$sql = 'insert into syllabel (syllabel_lemma_id, syllabel_name) values ('.$lemmaRow['lemma_id'].', \''.$syllabel.'\')';
-					$kateglox->query($sql);
-					echo $sql."\n";
-				}
-			}else{
-				echo "NOT FOUND :".$syllabel."\n";
-			}
-		}
-	}
+	//SYLLABEL
+//	foreach($kateglo->query('select phrase, content from sys_cache order by content;') as $row) {
+//		$content = trim($row['content']);
+//		if(strpos($content, '<b>') === 0){
+//			$getEnd = strpos($content, '</b>')-3;
+//			$getRawSyllabel = substr($content, 3, $getEnd);
+//			if(strpos($getRawSyllabel, '<sup>') === 0){
+//				$getSupEnd = strpos($getRawSyllabel, '</sup>')+6;
+//				$getSyllabel = substr($getRawSyllabel, $getSupEnd);				
+//			}else{
+//				$getSyllabel = $getRawSyllabel;
+//			}
+//			
+//			$syllabel = strip_tags(html_entity_decode($getSyllabel, ENT_QUOTES, 'UTF-8'));
+//			$getLemma = $kateglox->query('select lemma_id, lemma_name from lemma where lemma_name = \''.$row['phrase'].'\';');
+//			if(count($getLemma) > 0){
+//				foreach ($getLemma as $lemmaRow){
+//					$sql = 'insert into syllabel (syllabel_lemma_id, syllabel_name) values ('.$lemmaRow['lemma_id'].', \''.$syllabel.'\')';
+//					$kateglox->query($sql);
+//					echo $sql."\n";
+//				}
+//			}else{
+//				echo "NOT FOUND :".$syllabel."\n";
+//			}
+//		}
+//	}
 	
 	$kateglo = null;
 	$kateglox = null;
