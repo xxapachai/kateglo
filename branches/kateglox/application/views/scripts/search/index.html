@@ -27,7 +27,7 @@
 			<tr><th align="center">Glossary</th><th align="center">Lemma</th><th align="center">Locale</th><th align="center">Discipline</th></tr>
 			</thead>
 			<tbody>
-				<tr tal:repeat="hit hits"><td tal:content="hit/glossary">Glossary</td><td><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td tal:content="hit/locale">Locale</td><td tal:content="hit/discipline">Discipline</td></tr>
+				<tr tal:repeat="hit hits"><td tal:content="hit/glossary">Glossary</td><td><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td tal:content="hit/localeName">Locale</td><td tal:content="hit/disciplineName">Discipline</td></tr>
 			</tbody>
 		</table>
 	</div>

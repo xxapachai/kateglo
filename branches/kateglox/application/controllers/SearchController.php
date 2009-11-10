@@ -51,19 +51,19 @@ class SearchController extends Zend_Controller_Action {
 			$search->setFieldValue($searchText);
 			$search->setCheckedRadio($contextText);
 			if($searchText !== '' || $searchText !== null){
-				if($contextText == $search->getLemmaRadioValue()){
-					$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
-					$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
-					$this->view->hits = new collections\ArrayCollection($index->find($query));
+				$hits = null;
+				$lucene = new services\Lucene();
+				if($contextText == $search->getLemmaRadioValue()){					
+					$hits = $lucene->lemma($searchText);
 				}else if($contextText == $search->getGlossaryRadioValue()){
-					$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
-					$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
-					$this->view->hits = new collections\ArrayCollection($index->find($query));	
+					$hits = $lucene->glossary($searchText);	
 				}else{
 					header('location: '.$request->getBaseUrl());
 				}
+				$this->view->hits = new collections\ArrayCollection(iterator_to_array(new LimitIterator($hits->getIterator(), (2 - 1) * 10, 10))); 
 			}
 		}
+		
 	}
 }
 ?>
