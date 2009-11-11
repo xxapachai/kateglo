@@ -20,7 +20,7 @@ defined('KATEGLO_PATH')
 || define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . '/../../'));
 
 defined('INDEX_PATH')
-|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . '/../index'));
+|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . '/../build/index'));
 
 defined('CONFIGS_PATH')
 || define('CONFIGS_PATH', '/configs/application.ini');
