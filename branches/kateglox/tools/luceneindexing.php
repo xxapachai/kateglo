@@ -38,7 +38,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 	$definitionSourceTypes = array();
 	foreach($kateglox->query('SELECT definition_id, definition_text, lexical_name FROM definition LEFT JOIN lexical ON definition_lexical_id = lexical_id WHERE definition_lemma_id = '.$lemma['lemma_id'].'; ') as $definition){
 		if($definitions != ''){
-			$definitions .= ' ';
+			$definitions .= "\n\n";
 		}
 		$definitions .= $definition['definition_text'];
 
@@ -62,11 +62,11 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 	}
 
 	if($definitions != ''){
-		$doc->addField(Zend_Search_Lucene_Field::unStored('definition', $definitions));
+		$doc->addField(Zend_Search_Lucene_Field::text('definition', $definitions));
 	}
 
 	if(count($lexicals) > 0){
-		$doc->addField(Zend_Search_Lucene_Field::unStored('lexical', implode(' ',$lexicals)));
+		$doc->addField(Zend_Search_Lucene_Field::text('lexical', implode("\n",$lexicals)));
 	}
 
 	if($definitionSources != ''){
@@ -185,6 +185,62 @@ foreach($kateglox->query('SELECT glossary.*, locale.*, discipline.*, lemma.* FRO
 	if(count($glossarySourcesType) > 0){
 		$doc->addField(Zend_Search_Lucene_Field::unStored('gloSourceType', implode(' ',$glossarySourcesType)));
 	}	
+	
+	$definitions = '';
+	$lexicals = array();
+	$definitionSources = '';
+	$definitionSourceTypes = array();
+	foreach($kateglox->query('SELECT definition_id, definition_text, lexical_name FROM definition LEFT JOIN lexical ON definition_lexical_id = lexical_id WHERE definition_lemma_id = '.$glossary['lemma_id'].'; ') as $definition){
+		if($definitions != ''){
+			$definitions .= "\n\n";
+		}
+		$definitions .= $definition['definition_text'];
+
+		if($definition['lexical_name'] != ''){
+			if(!in_array($definition['lexical_name'], $lexicals)){
+				$lexicals[] = $definition['lexical_abbreviation'];
+			}
+		}
+
+		foreach($kateglox->query('SELECT source_label, source_type_name FROM definition_source LEFT JOIN source ON definition_source.source_id = source.source_id LEFT JOIN source_type on source_type.source_type_id = source.source_type_id WHERE definition_id = '.$definition['definition_id'].';') as $source){
+			if($definitionSources != ''){
+				$definitionSources .= ' ';
+			}
+			$definitionSources .= $source['source_label'];
+			if($source['source_type_name'] != ''){
+				if(!in_array($source['source_type_name'], $definitionSourceTypes)){
+					$definitionSourceTypes[] = $source['source_type_abbreviation'];
+				}
+			}
+		}
+	}
+
+	if($definitions != ''){
+		$doc->addField(Zend_Search_Lucene_Field::unStored('definition', $definitions));
+	}
+
+	if(count($lexicals) > 0){
+		$doc->addField(Zend_Search_Lucene_Field::unStored('lexical', implode(' ',$lexicals)));
+	}
+
+	if($definitionSources != ''){
+		$doc->addField(Zend_Search_Lucene_Field::unStored('defSource', $definitionSources));
+	}
+
+	if(count($definitionSourceTypes) > 0){
+		$doc->addField(Zend_Search_Lucene_Field::unStored('defSourceType', implode(' ',$definitionSourceTypes)));
+	}
+
+	$relationTypes = array();
+	foreach($kateglox->query('SELECT relation_type_name FROM relation LEFT JOIN relation_type ON relation.relation_type_id = relation_type.relation_type_id WHERE relation_parent_id = '.$glossary['lemma_id'].'; ') as $relationType){
+		if(!in_array($relationType['relation_type_name'], $relationTypes)){
+			$relationTypes[] = $relationType['relation_type_abbreviation'];
+		}
+	}
+
+	if(count($relationTypes) > 0){
+		$doc->addField(Zend_Search_Lucene_Field::unStored('relationType', implode(' ',$relationTypes)));
+	}
 	
 	echo $glossary['glossary_name']."\n";
 	$glossaryIndex->addDocument($doc);

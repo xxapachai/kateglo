@@ -83,7 +83,7 @@ class DataAccess {
       		$config->setMetadataCacheImpl(self::$metadataCache);
         	$config->setQueryCacheImpl(self::$queryCache);
         	$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
-        	$config->setProxyNamespace('kateglo\proxies');
+        	$config->setProxyNamespace(configs\Configs::getInstance()->proxy->namespace);
         	
         	self::$entityManager = ORM\EntityManager::create($conn, $config);
 		}
