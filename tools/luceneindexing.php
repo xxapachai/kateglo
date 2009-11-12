@@ -19,18 +19,17 @@ require_once 'Zend/Search/Lucene.php';
 require_once 'Zend/Search/Lucene/Field.php';
 require_once 'Zend/Search/Lucene/Document.php';
 
-$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
+//$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
+$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 $lemmaIndex = Zend_Search_Lucene::create(INDEX_PATH.'/lemma_index');
 
 foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type ON lemma.lemma_id = lemma_type.lemma_id LEFT JOIN type ON type.type_id = lemma_type.type_id  ORDER BY lemma.lemma_name;') as $lemma) {
 	$doc = new Zend_Search_Lucene_Document();
-
+	
 	$doc->addField(Zend_Search_Lucene_Field::text('lemma', $lemma['lemma_name']));
 	$doc->addField(Zend_Search_Lucene_Field::unIndexed('id', $lemma['lemma_id']));
-	if($lemma['type_name'] != ''){
-		$doc->addField(Zend_Search_Lucene_Field::keyword('type', $lemma['type_abbreviation']));
-	}
+	$doc->addField(Zend_Search_Lucene_Field::text('type', $lemma['type_abbreviation']));
 
 	$definitions = '';
 	$lexicals = array();
@@ -42,8 +41,8 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 		}
 		$definitions .= $definition['definition_text'];
 
-		if($definition['lexical_name'] != ''){
-			if(!in_array($definition['lexical_name'], $lexicals)){
+		if($definition['lexical_abbreviation'] != ''){
+			if(!in_array($definition['lexical_abbreviation'], $lexicals)){
 				$lexicals[] = $definition['lexical_abbreviation'];
 			}
 		}
@@ -53,8 +52,8 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 				$definitionSources .= ' ';
 			}
 			$definitionSources .= $source['source_label'];
-			if($source['source_type_name'] != ''){
-				if(!in_array($source['source_type_name'], $definitionSourceTypes)){
+			if($source['source_type_abbreviation'] != ''){
+				if(!in_array($source['source_type_abbreviation'], $definitionSourceTypes)){
 					$definitionSourceTypes[] = $source['source_type_abbreviation'];
 				}
 			}
@@ -97,8 +96,8 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 		}
 		$glossaries .= $glossary['glossary_name'];
 
-		if($glossary['locale_name'] != ''){
-			if(!in_array($glossary['locale_name'], $locales)){
+		if($glossary['locale_abbreviation'] != ''){
+			if(!in_array($glossary['locale_abbreviation'], $locales)){
 				$locales[] = $glossary['locale_abbreviation'];
 			}
 		}
@@ -114,8 +113,8 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 				$glossarySources .= ' ';
 			}
 			$glossarySources .= $source['source_label'];
-			if($source['source_type_name'] != ''){
-				if(!in_array($source['source_type_name'], $glossarySourcesType)){
+			if($source['source_type_abbreviation'] != ''){
+				if(!in_array($source['source_type_abbreviation'], $glossarySourcesType)){
 					$glossarySourcesType[] = $source['source_type_abbreviation'];
 				}
 			}
@@ -156,9 +155,9 @@ foreach($kateglox->query('SELECT glossary.*, locale.*, discipline.*, lemma.* FRO
 	$doc->addField(Zend_Search_Lucene_Field::text('glossary', $glossary['glossary_name']));
 	$doc->addField(Zend_Search_Lucene_Field::text('lemma', $glossary['lemma_name']));
 	$doc->addField(Zend_Search_Lucene_Field::text('localeName', $glossary['locale_name']));
-	$doc->addField(Zend_Search_Lucene_Field::keyword('locale', $glossary['locale_abbreviation']));
+	$doc->addField(Zend_Search_Lucene_Field::text('locale', $glossary['locale_abbreviation']));
 	$doc->addField(Zend_Search_Lucene_Field::text('disciplineName', $glossary['discipline_name']));
-	$doc->addField(Zend_Search_Lucene_Field::keyword('discipline', $glossary['discipline_abbreviation']));
+	$doc->addField(Zend_Search_Lucene_Field::text('discipline', $glossary['discipline_abbreviation']));
 	$doc->addField(Zend_Search_Lucene_Field::unIndexed('glossaryId', $glossary['glossary_id']));
 	
 	$glossarySources = '';
@@ -168,8 +167,8 @@ foreach($kateglox->query('SELECT glossary.*, locale.*, discipline.*, lemma.* FRO
 			$glossarySources .= ' ';
 		}
 		$glossarySources .= $source['source_label'];
-		if($source['source_type_name'] != ''){
-			if(!in_array($source['source_type_name'], $glossarySourcesType)){
+		if($source['source_type_abbreviation'] != ''){
+			if(!in_array($source['source_type_abbreviation'], $glossarySourcesType)){
 				$glossarySourcesType[] = $source['source_type_abbreviation'];
 			}
 		}
@@ -192,8 +191,8 @@ foreach($kateglox->query('SELECT glossary.*, locale.*, discipline.*, lemma.* FRO
 		}
 		$definitions .= $definition['definition_text'];
 
-		if($definition['lexical_name'] != ''){
-			if(!in_array($definition['lexical_name'], $lexicals)){
+		if($definition['lexical_abbreviation'] != ''){
+			if(!in_array($definition['lexical_abbreviation'], $lexicals)){
 				$lexicals[] = $definition['lexical_abbreviation'];
 			}
 		}
@@ -203,8 +202,8 @@ foreach($kateglox->query('SELECT glossary.*, locale.*, discipline.*, lemma.* FRO
 				$definitionSources .= ' ';
 			}
 			$definitionSources .= $source['source_label'];
-			if($source['source_type_name'] != ''){
-				if(!in_array($source['source_type_name'], $definitionSourceTypes)){
+			if($source['source_type_abbreviation'] != ''){
+				if(!in_array($source['source_type_abbreviation'], $definitionSourceTypes)){
 					$definitionSourceTypes[] = $source['source_type_abbreviation'];
 				}
 			}

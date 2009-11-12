@@ -43,6 +43,7 @@ class Lucene {
 	 */
 	public function lemma($searchText){
 		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
+		\Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('UTF-8');
 		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
 		return $result;
@@ -67,6 +68,7 @@ class Lucene {
 	 */
 	public function glossary($searchText){
 		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
+		\Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('UTF-8');
 		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
 		return $result;
