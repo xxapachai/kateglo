@@ -18,8 +18,15 @@
 			</div>
 		</form>
 	</div>
-	<div tal:condition="php: hits.count() GT 0 AND search.getLemmaRadioValue() EQ search.getCheckedRadio()" tal:repeat="hit hits">
-		<div><a tal:define="global lemma hit/lemma" href="lemma/${lemma}">${lemma}</a></div>
+	<div tal:condition="php: hits.count() GT 0 AND search.getLemmaRadioValue() EQ search.getCheckedRadio()">
+		<table border="1">
+			<thead>
+			<tr><th align="center">Lemma</th><th align="center">Lexical</th><th align="center">Definitions</th></tr>
+			</thead>
+			<tbody>
+				<tr tal:repeat="hit hits"><td valign="middle"><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" tal:content="hit/lexical">Lexical</td><td valign="middle" tal:content="hit/definition">Definitions</td></tr>
+			</tbody>
+		</table>
 	</div>
 	<div tal:condition="php: hits.count() GT 0 AND search.getGlossaryRadioValue() EQ search.getCheckedRadio()" >
 		<table border="1">
