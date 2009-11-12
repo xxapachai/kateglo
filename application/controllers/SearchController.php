@@ -54,13 +54,13 @@ class SearchController extends Zend_Controller_Action {
 				$hits = null;
 				$lucene = new services\Lucene();
 				if($contextText == $search->getLemmaRadioValue()){					
-					$hits = $lucene->lemma($searchText);
+					$this->view->hits = $lucene->lemma($searchText);
 				}else if($contextText == $search->getGlossaryRadioValue()){
-					$hits = $lucene->glossary($searchText);	
+					$this->view->hits = $lucene->glossary($searchText);	
 				}else{
 					header('location: '.$request->getBaseUrl());
 				}
-				$this->view->hits = new collections\ArrayCollection(iterator_to_array(new LimitIterator($hits->getIterator(), (2 - 1) * 10, 10))); 
+				//$this->view->hits = new collections\ArrayCollection(iterator_to_array(new LimitIterator($hits->getIterator(), (2 - 1) * 10, 10))); 
 			}
 		}
 		

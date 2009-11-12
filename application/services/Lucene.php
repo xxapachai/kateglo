@@ -20,6 +20,7 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\utilities\collections;
+use kateglo\application\configs;
 /**
  *  
  * 
@@ -41,8 +42,8 @@ class Lucene {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function lemma($searchText){
-		$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
-		$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
+		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
+		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
 		return $result;
 	}
@@ -65,8 +66,8 @@ class Lucene {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function glossary($searchText){
-		$index = Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
-		$query = Zend_Search_Lucene_Search_QueryParser::parse($searchText);
+		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
+		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
 		return $result;
 	}

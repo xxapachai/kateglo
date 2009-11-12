@@ -8,7 +8,7 @@ defined('ZF_PATH')
 || define('ZF_PATH', realpath(DOCUMENT_ROOT . '/../../ZendFramework/library'));
 
 defined('INDEX_PATH')
-|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . '/../index'));
+|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . '/../build/index'));
 
 set_include_path(implode(PATH_SEPARATOR, array(
 realpath(DOCUMENT_ROOT . '/../library'),
@@ -19,7 +19,7 @@ require_once 'Zend/Search/Lucene.php';
 require_once 'Zend/Search/Lucene/Field.php';
 require_once 'Zend/Search/Lucene/Document.php';
 
-$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
+$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 
 $lemmaIndex = Zend_Search_Lucene::create(INDEX_PATH.'/lemma_index');
 
@@ -36,7 +36,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 	$lexicals = array();
 	$definitionSources = '';
 	$definitionSourceTypes = array();
-	foreach($kateglox->query('SELECT definition_id, definition_text, lexical_name FROM definition LEFT JOIN lexical ON definition_lexical_id = lexical_id WHERE definition_lemma_id = '.$lemma['lemma_id'].'; ') as $definition){
+	foreach($kateglox->query('SELECT definition_id, definition_text, lexical_name, lexical_abbreviation FROM definition LEFT JOIN lexical ON definition_lexical_id = lexical_id WHERE definition_lemma_id = '.$lemma['lemma_id'].'; ') as $definition){
 		if($definitions != ''){
 			$definitions .= "\n\n";
 		}
@@ -48,7 +48,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 			}
 		}
 
-		foreach($kateglox->query('SELECT source_label, source_type_name FROM definition_source LEFT JOIN source ON definition_source.source_id = source.source_id LEFT JOIN source_type on source_type.source_type_id = source.source_type_id WHERE definition_id = '.$definition['definition_id'].';') as $source){
+		foreach($kateglox->query('SELECT source_label, source_type_name, source_type_abbreviation FROM definition_source LEFT JOIN source ON definition_source.source_id = source.source_id LEFT JOIN source_type on source_type.source_type_id = source.source_type_id WHERE definition_id = '.$definition['definition_id'].';') as $source){
 			if($definitionSources != ''){
 				$definitionSources .= ' ';
 			}
@@ -60,14 +60,10 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 			}
 		}
 	}
+	
+	$doc->addField(Zend_Search_Lucene_Field::text('definition', $definitions));	
 
-	if($definitions != ''){
-		$doc->addField(Zend_Search_Lucene_Field::text('definition', $definitions));
-	}
-
-	if(count($lexicals) > 0){
-		$doc->addField(Zend_Search_Lucene_Field::text('lexical', implode("\n",$lexicals)));
-	}
+	$doc->addField(Zend_Search_Lucene_Field::text('lexical', implode("\n",$lexicals)));
 
 	if($definitionSources != ''){
 		$doc->addField(Zend_Search_Lucene_Field::unStored('defSource', $definitionSources));
@@ -79,7 +75,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 
 
 	$relationTypes = array();
-	foreach($kateglox->query('SELECT relation_type_name FROM relation LEFT JOIN relation_type ON relation.relation_type_id = relation_type.relation_type_id WHERE relation_parent_id = '.$lemma['lemma_id'].'; ') as $relationType){
+	foreach($kateglox->query('SELECT relation_type_name, relation_type_abbreviation FROM relation LEFT JOIN relation_type ON relation.relation_type_id = relation_type.relation_type_id WHERE relation_parent_id = '.$lemma['lemma_id'].'; ') as $relationType){
 		if(!in_array($relationType['relation_type_name'], $relationTypes)){
 			$relationTypes[] = $relationType['relation_type_abbreviation'];
 		}
@@ -95,7 +91,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 	$disciplines = array();
 	$glossarySources = '';
 	$glossarySourcesType = array();
-	foreach($kateglox->query('SELECT glossary_id, glossary_name, locale_name, discipline_name FROM glossary LEFT JOIN locale ON glossary.glossary_locale_id = locale.locale_id LEFT JOIN discipline ON glossary_discipline_id = discipline.discipline_id WHERE glossary_lemma_id = '.$lemma['lemma_id'].'; ') as $glossary){
+	foreach($kateglox->query('SELECT glossary_id, glossary_name, locale_name, locale_abbreviation, discipline_name FROM glossary LEFT JOIN locale ON glossary.glossary_locale_id = locale.locale_id LEFT JOIN discipline ON glossary_discipline_id = discipline.discipline_id WHERE glossary_lemma_id = '.$lemma['lemma_id'].'; ') as $glossary){
 		if($glossaries != ''){
 			$glossaries .= ' ';
 		}
@@ -113,7 +109,7 @@ foreach($kateglox->query('SELECT lemma.*, type.* FROM lemma LEFT JOIN lemma_type
 			}
 		}
 		
-		foreach($kateglox->query('SELECT source_label, source_type_name FROM glossary_source LEFT JOIN source ON glossary_source.source_id = source.source_id LEFT JOIN source_type on source_type.source_type_id = source.source_type_id WHERE glossary_id = '.$glossary['glossary_id'].';') as $source){
+		foreach($kateglox->query('SELECT source_label, source_type_name, source_type_abbreviation FROM glossary_source LEFT JOIN source ON glossary_source.source_id = source.source_id LEFT JOIN source_type on source_type.source_type_id = source.source_type_id WHERE glossary_id = '.$glossary['glossary_id'].';') as $source){
 			if($glossarySources != ''){
 				$glossarySources .= ' ';
 			}
