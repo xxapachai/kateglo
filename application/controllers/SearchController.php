@@ -49,7 +49,9 @@ class SearchController extends Zend_Controller_Action {
 			$searchText = $request->getParam($search->getFieldName());
 			$contextText = $request->getParam($search->getRadioName());
 			$search->setFieldValue($searchText);
-			$search->setCheckedRadio($contextText);
+			if($contextText !== null && $contextText !== ''){
+				$search->setCheckedRadio($contextText);
+			}
 			if($searchText !== '' || $searchText !== null){
 				$hits = null;
 				$lucene = new services\Lucene();
@@ -61,6 +63,20 @@ class SearchController extends Zend_Controller_Action {
 					header('location: '.$request->getBaseUrl());
 				}
 				//$this->view->hits = new collections\ArrayCollection(iterator_to_array(new LimitIterator($hits->getIterator(), (2 - 1) * 10, 10))); 
+			}
+			if($request->getParam('output') !== '' || $request->getParam('output') !== null){
+				$output = $request->getParam('output');
+				if($output == 'json'){
+					foreach($this->view->hits as $hits){
+						$hits->lemma = $hits->lemma;
+						if($contextText == $search->getGlossaryRadioValue()){
+							$hits->glossary = $hits->glossary;
+						}
+					}
+					$json = json_encode(array('id' => $searchText, 'count' => $this->view->hits->count() , 'data' => $this->view->hits->toArray()));
+					echo $request->getParam('callback').'('.$json.')';
+					die();
+				}
 			}
 		}
 		

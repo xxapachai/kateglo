@@ -3,20 +3,21 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/libs/extjs/resources/css/ext-all.css" />
+<script type="text/javascript" src="/libs/extjs/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/libs/extjs/ext-all.js"></script>
+<script type="text/javascript" src="/javascripts/search.js"></script>
 <title tal:content="lemma/getLemma">Title</title>
 </head>
 <body>
 	<div>
-		<form tal:attributes="action search/getFormAction; method search/getFormMethod" >
-			<div>
-				<input type="text" style="width: 500px;" tal:attributes="name search/getFieldName; value search/getFieldValue"  />
-				<input type="submit" tal:attributes="value search/getButtonValue" />
-			</div>
-			<div>
-				Search: <input checked="checked" type="radio" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
-				&nbsp;&nbsp; &nbsp; <input type="radio" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
-			</div>
-		</form>
+		<div>
+			<input type="text" size="40" onfocus="this.select();" name="search" id="search" tal:attributes="value search/getFieldValue" />
+		</div>
+		<div>
+			Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+			&nbsp;&nbsp; &nbsp; <input type="radio" onclick="changeContext('${context}');" tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
+		</div>
 	</div>
 	<div>
 		<table border="1">
