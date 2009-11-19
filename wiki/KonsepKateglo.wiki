@@ -1,28 +1,100 @@
+#labels Phase-Requirements
 = Konsep =
-
 Informasi di kateglo sebenarnya semuanya diawali dari "kata". Disini kita kasih nama "[http://id.wikipedia.org/wiki/Lemma_%28linguistik%29 Lemma]". seperti pada umumnya kamus, baik itu kamus definisi ataupun kamus terjemahan. 
 
-Dari Lemma kita baru bisa melihat informasi lain yang menyangkut pada Lemma ini.
+Dari Lemma kita baru bisa melihat informasi lain yang mendefinisikan Lemma ini.
 
 Sebuah Lemma memiliki:
-  * Syllabel
-  * Type
-  * Definisi
-  * Relasi
-  * Glossary
-  * Etymology
+  * [Syllabel]
+  * [Type]
+  * [Definisi]
+  * [Relasi]
+  * [Glossary]
+  * [Etymology]
 
 == Syllabel ==
-
 Sebuah lemma wajib memiliki [http://en.wikipedia.org/wiki/Syllable Syllabel] untuk saat ini belum semua lemma memiliki Syllabel.
 
 == Type ==
-
 Sebuah lemma wajib memiliki minimal satu Type.
 
 Jenis Type antara lain:
-
   * Kata dasar (root)
   * Imbuhan (fixation)
   * Kata turunan (descendant)
   * Peribahasa (proverb)
+
+== Definisi ==
+Sebuah lemma wajib memiliki minimal satu definisi. Definisi memiliki informasi tambahan, antara lain :
+  * Lexical
+  * Disiplin
+  * Sumber
+
+=== Lexical ===
+Sebuah Definisi memiliki satu [http://en.wikipedia.org/wiki/Lexical lexical].
+
+Jenis Lexical antara lain:
+  * Nomina (kata benda) / noun
+  * Verba (kata kerja) / verb
+  * Adjektiva (kata sifat) / adjective
+  * Adverbia (kata keterangan) / adverb
+  * Pronomina (kata ganti) / pronoun
+  * Numeralia (kata bilangan) / numeric
+  * Lain-lain (preposisi, artikula, dll) / other
+
+=== Disiplin ===
+Sebuah Definisi memiliki satu disiplin.
+
+Jenis Disiplin sebagai contoh:
+  * Biologi
+  * Ekonomi
+  * Fisika
+  * Kimia
+  * Linguistik
+  * Matematika
+  * Olahraga
+  * Pariwisata
+  * Politik
+
+=== Sumber ===
+Sebuah Definisi dapat diambil dari beberapa sumber. Sebuah sumber didefinisikan dengan URL, Label dan Jenis(type) dari sumber.
+
+==== Jenis Sumber ====
+Sebuah sumber memiliki satu jenis sumber.
+
+Jenis sumber antara lain:
+  * Pusat Bahasa (pusba)
+  * Sofia Mansoor (sofia)
+  * Bahtera (bahtera)
+  * Wikipedia (wikipedia)
+  * Daisy Subakti (daisy)
+
+== Relasi ==
+Sebuah Lemma dapat memiliki beberapa relasi terhadap Lemma lainnya. Sebuah relasi didefinisikan dengan Jenis(type) relasi.
+
+=== Jenis Relasi ===
+Sebuah lemma memiliki satu jenis relasi.
+
+Jenis relasi antara lain:
+  * Sinonim / synonym
+  * Antonim / antonym
+  * Berkaitan / related
+  * Peribahasa / proverb
+  * Turunan / descendant
+  * Berimbuhan / fixation
+  * Majemuk / compound
+
+== Glossary ==
+Sebuah lemma dapat memiliki beberapa Glossary. Sebuah Glossary didefinisikan oleh:
+  * Jenis Bahasa
+  * [Disiplin]
+  * [Sumber]
+
+=== Jenis Bahasa ===
+Sebuah Glossary memiliki satu jenis bahasa. Untuk saat ini Jenis bahasa yang ada di contoh adalah bahasa inggris. ini dapat berubah sewaktu-waktu apabila bahasa lain ditambahkan.
+
+= Class Diagram =
+http://kateglo.googlecode.com/svn-history/r213/branches/kateglox/build/db/kategloxdb.jpg
+
+= Component Diagram =
+http://kateglo.googlecode.com/svn/branches/kateglox/build/db/kategloxComponent.jpg
