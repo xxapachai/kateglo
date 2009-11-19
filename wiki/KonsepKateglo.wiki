@@ -5,12 +5,12 @@ Informasi di kateglo sebenarnya semuanya diawali dari "kata". Disini kita kasih 
 Dari Lemma kita baru bisa melihat informasi lain yang mendefinisikan Lemma ini.
 
 Sebuah Lemma memiliki:
-  * [Syllabel]
-  * [Type]
-  * [Definisi]
-  * [Relasi]
-  * [Glossary]
-  * [Etymology]
+  * [KonsepKateglo#Syllabel Syllabel]
+  * [KonsepKateglo#Type Type]
+  * [KonsepKateglo#Definisi Definisi]
+  * [KonsepKateglo#Relasi Relasi]
+  * [KonsepKateglo#Glossary Glossary]
+  * [KonsepKateglo#Etymology Etymology]
 
 == Syllabel ==
 Sebuah lemma wajib memiliki [http://en.wikipedia.org/wiki/Syllable Syllabel] untuk saat ini belum semua lemma memiliki Syllabel.
@@ -26,9 +26,9 @@ Jenis Type antara lain:
 
 == Definisi ==
 Sebuah lemma wajib memiliki minimal satu definisi. Definisi memiliki informasi tambahan, antara lain :
-  * Lexical
-  * Disiplin
-  * Sumber
+  * [KonsepKateglo#Lexical Lexical]
+  * [KonsepKateglo#Disiplin Disiplin]
+  * [KonsepKateglo#Sumber Sumber]
 
 === Lexical ===
 Sebuah Definisi memiliki satu [http://en.wikipedia.org/wiki/Lexical lexical].
@@ -86,9 +86,9 @@ Jenis relasi antara lain:
 
 == Glossary ==
 Sebuah lemma dapat memiliki beberapa Glossary. Sebuah Glossary didefinisikan oleh:
-  * Jenis Bahasa
-  * [Disiplin]
-  * [Sumber]
+  * [KonsepKateglo#Jenis_Bahasa Jenis Bahasa]
+  * [KonsepKateglo#Disiplin Disiplin]
+  * [KonsepKateglo#Sumber Sumber]
 
 === Jenis Bahasa ===
 Sebuah Glossary memiliki satu jenis bahasa. Untuk saat ini Jenis bahasa yang ada di contoh adalah bahasa inggris. ini dapat berubah sewaktu-waktu apabila bahasa lain ditambahkan.
