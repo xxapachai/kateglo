@@ -1,0 +1,16 @@
+= Konsep =
+
+Informasi di kateglo sebenarnya semuanya diawali dari "kata". Disini kita kasih nama "[http://id.wikipedia.org/wiki/Lemma_%28linguistik%29 Lemma]". seperti pada umumnya kamus, baik itu kamus definisi ataupun kamus terjemahan. 
+
+Dari Lemma kita baru bisa melihat informasi lain yang menyangkut pada Lemma ini.
+
+Sebuah Lemma memiliki:
+* Syllabel
+* Type
+* Definisi
+* Relasi
+* Glossary
+* Etymology
+
+== Syllabel ==
+
