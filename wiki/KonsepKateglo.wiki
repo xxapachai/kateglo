@@ -14,3 +14,15 @@ Sebuah Lemma memiliki:
 
 == Syllabel ==
 
+Sebuah lemma wajib memiliki [http://en.wikipedia.org/wiki/Syllable Syllabel] untuk saat ini belum semua lemma memiliki Syllabel.
+
+== Type ==
+
+Sebuah lemma wajib memiliki minimal satu Type.
+
+Jenis Type antara lain:
+
+* Kata dasar (root)
+* Imbuhan (fixation)
+* Kata turunan (descendant)
+* Peribahasa (proverb)
