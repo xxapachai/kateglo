@@ -5,12 +5,12 @@ Informasi di kateglo sebenarnya semuanya diawali dari "kata". Disini kita kasih 
 Dari Lemma kita baru bisa melihat informasi lain yang menyangkut pada Lemma ini.
 
 Sebuah Lemma memiliki:
-* Syllabel
-* Type
-* Definisi
-* Relasi
-* Glossary
-* Etymology
+  * Syllabel
+  * Type
+  * Definisi
+  * Relasi
+  * Glossary
+  * Etymology
 
 == Syllabel ==
 
@@ -22,7 +22,7 @@ Sebuah lemma wajib memiliki minimal satu Type.
 
 Jenis Type antara lain:
 
-* Kata dasar (root)
-* Imbuhan (fixation)
-* Kata turunan (descendant)
-* Peribahasa (proverb)
+  * Kata dasar (root)
+  * Imbuhan (fixation)
+  * Kata turunan (descendant)
+  * Peribahasa (proverb)
