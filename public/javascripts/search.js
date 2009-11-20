@@ -1,4 +1,4 @@
-Ext.BLANK_IMAGE_URL = '../../resources/images/default/s.gif';
+Ext.BLANK_IMAGE_URL = '/libs/extjs/resources/images/default/s.gif';
 context = 'lemma';
 function changeContext(newContext){
 	context = newContext;

@@ -10,42 +10,45 @@
 <title tal:content="lemma/getLemma">Title</title>
 </head>
 <body>
-	<div>
-		<div>
-			<input type="text" size="40" onfocus="this.select();" name="search" id="search" tal:attributes="value search/getFieldValue" />
-		</div>
-		<div>
-			Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
+   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
+		<input type="text" onfocus="this.select();" size="40" name="search" id="search" tal:attributes="value search/getFieldValue" />
+		<div style="padding-top:4px;">
+           Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
 			&nbsp;&nbsp; &nbsp; <input type="radio" onclick="changeContext('${context}');" tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
-		</div>
-	</div>
-	<div>
-		<table border="1">
-			<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;" tal:define="global getLemma lemma/getLemma; syllabel php:utf8_encode(lemma.getSyllabel().getSyllabel())">${getLemma} (${syllabel})</td></tr>
-			<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
-			<tr tal:repeat="type lemma/getTypes"><td tal:content="type/getId">type id</td><td colspan="2" tal:content="type/getType">type</td></tr>
-			<tr tal:condition="php: lemma.getRelations().count() GT 0"><td colspan="3" style="font-weight: bold">Relations</td></tr>
-			<tr tal:repeat="relation lemma/getRelations">
-				<td tal:content="relation/getType/getType">relation type</td>
-				<td colspan="2">
-					<a tal:attributes="href relation/getChild/getLemma" tal:content="relation/getChild/getLemma" />
-				</td>
-			</tr>
-			<tr tal:condition="php: lemma.getDefinitions().count() GT 0" ><td colspan="3" style="font-weight: bold">Definitions</td></tr>
-			<tr tal:repeat="definition lemma/getDefinitions">
-				<td tal:content="definition/getLexical/getLexical">lexical</td>
-				<td tal:condition="php: definition.getSources().count() GT 0" tal:content="definition/getDefinition">definition</td>
-				<td tal:condition="php: definition.getSources().count() GT 0" tal:repeat="definitionSource definition/getSources"><a tal:attributes="href definitionSource/getUrl; target string:_blank" tal:content="definitionSource/getLabel" /></td>
-				<td colspan="2" tal:condition="php: definition.getSources().count() EQ 0" tal:content="definition/getDefinition">definition</td>
-			</tr>
-			<tr tal:condition="php: lemma.getGlossaries().count() GT 0"><td colspan="3" style="font-weight: bold">Glossaries</td></tr>
-			<tr tal:repeat="glossary lemma/getGlossaries">
-				<td tal:content="glossary/getDiscipline/getDiscipline">discipline</td>
-				<td tal:condition="php: glossary.getSources().count() GT 0" tal:define="global glossaryLocale glossary/getLocale/getLocale; glossaryText glossary/getGlossary">(${glossaryLocale}) ${glossaryText}</td>
-				<td tal:condition="php: glossary.getSources().count() GT 0" tal:repeat="glossarySource glossary/getSources"><a tal:attributes="href glossarySource/getUrl; target string:_blank" tal:content="glossarySource/getLabel" /></td>
-				<td colspan="2" tal:condition="php: glossary.getSources().count() EQ 0" tal:define="global glossaryLocale glossary/getLocale/getLocale; glossaryText glossary/getGlossary">(${glossaryLocale}) ${glossaryText}</td>
-			</tr>
-		</table>
-	</div>
+        </div>
+	 </div></div></div>
+    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+</div>
+<div>
+	<table border="1">
+		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;" tal:define="global getLemma lemma/getLemma; syllabel php:utf8_encode(lemma.getSyllabel().getSyllabel())">${getLemma} (${syllabel})</td></tr>
+		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
+		<tr tal:repeat="type lemma/getTypes"><td tal:content="type/getId">type id</td><td colspan="2" tal:content="type/getType">type</td></tr>
+		<tr tal:condition="php: lemma.getRelations().count() GT 0"><td colspan="3" style="font-weight: bold">Relations</td></tr>
+		<tr tal:repeat="relation lemma/getRelations">
+			<td tal:content="relation/getType/getType">relation type</td>
+			<td colspan="2">
+				<a tal:attributes="href relation/getChild/getLemma" tal:content="relation/getChild/getLemma" />
+			</td>
+		</tr>
+		<tr tal:condition="php: lemma.getDefinitions().count() GT 0" ><td colspan="3" style="font-weight: bold">Definitions</td></tr>
+		<tr tal:repeat="definition lemma/getDefinitions">
+			<td tal:content="definition/getLexical/getLexical">lexical</td>
+			<td tal:condition="php: definition.getSources().count() GT 0" tal:content="definition/getDefinition">definition</td>
+			<td tal:condition="php: definition.getSources().count() GT 0" tal:repeat="definitionSource definition/getSources"><a tal:attributes="href definitionSource/getUrl; target string:_blank" tal:content="definitionSource/getLabel" /></td>
+			<td colspan="2" tal:condition="php: definition.getSources().count() EQ 0" tal:content="definition/getDefinition">definition</td>
+		</tr>
+		<tr tal:condition="php: lemma.getGlossaries().count() GT 0"><td colspan="3" style="font-weight: bold">Glossaries</td></tr>
+		<tr tal:repeat="glossary lemma/getGlossaries">
+			<td tal:content="glossary/getDiscipline/getDiscipline">discipline</td>
+			<td tal:condition="php: glossary.getSources().count() GT 0" tal:define="global glossaryLocale glossary/getLocale/getLocale; glossaryText glossary/getGlossary">(${glossaryLocale}) ${glossaryText}</td>
+			<td tal:condition="php: glossary.getSources().count() GT 0" tal:repeat="glossarySource glossary/getSources"><a tal:attributes="href glossarySource/getUrl; target string:_blank" tal:content="glossarySource/getLabel" /></td>
+			<td colspan="2" tal:condition="php: glossary.getSources().count() EQ 0" tal:define="global glossaryLocale glossary/getLocale/getLocale; glossaryText glossary/getGlossary">(${glossaryLocale}) ${glossaryText}</td>
+		</tr>
+	</table>
+</div>
 </body>
 </html>

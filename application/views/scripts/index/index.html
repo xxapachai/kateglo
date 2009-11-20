@@ -10,14 +10,17 @@
 <title>Title</title>
 </head>
 <body>
-	<div>
-		<div>
-			<input type="text" onfocus="this.select();" size="40" name="search" id="search" tal:attributes="value search/getFieldValue" />
-		</div>
-		<div>
-			Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
+   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
+		<input type="text" onfocus="this.select();" size="40" name="search" id="search" tal:attributes="value search/getFieldValue" />
+		<div style="padding-top:4px;">
+           Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
 			&nbsp;&nbsp; &nbsp; <input type="radio" onclick="changeContext('${context}');" tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
-		</div>
-	</div>
+        </div>
+	 </div></div></div>
+    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+</div>
 </body>
 </html>
