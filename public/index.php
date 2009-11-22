@@ -5,7 +5,7 @@ defined('DOCUMENT_ROOT')
 || define('DOCUMENT_ROOT', realpath(dirname(__FILE__)));
 
 defined('DOCTRINE_PROXIES_PATH')
-|| define('DOCTRINE_PROXIES_PATH', realpath(DOCUMENT_ROOT . '/../proxies'));
+|| define('DOCTRINE_PROXIES_PATH', realpath(DOCUMENT_ROOT . '/../build/proxies'));
 
 defined('DOCTRINE_PATH')
 || define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . '/../../doctrine/lib'));
@@ -30,10 +30,15 @@ defined('APPLICATION_PATH')
 || define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
 
 // Define application environment
-defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', 'linuxDevelopment');
+//defined('APPLICATION_ENV')
+//|| define('APPLICATION_ENV', 'linuxDevelopment');
 //defined('APPLICATION_ENV')
 //|| define('APPLICATION_ENV', 'windowsDevelopment');
+defined('APPLICATION_ENV')
+|| define('APPLICATION_ENV', 'production');
+
+define('PHPTAL_PHP_CODE_DESTINATION',
+realpath(DOCUMENT_ROOT . '/../build/proxies'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
