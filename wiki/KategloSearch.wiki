@@ -1,0 +1,44 @@
+= Search =
+
+Search di Kateglo menggunakan Lucene. Bagaimana menggunakan Lucene bisa dibaca di website [http://framework.zend.com/manual/en/zend.search.lucene.query-language.html Zend].
+
+Index dari Kateglo ada 2 macam, yaitu:
+  * Lemma
+  * Glossary
+
+Masing-masing memiliki fields untuk membatasi pencarian.
+
+== Lemma ==
+
+Pencarian Lemma bisa dibatasi dengan Field berikut:
+
+  * lemma
+  * type
+  * definition
+  * lexical
+  * defSource
+  * defSourceType
+  * relationType
+  * glossary
+  * locale
+  * discipline
+  * gloSource
+  * gloSourceType
+
+== Glossary ==
+
+Pencarian Lemma bisa dibatasi dengan Field berikut:
+
+  * glossary
+  * lemma
+  * locale
+  * localeName
+  * discipline
+  * disciplineName
+  * gloSource
+  * gloSourceType
+  * definition
+  * lexical
+  * defSource
+  * defSourceType
+  * relationType
