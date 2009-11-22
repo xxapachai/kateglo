@@ -19,6 +19,7 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\utilities;
+use kateglo\application\faces;
 /**
  * 
  * 
@@ -55,6 +56,10 @@ class ErrorController extends Zend_Controller_Action
 		utilities\LogService::getInstance()->log($errors->exception, \Zend_Log::ERR);
         $this->view->exception = $errors->exception;
         $this->view->request   = $errors->request;
+        /*@var $request Zend_Controller_Request_Http */
+		$request = $this->getRequest();
+		$search = new faces\Search();
+		$this->view->search = $search;
     }
 
 

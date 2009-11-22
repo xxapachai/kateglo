@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/libs/extjs/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="/styles/main.css" />
 <script type="text/javascript" src="/libs/extjs/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="/libs/extjs/ext-all.js"></script>
 <script type="text/javascript" src="/javascripts/search.js"></script>
@@ -14,7 +15,8 @@
    	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
    	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
    		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
-		<input type="text" onfocus="this.select();" size="40" name="search" id="search" tal:attributes="value search/getFieldValue" />
+		<input type="text" onfocus="this.select();" size="40" name="searchLemma" id="searchLemma" tal:attributes="value search/getFieldValue" />
+		<input type="text" onfocus="this.select();" size="40" name="searchGlossary" id="searchGlossary" tal:attributes="value search/getFieldValue" style="display:none;" />
 		<div style="padding-top:4px;">
            Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
 			&nbsp;&nbsp; &nbsp; <input type="radio" onclick="changeContext('${context}');" tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
