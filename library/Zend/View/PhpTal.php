@@ -21,8 +21,9 @@
 require_once 'Zend/View/Interface.php';  
   
 /** PHPTAL */  
-require_once 'PHPTAL.php';  
+require_once 'PHPTAL.php';
   
+use kateglo\application\configs;  
 /**
  * A PHPTAL templating engine implementation.
  * 
@@ -72,7 +73,7 @@ class Zend_View_PhpTal implements Zend_View_Interface
     public function __construct(array $config = array()) 
     { 
         $this->_engine = new PHPTAL(); 
- 
+ 		$this->_engine->setPhpCodeDestination(configs\Configs::getInstance()->tal->destination);
         if (isset($config['scriptPath'])) { 
             $this->setScriptPath($config['scriptPath']); 
         } 
