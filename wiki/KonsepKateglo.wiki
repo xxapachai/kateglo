@@ -93,6 +93,9 @@ Sebuah lemma dapat memiliki beberapa Glossary. Sebuah Glossary didefinisikan ole
 === Jenis Bahasa ===
 Sebuah Glossary memiliki satu jenis bahasa. Untuk saat ini Jenis bahasa yang ada di contoh adalah bahasa inggris. ini dapat berubah sewaktu-waktu apabila bahasa lain ditambahkan.
 
+= Use Case Diagram =
+http://kateglo.googlecode.com/svn/branches/kateglox/build/db/kategloxUseCase.jpg
+
 = Class Diagram =
 http://kateglo.googlecode.com/svn-history/r213/branches/kateglox/build/db/kategloxdb.jpg
 
