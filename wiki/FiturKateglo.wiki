@@ -1,7 +1,7 @@
 #summary Daftar fitur kateglo
 
-= Details =
+Berikut daftar fitur Kateglo
 
- * Text in *bold* or _italic_
- * Headings, paragraphs, and lists
- * Automatic links to other wiki pages
+ * Beranda menampilkan jumlah entri kamus, glosarium, dan peribahasa
+ * Beranda menampilkan 10 kata secara acak
+ * Beranda menampilkan 5 kesalahan eja secara acak
