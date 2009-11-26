@@ -79,7 +79,7 @@ class Relation {
 
 	/**
 	 *
-	 * @return kateglo\application\models\Phrase
+	 * @return kateglo\application\models\Lemma
 	 */
 	public function getParent(){
 		return $this->parent;

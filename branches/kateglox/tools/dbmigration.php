@@ -1,7 +1,7 @@
 <?php
 try {
-	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'root');
-	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root');
+	$kateglo = new PDO('mysql:host=localhost;dbname=kateglo', 'root', 'mysql123');
+	$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 
 	/* Migrate LEMMA*/
 //	
@@ -353,6 +353,45 @@ try {
 //			}
 //		}
 //	}
+
+	//MIGRATE MISSPELLED	
+//	foreach($kateglo->query('SELECT DISTINCT actual_phrase FROM phrase WHERE actual_phrase IS NOT NULL;') as $row) {
+//		
+//		$misspelledId = null;
+//		foreach($kateglox->query('SELECT lemma_id FROM lemma WHERE lemma_name = \''.$row['actual_phrase'].'\';') as $misspelledRow) {
+//			$misspelledId = $misspelledRow['lemma_id'];
+//			echo "FIND MISSPELLED ".$row['actual_phrase']."\n";
+//		}
+//		
+//		if(is_null($misspelledId)){
+//			$kateglox->query('INSERT INTO lemma (lemma_name) VALUES (\''.$row['actual_phrase'].'\')');
+//			$misspelledId = $kateglox->lastInsertId();
+//			echo "CREATE MISSPELLED ".$row['actual_phrase']."\n";
+//		}
+//		
+//		if(!is_null($misspelledId)){
+//			foreach($kateglo->query('SELECT phrase FROM phrase WHERE actual_phrase = \''.$row['actual_phrase'].'\';') as $phraseRow) {
+//				$lemmaId = null;
+//				foreach($kateglox->query('SELECT lemma_id FROM lemma WHERE lemma_name = \''.$phraseRow['phrase'].'\';') as $lemmaRow) {
+//					$lemmaId = $lemmaRow['lemma_id'];
+//					echo "FIND LEMMA ".$phraseRow['phrase']."\n";
+//				}
+//				
+//				if(!is_null($lemmaId)){
+//					$kateglox->query('INSERT INTO relation (relation_parent_id, relation_child_id, relation_type_id) VALUES (\''.$misspelledId.'\', \''.$lemmaId.'\', 1)');
+//					$kateglox->query('INSERT INTO relation (relation_child_id, relation_parent_id, relation_type_id) VALUES (\''.$misspelledId.'\', \''.$lemmaId.'\', 1)');
+//					echo "CREATE RELATION ".$row['actual_phrase']." AND ".$phraseRow['phrase']."\n";
+//					$kateglox->query('INSERT INTO misspelled (misspelled_id, lemma_id) VALUES (\''.$misspelledId.'\', \''.$lemmaId.'\')');
+//					echo "CREATE MISSPELLED ".$row['actual_phrase']." AND ".$phraseRow['phrase']."\n\n";
+//				}else{
+//					echo "ERRORRR LEMMA \n\n";
+//				}
+//			}
+//		}else{
+//			echo "ERRORRR MISSPELLED \n\n";
+//		}
+//	}
+	
 	
 	$kateglo = null;
 	$kateglox = null;
