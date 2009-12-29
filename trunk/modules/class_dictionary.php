@@ -36,7 +36,8 @@ class dictionary extends page
 			case 'delete':
 				if ($_GET['phrase'])
 				{
-					$this->delete($_GET['phrase']);
+					if ($this->auth->checkAuth())
+						$this->delete($_GET['phrase']);
 					redir('./?mod=dictionary&action=view&phrase=' . $_GET['phrase']);
 				}
 				break;
