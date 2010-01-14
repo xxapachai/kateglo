@@ -86,10 +86,30 @@ class Lemma {
 	 */
 	protected $relations;
 
+	/**
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma", mappedBy="misspells")
+	 */
+	private $misspelled;
+
+	/**
+	 *
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
+	 * @JoinTable(name="misspelled",
+	 *      joinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma_id")},
+	 *      inverseJoinColumns={@JoinColumn(name="misspelled_id", referencedColumnName="lemma_id")}
+	 * )
+	 */
+	private $misspells;
+
+
 	public function __construct() {
 		$this->types = new collections\ArrayCollection();
 		$this->definitions = new collections\ArrayCollection();
 		$this->relations = new collections\ArrayCollection();
+		$this->misspelled = new collections\ArrayCollection();
+		$this->misspels = new collections\ArrayCollection();
 	}
 
 
@@ -134,40 +154,40 @@ class Lemma {
 	public function getSyllabel(){
 		return $this->syllabel;
 	}
-	
+
 	/**
-     * 
-     * @param kateglo\application\models\Type $type
-     * @return void
-     */
+	 *
+	 * @param kateglo\application\models\Type $type
+	 * @return void
+	 */
 	public function addType(models\Type $type){
-        if (!$this->types->contains($type)) {
-            $this->types[] = $type;
-            $type->addLemma($this);
-        }
-    }
+		if (!$this->types->contains($type)) {
+			$this->types[] = $type;
+			$type->addLemma($this);
+		}
+	}
 
-    /**
-     * 
-     * @param kateglo\application\models\Type $type
-     * @return void
-     */
-    public function removeType(models\Type $type)
-    {
-        $removed = $this->sources->removeElement($type);
-        if ($removed !== null) {
-            $removed->removeLemma($this);
-        }
-    }
+	/**
+	 *
+	 * @param kateglo\application\models\Type $type
+	 * @return void
+	 */
+	public function removeType(models\Type $type)
+	{
+		$removed = $this->sources->removeElement($type);
+		if ($removed !== null) {
+			$removed->removeLemma($this);
+		}
+	}
 
-    /**
-     * 
-     * @return kateglo\application\helpers\collections\ArrayCollection
-     */
-    public function getTypes()
-    {
-        return $this->types;
-    }
+	/**
+	 *
+	 * @return kateglo\application\helpers\collections\ArrayCollection
+	 */
+	public function getTypes()
+	{
+		return $this->types;
+	}
 
 	/**
 	 *
@@ -260,6 +280,72 @@ class Lemma {
 	 */
 	public function getRelations(){
 		return $this->relations;
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Lemma $lemma
+	 * @return void
+	 */
+	public function addMisspelled(models\Lemma $lemma){
+		if (!$this->misspelled->contains($lemma)) {
+			$this->misspelled[] = $lemma;
+			$lemma->addMisspells($this);
+		}
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Lemma $lemma
+	 * @return void
+	 */
+	public function removeMisspelled(models\Lemma $lemma){
+		/*@var $removed kateglo\application\models\Lemma */
+		$removed = $this->misspelled->removeElement($lemma);
+		if ($removed !== null) {
+			$removed->removeMisspells($this);
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getMisspelled(){
+		return $this->misspelled;
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Lemma $lemma
+	 * @return void
+	 */
+	public function addMisspells(models\Lemma $lemma){
+		if (!$this->misspells->contains($lemma)) {
+			$this->misspells[] = $lemma;
+			$lemma->addMisspelled($this);
+		}
+	}
+
+	/**
+	 *
+	 * @param kateglo\application\models\Lemma $lemma
+	 * @return void
+	 */
+	public function removeMisspells(models\Lemma $lemma){
+		/*@var $removed kateglo\application\models\Lemma */
+		$removed = $this->misspells->removeElement($lemma);
+		if ($removed !== null) {
+			$removed->removeMisspelled($this);
+		}
+	}
+
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getMisspells(){
+		return $this->misspells;
 	}
 
 }

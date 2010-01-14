@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\services;
 /*
  *  $Id$
  *
@@ -20,56 +20,40 @@ namespace kateglo\application\domains;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\domains\exceptions;
-use kateglo\application\utilities;
-use kateglo\application\models;
-use Doctrine\ORM\Mapping;
+use kateglo\application\domains;
 /**
- *
- *
- * @package kateglo\application\domains
+ *  
+ * 
+ * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lemma {
-
+class Amount {
+	
+	const CLASS_NAME = __CLASS__;
+	
 	/**
-	 *
-	 * @param string $lemma
-	 * @return kateglo\application\models\Lemma
-	 */
-	public static function getByLemma($lemma){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.lemma = '$lemma'");
-		$result = $query->getResult();
-		if(count($result) === 1){
-			if(! ($result[0] instanceof models\Lemma)){
-				throw new exceptions\DomainObjectNotFoundException("wrong result");
-			}
-		}else{
-			throw new exceptions\DomainResultEmptyException("result not found");
-		}
-
-		return $result[0];
-	}
-
-	/**
-	 *
+	 * 
 	 * @return int
 	 */
-	public static function getTotalCount(){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT COUNT(l.id) FROM ".models\Lemma::CLASS_NAME." l ");
-		$result = $query->getSingleResult();
+	public function lemma(){
+		$result = domains\Lemma::getTotalCount();
 		
-		if(! ( is_numeric($result[1]) )){var_dump($result); die();
-			throw new exceptions\DomainResultEmptyException("result not found");
-		}
-		 
-
-		return $result[1];
+		return $result;
+	}
+	
+/**
+	 * 
+	 * @return int
+	 */
+	public function glossary(){
+		$result = domains\Glossary::getTotalCount();
+		
+		return $result;
 	}
 }
 ?>

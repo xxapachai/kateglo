@@ -76,7 +76,7 @@ Ext.onReady(function(){
         displayField:'title',
         typeAhead: false,
         loadingText: 'Searching...',
-        width: 570,
+        width: 470,
         hideTrigger:true,
         tpl: resultTplGlo,
         applyTo: 'searchGlossary',

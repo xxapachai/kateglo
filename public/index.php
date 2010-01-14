@@ -32,10 +32,10 @@ defined('APPLICATION_PATH')
 // Define application environment
 //defined('APPLICATION_ENV')
 //|| define('APPLICATION_ENV', 'linuxDevelopment');
-//defined('APPLICATION_ENV')
-//|| define('APPLICATION_ENV', 'windowsDevelopment');
 defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', 'production');
+|| define('APPLICATION_ENV', 'windowsDevelopment');
+//defined('APPLICATION_ENV')
+//|| define('APPLICATION_ENV', 'production');
 
 define('PHPTAL_PHP_CODE_DESTINATION',
 realpath(DOCUMENT_ROOT . '/../build/proxies'));

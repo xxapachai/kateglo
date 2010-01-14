@@ -19,6 +19,7 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\faces;
+use kateglo\application\services;
 /**
  *
  *
@@ -42,6 +43,9 @@ class IndexController extends Zend_Controller_Action
 		$request = $this->getRequest();
 		$search = new faces\Search();
 		$this->view->search = $search;
+		
+		$amount = new services\Amount();
+		$this->view->amount = $amount;
 	}
 }
 ?>
