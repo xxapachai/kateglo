@@ -7,24 +7,26 @@
 <link rel="stylesheet" type="text/css" href="/styles/main.css" />
 <script type="text/javascript" src="/libs/extjs/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="/libs/extjs/ext-all.js"></script>
-<script type="text/javascript" src="/javascripts/search.js"></script>
 <title tal:content="lemma/getLemma">Title</title>
 </head>
 <body>
-<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
-   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
-   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
-   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
-		<input type="text" onfocus="this.select();" size="40" name="searchLemma" id="searchLemma" tal:attributes="value search/getFieldValue" />
-		<input type="text" onfocus="this.select();" size="40" name="searchGlossary" id="searchGlossary" tal:attributes="value search/getFieldValue" style="display:none;" />
-		<div style="padding-top:4px;">
-           Search: <input checked="checked" type="radio" onclick="changeContext('${context}');" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
-			&nbsp;&nbsp; &nbsp; <input type="radio" onclick="changeContext('${context}');" tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
-        </div>
-	 </div></div></div>
-    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
-</div>
-<div>
+	<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
+		<form action="/search" method="get" >
+	   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+	   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+	   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
+			<div id="ext-gen4" class="x-form-field-wrap x-form-field-trigger-wrap" style="width: 570px;">
+				<input id="searchLemma" class=" x-form-text x-form-field" type="text" value="" name="query" size="40" onfocus="this.select();" style="width: 562px;" autocomplete="off"/>
+				<img alt="" id="ext-gen5" class="x-form-trigger x-form-arrow-trigger" src="/libs/extjs/resources/images/default/s.gif" style="display: none;"/>
+			</div>			
+			<div style="padding-top:4px;">
+	           Search: <input checked="checked" type="radio" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+				&nbsp;&nbsp; &nbsp; <input type="radio"  tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
+	        </div>
+		 </div></div></div>
+		 </form>
+	    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+	</div>
 	<table border="1">
 		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;" tal:define="global getLemma lemma/getLemma; syllabel php:utf8_encode(lemma.getSyllabel().getSyllabel())">${getLemma} (${syllabel})</td></tr>
 		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>

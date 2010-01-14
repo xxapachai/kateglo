@@ -7,17 +7,22 @@
 <title>Kateglo - Search</title>
 </head>
 <body>
-	<div>
-		<form tal:attributes="action search/getFormAction;" method="get" >
-			<div>
-				<input type="text" style="width: 500px;" tal:attributes="name search/getFieldName; value search/getFieldValue"  />
-				<input type="submit" tal:attributes="value search/getButtonValue" />
-			</div>
-			<div>
-				Search: <input type="radio" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue; checked php: search.getLemmaRadioValue() EQ search.getCheckedRadio() " /> Lemma
-				&nbsp;&nbsp; &nbsp; <input type="radio" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue; checked php: search.getGlossaryRadioValue() EQ search.getCheckedRadio()" /> Glossary
-			</div>
-		</form>
+	<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
+		<form action="/search" method="get" >
+	   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+	   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+	   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
+			<div id="ext-gen4" class="x-form-field-wrap x-form-field-trigger-wrap" style="width: 570px;">
+				<input id="searchLemma" class=" x-form-text x-form-field" type="text" value="" name="query" size="40" onfocus="this.select();" style="width: 562px;" autocomplete="off"/>
+				<img alt="" id="ext-gen5" class="x-form-trigger x-form-arrow-trigger" src="/libs/extjs/resources/images/default/s.gif" style="display: none;"/>
+			</div>			
+			<div style="padding-top:4px;">
+	           Search: <input checked="checked" type="radio" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> Lemma
+				&nbsp;&nbsp; &nbsp; <input type="radio"  tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> Glossary
+	        </div>
+		 </div></div></div>
+		 </form>
+	    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
 	</div>
 	<div tal:condition="php: hits.count() GT 0 AND search.getLemmaRadioValue() EQ search.getCheckedRadio()">
 		<table border="1">
