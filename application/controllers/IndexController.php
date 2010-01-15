@@ -46,6 +46,9 @@ class IndexController extends Zend_Controller_Action
 		
 		$amount = new services\Amount();
 		$this->view->amount = $amount;
+		
+		$lists = new services\Lists();
+		$this->view->lists = $lists;
 	}
 }
 ?>

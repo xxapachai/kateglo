@@ -35,42 +35,31 @@ use Doctrine\ORM\Mapping;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lemma {
+class Misspelled {
 
 	/**
 	 *
-	 * @param string $lemma
-	 * @return kateglo\application\models\Lemma
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public static function getByLemma($lemma){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.lemma = '$lemma'");
+	public static function getRandom($limit = 5){
+		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT m FROM ".models\Misspelled::CLASS_NAME." m ");
 		$result = $query->getResult();
-		if(count($result) === 1){
-			if(! ($result[0] instanceof models\Lemma)){
-				throw new exceptions\DomainObjectNotFoundException("wrong result");
+		$newResult = new utilities\collections\ArrayCollection();
+		if(count($result) > 0){
+			$random = array_rand($result, $limit);
+			foreach($random as $randomKey){
+				if(! ($result[$randomKey] instanceof models\Misspelled)){
+					throw new exceptions\DomainObjectNotFoundException("wrong result");
+				}else{
+					$newResult->add($result[$randomKey]);
+				}
 			}
 		}else{
 			throw new exceptions\DomainResultEmptyException("result not found");
 		}
 
-		return $result[0];
-	}
-
-	/**
-	 *
-	 * @return int
-	 */
-	public static function getTotalCount(){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT COUNT(l.id) FROM ".models\Lemma::CLASS_NAME." l ");
-		$result = $query->getSingleResult();
-		
-		if(! ( is_numeric($result[1]) )){var_dump($result); die();
-			throw new exceptions\DomainResultEmptyException("result not found");
-		}
-		 
-
-		return $result[1];
-	}
-	
+		return $newResult;
+	}	
 }
 ?>

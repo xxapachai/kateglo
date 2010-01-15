@@ -41,6 +41,9 @@
 	    		<td> ${glossaryAmount} entri.</td></tr>
 	    </table>
     </div>
+    <table>
+		<tr tal:repeat="list lists/randomMisspelled"><td valign="middle"><a tal:define="global lemma list/getMisspelled/getLemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" ><a tal:define="global misspells list/getMisspells/getLemma;" href="lemma/${misspells}">${misspells}</a></td></tr>
+	</table>
 </div>
 </body>
 </html>

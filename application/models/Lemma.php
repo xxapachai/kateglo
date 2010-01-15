@@ -88,18 +88,14 @@ class Lemma {
 
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma", mappedBy="misspells")
+	 * @OneToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="misspelled", cascade={"persist"})
 	 */
 	private $misspelled;
 
 	/**
 	 *
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Lemma")
-	 * @JoinTable(name="misspelled",
-	 *      joinColumns={@JoinColumn(name="lemma_id", referencedColumnName="lemma_id")},
-	 *      inverseJoinColumns={@JoinColumn(name="misspelled_id", referencedColumnName="lemma_id")}
-	 * )
+	 * @OneToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="misspells", cascade={"persist"})
 	 */
 	private $misspells;
 

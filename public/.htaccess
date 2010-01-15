@@ -6,3 +6,7 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
+
+<Files "favicon.ico">
+RewriteRule ^/([^/]+/)+favicon\.ico$ /public/images/favicon.ico [L]
+</Files>
