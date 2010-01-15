@@ -72,5 +72,30 @@ class Lemma {
 		return $result[1];
 	}
 	
+	/**
+	 *
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public static function getRandom($limit = 10){
+		//$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l ");
+		$result = $query->getResult();
+		$newResult = new utilities\collections\ArrayCollection();
+		if(count($result) > 0){
+			$random = array_rand($result, $limit);
+			foreach($random as $randomKey){
+				if(! ($result[$randomKey] instanceof models\Lemma)){
+					throw new exceptions\DomainObjectNotFoundException("wrong result");
+				}else{
+					$newResult->add($result[$randomKey]);
+				}
+			}
+		}else{
+			throw new exceptions\DomainResultEmptyException("result not found");
+		}
+
+		return $newResult;
+	}	
+	
 }
 ?>

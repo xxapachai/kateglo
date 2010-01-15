@@ -24,6 +24,7 @@ use kateglo\application\domains\exceptions;
 use kateglo\application\utilities;
 use kateglo\application\models;
 use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Query;
 /**
  *
  *
@@ -43,23 +44,37 @@ class Misspelled {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public static function getRandom($limit = 5){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT m FROM ".models\Misspelled::CLASS_NAME." m ");
+		
+		$resultMapping = new Query\ResultSetMapping;
+		$resultMapping->addEntityResult(models\Misspelled::CLASS_NAME, 'm');
+		$resultMapping->addFieldResult('m', 'lemma_id', 'id');
+		
+		$query = utilities\DataAccess::getEntityManager()->createNativeQuery('SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT '.$limit.' ; ', $resultMapping);
+		$query->setParameter(1, $limit);
+		
+		$randomIdResult = $query->getResult();
+		$randomId = '';
+		foreach ($randomIdResult as $randomId){
+			$randomId .= "'".$randomId->getId()."',";
+		}	
+		$getImplode = "'".implode("','", $randomIdArray)."'"; var_dump($getImplode); var_dump();
+		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ($getImplode) ");
 		$result = $query->getResult();
 		$newResult = new utilities\collections\ArrayCollection();
 		if(count($result) > 0){
-			$random = array_rand($result, $limit);
-			foreach($random as $randomKey){
-				if(! ($result[$randomKey] instanceof models\Misspelled)){
-					throw new exceptions\DomainObjectNotFoundException("wrong result");
-				}else{
-					$newResult->add($result[$randomKey]);
-				}
-			}
+//			$random = array_rand($result, $limit);
+//			foreach($random as $randomKey){
+//				if(! ($result[$randomKey] instanceof models\Misspelled)){
+//					throw new exceptions\DomainObjectNotFoundException("wrong result");
+//				}else{
+//					$newResult->add($result[$randomKey]);
+//				}
+//			}
+		return $result;
 		}else{
 			throw new exceptions\DomainResultEmptyException("result not found");
 		}
 
-		return $newResult;
 	}	
 }
 ?>
