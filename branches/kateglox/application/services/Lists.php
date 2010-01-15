@@ -45,5 +45,15 @@ class Lists {
 		$result = domains\Misspelled::getRandom($limit);
 		return $result;
 	}
+	
+	/**
+	 * 
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function randomLemma($limit = 10){
+		$result = domains\Lemma::getRandom($limit);
+		return $result;
+	}
 }
 ?>
