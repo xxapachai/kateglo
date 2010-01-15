@@ -126,7 +126,7 @@ class Definition {
 	 */
 	public function removeLemma() {
 		if ($this->lemma !== null) {
-			/*@var $phrase kateglo\application\models\Lemma */
+			/*@var $lemma kateglo\application\models\Lemma */
 			$lemma = $this->lemma;
 			$this->lemma = null;
 			$lemma->removeDefinition($this);
