@@ -45,32 +45,18 @@ class Misspelled {
 	 */
 	public static function getRandom($limit = 5){
 		
-		$resultMapping = new Query\ResultSetMapping;
-		$resultMapping->addEntityResult(models\Misspelled::CLASS_NAME, 'm');
-		$resultMapping->addFieldResult('m', 'lemma_id', 'id');
+		$randomIdResult = utilities\DataAccess::getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ; ");
+		$idArray = array();
+		foreach($randomIdResult as $idResult){
+			$idArray[] = $idResult['lemma_id'];
+		}
+				
+		$sql = "SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ('".implode("','", $idArray)."');";
 		
-		$query = utilities\DataAccess::getEntityManager()->createNativeQuery('SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT '.$limit.' ; ', $resultMapping);
-		$query->setParameter(1, $limit);
-		
-		$randomIdResult = $query->getResult();
-		$randomId = '';
-		foreach ($randomIdResult as $randomId){
-			$randomId .= "'".$randomId->getId()."',";
-		}	
-		$getImplode = "'".implode("','", $randomIdArray)."'"; var_dump($getImplode); var_dump();
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ($getImplode) ");
+		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);		
 		$result = $query->getResult();
-		$newResult = new utilities\collections\ArrayCollection();
 		if(count($result) > 0){
-//			$random = array_rand($result, $limit);
-//			foreach($random as $randomKey){
-//				if(! ($result[$randomKey] instanceof models\Misspelled)){
-//					throw new exceptions\DomainObjectNotFoundException("wrong result");
-//				}else{
-//					$newResult->add($result[$randomKey]);
-//				}
-//			}
-		return $result;
+			return $result;
 		}else{
 			throw new exceptions\DomainResultEmptyException("result not found");
 		}
