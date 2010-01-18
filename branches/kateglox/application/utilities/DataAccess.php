@@ -49,11 +49,18 @@ class DataAccess {
 	 * @var Doctrine\Common\Cache\ArrayCache
 	 */
 	private static $metadataCache = null;
+	
 	/**
 	 * 
 	 * @var Doctrine\Common\Cache\ArrayCache
 	 */
 	private static $queryCache = null;
+	
+	/**
+	 * 
+	 * @var Doctrine\DBAL\Connection
+	 */
+	private static $conn = null;
 	
 	/**
 	 * 
@@ -70,9 +77,10 @@ class DataAccess {
         					"dbname" => configs\Configs::getInstance()->database->name,
         					"user" => configs\Configs::getInstance()->database->username,
         					"password" => configs\Configs::getInstance()->database->password);
-        	
-        	$conn = DBAL\DriverManager::getConnection($params, null);
-        	$conn->connect();
+        	if(self::$conn == null){
+        		self::$conn = DBAL\DriverManager::getConnection($params, null);
+        	}
+        	self::$conn->connect();
         	if(self::$metadataCache == null){
         		self::$metadataCache = new Cache\ArrayCache();
         	}
@@ -85,7 +93,7 @@ class DataAccess {
         	$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
         	$config->setProxyNamespace(configs\Configs::getInstance()->proxy->namespace);
         	
-        	self::$entityManager = ORM\EntityManager::create($conn, $config);
+        	self::$entityManager = ORM\EntityManager::create(self::$conn, $config);
 		}
 		return self::$entityManager;
 	}
@@ -105,6 +113,23 @@ class DataAccess {
 	 */
 	public static function setEntityManager(ORM\EntityManager $entityManager){
 		self::$entityManager = $entityManager;
+	}
+	
+	/**
+	 * 
+	 * @return Doctrine\ORM\EntityManager
+	 */
+	public static function getConnection(){
+		if(self::$conn == null){
+			$params = array("driver"=> configs\Configs::getInstance()->database->adapter, 
+        					"host" => configs\Configs::getInstance()->database->host,
+        					"port" => configs\Configs::getInstance()->database->port,
+        					"dbname" => configs\Configs::getInstance()->database->name,
+        					"user" => configs\Configs::getInstance()->database->username,
+        					"password" => configs\Configs::getInstance()->database->password);
+			self::$conn = DBAL\DriverManager::getConnection($params, null);
+		}
+		return self::$conn;
 	}
 }
 

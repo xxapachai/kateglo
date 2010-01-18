@@ -43,7 +43,13 @@
     </div>
 
     <table>
-		<tr tal:repeat="list lists/randomMisspelled"><td valign="middle"><a tal:define="global lemma list/getMisspelled/getLemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" ><a tal:define="global misspells list/getMisspells/getLemma;" href="lemma/${misspells}">${misspells}</a></td></tr>
+    	<tr><td colspan="3">Salah Eja</td></tr>
+		<tr tal:repeat="list lists/randomMisspelled"><td valign="middle"><a tal:define="global misspelledLemma list/getMisspelled/getLemma;" href="lemma/${misspelledLemma}">${misspelledLemma}</a></td><td>&nbsp;harusnya&nbsp;</td><td valign="middle" ><a tal:define="global misspells list/getMisspells/getLemma;" href="lemma/${misspells}">${misspells}</a></td></tr>
+	</table>
+	
+	<table>
+		<tr><td>Lemma</td></tr>
+		<tr tal:repeat="list lists/randomLemma"><td valign="middle"><a tal:define="global lemma list/getLemma;" href="lemma/${lemma}">${lemma}</a></td></tr>
 	</table>
 </div>
 </body>

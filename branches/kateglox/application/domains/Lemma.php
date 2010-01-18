@@ -78,23 +78,22 @@ class Lemma {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public static function getRandom($limit = 10){
-		//$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l ");
+		
+		$randomIdResult = utilities\DataAccess::getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ; ");
+		$idArray = array();
+		foreach($randomIdResult as $idResult){
+			$idArray[] = $idResult['lemma_id'];
+		}
+				
+		$sql = "SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.id IN ('".implode("','", $idArray)."');";
+		
+		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);		
 		$result = $query->getResult();
-		$newResult = new utilities\collections\ArrayCollection();
 		if(count($result) > 0){
-			$random = array_rand($result, $limit);
-			foreach($random as $randomKey){
-				if(! ($result[$randomKey] instanceof models\Lemma)){
-					throw new exceptions\DomainObjectNotFoundException("wrong result");
-				}else{
-					$newResult->add($result[$randomKey]);
-				}
-			}
+			return $result;
 		}else{
 			throw new exceptions\DomainResultEmptyException("result not found");
 		}
-
-		return $newResult;
 	}	
 	
 }
