@@ -22,8 +22,8 @@ namespace kateglo\application\services;
 
 use kateglo\application\domains;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -33,11 +33,11 @@ use kateglo\application\domains;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Lists {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
-	 * 
+	 *
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
@@ -45,14 +45,96 @@ class Lists {
 		$result = domains\Misspelled::getRandom($limit);
 		return $result;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function randomLemma($limit = 10){
 		$result = domains\Lemma::getRandom($limit);
+		return $result;
+	}
+
+	/**
+	 *
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $filters
+	 * @param string $orderBy
+	 * @param string $direction
+	 * @return array
+	 */
+	public function listLemma($offset = 0, $limit = 50, array $filters = array(), $orderBy = "", $direction = "ASC"){
+		$lemma = "";
+		$type = array();
+		$definition = "";
+		$lexical = array();
+		
+		foreach($filters as $filter){
+			if($filter['field'] == 'lemma'){
+				$lemma = $filter['data']['value'];
+			}
+			
+			if($filter['field'] == 'type'){
+				$type = explode(',', $filter['data']['value']);
+			}
+			
+			if($filter['field'] == 'definition'){
+				$definition = $filter['data']['value'];
+			}
+			
+			if($filter['field'] == 'lexical'){
+				$lexical = explode(',', $filter['data']['value']);
+			}
+		}		
+		
+		$result = domains\Lemma::getLists($offset, $limit, $lemma, $type, $definition, $lexical, $orderBy, $direction);
+		$arrayResult = array();
+		/*@var $lemma kateglo\application\models\Lemma */
+		foreach($result as $lemma){
+			if($lemma->getDefinitions()->count() > 0){
+				/*@var $definition kateglo\application\models\Definition */
+				foreach ($lemma->getDefinitions() as $definition){
+					$entityArray = array();
+					$entityArray['lemma'] = $lemma->getLemma();
+					/*@var $type kateglo\application\models\Type */
+					foreach($lemma->getTypes() as $type){
+						$entityArray['type'] = $type->getType();
+					}
+					$entityArray['definition'] = $definition->getDefinition();
+					$entityArray['lexical'] = $definition->getLexical()->getLexical();					
+					$arrayResult[] = $entityArray;
+				}
+			}else{				
+				$entityArray = array();
+				$entityArray['lemma'] = $lemma->getLemma();
+				/*@var $type kateglo\application\models\Type */
+				foreach($lemma->getTypes() as $type){
+					$entityArray['type'] = $type->getType();
+				}
+				$arrayResult[] = $entityArray;
+			}
+
+		}
+		return $arrayResult;
+	}
+	
+	/**
+	 * 
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function listType(){
+		$result = domains\Type::getAllType();
+		return $result;
+	}
+	
+	/**
+	 * 
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function listLexical(){
+		$result = domains\Lexical::getAllLexical();
 		return $result;
 	}
 }

@@ -41,11 +41,22 @@ class ListsController extends Zend_Controller_Action
 		$request = $this->getRequest();
 		$searchFaces = new faces\Search();
 		$this->view->search = $searchFaces;
-		if($request->isGet()){
-
+		if($request->isPost()){
+			$lists = new services\Lists();
+			$amount = new services\Amount();
+			$filters = array();
+			if(array_key_exists('filter', $_POST)){
+				if(is_array($_POST['filter'])){
+					$filters = $_POST['filter'];
+				}
+			}
+			echo "{\"totalCount\": \"".$amount->lemma()."\",\"data\":".json_encode($lists->listLemma($_POST['start'], $_POST['limit'], $filters, $_POST['sort'], $_POST['dir']))."}"; die();
 		}else{
-			if($request->isPost()){
-				
+			if($request->isGet()){
+				if(array_key_exists('lists', $_GET)){
+					$lists = new services\Lists(); 
+					echo "{\"type\": ".json_encode($lists->listType()).", \"lexical\": ".json_encode($lists->listLexical())."}"; die();
+				}
 			}else{
 				header('location: '.$request->getBaseUrl());
 			}
