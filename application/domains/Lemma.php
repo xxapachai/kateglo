@@ -63,38 +63,132 @@ class Lemma {
 	public static function getTotalCount(){
 		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT COUNT(l.id) FROM ".models\Lemma::CLASS_NAME." l ");
 		$result = $query->getSingleResult();
-		
+
 		if(! ( is_numeric($result[1]) )){var_dump($result); die();
-			throw new exceptions\DomainResultEmptyException("result not found");
+		throw new exceptions\DomainResultEmptyException("result not found");
 		}
-		 
+			
 
 		return $result[1];
 	}
-	
+
 	/**
 	 *
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public static function getRandom($limit = 10){
-		
+
 		$randomIdResult = utilities\DataAccess::getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ; ");
 		$idArray = array();
 		foreach($randomIdResult as $idResult){
 			$idArray[] = $idResult['lemma_id'];
 		}
-				
+
 		$sql = "SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.id IN ('".implode("','", $idArray)."');";
-		
-		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);		
+
+		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);
 		$result = $query->getResult();
 		if(count($result) > 0){
 			return $result;
 		}else{
 			throw new exceptions\DomainResultEmptyException("result not found");
 		}
-	}	
-	
+	}
+
+	/**
+	 * 
+	 * @param int $offset
+	 * @param int $limit
+	 * @param string $lemma
+	 * @param array $type
+	 * @param string $definition
+	 * @param array $lexical
+	 * @param string $orderBy
+	 * @param string $direction
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public static function getLists($offset = 0, $limit = 50, $lemma = "", array $type, $definition = "", array $lexical, $orderBy = "", $direction = "ASC"){
+		$sqlSelect = "SELECT l";
+		$sqlFrom = "FROM ".models\Lemma::CLASS_NAME." l";
+		
+		$whereClause = "";
+
+		if($lemma !== ""){
+			$whereClause .= " l.lemma LIKE '".$lemma."%' ";
+		}
+
+		if($definition !== ""){
+			$sqlSelect .= ", d";
+			$sqlFrom .= " LEFT JOIN l.definitions d";
+			if($whereClause !== ""){
+				$whereClause .= " AND ";
+			}
+			$whereClause .= " d.definition LIKE '".$definition."%' ";
+		}
+
+		if(count($type) > 0){
+			$sqlSelect .= ", t";
+			$sqlFrom .= " LEFT JOIN l.types t";
+			if($whereClause !== ""){
+				$whereClause .= " AND ";
+			}
+			$whereClause .= " t.type IN ('".implode("','", $type)."') ";
+		}
+
+		if(count($lexical) > 0){
+			if($definition !== ""){
+				$sqlSelect .= ", lx";
+				$sqlFrom .= " LEFT JOIN d.lexical lx";
+			}else{
+				$sqlSelect .= ", d, lx";
+				$sqlFrom .= " LEFT JOIN l.definitions d LEFT JOIN d.lexical lx";
+			}
+			if($whereClause !== ""){
+				$whereClause .= " AND ";
+			}
+			$whereClause .= " lx.lexical IN ('".implode("','", $lexical)."') ";
+		}
+		$sql = $sqlSelect." ".$sqlFrom." ";
+		if($whereClause !== ""){
+			$sql .= ' WHERE '.$whereClause;
+		}
+
+		switch ($orderBy){
+			case 'lemma':
+				$orderBy = " l.lemma ";
+				break;
+			case 'type':
+				$orderBy = " t.type ";
+				break;
+			case 'definition':
+				$orderBy = " d.definition ";
+				break;
+			case 'lexical':
+				$orderBy = " lx.lexical ";
+				break;
+			default:
+				$orderBy = " l.lemma ";
+		}
+
+
+		$sql .= " ORDER BY".$orderBy." ".$direction;
+
+		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);
+		$query->setFirstResult($offset);
+		$query->setMaxResults($limit);
+		$result = $query->getResult();
+		if(count($result) > 0){
+			if(! ($result[0] instanceof models\Lemma)){
+				throw new exceptions\DomainObjectNotFoundException("wrong result");
+			}
+		}else{
+			throw new exceptions\DomainResultEmptyException("result not found");
+		}
+
+		return $result;
+
+	}
+
 }
 ?>
