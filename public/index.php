@@ -5,29 +5,35 @@ defined('DOCUMENT_ROOT')
 || define('DOCUMENT_ROOT', realpath(dirname(__FILE__)));
 
 defined('DOCTRINE_PROXIES_PATH')
-|| define('DOCTRINE_PROXIES_PATH', realpath(DOCUMENT_ROOT . '/../build/proxies'));
+|| define('DOCTRINE_PROXIES_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .'build' . DIRECTORY_SEPARATOR . 'proxies'));
 
 defined('DOCTRINE_PATH')
-|| define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . '/../../doctrine/lib'));
+|| define('DOCTRINE_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'doctrine' . DIRECTORY_SEPARATOR . 'lib'));
 
 defined('ZF_PATH')
-|| define('ZF_PATH', realpath(DOCUMENT_ROOT . '/../../ZendFramework/library'));
+|| define('ZF_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .'ZendFramework'. DIRECTORY_SEPARATOR .'library'));
 
 defined('TAL_PATH')
-|| define('TAL_PATH', realpath(DOCUMENT_ROOT . '/../../phptal/classes'));
+|| define('TAL_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'phptal' . DIRECTORY_SEPARATOR . 'classes'));
+
+defined('STUBBLES_PATH')
+|| define('STUBBLES_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'stubbles' ));
 
 defined('KATEGLO_PATH')
-|| define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . '/../../'));
+|| define('KATEGLO_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..'));
 
 defined('INDEX_PATH')
-|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . '/../build/index'));
-
-defined('CONFIGS_PATH')
-|| define('CONFIGS_PATH', '/configs/application.ini');
+|| define('INDEX_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'build' . DIRECTORY_SEPARATOR . 'index'));
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-|| define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . '/../application'));
+|| define('APPLICATION_PATH', realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application'));
+
+defined('CONFIGS_PATH')
+|| define('CONFIGS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini');
+
+defined('LIBRARY_PATH')
+|| define('LIBRARY_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'library');
 
 // Define application environment
 //defined('APPLICATION_ENV')
@@ -38,29 +44,40 @@ defined('APPLICATION_ENV')
 //|| define('APPLICATION_ENV', 'production');
 
 define('PHPTAL_PHP_CODE_DESTINATION',
-realpath(DOCUMENT_ROOT . '/../build/proxies'));
+realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'build' . DIRECTORY_SEPARATOR . 'proxies'));
+
+define('STUBBLES_CACHE',
+realpath(DOCUMENT_ROOT . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'build' . DIRECTORY_SEPARATOR . 'proxies'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
-realpath(APPLICATION_PATH . '/../library'),
+realpath(LIBRARY_PATH),
 realpath(DOCTRINE_PATH),
 realpath(ZF_PATH),
 realpath(TAL_PATH),
+realpath(STUBBLES_PATH),
 realpath(KATEGLO_PATH),
 get_include_path(),
 )));
 
 /** Zend Application */
-require_once 'Zend/Application.php';
+require_once 'Zend'.DIRECTORY_SEPARATOR.'Application.php';
 
 /** Template Engine */
 require_once 'PHPTAL.php';
 
+/** Stubbles Inversion of Control */
+require_once 'bootstrap.php';
+
 /** Load Class for Doctrine and Kateglo */
-require_once 'Doctrine/Common/GlobalClassLoader.php';
+require_once 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'GlobalClassLoader.php';
 
 use kateglo\application\utilities;
 use kateglo\application\configs;
+
+//instantiate autoloader for Stubbles
+stubBootstrap::init(array("project" => DOCUMENT_ROOT, "cache" => STUBBLES_CACHE));
+stubClassLoader::load('net::stubbles::ioc::stubBinder');
 
 //instantiate autoloader for Doctrine and Kateglo
 $classLoader = new Doctrine\Common\GlobalClassLoader ( );
@@ -71,13 +88,13 @@ $classLoader->register();
 // Create application, bootstrap, and run
 $application = new Zend_Application(
 APPLICATION_ENV,
-APPLICATION_PATH . CONFIGS_PATH
+CONFIGS_PATH
 );
 
 
 try {
 	// Initialize Configuration
-	configs\Configs::getInstance ( new \Zend_Config_Ini ( APPLICATION_PATH . CONFIGS_PATH, APPLICATION_ENV ) );
+	configs\Configs::getInstance ( new \Zend_Config_Ini ( CONFIGS_PATH, APPLICATION_ENV ) );
 
 	//run kateglo
 	$application->bootstrap()->run();
