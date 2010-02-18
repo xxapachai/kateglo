@@ -1,4 +1,5 @@
 <?php
+use kateglo\application\utilities\interfaces;
 date_default_timezone_set ( "Europe/Berlin" );
 
 defined('DOCUMENT_ROOT')
@@ -91,16 +92,13 @@ APPLICATION_ENV,
 CONFIGS_PATH
 );
 
-
+$logService = utilities\Injector::getInstance(interfaces\LogService::INTERFACE_NAME);
 try {
-	// Initialize Configuration
-	configs\Configs::getInstance ( new \Zend_Config_Ini ( CONFIGS_PATH, APPLICATION_ENV ) );
-
 	//run kateglo
 	$application->bootstrap()->run();
 
 } catch ( Exception $e ) {
 	//catch anything in log files
-	utilities\LogService::getInstance()->log($e->getTraceAsString(), \Zend_Log::ERR);
+	$logService->get()->log($e->getTraceAsString(), \Zend_Log::ERR);
 }
 ?>

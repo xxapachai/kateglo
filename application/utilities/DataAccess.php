@@ -26,110 +26,143 @@ use Doctrine\Common\Cache;
 use Doctrine\DBAL;
 use Doctrine\ORM;
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
+ * @Singleton
  */
-class DataAccess {
+class DataAccess implements interfaces\DataAccess {
 
+	public static $CLASS_NAME = __CLASS__;
+	
 	/**
-	 * 
+	 *
 	 * @var Doctrine\ORM\EntityManager
 	 */
-	private static $entityManager = null;
-	
+	private $entityManager = null;
+
 	/**
-	 * 
+	 *
 	 * @var Doctrine\Common\Cache\ArrayCache
 	 */
-	private static $metadataCache = null;
-	
+	private $metadataCache = null;
+
 	/**
-	 * 
+	 *
 	 * @var Doctrine\Common\Cache\ArrayCache
 	 */
-	private static $queryCache = null;
-	
+	private $queryCache = null;
+
 	/**
-	 * 
+	 *
 	 * @var Doctrine\DBAL\Connection
 	 */
-	private static $conn = null;
-	
-	/**
-	 * 
-	 * @return Doctrine\ORM\EntityManager
-	 */
-	public static function getEntityManager()
-	{
+	private $conn = null;
 
-		if(self::$entityManager == null){
-			        	
-        	$params = array("driver"=> configs\Configs::getInstance()->database->adapter, 
-        					"host" => configs\Configs::getInstance()->database->host,
-        					"port" => configs\Configs::getInstance()->database->port,
-        					"dbname" => configs\Configs::getInstance()->database->name,
-        					"user" => configs\Configs::getInstance()->database->username,
-        					"password" => configs\Configs::getInstance()->database->password);
-        	if(self::$conn == null){
-        		self::$conn = DBAL\DriverManager::getConnection($params, null);
-        	}
-        	self::$conn->connect();
-        	if(self::$metadataCache == null){
-        		self::$metadataCache = new Cache\ArrayCache();
-        	}
-        	if(self::$queryCache == null){
-        		self::$queryCache = new Cache\ArrayCache();
-        	}
-        	$config = new ORM\Configuration();
-      		$config->setMetadataCacheImpl(self::$metadataCache);
-        	$config->setQueryCacheImpl(self::$queryCache);
-        	$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
-        	$config->setProxyNamespace(configs\Configs::getInstance()->proxy->namespace);
-        	
-        	self::$entityManager = ORM\EntityManager::create(self::$conn, $config);
-		}
-		return self::$entityManager;
-	}
-	
 	/**
-	 * 
-	 * @return void
+	 *
+	 * @var kateglo\application\configs\interfaces\Configs
 	 */
-	public static function clearEntityManager(){
-		self::$entityManager = null;
-	}
-	
+	private $configs;
+
 	/**
-	 * 
-	 * @param Doctrine\ORM\EntityManager
+	 *
+	 * @param kateglo\application\configs\interfaces\Configs $configs 
 	 * @return void
+	 *
+	 * @Inject
 	 */
-	public static function setEntityManager(ORM\EntityManager $entityManager){
-		self::$entityManager = $entityManager;
+	public function setConfigs(configs\interfaces\Configs $configs){
+		$this->configs = $configs;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return Doctrine\ORM\EntityManager
 	 */
-	public static function getConnection(){
-		if(self::$conn == null){
-			$params = array("driver"=> configs\Configs::getInstance()->database->adapter, 
-        					"host" => configs\Configs::getInstance()->database->host,
-        					"port" => configs\Configs::getInstance()->database->port,
-        					"dbname" => configs\Configs::getInstance()->database->name,
-        					"user" => configs\Configs::getInstance()->database->username,
-        					"password" => configs\Configs::getInstance()->database->password);
-			self::$conn = DBAL\DriverManager::getConnection($params, null);
+	public function getEntityManager()
+	{
+		if(! ($this->entityManager instanceof ORM\EntityManager)){
+			$this->setEntityManager(); 			 
 		}
-		return self::$conn;
+		return $this->entityManager;
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	public function clearEntityManager(){
+		$this->entityManager = null;
+	}
+
+	/**
+	 *
+	 * @param Doctrine\ORM\EntityManager $entityManager
+	 * @return void
+	 */
+	public function setEntityManager(ORM\EntityManager $entityManager = null){
+		if($entityManager === null){
+			if(! ($this->entityManager instanceof ORM\EntityManager)){
+				if($this->conn == null){
+					$this->setConnection();
+				}
+				if($this->metadataCache == null){
+					$this->metadataCache = new Cache\ArrayCache();
+				}
+				if($this->queryCache == null){
+					$this->queryCache = new Cache\ArrayCache();
+				}
+				$config = new ORM\Configuration();
+				$config->setMetadataCacheImpl($this->metadataCache);
+				$config->setQueryCacheImpl($this->queryCache);
+				$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
+				$config->setProxyNamespace($this->configs->get()->proxy->namespace);
+				 
+				$this->entityManager = ORM\EntityManager::create($this->conn, $config);
+			}
+		}else{
+			$this->entityManager = $entityManager;
+		}
+	}
+
+	/**
+	 *
+	 * @return Doctrine\DBAL\Connection
+	 */
+	public function getConnection(){
+		if(! ($this->conn instanceof DBAL\DriverManager)){
+			$this->setConnection();
+		}
+		return $this->conn;
+	}
+
+	/**
+	 * @param Doctrine\DBAL\Connection $conn
+	 * @return void
+	 */
+	public function setConnection(DBAL\Connection $conn = null){
+		if($conn === null){
+			if(! ($this->conn instanceof DBAL\DriverManager) ){
+				$params = array("driver"=> $this->configs->get()->database->adapter,
+        					"host" => $this->configs->get()->database->host,
+        					"port" => $this->configs->get()->database->port,
+        					"dbname" => $this->configs->get()->database->name,
+        					"user" => $this->configs->get()->database->username,
+        					"password" => $this->configs->get()->database->password);
+				$this->conn = DBAL\DriverManager::getConnection($params, null);
+			}
+		}else{
+			$this->conn = $conn;
+		}
+		$this->conn->connect();
 	}
 }
 

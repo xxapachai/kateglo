@@ -19,38 +19,73 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\configs;
+use kateglo\application\configs\interfaces;
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
+ * @Singleton
  */
 class LogService {
 
+	public static $CLASS_NAME = __CLASS__;
+	
 	/**
 	 *
 	 * @var Zend_Log
 	 */
-	private static $logInstance;
+	private $logInstance;
+	
+	/**
+	 *
+	 * @var kateglo\application\configs\interfaces\Configs
+	 */
+	private $configs;
+	
+	/**
+	 *
+	 * @param kateglo\application\configs\interfaces\Configs $configs 
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setConfigs(interfaces\Configs $configs){
+		$this->configs = $configs;
+	}
 
 	/**
 	 *
 	 * @return Zend_Log
 	 */
-	public static function getInstance(){
-		if(self::$logInstance === null){
-			self::$logInstance = new \Zend_Log();
-			self::$logInstance->addWriter(new \Zend_Log_Writer_Stream(configs\Configs::getInstance()->errorLog));
+	public function get(){
+		if(! ($this->logInstance instanceof \Zend_Log)){
+			$this->set();
 		}
 
-		return self::$logInstance;
+		return $this->logInstance;
+	}
+
+	/**
+	 * 
+	 * @param Zend_Log $logInstance
+	 * @return void
+	 */
+	public function set(\Zend_Log $logInstance = null){
+		if($logInstance === null){
+			if(! ($this->logInstance instanceof \Zend_Log)){
+				$this->logInstance = new \Zend_Log();
+				$this->logInstance->addWriter(new \Zend_Log_Writer_Stream($this->configs->getInstance()->errorLog));
+			}
+		}else{
+			$this->logInstance = $logInstance;
+		}
 	}
 }
 

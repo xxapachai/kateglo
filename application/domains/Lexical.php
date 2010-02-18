@@ -19,12 +19,11 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\domains\interfaces;
 use kateglo\application\domains\exceptions;
-use kateglo\application\utilities;
 use kateglo\application\models;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query;
+use kateglo\application\utilities;
 /**
  *
  *
@@ -36,22 +35,40 @@ use Doctrine\ORM\Query;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lexical {
+class Lexical implements interfaces\Lexical {
+	
+	public static $CLASS_NAME = __CLASS__;
 
+	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 */
+	private $dataAccess;
+		
+	/**
+	 *
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
 	/**
 	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public static function getAllLexical(){
-		
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT lx FROM ".models\Lexical::CLASS_NAME." lx ");
+	public function getAllLexical(){		
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT lx FROM ".models\Lexical::CLASS_NAME." lx ");
 		$result = $query->getResult(Query::HYDRATE_ARRAY);
 		if(count($result) === 0){
-			throw new exceptions\DomainResultEmptyException("result not found");
+			throw new exceptions\DomainResultEmptyException();
 		}
 
 		return $result;
-
-	}	
+	}
+	
 }
 ?>

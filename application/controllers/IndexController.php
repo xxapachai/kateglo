@@ -18,8 +18,9 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\services\interfaces;
+use kateglo\application\utilities;
 use kateglo\application\faces;
-use kateglo\application\services;
 /**
  *
  *
@@ -44,10 +45,10 @@ class IndexController extends Zend_Controller_Action
 		$search = new faces\Search();
 		$this->view->search = $search;
 		
-		$amount = new services\Amount();
+		$amount = utilities\Injector::getInstance(interfaces\Amount::INTERFACE_NAME);
 		$this->view->amount = $amount;
 		
-		$lists = new services\Lists();
+		$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME);
 		$this->view->lists = $lists;
 	}
 }

@@ -19,12 +19,10 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\domains\interfaces;
 use kateglo\application\domains\exceptions;
-use kateglo\application\utilities;
 use kateglo\application\models;
-use Doctrine\ORM\Mapping;
-use Doctrine\ORM\Query;
+use kateglo\application\utilities;
 /**
  *
  *
@@ -36,16 +34,35 @@ use Doctrine\ORM\Query;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Misspelled {
+class Misspelled implements interfaces\Misspelled {
+	
+	public static $CLASS_NAME = __CLASS__;
 
+	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 */
+	private $dataAccess;
+		
+	/**
+	 *
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
 	/**
 	 *
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public static function getRandom($limit = 5){
+	public function getRandom($limit = 5){
 		
-		$randomIdResult = utilities\DataAccess::getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ; ");
+		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ; ");
 		$idArray = array();
 		foreach($randomIdResult as $idResult){
 			$idArray[] = $idResult['lemma_id'];
@@ -53,14 +70,15 @@ class Misspelled {
 				
 		$sql = "SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ('".implode("','", $idArray)."');";
 		
-		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);		
+		$query = $this->dataAccess->getEntityManager()->createQuery($sql);		
 		$result = $query->getResult();
 		if(count($result) > 0){
 			return $result;
 		}else{
-			throw new exceptions\DomainResultEmptyException("result not found");
+			throw new exceptions\DomainResultEmptyException();
 		}
 
 	}	
+
 }
 ?>

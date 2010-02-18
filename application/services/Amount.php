@@ -19,7 +19,6 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
 use kateglo\application\domains;
 /**
  *  
@@ -32,26 +31,60 @@ use kateglo\application\domains;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Amount {
+class Amount implements interfaces\Amount {
 	
-	const CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
+	
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Lemma
+	 */
+	private $lemma;
+	
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Glossary
+	 */
+	private $glossary;
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Lemma $lemma
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setLemma(domains\interfaces\Lemma $lemma){
+		$this->lemma = $lemma;
+	}
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Glossary $glossary
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setGlossary(domains\interfaces\Glossary $glossary){
+		$this->glossary = $glossary;
+	}
 	
 	/**
 	 * 
 	 * @return int
 	 */
 	public function lemma(){
-		$result = domains\Lemma::getTotalCount();
+		$result = $this->lemma->getTotalCount();
 		
 		return $result;
 	}
 	
-/**
+	/**
 	 * 
 	 * @return int
 	 */
 	public function glossary(){
-		$result = domains\Glossary::getTotalCount();
+		$result = $this->lemma->getTotalCount();
 		
 		return $result;
 	}

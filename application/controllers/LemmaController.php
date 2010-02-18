@@ -18,9 +18,10 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities;
+use kateglo\application\services\interfaces;
 use kateglo\application\helpers;
 use kateglo\application\faces;
-use kateglo\application\services;
 use kateglo\application\domains;
 /**
  *
@@ -45,7 +46,7 @@ class LemmaController extends Zend_Controller_Action
 			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
 			if($text !== ''){
 				$searchFaces->setFieldValue($text);
-				$searchService = new services\Search();
+				$searchService = utilities\Injector::getInstance(interfaces\Search::INTERFACE_NAME);
 				$this->view->lemma = $searchService->lemma($text);
 			}
 		}else{
