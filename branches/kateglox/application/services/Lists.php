@@ -19,7 +19,6 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
 use kateglo\application\domains;
 /**
  *
@@ -32,17 +31,85 @@ use kateglo\application\domains;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lists {
+class Lists implements interfaces\Lists {
 
-	const CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
 
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Misspelled
+	 */
+	private $misspelled;
+	
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Lemma
+	 */
+	private $lemma;
+	
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Type
+	 */
+	private $type;
+	
+	/**
+	 * 
+	 * @var kateglo\application\domains\interfaces\Lexical
+	 */
+	private $lexical;
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Lemma $lemma
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setLemma(domains\interfaces\Lemma $lemma){
+		$this->lemma = $lemma;
+	}
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Misspelled $misspelled
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setMisspelled(domains\interfaces\Misspelled $misspelled){
+		$this->misspelled = $misspelled;
+	}
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Type $type
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setType(domains\interfaces\Type $type){
+		$this->type = $type;
+	}
+	
+	/**
+	 *
+	 * @params kateglo\application\domains\interfaces\Lexical $lexical
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setLexical(domains\interfaces\Lexical $lexical){
+		$this->lexical = $lexical;
+	}
+	
 	/**
 	 *
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function randomMisspelled($limit = 5){
-		$result = domains\Misspelled::getRandom($limit);
+		$result = $this->misspelled->getRandom($limit);
 		return $result;
 	}
 
@@ -52,7 +119,7 @@ class Lists {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function randomLemma($limit = 10){
-		$result = domains\Lemma::getRandom($limit);
+		$result = $this->lemma->getRandom($limit);
 		return $result;
 	}
 
@@ -89,7 +156,7 @@ class Lists {
 			}
 		}		
 		
-		$result = domains\Lemma::getLists($offset, $limit, $lemma, $type, $definition, $lexical, $orderBy, $direction);
+		$result = $this->lemma->getLists($offset, $limit, $lemma, $type, $definition, $lexical, $orderBy, $direction);
 		$arrayResult = array();
 		/*@var $lemma kateglo\application\models\Lemma */
 		foreach($result as $lemma){
@@ -125,7 +192,7 @@ class Lists {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function listType(){
-		$result = domains\Type::getAllType();
+		$result = $this->type->getAllType();
 		return $result;
 	}
 	
@@ -134,7 +201,7 @@ class Lists {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function listLexical(){
-		$result = domains\Lexical::getAllLexical();
+		$result = $this->lexical->getAllLexical();
 		return $result;
 	}
 }

@@ -32,9 +32,26 @@ use kateglo\application\configs;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lucene {
+class Lucene implements interfaces\Lucene {
 	
-	const CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
+	
+	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\Configs
+	 */
+	private $configs;
+	
+	/**
+	 *
+	 * @params kateglo\application\utilities\interfaces\Configs $configs
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setConfigs(configs\interfaces\Configs $configs){
+		$this->configs = $configs;
+	}
 	
 	/**
 	 * 
@@ -42,7 +59,7 @@ class Lucene {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function lemma($searchText){
-		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->lemma);
+		$index = \Zend_Search_Lucene::open(INDEX_PATH.$this->configs->get()->index->lemma);
 		\Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('UTF-8');
 		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
@@ -54,7 +71,7 @@ class Lucene {
 	 * @param string $searchText
 	 * @param int $offset
 	 * @param int $count
-	 * @return unknown_type
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function lemmaPaginated($searchText, $offset, $count){
 		$result = new collections\ArrayCollection(iterator_to_array(new LimitIterator($this->lemma($searchText)->getIterator(), $offset, $count)));
@@ -67,7 +84,7 @@ class Lucene {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function glossary($searchText){
-		$index = \Zend_Search_Lucene::open(INDEX_PATH.configs\Configs::getInstance()->index->glossary);
+		$index = \Zend_Search_Lucene::open(INDEX_PATH.$this->configs->get()->index->glossary);
 		\Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('UTF-8');
 		$query = \Zend_Search_Lucene_Search_QueryParser::parse($searchText);
 		$result = new collections\ArrayCollection($index->find($query));
@@ -82,7 +99,7 @@ class Lucene {
 	 * @return unknown_type
 	 */
 	public function glossaryPaginated($searchText, $offset, $count){
-		$result = new collections\ArrayCollection(iterator_to_array(new LimitIterator($this->glossary($searchText)->getIterator(), $offset, $count)));
+		$result = new collections\ArrayCollection(iterator_to_array(new \LimitIterator($this->glossary($searchText)->getIterator(), $offset, $count)));
 		return $result;
 	}
 }

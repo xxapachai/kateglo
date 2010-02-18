@@ -19,11 +19,10 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\domains\interfaces;
 use kateglo\application\domains\exceptions;
-use kateglo\application\utilities;
 use kateglo\application\models;
-use Doctrine\ORM\Mapping;
+use kateglo\application\utilities;
 /**
  * 
  * 
@@ -35,21 +34,42 @@ use Doctrine\ORM\Mapping;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Glossary {
+class Glossary implements interfaces\Glossary{
+	
+	public static $CLASS_NAME = __CLASS__;
+
+	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 */
+	private $dataAccess;
+		
+	/**
+	 *
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
 	
 	/**
 	 * 
 	 * @return int
 	 */
-	public static function getTotalCount(){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT COUNT(g.id) FROM ".models\Glossary::CLASS_NAME." g; ");        
+	public function getTotalCount(){
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT COUNT(g.id) FROM ".models\Glossary::CLASS_NAME." g; ");        
 		$result = $query->getSingleResult();
 		
 		if(! ( is_numeric($result[1]) )){var_dump($result); die();
-			throw new exceptions\DomainResultEmptyException("result not found");
+			throw new exceptions\DomainResultEmptyException();
 		}
         
         return $result[1];
 	}
+
 }
 ?>

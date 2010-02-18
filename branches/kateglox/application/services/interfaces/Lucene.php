@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\services\interfaces;
 /*
  *  $Id$
  *
@@ -19,59 +19,52 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains\interfaces;
-use kateglo\application\domains\exceptions;
-use kateglo\application\models;
-use kateglo\application\utilities;
+
 /**
+ *  
  * 
- * 
- * @package kateglo\application\domains
+ * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since 2009-11-10
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class User implements interfaces\User {
+interface Lucene {
 	
-	public static $CLASS_NAME = __CLASS__;
-
-	/**
-	 * 
-	 * @var kateglo\application\utilities\interfaces\DataAccess
-	 */
-	private $dataAccess;
-		
-	/**
-	 *
-	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
-		$this->dataAccess = $dataAccess;
-	}
+	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 * 
-	 * @param string $username
-	 * @return kateglo\application\models\User
+	 * @param string $searchText
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getByUsername($username){
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
-		$result = $query->getResult();
-        if(count($result) === 1){
-        	if(! ($result[0] instanceof models\User)){
-        		throw new exceptions\DomainObjectNotFoundException();
-        	}
-        }else{
-        	throw new exceptions\DomainResultEmptyException();
-        }
-        
-        return $result[0];
-	}
+	function lemma($searchText);
+	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $count
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function lemmaPaginated($searchText, $offset, $count);
+	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function glossary($searchText);
+	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $count
+	 * @return unknown_type
+	 */
+	function glossaryPaginated($searchText, $offset, $count);
 }
 ?>

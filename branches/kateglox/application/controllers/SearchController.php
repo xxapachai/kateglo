@@ -18,10 +18,11 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\services\interfaces;
+use kateglo\application\utilities;
 use kateglo\application\utilities\collections;
 use kateglo\application\configs;
 use kateglo\application\faces;
-use kateglo\application\services;
 use kateglo\application\domains;
 /**
  *
@@ -54,7 +55,7 @@ class SearchController extends Zend_Controller_Action {
 			}
 			if($searchText !== '' || $searchText !== null){
 				$hits = null;
-				$lucene = new services\Lucene();
+				$lucene = utilities\Injector::getInstance(interfaces\Lucene::INTERFACE_NAME);
 				if($contextText == $search->getLemmaRadioValue()){					
 					$this->view->hits = $lucene->lemma($searchText);
 				}else if($contextText == $search->getGlossaryRadioValue()){

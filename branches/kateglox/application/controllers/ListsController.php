@@ -18,9 +18,10 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\services\interfaces;
+use kateglo\application\utilities;
 use kateglo\application\helpers;
 use kateglo\application\faces;
-use kateglo\application\services;
 use kateglo\application\domains;
 /**
  *
@@ -42,8 +43,8 @@ class ListsController extends Zend_Controller_Action
 		$searchFaces = new faces\Search();
 		$this->view->search = $searchFaces;
 		if($request->isPost()){
-			$lists = new services\Lists();
-			$amount = new services\Amount();
+			$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME);
+			$amount = utilities\Injector::getInstance(interfaces\Amount::INTERFACE_NAME);
 			$filters = array();
 			if(array_key_exists('filter', $_POST)){
 				if(is_array($_POST['filter'])){
@@ -54,7 +55,7 @@ class ListsController extends Zend_Controller_Action
 		}else{
 			if($request->isGet()){
 				if(array_key_exists('lists', $_GET)){
-					$lists = new services\Lists(); 
+					$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME); 
 					echo "{\"type\": ".json_encode($lists->listType()).", \"lexical\": ".json_encode($lists->listLexical())."}"; die();
 				}
 			}else{

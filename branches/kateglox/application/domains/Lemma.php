@@ -19,11 +19,10 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\domains\interfaces;
 use kateglo\application\domains\exceptions;
-use kateglo\application\utilities;
 use kateglo\application\models;
-use Doctrine\ORM\Mapping;
+use kateglo\application\utilities;
 /**
  *
  *
@@ -35,22 +34,41 @@ use Doctrine\ORM\Mapping;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lemma {
+class Lemma implements interfaces\Lemma{
+
+	public static $CLASS_NAME = __CLASS__;
 
 	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 */
+	private $dataAccess;
+		
+	/**
 	 *
-	 * @param string $lemma
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
+	/**
+	 *
+	 * @param string $lemma 
 	 * @return kateglo\application\models\Lemma
 	 */
-	public static function getByLemma($lemma){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.lemma = '$lemma'");
+	public function getByLemma($lemma){
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.lemma = '$lemma'");
 		$result = $query->getResult();
 		if(count($result) === 1){
 			if(! ($result[0] instanceof models\Lemma)){
-				throw new exceptions\DomainObjectNotFoundException("wrong result");
+				throw new exceptions\DomainObjectNotFoundException();
 			}
 		}else{
-			throw new exceptions\DomainResultEmptyException("result not found");
+			throw new exceptions\DomainResultEmptyException();
 		}
 
 		return $result[0];
@@ -60,8 +78,8 @@ class Lemma {
 	 *
 	 * @return int
 	 */
-	public static function getTotalCount(){
-		$query = utilities\DataAccess::getEntityManager()->createQuery("SELECT COUNT(l.id) FROM ".models\Lemma::CLASS_NAME." l ");
+	public function getTotalCount(){
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT COUNT(l.id) FROM ".models\Lemma::CLASS_NAME." l ");
 		$result = $query->getSingleResult();
 
 		if(! ( is_numeric($result[1]) )){var_dump($result); die();
@@ -77,9 +95,9 @@ class Lemma {
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public static function getRandom($limit = 10){
+	public function getRandom($limit = 10){
 
-		$randomIdResult = utilities\DataAccess::getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ; ");
+		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ; ");
 		$idArray = array();
 		foreach($randomIdResult as $idResult){
 			$idArray[] = $idResult['lemma_id'];
@@ -87,7 +105,7 @@ class Lemma {
 
 		$sql = "SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.id IN ('".implode("','", $idArray)."');";
 
-		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);
+		$query = $this->dataAccess->getEntityManager()->createQuery($sql);
 		$result = $query->getResult();
 		if(count($result) > 0){
 			return $result;
@@ -108,7 +126,7 @@ class Lemma {
 	 * @param string $direction
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public static function getLists($offset = 0, $limit = 50, $lemma = "", array $type, $definition = "", array $lexical, $orderBy = "", $direction = "ASC"){
+	public function getLists($offset = 0, $limit = 50, $lemma = "", array $type, $definition = "", array $lexical, $orderBy = "", $direction = "ASC"){
 		$sqlSelect = "SELECT l";
 		$sqlFrom = "FROM ".models\Lemma::CLASS_NAME." l";
 		
@@ -174,7 +192,7 @@ class Lemma {
 
 		$sql .= " ORDER BY".$orderBy." ".$direction;
 
-		$query = utilities\DataAccess::getEntityManager()->createQuery($sql);
+		$query = $this->dataAccess->getEntityManager()->createQuery($sql);
 		$query->setFirstResult($offset);
 		$query->setMaxResults($limit);
 		$result = $query->getResult();

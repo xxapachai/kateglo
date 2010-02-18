@@ -19,6 +19,7 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\configs\interfaces;
 use kateglo\application\configs\exceptions;
 /**
  *
@@ -30,31 +31,46 @@ use kateglo\application\configs\exceptions;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
+ * @Singleton
  */
-class Configs {
+class Configs implements interfaces\Configs{
+
+	public static $CLASS_NAME = __CLASS__;
 	
 	/**
 	 *
 	 * @var Zend_Config_Ini
 	 */
-	private static $configs;
+	private $configs;
 
 	/**
 	 *
-	 * @param $configObject Zend_Config_Ini
+	 *
 	 * @return Zend_Config_Ini
 	 */
-	public static function getInstance(\Zend_Config_Ini $configObject = null) {
-		if ($configObject === null) {
-			if (! (static::$configs instanceof \Zend_Config_Ini)) {
-				throw new exceptions\ConfigsException("Object not Instantiated");
-			}
-		} else {
-			static::$configs=$configObject ;
+	public function get() {
+		if($this->configs == null){
+			$this->set();
 		}
 
-		return static::$configs;
+		return $this->configs;
+	}
 
+	/**
+	 *
+	 * @param Zend_Config_Ini $configs
+	 * @throws kateglo\application\configs\exceptions\ConfigsException
+	 * @return void
+	 */
+	public function set(\Zend_Config_Ini $configs = null){
+		if ($configs === null) {
+			if(! ($this->configs instanceof \Zend_Config_Ini)){
+				$this->configs = new \Zend_Config_Ini ( CONFIGS_PATH, APPLICATION_ENV );
+			}
+		}else {
+			$this->configs = $configs ;
+		}
 	}
 
 }

@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\domains\interfaces;
 /*
  *  $Id$
  *
@@ -19,10 +19,7 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains\interfaces;
-use kateglo\application\domains\exceptions;
-use kateglo\application\models;
-use kateglo\application\utilities;
+
 /**
  * 
  * 
@@ -34,44 +31,15 @@ use kateglo\application\utilities;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class User implements interfaces\User {
+interface User{
 	
-	public static $CLASS_NAME = __CLASS__;
-
-	/**
-	 * 
-	 * @var kateglo\application\utilities\interfaces\DataAccess
-	 */
-	private $dataAccess;
-		
-	/**
-	 *
-	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
-		$this->dataAccess = $dataAccess;
-	}
+	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 * 
 	 * @param string $username
 	 * @return kateglo\application\models\User
 	 */
-	public function getByUsername($username){
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
-		$result = $query->getResult();
-        if(count($result) === 1){
-        	if(! ($result[0] instanceof models\User)){
-        		throw new exceptions\DomainObjectNotFoundException();
-        	}
-        }else{
-        	throw new exceptions\DomainResultEmptyException();
-        }
-        
-        return $result[0];
-	}
+	function getByUsername($username);
 }
 ?>
