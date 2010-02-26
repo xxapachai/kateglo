@@ -81,7 +81,7 @@ class LogService {
 		if($logInstance === null){
 			if(! ($this->logInstance instanceof \Zend_Log)){
 				$this->logInstance = new \Zend_Log();
-				$this->logInstance->addWriter(new \Zend_Log_Writer_Stream($this->configs->getInstance()->errorLog));
+				$this->logInstance->addWriter(new \Zend_Log_Writer_Stream($this->configs->get()->errorLog));
 			}
 		}else{
 			$this->logInstance = $logInstance;

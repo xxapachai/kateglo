@@ -62,8 +62,7 @@ class SearchController extends Zend_Controller_Action {
 					$this->view->hits = $lucene->glossary($searchText);	
 				}else{
 					header('location: '.$request->getBaseUrl());
-				}
-				//$this->view->hits = new collections\ArrayCollection(iterator_to_array(new LimitIterator($hits->getIterator(), (2 - 1) * 10, 10))); 
+				} 
 			}
 			if($request->getParam('output') !== '' || $request->getParam('output') !== null){
 				$output = $request->getParam('output');
