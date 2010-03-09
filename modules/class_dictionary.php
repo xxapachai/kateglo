@@ -1416,11 +1416,9 @@ class dictionary extends page
 	 */
 	function show_kbbi()
 	{
-		global $is_offline;
 		$ret .= '</td><td width="1%">&nbsp;</td><td width="40%" style="background:#EEE; padding: 10px;">' . LF;
 		$ret .= sprintf('<p><strong>%1$s</strong></p>' . LF, $this->msg['kbbi_ref']);
-		if (!$is_offline)
-			$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
+		$ret .= $this->kbbi->query($_GET['phrase'], 1) . '</b></i>' . LF;
 		$ret .= '</td></tr></table>' . LF;
 
 		return($ret);
