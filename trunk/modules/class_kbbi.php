@@ -48,6 +48,7 @@ class kbbi
 		if ($ret = $this->get_cache($query))
 			if (!$this->force_refresh)
 				return($ret);
+		if ($is_offline) return;
 
 		$ret = '';
 		$this->query = $query;
