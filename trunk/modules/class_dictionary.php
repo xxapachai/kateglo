@@ -70,6 +70,7 @@ class dictionary extends page
 			case 'view':
 				if ($_GET['phrase'])
 					$this->title = $_GET['phrase'];
+				//$ret .= $this->show_phrase_brief();
 				$ret .= $this->show_phrase();
 				break;
 			case 'form':
@@ -364,12 +365,11 @@ class dictionary extends page
 				$ret .= sprintf($template, $this->msg['pronounciation'], $phrase['pronounciation']);
 			if ($phrase['etymology'])
 				$ret .= sprintf($template, $this->msg['etymology'], $phrase['etymology']);
-
+			if ($phrase['notes'])
+				$ret .= sprintf($template, $this->msg['notes'], $phrase['notes']);
 			if ($phrase['root'])
-			{
 				$ret .= sprintf($template, $this->msg['root_phrase'],
 					$this->merge_phrase_list($phrase['root'], 'root_phrase'));
-			}
 			if ($phrase['roget_class'])
 				$ret .= sprintf($template, $this->msg['roget_class'], $phrase['roget_name']);
 			if ($phrase['ref_source'])
@@ -996,9 +996,10 @@ class dictionary extends page
 	 *
 	 * @return Phrase structure
 	 */
-	function get_phrase()
+	function get_phrase($input = null)
 	{
 		global $_GET;
+		$search = $input ? $input : $_GET['phrase'];
 		// phrase
 		$query = sprintf('
 			SELECT a.*, b.lex_class_name, c.roget_name,
@@ -1008,22 +1009,22 @@ class dictionary extends page
 				LEFT JOIN roget_class c ON a.roget_class = c.roget_class
 				LEFT JOIN ref_source d ON a.ref_source = d.ref_source
 			WHERE a.phrase = %1$s;',
-			$this->db->quote($_GET['phrase'])
+			$this->db->quote($search)
 		);
 //		echo($query);
 
 		$phrase = $this->db->get_row($query);
 		if ($phrase)
 		{
-			$_GET['phrase'] = $phrase['phrase'];
+			$search = $phrase['phrase'];
 			// root
-			if ($phrase['type'] != 'r')
+			if ($phrase['type'] != 'r' && !$input)
 			{
 				$query = sprintf('SELECT a.root_phrase, a.rel_type
 					FROM relation a
 					WHERE a.related_phrase = %1$s AND a.rel_type = \'d\'
 					ORDER BY a.root_phrase',
-					$this->db->quote($_GET['phrase'])
+					$this->db->quote($search)
 				);
 				$rows = $this->db->get_rows($query);
 				$phrase['root'] = $rows;
@@ -1035,45 +1036,48 @@ class dictionary extends page
 					LEFT JOIN lexical_class c ON a.lex_class = c.lex_class
 				WHERE a.phrase = %1$s
 				ORDER BY a.def_num, a.def_uid',
-				$this->db->quote($_GET['phrase']), $this->db->quote($class_name)
+				$this->db->quote($search), $this->db->quote($class_name)
 			);
 			$rows = $this->db->get_rows($query);
 			$phrase['definition'] = $rows;
 
-			// external reference
-			$query = sprintf('SELECT a.*
-				FROM external_ref a
-				WHERE a.phrase = %1$s',
-				$this->db->quote($_GET['phrase'])
-			);
-			$rows = $this->db->get_rows($query);
-			$phrase['reference'] = $rows;
+			if (!$input)
+			{
+				// external reference
+				$query = sprintf('SELECT a.*
+					FROM external_ref a
+					WHERE a.phrase = %1$s',
+					$this->db->quote($search)
+				);
+				$rows = $this->db->get_rows($query);
+				$phrase['reference'] = $rows;
 
-			// proverb
-			$query = sprintf('SELECT a.*
-				FROM proverb a
-				WHERE a.prv_type = 1 AND a.phrase = %1$s
-				ORDER BY a.proverb',
-				$this->db->quote($_GET['phrase']));
-			$rows = $this->db->get_rows($query);
-			$phrase['proverbs'] = $rows;
+				// proverb
+				$query = sprintf('SELECT a.*
+					FROM proverb a
+					WHERE a.prv_type = 1 AND a.phrase = %1$s
+					ORDER BY a.proverb',
+					$this->db->quote($search));
+				$rows = $this->db->get_rows($query);
+				$phrase['proverbs'] = $rows;
 
-			// translation
-			$query = sprintf('SELECT a.*
-				FROM translation a
-				WHERE a.lemma = %1$s',
-				$this->db->quote($_GET['phrase'])
-			);
-			$rows = $this->db->get_rows($query);
-			$phrase['translations'] = $rows;
+				// translation
+				$query = sprintf('SELECT a.*
+					FROM translation a
+					WHERE a.lemma = %1$s',
+					$this->db->quote($search)
+				);
+				$rows = $this->db->get_rows($query);
+				$phrase['translations'] = $rows;
 
 			// opentran
 //			$opentran = new opentran();
-//			if ($translation = $opentran->translate($_GET['phrase']))
+//			if ($translation = $opentran->translate($search))
 //				$phrase['translations'][] = $translation;
 
 			// derivation and relation
-			$this->get_relation(&$phrase, 'related_phrase');
+				$this->get_relation(&$phrase, 'related_phrase');
+			}
 		}
 		return($phrase);
 	}
@@ -1591,6 +1595,171 @@ class dictionary extends page
 	function getAPI()
 	{
 		return($this->get_phrase());
+	}
+
+	/**
+	 * Experiment
+	 */
+	function show_phrase_brief()
+	{
+		$phrase = $this->get_phrase();
+		$def_count = count($phrase['definition']);
+		$redirect = $phrase['actual_phrase'];
+		$ret .= '<p>';
+		// redirect
+		if ($redirect)
+		{
+			$ret .= sprintf('<b>%1$s</b> &#8594; <a href="%3$s%2$s">%2$s</a>',
+				$phrase['phrase'],
+				$phrase['actual_phrase'],
+				'./?mod=dictionary&action=view&phrase='
+			);
+			$ret .= '</p>' . LF;
+			return($ret);
+		}
+		// header
+		$ret .= sprintf('<b>%1$s</b>%2$s%3$s%4$s',
+			$phrase['phrase'],
+			$phrase['pronounciation'] ? ' /' . $phrase['pronounciation'] . '/' : '',
+			$phrase['lex_class'] ? ' <i>' . $phrase['lex_class'] . '</i>' : '',
+			$phrase['discipline'] ? ' <i>(' . $phrase['discipline'] . '</i>)' : ''
+		);
+		// definitions
+		foreach ($phrase['definition'] as $idx => $def)
+		{
+			$ret .= sprintf('%1$s%2$s%3$s%4$s %5$s%6$s',
+				$idx >= 1 ? '; ' : '',
+				$def_count > 1 ? ' <b>' . ($idx + 1) . '</b>' : '',
+				$def['lex_class'] ? ' <i>' . $def['lex_class'] . '</i>' : '',
+				$def['discipline'] ? ' <i>' . $def['discipline'] . '</i>' : '',
+				$def['def_text'],
+				$def['sample'] ? ': <i>' . $def['sample'] . '</i> ' : ''
+			);
+		}
+		// source
+		if ($phrase['ref_source']) $ret .= sprintf(' (%1$s)', $phrase['ref_source_name']);
+		$ret .= '</p>' . LF;
+		if ($phrase['etymology']) $ret .= sprintf('<blockquote>Etimologi: %1$s</blockquote>', $phrase['etymology']);
+		if ($phrase['notes']) $ret .= sprintf('<blockquote>Catatan: %1$s</blockquote>', $phrase['notes']);
+		// root
+		if ($phrase['root'])
+		{
+			$ret .= '<blockquote>';
+			$ret .= 'Kata dasar:';
+			foreach ($phrase['root'] as $idx => $root)
+			{
+				$ret .= sprintf('%2$s <a href="%3$s%1$s">%1$s</a>%4$s',
+					$root['root_phrase'],
+					$idx >= 1 ? '; ' : '',
+					'./?mod=dictionary&action=view&phrase=',
+					$root['lex_class'] ? ' (<i>' . $root['lex_class'] . '</i>)' : '');
+			}
+			$ret .= '</blockquote>' . LF;
+		}
+		// relations
+		foreach ($phrase['relation'] as $key => $rel)
+		{
+			if (count($rel) > 1)
+			{
+				$ret .= '<blockquote>';
+				if ($rel['name'] != 'Turunan')
+				{
+					$ret .= sprintf('%1$s: ', $rel['name']);
+					foreach ($rel as $rel_idx => $rel_phrase)
+					{
+						if (is_numeric($rel_idx))
+						{
+	//						$ret .= sprintf('%2$s <a href="%3$s%1$s">%1$s</a>%4$s',
+	//							$rel_phrase['related_phrase'],
+	//							$rel_idx >= 1 ? '; ' : '',
+	//							'./?mod=dictionary&action=view&phrase=',
+	//							$rel_phrase['lex_class'] ? ' (<i>' . $rel_phrase['lex_class'] . '</i>)' : '');
+							$ret .= sprintf('%2$s <a href="%3$s%1$s">%1$s</a>',
+								$rel_phrase['related_phrase'],
+								$rel_idx >= 1 ? '; ' : '',
+								'./?mod=dictionary&action=view&phrase=');
+						}
+					}
+				}
+				else
+				{
+					foreach ($rel as $rel_idx => $rel_phrase)
+					{
+						if (is_numeric($rel_idx))
+						{
+							$ret .= '<p>';
+							$rel_data = $this->get_phrase($rel_phrase['related_phrase']);
+							$ret .= sprintf('<b><a href="%2$s%1$s">%1$s</a></b>',
+								$rel_phrase['related_phrase'],
+								'./?mod=dictionary&action=view&phrase='
+							);
+							foreach ($rel_data['definition'] as $idx => $def)
+							{
+								$ret .= sprintf('%1$s%2$s%3$s%4$s %5$s%6$s',
+									$idx >= 1 ? '; ' : '',
+									count($rel_data['definition']) > 1 ? ' <b>' . ($idx + 1) . '</b>' : '',
+									$def['lex_class'] ? ' <i>' . $def['lex_class'] . '</i>' : '',
+									$def['discipline'] ? ' <i>' . $def['discipline'] . '</i>' : '',
+									$def['def_text'],
+									$def['sample'] ? ': <i>' . $def['sample'] . '</i> ' : ''
+								);
+							}
+							$ret .= '</p>' . LF;
+						}
+					}
+				}
+				$ret .= '</blockquote>' . LF;
+			}
+		}
+		// peribahasa
+		if ($phrase['proverbs'])
+		{
+			$ret .= '<blockquote>';
+			$ret .= 'Peribahasa: ';
+			foreach ($phrase['proverbs'] as $idx => $proverb)
+			{
+				$ret .= sprintf('%3$s%4$s <em>%1$s</em>: %2$s',
+					$proverb['proverb'],
+					$proverb['meaning'],
+					$idx >= 1 ? '; ' : '',
+					count($phrase['proverbs']) > 1 ? '<b>' . ($idx + 1) . '</b>' : '');
+			}
+			$ret .= '</blockquote>' . LF;
+		}
+		// translation
+		if ($phrase['translations'])
+		{
+			$ret .= '<blockquote>';
+			$ret .= 'Terjemahan: ';
+			foreach ($phrase['translations'] as $idx => $translation)
+			{
+				$ret .= sprintf('%3$s<b>%1$s</b> %2$s',
+					$translation['ref_source'],
+					$translation['translation'],
+					$idx >= 1 ? '; ' : '');
+			}
+			$ret .= '</blockquote>' . LF;
+		}
+		// reference
+		if ($phrase['reference'])
+		{
+			$ret .= '<blockquote>';
+			$ret .= 'Rujukan: ';
+			foreach ($phrase['reference'] as $idx => $ref)
+			{
+				$ret .= sprintf('%3$s%4$s <a href="%2$s">%1$s</a>',
+					$ref['label'] ? $ref['label'] : $ref['url'],
+					$ref['url'],
+					$idx >= 1 ? '; ' : '',
+					count($phrase['reference']) > 1 ? '<b>' . ($idx + 1) . '</b>' : '');
+			}
+			$ret .= '</blockquote>' . LF;
+		}
+
+		$this->kbbi = new kbbi($this->msg, &$this->db);
+		$ret .= $this->kbbi->query($phrase['phrase'], 1) . '</b></i>' . LF;
+
+		return($ret);
 	}
 
 };
