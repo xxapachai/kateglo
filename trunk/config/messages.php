@@ -101,7 +101,7 @@ $msg = array(
 	'related_phrase' => 'Lema terkait',
 	'required_alert' => '%1$s harus diisi',
 	'ref_source' => 'Sumber',
-	'root_phrase' => 'Akar kata',
+	'root_phrase' => 'Kata dasar',
 	'roget_class' => 'Klasifikasi Roget',
 	'random_lemma' => 'Lema acak',
 
