@@ -454,7 +454,7 @@ class dictionary extends page
 					(root_phrase, related_phrase, rel_type, updater, updated)
 					SELECT phrase, \'%2$s\', \'c\', \'rooter\', NOW()
 					FROM phrase
-					WHERE phrase IN (%1$s) AND phrase NOT IN
+					WHERE phrase <> \'%2$s\' AND phrase IN (%1$s) AND phrase NOT IN
 						(SELECT root_phrase FROM relation
 						WHERE related_phrase = \'%2$s\');',
 				$words, $_GET['phrase']);
