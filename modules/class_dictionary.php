@@ -418,6 +418,49 @@ class dictionary extends page
 				$ret .= '</ul>' . LF;
 			}
 
+			// additional process: update relation
+			if ($phrase['relation']['d'])
+			{
+				$word = $_GET['phrase'];
+				$tmp = '';
+				foreach ($phrase['relation']['d'] as $rel)
+				{
+					$pattern = '/\b' . $word . '\b/';
+					if (preg_match($pattern, $rel['related_phrase'])
+						&& !strpos($rel['related_phrase'], '-'))
+					{
+						$tmp .= $tmp ? ', ' : '';
+						$tmp .= "'" . $rel['related_phrase'] . "'";
+					}
+				}
+				if ($tmp)
+				{
+					$sql = sprintf('UPDATE relation SET
+						rel_type = \'c\',
+						updater = \'%3$s\',
+						updated = NOW()
+						WHERE root_phrase = \'%1$s\'
+						AND related_phrase IN (%2$s);', $word, $tmp, 'compounder');
+					$this->db->exec($sql);
+				}
+			}
+
+			// additional process: insert new root
+			if ($phrase['root'])
+			{
+				$words = "'" . str_replace(' ', "', '", $_GET['phrase']) .  "'";
+				$sql = sprintf('
+					INSERT INTO relation
+					(root_phrase, related_phrase, rel_type, updater, updated)
+					SELECT phrase, \'%2$s\', \'c\', \'rooter\', NOW()
+					FROM phrase
+					WHERE phrase IN (%1$s) AND phrase NOT IN
+						(SELECT root_phrase FROM relation
+						WHERE related_phrase = \'%2$s\');',
+				$words, $_GET['phrase']);
+				$this->db->exec($sql);
+			}
+
 		}
 		else
 		{
@@ -1022,7 +1065,7 @@ class dictionary extends page
 			{
 				$query = sprintf('SELECT a.root_phrase, a.rel_type
 					FROM relation a
-					WHERE a.related_phrase = %1$s AND a.rel_type = \'d\'
+					WHERE a.related_phrase = %1$s AND a.rel_type IN (\'d\', \'c\')
 					ORDER BY a.root_phrase',
 					$this->db->quote($search)
 				);
