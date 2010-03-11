@@ -191,33 +191,99 @@ class dictionary extends page
 				$where .= ' LEFT(a.phrase, 1) REGEXP \'^[^[:alpha:]]\' ';
 		}
 
-		$cols = 'a.phrase';
+		$cols = 'a.phrase, a.lex_class, a.actual_phrase';
 		$from = 'FROM phrase a ' . $where . ' ';
 		$from .= 'ORDER BY a.phrase ';
+		$this->db->defaults['rperpage'] = 20;
 		$rows = $this->db->get_rows_paged($cols, $from);
+		$row_count = $this->db->num_rows;
 
 		// result
-		if ($this->db->num_rows > 0)
+		if ($row_count > 0)
 		{
-			$mark = ceil($this->db->num_rows / 3);
-			$j = 1;
-			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
-			$ret .= '<table width="100%"><tr valign="top">' . LF;
+			// params
+			$nav_html = $this->db->get_page_nav(true);
+			$start_row = $this->db->pager['rbegin'];
+			$url_detail = './?mod=dictionary&action=view&phrase=';
+
+			// get definitions
 			foreach ($rows as $row)
 			{
-				$i++;
-				if ($j == $i)
-				{
-					if ($i > 1) $ret .= '</ul></td>' . LF;
-					$ret .= '<td width="33%"><ul start="' . ($this->db->pager['rbegin'] + $i - 1) . '">' . LF;
-					$j += $mark;
-				}
-				$tmp = '<li><a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a></li>' . LF;
-				$ret .= sprintf($tmp, $row['phrase']);
+				$found .= $found ? ', ' : '';
+				$found .= $this->db->_db->quote($row['phrase']);
 			}
-			$ret .= '</ul></td>' . LF;
-			$ret .= '</tr></table>' . LF;
-			$ret .= '<p>' . $this->db->get_page_nav(true) . '</p>' . LF;
+			$sql = 'SELECT * FROM definition WHERE phrase IN (%1$s)
+				ORDER BY phrase, def_num, def_uid;';
+			$defs = $this->db->get_rows(sprintf($sql, $found));
+			for ($i = 0; $i < $row_count; $i++)
+			{
+				foreach ($defs as $def)
+				{
+					if ($rows[$i]['phrase'] == $def['phrase'])
+					{
+						$rows[$i]['defs'][] = $def;
+					}
+				}
+			}
+
+			// print result
+			$ret .= '<p>' . $nav_html . '</p>' . LF;
+			foreach ($rows as $row)
+			{
+				$i = 0;
+				$def_count = count($row['defs']);
+				$ret .= '<p>';
+				$ret .= sprintf('<b><a href="%2$s%1$s">%1$s</a></b> ',
+					$row['phrase'],
+					$url_detail
+				);
+				$ret .= '</p>' . LF;
+				$ret .= '<blockquote>';
+				if ($row['actual_phrase'])
+				{
+					$ret .= sprintf('&rarr; <a href="%2$s%1$s">%1$s</a>',
+						$row['actual_phrase'], $url_detail);
+				}
+				else
+				{
+					foreach ($row['defs'] as $def)
+					{
+						$i++;
+						if ($i == 1)
+						{
+							$ret .= $row['lex_class'] ? '<i>' . $row['lex_class'] . '</i> ' : '';
+						}
+						$ret .= sprintf('%1$s%3$s%2$s; ',
+							$def_count > 1 ? '<b>' . $i . '</b> ' : '',
+							$def['see'] ? sprintf('&rarr; <a href="%2$s%1$s">%1$s</a>',
+								$def['see'], $url_detail) : $def['def_text'],
+							$def['lex_class'] && ($def['lex_class'] != $row['lex_class']) ? '<i>' . $def['lex_class'] . '</i> ' : ''
+						);
+					}
+				}
+				$ret .= '</blockquote>' . LF;
+			}
+			$ret .= '<p>' . $nav_html . '</p>' . LF;
+
+//			$mark = ceil($row_count / 3);
+//			$j = 1;
+//			$ret .= '<p>' . $nav_html . '</p>' . LF;
+//			$ret .= '<table width="100%"><tr valign="top">' . LF;
+//			foreach ($rows as $row)
+//			{
+//				$i++;
+//				if ($j == $i)
+//				{
+//					if ($i > 1) $ret .= '</ul></td>' . LF;
+//					$ret .= '<td width="33%"><ul start="' . ($start_row + $i - 1) . '">' . LF;
+//					$j += $mark;
+//				}
+//				$tmp = '<li><a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a></li>' . LF;
+//				$ret .= sprintf($tmp, $row['phrase']);
+//			}
+//			$ret .= '</ul></td>' . LF;
+//			$ret .= '</tr></table>' . LF;
+//			$ret .= '<p>' . $nav_html . '</p>' . LF;
 		}
 		else
 			$ret .= sprintf('<p>Frasa yang dicari tidak ditemukan. <a href="./?mod=dictionary&action=view&phrase=%1$s">Coba lagi</a>?</p>' . LF, $_GET['phrase']);
