@@ -315,36 +315,45 @@ class dictionary extends page
 				if ($def_count > 1) $ret .= '<ol>' . LF;
 				foreach ($defs as $def)
 				{
+					// discipline
 					$discipline = ($i == 0) ? $phrase['info'] : '';
+					if ($def['discipline'])
+					{
+						$discipline .= $discipline ? ', ' : '';
+						$discipline .= $def['discipline'];
+					}
+					$dsc = $discipline ? '<em>(' . $this->get_abbrev($discipline) . ')</em> ' : '';
+					// lex class
+					$lex_name = $def['lex_class'];
+					$lex_title = $lex_classes[$def['lex_class']];
+					if ($def['lex_class_ref'])
+					{
+						$lex_name = sprintf(
+							'<a href="./?mod=dictionary&action=view&phrase=%2$s" title="%3$s">%1$s</a>',
+							$def['lex_class'],
+							$def['lex_class_ref'],
+							$lex_title
+						);
+					}
+					$lex = $def['lex_class'] ? '<em>' . $lex_name . '</em> ' : '';
+					// start
 					if ($def_count > 1) $ret .= '<li>';
 					if ($def['see'])
 					{
-						$ret .= sprintf('lihat <a href="./?mod=dictionary&action=view&phrase=%2$s">%1$s</a>',
+						$ret .= sprintf('%3$s%4$s&rarr; <a href="%2$s%1$s">%1$s</a>',
 							$def['see'],
-							$def['see']
+							'./?mod=dictionary&action=view&phrase=',
+							$lex,
+							$dsc
 						);
 					}
 					else
 					{
-						if ($def['discipline'])
-						{
-							$discipline .= $discipline ? ', ' : '';
-							$discipline .= $def['discipline'];
-						}
-						$lex_name = $def['lex_class'];
-						$lex_title = $lex_classes[$def['lex_class']];
-						if ($def['lex_class_ref'])
-							$lex_name = sprintf(
-								'<a href="./?mod=dictionary&action=view&phrase=%2$s" title="%3$s">%1$s</a>',
-								$def['lex_class'],
-								$def['lex_class_ref'],
-								$lex_title
-							);
 						$ret .= sprintf('%4$s%2$s%1$s%3$s',
 							$def['def_text'],
-							$discipline ? '<em>(' . $this->get_abbrev($discipline) . ')</em> ' : '',
+							$dsc,
 							$def['sample'] ? ': <em>' . $def['sample'] . '</em> ' : '',
-							$def['lex_class'] ? '<em>' . $lex_name . '</em> ' : ''
+							$lex
 						);
 					}
 					if ($def_count > 1) $ret .= '</li>' . LF;
@@ -720,8 +729,16 @@ class dictionary extends page
 		}
 		foreach ($phrase['relation'] as $type_key => $type)
 		{
+			unset($sort1);
+			unset($sort2);
 			if (count($type) > 1)
 			{
+				foreach ($type as $key => $row) {
+					$sort1[$key]  = $row['lex_class'];
+					$sort2[$key]  = $row['related_phrase'];
+				}
+				array_multisort($sort1, SORT_ASC, $sort2, SORT_ASC, $type);
+
 				$ret .= sprintf('<p><strong>%1$s:</strong></p>' . LF, $type['name']);
 				$ret .= '<blockquote>' . LF;
 				$ret .= $this->merge_phrase_list($type, $col_name, count($type) - 1, true);
@@ -1399,14 +1416,22 @@ class dictionary extends page
 		{
 			for ($i = 0; $i < $count; $i++)
 			{
+				$lex1 = $phrases[$i]['lex_class'];
 				// $ret .= ($i == 0) ? '<br />': '';
-				$ret .= sprintf('<a href="./?mod=dictionary&action=view&phrase=%1$s">%1$s</a>', $phrases[$i][$col_name]);
-				if ($show_lex && $phrases[$i]['lex_class'])
-					$ret .= sprintf(' (<span title="%1$s">%2$s</span>)',
+				if ($show_lex && $phrases[$i]['lex_class'] && ($lex1 != $lex2))
+				{
+					$ret .= sprintf('<em><span title="%1$s">%2$s</span></em>',
 						$lex_classes[$phrases[$i]['lex_class']],
 						$phrases[$i]['lex_class']
 					);
+					$ret .= ': ';
+				}
+				$ret .= sprintf('<a href="%2$s%1$s">%1$s</a>',
+					$phrases[$i][$col_name],
+					'./?mod=dictionary&action=view&phrase='
+				);
 				$ret .= ($i < $count - 1) ? '; ': '';
+				$lex2 = $lex1;
 			}
 		}
 		else
@@ -1825,13 +1850,13 @@ class dictionary extends page
 		$prev = $this->db->get_rows(sprintf($tpl, '<', 'DESC'), false);
 		$next = $this->db->get_rows(sprintf($tpl, '>', 'ASC'), false);
 		// populate and sort array
-		if (is_array($prev)) foreach ($prev as $val) $arr[] = $val[0];
-		$arr[] = $id;
-		if (is_array($next)) foreach ($next as $val) $arr[] = $val[0];
+		if (is_array($prev)) foreach ($prev as $val) $arr[strtolower($val[0])] = $val[0];
+		$arr[strtolower($id)] = $id;
+		if (is_array($next)) foreach ($next as $val) $arr[strtolower($val[0])] = $val[0];
 		// create html
 		if (is_array($arr))
 		{
-			sort($arr);
+			ksort($arr);
 			foreach ($arr as $val)
 			{
 				$ret .= $ret ? ' | ' : '';
