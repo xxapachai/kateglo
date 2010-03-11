@@ -219,7 +219,7 @@ class dictionary extends page
 			{
 				foreach ($defs as $def)
 				{
-					if ($rows[$i]['phrase'] == $def['phrase'])
+					if (strtolower($rows[$i]['phrase']) == strtolower($def['phrase']))
 					{
 						$rows[$i]['defs'][] = $def;
 					}
@@ -246,19 +246,22 @@ class dictionary extends page
 				}
 				else
 				{
-					foreach ($row['defs'] as $def)
+					if ($def_count)
 					{
-						$i++;
-						if ($i == 1)
+						foreach ($row['defs'] as $def)
 						{
-							$ret .= $row['lex_class'] ? '<i>' . $row['lex_class'] . '</i> ' : '';
+							$i++;
+							if ($i == 1)
+							{
+								$ret .= $row['lex_class'] ? '<i>' . $row['lex_class'] . '</i> ' : '';
+							}
+							$ret .= sprintf('%1$s%3$s%2$s; ',
+								$def_count > 1 ? '<b>' . $i . '</b> ' : '',
+								$def['see'] ? sprintf('&rarr; <a href="%2$s%1$s">%1$s</a>',
+									$def['see'], $url_detail) : $def['def_text'],
+								$def['lex_class'] && ($def['lex_class'] != $row['lex_class']) ? '<i>' . $def['lex_class'] . '</i> ' : ''
+							);
 						}
-						$ret .= sprintf('%1$s%3$s%2$s; ',
-							$def_count > 1 ? '<b>' . $i . '</b> ' : '',
-							$def['see'] ? sprintf('&rarr; <a href="%2$s%1$s">%1$s</a>',
-								$def['see'], $url_detail) : $def['def_text'],
-							$def['lex_class'] && ($def['lex_class'] != $row['lex_class']) ? '<i>' . $def['lex_class'] . '</i> ' : ''
-						);
 					}
 				}
 				$ret .= '</blockquote>' . LF;
