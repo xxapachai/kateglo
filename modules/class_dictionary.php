@@ -300,6 +300,12 @@ class dictionary extends page
 			else
 				$defs = $phrase['definition'];
 
+			// navigation, only for logged in users #experiment
+			if ($this->auth->checkAuth())
+			{
+				$ret .= '<p>' . $this->get_prev_next($_GET['phrase']) . '</p>';
+			}
+
 			// show definition
 			$def_count = count($defs);
 			$ret .= '<p><strong>' . $this->msg['definition']. ':</strong></p>' . LF;
@@ -460,7 +466,6 @@ class dictionary extends page
 				$words, $_GET['phrase']);
 				$this->db->exec($sql);
 			}
-
 		}
 		else
 		{
@@ -1805,5 +1810,39 @@ class dictionary extends page
 		return($ret);
 	}
 
+	/**
+	 * Return prev next navigation
+	 */
+	function get_prev_next($id)
+	{
+		$limit = 5;
+		$table = 'phrase';
+		$field = 'phrase';
+		// prepare and execute sql
+		$tpl = 'SELECT %1$s FROM %2$s WHERE %1$s <ops> %3$s ORDER BY %1$s <sort> LIMIT %4$s;';
+		$tpl = sprintf($tpl, $field, $table, $this->db->quote($id), $limit);
+		$tpl = str_replace('<sort>', '%2$s', str_replace('<ops>', '%1$s', $tpl));
+		$prev = $this->db->get_rows(sprintf($tpl, '<', 'DESC'), false);
+		$next = $this->db->get_rows(sprintf($tpl, '>', 'ASC'), false);
+		// populate and sort array
+		if (is_array($prev)) foreach ($prev as $val) $arr[] = $val[0];
+		$arr[] = $id;
+		if (is_array($next)) foreach ($next as $val) $arr[] = $val[0];
+		// create html
+		if (is_array($arr))
+		{
+			sort($arr);
+			foreach ($arr as $val)
+			{
+				$ret .= $ret ? ' | ' : '';
+				if ($val == $id)
+					$ret .= $id;
+				else
+					$ret .= sprintf('<a href="%2$s%1$s">%1$s</a>',
+						$val, './?mod=dictionary&action=view&phrase=');
+			}
+		}
+		return($ret);
+	}
 };
 ?>
