@@ -191,7 +191,7 @@ class dictionary extends page
 				$where .= ' LEFT(a.phrase, 1) REGEXP \'^[^[:alpha:]]\' ';
 		}
 
-		$cols = 'a.phrase, a.lex_class, a.actual_phrase';
+		$cols = 'a.phrase, a.lex_class, a.actual_phrase, a.info';
 		$from = 'FROM phrase a ' . $where . ' ';
 		$from .= 'ORDER BY a.phrase ';
 		$this->db->defaults['rperpage'] = 20;
@@ -246,20 +246,19 @@ class dictionary extends page
 				}
 				else
 				{
+					$ret .= $row['lex_class'] ? '<i>' . $row['lex_class'] . '</i> ' : '';
+					$ret .= $row['info'] ? '<i>(' . $row['info'] . ')</i> ' : '';
 					if ($def_count)
 					{
 						foreach ($row['defs'] as $def)
 						{
 							$i++;
-							if ($i == 1)
-							{
-								$ret .= $row['lex_class'] ? '<i>' . $row['lex_class'] . '</i> ' : '';
-							}
-							$ret .= sprintf('%1$s%3$s%2$s; ',
+							$ret .= sprintf('%1$s%3$s%4$s%2$s; ',
 								$def_count > 1 ? '<b>' . $i . '</b> ' : '',
 								$def['see'] ? sprintf('&rarr; <a href="%2$s%1$s">%1$s</a>',
 									$def['see'], $url_detail) : $def['def_text'],
-								$def['lex_class'] && ($def['lex_class'] != $row['lex_class']) ? '<i>' . $def['lex_class'] . '</i> ' : ''
+								$def['lex_class'] && ($def['lex_class'] != $row['lex_class']) ? '<i>' . $def['lex_class'] . '</i> ' : '',
+								$def['discipline'] ? '<i>(' . $def['discipline'] . ')</i> ' : ''
 							);
 						}
 					}
@@ -335,6 +334,7 @@ class dictionary extends page
 		// kbbi header
 		$ret .= '<table width="100%" cellpadding="0" cellspacing="0"><tr valign="top"><td width="60%">' . LF;
 
+		// buttons
 		if ($this->auth->checkAuth())
 		{
 			$actions = array(
@@ -368,12 +368,6 @@ class dictionary extends page
 				));
 			else
 				$defs = $phrase['definition'];
-
-			// navigation, only for logged in users #experiment
-			if ($this->auth->checkAuth())
-			{
-				$ret .= '<p>' . $this->get_prev_next($_GET['phrase']) . '</p>';
-			}
 
 			// show definition
 			$def_count = count($defs);
@@ -560,7 +554,14 @@ class dictionary extends page
 		$glossary->sublist = true;
 		$ret .= $glossary->show_result();
 
+		// kbbi
 		$ret .= $this->show_kbbi();
+
+		// navigation
+		if ($phrase)
+		{
+			$ret .= '<p align="center">' . $this->get_prev_next($_GET['phrase']) . '</p>';
+		}
 
 		return($ret);
 	}
@@ -1928,7 +1929,7 @@ class dictionary extends page
 			ksort($arr);
 			foreach ($arr as $val)
 			{
-				$ret .= $ret ? ' | ' : '';
+				$ret .= $ret ? ' ~ ' : '';
 				if ($val == $id)
 					$ret .= $id;
 				else
