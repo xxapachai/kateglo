@@ -32,10 +32,10 @@
 	<div tal:condition="php: hits.count() GT 0 AND search.getLemmaRadioValue() EQ search.getCheckedRadio()">
 		<table border="1">
 			<thead>
-			<tr><th align="center">Lemma</th><th align="center">Type</th><th align="center">Lexical</th><th align="center">Definitions</th></tr>
+			<tr><th align="center">Lemma</th><th align="center">Lexical</th><th align="center">Definitions</th></tr>
 			</thead>
 			<tbody>
-				<tr tal:repeat="hit hits"><td valign="middle"><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" tal:content="hit/type">Type</td><td valign="middle" tal:content="hit/lexical">Lexical</td><td valign="middle" tal:content="structure php: nl2br(hit.definition)">Definitions</td></tr>
+				<tr tal:repeat="hit hits"><td valign="middle"><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" tal:content="hit/lexical">Lexical</td><td valign="middle" tal:content="structure php: nl2br(hit.definition)">Definitions</td></tr>
 			</tbody>
 		</table>
 	</div>

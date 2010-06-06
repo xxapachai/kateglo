@@ -71,7 +71,7 @@ require_once 'PHPTAL.php';
 require_once 'bootstrap.php';
 
 /** Load Class for Doctrine and Kateglo */
-require_once 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'GlobalClassLoader.php';
+require_once 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'ClassLoader.php';
 
 use kateglo\application\utilities;
 use kateglo\application\configs;
@@ -80,11 +80,12 @@ use kateglo\application\configs;
 stubBootstrap::init(array("project" => DOCUMENT_ROOT, "cache" => STUBBLES_CACHE));
 stubClassLoader::load('net::stubbles::ioc::stubBinder');
 
-//instantiate autoloader for Doctrine and Kateglo
-$classLoader = new Doctrine\Common\GlobalClassLoader ( );
-$classLoader->registerNamespace('Doctrine', realpath(DOCTRINE_PATH));
-$classLoader->registerNamespace('kateglo', realpath(KATEGLO_PATH));
-$classLoader->register();
+//instantiate autoloader for Doctrine and Momoku
+$doctrineLoader = new Doctrine\Common\ClassLoader ( 'Doctrine', realpath(DOCTRINE_PATH));
+$doctrineLoader->register();
+
+$kategloLoader = new Doctrine\Common\ClassLoader ( 'kateglo', realpath(KATEGLO_PATH));
+$kategloLoader->register();
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(

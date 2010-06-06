@@ -97,13 +97,13 @@ class Lemma implements interfaces\Lemma{
 	 */
 	public function getRandom($limit = 10){
 
-		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ; ");
+		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM lemma ORDER BY RAND() LIMIT ".$limit." ");
 		$idArray = array();
 		foreach($randomIdResult as $idResult){
 			$idArray[] = $idResult['lemma_id'];
 		}
 
-		$sql = "SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.id IN ('".implode("','", $idArray)."');";
+		$sql = "SELECT l FROM ".models\Lemma::CLASS_NAME." l WHERE l.id IN ('".implode("','", $idArray)."')";
 
 		$query = $this->dataAccess->getEntityManager()->createQuery($sql);
 		$result = $query->getResult();

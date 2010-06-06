@@ -62,13 +62,13 @@ class Misspelled implements interfaces\Misspelled {
 	 */
 	public function getRandom($limit = 5){
 		
-		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ; ");
+		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ");
 		$idArray = array();
 		foreach($randomIdResult as $idResult){
 			$idArray[] = $idResult['lemma_id'];
 		}
 				
-		$sql = "SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ('".implode("','", $idArray)."');";
+		$sql = "SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ('".implode("','", $idArray)."')";
 		
 		$query = $this->dataAccess->getEntityManager()->createQuery($sql);		
 		$result = $query->getResult();

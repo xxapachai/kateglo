@@ -61,7 +61,7 @@ class Glossary implements interfaces\Glossary{
 	 * @return int
 	 */
 	public function getTotalCount(){
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT COUNT(g.id) FROM ".models\Glossary::CLASS_NAME." g; ");        
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT COUNT(g.id) FROM ".models\Glossary::CLASS_NAME." g ");        
 		$result = $query->getSingleResult();
 		
 		if(! ( is_numeric($result[1]) )){var_dump($result); die();
