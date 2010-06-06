@@ -28,7 +28,7 @@
 	    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
 	</div>
 	<table border="1">
-		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;" tal:define="global getLemma lemma/getLemma; syllabel php:utf8_encode(lemma.getSyllabel().getSyllabel())">${getLemma} (${syllabel})</td></tr>
+		<tr><td colspan="3" style="text-align: center; font-weight: bold; font-size: 14px;" tal:define="global getLemma lemma/getLemma;">${getLemma}</td></tr>
 		<tr><td colspan="3" style="font-weight: bold">Types</td></tr>
 		<tr tal:repeat="type lemma/getTypes"><td tal:content="type/getId">type id</td><td colspan="2" tal:content="type/getType">type</td></tr>
 		<tr tal:condition="php: lemma.getRelations().count() GT 0"><td colspan="3" style="font-weight: bold">Relations</td></tr>
