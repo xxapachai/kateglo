@@ -123,6 +123,7 @@ class DataAccess implements interfaces\DataAccess {
 				$config = new ORM\Configuration();
 				$config->setMetadataCacheImpl($this->metadataCache);
 				$config->setQueryCacheImpl($this->queryCache);
+				$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver());
 				$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
 				$config->setProxyNamespace($this->configs->get()->proxy->namespace);
 				 
