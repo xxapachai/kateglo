@@ -42,6 +42,7 @@ Kateglo.
 
 * Ivan Lanin - http://ivan.lanin.org
 * Romi Hardiyanto - http://www.ewesewes.web.id
+* Arthur Purnama - http://arthur.purnama.de
 
 == Kredit ==
 
