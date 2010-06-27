@@ -39,6 +39,8 @@ defined('LIBRARY_PATH')
 // Define application environment
 //defined('APPLICATION_ENV')
 //|| define('APPLICATION_ENV', 'linuxDevelopment');
+//defined('APPLICATION_ENV')
+//|| define('APPLICATION_ENV', 'macDevelopment');
 defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', 'windowsDevelopment');
 //defined('APPLICATION_ENV')

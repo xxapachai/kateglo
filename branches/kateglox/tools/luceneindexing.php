@@ -21,6 +21,7 @@ require_once 'Zend/Search/Lucene/Document.php';
 
 //$kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'mysql123');
 $kateglox = new PDO('mysql:host=localhost;dbname=kateglox', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+//$kateglox = new PDO('mysql:host=127.0.0.1;port=8889;dbname=kateglox', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 $lemmaIndex = Zend_Search_Lucene::create(INDEX_PATH.'/lemma_index');
 
