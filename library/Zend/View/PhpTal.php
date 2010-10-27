@@ -72,7 +72,7 @@ class Zend_View_PhpTal implements Zend_View_Interface
     public function __construct(array $config = array()) 
     { 
         $this->_engine = new PHPTAL(); 
- 		$this->_engine->setPhpCodeDestination(Injector::getInstance(configs\interfaces\Configs::INTERFACE_NAME)->get()->tal->destination);
+ 		$this->_engine->setPhpCodeDestination(Injector::getInstance(configs\interfaces\Configs::INTERFACE_NAME)->get()->cache->tal);
         if (isset($config['scriptPath'])) { 
             $this->setScriptPath($config['scriptPath']); 
         } 

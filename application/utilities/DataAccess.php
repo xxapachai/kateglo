@@ -124,8 +124,8 @@ class DataAccess implements interfaces\DataAccess {
 				$config->setMetadataCacheImpl($this->metadataCache);
 				$config->setQueryCacheImpl($this->queryCache);
 				$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver());
-				$config->setProxyDir(realpath(DOCTRINE_PROXIES_PATH));
-				$config->setProxyNamespace($this->configs->get()->proxy->namespace);
+				$config->setProxyDir(realpath($this->configs->get()->cache->doctrine->proxy));
+				$config->setProxyNamespace($this->configs->get()->cache->doctrine->namespace);
 				 
 				$this->entityManager = ORM\EntityManager::create($this->conn, $config);
 			}
