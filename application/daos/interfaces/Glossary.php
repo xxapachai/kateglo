@@ -1,4 +1,5 @@
 <?php
+namespace kateglo\application\daos\interfaces;
 /*
  *  $Id$
  *
@@ -18,40 +19,27 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities;
-use kateglo\application\services\interfaces;
-use kateglo\application\helpers;
-use kateglo\application\faces;
-use kateglo\application\daos;
+
 /**
- *
- *
- * @package kateglo\application\controllers
+ * 
+ * 
+ * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  2009-10-14
+ * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class LemmaController extends Zend_Controller_Action
-{
+interface Glossary{
+	
+	const INTERFACE_NAME = __CLASS__;
+	
+	/**
+	 * 
+	 * @return int
+	 */
+	function getTotalCount();
 
-	public function indexAction(){
-		/*@var $request Zend_Controller_Request_Http */
-		$request = $this->getRequest();
-		$searchFaces = new faces\Search();
-		$this->view->search = $searchFaces;
-		if($request->isGet()){
-			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
-			if($text !== ''){
-				$searchFaces->setFieldValue($text);
-				$searchService = utilities\Injector::getInstance(interfaces\Search::INTERFACE_NAME);
-				$this->view->lemma = $searchService->lemma($text);
-			}
-		}else{
-			header('location: '.$request->getBaseUrl());
-		}
-	}
 }
 ?>

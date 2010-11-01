@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\daos;
 /*
  *  $Id$
  *
@@ -19,14 +19,14 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains\interfaces;
-use kateglo\application\domains\exceptions;
+use kateglo\application\daos\interfaces;
+use kateglo\application\daos\exceptions;
 use kateglo\application\models;
 use kateglo\application\utilities;
 /**
  *
  *
- * @package kateglo\application\domains
+ * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since

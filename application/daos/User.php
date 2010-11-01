@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains\interfaces;
+namespace kateglo\application\daos;
 /*
  *  $Id$
  *
@@ -19,26 +19,59 @@ namespace kateglo\application\domains\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\daos\interfaces;
+use kateglo\application\daos\exceptions;
+use kateglo\application\models;
+use kateglo\application\utilities;
 /**
- *
- *
- * @package kateglo\application\domains\interfaces
+ * 
+ * 
+ * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Type {
-
-	const INTERFACE_NAME = __CLASS__;
+class User implements interfaces\User {
 	
+	public static $CLASS_NAME = __CLASS__;
+
+	/**
+	 * 
+	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 */
+	private $dataAccess;
+		
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
 	 */
-	function getAllType();
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
+	/**
+	 * 
+	 * @param string $username
+	 * @return kateglo\application\models\User
+	 */
+	public function getByUsername($username){
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
+		$result = $query->getResult();
+        if(count($result) === 1){
+        	if(! ($result[0] instanceof models\User)){
+        		throw new exceptions\DomainObjectNotFoundException();
+        	}
+        }else{
+        	throw new exceptions\DomainResultEmptyException();
+        }
+        
+        return $result[0];
+	}
 }
 ?>

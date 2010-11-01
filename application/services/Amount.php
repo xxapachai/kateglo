@@ -19,7 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains;
+use kateglo\application\daos;
 /**
  *  
  * 
@@ -37,35 +37,35 @@ class Amount implements interfaces\Amount {
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Lemma
+	 * @var kateglo\application\daos\interfaces\Lemma
 	 */
 	private $lemma;
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Glossary
+	 * @var kateglo\application\daos\interfaces\Glossary
 	 */
 	private $glossary;
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Lemma $lemma
+	 * @params kateglo\application\daos\interfaces\Lemma $lemma
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(domains\interfaces\Lemma $lemma){
+	public function setLemma(daos\interfaces\Lemma $lemma){
 		$this->lemma = $lemma;
 	}
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Glossary $glossary
+	 * @params kateglo\application\daos\interfaces\Glossary $glossary
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setGlossary(domains\interfaces\Glossary $glossary){
+	public function setGlossary(daos\interfaces\Glossary $glossary){
 		$this->glossary = $glossary;
 	}
 	

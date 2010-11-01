@@ -20,7 +20,7 @@ namespace kateglo\tests;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\tests\application\domains;
+use kateglo\tests\application\daos;
 
 require_once 'bootstrap.php';
 
@@ -64,7 +64,7 @@ class TestSuite extends \PHPUnit_Framework_TestSuite {
 		$suite->addTestSuite(helpers\AuthenticationAdapterTest::CLASS_NAME);
 		$suite->addTestSuite(services\AuthenticationTest::CLASS_NAME);
 		$suite->addTestSuite(utilities\DataAccessTest::CLASS_NAME);
-		$suite->addTestSuite(domains\UserTest::CLASS_NAME);
+		$suite->addTestSuite(daos\UserTest::CLASS_NAME);
 		$suite->addTestSuite(utilities\LogServiceTest::CLASS_NAME);
 		
 		return $suite;

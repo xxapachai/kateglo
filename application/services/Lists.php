@@ -19,7 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains;
+use kateglo\application\daos;
 /**
  *
  *
@@ -37,69 +37,69 @@ class Lists implements interfaces\Lists {
 
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Misspelled
+	 * @var kateglo\application\daos\interfaces\Misspelled
 	 */
 	private $misspelled;
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Lemma
+	 * @var kateglo\application\daos\interfaces\Lemma
 	 */
 	private $lemma;
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Type
+	 * @var kateglo\application\daos\interfaces\Type
 	 */
 	private $type;
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Lexical
+	 * @var kateglo\application\daos\interfaces\Lexical
 	 */
 	private $lexical;
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Lemma $lemma
+	 * @params kateglo\application\daos\interfaces\Lemma $lemma
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(domains\interfaces\Lemma $lemma){
+	public function setLemma(daos\interfaces\Lemma $lemma){
 		$this->lemma = $lemma;
 	}
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Misspelled $misspelled
+	 * @params kateglo\application\daos\interfaces\Misspelled $misspelled
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setMisspelled(domains\interfaces\Misspelled $misspelled){
+	public function setMisspelled(daos\interfaces\Misspelled $misspelled){
 		$this->misspelled = $misspelled;
 	}
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Type $type
+	 * @params kateglo\application\daos\interfaces\Type $type
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setType(domains\interfaces\Type $type){
+	public function setType(daos\interfaces\Type $type){
 		$this->type = $type;
 	}
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Lexical $lexical
+	 * @params kateglo\application\daos\interfaces\Lexical $lexical
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLexical(domains\interfaces\Lexical $lexical){
+	public function setLexical(daos\interfaces\Lexical $lexical){
 		$this->lexical = $lexical;
 	}
 	

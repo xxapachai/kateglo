@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains;
+namespace kateglo\application\daos;
 /*
  *  $Id$
  *
@@ -19,23 +19,22 @@ namespace kateglo\application\domains;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains\interfaces;
-use kateglo\application\domains\exceptions;
+use kateglo\application\daos\interfaces;
+use kateglo\application\daos\exceptions;
 use kateglo\application\models;
-use Doctrine\ORM\Query;
 use kateglo\application\utilities;
 /**
- *
- *
- * @package kateglo\application\domains
+ * 
+ * 
+ * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since  
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lexical implements interfaces\Lexical {
+class Glossary implements interfaces\Glossary{
 	
 	public static $CLASS_NAME = __CLASS__;
 
@@ -56,19 +55,21 @@ class Lexical implements interfaces\Lexical {
 		$this->dataAccess = $dataAccess;
 	}
 	
+	
 	/**
-	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * 
+	 * @return int
 	 */
-	public function getAllLexical(){		
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT lx FROM ".models\Lexical::CLASS_NAME." lx ");
-		$result = $query->getResult(Query::HYDRATE_ARRAY);
-		if(count($result) === 0){
+	public function getTotalCount(){
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT COUNT(g.id) FROM ".models\Glossary::CLASS_NAME." g ");        
+		$result = $query->getSingleResult();
+		
+		if(! ( is_numeric($result[1]) )){var_dump($result); die();
 			throw new exceptions\DomainResultEmptyException();
 		}
-
-		return $result;
+        
+        return $result[1];
 	}
-	
+
 }
 ?>

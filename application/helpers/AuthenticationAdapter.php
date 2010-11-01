@@ -20,8 +20,8 @@ namespace kateglo\application\helpers;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\domains\exceptions;
-use kateglo\application\domains;
+use kateglo\application\daos\exceptions;
+use kateglo\application\daos;
 use kateglo\application\models;
 use kateglo\application\utilities;
 /**
@@ -101,7 +101,7 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 		
 		try{
 			/*@var $userObj kateglo\application\models\User */
-			$userObj = domains\User::getByUsername($this->username);
+			$userObj = daos\User::getByUsername($this->username);
 			if($userObj->getPassword() == md5($this->password)){
 				$userObj->setLastLogin(new \DateTime());
 				utilities\DataAccess::getEntityManager()->persist($userObj);
