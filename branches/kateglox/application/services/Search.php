@@ -19,7 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\domains;
+use kateglo\application\daos;
 /**
  *  
  * 
@@ -37,18 +37,18 @@ class Search implements interfaces\Search{
 	
 	/**
 	 * 
-	 * @var kateglo\application\domains\interfaces\Lemma
+	 * @var kateglo\application\daos\interfaces\Lemma
 	 */
 	private $lemma;
 	
 	/**
 	 *
-	 * @params kateglo\application\domains\interfaces\Lemma $lemma
+	 * @params kateglo\application\daos\interfaces\Lemma $lemma
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(domains\interfaces\Lemma $lemma){
+	public function setLemma(daos\interfaces\Lemma $lemma){
 		$this->lemma = $lemma;
 	}
 	

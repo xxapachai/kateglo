@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains\interfaces;
+namespace kateglo\application\daos\interfaces;
 /*
  *  $Id$
  *
@@ -23,7 +23,7 @@ namespace kateglo\application\domains\interfaces;
 /**
  *
  *
- * @package kateglo\application\domains\interfaces
+ * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since
@@ -31,15 +31,15 @@ namespace kateglo\application\domains\interfaces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Misspelled {
+interface Lexical{
 	
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 *
-	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getRandom($limit);
+	function getAllLexical();
+	
 }
 ?>

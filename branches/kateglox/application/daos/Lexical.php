@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains\interfaces;
+namespace kateglo\application\daos;
 /*
  *  $Id$
  *
@@ -19,27 +19,56 @@ namespace kateglo\application\domains\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\daos\interfaces;
+use kateglo\application\daos\exceptions;
+use kateglo\application\models;
+use Doctrine\ORM\Query;
+use kateglo\application\utilities;
 /**
- * 
- * 
- * @package kateglo\application\domains
+ *
+ *
+ * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface User{
+class Lexical implements interfaces\Lexical {
 	
-	const INTERFACE_NAME = __CLASS__;
-	
+	public static $CLASS_NAME = __CLASS__;
+
 	/**
 	 * 
-	 * @param string $username
-	 * @return kateglo\application\models\User
+	 * @var kateglo\application\utilities\interfaces\DataAccess
 	 */
-	function getByUsername($username);
+	private $dataAccess;
+		
+	/**
+	 *
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getAllLexical(){		
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT lx FROM ".models\Lexical::CLASS_NAME." lx ");
+		$result = $query->getResult(Query::HYDRATE_ARRAY);
+		if(count($result) === 0){
+			throw new exceptions\DomainResultEmptyException();
+		}
+
+		return $result;
+	}
+	
 }
 ?>

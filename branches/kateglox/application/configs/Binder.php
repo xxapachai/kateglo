@@ -21,7 +21,7 @@ namespace kateglo\application\configs;
  */
 use kateglo\application\utilities;
 use kateglo\application\services;
-use kateglo\application\domains;
+use kateglo\application\daos;
 /**
  *
  *
@@ -37,12 +37,12 @@ class Binder{
 	
 	public static function bind(\stubBinder $container){
 		$container->bind(interfaces\Configs::INTERFACE_NAME)->to(Configs::$CLASS_NAME);
-		$container->bind(domains\interfaces\Glossary::INTERFACE_NAME)->to(domains\Glossary::$CLASS_NAME);
-		$container->bind(domains\interfaces\Lemma::INTERFACE_NAME)->to(domains\Lemma::$CLASS_NAME);
-		$container->bind(domains\interfaces\Lexical::INTERFACE_NAME)->to(domains\Lexical::$CLASS_NAME);
-		$container->bind(domains\interfaces\Misspelled::INTERFACE_NAME)->to(domains\Misspelled::$CLASS_NAME);
-		$container->bind(domains\interfaces\Type::INTERFACE_NAME)->to(domains\Type::$CLASS_NAME);
-		$container->bind(domains\interfaces\User::INTERFACE_NAME)->to(domains\User::$CLASS_NAME);
+		$container->bind(daos\interfaces\Glossary::INTERFACE_NAME)->to(daos\Glossary::$CLASS_NAME);
+		$container->bind(daos\interfaces\Lemma::INTERFACE_NAME)->to(daos\Lemma::$CLASS_NAME);
+		$container->bind(daos\interfaces\Lexical::INTERFACE_NAME)->to(daos\Lexical::$CLASS_NAME);
+		$container->bind(daos\interfaces\Misspelled::INTERFACE_NAME)->to(daos\Misspelled::$CLASS_NAME);
+		$container->bind(daos\interfaces\Type::INTERFACE_NAME)->to(daos\Type::$CLASS_NAME);
+		$container->bind(daos\interfaces\User::INTERFACE_NAME)->to(daos\User::$CLASS_NAME);
 		$container->bind(services\interfaces\Amount::INTERFACE_NAME)->to(services\Amount::$CLASS_NAME);
 		$container->bind(services\interfaces\Lists::INTERFACE_NAME)->to(services\Lists::$CLASS_NAME);
 		$container->bind(services\interfaces\Lucene::INTERFACE_NAME)->to(services\Lucene::$CLASS_NAME);

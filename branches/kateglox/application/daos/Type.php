@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains\interfaces;
+namespace kateglo\application\daos;
 /*
  *  $Id$
  *
@@ -19,27 +19,57 @@ namespace kateglo\application\domains\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\daos\interfaces;
+use kateglo\application\daos\exceptions;
+use kateglo\application\models;
+use Doctrine\ORM\Query;
+use kateglo\application\utilities;
 /**
- * 
- * 
- * @package kateglo\application\domains\interfaces
+ *
+ *
+ * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Glossary{
-	
-	const INTERFACE_NAME = __CLASS__;
-	
+class Type implements interfaces\Type {
+
+	public static $CLASS_NAME = __CLASS__;
+
 	/**
 	 * 
-	 * @return int
+	 * @var kateglo\application\utilities\interfaces\DataAccess
 	 */
-	function getTotalCount();
+	private $dataAccess;
+		
+	/**
+	 *
+	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @return void
+	 * 
+	 * @Inject
+	 */
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+		$this->dataAccess = $dataAccess;
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getAllType(){
+		
+		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT t FROM ".models\Type::CLASS_NAME." t ");
+		$result = $query->getResult(Query::HYDRATE_ARRAY);
+		if(count($result) === 0){
+			throw new exceptions\DomainResultEmptyException();
+		}
 
+		return $result;
+
+	}	
 }
 ?>

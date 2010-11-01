@@ -23,7 +23,7 @@ use kateglo\application\utilities;
 use kateglo\application\utilities\collections;
 use kateglo\application\configs;
 use kateglo\application\faces;
-use kateglo\application\domains;
+use kateglo\application\daos;
 /**
  *
  *

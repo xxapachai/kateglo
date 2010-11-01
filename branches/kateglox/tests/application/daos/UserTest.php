@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\domains\exceptions;
+namespace kateglo\tests\application\daos;
 /*
  *  $Id$
  *
@@ -19,18 +19,57 @@ namespace kateglo\application\domains\exceptions;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
- 
- /**
- * 
- * 
- * @package kateglo\application\domains\exceptions
+
+use kateglo\application\daos;
+/**
+ *
+ *
+ * @uses Exception
+ * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-14
+ * @since
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- */ 
-class DomainResultEmptyException extends \Exception {
+ */
+class UserTest extends \PHPUnit_Framework_TestCase {
+	const CLASS_NAME = __CLASS__;
+
+	/**
+	 *
+	 * @return void
+	 */
+	protected function setUp(){
+
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	protected function tearDown(){
+
+	}
+
+	/**
+	 * @expectedException kateglo\application\daos\exceptions\DomainResultEmptyException
+	 * @return void
+	 */
+	public function testGetByUsernameResultEmpty(){
+		daos\User::getByUsername('Undefined');
+	}
+
+	/**
+	 *
+	 * @return void
+	 */
+	public function testGetByUsername(){
+		/*@var $result kateglo\application\models\User */
+		$result = daos\User::getByUsername('arthur@purnama.de');
+		
+		$this->assertEquals('arthur@purnama.de', $result->getUsername());
+		$this->assertEquals(md5('arthur'), $result->getPassword());
+	}
 }
 ?>
