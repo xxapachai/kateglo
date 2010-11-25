@@ -33,16 +33,16 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="relation")
+ * @Table(name="synonym")
  */
-class Relation {
+class Synonym {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="relation_id")
+	 * @Column(type="integer", name="synonym_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
@@ -50,20 +50,20 @@ class Relation {
 	/**
 	 * @var kateglo\application\models\Meaning
 	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinColumn(name="relation_meaning_id", referencedColumnName="meaning_id")
+	 * @JoinColumn(name="synonym_meaning_id", referencedColumnName="meaning_id")
 	 */
 	private $meaning;
 	
 	/**
 	 * @var kateglo\application\models\Meaning
 	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"persist"})
-	 * @JoinColumn(name="relation_relation_id", referencedColumnName="meaning_id")
+	 * @JoinColumn(name="synonym_synonym_id", referencedColumnName="meaning_id")
 	 */
-	private $relation;
+	private $synonym;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="relations", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="synonyms", cascade={"persist"})
 	 */
 	private $definitions;
 	
@@ -102,7 +102,7 @@ class Relation {
 			/*@var $entry kateglo\application\models\Meaning */
 			$meaning = $this->meaning;
 			$this->meaning = null;
-			$meaning->removeRelation ( $this );
+			$meaning->removeSynonym ( $this );
 		}
 	}
 	
@@ -110,8 +110,8 @@ class Relation {
 	 * 
 	 * @return kateglo\application\models\Meaning
 	 */
-	public function getRelation() {
-		return $this->relation;
+	public function getSynonym() {
+		return $this->synonym;
 	}
 	
 	/**
@@ -120,8 +120,8 @@ class Relation {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setRelation(models\Meaning $meaning) {
-		$this->relation = $meaning;
+	public function setSynonym(models\Meaning $meaning) {
+		$this->synonym = $meaning;
 	}
 	
 	/**
@@ -132,7 +132,7 @@ class Relation {
 	public function addDefinition(models\Definition $definition) {
 		if (! $this->definitions->contains ( $definition )) {
 			$this->definitions [] = $definition;
-			$definition->addAntonym ( $this );
+			$definition->addSynonym ( $this );
 		}
 	}
 	
@@ -145,7 +145,7 @@ class Relation {
 		/*@var $removed kateglo\application\models\Definition */
 		$removed = $this->definitions->removeElement ( $definition );
 		if ($removed !== null) {
-			$removed->removeRelation ( $this );
+			$removed->removeSynonym ( $this );
 		}
 	}
 	

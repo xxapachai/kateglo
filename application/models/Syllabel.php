@@ -19,6 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\utilities\collections;
 use kateglo\application\models;
 /**
  *
@@ -26,8 +27,8 @@ use kateglo\application\models;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,63 +36,123 @@ use kateglo\application\models;
  * @Table(name="syllabel")
  */
 class Syllabel {
-
+	
 	const CLASS_NAME = __CLASS__;
-
-	/**
-	 * 
-	 * @var int
-	 * @Id 
-	 * @Column(type="integer", name="syllabel_lemma_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
 	
 	/**
-	 * @var kateglo\application\models\Lemma
-	 * @OneToOne(targetEntity="kateglo\application\models\Lemma", mappedBy="syllabel", cascade={"persist"})
+	 * @var int
+	 * @Id
+	 * @Column(type="integer", name="syllabel_id")
+	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $lemma;
-
+	protected $id;
+	
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="syllabel_name", unique=true, length=255)
+	 * @Column(type="string", name="syllabel_text", unique=true, length=255)
 	 */
-	private $syllabel;
-
+	protected $syllabel;
+	
 	/**
-	 *
-	 * @param kateglo\application\models\Lemma $lemma
-	 * @return void
+	 * @var kateglo\application\models\Meaning
+	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
+	 * @JoinColumn(name="syllabel_meaning_id", referencedColumnName="meaning_id")
 	 */
-	public function setLemma(models\Lemma $lemma){
-		$this->lemma = $lemma;
-	}
-
+	private $meaning;
+	
 	/**
-	 *
-	 * @return kateglo\application\models\Lemma
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"persist"})
 	 */
-	public function getLemma(){
-		return $this->lemma;
+	private $pronounciations;
+	
+	function __construct() {
+		$this->pronounciations = new collections\ArrayCollection ();
 	}
-
+	
+	/**
+	 * @return the $id
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
 	/**
 	 *
 	 * @param string $syllabel
 	 * @return void
 	 */
-	public function setSyllabel($syllabel){
+	public function setSyllabel($syllabel) {
 		$this->syllabel = $syllabel;
 	}
-
+	
 	/**
 	 *
 	 * @return string
 	 */
-	public function getSyllabel(){
+	public function getSyllabel() {
 		return $this->syllabel;
 	}
+	
+	/**
+	 * @return kateglo\application\models\Meaning
+	 */
+	public function getMeaning() {
+		return $this->meaning;
+	}
+	
+	/**
+	 * @param kateglo\application\models\Meaning $meaning
+	 * @return void
+	 */
+	public function setMeaning(models\Meaning $meaning) {
+		$this->meaning = $meaning;
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeMeaning() {
+		if ($this->meaning !== null) {
+			/*@var $entry kateglo\application\models\Meaning */
+			$meaning = $this->meaning;
+			$this->meaning = null;
+			$meaning->removeSyllabel ( $this );
+		}
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Pronounciation $pronounciation
+	 * @return void
+	 */
+	public function addPronounciation(models\Pronounciation $pronounciation) {
+		$this->pronounciations [] = $pronounciation;
+		$pronounciation->setSyllabel ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Pronounciation $pronounciation
+	 * @return void
+	 */
+	public function removePronounciation(models\Pronounciation $pronounciation) {
+		/*@var $removed kateglo\application\models\Pronounciation */
+		$removed = $this->pronounciations->removeElement ( $pronounciation );
+		if ($removed !== null) {
+			$removed->removeSyllabel ();
+		}
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getPronounciations() {
+		return $this->pronounciations;
+	}
 }
+
 ?>

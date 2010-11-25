@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\daos;
+namespace kateglo\application\services\exceptions;
 /*
  *  $Id$
  *
@@ -19,57 +19,19 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\daos\interfaces;
-use kateglo\application\daos\exceptions;
-use kateglo\application\models;
-use Doctrine\ORM\Query;
-use kateglo\application\utilities;
+
 /**
+ * 
  *
- *
- * @package kateglo\application\daos
+ * @package kateglo\application\services\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Type implements interfaces\Type {
+class SearchException extends \Exception {
 
-	public static $CLASS_NAME = __CLASS__;
-
-	/**
-	 * 
-	 * @var kateglo\application\utilities\interfaces\DataAccess
-	 */
-	private $dataAccess;
-		
-	/**
-	 *
-	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
-		$this->dataAccess = $dataAccess;
-	}
-	
-	/**
-	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function getAllType(){
-		
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT t FROM ".models\Type::CLASS_NAME." t ");
-		$result = $query->getResult(Query::HYDRATE_ARRAY);
-		if(count($result) === 0){
-			throw new exceptions\DomainResultEmptyException();
-		}
-
-		return $result;
-
-	}	
 }
 ?>

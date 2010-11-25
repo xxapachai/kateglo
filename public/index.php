@@ -1,16 +1,13 @@
 <?php
+
 /** Set Time Zone to where the server is */
-use kateglo\application\utilities\LogService;
 date_default_timezone_set ( "Europe/Berlin" );
 
 /** Define application environment for the application.ini */
-defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') :
-//'linuxDevelopment'
-		'windowsDevelopment'
-		//'macDevelopment'
+defined ( 'APPLICATION_ENV' ) || define ( 'APPLICATION_ENV', (getenv ( 'APPLICATION_ENV' ) ? getenv ( 'APPLICATION_ENV' ) : //'linuxDevelopment'
+'windowsDevelopment') );//'macDevelopment'
 //'production'
-));
+
 
 /**
  *
@@ -19,31 +16,27 @@ defined('APPLICATION_ENV')
  *
  * @var string
  */
-$kategloRoot =  realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..');
+defined ( 'KATEGLO_ROOT' ) || define ( 'KATEGLO_ROOT', realpath ( dirname ( __FILE__ ) . DIRECTORY_SEPARATOR . '..' ) );
 
 /**
  *
  * Define the path of the Kateglo
  * Default: www/
  *
- * @var string
  */
-$wwwRoot = realpath($kategloRoot . DIRECTORY_SEPARATOR . '..' );
+$wwwRoot = realpath ( KATEGLO_ROOT . DIRECTORY_SEPARATOR . '..' );
 
 /**
  * Define path to application directory
  * Default: www/kateglo/application
  */
-defined('APPLICATION_PATH')
-|| define('APPLICATION_PATH', realpath($kategloRoot . DIRECTORY_SEPARATOR . 'application'));
-
+defined ( 'APPLICATION_PATH' ) || define ( 'APPLICATION_PATH', realpath ( KATEGLO_ROOT . DIRECTORY_SEPARATOR . 'application' ) );
 
 /**
  * Define where to find the ini file
  * Default: www/kateglo/application/configs/application.ini
  */
-defined('CONFIGS_PATH')
-|| define('CONFIGS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini');
+defined ( 'CONFIGS_PATH' ) || define ( 'CONFIGS_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini' );
 
 /**
  *
@@ -52,10 +45,7 @@ defined('CONFIGS_PATH')
  *
  * @var string
  */
-$libraryPath = realpath($kategloRoot . DIRECTORY_SEPARATOR . 'library');
-
-
-
+$libraryPath = realpath ( KATEGLO_ROOT . DIRECTORY_SEPARATOR . 'library' );
 
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate Stubbles Inversion of Control +++ */
@@ -67,7 +57,7 @@ $libraryPath = realpath($kategloRoot . DIRECTORY_SEPARATOR . 'library');
  *
  * @var string
  */
-$stubblesPath = realpath($wwwRoot . DIRECTORY_SEPARATOR . 'stubbles' );
+$stubblesPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'stubbles' );
 
 /**
  *
@@ -76,7 +66,7 @@ $stubblesPath = realpath($wwwRoot . DIRECTORY_SEPARATOR . 'stubbles' );
  *
  * @var string
  */
-$stubblesCache = realpath($kategloRoot . DIRECTORY_SEPARATOR  . 'cache' . DIRECTORY_SEPARATOR . 'stubbles');
+$stubblesCache = realpath ( KATEGLO_ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'stubbles' );
 
 /**
  *
@@ -85,10 +75,10 @@ $stubblesCache = realpath($kategloRoot . DIRECTORY_SEPARATOR  . 'cache' . DIRECT
  *
  * @var string
  */
-$stubblesClassLoader = realpath($stubblesPath . DIRECTORY_SEPARATOR  . 'src' . DIRECTORY_SEPARATOR . 'main'. DIRECTORY_SEPARATOR .'php'. DIRECTORY_SEPARATOR .'net'. DIRECTORY_SEPARATOR .'stubbles' . DIRECTORY_SEPARATOR . 'stubClassLoader.php');
+$stubblesClassLoader = realpath ( $stubblesPath . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'main' . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR . 'net' . DIRECTORY_SEPARATOR . 'stubbles' . DIRECTORY_SEPARATOR . 'stubClassLoader.php' );
 
 /** Import Stubbles Bootstrap File */
-require_once $stubblesPath . DIRECTORY_SEPARATOR  . 'bootstrap.php';
+require_once $stubblesPath . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 /** Override Stubbles original bootstrap */
 require_once $libraryPath . DIRECTORY_SEPARATOR . 'Stubbles' . DIRECTORY_SEPARATOR . 'bootstrap.php';
@@ -99,25 +89,22 @@ require_once $libraryPath . DIRECTORY_SEPARATOR . 'Stubbles' . DIRECTORY_SEPARAT
  *
  * @var array
  */
-$stubblesPathes = array("project" => $kategloRoot, "cache" => $stubblesCache);
+$stubblesPathes = array ("project" => KATEGLO_ROOT, "cache" => $stubblesCache );
 
 /**
  * Instantiate autoloader for Stubbles
  * Using the Class that override the original init() method.
  */
-kateglo\library\Stubbles\stubBootstrap::init($stubblesPathes, $stubblesClassLoader);
+kateglo\library\Stubbles\stubBootstrap::init ( $stubblesPathes, $stubblesClassLoader );
 
 /**
  * Load the Stubbles Inversion of Control
  * IoC ready to use.
  */
-\stubClassLoader::load('net::stubbles::ioc::stubBinder');
+\stubClassLoader::load ( 'net::stubbles::ioc::stubBinder' );
 
 /** +++ END : Initiate Stubbles Inversion of Control +++ */
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-
-
 
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate Doctrine Object Relational Mapper +++ */
@@ -129,10 +116,10 @@ kateglo\library\Stubbles\stubBootstrap::init($stubblesPathes, $stubblesClassLoad
  *
  * @var string
  */
-$doctrinePath = realpath($wwwRoot . DIRECTORY_SEPARATOR . 'doctrine');
+$doctrinePath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'doctrine' );
 
 /** Import Doctrine Class Loader */
-require_once $doctrinePath. DIRECTORY_SEPARATOR . 'Doctrine'. DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'ClassLoader.php' ;
+require_once $doctrinePath . DIRECTORY_SEPARATOR . 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'ClassLoader.php';
 
 /**
  *
@@ -140,8 +127,8 @@ require_once $doctrinePath. DIRECTORY_SEPARATOR . 'Doctrine'. DIRECTORY_SEPARATO
  *
  * @var Doctrine\Common\ClassLoader
  */
-$doctrineLoader = new Doctrine\Common\ClassLoader ( 'Doctrine', realpath($doctrinePath));
-$doctrineLoader->register();
+$doctrineLoader = new Doctrine\Common\ClassLoader ( 'Doctrine', realpath ( $doctrinePath ) );
+$doctrineLoader->register ();
 
 /**
  *
@@ -149,14 +136,11 @@ $doctrineLoader->register();
  *
  * @var Doctrine\Common\ClassLoader
  */
-$kategloLoader = new Doctrine\Common\ClassLoader ( 'kateglo', realpath($wwwRoot));
-$kategloLoader->register();
+$kategloLoader = new Doctrine\Common\ClassLoader ( 'kateglo', realpath ( $wwwRoot ) );
+$kategloLoader->register ();
 
 /** +++ End : Initiate Doctrine Object Relational Mapper +++ */
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-
-
 
 /** +++++++++++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate PHPTal Template Engine +++ */
@@ -168,17 +152,15 @@ $kategloLoader->register();
  *
  * @var string
  */
-$talPath = realpath($wwwRoot. DIRECTORY_SEPARATOR . 'phptal' . DIRECTORY_SEPARATOR . 'classes');
+$talPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'phptal' . DIRECTORY_SEPARATOR . 'classes' );
 
 /** Import PHPTal Template Engine Loader */
-require_once  $talPath. DIRECTORY_SEPARATOR . 'PHPTAL.php';
+require_once $talPath . DIRECTORY_SEPARATOR . 'PHPTAL.php';
 
 /** +++ END : Initiate PHPTal Template Engine +++ */
 /** +++++++++++++++++++++++++++++++++++++++++++++ */
-
-
-
-
+set_include_path ( realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'solr' ) );
+require_once ('Apache/Solr/Service.php');
 /** +++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate Zend Framework +++ */
 
@@ -189,10 +171,10 @@ require_once  $talPath. DIRECTORY_SEPARATOR . 'PHPTAL.php';
  *
  * @var string
  */
-$zfPath = realpath($wwwRoot . DIRECTORY_SEPARATOR .'ZendFramework'. DIRECTORY_SEPARATOR .'library');
+$zfPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'ZendFramework' . DIRECTORY_SEPARATOR . 'library' );
 
 /** Ensure libraries is on include_path */
-set_include_path(implode(PATH_SEPARATOR, array(realpath($zfPath), realpath($libraryPath), get_include_path() )));
+set_include_path ( implode ( PATH_SEPARATOR, array (realpath ( $zfPath ), realpath ( $libraryPath ), get_include_path () ) ) );
 
 /** Import Zend Framework Loader */
 require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
@@ -203,7 +185,7 @@ require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
  *
  * @var Zend_Application
  */
-$application = new Zend_Application( APPLICATION_ENV, CONFIGS_PATH);
+$application = new Zend_Application ( APPLICATION_ENV, CONFIGS_PATH );
 
 use kateglo\application\utilities;
 use kateglo\application\utilities\interfaces;
@@ -213,15 +195,15 @@ use kateglo\application\utilities\interfaces;
  * Get Log Service from Dependency Injector
  * @var kateglo\application\utilities\interfaces\LogService
  */
-$logService = utilities\Injector::getInstance(interfaces\LogService::INTERFACE_NAME);
+$logService = utilities\Injector::getInstance ( interfaces\LogService::INTERFACE_NAME );
 
 try {
 	//run kateglo
-	$application->bootstrap()->run();
+	$application->bootstrap ()->run ();
 
 } catch ( Exception $e ) {
 	//catch anything in log files
-	$logService->get()->log($e->getTraceAsString(), \Zend_Log::ERR);
+	$logService->get ()->log ( $e->getTraceAsString (), \Zend_Log::ERR );
 }
 
 /** +++ END : Initiate Zend Framework +++ */

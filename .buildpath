@@ -4,6 +4,7 @@
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/Stubbles"/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/Zend Framework"/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/PHPTal"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/Apache Solr"/>
 	<buildpathentry kind="src" path=""/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/Doctrine"/>
 </buildpath>

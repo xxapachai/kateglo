@@ -33,94 +33,93 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="discipline")
+ * @Table(name="sample")
  */
-class Discipline {
+class Sample {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="discipline_id")
+	 * @Column(type="integer", name="sample_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="discipline_name", unique=true, length=255)
+	 * @Column(type="string", name="sample_text", unique=true, length=255)
 	 */
-	protected $discipline;
+	protected $sample;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
-	 * @JoinTable(name="rel_definition_discipline",
-	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
-	 * )
+	 * @var kateglo\application\models\Definition
+	 * @ManyToOne(targetEntity="kateglo\application\models\Definition")
+	 * @JoinColumn(name="sample_definition_id", referencedColumnName="definition_id")
 	 */
-	private $definitions;
+	private $definition;
 	
-	public function __construct(){
-		$this->definitions = new collections\ArrayCollection ();
+	function __construct() {
+	
 	}
 	
 	/**
-	 * @return the $id
+	 *
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * @return the $discipline
+	 *
+	 * @param string $sample
+	 * @return void
 	 */
-	public function getDiscipline() {
-		return $this->discipline;
+	public function setSample($sample) {
+		$this->sample = $sample;
 	}
 	
 	/**
-	 * @param string $discipline
+	 *
+	 * @return string
 	 */
-	public function setDiscipline($discipline) {
-		$this->discipline = $discipline;
+	public function getSample() {
+		return $this->sample;
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
-	 */	
-	public function addDefinition(models\Definition $definition){
-        if (!$this->definitions->contains($definition)) {
-            $this->definitions[] = $definition;
-            $definition->addDiscipline($this);
-        }
-    }
+	 */
+	public function setDefinition(models\Definition $definition) {
+		$this->definition = $definition;
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\models\Definition
+	 */
+	public function getDefinition() {
+		return $this->definition;
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeDefinition() {
+		if ($this->entry !== null) {
+			/*@var $entry kateglo\application\models\Definition */
+			$definition = $this->definition;
+			$this->definition = null;
+			$definition->removeSample($this);
+		}
+	}
 
-    /**
-     * 
-     * @param kateglo\application\models\Definition $definition
-     * @return void
-     */
-    public function removeDefinition(models\Definition $definition){
-    	/*@var $removed kateglo\application\models\Definition */
-        $removed = $this->definitions->removeElement($definition);
-        if ($removed !== null) {
-            $removed->removeDiscipline($this);
-        }
-    }
-
-    /**
-     * 
-     * @return kateglo\application\utilities\collections\ArrayCollection
-     */
-    public function getDefinitions(){
-        return $this->definitions;
-    }
 }
 
 ?>

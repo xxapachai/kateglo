@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\utilities;
+namespace kateglo\application\daos\interfaces;
 /*
  *  $Id$
  *
@@ -19,56 +19,56 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs;
-use kateglo\application\utilities\exceptions;
+
 /**
  *
  *
- * @package kateglo\application\utilities
+ * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Injector{
+interface Entry {
 	
-	/**
-	 * 
-	 * @var stubBinder
-	 */
-	private static $container;
-	
-	/**
-	 * 
-	 * @param string $className
-	 * @return Object<T>
-	 */
-	public static function getInstance($className){
-		if(! (self::$container instanceof \stubBinder)){
-			self::set();
-		}
-		$object = self::$container->getInjector()->getInstance($className);
-		if(! ($object instanceof $className) ){ 
-			throw new exceptions\InjectorException('Object instantiating failed!');
-		}
-		return $object;
-	}
+	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 *
-	 * @param stubBinder $container
+	 * @param string $entry 
+	 * @return kateglo\application\models\Entry
 	 */
-	public static function set(\stubBinder $container = null){
-		if($container === null){
-			if(! (self::$container instanceof \stubBinder) ){
-				self::$container = new \stubBinder();
-				configs\Binder::bind(self::$container);
-			}
-		}else{
-			self::$container = $container;
-		}
-	}
+	function getByEntry($entry);
+	
+	/**
+	 *
+	 * @return int
+	 */
+	function getTotalCount();
+	
+	/**
+	 *
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function getRandom($limit = 10);
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function getAll();
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param int $limit
+	 * @param int $offset
+	 * @return Doctrine\ORM\Internal\Hydration\IterableResult
+	 */
+	function getSome($limit, $offset);
 }
+
 ?>

@@ -33,16 +33,16 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="discipline")
+ * @Table(name="source_category")
  */
-class Discipline {
+class SourceCategory {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="discipline_id")
+	 * @Column(type="integer", name="source_category_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
@@ -50,22 +50,22 @@ class Discipline {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="discipline_name", unique=true, length=255)
+	 * @Column(type="string", name="source_category_name", unique=true, length=255)
 	 */
-	protected $discipline;
+	protected $category;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
-	 * @JoinTable(name="rel_definition_discipline",
-	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
-	 * )
+	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"persist"})
 	 */
-	private $definitions;
+	protected $sources;
 	
-	public function __construct(){
-		$this->definitions = new collections\ArrayCollection ();
+	/**
+	 * 
+	 * Construct
+	 */
+	function __construct() {
+		$this->sources = new collections\ArrayCollection ();
 	}
 	
 	/**
@@ -76,51 +76,49 @@ class Discipline {
 	}
 	
 	/**
-	 * @return the $discipline
+	 * @return the $category
 	 */
-	public function getDiscipline() {
-		return $this->discipline;
+	public function getCategory() {
+		return $this->category;
 	}
 	
 	/**
-	 * @param string $discipline
+	 * @param string $category
 	 */
-	public function setDiscipline($discipline) {
-		$this->discipline = $discipline;
+	public function setCategory($category) {
+		$this->category = $category;
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\models\Definition $definition
+	 *
+	 * @param kateglo\application\models\Source $source
 	 * @return void
-	 */	
-	public function addDefinition(models\Definition $definition){
-        if (!$this->definitions->contains($definition)) {
-            $this->definitions[] = $definition;
-            $definition->addDiscipline($this);
-        }
-    }
-
-    /**
-     * 
-     * @param kateglo\application\models\Definition $definition
-     * @return void
-     */
-    public function removeDefinition(models\Definition $definition){
-    	/*@var $removed kateglo\application\models\Definition */
-        $removed = $this->definitions->removeElement($definition);
-        if ($removed !== null) {
-            $removed->removeDiscipline($this);
-        }
-    }
-
-    /**
-     * 
-     * @return kateglo\application\utilities\collections\ArrayCollection
-     */
-    public function getDefinitions(){
-        return $this->definitions;
-    }
+	 */
+	public function addSource(models\Source $source) {
+		$this->sources [] = $source;
+		$source->setCategory ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Source $source
+	 * @return void
+	 */
+	public function removeSource(models\Misspelled $source) {
+		/*@var $removed kateglo\application\models\Source */
+		$removed = $this->sources->removeElement ( $source );
+		if ($removed !== null) {
+			$removed->removeMeaning ();
+		}
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getSources() {
+		return $this->sources;
+	}
 }
 
 ?>

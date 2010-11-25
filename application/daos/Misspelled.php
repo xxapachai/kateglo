@@ -37,13 +37,13 @@ use kateglo\application\utilities;
 class Misspelled implements interfaces\Misspelled {
 	
 	public static $CLASS_NAME = __CLASS__;
-
+	
 	/**
 	 * 
 	 * @var kateglo\application\utilities\interfaces\DataAccess
 	 */
 	private $dataAccess;
-		
+	
 	/**
 	 *
 	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
@@ -51,7 +51,7 @@ class Misspelled implements interfaces\Misspelled {
 	 * 
 	 * @Inject
 	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess) {
 		$this->dataAccess = $dataAccess;
 	}
 	
@@ -60,25 +60,23 @@ class Misspelled implements interfaces\Misspelled {
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getRandom($limit = 5){
+	public function getRandom($limit = 5) {
 		
-		$randomIdResult = $this->dataAccess->getConnection()->query("SELECT lemma_id FROM misspelled ORDER BY RAND() LIMIT ".$limit." ");
-		$idArray = array();
-		foreach($randomIdResult as $idResult){
-			$idArray[] = $idResult['lemma_id'];
+		$randomIdResult = $this->dataAccess->getConnection ()->query ( "SELECT misspelled_id FROM misspelled ORDER BY RAND() LIMIT " . $limit . " " );
+		$idArray = array ();
+		foreach ( $randomIdResult as $idResult ) {
+			$idArray [] = $idResult ['misspelled_id'];
 		}
-				
-		$sql = "SELECT m FROM ".models\Misspelled::CLASS_NAME." m WHERE m.id IN ('".implode("','", $idArray)."')";
 		
-		$query = $this->dataAccess->getEntityManager()->createQuery($sql);		
-		$result = $query->getResult();
-		if(count($result) > 0){
+		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT m FROM " . models\Misspelled::CLASS_NAME . " m WHERE m.id IN ('" . implode ( "','", $idArray ) . "')" );
+		$result = $query->getResult ();
+		if (count ( $result ) > 0) {
 			return $result;
-		}else{
-			throw new exceptions\DomainResultEmptyException();
+		} else {
+			throw new exceptions\DomainResultEmptyException ();
 		}
-
-	}	
+	
+	}
 
 }
 ?>

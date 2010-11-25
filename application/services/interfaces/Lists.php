@@ -47,29 +47,6 @@ interface Lists {
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	function randomLemma($limit);
-
-	/**
-	 *
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $filters
-	 * @param string $orderBy
-	 * @param string $direction
-	 * @return array
-	 */
-	function listLemma($offset, $limit, array $filters, $orderBy, $direction);
-	
-	/**
-	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	function listType();
-	
-	/**
-	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	function listLexical();
+	function randomEntry($limit);
 }
 ?>

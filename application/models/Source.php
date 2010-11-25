@@ -27,8 +27,8 @@ use kateglo\application\models;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -36,194 +36,140 @@ use kateglo\application\models;
  * @Table(name="source")
  */
 class Source {
-
+	
 	const CLASS_NAME = __CLASS__;
-
+	
 	/**
 	 * @var int
 	 * @Id
 	 * @Column(type="integer", name="source_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
-
-	/**
-	 * @var string
-	 * @Column(type="string", name="source_url", unique=true, length=255)
-	 */
-	private $url;
-
-	/**
-	 * @var string
-	 * @Column(type="string", name="source_label", unique=true, length=255)
-	 */
-	private $label;
-	
-	/**
-	 * @var kateglo\application\models\SourceType
-	 * @ManyToOne(targetEntity="kateglo\application\models\SourceType")
-	 * @JoinColumn(name="source_type_id", referencedColumnName="source_type_id")
-	 */
-	private $type;
-
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="sources")
-	 */
-	private $definitions;
-	
-	/**
-	 * @var kateglo\application\helpers\collections\ArrayCollection
-     * @ManyToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="sources")
-	 */
-	private $glossaries;
-
-
-	/**
-	 * 
-	 * @return void
-	 */
-	public function __construct(){
-		$this->definitions = new collections\ArrayCollection();
-		$this->glossaries = new collections\ArrayCollection();
-	}
+	protected $id;
 	
 	/**
 	 *
-	 * @return int
+	 * @var string
+	 * @Column(type="string", name="source_url", length=2100)
 	 */
-	public function getId(){
+	protected $url;
+	
+	/**
+	 *
+	 * @var string
+	 * @Column(type="string", name="source_text")
+	 */
+	protected $source;
+	
+	/**
+	 * @var kateglo\application\models\Meaning
+	 * @ManyToOne(targetEntity="kateglo\application\models\SourceCategory")
+	 * @JoinColumn(name="source_category_id", referencedColumnName="source_category_id")
+	 */
+	private $category;
+	
+	/**
+	 * @var kateglo\application\models\Entry
+	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
+	 * @JoinColumn(name="source_entry_id", referencedColumnName="entry_id")
+	 */
+	private $entry;
+	
+	function __construct() {
+	
+	}
+	
+	/**
+	 * @return the $id
+	 */
+	public function getId() {
 		return $this->id;
 	}
-
+	
 	/**
-	 *
-	 * @param string $url
-	 * @return void
+	 * @return the $url
 	 */
-	public function setUrl($url){
-		$this->url = $url;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getUrl(){
+	public function getUrl() {
 		return $this->url;
 	}
-
+	
 	/**
-	 *
-	 * @param string $label
+	 * @return the $category
+	 */
+	public function getSource() {
+		return $this->source;
+	}
+	
+	/**
+	 * @param string $url
+	 */
+	public function setUrl($url) {
+		$this->url = $url;
+	}
+	
+	/**
+	 * @param string $category
+	 */
+	public function setSource($source) {
+		$this->source = $source;
+	}
+	
+	/**
+	 * @return kateglo\application\models\SourceCategory
+	 */
+	public function getCategory() {
+		return $this->category;
+	}
+	
+	/**
+	 * @param kateglo\application\models\SourceCategory $category
 	 * @return void
 	 */
-	public function setLabel($label){
-		$this->label = $label;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getLabel(){
-		return $this->label;
+	public function setCategory(models\SourceCategory $category) {
+		$this->category = $category;
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\SourceType $type
 	 * @return void
 	 */
-	public function setType(models\Type $type){
-		$this->type = $type;
-	}
-
-	/**
-	 *
-	 * @return kateglo\application\models\SourceType
-	 */
-	public function getType(){
-		return $this->type;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeType() {
-		if ($this->type !== null) {
-			/*@var $phrase kateglo\application\models\SourceType */
-			$type = $this->type;
-			$this->type = null;
-			$type->removeSource($this);
+	public function removeCategory() {
+		if ($this->category !== null) {
+			/*@var $category kateglo\application\models\SourceCategory */
+			$category = $this->category;
+			$this->category = null;
+			$category->removeSource ( $this );
 		}
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\models\Definition $definition
+	 * @return kateglo\application\models\Entry
+	 */
+	public function getEntry() {
+		return $this->entry;
+	}
+	
+	/**
+	 * @param kateglo\application\models\Entry $entry
 	 * @return void
-	 */	
-	public function addDefinition(models\Definition $definition){
-        if (!$this->definitions->contains($definition)) {
-            $this->definitions[] = $definition;
-            $definition->addSource($this);
-        }
-    }
-
-    /**
-     * 
-     * @param kateglo\application\models\Definition $definition
-     * @return void
-     */
-    public function removeDefinition(models\Definition $definition){
-        $removed = $this->definitions->removeElement($definition);
-        if ($removed !== null) {
-            $removed->removeSource($this);
-        }
-    }
-
-    /**
-     * 
-     * @return kateglo\application\helpers\collections\ArrayCollection
-     */
-    public function getDefinitions(){
-        return $this->definitions;
-    }
-    
-    /**
-     * 
-     * @param kateglo\application\models\Glossary $glossary
-     * @return void
-     */
-    public function addGlossary(models\Glossary $glossary){
-    	if (!$this->glossaries->contains($glossary)) {
-            $this->glossaries[] = $glossary;
-            $glossary->addSource($this);
-        }
-    }
-
-    /**
-     * 
-     * @param kateglo\application\models\Glossary $glossary
-     * @return void
-     */
-    public function removeGlossary(models\Glossary $glossary){
-    	/*@var $removed kateglo\application\models\Glossary */
-        $removed = $this->glossaries->removeElement($glossary);
-        if ($removed !== null) {
-            $removed->removeSource();
-        }
-    }
-    
-    /**
-     * 
-     * @return kateglo\application\helpers\collections\ArrayCollection
-     */
-	public function getGlossaries(){
-        return $this->glossaries;
-    }
+	 */
+	public function setEntry(models\Entry $entry) {
+		$this->entry = $entry;
+	}
+	
+	/**
+	 *
+	 * @return void
+	 */
+	public function removeEntry() {
+		if ($this->entry !== null) {
+			/*@var $entry kateglo\application\models\Entry */
+			$entry = $this->entry;
+			$this->entry = null;
+			$entry->removeSource ( $this );
+		}
+	}
 
 }
+
 ?>

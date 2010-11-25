@@ -18,6 +18,9 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\models\Syllabel;
+use kateglo\application\models\TypeCategory;
+use kateglo\application\models\Definition;
 use kateglo\application\services\interfaces;
 use kateglo\application\utilities;
 use kateglo\application\faces;
@@ -32,24 +35,26 @@ use kateglo\application\faces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action
-{
-
-	public function init(){
+class IndexController extends Zend_Controller_Action {
+	
+	public function init() {
 		/* Initialize action controller here */
 	}
-
-	public function indexAction(){
+	
+	public function indexAction() {
+		
+		$this->view->appPath = APPLICATION_PATH;
 		/*@var $request Zend_Controller_Request_Http */
-		$request = $this->getRequest();
-		$search = new faces\Search();
+		$request = $this->getRequest ();
+		$search = new faces\Search ();
 		$this->view->search = $search;
 		
-		$amount = utilities\Injector::getInstance(interfaces\Amount::INTERFACE_NAME);
+		$amount = utilities\Injector::getInstance ( interfaces\Amount::INTERFACE_NAME );
 		$this->view->amount = $amount;
 		
-		$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME);
+		$lists = utilities\Injector::getInstance ( interfaces\Lists::INTERFACE_NAME );
 		$this->view->lists = $lists;
+	
 	}
 }
 ?>

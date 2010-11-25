@@ -33,91 +33,82 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="type")
+ * @Table(name="entry")
  */
-class Type {
+class Entry {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="type_id")
+	 * @Column(type="integer", name="entry_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="type_name", unique=true, length=255)
+	 * @Column(type="string", name="entry_name", unique=true, length=255)
 	 */
-	protected $type;
+	private $entry;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinTable(name="rel_meaning_type",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_meaning_id", referencedColumnName="meaning_id")}
-	 * )
+	 * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"persist"})
 	 */
 	private $meanings;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\TypeCategory")
-	 * @JoinTable(name="rel_type_category",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_type_category_id", referencedColumnName="type_category_id")}
-	 * )
+	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"persist"})
 	 */
-	private $categories;
+	private $sources;
 	
-	function __construct() {
+	/**
+	 * 
+	 * Constructor
+	 * 
+	 */
+	public function __construct() {
 		$this->meanings = new collections\ArrayCollection ();
-		$this->categories = new collections\ArrayCollection ();
 	}
 	
 	/**
-	 *
-	 * @return int
+	 * @return the $id
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 *
-	 * @param string $type
+	 * @return the $entry
+	 */
+	public function getEntry() {
+		return $this->entry;
+	}
+	
+	/**
+	 * @param string $entry
 	 * @return void
 	 */
-	public function setType($type) {
-		$this->type = $type;
+	public function setEntry($entry) {
+		$this->entry = $entry;
 	}
 	
 	/**
 	 *
-	 * @return string
-	 */
-	public function getType() {
-		return $this->type;
-	}
-	
-	/**
-	 * 
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
 	public function addMeaning(models\Meaning $meaning) {
-		if (! $this->meanings->contains ( $meaning )) {
-			$this->meanings [] = $meaning;
-			$meaning->addType ( $this );
-		}
+		$this->meanings [] = $meaning;
+		$meaning->setEntry ( $this );
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
@@ -125,12 +116,12 @@ class Type {
 		/*@var $removed kateglo\application\models\Meaning */
 		$removed = $this->meanings->removeElement ( $meaning );
 		if ($removed !== null) {
-			$removed->removeType ( $this );
+			$removed->removeEntry ();
 		}
 	}
 	
 	/**
-	 * 
+	 *
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function getMeanings() {
@@ -138,35 +129,34 @@ class Type {
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\models\TypeCategory $category
+	 *
+	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function setCategory(models\TypeCategory $category) {
-		if (! $this->categories->contains ( $category )) {
-			$this->categories [0] = $category;
-			$category->addType ( $this );
-		}
+	public function addSource(models\Source $source) {
+		$this->sources [] = $source;
+		$source->setEntry ( $this );
 	}
 	
 	/**
-	 * 
-	 * @param kateglo\application\models\TypeCategory $category
+	 *
+	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function removeCategory() {
-		$removed = $this->categories->removeElement ( $this->categories->get(0) );
+	public function removeSource(models\Source $source) {
+		/*@var $removed kateglo\application\models\Source */
+		$removed = $this->sources->removeElement ( $source );
 		if ($removed !== null) {
-			$removed->removeType ( $this );
+			$removed->removeEntry ();
 		}
 	}
 	
 	/**
-	 * 
-	 * @return kateglo\application\models\TypeCategory
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getCategory() {
-		return $this->categories->get(0);
+	public function getSources() {
+		return $this->sources;
 	}
 }
 

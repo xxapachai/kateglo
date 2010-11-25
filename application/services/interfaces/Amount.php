@@ -39,12 +39,6 @@ interface Amount {
 	 * 
 	 * @return int
 	 */
-	function lemma();
-	
-	/**
-	 * 
-	 * @return int
-	 */
-	function glossary();
+	function entry();
 }
 ?>
