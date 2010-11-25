@@ -43,31 +43,19 @@ class Lists implements interfaces\Lists {
 	
 	/**
 	 * 
-	 * @var kateglo\application\daos\interfaces\Lemma
+	 * @var kateglo\application\daos\interfaces\Entry
 	 */
-	private $lemma;
-	
-	/**
-	 * 
-	 * @var kateglo\application\daos\interfaces\Type
-	 */
-	private $type;
-	
-	/**
-	 * 
-	 * @var kateglo\application\daos\interfaces\Lexical
-	 */
-	private $lexical;
+	private $entry;
 	
 	/**
 	 *
-	 * @params kateglo\application\daos\interfaces\Lemma $lemma
+	 * @params kateglo\application\daos\interfaces\Entry $entry
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(daos\interfaces\Lemma $lemma){
-		$this->lemma = $lemma;
+	public function setEntry(daos\interfaces\Entry $entry){
+		$this->entry = $entry;
 	}
 	
 	/**
@@ -79,28 +67,6 @@ class Lists implements interfaces\Lists {
 	 */
 	public function setMisspelled(daos\interfaces\Misspelled $misspelled){
 		$this->misspelled = $misspelled;
-	}
-	
-	/**
-	 *
-	 * @params kateglo\application\daos\interfaces\Type $type
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setType(daos\interfaces\Type $type){
-		$this->type = $type;
-	}
-	
-	/**
-	 *
-	 * @params kateglo\application\daos\interfaces\Lexical $lexical
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setLexical(daos\interfaces\Lexical $lexical){
-		$this->lexical = $lexical;
 	}
 	
 	/**
@@ -118,91 +84,10 @@ class Lists implements interfaces\Lists {
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function randomLemma($limit = 10){
-		$result = $this->lemma->getRandom($limit);
-		return $result;
-	}
-
-	/**
-	 *
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $filters
-	 * @param string $orderBy
-	 * @param string $direction
-	 * @return array
-	 */
-	public function listLemma($offset = 0, $limit = 50, array $filters = array(), $orderBy = "", $direction = "ASC"){
-		$lemma = "";
-		$type = array();
-		$definition = "";
-		$lexical = array();
-		
-		foreach($filters as $filter){
-			if($filter['field'] == 'lemma'){
-				$lemma = $filter['data']['value'];
-			}
-			
-			if($filter['field'] == 'type'){
-				$type = explode(',', $filter['data']['value']);
-			}
-			
-			if($filter['field'] == 'definition'){
-				$definition = $filter['data']['value'];
-			}
-			
-			if($filter['field'] == 'lexical'){
-				$lexical = explode(',', $filter['data']['value']);
-			}
-		}		
-		
-		$result = $this->lemma->getLists($offset, $limit, $lemma, $type, $definition, $lexical, $orderBy, $direction);
-		$arrayResult = array();
-		/*@var $lemma kateglo\application\models\Lemma */
-		foreach($result as $lemma){
-			if($lemma->getDefinitions()->count() > 0){
-				/*@var $definition kateglo\application\models\Definition */
-				foreach ($lemma->getDefinitions() as $definition){
-					$entityArray = array();
-					$entityArray['lemma'] = $lemma->getLemma();
-					/*@var $type kateglo\application\models\Type */
-					foreach($lemma->getTypes() as $type){
-						$entityArray['type'] = $type->getType();
-					}
-					$entityArray['definition'] = $definition->getDefinition();
-					$entityArray['lexical'] = $definition->getLexical()->getLexical();					
-					$arrayResult[] = $entityArray;
-				}
-			}else{				
-				$entityArray = array();
-				$entityArray['lemma'] = $lemma->getLemma();
-				/*@var $type kateglo\application\models\Type */
-				foreach($lemma->getTypes() as $type){
-					$entityArray['type'] = $type->getType();
-				}
-				$arrayResult[] = $entityArray;
-			}
-
-		}
-		return $arrayResult;
-	}
-	
-	/**
-	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function listType(){
-		$result = $this->type->getAllType();
+	public function randomEntry($limit = 10){
+		$result = $this->entry->getRandom($limit);
 		return $result;
 	}
 	
-	/**
-	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function listLexical(){
-		$result = $this->lexical->getAllLexical();
-		return $result;
-	}
 }
 ?>

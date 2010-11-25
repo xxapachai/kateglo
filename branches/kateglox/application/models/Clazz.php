@@ -33,16 +33,16 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="type")
+ * @Table(name="class")
  */
-class Type {
+class Clazz {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="type_id")
+	 * @Column(type="integer", name="class_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
@@ -50,32 +50,32 @@ class Type {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="type_name", unique=true, length=255)
+	 * @Column(type="string", name="class_name", unique=true, length=255)
 	 */
-	protected $type;
+	protected $clazz;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinTable(name="rel_meaning_type",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_meaning_id", referencedColumnName="meaning_id")}
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
+	 * @JoinTable(name="rel_definition_class",
+	 * joinColumns={@JoinColumn(name="rel_class_id", referencedColumnName="class_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
 	 * )
 	 */
-	private $meanings;
+	private $definitions;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\TypeCategory")
-	 * @JoinTable(name="rel_type_category",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_type_category_id", referencedColumnName="type_category_id")}
+	 * @ManyToMany(targetEntity="kateglo\application\models\ClazzCategory")
+	 * @JoinTable(name="rel_class_category",
+	 * joinColumns={@JoinColumn(name="rel_class_id", referencedColumnName="class_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_class_category_id", referencedColumnName="class_category_id")}
 	 * )
 	 */
 	private $categories;
 	
 	function __construct() {
-		$this->meanings = new collections\ArrayCollection ();
+		$this->definitions = new collections\ArrayCollection ();
 		$this->categories = new collections\ArrayCollection ();
 	}
 	
@@ -89,43 +89,43 @@ class Type {
 	
 	/**
 	 *
-	 * @param string $type
+	 * @param string $clazz
 	 * @return void
 	 */
-	public function setType($type) {
-		$this->type = $type;
+	public function setClazz($clazz) {
+		$this->clazz = $clazz;
 	}
 	
 	/**
 	 *
 	 * @return string
 	 */
-	public function getType() {
-		return $this->type;
+	public function getClazz() {
+		return $this->clazz;
 	}
 	
 	/**
 	 * 
-	 * @param kateglo\application\models\Meaning $meaning
+	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function addMeaning(models\Meaning $meaning) {
-		if (! $this->meanings->contains ( $meaning )) {
-			$this->meanings [] = $meaning;
-			$meaning->addType ( $this );
+	public function addDefinition(models\Definition $definition) {
+		if (! $this->definitions->contains ( $definition )) {
+			$this->definitions [] = $definition;
+			$definition->setClazz ( $this );
 		}
 	}
 	
 	/**
 	 * 
-	 * @param kateglo\application\models\Meaning $meaning
+	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function removeMeaning(models\Meaning $meaning) {
-		/*@var $removed kateglo\application\models\Meaning */
-		$removed = $this->meanings->removeElement ( $meaning );
+	public function removeDefinition(models\Definition $definition) {
+		/*@var $removed  kateglo\application\models\Definition */
+		$removed = $this->definitions->removeElement ( $definition );
 		if ($removed !== null) {
-			$removed->removeType ( $this );
+			$removed->removeClazz();
 		}
 	}
 	
@@ -133,37 +133,37 @@ class Type {
 	 * 
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function getMeanings() {
-		return $this->meanings;
+	public function getDefinitions() {
+		return $this->definitions;
 	}
-	
+
 	/**
 	 * 
-	 * @param kateglo\application\models\TypeCategory $category
+	 * @param kateglo\application\models\ClazzCategory $category
 	 * @return void
 	 */
-	public function setCategory(models\TypeCategory $category) {
+	public function setCategory(models\ClazzCategory $category) {
 		if (! $this->categories->contains ( $category )) {
 			$this->categories [0] = $category;
-			$category->addType ( $this );
+			$category->addClazz ( $this );
 		}
 	}
 	
 	/**
 	 * 
-	 * @param kateglo\application\models\TypeCategory $category
+	 * @param kateglo\application\models\ClazzCategory $category
 	 * @return void
 	 */
-	public function removeCategory() {
-		$removed = $this->categories->removeElement ( $this->categories->get(0) );
+	public function removeCategory(models\ClazzCategory $category) {
+		$removed = $this->categories->removeElement ( $category );
 		if ($removed !== null) {
-			$removed->removeType ( $this );
+			$removed->removeType ();
 		}
 	}
 	
 	/**
 	 * 
-	 * @return kateglo\application\models\TypeCategory
+	 * @return kateglo\application\models\ClazzCategory
 	 */
 	public function getCategory() {
 		return $this->categories->get(0);

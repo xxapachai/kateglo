@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kateglo - Body</title>
+</head>
+<body metal:define-macro="body">
+<div class="body">
+	<div class="header">
+		<div class="logo">
+			<a href="/" title="Kateglo Start" ><img class="logoImg" src="/images/kateglo40.png" alt="Kateglo Logo" /></a>
+		</div>
+		<div class="search">
+			<div class="search-form">
+				<form action="/search" method="get" >
+					<div>
+						<input type="text" name="query" onfocus="this.select();" class="search-field" autocomplete="off" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
+						<input type="submit" value="Cari" />
+					</div>
+			 	</form>
+		 	</div>
+		</div>
+	</div>
+	<div class="navbar">
+		<div class="menu">
+			<ul>
+				<li><a href="">Beranda</a></li>
+				<li><a href="">Kamus</a></li>
+				<li><a href="">Tesaurus</a></li>
+				<li>Glosarium</li>
+				<li>Peribahasa</li>
+				<li>Singkatan</li>
+			</ul>
+		</div>
+		<div class="account">
+			Masuk Log
+		</div>
+	</div>
+	<div class="content">
+		<div metal:define-slot="content">
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footer-menu">text</div>
+		<div class="footer-license">
+			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+				<img src="/images/cc-by-nc-sa.png" style="border-width: 0pt;" alt="CC-BY-NC-SA" title="CC-BY-NC-SA" />
+			</a>
+		</div>
+	</div>	
+</div>
+</body>
+</html>

@@ -19,48 +19,72 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\daos;
+use kateglo\application\utilities;
+use kateglo\application\configs;
 /**
- *  
+ * 
  * 
  * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
+ * @since 2009-11-10
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Search implements interfaces\Search{
+class Search implements interfaces\Search {
 	
 	public static $CLASS_NAME = __CLASS__;
 	
 	/**
 	 * 
-	 * @var kateglo\application\daos\interfaces\Lemma
+	 * @var kateglo\application\utilities\interfaces\SearchEngine
 	 */
-	private $lemma;
+	private $searchEngine;
 	
 	/**
 	 *
-	 * @params kateglo\application\daos\interfaces\Lemma $lemma
+	 * @params kateglo\application\utilities\interfaces\SearchEngine $searchEngine
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(daos\interfaces\Lemma $lemma){
-		$this->lemma = $lemma;
+	public function setSearchEngine(utilities\interfaces\SearchEngine $searchEngine) {
+		$this->searchEngine = $searchEngine;
 	}
 	
 	/**
 	 * 
-	 * @param string $lemma
-	 * @return kateglo\application\models\Lemma
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function lemma($lemma){
-		$result = $this->lemma->getByLemma($lemma);
-		
-		return $result;
+	public function entry($searchText, $offset = 0, $limit = 10) {
+		if ($this->searchEngine->getSolrService ()->ping ()) {
+			
+			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit );
+			
+			if ($request->getHttpStatus () == 200) {
+				
+				for ($i = 0; $i < count($request->response->docs); $i++){
+					/*@var $docs Apache_Solr_Document */
+					$docs = $request->response->docs[$i];
+					$newDocs['documentBoost'] = $docs->getBoost();
+					$newDocs['fields'] = $docs->getFields();
+					$newDocs['fieldBoosts'] = $docs->getFieldBoosts();
+					$request->response->docs[$i] = $newDocs;
+				}
+				
+				return (array)$request->response;
+			} else {
+				throw new exceptions\SearchException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
+			}
+		} else {
+			throw new exceptions\SearchException ( 'Search Engine service is not responding !' );
+		}
+	
 	}
+
 }
 ?>

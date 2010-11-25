@@ -1,53 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/libs/extjs/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="/styles/main.css" />
-<script type="text/javascript" src="/libs/extjs/adapter/ext/ext-base.js"></script>
-<script type="text/javascript" src="/libs/extjs/ext-all.js"></script>
-<title>Kateglo - Search</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Kateglo - Beranda</title>
+<meta metal:use-macro="${appPath}/views/macros/head.html/head" />
 </head>
-<body>
-	<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
-	<form action="/search" method="get" >
-   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
-   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
-   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
-		<div id="ext-gen4" class="x-form-field-wrap x-form-field-trigger-wrap" style="width: 570px;">
-			<input id="searchLemma" class=" x-form-text x-form-field" type="text" name="query" size="40" onfocus="this.select();" style="width: 562px;" autocomplete="off" tal:attributes="value search/getFieldValue" />
-			<img alt="" id="ext-gen5" class="x-form-trigger x-form-arrow-trigger" src="/libs/extjs/resources/images/default/s.gif" style="display: none;"/>
-		</div>		
-		<div style="padding-top:4px;">
-           Search: <input style="valign: middle;" checked="checked" type="radio" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> 
-           <img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" />
-			&nbsp;&nbsp; &nbsp; <input style="valign: middle;" type="radio"  tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> 
-			<img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/uk.png" alt="inggris" />
-        </div>
-	 </div></div></div>
-	 </form>
-    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
-	</div>
-	<div tal:condition="php: hits.count() GT 0 AND search.getLemmaRadioValue() EQ search.getCheckedRadio()">
-		<table border="1">
-			<thead>
-			<tr><th align="center">Lemma</th><th align="center">Lexical</th><th align="center">Definitions</th></tr>
-			</thead>
-			<tbody>
-				<tr tal:repeat="hit hits"><td valign="middle"><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td valign="middle" tal:content="hit/lexical">Lexical</td><td valign="middle" tal:content="structure php: nl2br(hit.definition)">Definitions</td></tr>
-			</tbody>
-		</table>
-	</div>
-	<div tal:condition="php: hits.count() GT 0 AND search.getGlossaryRadioValue() EQ search.getCheckedRadio()" >
-		<table border="1">
-			<thead>
-			<tr><th align="center">Glossary</th><th align="center">Lemma</th><th align="center">Locale</th><th align="center">Discipline</th></tr>
-			</thead>
-			<tbody>
-				<tr tal:repeat="hit hits"><td tal:content="hit/glossary">Glossary</td><td><a tal:define="global lemma hit/lemma;" href="lemma/${lemma}">${lemma}</a></td><td tal:content="hit/localeName">Locale</td><td tal:content="hit/disciplineName">Discipline</td></tr>
-			</tbody>
-		</table>
+<body metal:use-macro="${appPath}/views/macros/body.html/body">
+	<div tal:omit-tag="true"  metal:fill-slot="content">
+	    <div tal:repeat="hit hits/docs">
+	    	<div>
+	    		<a tal:define="global entry hit/fields/entry;" href="entry/${entry}">${entry}</a>
+	    		<div tal:condition="php: is_array(hit['fields']['definition'])">
+		    		<div tal:repeat="definition hit/fields/definition" style="padding-left:15px;">    		
+		    			<div tal:content="definition">Definition</div>
+		    		</div>
+	    		</div>
+	    		<div tal:condition="php: !is_array(hit['fields']['definition'])">
+		    		<div tal:content="hit/fields/definition" style="padding-left:15px;">    		
+		    			Definition
+		    		</div>
+	    		</div>
+	    	</div>
+	    	<br />
+	    </div>
 	</div>
 </body>
 </html>

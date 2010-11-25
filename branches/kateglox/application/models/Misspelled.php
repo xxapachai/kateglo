@@ -22,16 +22,16 @@ namespace kateglo\application\models;
 use kateglo\application\utilities\collections;
 use kateglo\application\models;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- * 
+ *
  * @Entity
  * @Table(name="misspelled")
  */
@@ -40,104 +40,126 @@ class Misspelled {
 	const CLASS_NAME = __CLASS__;
 	
 	/**
-	 * 
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="lemma_id")
+	 * @Column(type="integer", name="misspelled_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
-	 * 
-	 * @var kateglo\application\models\Lemma
-	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
-     * @JoinColumn(name="lemma_id", referencedColumnName="lemma_id")
+	 * @var kateglo\application\models\Meaning
+	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
+	 * @JoinColumn(name="misspelled_meaning_id", referencedColumnName="meaning_id")
 	 */
-	protected $misspelled;
+	private $meaning;
 	
 	/**
-	 * 
-	 * @var string
-	 * @ManyToOne(targetEntity="kateglo\application\models\Lemma")
-     * @JoinColumn(name="misspelled_id", referencedColumnName="lemma_id")
+	 * @var kateglo\application\models\Meaning
+	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", inversedBy="spelled")
+	 * @JoinColumn(name="misspelled_misspelled_id", referencedColumnName="meaning_id")
 	 */
-	protected $misspells;
+	private $misspelled;
 	
 	/**
-	 * 
-	 * @return void
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="misspelleds", cascade={"persist"})
 	 */
-	public function __construct(){
-		$relations = new collections\ArrayCollection();
+	private $definitions;
+	
+	function __construct() {
+		$this->definitions = new collections\ArrayCollection ();
 	}
 	
 	/**
-	 * 
-	 * @return int
+	 * @return the $id
 	 */
-	public function getId(){
+	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 *
-	 * @param kateglo\application\models\Lemma $misspelled
+	 * @return kateglo\application\models\Meaning
+	 */
+	public function getMeaning() {
+		return $this->meaning;
+	}
+	
+	/**
+	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setMisspelled(models\Lemma $misspelled){
-		$this->misspelled = $misspelled;
+	public function setMeaning(models\Meaning $meaning) {
+		$this->meaning = $meaning;
 	}
-
+	
 	/**
 	 *
-	 * @return kateglo\application\models\Lemma
+	 * @return void
 	 */
-	public function getMisspelled(){
+	public function removeMeaning() {
+		if ($this->meaning !== null) {
+			/*@var $entry kateglo\application\models\Meaning */
+			$meaning = $this->meaning;
+			$this->meaning = null;
+			$meaning->removeMisspelled ( $this );
+		}
+	}
+	
+	/**
+	 * 
+	 * @return kateglo\application\models\Meaning
+	 */
+	public function getMisspelled() {
 		return $this->misspelled;
 	}
-
+	
 	/**
-	 *
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function removeMisspelled() {
-		if ($this->misspelled !== null) {
-			/*@var $misspelled kateglo\application\models\Lemma */
-			$misspelled = $this->misspelled;
-			$this->misspelled = null;
-			$misspelled->removeMisspelled($this);
+	public function setMisspelled(models\Meaning $meaning) {
+		if ($this->misspelled !== $meaning) {
+			$this->misspelled = $meaning;
+			$meaning->setSpelled ( $this );
 		}
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Lemma $misspells
+	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function setMisspells(models\Lemma $misspells){
-		$this->misspells = $misspells;
-	}
-
-	/**
-	 *
-	 * @return kateglo\application\models\Lemma
-	 */
-	public function getMisspells(){
-		return $this->misspells;
-	}
-
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeMisspells() {
-		if ($this->misspells !== null) {
-			/*@var $misspells kateglo\application\models\Lemma */
-			$misspells = $this->misspelled;
-			$this->misspells = null;
-			$misspells->removeMisspells($this);
+	public function addDefinition(models\Definition $definition) {
+		if (! $this->definitions->contains ( $definition )) {
+			$this->definitions [] = $definition;
+			$definition->addMisspelled ( $this );
 		}
 	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Definition $definition
+	 * @return source
+	 */
+	public function removeDefinition(models\Definition $definition) {
+		/*@var $removed kateglo\application\models\Definition */
+		$removed = $this->definitions->removeElement ( $definition );
+		if ($removed !== null) {
+			$removed->removeMisspelled ( $this );
+		}
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getDefinitions() {
+		return $this->definitions;
+	}
+
 }
+
 ?>

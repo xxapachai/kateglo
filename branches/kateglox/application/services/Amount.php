@@ -21,7 +21,7 @@ namespace kateglo\application\services;
  */
 use kateglo\application\daos;
 /**
- *  
+ * 
  * 
  * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
@@ -37,54 +37,27 @@ class Amount implements interfaces\Amount {
 	
 	/**
 	 * 
-	 * @var kateglo\application\daos\interfaces\Lemma
+	 * @var kateglo\application\daos\interfaces\Entry
 	 */
-	private $lemma;
-	
-	/**
-	 * 
-	 * @var kateglo\application\daos\interfaces\Glossary
-	 */
-	private $glossary;
+	private $entry;
 	
 	/**
 	 *
-	 * @params kateglo\application\daos\interfaces\Lemma $lemma
+	 * @params kateglo\application\daos\interfaces\Entry $entry
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setLemma(daos\interfaces\Lemma $lemma){
-		$this->lemma = $lemma;
-	}
-	
-	/**
-	 *
-	 * @params kateglo\application\daos\interfaces\Glossary $glossary
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setGlossary(daos\interfaces\Glossary $glossary){
-		$this->glossary = $glossary;
+	public function setEntry(daos\interfaces\Entry $entry) {
+		$this->entry = $entry;
 	}
 	
 	/**
 	 * 
 	 * @return int
 	 */
-	public function lemma(){
-		$result = $this->lemma->getTotalCount();
-		
-		return $result;
-	}
-	
-	/**
-	 * 
-	 * @return int
-	 */
-	public function glossary(){
-		$result = $this->lemma->getTotalCount();
+	public function entry() {
+		$result = $this->entry->getTotalCount ();
 		
 		return $result;
 	}

@@ -38,9 +38,8 @@ use kateglo\application\daos;
  */
 class SearchController extends Zend_Controller_Action {
 
-	const CLASS_NAME = __CLASS__;
-
 	public function indexAction() {
+		$this->view->appPath = APPLICATION_PATH;
 		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
 		$search = new faces\Search();
@@ -48,31 +47,16 @@ class SearchController extends Zend_Controller_Action {
 		$this->view->hits = new collections\ArrayCollection();
 		if($request->isGet()){
 			$searchText = $request->getParam($search->getFieldName());
-			$contextText = $request->getParam($search->getRadioName());
 			$search->setFieldValue($searchText);
-			if($contextText !== null && $contextText !== ''){
-				$search->setCheckedRadio($contextText);
-			}
 			if($searchText !== '' || $searchText !== null){
 				$hits = null;
-				$lucene = utilities\Injector::getInstance(interfaces\Lucene::INTERFACE_NAME);
-				if($contextText == $search->getLemmaRadioValue()){					
-					$this->view->hits = $lucene->lemma($searchText);
-				}else if($contextText == $search->getGlossaryRadioValue()){
-					$this->view->hits = $lucene->glossary($searchText);	
-				}else{
+				$lucene = utilities\Injector::getInstance(interfaces\Search::INTERFACE_NAME);
+					$this->view->hits = $lucene->entry($searchText);
 					header('location: '.$request->getBaseUrl());
-				} 
 			}
 			if($request->getParam('output') !== '' || $request->getParam('output') !== null){
 				$output = $request->getParam('output');
 				if($output == 'json'){
-					foreach($this->view->hits as $hits){
-						$hits->lemma = $hits->lemma;
-						if($contextText == $search->getGlossaryRadioValue()){
-							$hits->glossary = $hits->glossary;
-						}
-					}
 					$json = json_encode(array('id' => $searchText, 'count' => $this->view->hits->count() , 'data' => $this->view->hits->toArray()));
 					echo $request->getParam('callback').'('.$json.')';
 					die();

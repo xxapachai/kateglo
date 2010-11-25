@@ -18,8 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\services\interfaces;
 use kateglo\application\utilities;
+use kateglo\application\services\interfaces;
 use kateglo\application\helpers;
 use kateglo\application\faces;
 use kateglo\application\daos;
@@ -34,33 +34,24 @@ use kateglo\application\daos;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class ListsController extends Zend_Controller_Action
+class EntryController extends Zend_Controller_Action
 {
 
 	public function indexAction(){
+		$this->view->appPath = APPLICATION_PATH;
 		/*@var $request Zend_Controller_Request_Http */
 		$request = $this->getRequest();
 		$searchFaces = new faces\Search();
 		$this->view->search = $searchFaces;
-		if($request->isPost()){
-			$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME);
-			$amount = utilities\Injector::getInstance(interfaces\Amount::INTERFACE_NAME);
-			$filters = array();
-			if(array_key_exists('filter', $_POST)){
-				if(is_array($_POST['filter'])){
-					$filters = $_POST['filter'];
-				}
+		if($request->isGet()){
+			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
+			if($text !== ''){
+				$searchFaces->setFieldValue($text);
+				$entityService = utilities\Injector::getInstance(interfaces\Entity::INTERFACE_NAME);
+				$this->view->entry = $entityService->entry($text);
 			}
-			echo "{\"totalCount\": \"".$amount->lemma()."\",\"data\":".json_encode($lists->listLemma($_POST['start'], $_POST['limit'], $filters, $_POST['sort'], $_POST['dir']))."}"; die();
 		}else{
-			if($request->isGet()){
-				if(array_key_exists('lists', $_GET)){
-					$lists = utilities\Injector::getInstance(interfaces\Lists::INTERFACE_NAME); 
-					echo "{\"type\": ".json_encode($lists->listType()).", \"lexical\": ".json_encode($lists->listLexical())."}"; die();
-				}
-			}else{
-				header('location: '.$request->getBaseUrl());
-			}
+			header('location: '.$request->getBaseUrl());
 		}
 	}
 }

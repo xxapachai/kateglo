@@ -159,6 +159,7 @@ class DataAccess implements interfaces\DataAccess {
         					"user" => $this->configs->get()->database->username,
         					"password" => $this->configs->get()->database->password);
 				$this->conn = DBAL\DriverManager::getConnection($params, null);
+				$this->conn->setCharset($this->configs->get()->database->charset);
 			}
 		}else{
 			$this->conn = $conn;

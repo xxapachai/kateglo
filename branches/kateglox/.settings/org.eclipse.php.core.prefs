@@ -1,5 +1,5 @@
-#Wed Oct 27 16:45:45 CEST 2010
+#Sat Nov 20 15:04:14 CET 2010
 eclipse.preferences.version=1
-include_path=5;org.eclipse.dltk.USER_LIBRARY/Doctrine\u00055;org.eclipse.dltk.USER_LIBRARY/Zend Framework\u00055;org.eclipse.dltk.USER_LIBRARY/Stubbles\u00055;org.eclipse.dltk.USER_LIBRARY/PHPTal
+include_path=5;org.eclipse.dltk.USER_LIBRARY/Doctrine\u00055;org.eclipse.dltk.USER_LIBRARY/Zend Framework\u00055;org.eclipse.dltk.USER_LIBRARY/Stubbles\u00055;org.eclipse.dltk.USER_LIBRARY/PHPTal\u00055;org.eclipse.dltk.USER_LIBRARY/Apache Solr
 phpVersion=php5.3
 use_asp_tags_as_php=false

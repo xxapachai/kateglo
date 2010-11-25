@@ -1,57 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/libs/extjs/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="/styles/main.css" />
-<script type="text/javascript" src="/libs/extjs/adapter/ext/ext-base.js"></script>
-<script type="text/javascript" src="/libs/extjs/ext-all.js"></script>
-<title>Kateglo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Kateglo - Beranda</title>
+<meta metal:use-macro="${appPath}/views/macros/head.html/head" />
 </head>
-<body>
-<div style="width:600px;margin-top:20px;margin-left:auto;margin-right:auto;">
-	<form action="/search" method="get" >
-   	<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
-   	<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
-   		<h3 style="margin-bottom:5px;">Search Kateglo</h3>
-		<div id="ext-gen4" class="x-form-field-wrap x-form-field-trigger-wrap" style="width: 570px;">
-			<input id="searchLemma" class=" x-form-text x-form-field" type="text" value="" name="query" size="40" onfocus="this.select();" style="width: 562px;" autocomplete="off"/>
-			<img alt="" id="ext-gen5" class="x-form-trigger x-form-arrow-trigger" src="/libs/extjs/resources/images/default/s.gif" style="display: none;"/>
-		</div>		
-		<div style="padding-top:4px;">
-           Search: <input style="valign: middle;" checked="checked" type="radio" tal:define="context search/getLemmaRadioValue" tal:attributes="name search/getRadioName; value search/getLemmaRadioValue" /> 
-           <img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" />
-			&nbsp;&nbsp; &nbsp; <input style="valign: middle;" type="radio"  tal:define="context search/getGlossaryRadioValue" tal:attributes="name search/getRadioName; value search/getGlossaryRadioValue" /> 
-			<img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/uk.png" alt="inggris" />
-        </div>
-	 </div></div></div>
-	 </form>
-    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
-    <div tal:define="global lemmaAmount amount/lemma; glossaryAmount amount/glossary">
-	    <table>
-	    	<tr>
-	    		<td><img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /></td>
-	    		<td>:</td>
-	    		<td> ${lemmaAmount} entri.</td>
-	    	</tr> 
-	    	<tr>
-	    		<td><img style="valign: middle; border: 1px solid black;" src="/images/indonesia.png" alt="indonesia" /> - <img style="valign: middle; border: 1px solid black;" src="/images/uk.png" alt="inggris" /></td>
-	    		<td>:</td>
-	    		<td> ${glossaryAmount} entri.</td></tr>
-	    </table>
-    </div>
-
-    <table>
-    	<tr><td colspan="3">Salah Eja</td></tr>
-		<tr tal:repeat="list lists/randomMisspelled"><td valign="middle"><a tal:define="global misspelledLemma list/getMisspelled/getLemma;" href="lemma/${misspelledLemma}">${misspelledLemma}</a></td><td>&nbsp;harusnya&nbsp;</td><td valign="middle" ><a tal:define="global misspells list/getMisspells/getLemma;" href="lemma/${misspells}">${misspells}</a></td></tr>
-	</table>
-	
-	<table>
-		<tr><td>Lemma</td></tr>
-		<tr tal:repeat="list lists/randomLemma"><td valign="middle"><a tal:define="global lemma list/getLemma;" href="lemma/${lemma}">${lemma}</a></td></tr>
-	</table>
-</div>
+<body metal:use-macro="${appPath}/views/macros/body.html/body">
+	<div tal:omit-tag="true"  metal:fill-slot="content">
+		<div style="text-align: center">
+			<p>
+				Selamat datang di <strong>Kateglo (Beta)</strong> - <a href="/kamus">kamus</a>, <a href="/tesaurus">tesaurus</a>, dan glosarium bahasa Indonesia.
+			</p>
+			<p>
+				Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari <a href="/entry/entri">entri</a> yang Anda inginkan.
+			</p>
+			<p tal:define="global entryAmount amount/entry;" >
+	    		Saat ini terdapat ${entryAmount} entri <a href="/kamus">kamus</a>.
+	   		</p>
+	   		<p>
+	   			<strong>Entri acak:</strong>
+	   			<br />
+	   			<span tal:repeat="list lists/randomEntry"><a tal:define="global entry list/getEntry;" href="entry/${entry}">${entry}</a>  &nbsp;&nbsp;&nbsp;</span>
+	   		</p>
+	   		<p>
+	   			<strong>Entri acak:</strong>
+	   			<br />
+	   			<span tal:repeat="list lists/randomMisspelled"> 
+	   				<a tal:define="global misspells list/getMeaning/getEntry/getEntry;" href="entry/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/getMisspelled/getEntry/getEntry;" href="entry/${misspelledEntry}">${misspelledEntry}</a> <br />
+	   			</span>
+	   		</p>
+		</div>
+	</div>
 </body>
 </html>
-

@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\daos;
+namespace kateglo\application\services;
 /*
  *  $Id$
  *
@@ -19,56 +19,51 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\daos\interfaces;
-use kateglo\application\daos\exceptions;
-use kateglo\application\models;
-use Doctrine\ORM\Query;
-use kateglo\application\utilities;
+use kateglo\application\daos;
 /**
- *
- *
- * @package kateglo\application\daos
+ * 
+ * 
+ * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Lexical implements interfaces\Lexical {
+class Entity implements interfaces\Entity {
 	
 	public static $CLASS_NAME = __CLASS__;
-
+	
+	
 	/**
 	 * 
-	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 * @var kateglo\application\daos\interfaces\Entry
 	 */
-	private $dataAccess;
-		
+	private $entry;
+
+	
 	/**
 	 *
-	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @params kateglo\application\daos\interfaces\Entry $entry
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
-		$this->dataAccess = $dataAccess;
+	public function setEntry(daos\interfaces\Entry $entry) {
+		$this->entry = $entry;
 	}
+	
 	
 	/**
-	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * 
+	 * @param string $entry
+	 * @return kateglo\application\models\Entry
 	 */
-	public function getAllLexical(){		
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT lx FROM ".models\Lexical::CLASS_NAME." lx ");
-		$result = $query->getResult(Query::HYDRATE_ARRAY);
-		if(count($result) === 0){
-			throw new exceptions\DomainResultEmptyException();
-		}
-
+	public function entry($entry) {
+		$result = $this->entry->getByEntry ( $entry );
+		
 		return $result;
 	}
-	
 }
 ?>

@@ -23,23 +23,25 @@ namespace kateglo\application\services\interfaces;
 /**
  *  
  * 
- * @package kateglo\application\services\interfaces
+ * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
+ * @since 2009-11-10
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 interface Search {
-
+	
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 * 
-	 * @param string $lemma
-	 * @return kateglo\application\models\Lemma
+	 * @param string $searchText
+	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	function lemma($lemma);
+	function entry($searchText);
+	
+	
 }
 ?>

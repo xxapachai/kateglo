@@ -33,16 +33,16 @@ use kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="discipline")
+ * @Table(name="type_category")
  */
-class Discipline {
+class TypeCategory {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="discipline_id")
+	 * @Column(type="integer", name="type_category_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
@@ -50,23 +50,23 @@ class Discipline {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="discipline_name", unique=true, length=255)
+	 * @Column(type="string", name="type_category_name", unique=true, length=255)
 	 */
-	protected $discipline;
+	protected $category;
 	
 	/**
 	 * @var kateglo\application\utilities\collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
-	 * @JoinTable(name="rel_definition_discipline",
-	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
-	 * )
+	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="categories", cascade={"persist"})
 	 */
-	private $definitions;
-	
-	public function __construct(){
-		$this->definitions = new collections\ArrayCollection ();
-	}
+	protected $types;
+
+	/**
+	 * 
+	 * Construct
+	 */
+	function __construct() {
+		$this->types = new collections\ArrayCollection ();
+	}	
 	
 	/**
 	 * @return the $id
@@ -76,51 +76,51 @@ class Discipline {
 	}
 	
 	/**
-	 * @return the $discipline
+	 * @return the $category
 	 */
-	public function getDiscipline() {
-		return $this->discipline;
+	public function getCategory() {
+		return $this->category;
 	}
 	
 	/**
-	 * @param string $discipline
+	 * @param string $category
 	 */
-	public function setDiscipline($discipline) {
-		$this->discipline = $discipline;
+	public function setCategory($category) {
+		$this->category = $category;
 	}
-	
+
 	/**
-	 * 
-	 * @param kateglo\application\models\Definition $definition
+	 *
+	 * @param kateglo\application\models\Type $type
 	 * @return void
-	 */	
-	public function addDefinition(models\Definition $definition){
-        if (!$this->definitions->contains($definition)) {
-            $this->definitions[] = $definition;
-            $definition->addDiscipline($this);
-        }
-    }
-
-    /**
-     * 
-     * @param kateglo\application\models\Definition $definition
-     * @return void
-     */
-    public function removeDefinition(models\Definition $definition){
-    	/*@var $removed kateglo\application\models\Definition */
-        $removed = $this->definitions->removeElement($definition);
-        if ($removed !== null) {
-            $removed->removeDiscipline($this);
-        }
-    }
-
-    /**
-     * 
-     * @return kateglo\application\utilities\collections\ArrayCollection
-     */
-    public function getDefinitions(){
-        return $this->definitions;
-    }
+	 */
+	public function addType(models\Type $type) {
+		if (! $this->types->contains ( $type )) {
+			$this->types [] = $type;
+			$type->setCategory ( $this );
+		}
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Type $type
+	 * @return void
+	 */
+	public function removeType(models\Type $type) {
+		/*@var $removed kateglo\application\models\Type */
+		$removed = $this->types->removeElement ( $type );
+		if ($removed !== null) {
+			$removed->removeCategory ();
+		}
+	}
+	
+	/**
+	 *
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	public function getTypes() {
+		return $this->types;
+	}	
 }
 
 ?>

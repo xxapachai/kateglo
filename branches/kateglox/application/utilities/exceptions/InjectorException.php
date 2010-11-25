@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\daos\interfaces;
+namespace kateglo\application\utilities\exceptions;
 /*
  *  $Id$
  *
@@ -21,53 +21,17 @@ namespace kateglo\application\daos\interfaces;
  */
 
 /**
+ * 
  *
- *
- * @package kateglo\application\daos\interfaces
+ * @package kateglo\application\services\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
+ * @since 2009-10-07
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Lemma{
-
-	const INTERFACE_NAME = __CLASS__;
+class InjectorException extends \Exception{
 	
-	/**
-	 *
-	 * @param string $lemma 
-	 * @return kateglo\application\models\Lemma
-	 */
-	function getByLemma($lemma);
-
-	/**
-	 *
-	 * @return int
-	 */
-	function getTotalCount();
-
-	/**
-	 *
-	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	function getRandom($limit);
-
-	/**
-	 * 
-	 * @param int $offset
-	 * @param int $limit
-	 * @param string $lemma
-	 * @param array $type
-	 * @param string $definition
-	 * @param array $lexical
-	 * @param string $orderBy
-	 * @param string $direction
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	function getLists($offset, $limit, $lemma, array $type, $definition, array $lexical, $orderBy, $direction);
-
 }
 ?>

@@ -19,8 +19,12 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+
 use kateglo\application\configs;
-use kateglo\application\utilities\exceptions;
+use Doctrine\Common;
+use Doctrine\Common\Cache;
+use Doctrine\DBAL;
+use Doctrine\ORM;
 /**
  *
  *
@@ -31,44 +35,59 @@ use kateglo\application\utilities\exceptions;
  * @version 0.0
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
+ * @Singleton
  */
-class Injector{
+class SearchEngine implements interfaces\SearchEngine {
+	
+	public static $CLASS_NAME = __CLASS__;
 	
 	/**
-	 * 
-	 * @var stubBinder
+	 *
+	 * @var Apache_Solr_Service
 	 */
-	private static $container;
+	private $service = null;
 	
 	/**
-	 * 
-	 * @param string $className
-	 * @return Object<T>
+	 *
+	 * @var kateglo\application\configs\interfaces\Configs
 	 */
-	public static function getInstance($className){
-		if(! (self::$container instanceof \stubBinder)){
-			self::set();
-		}
-		$object = self::$container->getInjector()->getInstance($className);
-		if(! ($object instanceof $className) ){ 
-			throw new exceptions\InjectorException('Object instantiating failed!');
-		}
-		return $object;
+	private $configs;
+	
+	/**
+	 *
+	 * @param kateglo\application\configs\interfaces\Configs $configs 
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setConfigs(configs\interfaces\Configs $configs) {
+		$this->configs = $configs;
 	}
 	
 	/**
 	 *
-	 * @param stubBinder $container
+	 * @return Apache_Solr_Service
 	 */
-	public static function set(\stubBinder $container = null){
-		if($container === null){
-			if(! (self::$container instanceof \stubBinder) ){
-				self::$container = new \stubBinder();
-				configs\Binder::bind(self::$container);
-			}
+	public function getSolrService() {
+		if (! ($this->service instanceof \Apache_Solr_Service)) {	
+			$this->setSolrService();		
+		}
+		return $this->service;
+	}
+	
+	/**
+	 *
+	 * @param Apache_Solr_Service $service
+	 * @return void
+	 */
+	public function setSolrService(\Apache_Solr_Service $service = null) {
+		if($service === null){
+			$this->service = new \Apache_Solr_Service ( $this->configs->get()->solr->host, $this->configs->get()->solr->port, $this->configs->get()->solr->path );			
 		}else{
-			self::$container = $container;
+			$this->service = $service;
 		}
 	}
 }
+
 ?>
