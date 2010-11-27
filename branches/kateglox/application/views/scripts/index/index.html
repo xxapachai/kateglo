@@ -15,19 +15,19 @@
 			<p>
 				Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari <a href="/entry/entri">entri</a> yang Anda inginkan.
 			</p>
-			<p tal:define="global entryAmount amount/entry;" >
+			<p tal:define="entryAmount amount" >
 	    		Saat ini terdapat ${entryAmount} entri <a href="/kamus">kamus</a>.
 	   		</p>
 	   		<p>
 	   			<strong>Entri acak:</strong>
 	   			<br />
-	   			<span tal:repeat="list lists/randomEntry"><a tal:define="global entry list/getEntry;" href="entry/${entry}">${entry}</a>  &nbsp;&nbsp;&nbsp;</span>
+	   			<span tal:repeat="list entry/docs"><a tal:define="global entry_name list/fields/entry;" href="entry/${entry_name}">${entry_name}</a>  &nbsp;&nbsp;&nbsp;</span>
 	   		</p>
 	   		<p>
 	   			<strong>Entri acak:</strong>
 	   			<br />
-	   			<span tal:repeat="list lists/randomMisspelled"> 
-	   				<a tal:define="global misspells list/getMeaning/getEntry/getEntry;" href="entry/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/getMisspelled/getEntry/getEntry;" href="entry/${misspelledEntry}">${misspelledEntry}</a> <br />
+	   			<span tal:repeat="list misspelled/docs"> 
+	   				<a tal:define="global misspells list/fields/spelled;" href="entry/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/fields/entry;" href="entry/${misspelledEntry}">${misspelledEntry}</a> <br />
 	   			</span>
 	   		</p>
 		</div>

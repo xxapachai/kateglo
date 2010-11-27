@@ -31,7 +31,7 @@ namespace kateglo\application\services\exceptions;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class SearchException extends \Exception {
+class EntryException extends \Exception {
 
 }
 ?>

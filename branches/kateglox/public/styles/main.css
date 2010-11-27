@@ -14,6 +14,10 @@ a {
 	text-decoration: none;
 }
 
+a:visited {
+	color: blue;
+}
+
 .body {
 	width: 600px;
 	margin-left: auto;
@@ -121,8 +125,13 @@ a {
 	margin-bottom: 10px;
 }
 
-
 .class-sample {
 	font-style: italic;
 	font-size: small;
+}
+
+.source dt {
+	font-size: large;
+	font-weight: bold;
+	margin-bottom: 10px;
 }

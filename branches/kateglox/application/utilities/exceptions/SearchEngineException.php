@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\services\interfaces;
+namespace kateglo\application\utilities\exceptions;
 /*
  *  $Id$
  *
@@ -21,9 +21,9 @@ namespace kateglo\application\services\interfaces;
  */
 
 /**
- *  
  * 
- * @package kateglo\application\services\interfaces
+ *
+ * @package kateglo\application\services\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since 2009-10-07
@@ -31,15 +31,7 @@ namespace kateglo\application\services\interfaces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entity {
-
-	const INTERFACE_NAME = __CLASS__;
+class SearchEngineException extends \Exception{
 	
-	/**
-	 * 
-	 * @param string $entry
-	 * @return kateglo\application\models\Entry
-	 */
-	function entry($entry);
 }
 ?>
