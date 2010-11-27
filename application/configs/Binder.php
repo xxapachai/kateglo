@@ -41,10 +41,7 @@ class Binder{
 		$container->bind(daos\interfaces\Entry::INTERFACE_NAME)->to(daos\Entry::$CLASS_NAME);
 		$container->bind(daos\interfaces\Misspelled::INTERFACE_NAME)->to(daos\Misspelled::$CLASS_NAME);
 		$container->bind(daos\interfaces\User::INTERFACE_NAME)->to(daos\User::$CLASS_NAME);
-		$container->bind(services\interfaces\Amount::INTERFACE_NAME)->to(services\Amount::$CLASS_NAME);
-		$container->bind(services\interfaces\Lists::INTERFACE_NAME)->to(services\Lists::$CLASS_NAME);
-		$container->bind(services\interfaces\Entity::INTERFACE_NAME)->to(services\Entity::$CLASS_NAME);
-		$container->bind(services\interfaces\Search::INTERFACE_NAME)->to(services\Search::$CLASS_NAME);
+		$container->bind(services\interfaces\Entry::INTERFACE_NAME)->to(services\Entry::$CLASS_NAME);
 		$container->bind(utilities\interfaces\DataAccess::INTERFACE_NAME)->to(utilities\DataAccess::$CLASS_NAME);
 		$container->bind(utilities\interfaces\LogService::INTERFACE_NAME)->to(utilities\LogService::$CLASS_NAME);	
 		$container->bind(utilities\interfaces\SearchEngine::INTERFACE_NAME)->to(utilities\SearchEngine::$CLASS_NAME);	

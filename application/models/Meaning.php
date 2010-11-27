@@ -159,8 +159,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addDefinition(models\Definition $definition) {
-		$this->definitions [] = $definition;
-		$definition->setMeaning ( $this );
+		if (! $this->definitions->contains ( $definition )) {
+			$this->definitions [] = $definition;
+			$definition->setMeaning ( $this );
+		}
 	}
 	
 	/**
@@ -189,14 +191,10 @@ class Meaning {
 	 * @param kateglo\application\models\Type $type
 	 * @return void
 	 */
-	public function setType(models\Type $type) {
-		if (is_null ( $type )) {
-			$this->removeType($type);
-		} else {
-			if (! $this->types->contains ( $type )) {
-				$this->types [0] = $type;
-				$type->addMeaning ( $this );
-			}
+	public function addType(models\Type $type) {
+		if (! $this->types->contains ( $type )) {
+			$this->types [] = $type;
+			$type->addMeaning ( $this );
 		}
 	}
 	
@@ -206,6 +204,7 @@ class Meaning {
 	 * @return void
 	 */
 	private function removeType(models\Type $type) {
+		/*@var $removed kateglo\application\models\Type */
 		$removed = $this->types->removeElement ( $type );
 		if ($removed !== null) {
 			$removed->removeMeaning ( $this );
@@ -216,8 +215,8 @@ class Meaning {
 	 *
 	 * @return kateglo\application\models\Type
 	 */
-	public function getType() {
-		return $this->types [0];
+	public function getTypes() {
+		return $this->types;
 	}
 	
 	/**
@@ -226,8 +225,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addAntonym(models\Antonym $antonym) {
-		$this->antonyms [] = $antonym;
-		$antonym->setMeaning ( $this );
+		if (! $this->antonyms->contains ( $antonym )) {
+			$this->antonyms [] = $antonym;
+			$antonym->setMeaning ( $this );
+		}
 	}
 	
 	/**
@@ -257,8 +258,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addSynonym(models\Synonym $synonym) {
-		$this->synonyms [] = $synonym;
-		$synonym->setMeaning ( $this );
+		if (! $this->synonyms->contains ( $synonym )) {
+			$this->synonyms [] = $synonym;
+			$synonym->setMeaning ( $this );
+		}
 	}
 	
 	/**
@@ -288,8 +291,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addRelation(models\Relation $relation) {
-		$this->relations [] = $relation;
-		$relation->setMeaning ( $this );
+		if (! $this->relations->contains ( $relation )) {
+			$this->relations [] = $relation;
+			$relation->setMeaning ( $this );
+		}
 	}
 	
 	/**
@@ -319,8 +324,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addSyllabel(models\Syllabel $syllabel) {
-		$this->syllabels [] = $syllabel;
-		$syllabel->setMeaning ( $this );
+		if (! $this->syllabels->contains ( $syllabel )) {
+			$this->syllabels [] = $syllabel;
+			$syllabel->setMeaning ( $this );
+		}
 	}
 	
 	/**
@@ -350,8 +357,10 @@ class Meaning {
 	 * @return void
 	 */
 	public function addMisspelled(models\Misspelled $misspelled) {
-		$this->misspelleds [] = $misspelled;
-		$misspelled->setMeaning ( $this );
+		if (! $this->misspelleds->contains ( $misspelled )) {
+			$this->misspelleds [] = $misspelled;
+			$misspelled->setMeaning ( $this );
+		}
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\services\interfaces;
 /*
- *  $Id$
+ *  $Id: Entity.php 261 2010-11-25 18:54:40Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -21,9 +21,9 @@ namespace kateglo\application\services\interfaces;
  */
 
 /**
- *  
  * 
- * @package kateglo\application\services
+ * 
+ * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since 2009-10-07
@@ -31,14 +31,44 @@ namespace kateglo\application\services\interfaces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Amount {
+interface Entry {
 	
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 * 
+	 * @param string $entry
+	 * @return kateglo\application\models\Entry
+	 */
+	function getEntry($entry);
+	
+	/**
+	 * 
 	 * @return int
 	 */
-	function entry();
+	function getTotalCount();
+	
+	/**
+	 *
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function randomMisspelled($limit = 5);
+	
+	/**
+	 *
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function randomEntry($limit = 10);
+	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function searchEntry($searchText, $offset = 0, $limit = 10);
 }
 ?>

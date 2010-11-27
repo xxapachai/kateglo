@@ -50,8 +50,9 @@ class SearchController extends Zend_Controller_Action {
 			$search->setFieldValue($searchText);
 			if($searchText !== '' || $searchText !== null){
 				$hits = null;
-				$lucene = utilities\Injector::getInstance(interfaces\Search::INTERFACE_NAME);
-					$this->view->hits = $lucene->entry($searchText);
+				/*@var $lucene kateglo\application\services\Entry */
+				$lucene = utilities\Injector::getInstance(interfaces\Entry::INTERFACE_NAME);
+					$this->view->hits = $lucene->searchEntry($searchText);
 					header('location: '.$request->getBaseUrl());
 			}
 			if($request->getParam('output') !== '' || $request->getParam('output') !== null){

@@ -47,8 +47,9 @@ class EntryController extends Zend_Controller_Action
 			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
 			if($text !== ''){
 				$searchFaces->setFieldValue($text);
-				$entityService = utilities\Injector::getInstance(interfaces\Entity::INTERFACE_NAME);
-				$this->view->entry = $entityService->entry($text);
+				/*@var $entityService kateglo\application\services\interfaces\Entry */
+				$entityService = utilities\Injector::getInstance(interfaces\Entry::INTERFACE_NAME);
+				$this->view->entry = $entityService->getEntry($text);
 			}
 		}else{
 			header('location: '.$request->getBaseUrl());

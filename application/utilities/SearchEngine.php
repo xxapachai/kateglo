@@ -70,10 +70,14 @@ class SearchEngine implements interfaces\SearchEngine {
 	 * @return Apache_Solr_Service
 	 */
 	public function getSolrService() {
-		if (! ($this->service instanceof \Apache_Solr_Service)) {	
-			$this->setSolrService();		
+		if (! ($this->service instanceof \Apache_Solr_Service)) {
+			$this->setSolrService ();
 		}
-		return $this->service;
+		if ($this->service->ping ()) {
+			return $this->service;
+		}else {
+			throw new exceptions\SearchEngineException;
+		}
 	}
 	
 	/**
@@ -82,9 +86,9 @@ class SearchEngine implements interfaces\SearchEngine {
 	 * @return void
 	 */
 	public function setSolrService(\Apache_Solr_Service $service = null) {
-		if($service === null){
-			$this->service = new \Apache_Solr_Service ( $this->configs->get()->solr->host, $this->configs->get()->solr->port, $this->configs->get()->solr->path );			
-		}else{
+		if ($service === null) {
+			$this->service = new \Apache_Solr_Service ( $this->configs->get ()->solr->host, $this->configs->get ()->solr->port, $this->configs->get ()->solr->path );
+		} else {
 			$this->service = $service;
 		}
 	}

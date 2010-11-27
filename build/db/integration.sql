@@ -68,7 +68,9 @@ INSERT INTO kateglox2.type (type_name) VALUES
 ('Kata ulang'),
 ('Gabungan kata'),
 ('Peribahasa'),
-('Idiom');
+('Idiom'),
+('Akronim'),
+('Singkatan');
 
 ---------------------------------------------------------------------------------------
 
@@ -462,3 +464,76 @@ order by phrase
 
 -------------------------------------------------------------------------------------------------
 
+insert into kateglox2.meaning (meaning_entry_id) select entry_id
+from abbr_entry
+left join phrase on phrase = abbr_key
+left join kateglox2.entry on entry_name = phrase
+where phrase is not null
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+insert into kateglox2.definition (definition_meaning_id, definition_text) select (select max( meaning_id ) from kateglox2.meaning where meaning_entry_id = entry_id)  new_mean, Case
+	when abbr_id is null then abbr_en
+	when abbr_id = '' then abbr_en
+	when abbr_id is not null then abbr_id
+end as definition
+from abbr_entry
+left join phrase on phrase = abbr_key
+left join kateglox2.entry on entry_name = phrase
+where phrase is not null
+
+-----------------------------------------------------------------------------------
+
+insert into kateglox2.rel_meaning_type (rel_meaning_id, rel_type_id) select (select max( meaning_id ) from kateglox2.meaning where meaning_entry_id = entry_id)  new_mean, 10
+from abbr_entry
+left join phrase on phrase = abbr_key
+left join kateglox2.entry on entry_name = phrase
+where phrase is not null
+group by new_mean
+
+--------------------------------------------------------------------------------------
+
+insert into kateglox2.entry (entry_name) select abbr_key
+from abbr_entry
+left join phrase on phrase = abbr_key
+where phrase is null
+group by abbr_key
+ON DUPLICATE KEY UPDATE entry_name=entry_name;
+
+---------------------------------------------------------------------------------------------------------
+
+insert into kateglox2.meaning (meaning_entry_id) select entry_id
+from abbr_entry
+left join kateglox2.entry on convert( abbr_key using utf8 ) = convert( entry_name using utf8)
+left join kateglox2.meaning on entry_id = meaning_entry_id
+where meaning_id is null
+group by abbr_key
+ON DUPLICATE KEY UPDATE meaning_entry_id=meaning_entry_id;
+
+-----------------------------------------------------------------------------------------------------------
+
+insert into kateglox2.rel_meaning_type (rel_meaning_id, rel_type_id) select meaning_id, 10
+from abbr_entry
+left join kateglox2.entry on convert( abbr_key using utf8 ) = convert( entry_name using utf8)
+left join kateglox2.meaning on entry_id = meaning_entry_id
+left join kateglox2.definition on definition_meaning_id = meaning_id
+where definition_id is null
+group by abbr_key
+ON DUPLICATE KEY UPDATE rel_meaning_id=rel_meaning_id, rel_type_id=rel_type_id;
+
+--------------------------------------------------------------------------------------------------------------
+
+insert into kateglox2.definition (definition_meaning_id, definition_text) select meaning_id, 
+Case
+	when abbr_id is null then abbr_en
+	when abbr_id = '' then abbr_en
+	when abbr_id is not null then abbr_id
+end as definition
+from abbr_entry
+left join kateglox2.entry on convert( abbr_key using utf8 ) = convert( entry_name using utf8)
+left join kateglox2.meaning on entry_id = meaning_entry_id
+left join kateglox2.definition on definition_meaning_id = meaning_id
+where definition_id is null
+group by abbr_key
+having definition is not null

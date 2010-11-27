@@ -278,7 +278,7 @@ function insertSolr(&$docStart, $segment = 100) {
 					}
 					
 					if ($meaning->getSpelled () instanceof kateglo\application\models\Misspelled) {
-						$doc->addField ( 'classCategory', $meaning->getSpelled ()->getMeaning ()->getEntry ()->getEntry () );
+						$doc->addField ( 'spelled', $meaning->getSpelled ()->getMeaning ()->getEntry ()->getEntry () );
 					}
 					
 					/*@var $syllabel kateglo\application\models\Syllabel */
