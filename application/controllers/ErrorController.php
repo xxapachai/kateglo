@@ -61,6 +61,7 @@ class ErrorController extends Zend_Controller_Action
 		$search = new faces\Search();
 		$this->view->search = $search;
 		$this->view->appPath = APPLICATION_PATH;
+		$this->view->formAction = '/kamus';
     }
 
 

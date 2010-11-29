@@ -43,6 +43,7 @@ class EntryController extends Zend_Controller_Action
 		$request = $this->getRequest();
 		$searchFaces = new faces\Search();
 		$this->view->search = $searchFaces;
+		$this->view->formAction = '/kamus';
 		if($request->isGet()){
 			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
 			if($text !== ''){

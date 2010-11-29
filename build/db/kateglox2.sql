@@ -224,8 +224,7 @@ CREATE TABLE IF NOT EXISTS `rel_definition_discipline` (
 CREATE TABLE IF NOT EXISTS `rel_meaning_type` (
   `rel_meaning_id` int(11) NOT NULL,
   `rel_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`rel_meaning_id`,`rel_type_id`),
-  KEY `rel_meaning_id` (`rel_meaning_id`),
+  PRIMARY KEY (`rel_meaning_id`),
   KEY `rel_type_id` (`rel_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

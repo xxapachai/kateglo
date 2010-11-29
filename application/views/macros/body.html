@@ -13,7 +13,7 @@
 		</div>
 		<div class="search">
 			<div class="search-form">
-				<form action="/search" method="get" >
+				<form action="${formAction}" method="get" >
 					<div>
 						<input type="text" name="query" onfocus="this.select();" class="search-field" autocomplete="off" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
 						<input type="submit" value="Cari" />
@@ -26,8 +26,8 @@
 		<div class="menu">
 			<ul>
 				<li><a href="/">Beranda</a></li>
-				<li><a href="">Kamus</a></li>
-				<li><a href="">Tesaurus</a></li>
+				<li><a href="/kamus">Kamus</a></li>
+				<li><a href="/thesaurus">Tesaurus</a></li>
 				<li>Glosarium</li>
 				<li>Peribahasa</li>
 				<li>Singkatan</li>
