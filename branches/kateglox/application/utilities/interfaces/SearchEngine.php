@@ -37,7 +37,7 @@ interface SearchEngine {
 	
 	/**
 	 * 
-	 * @return Apache_Solr_Service
+	 * @return \Apache_Solr_Service
 	 */
 	function getSolrService();
 	

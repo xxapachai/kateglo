@@ -146,9 +146,9 @@ class Entry implements interfaces\Entry {
 	 * @param int $limit
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	public function searchEntry($searchText, $offset = 0, $limit = 10) {
-		
-		$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit );
+	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty($searchText)) ? '*' : $searchText;
+		$request = $this->searchEngine->getSolrService ()->search( $searchText, $offset, $limit,  $params);
 		
 		if ($request->getHttpStatus () == 200) {
 			
@@ -166,6 +166,19 @@ class Entry implements interfaces\Entry {
 			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
 		}
 	
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 */
+	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()){
+		$searchText = (empty($searchText)) ? '*' : $searchText;
+		return $this->searchEntry('('.$searchText.' AND synonym:*)', $offset, $limit, $params);
 	}
 }
 ?>

@@ -31,9 +31,8 @@
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{
-
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
+	
 	/**
 	 * Run the application
 	 *
@@ -46,31 +45,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 * @return void
 	 * @throws Zend_Application_Bootstrap_Exception
 	 */
-	public function run()
-	{
-		$front = $this->getResource('FrontController');
-		$router = $front->getRouter();
-		$route = new Zend_Controller_Router_Route(':controller/:text',
-		array(
-				'text'	 => '',
-		)
-		);
-
-		$router->addRoute('kateglo', $route);
-		$default = $front->getDefaultModule();
-		if (null === $front->getControllerDirectory($default)) {
-			throw new Zend_Application_Bootstrap_Exception(
-                'No default controller directory registered with front controller'
-                );
+	public function run() {
+		$front = $this->getResource ( 'FrontController' );
+		$router = $front->getRouter ();
+		$route = new Zend_Controller_Router_Route ( 'entry/:text', array ('controller' => 'entry', 'text' => '' ) );
+		
+		$router->addRoute ( 'kateglo', $route );
+		$default = $front->getDefaultModule ();
+		if (null === $front->getControllerDirectory ( $default )) {
+			throw new Zend_Application_Bootstrap_Exception ( 'No default controller directory registered with front controller' );
 		}
 		
-		
-		$front->setParam('bootstrap', $this);
+		$front->setParam ( 'bootstrap', $this );
 		require_once 'Zend/Controller/Action/Helper/PhpTal.php';
 		
-		Zend_Controller_Action_HelperBroker::getStack()->offsetSet(-80, new Zend_Controller_Action_Helper_PhpTal());
-		Zend_Controller_Action_HelperBroker::getStack()->{'ViewRenderer'} = true;
-		$front->dispatch();
+		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80, new Zend_Controller_Action_Helper_PhpTal () );
+		Zend_Controller_Action_HelperBroker::getStack ()->{'ViewRenderer'} = true;
+		$front->dispatch ();
 	}
 
 }
