@@ -66,9 +66,21 @@ interface Entry {
 	 * 
 	 * @param string $searchText
 	 * @param int $offset
-	 * @param int $limit
+	 * @param int $limit 
+	 * @param array $params
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	function searchEntry($searchText, $offset = 0, $limit = 10);
+	function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 */
+	function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
 }
 ?>

@@ -32,7 +32,25 @@ use kateglo\application\faces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action {
+class IndexController extends Zend_Controller_Action_Stubbles {
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var kateglo\application\services\interfaces\Entry;
+	 */
+	private $entry;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 * 
+	 * @Inject
+	 */
+	public function setEntry(interfaces\Entry $entry) {
+		$this->entry = $entry;
+	}
 	
 	public function init() {
 		/* Initialize action controller here */
@@ -46,11 +64,9 @@ class IndexController extends Zend_Controller_Action {
 		$search = new faces\Search ();
 		$this->view->search = $search;
 		
-		/*@var $entry kateglo\application\services\interfaces\Entry */
-		$entry = utilities\Injector::getInstance ( interfaces\Entry::INTERFACE_NAME );
-		$this->view->amount = $entry->getTotalCount ();
-		$this->view->entry = $entry->randomEntry ();
-		$this->view->misspelled = $entry->randomMisspelled ();
+		$this->view->amount = $this->entry->getTotalCount ();
+		$this->view->entry = $this->entry->randomEntry ();
+		$this->view->misspelled = $this->entry->randomMisspelled ();
 		$this->view->formAction = '/kamus';
 	
 	}
