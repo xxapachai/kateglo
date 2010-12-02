@@ -19,6 +19,12 @@
  * <http://code.google.com/p/kateglo/>.
  */
 
+require_once 'Zend/Controller/Dispatcher/Stubbles.php';
+
+require_once 'Zend/Controller/Action/Helper/PhpTal.php';
+
+use kateglo\application\utilities\Injector;
+use kateglo\application\configs;
 /**
  *
  *
@@ -46,7 +52,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	 * @throws Zend_Application_Bootstrap_Exception
 	 */
 	public function run() {
+		/*@var $front Zend_Controller_Front */
 		$front = $this->getResource ( 'FrontController' );
+		
+		$dispatcher = new Zend_Controller_Dispatcher_Stubbles ();
+		$dispatcher->setControllerDirectory ( Injector::getInstance ( configs\interfaces\Configs::INTERFACE_NAME )->get ()->resources->frontController->controllerDirectory );
+		$front->setDispatcher ( $dispatcher );
+		
 		$router = $front->getRouter ();
 		$route = new Zend_Controller_Router_Route ( 'entry/:text', array ('controller' => 'entry', 'text' => '' ) );
 		
@@ -57,10 +69,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		}
 		
 		$front->setParam ( 'bootstrap', $this );
-		require_once 'Zend/Controller/Action/Helper/PhpTal.php';
 		
 		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80, new Zend_Controller_Action_Helper_PhpTal () );
 		Zend_Controller_Action_HelperBroker::getStack ()->{'ViewRenderer'} = true;
+		
 		$front->dispatch ();
 	}
 

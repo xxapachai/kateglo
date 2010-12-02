@@ -147,11 +147,10 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
-		$searchText = (empty($searchText)) ? '*' : $searchText;
-		$request = $this->searchEngine->getSolrService ()->search( $searchText, $offset, $limit,  $params);
 		
-		if ($request->getHttpStatus () == 200) {
-			
+		try {
+			$searchText = (empty ( $searchText )) ? '*' : $searchText;
+			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit, $params );
 			for($i = 0; $i < count ( $request->response->docs ); $i ++) {
 				/*@var $docs Apache_Solr_Document */
 				$docs = $request->response->docs [$i];
@@ -162,8 +161,8 @@ class Entry implements interfaces\Entry {
 			}
 			
 			return ( array ) $request->response;
-		} else {
-			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
+		} catch ( \Apache_Solr_Exception $e ) {
+			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	
 	}
@@ -176,9 +175,9 @@ class Entry implements interfaces\Entry {
 	 * @param int $limit
 	 * @param array $params
 	 */
-	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()){
-		$searchText = (empty($searchText)) ? '*' : $searchText;
-		return $this->searchEntry('('.$searchText.' AND synonym:*)', $offset, $limit, $params);
+	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntry ( '(' . $searchText . ' AND synonym:*)', $offset, $limit, $params );
 	}
 }
 ?>

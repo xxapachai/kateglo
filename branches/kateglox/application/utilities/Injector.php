@@ -32,7 +32,7 @@ use kateglo\application\utilities\exceptions;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Injector{
+class Injector {
 	
 	/**
 	 * 
@@ -45,13 +45,13 @@ class Injector{
 	 * @param string $className
 	 * @return Object<T>
 	 */
-	public static function getInstance($className){
-		if(! (self::$container instanceof \stubBinder)){
-			self::set();
+	public static function getInstance($className) {
+		if (! (self::$container instanceof \stubBinder)) {
+			self::set ();
 		}
-		$object = self::$container->getInjector()->getInstance($className);
-		if(! ($object instanceof $className) ){ 
-			throw new exceptions\InjectorException('Object instantiating failed!');
+		$object = self::$container->getInjector ()->getInstance ( $className );
+		if (! ($object instanceof $className)) {
+			throw new exceptions\InjectorException ( 'Object instantiating failed!' );
 		}
 		return $object;
 	}
@@ -60,15 +60,26 @@ class Injector{
 	 *
 	 * @param stubBinder $container
 	 */
-	public static function set(\stubBinder $container = null){
-		if($container === null){
-			if(! (self::$container instanceof \stubBinder) ){
-				self::$container = new \stubBinder();
-				configs\Binder::bind(self::$container);
+	public static function set(stubBinder $container = null) {
+		if ($container === null) {
+			if (! (self::$container instanceof \stubBinder)) {
+				self::$container = new \stubBinder ();
+				configs\Binder::bind ( self::$container );
 			}
-		}else{
+		} else {
 			self::$container = $container;
 		}
+	}
+	
+	/**
+	 *
+	 * @param stubBinder $container
+	 */
+	public static function get(stubBinder $container = null) {
+		if (! (self::$container instanceof \stubBinder)) {
+			self::set ();
+		}
+		return self::$container;
 	}
 }
 ?>

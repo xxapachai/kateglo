@@ -32,38 +32,52 @@ use kateglo\application\faces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class ErrorController extends Zend_Controller_Action
-{
-
-    public function errorAction()
-    {
-        $errors = $this->_getParam('error_handler');
-        
-        switch ($errors->type) { 
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-        
-                // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
-                break;
-            default:
-                // application error 
-                $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = 'Application error';
-                break;
-        }
-        //catch anything in log files
-		utilities\Injector::getInstance(interfaces\LogService::INTERFACE_NAME)->get()->log($errors->exception, \Zend_Log::ERR);
-        $this->view->exception = $errors->exception;
-        $this->view->request   = $errors->request;
-        
-		$search = new faces\Search();
+class ErrorController extends Zend_Controller_Action_Stubbles {
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var kateglo\application\utilities\interfaces\LogService;
+	 */
+	private $log;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\utilities\interfaces\LogService $log
+	 * 
+	 * @Inject
+	 */
+	public function setEntry(interfaces\LogService $log) {
+		$this->log = $log;
+	}
+	
+	public function errorAction() {
+		$errors = $this->_getParam ( 'error_handler' );
+		
+		switch ($errors->type) {
+			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
+			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
+				
+				// 404 error -- controller or action not found
+				$this->getResponse ()->setHttpResponseCode ( 404 );
+				$this->view->message = 'Page not found';
+				break;
+			default :
+				// application error 
+				$this->getResponse ()->setHttpResponseCode ( 500 );
+				$this->view->message = 'Application error';
+				break;
+		}
+		//catch anything in log files
+		$this->log->get ()->log ( $errors->exception, \Zend_Log::ERR );
+		$this->view->exception = $errors->exception;
+		$this->view->request = $errors->request;
+		
+		$search = new faces\Search ();
 		$this->view->search = $search;
 		$this->view->appPath = APPLICATION_PATH;
 		$this->view->formAction = '/kamus';
-    }
-
+	}
 
 }
 ?>

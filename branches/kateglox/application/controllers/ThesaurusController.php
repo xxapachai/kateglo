@@ -24,6 +24,7 @@ use kateglo\application\utilities\collections;
 use kateglo\application\configs;
 use kateglo\application\faces;
 use kateglo\application\daos;
+use kateglo\application\services\exceptions;
 /**
  *
  *
@@ -36,17 +37,40 @@ use kateglo\application\daos;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class ThesaurusController extends Zend_Controller_Action {
+class ThesaurusController extends Zend_Controller_Action_Stubbles {
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var kateglo\application\services\interfaces\Entry;
+	 */
+	private $entry;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 * 
+	 * @Inject
+	 */
+	public function setEntry(interfaces\Entry $entry) {
+		$this->entry = $entry;
+	}
 	
 	public function indexAction() {
 		$this->view->appPath = APPLICATION_PATH;
-		$this->view->formAction = '/kamus';
+		$this->view->formAction = '/thesaurus';
 		$this->search ();
 	}
 	
 	public function jsonAction() {
-		$this->search ();
-		$this->view->json = json_encode ( $this->view->hits );
+		try {
+			$this->search ();
+			$this->view->json = json_encode ( $this->view->hits );
+		} catch ( exceptions\EntryException $e ) {
+			$this->getResponse ()->setHttpResponseCode ( 500 );
+			$this->view->json = json_encode ( array ('error' => $e->getMessage () ) );
+		}
 	}
 	
 	private function search() {
@@ -58,11 +82,9 @@ class ThesaurusController extends Zend_Controller_Action {
 			$this->view->search = $search;
 			$searchText = $request->getParam ( $search->getFieldName () );
 			$search->setFieldValue ( $searchText );
-			$limit = (is_numeric($request->getParam('rows')) ? intval($request->getParam('rows')) : 10);
-			$offset = (is_numeric($request->getParam('start')) ? intval($request->getParam('start')) : 0);
-			/*@var $lucene kateglo\application\services\Entry */
-			$lucene = utilities\Injector::getInstance ( interfaces\Entry::INTERFACE_NAME );
-			$this->view->hits = $lucene->searchThesaurus( $searchText, $offset, $limit, array('fl' =>'entry,synonym') );
+			$limit = (is_numeric ( $request->getParam ( 'rows' ) ) ? intval ( $request->getParam ( 'rows' ) ) : 10);
+			$offset = (is_numeric ( $request->getParam ( 'start' ) ) ? intval ( $request->getParam ( 'start' ) ) : 0);
+			$this->view->hits = $this->entry->searchThesaurus ( $searchText, $offset, $limit, array ('fl' => 'entry,synonym' ) );
 		}
 	}
 }

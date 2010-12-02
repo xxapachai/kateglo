@@ -44,8 +44,7 @@ class Binder{
 		$container->bind(services\interfaces\Entry::INTERFACE_NAME)->to(services\Entry::$CLASS_NAME);
 		$container->bind(utilities\interfaces\DataAccess::INTERFACE_NAME)->to(utilities\DataAccess::$CLASS_NAME);
 		$container->bind(utilities\interfaces\LogService::INTERFACE_NAME)->to(utilities\LogService::$CLASS_NAME);	
-		$container->bind(utilities\interfaces\SearchEngine::INTERFACE_NAME)->to(utilities\SearchEngine::$CLASS_NAME);	
-		$container->bind('Zend_View_Interface')->to('Zend_View_PhpTal');	
+		$container->bind(utilities\interfaces\SearchEngine::INTERFACE_NAME)->to(utilities\SearchEngine::$CLASS_NAME);
 	}
 }
 ?>
