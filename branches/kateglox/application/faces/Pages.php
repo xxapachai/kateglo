@@ -28,8 +28,8 @@ use kateglo\application\faces\Page;
  * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2010-12-16 21:41:15 +0100 (Do, 16 Dez 2010) $
- * @version $LastChangedRevision: 265 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
