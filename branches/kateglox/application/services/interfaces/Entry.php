@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\services\interfaces;
 /*
- *  $Id: Entity.php 261 2010-11-25 18:54:40Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\services\interfaces;
  * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -82,5 +82,25 @@ interface Entry {
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
 	function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 */
+	function searchProverb($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 */
+	function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array());
 }
 ?>

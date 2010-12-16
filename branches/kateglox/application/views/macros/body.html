@@ -15,8 +15,8 @@
 			<div class="search-form">
 				<form action="${formAction}" method="get" >
 					<div>
-						<input type="text" name="query" onfocus="this.select();" class="search-field" autocomplete="off" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
-						<input type="submit" value="Cari" />
+						<input type="text" name="${search/getFieldName}" onfocus="this.select();" class="search-field" autocomplete="off" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
+						<input type="submit" value="${search/getButtonValue}" />
 					</div>
 			 	</form>
 		 	</div>
@@ -29,8 +29,8 @@
 				<li><a href="/kamus">Kamus</a></li>
 				<li><a href="/thesaurus">Tesaurus</a></li>
 				<li>Glosarium</li>
-				<li>Peribahasa</li>
-				<li>Singkatan</li>
+				<li><a href="/peribahasa">Peribahasa</a></li>
+				<li><a href="/singkatan">Singkatan</a></li>
 			</ul>
 		</div>
 		<div class="account">

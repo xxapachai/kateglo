@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kateglo - Pagination</title>
+</head>
+<body tal:omit-tag="true" metal:define-macro="pagination">
+<div class="pagination" tal:condition="php: is_object(pages) && is_object(pages.getPagination())">
+	<ul tal:repeat="page pages/getPagination">
+		<li tal:condition="not: page/isCurrent" ><a href="${formAction}/?${search/getFieldName}=${search/getFieldValue}&start=${page/getStart}">${page/getText}</a></li>
+		<li tal:condition="page/isCurrent" tal:content="page/getText"><strong>Text</strong></li>
+	</ul>			
+   	<br />
+</div>
+</body>
+</html>

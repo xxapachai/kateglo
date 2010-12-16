@@ -41,8 +41,8 @@ namespace kateglo\application\utilities\collections;
  * @package kateglo\application\utilities\collections
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-07
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>

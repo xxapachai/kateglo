@@ -1,20 +1,23 @@
 <?php 
-/**
- * LICENSE
+/*
+ *  $Id$
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2007 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */  
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the GPL 2.0. For more information, see
+ * <http://code.google.com/p/kateglo/>.
+ */
   
   
 /** Zend_View_Interface */  
@@ -32,10 +35,13 @@ use kateglo\application\configs;
  * information, consult the COPYING file contained in the PHPTAL distribution.
  * Only use PHPTAL and this interface if your project license permits it.
  *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2007 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package kateglo\library\Zend\View
+ * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
+ * @link http://code.google.com/p/kateglo/
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
+ * @author  Arthur Purnama <arthur@purnama.de>
+ * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */  
 class Zend_View_PhpTal implements Zend_View_Interface 
 { 

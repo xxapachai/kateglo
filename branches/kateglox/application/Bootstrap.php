@@ -28,12 +28,11 @@ use kateglo\application\configs;
 /**
  *
  *
- * @uses Exception
- * @package kateglo\application\configs
+ * @package kateglo\application
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
