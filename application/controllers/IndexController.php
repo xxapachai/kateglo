@@ -27,8 +27,8 @@ use kateglo\application\faces;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  2009-10-14
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -44,6 +44,13 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
+	
+	/**
+	 * 
+	 * Enter description here ...
 	 * @param kateglo\application\services\interfaces\Entry $entry
 	 * 
 	 * @Inject
@@ -52,18 +59,21 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 		$this->entry = $entry;
 	}
 	
-	public function init() {
-		/* Initialize action controller here */
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * 
+	 * @Inject
+	 */
+	public function setSearch(faces\interfaces\Search $search) {
+		$this->search = $search;
 	}
 	
 	public function indexAction() {
 		
 		$this->view->appPath = APPLICATION_PATH;
-		/*@var $request Zend_Controller_Request_Http */
-		$request = $this->getRequest ();
-		$search = new faces\Search ();
-		$this->view->search = $search;
-		
+		$this->view->search = $this->search;		
 		$this->view->amount = $this->entry->getTotalCount ();
 		$this->view->entry = $this->entry->randomEntry ();
 		$this->view->misspelled = $this->entry->randomMisspelled ();

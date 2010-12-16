@@ -27,8 +27,8 @@ use kateglo\application\faces;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-10-14
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -43,12 +43,30 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
+	
+	/**
+	 * 
+	 * Enter description here ...
 	 * @param kateglo\application\utilities\interfaces\LogService $log
 	 * 
 	 * @Inject
 	 */
 	public function setEntry(interfaces\LogService $log) {
 		$this->log = $log;
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * 
+	 * @Inject
+	 */
+	public function setSearch(faces\interfaces\Search $search) {
+		$this->search = $search;
 	}
 	
 	public function errorAction() {
@@ -73,9 +91,8 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 		$this->view->exception = $errors->exception;
 		$this->view->request = $errors->request;
 		
-		$search = new faces\Search ();
-		$this->view->search = $search;
 		$this->view->appPath = APPLICATION_PATH;
+		$this->view->search = $this->search;
 		$this->view->formAction = '/kamus';
 	}
 

@@ -32,8 +32,8 @@ use kateglo\application\services\exceptions;
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since 2009-11-09
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -49,6 +49,19 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
+	
+	/**
+	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Pages;
+	 */
+	private $pages;
+	
+	/**
+	 * 
+	 * Enter description here ...
 	 * @param kateglo\application\services\interfaces\Entry $entry
 	 * 
 	 * @Inject
@@ -57,10 +70,40 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 		$this->entry = $entry;
 	}
 	
-	public function indexAction() {
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * 
+	 * @Inject
+	 */
+	public function setSearch(faces\interfaces\Search $search) {
+		$this->search = $search;
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * 
+	 * @Inject
+	 */
+	public function setPages(faces\interfaces\Pages $pages) {
+		$this->pages = $pages;
+	}
+	
+	public function init() {
+		$this->view->search = $this->search;
+		$this->pages->setLimit ( (is_numeric ( $this->_request->getParam ( 'rows' ) ) ? intval ( $this->_request->getParam ( 'rows' ) ) : 10) );
+		$this->pages->setOffset ( (is_numeric ( $this->_request->getParam ( 'start' ) ) ? intval ( $this->_request->getParam ( 'start' ) ) : 0) );
 		$this->view->appPath = APPLICATION_PATH;
+	}
+	
+	public function indexAction() {
 		$this->view->formAction = '/kamus';
 		$this->search ();
+		$this->pages->setAmount ( $this->view->hits ['numFound'] );
+		$this->view->pages = $this->pages;
 	}
 	
 	public function jsonAction() {
@@ -74,17 +117,11 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	}
 	
 	private function search() {
-		/*@var $request Zend_Controller_Request_Http */
-		$request = $this->getRequest ();
 		$this->view->hits = new collections\ArrayCollection ();
-		if ($request->isGet ()) {
-			$search = new faces\Search ();
-			$this->view->search = $search;
-			$searchText = $request->getParam ( $search->getFieldName () );
-			$search->setFieldValue ( $searchText );
-			$limit = (is_numeric ( $request->getParam ( 'rows' ) ) ? intval ( $request->getParam ( 'rows' ) ) : 10);
-			$offset = (is_numeric ( $request->getParam ( 'start' ) ) ? intval ( $request->getParam ( 'start' ) ) : 0);
-			$this->view->hits = $this->entry->searchEntry ( $searchText, $offset, $limit );
+		if ($this->_request->isGet ()) {
+			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
+			$this->view->search->setFieldValue ( $searchText );
+			$this->view->hits = $this->entry->searchEntry ( $searchText, $this->pages->getOffset (), $this->pages->getLimit () );
 		}
 	}
 }

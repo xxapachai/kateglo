@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Kateglo - Singkatan</title>
+<meta metal:use-macro="${appPath}/views/macros/head.html/head" />
+</head>
+<body metal:use-macro="${appPath}/views/macros/body.html/body">
+	<div tal:omit-tag="true"  metal:fill-slot="content">
+	    <div tal:repeat="hit hits/docs">
+	    	<div>
+	    		<a tal:define="global entry hit/fields/entry;" href="entry/${entry}">${entry}</a>
+	    		<div tal:condition="php: ( array_key_exists('definition', hit['fields']) && is_array(hit['fields']['definition']) )">
+		    		<div tal:repeat="definition hit/fields/definition" style="padding-left:15px;">    		
+		    			<div tal:content="definition">Singkatan</div>
+		    		</div>
+	    		</div>
+	    		<div tal:condition="php: ( array_key_exists('definition', hit['fields']) && !is_array(hit['fields']['definition']) )">
+		    		<div tal:content="hit/fields/definition" style="padding-left:15px;">    		
+		    			Singkatan
+		    		</div>
+	    		</div>
+	    	</div>
+	    	<br />
+	    </div>	    	    
+		<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination" >
+		</div>
+	</div>
+</body>
+</html>

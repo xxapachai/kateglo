@@ -29,20 +29,26 @@ use kateglo\application\daos;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since  2009-10-14
- * @version 0.0
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class EntryController extends Zend_Controller_Action_Stubbles
-{
-
+class EntryController extends Zend_Controller_Action_Stubbles {
+	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var kateglo\application\services\interfaces\Entry;
 	 */
 	private $entry;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
 	
 	/**
 	 * 
@@ -55,21 +61,29 @@ class EntryController extends Zend_Controller_Action_Stubbles
 		$this->entry = $entry;
 	}
 	
-	public function indexAction(){
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * 
+	 * @Inject
+	 */
+	public function setSearch(faces\interfaces\Search $search) {
+		$this->search = $search;
+	}
+	
+	public function indexAction() {
 		$this->view->appPath = APPLICATION_PATH;
-		/*@var $request Zend_Controller_Request_Http */
-		$request = $this->getRequest();
-		$searchFaces = new faces\Search();
-		$this->view->search = $searchFaces;
+		$this->view->search = $this->search;
 		$this->view->formAction = '/kamus';
-		if($request->isGet()){
-			$text = urldecode($request->getParam(helpers\RouteParameter::TEXT));
-			if($text !== ''){
-				$searchFaces->setFieldValue($text);
-				$this->view->entry = $this->entry->getEntry($text);
+		if ($this->_request->isGet ()) {
+			$text = urldecode ( $this->_request->getParam ( helpers\RouteParameter::TEXT ) );
+			if ($text !== '') {
+				$this->view->search->setFieldValue ( $text );
+				$this->view->entry = $this->entry->getEntry ( $text );
 			}
-		}else{
-			header('location: '.$request->getBaseUrl());
+		} else {
+			header ( 'location: ' . $this->_request->getBaseUrl () );
 		}
 	}
 }
