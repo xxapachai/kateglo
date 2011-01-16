@@ -24,7 +24,6 @@ use kateglo\application\utilities;
 /**
  *
  *
- * @uses Exception
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/

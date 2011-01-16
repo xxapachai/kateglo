@@ -8,17 +8,12 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 	<div tal:omit-tag="true"  metal:fill-slot="content">
-	    <div tal:repeat="hit hits/docs">
+	    <div tal:repeat="hit hits/getDocuments">
 	    	<div>
-	    		<a tal:define="global entry hit/fields/entry;" href="entry/${entry}">${entry}</a>
-	    		<div tal:condition="php: ( array_key_exists('definition', hit['fields']) && is_array(hit['fields']['definition']) )">
-		    		<div tal:repeat="definition hit/fields/definition" style="padding-left:15px;">    		
+	    		<a tal:define="global entry hit/getEntry;" href="entry/${entry}">${entry}</a>	    		
+	    		<div tal:condition="php: ( hit.getDefinitions().count() gt 0 )">
+		    		<div tal:repeat="definition hit/getDefinitions" style="padding-left:15px;">    		
 		    			<div tal:content="definition">Peribahasa</div>
-		    		</div>
-	    		</div>
-	    		<div tal:condition="php: ( array_key_exists('definition', hit['fields']) && !is_array(hit['fields']['definition']) )">
-		    		<div tal:content="hit/fields/definition" style="padding-left:15px;">    		
-		    			Definition
 		    		</div>
 	    		</div>
 	    	</div>

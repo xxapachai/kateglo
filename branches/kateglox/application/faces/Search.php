@@ -42,6 +42,26 @@ class Search implements interfaces\Search{
 	private $fieldValue = '';
 	
 	/**
+	 * Enter description here ...
+	 * @var string
+	 */
+	private $formAction = '';
+	
+	/**
+	 * @return the $formAction
+	 */
+	public function getFormAction() {
+		return $this->formAction;
+	}
+
+	/**
+	 * @param string $formAction
+	 */
+	public function setFormAction($formAction) {
+		$this->formAction = $formAction;
+	}
+
+	/**
 	 * 
 	 * @return string
 	 */

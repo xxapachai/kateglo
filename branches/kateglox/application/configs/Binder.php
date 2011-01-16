@@ -38,16 +38,14 @@ class Binder {
 	
 	public static function bind( \stubBinder $container) {
 		$container->bind ( interfaces\Configs::INTERFACE_NAME )->to ( Configs::$CLASS_NAME );
-		$container->bind ( daos\interfaces\Glossary::INTERFACE_NAME )->to ( daos\Glossary::$CLASS_NAME );
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
-		$container->bind ( daos\interfaces\Misspelled::INTERFACE_NAME )->to ( daos\Misspelled::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
+		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\DataAccess::INTERFACE_NAME )->to ( utilities\DataAccess::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\LogService::INTERFACE_NAME )->to ( utilities\LogService::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\SearchEngine::INTERFACE_NAME )->to ( utilities\SearchEngine::$CLASS_NAME );
 		$container->bind ( faces\interfaces\Search::INTERFACE_NAME )->to ( faces\Search::$CLASS_NAME );
-		$container->bind ( faces\interfaces\Pages::INTERFACE_NAME )->to ( faces\Pages::$CLASS_NAME );
 	}
 }
 ?>

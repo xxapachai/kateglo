@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\faces\interfaces;
+namespace kateglo\application\faces;
 /*
  *  $Id$
  *
@@ -20,84 +20,102 @@ namespace kateglo\application\faces\interfaces;
  * <http://code.google.com/p/kateglo/>.
  */
 
+use kateglo\application\utilities\collections\ArrayCollection;
 /**
  *
  *
- * @package kateglo\application\faces\interfaces
+ * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2010-12-16 22:33:38 +0100 (Do, 16 Dez 2010) $
+ * @version $LastChangedRevision: 267 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Pages {
-	
-	const INTERFACE_NAME = __CLASS__;
+class Hit {
 	
 	/**
-	 * @return int $pageRange
+	 * 
+	 * Enter description here ...
+	 * @var string
 	 */
-	function getPageRange();
+	const COUNT = 'count';
 	
 	/**
-	 * @param int $pageRange
+	 * 
+	 * Enter description here ...
+	 * @var string
 	 */
-	function setPageRange($pageRange);
+	const START = 'start';
 	
 	/**
-	 * @return int $amount
+	 * 
+	 * Enter description here ...
+	 * @var string
 	 */
-	function getAmount();
-	
-	/**
-	 * @param int $amount
-	 */
-	function setAmount($amount);
-	
-	/**
-	 * @return int $limit
-	 */
-	function getLimit();
-	
-	/**
-	 * @param int $limit
-	 */
-	function setLimit($limit);
-	
-	/**
-	 * @return int $offset
-	 */
-	function getOffset();
-	
-	/**
-	 * @param int $offset
-	 */
-	function setOffset($offset);
+	const DOCUMENTS = 'documents';
 	
 	/**
 	 * Enter description here ...
+	 * @var int
+	 */
+	private $count;
+	
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $start;
+	
+	/**
+	 * Enter description here ...
+	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 */
+	private $documents;
+	
+	/**
 	 * @return int
 	 */
-	function getPageAmount();
-	
+	public function getCount() {
+		return $this->count;
+	}
+
 	/**
-	 * Enter description here ...
+	 * @param int $count
+	 */
+	public function setCount($count) {
+		$this->count = $count;
+	}
+
+	/**
 	 * @return int
 	 */
-	function getCurrentPage();
-	
+	public function getStart() {
+		return $this->start;
+	}
+
 	/**
-	 * Enter description here ...
+	 * @param int $start
+	 */
+	public function setStart($start) {
+		$this->start = $start;
+	}
+
+	/**
 	 * @return kateglo\application\utilities\collections\ArrayCollection
 	 */
-	function getPagination();
-	
+	public function getDocuments() {
+		return $this->documents;
+	}
+
 	/**
-	 * Enter description here ...
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @param kateglo\application\utilities\collections\ArrayCollection $documents
 	 */
-	function getAllPages();
+	public function setDocuments(ArrayCollection $documents) {
+		$this->documents = $documents;
+	}
+
+	
 }
 
 ?>

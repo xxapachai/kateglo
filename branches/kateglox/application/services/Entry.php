@@ -19,8 +19,13 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\faces\Hit;
+
+use kateglo\application\faces\Document;
+use kateglo\application\utilities\collections\ArrayCollection;
 use kateglo\application\daos;
 use kateglo\application\utilities;
+use kateglo\application\faces;
 /**
  * 
  * 
@@ -86,30 +91,9 @@ class Entry implements interfaces\Entry {
 	 * @return int
 	 */
 	public function getTotalCount() {
-		$result = $this->entry->getTotalCount ();
-		
-		return $result;
-	}
-	
-	/**
-	 *
-	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
-	 */
-	public function randomMisspelled($limit = 5) {
-		$request = $this->searchEngine->getSolrService ()->search ( 'spelled:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
+		$request = $this->searchEngine->getSolrService ()->search ( 'entry:*', 0, 1 );
 		if ($request->getHttpStatus () == 200) {
-			
-			for($i = 0; $i < count ( $request->response->docs ); $i ++) {
-				/*@var $docs Apache_Solr_Document */
-				$docs = $request->response->docs [$i];
-				$newDocs ['documentBoost'] = $docs->getBoost ();
-				$newDocs ['fields'] = $docs->getFields ();
-				$newDocs ['fieldBoosts'] = $docs->getFieldBoosts ();
-				$request->response->docs [$i] = $newDocs;
-			}
-			
-			return ( array ) $request->response;
+			return $request->response->numFound;
 		} else {
 			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
 		}
@@ -118,22 +102,26 @@ class Entry implements interfaces\Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return kateglo\application\faces\Hit
+	 */
+	public function randomMisspelled($limit = 5) {
+		$request = $this->searchEngine->getSolrService ()->search ( 'spelled:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
+		if ($request->getHttpStatus () == 200) {
+			return $this->convertResponse2Faces ( $request->response );
+		} else {
+			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
+		}
+	}
+	
+	/**
+	 *
+	 * @param int $limit
+	 * @return kateglo\application\faces\Hit
 	 */
 	public function randomEntry($limit = 10) {
 		$request = $this->searchEngine->getSolrService ()->search ( 'entry:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
 		if ($request->getHttpStatus () == 200) {
-			
-			for($i = 0; $i < count ( $request->response->docs ); $i ++) {
-				/*@var $docs Apache_Solr_Document */
-				$docs = $request->response->docs [$i];
-				$newDocs ['documentBoost'] = $docs->getBoost ();
-				$newDocs ['fields'] = $docs->getFields ();
-				$newDocs ['fieldBoosts'] = $docs->getFieldBoosts ();
-				$request->response->docs [$i] = $newDocs;
-			}
-			
-			return ( array ) $request->response;
+			return $this->convertResponse2Faces ( $request->response );
 		} else {
 			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
 		}
@@ -144,27 +132,35 @@ class Entry implements interfaces\Entry {
 	 * @param string $searchText
 	 * @param int $offset
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit
 	 */
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
-		
 		try {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit, $params );
-			for($i = 0; $i < count ( $request->response->docs ); $i ++) {
-				/*@var $docs Apache_Solr_Document */
-				$docs = $request->response->docs [$i];
-				$newDocs ['documentBoost'] = $docs->getBoost ();
-				$newDocs ['fields'] = $docs->getFields ();
-				$newDocs ['fieldBoosts'] = $docs->getFieldBoosts ();
-				$request->response->docs [$i] = $newDocs;
-			}
-			
-			return ( array ) $request->response;
-		} catch (\Apache_Solr_Exception $e ) {
+			return $this->convertResponse2Faces ( $request->response );
+		} catch ( \Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
+	}
 	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	public function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+		try {
+			$searchText = (empty ( $searchText )) ? '*' : $searchText;
+			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit, $params );
+			return $this->convertResponse2Array ( $request->response )->toArray ();
+		} catch ( \Apache_Solr_Exception $e ) {
+			throw new exceptions\EntryException ( $e->getMessage () );
+		}
 	}
 	
 	/**
@@ -174,6 +170,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
+	 * @return kateglo\application\faces\Hit
 	 */
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
@@ -187,6 +184,21 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
+	 * @return array
+	 */
+	public function searchThesaurusAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntryAsArray ( '(' . $searchText . ' AND synonym:*)', $offset, $limit, $params );
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit|
 	 */
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
@@ -200,10 +212,120 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
+	 * @return array
+	 */
+	public function searchProverbAsArray($searchText, $asArray = false, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntryAsArray ( '(' . $searchText . ' AND typeExact:Perihbahasa)', $offset, $limit, $params );
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hits
 	 */
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
 		return $this->searchEntry ( '(' . $searchText . ' AND (typeExact:Akronim or typeExact:Singkatan ) )', $offset, $limit, $params );
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	public function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntryAsArray ( '(' . $searchText . ' AND (typeExact:Akronim or typeExact:Singkatan ) )', $offset, $limit, $params );
+	}
+	
+	/**
+	 * Enter description here ...
+	 * @param object $response
+	 * @return kateglo\application\faces\Hit
+	 */
+	private function convertResponse2Faces($response) {
+		$hit = new Hit();
+		$hit->setCount ( $response->numFound );
+		$hit->setStart ( $response->start );
+		$hit->setDocuments ( new ArrayCollection () );
+		for($i = 0; $i < count ( $response->docs ); $i ++) {
+			/*@var $doc Apache_Solr_Document */
+			$doc = $response->docs [$i];
+			$fields = $doc->getFields ();
+			
+			$document = new Document ();
+			$document->setId ( $fields [Document::ID] );
+			$document->setEntry ( $fields [Document::ENTRY] );
+			$document->setAntonyms ( $this->convert2Array ( $fields, Document::ANTONYM ) );
+			$document->setDisciplines ( $this->convert2Array ( $fields, Document::DISCIPLINE ) );
+			$document->setSamples ( $this->convert2Array ( $fields, Document::SAMPLE ) );
+			$document->setDefinitions ( $this->convert2Array ( $fields, Document::DEFINITION ) );
+			$document->setClasses ( $this->convert2Array ( $fields, Document::CLAZZ ) );
+			$document->setClassCategories ( $this->convert2Array ( $fields, Document::CLAZZ_CATEGORY ) );
+			$document->setMisspelleds ( $this->convert2Array ( $fields, Document::MISSPELLED ) );
+			$document->setRelations ( $this->convert2Array ( $fields, Document::RELATION ) );
+			$document->setSynonyms ( $this->convert2Array ( $fields, Document::SYNONYM ) );
+			$document->setSpelled ( array_key_exists ( Document::SPELLED, $fields ) ? $fields [Document::SPELLED] : '' );
+			$document->setSyllabels ( $this->convert2Array ( $fields, Document::SYLLABEL ) );
+			$document->setTypes ( $this->convert2Array ( $fields, Document::TYPE ) );
+			$document->setTypeCategories ( $this->convert2Array ( $fields, Document::TYPE_CATEGORY ) );
+			$document->setSource ( $this->convert2Array ( $fields, Document::SOURCE ) );
+			$document->setSourceCategories ( $this->convert2Array ( $fields, Document::SOURCE_CATEGORY ) );
+			
+			$hit->getDocuments ()->add ( $document );
+		}
+		
+		return $hit;
+	}
+	
+	/**
+	 * Enter description here ...
+	 * @param object $response
+	 * @return array
+	 */
+	private function convertResponse2Array($response) {
+		$hit = new ArrayCollection ();
+		$hit->set ( Hit::COUNT, $response->numFound );
+		$hit->set ( Hit::START, $response->start );
+		$hit->set ( Hit::DOCUMENTS, new ArrayCollection () );
+		for($i = 0; $i < count ( $response->docs ); $i ++) {
+			/*@var $doc Apache_Solr_Document */
+			$doc = $response->docs [$i];
+			$hit->get ( Hit::DOCUMENTS )->add ( $doc->getFields () );
+		}
+		$hit->set ( Hit::DOCUMENTS, $hit->get ( Hit::DOCUMENTS )->toArray () );
+		return $hit;
+	}
+	
+	/**
+	 * Enter description here ...
+	 * @param array $source
+	 * @param string $key
+	 * @return kateglo\application\utilities\collections\ArrayCollection|NULL
+	 */
+	private function convert2Array($source, $key) {
+		if (array_key_exists ( $key, $source )) {
+			$array = new ArrayCollection ();
+			if (! is_array ( $source [$key] )) {
+				$array->add ( $source [$key] );
+			} else {
+				foreach ( $source [$key] as $item ) {
+					$array->add ( $item );
+				}
+			}
+			return $array;
+		} else {
+			return null;
+		}
 	}
 }
 ?>
