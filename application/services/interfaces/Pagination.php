@@ -1,6 +1,7 @@
 <?php
+namespace kateglo\application\services\interfaces;
 /*
- *  $Id$
+ *  $Id: Entry.php 266 2010-12-16 21:01:27Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,65 +19,56 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\faces\interfaces\Search;
-use kateglo\application\services\interfaces\Entry;
+
 /**
- *
- *
- * @package kateglo\application\controllers
+ * 
+ * 
+ * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2010-12-16 22:01:27 +0100 (Do, 16 Dez 2010) $
+ * @version $LastChangedRevision: 266 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action_Stubbles {
+interface Pagination {
+	
+	const INTERFACE_NAME = __CLASS__;
 	
 	/**
-	 * 
 	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Entry;
+	 * @param int $amount
+	 * @param int $offset
+	 * @param int $limit
+	 * @param int $pageRange
+	 * @return kateglo\application\faces\Pagination
 	 */
-	private $entry;
+	function create($amount, $offset = 0, $limit = 10, $pageRange = 10);
 	
 	/**
-	 * 
 	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
+	 * @param int $amount
+	 * @param int $offset
+	 * @param int $limit
+	 * @param int $pageRange
+	 * @return array
 	 */
-	private $search;
+	function createAsArray($amount, $offset = 0, $limit = 10, $pageRange = 10);
 	
 	/**
-	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 * 
-	 * @Inject
+	 * @param int $amount
+	 * @param int $limit
+	 * @return int
 	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
+	function pageAmount($amount, $limit);
 	
 	/**
-	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
-	 * 
-	 * @Inject
+	 * @param int $offset
+	 * @param int $limit
+	 * @return int
 	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	public function indexAction() {		
-		$this->view->appPath = APPLICATION_PATH;
-		$this->view->search = $this->search;		
-		$this->view->amount = $this->entry->getTotalCount ();
-		$this->view->entry = $this->entry->randomEntry ();
-		$this->view->misspelled = $this->entry->randomMisspelled ();
-		$this->view->formAction = '/kamus';
-	
-	}
+	function currentPage($offset, $limit);
 }
 ?>

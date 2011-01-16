@@ -8,17 +8,12 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 	<div tal:omit-tag="true"  metal:fill-slot="content">
-	    <div tal:repeat="hit hits/docs">
+	    <div tal:repeat="hit hits/getDocuments">
 	    	<div>
-	    		<a tal:define="global entry hit/fields/entry;" href="entry/${entry}">${entry}</a>
-	    		<div tal:condition="php: ( array_key_exists('synonym', hit['fields']) && is_array(hit['fields']['synonym']) )">
-		    		<div tal:repeat="synonym hit/fields/synonym" style="padding-left:15px;">    		
+	    		<a tal:define="global entry hit/getEntry;" href="entry/${entry}">${entry}</a>
+	    		<div tal:condition="php: ( hit.getSynonyms().count() gt 0 )">
+		    		<div tal:repeat="synonym hit/getSynonyms" style="padding-left:15px;">    		
 		    			<div tal:content="synonym">Synonym</div>
-		    		</div>
-	    		</div>
-	    		<div tal:condition="php: ( array_key_exists('synonym', hit['fields']) && !is_array(hit['fields']['synonym']) )">
-		    		<div tal:content="hit/fields/synonym" style="padding-left:15px;">    		
-		    			Synonym
 		    		</div>
 	    		</div>
 	    	</div>

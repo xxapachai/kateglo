@@ -34,7 +34,7 @@ use kateglo\application\services\interfaces\Entry;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class KamusController extends Zend_Controller_Action_Stubbles {
+class TesaurusController extends Zend_Controller_Action_Stubbles {
 	
 	/**
 	 * 
@@ -82,7 +82,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * @param kateglo\application\faces\interfaces\Search $search
 	 * 
 	 * @Inject
 	 */
@@ -93,7 +93,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Pagination $pagination
+	 * @param kateglo\application\services\interfaces\Pagination $entry
 	 * 
 	 * @Inject
 	 */
@@ -113,15 +113,17 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	}
 	
 	/**
+	 * 
 	 * Enter description here ...
+	 * @return void
 	 */
 	public function indexAction() {
 		if ($this->_request->isGet ()) {
-			$this->view->formAction = '/kamus';
-			$searchText = $this->getRequest()->getParam ( $this->view->search->getFieldName () );
+			$this->view->formAction = '/tesaurus';
+			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
 			$this->view->search->setFieldValue ( $searchText );
 			/*@var $hits kateglo\application\faces\Hit */
-			$hits = $this->entry->searchEntry ( $searchText, $this->offset, $this->limit );
+			$hits = $this->entry->searchThesaurus ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, synonym, id' ) );
 			$this->view->pagination = $this->pagination->create ( $hits->getCount (), $this->offset, $this->limit );
 			$this->view->hits = $hits;
 		} else {
@@ -130,13 +132,15 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	}
 	
 	/**
+	 * 
 	 * Enter description here ...
+	 * @return void
 	 */
 	public function jsonAction() {
-		try {			
-			$searchText = $this->getRequest()->getParam ( $this->view->search->getFieldName () );
+		try {
+			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
 			$this->view->search->setFieldValue ( $searchText );
-			$hits = $this->entry->searchEntryAsArray ( $searchText, $this->offset, $this->limit );
+			$hits = $this->entry->searchThesaurusAsArray ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, synonym, id' ) );
 			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
 			$this->view->json = json_encode ( array ('hits' => $hits, 'pagination' => $pagination ) );
 		} catch ( EntryException $e ) {

@@ -66,11 +66,21 @@ interface Entry {
 	 * 
 	 * @param string $searchText
 	 * @param int $offset
-	 * @param int $limit 
+	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return kateglo\application\faces\Hit
 	 */
 	function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array());
 	
 	/**
 	 * 
@@ -79,7 +89,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return kateglo\application\faces\Hit
 	 */
 	function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
 	
@@ -90,6 +100,18 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
+	 * @return array
+	 */
+	function searchThesaurusAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit|array
 	 */
 	function searchProverb($searchText, $offset = 0, $limit = 10, $params = array());
 	
@@ -100,7 +122,30 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
+	 * @return kateglo\application\faces\Hit|array
+	 */
+	function searchProverbAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hits
 	 */
 	function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array());
 }
 ?>

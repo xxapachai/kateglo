@@ -36,6 +36,16 @@ interface Search {
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
+	 * @return the $formAction
+	 */
+	function getFormAction() ;
+	
+	/**
+	 * @param string $formAction
+	 */
+	function setFormAction($formAction) ;
+	
+	/**
 	 * 
 	 * @return string
 	 */

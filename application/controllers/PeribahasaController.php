@@ -18,17 +18,14 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\services\interfaces;
-use kateglo\application\utilities;
-use kateglo\application\utilities\collections;
-use kateglo\application\configs;
-use kateglo\application\faces;
-use kateglo\application\daos;
-use kateglo\application\services\exceptions;
+use kateglo\application\services\interfaces\Pagination;
+use kateglo\application\faces\interfaces\Search;
+use kateglo\application\services\interfaces\Entry;
+use kateglo\application\faces\Hit;
+use kateglo\application\services\exceptions\EntryException;
 /**
  *
  *
- * @uses Exception
  * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -55,9 +52,21 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles {
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Pages;
+	 * @var kateglo\application\services\interfaces\Pagination;
 	 */
-	private $pages;
+	private $pagination;
+	
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $limit;
+	
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $offset;
 	
 	/**
 	 * 
@@ -66,63 +75,72 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles {
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(interfaces\Entry $entry) {
+	public function setEntry(Entry $entry) {
 		$this->entry = $entry;
 	}
 	
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * @param kateglo\application\faces\interfaces\Search $search
 	 * 
 	 * @Inject
 	 */
-	public function setSearch(faces\interfaces\Search $search) {
+	public function setSearch(Search $search) {
 		$this->search = $search;
 	}
 	
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
+	 * @param kateglo\application\services\interfaces\Pagination $entry
 	 * 
 	 * @Inject
 	 */
-	public function setPages(faces\interfaces\Pages $pages) {
-		$this->pages = $pages;
+	public function setPages(Pagination $pagination) {
+		$this->pagination = $pagination;
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Controller_Action::init()
+	 */
 	public function init() {
 		$this->view->search = $this->search;
-		$this->pages->setLimit ( (is_numeric ( $this->_request->getParam ( 'rows' ) ) ? intval ( $this->_request->getParam ( 'rows' ) ) : 10) );
-		$this->pages->setOffset ( (is_numeric ( $this->_request->getParam ( 'start' ) ) ? intval ( $this->_request->getParam ( 'start' ) ) : 0) );
+		$this->limit = (is_numeric ( $this->_request->getParam ( 'rows' ) ) ? intval ( $this->_request->getParam ( 'rows' ) ) : 10);
+		$this->offset = (is_numeric ( $this->_request->getParam ( 'start' ) ) ? intval ( $this->_request->getParam ( 'start' ) ) : 0);
 		$this->view->appPath = APPLICATION_PATH;
 	}
 	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @return void
+	 */
 	public function indexAction() {
-		$this->view->formAction = '/peribahasa';
-		$this->search ();
-		$this->pages->setAmount ( $this->view->hits ['numFound'] );
-		$this->view->pages = $this->pages;
-	}
-	
-	public function jsonAction() {
-		try {
-			$this->view->search = $this->search;
-			$this->search ();
-			$this->view->json = json_encode ( $this->view->hits );
-		} catch ( exceptions\EntryException $e ) {
-			$this->getResponse ()->setHttpResponseCode ( 500 );
-			$this->view->json = json_encode ( array ('error' => $e->getMessage () ) );
+		if ($this->_request->isGet ()) {
+			$this->view->formAction = '/peribahasa';
+			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
+			$this->view->search->setFieldValue ( $searchText );
+			/*@var $hits kateglo\application\faces\Hit */
+			$hits = $this->entry->searchProverb ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, definition, id' ) );
+			$this->view->pagination = $this->pagination->create ( $hits->getCount (), $this->offset, $this->limit );
+			$this->view->hits = $hits;
+		} else {
+			//Block other request type?
 		}
 	}
 	
-	private function search() {
-		$this->view->hits = new collections\ArrayCollection ();
-		if ($this->_request->isGet ()) {
+	public function jsonAction() {	
+		try {
 			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
 			$this->view->search->setFieldValue ( $searchText );
-			$this->view->hits = $this->entry->searchProverb ( $searchText, $this->pages->getOffset (), $this->pages->getLimit (), array ('fl' => 'entry,definition' ) );
+			$hits = $this->entry->searchProverbAsArray ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, definition, id' ) );
+			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
+			$this->view->json = json_encode ( array ('hits' => $hits, 'pagination' => $pagination ) );
+		} catch ( EntryException $e ) {
+			$this->getResponse ()->setHttpResponseCode ( 500 );
+			$this->view->json = json_encode ( array ('error' => $e->getMessage () ) );
 		}
 	}
 }
