@@ -20,12 +20,10 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\faces\Hit;
-
 use kateglo\application\faces\Document;
-use kateglo\application\utilities\collections\ArrayCollection;
-use kateglo\application\daos;
-use kateglo\application\utilities;
-use kateglo\application\faces;
+use Doctrine\Common\Collections\ArrayCollection;
+use kateglo\application\utilities\interfaces\SearchEngine;
+use kateglo\application\daos\interfaces;
 /**
  * 
  * 
@@ -60,7 +58,7 @@ class Entry implements interfaces\Entry {
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(daos\interfaces\Entry $entry) {
+	public function setEntry(interfaces\Entry $entry) {
 		$this->entry = $entry;
 	}
 	
@@ -71,7 +69,7 @@ class Entry implements interfaces\Entry {
 	 * 
 	 * @Inject
 	 */
-	public function setSearchEngine(utilities\interfaces\SearchEngine $searchEngine) {
+	public function setSearchEngine(SearchEngine $searchEngine) {
 		$this->searchEngine = $searchEngine;
 	}
 	
@@ -310,7 +308,7 @@ class Entry implements interfaces\Entry {
 	 * Enter description here ...
 	 * @param array $source
 	 * @param string $key
-	 * @return kateglo\application\utilities\collections\ArrayCollection|NULL
+	 * @return Doctrine\Common\Collections\ArrayCollection|NULL
 	 */
 	private function convert2Array($source, $key) {
 		if (array_key_exists ( $key, $source )) {

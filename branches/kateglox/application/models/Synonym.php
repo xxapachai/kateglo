@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -62,13 +61,13 @@ class Synonym {
 	private $synonym;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="synonyms", cascade={"persist"})
 	 */
 	private $definitions;
 	
 	function __construct() {
-		$this->definitions = new collections\ArrayCollection ();
+		$this->definitions = new ArrayCollection ();
 	}
 	
 	/**
@@ -89,7 +88,7 @@ class Synonym {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setMeaning(models\Meaning $meaning) {
+	public function setMeaning(Meaning $meaning) {
 		$this->meaning = $meaning;
 	}
 	
@@ -120,7 +119,7 @@ class Synonym {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setSynonym(models\Meaning $meaning) {
+	public function setSynonym(Meaning $meaning) {
 		$this->synonym = $meaning;
 	}
 	
@@ -129,7 +128,7 @@ class Synonym {
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function addDefinition(models\Definition $definition) {
+	public function addDefinition(Definition $definition) {
 		if (! $this->definitions->contains ( $definition )) {
 			$this->definitions [] = $definition;
 			$definition->addSynonym ( $this );
@@ -141,7 +140,7 @@ class Synonym {
 	 * @param kateglo\application\models\Definition $definition
 	 * @return source
 	 */
-	public function removeDefinition(models\Definition $definition) {
+	public function removeDefinition(Definition $definition) {
 		/*@var $removed kateglo\application\models\Definition */
 		$removed = $this->definitions->removeElement ( $definition );
 		if ($removed !== null) {
@@ -151,7 +150,7 @@ class Synonym {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDefinitions() {
 		return $this->definitions;

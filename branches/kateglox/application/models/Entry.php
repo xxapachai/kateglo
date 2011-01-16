@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,13 +54,13 @@ class Entry {
 	private $entry;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"persist"})
 	 */
 	private $meanings;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"persist"})
 	 */
 	private $sources;
@@ -72,7 +71,7 @@ class Entry {
 	 * 
 	 */
 	public function __construct() {
-		$this->meanings = new collections\ArrayCollection ();
+		$this->meanings = new ArrayCollection ();
 	}
 	
 	/**
@@ -102,7 +101,7 @@ class Entry {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function addMeaning(models\Meaning $meaning) {
+	public function addMeaning(Meaning $meaning) {
 		$this->meanings [] = $meaning;
 		$meaning->setEntry ( $this );
 	}
@@ -112,7 +111,7 @@ class Entry {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function removeMeaning(models\Meaning $meaning) {
+	public function removeMeaning(Meaning $meaning) {
 		/*@var $removed kateglo\application\models\Meaning */
 		$removed = $this->meanings->removeElement ( $meaning );
 		if ($removed !== null) {
@@ -122,7 +121,7 @@ class Entry {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMeanings() {
 		return $this->meanings;
@@ -133,7 +132,7 @@ class Entry {
 	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function addSource(models\Source $source) {
+	public function addSource(Source $source) {
 		$this->sources [] = $source;
 		$source->setEntry ( $this );
 	}
@@ -143,7 +142,7 @@ class Entry {
 	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function removeSource(models\Source $source) {
+	public function removeSource(Source $source) {
 		/*@var $removed kateglo\application\models\Source */
 		$removed = $this->sources->removeElement ( $source );
 		if ($removed !== null) {
@@ -153,7 +152,7 @@ class Entry {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSources() {
 		return $this->sources;

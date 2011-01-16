@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -62,13 +61,13 @@ class Syllabel {
 	private $meaning;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"persist"})
 	 */
 	private $pronounciations;
 	
 	function __construct() {
-		$this->pronounciations = new collections\ArrayCollection ();
+		$this->pronounciations = new ArrayCollection ();
 	}
 	
 	/**
@@ -106,7 +105,7 @@ class Syllabel {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setMeaning(models\Meaning $meaning) {
+	public function setMeaning(Meaning $meaning) {
 		$this->meaning = $meaning;
 	}
 	
@@ -128,7 +127,7 @@ class Syllabel {
 	 * @param kateglo\application\models\Pronounciation $pronounciation
 	 * @return void
 	 */
-	public function addPronounciation(models\Pronounciation $pronounciation) {
+	public function addPronounciation(Pronounciation $pronounciation) {
 		$this->pronounciations [] = $pronounciation;
 		$pronounciation->setSyllabel ( $this );
 	}
@@ -138,7 +137,7 @@ class Syllabel {
 	 * @param kateglo\application\models\Pronounciation $pronounciation
 	 * @return void
 	 */
-	public function removePronounciation(models\Pronounciation $pronounciation) {
+	public function removePronounciation(Pronounciation $pronounciation) {
 		/*@var $removed kateglo\application\models\Pronounciation */
 		$removed = $this->pronounciations->removeElement ( $pronounciation );
 		if ($removed !== null) {
@@ -148,7 +147,7 @@ class Syllabel {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getPronounciations() {
 		return $this->pronounciations;

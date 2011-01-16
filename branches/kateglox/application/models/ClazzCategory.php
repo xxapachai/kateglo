@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,7 +54,7 @@ class ClazzCategory {
 	protected $category;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="categories", cascade={"persist"})
 	 */
 	protected $clazzes;
@@ -65,7 +64,7 @@ class ClazzCategory {
 	 * Construct
 	 */
 	function __construct() {
-		$this->clazzes = new collections\ArrayCollection ();
+		$this->clazzes = new ArrayCollection ();
 	}
 	
 	/**
@@ -94,7 +93,7 @@ class ClazzCategory {
 	 * @param kateglo\application\models\Clazz $clazz
 	 * @return void
 	 */
-	public function addClazz(models\Clazz $clazz) {
+	public function addClazz(Clazz $clazz) {
 		if (! $this->clazzes->contains ( $clazz )) {
 			$this->clazzes [] = $clazz;
 			$clazz->setCategory ( $this );
@@ -106,7 +105,7 @@ class ClazzCategory {
 	 * @param kateglo\application\models\Clazz $clazz
 	 * @return void
 	 */
-	public function removeClazz(models\Clazz $clazz) {
+	public function removeClazz(Clazz $clazz) {
 		/*@var $removed kateglo\application\models\Clazz */
 		$removed = $this->types->removeElement ( $clazz );
 		if ($removed !== null) {
@@ -116,7 +115,7 @@ class ClazzCategory {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getClazzes() {
 		return $this->clazzes;

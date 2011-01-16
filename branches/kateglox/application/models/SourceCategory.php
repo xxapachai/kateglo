@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,7 +54,7 @@ class SourceCategory {
 	protected $category;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"persist"})
 	 */
 	protected $sources;
@@ -65,7 +64,7 @@ class SourceCategory {
 	 * Construct
 	 */
 	function __construct() {
-		$this->sources = new collections\ArrayCollection ();
+		$this->sources = new ArrayCollection ();
 	}
 	
 	/**
@@ -94,7 +93,7 @@ class SourceCategory {
 	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function addSource(models\Source $source) {
+	public function addSource(Source $source) {
 		$this->sources [] = $source;
 		$source->setCategory ( $this );
 	}
@@ -104,7 +103,7 @@ class SourceCategory {
 	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function removeSource(models\Misspelled $source) {
+	public function removeSource(Misspelled $source) {
 		/*@var $removed kateglo\application\models\Source */
 		$removed = $this->sources->removeElement ( $source );
 		if ($removed !== null) {
@@ -114,7 +113,7 @@ class SourceCategory {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSources() {
 		return $this->sources;

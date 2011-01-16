@@ -19,8 +19,7 @@ namespace kateglo\application\faces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\utilities\collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * 
  * 
@@ -72,7 +71,7 @@ class Pagination {
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $pages;
 	
@@ -161,14 +160,14 @@ class Pagination {
 	}
 
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getPages() {
 		return $this->pages;
 	}
 
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $pages
+	 * @param Doctrine\Common\Collections\ArrayCollection $pages
 	 */
 	public function setPages(ArrayCollection $pages) {
 		$this->pages = $pages;

@@ -18,11 +18,9 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities;
-use kateglo\application\services\interfaces;
-use kateglo\application\helpers;
-use kateglo\application\faces;
-use kateglo\application\daos;
+use kateglo\application\helpers\RouteParameter;
+use kateglo\application\faces\interfaces\Search;
+use kateglo\application\services\interfaces\Entry;
 /**
  *
  *
@@ -57,7 +55,7 @@ class EntryController extends Zend_Controller_Action_Stubbles {
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(interfaces\Entry $entry) {
+	public function setEntry(Entry $entry) {
 		$this->entry = $entry;
 	}
 	
@@ -68,7 +66,7 @@ class EntryController extends Zend_Controller_Action_Stubbles {
 	 * 
 	 * @Inject
 	 */
-	public function setSearch(faces\interfaces\Search $search) {
+	public function setSearch(Search $search) {
 		$this->search = $search;
 	}
 	
@@ -77,7 +75,7 @@ class EntryController extends Zend_Controller_Action_Stubbles {
 		$this->view->search = $this->search;
 		$this->view->formAction = '/kamus';
 		if ($this->_request->isGet ()) {
-			$text = urldecode ( $this->_request->getParam ( helpers\RouteParameter::TEXT ) );
+			$text = urldecode ( $this->_request->getParam ( RouteParameter::TEXT ) );
 			if ($text !== '') {
 				$this->view->search->setFieldValue ( $text );
 				$this->view->entry = $this->entry->getEntry ( $text );

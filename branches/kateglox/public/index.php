@@ -187,15 +187,15 @@ require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
  */
 $application = new Zend_Application ( APPLICATION_ENV, CONFIGS_PATH );
 
-use kateglo\application\utilities;
-use kateglo\application\utilities\interfaces;
+use kateglo\application\utilities\Injector;
+use kateglo\application\utilities\interfaces\LogService;
 
 /**
  * 
  * Get Log Service from Dependency Injector
  * @var kateglo\application\utilities\interfaces\LogService
  */
-$logService = utilities\Injector::getInstance ( interfaces\LogService::INTERFACE_NAME );
+$logService = Injector::getInstance ( LogService::INTERFACE_NAME );
 
 try {
 	//run kateglo

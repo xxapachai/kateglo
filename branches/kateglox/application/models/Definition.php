@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -60,25 +59,25 @@ class Definition {
 	private $meaning;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="definitions", cascade={"persist"})
 	 */
 	private $clazz;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions", cascade={"persist"})
 	 */
 	private $disciplines;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Sample", mappedBy="definition", cascade={"persist"})
 	 */
 	private $samples;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym")
 	 * @JoinTable(name="rel_antonym_definition",
 	 * joinColumns={@JoinColumn(name="rel_antonym_id", referencedColumnName="antonym_id")},
@@ -88,7 +87,7 @@ class Definition {
 	private $antonyms;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym")
 	 * @JoinTable(name="rel_synonym_definition",
 	 * joinColumns={@JoinColumn(name="rel_synonym_id", referencedColumnName="synonym_id")},
@@ -98,7 +97,7 @@ class Definition {
 	private $synonyms;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Relation")
 	 * @JoinTable(name="rel_relation_definition",
 	 * joinColumns={@JoinColumn(name="rel_relation_id", referencedColumnName="relation_id")},
@@ -108,7 +107,7 @@ class Definition {
 	private $relations;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled")
 	 * @JoinTable(name="rel_misspelled_definition",
 	 * joinColumns={@JoinColumn(name="rel_misspelled_id", referencedColumnName="misspelled_id")},
@@ -118,13 +117,13 @@ class Definition {
 	private $misspelleds;
 	
 	function __construct() {
-		$this->clazz = new collections\ArrayCollection ();
-		$this->disciplines = new collections\ArrayCollection ();
-		$this->samples = new collections\ArrayCollection ();
-		$this->antonyms = new collections\ArrayCollection ();
-		$this->synonyms = new collections\ArrayCollection ();
-		$this->relations = new collections\ArrayCollection ();
-		$this->misspelleds = new collections\ArrayCollection ();
+		$this->clazz = new ArrayCollection();
+		$this->disciplines = new ArrayCollection ();
+		$this->samples = new ArrayCollection ();
+		$this->antonyms = new ArrayCollection ();
+		$this->synonyms = new ArrayCollection ();
+		$this->relations = new ArrayCollection ();
+		$this->misspelleds = new ArrayCollection ();
 	}
 	
 	/**
@@ -159,7 +158,7 @@ class Definition {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function setMeaning(models\Meaning $meaning) {
+	public function setMeaning(Meaning $meaning) {
 		$this->meaning = $meaning;
 	}
 	
@@ -181,7 +180,7 @@ class Definition {
 	 * @param kateglo\application\models\Clazz $clazz
 	 * @return void
 	 */
-	public function setClazz(models\Clazz $clazz) {
+	public function setClazz(Clazz $clazz) {
 		if (! $this->clazz->contains ( $clazz )) {
 			$this->clazz [0] = $clazz;
 			$clazz->addDefinition ( $this );
@@ -214,7 +213,7 @@ class Definition {
 	 * @param kateglo\application\models\Discipline $discipline
 	 * @return void
 	 */
-	public function addDiscipline(models\Discipline $discipline) {
+	public function addDiscipline(Discipline $discipline) {
 		if (! $this->disciplines->contains ( $discipline )) {
 			$this->disciplines [] = $discipline;
 			$discipline->addDefinition ( $this );
@@ -226,7 +225,7 @@ class Definition {
 	 * @param kateglo\application\models\Discipline $discipline
 	 * @return source
 	 */
-	public function removeDiscipline(models\Discipline $discipline) {
+	public function removeDiscipline(Discipline $discipline) {
 		/*@var $removed kateglo\application\models\Discipline */
 		$removed = $this->disciplines->removeElement ( $discipline );
 		if ($removed !== null) {
@@ -236,7 +235,7 @@ class Definition {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDisciplines() {
 		return $this->disciplines;
@@ -247,7 +246,7 @@ class Definition {
 	 * @param kateglo\application\models\Sample $sample
 	 * @return void
 	 */
-	public function addSample(models\Sample $sample) {
+	public function addSample(Sample $sample) {
 		$this->samples [] = $sample;
 		$sample->setDefinition ( $this );
 	}
@@ -257,7 +256,7 @@ class Definition {
 	 * @param kateglo\application\models\Sample $sample
 	 * @return void
 	 */
-	public function removeSample(models\Sample $sample) {
+	public function removeSample(Sample $sample) {
 		/*@var $removed kateglo\application\models\Sample */
 		$removed = $this->samples->removeElement ( $sample );
 		if ($removed !== null) {
@@ -267,7 +266,7 @@ class Definition {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSamples() {
 		return $this->samples;
@@ -278,7 +277,7 @@ class Definition {
 	 * @param kateglo\application\models\Antonym $antonym
 	 * @return void
 	 */
-	public function addAntonym(models\Antonym $antonym) {
+	public function addAntonym(Antonym $antonym) {
 		if (! $this->antonyms->contains ( $antonym )) {
 			$this->antonyms [] = $antonym;
 			$antonym->addDefinition ( $this );
@@ -290,7 +289,7 @@ class Definition {
 	 * @param kateglo\application\models\Antonym $antonym
 	 * @return void
 	 */
-	public function removeAntonym(models\Antonym $antonym) {
+	public function removeAntonym(Antonym $antonym) {
 		/*@var $removed kateglo\application\models\Antonym */
 		$removed = $this->antonyms->removeElement ( $antonym );
 		if ($removed !== null) {
@@ -300,7 +299,7 @@ class Definition {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getAntonyms() {
 		return $this->antonyms;
@@ -311,7 +310,7 @@ class Definition {
 	 * @param kateglo\application\models\Synonym $synonym
 	 * @return void
 	 */
-	public function addSynonym(models\Synonym $synonym) {
+	public function addSynonym(Synonym $synonym) {
 		if (! $this->synonyms->contains ( $synonym )) {
 			$this->synonyms [] = $synonym;
 			$synonym->addDefinition ( $this );
@@ -323,7 +322,7 @@ class Definition {
 	 * @param kateglo\application\models\Synonym $synonym
 	 * @return void
 	 */
-	public function removeSynonym(models\Synonym $synonym) {
+	public function removeSynonym(Synonym $synonym) {
 		/*@var $removed kateglo\application\models\Synonym */
 		$removed = $this->synonyms->removeElement ( $synonym );
 		if ($removed !== null) {
@@ -333,7 +332,7 @@ class Definition {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSynonyms() {
 		return $this->synonyms;
@@ -344,7 +343,7 @@ class Definition {
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
-	public function addRelation(models\Relation $relation) {
+	public function addRelation(Relation $relation) {
 		if (! $this->relations->contains ( $relation )) {
 			$this->relations [] = $relation;
 			$relation->addDefinition ( $this );
@@ -356,7 +355,7 @@ class Definition {
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
-	public function removeRelation(models\Relation $relation) {
+	public function removeRelation(Relation $relation) {
 		/*@var $removed kateglo\application\models\Relation */
 		$removed = $this->relations->removeElement ( $relation );
 		if ($removed !== null) {
@@ -366,7 +365,7 @@ class Definition {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getRelations() {
 		return $this->relations;
@@ -377,7 +376,7 @@ class Definition {
 	 * @param kateglo\application\models\Misspelled $misspelled
 	 * @return void
 	 */
-	public function addMisspelled(models\Misspelled $misspelled) {
+	public function addMisspelled(Misspelled $misspelled) {
 		if (! $this->misspelleds->contains ( $misspelled )) {
 			$this->misspelleds [] = $misspelled;
 			$misspelled->addDefinition ( $this );
@@ -389,7 +388,7 @@ class Definition {
 	 * @param kateglo\application\models\Misspelled $misspelled
 	 * @return void
 	 */
-	public function removeMisspelled(models\Misspelled $misspelled) {
+	public function removeMisspelled(Misspelled $misspelled) {
 		/*@var $removed kateglo\application\models\Misspelled */
 		$removed = $this->relations->removeElement ( $misspelled );
 		if ($removed !== null) {
@@ -399,7 +398,7 @@ class Definition {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMisspelleds() {
 		return $this->misspelleds;

@@ -20,7 +20,6 @@ namespace kateglo\application\faces;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\utilities\collections\ArrayCollection;
 /**
  *
  *
@@ -167,55 +166,55 @@ class Document {
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $antonyms;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $definitions;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $classes;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $classCategories;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $disciplines;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $samples;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $misspelleds;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $relations;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $synonyms;
 	
@@ -227,31 +226,31 @@ class Document {
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $syllabels;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $types;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $typeCategories;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $source;
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $sourceCategories;
 	/**
@@ -283,126 +282,126 @@ class Document {
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getAntonyms() {
 		return $this->antonyms;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $antonyms
+	 * @param Doctrine\Common\Collections\ArrayCollection $antonyms
 	 */
 	public function setAntonyms($antonyms) {
 		$this->antonyms = $antonyms;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDefinitions() {
 		return $this->definitions;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $definitions
+	 * @param Doctrine\Common\Collections\ArrayCollection $definitions
 	 */
 	public function setDefinitions($definitions) {
 		$this->definitions = $definitions;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getClasses() {
 		return $this->classes;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $classes
+	 * @param Doctrine\Common\Collections\ArrayCollection $classes
 	 */
 	public function setClasses($classes) {
 		$this->classes = $classes;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getClassCategories() {
 		return $this->classCategories;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $classCategories
+	 * @param Doctrine\Common\Collections\ArrayCollection $classCategories
 	 */
 	public function setClassCategories($classCategories) {
 		$this->classCategories = $classCategories;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDisciplines() {
 		return $this->disciplines;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $disciplines
+	 * @param Doctrine\Common\Collections\ArrayCollection $disciplines
 	 */
 	public function setDisciplines($disciplines) {
 		$this->disciplines = $disciplines;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSamples() {
 		return $this->samples;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $samples
+	 * @param Doctrine\Common\Collections\ArrayCollection $samples
 	 */
 	public function setSamples($samples) {
 		$this->samples = $samples;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMisspelleds() {
 		return $this->misspelleds;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $misspelleds
+	 * @param Doctrine\Common\Collections\ArrayCollection $misspelleds
 	 */
 	public function setMisspelleds($misspelleds) {
 		$this->misspelleds = $misspelleds;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getRelations() {
 		return $this->relations;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $relations
+	 * @param Doctrine\Common\Collections\ArrayCollection $relations
 	 */
 	public function setRelations($relations) {
 		$this->relations = $relations;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSynonyms() {
 		return $this->synonyms;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $synonyms
+	 * @param Doctrine\Common\Collections\ArrayCollection $synonyms
 	 */
 	public function setSynonyms($synonyms) {
 		$this->synonyms = $synonyms;
@@ -423,70 +422,70 @@ class Document {
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSyllabels() {
 		return $this->syllabels;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $syllabels
+	 * @param Doctrine\Common\Collections\ArrayCollection $syllabels
 	 */
 	public function setSyllabels($syllabels) {
 		$this->syllabels = $syllabels;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollections
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getTypes() {
 		return $this->types;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $types
+	 * @param Doctrine\Common\Collections\ArrayCollection $types
 	 */
 	public function setTypes($types) {
 		$this->types = $types;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getTypeCategories() {
 		return $this->typeCategories;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $typeCategories
+	 * @param Doctrine\Common\Collections\ArrayCollection $typeCategories
 	 */
 	public function setTypeCategories($typeCategories) {
 		$this->typeCategories = $typeCategories;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSource() {
 		return $this->source;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $source
+	 * @param Doctrine\Common\Collections\ArrayCollection $source
 	 */
 	public function setSource($source) {
 		$this->source = $source;
 	}
 	
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSourceCategories() {
 		return $this->sourceCategories;
 	}
 	
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $sourceCategories
+	 * @param Doctrine\Common\Collections\ArrayCollection $sourceCategories
 	 */
 	public function setSourceCategories($sourceCategories) {
 		$this->sourceCategories = $sourceCategories;

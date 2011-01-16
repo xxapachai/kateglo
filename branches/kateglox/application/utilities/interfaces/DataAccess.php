@@ -19,8 +19,8 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use Doctrine\DBAL;
-use Doctrine\ORM;
+use Doctrine\DBAL\Driver\Connection;
+use Doctrine\ORM\EntityManager;
 /**
  *
  *
@@ -53,7 +53,7 @@ interface DataAccess {
 	 * @param Doctrine\ORM\EntityManager $entityManager
 	 * @return void
 	 */
-	function setEntityManager(ORM\EntityManager $entityManager);
+	function setEntityManager(EntityManager $entityManager);
 	
 	/**
 	 * 
@@ -66,6 +66,6 @@ interface DataAccess {
 	 * @param Doctrine\DBAL\Connection $conn
 	 * @return void
 	 */
-	function setConnection(DBAL\Connection $conn);
+	function setConnection(Connection $conn);
 }
 ?>

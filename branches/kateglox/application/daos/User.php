@@ -19,10 +19,10 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\daos\interfaces;
-use kateglo\application\daos\exceptions;
 use kateglo\application\models;
-use kateglo\application\utilities;
+use kateglo\application\daos\exceptions\DomainResultEmptyException;
+use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
+use kateglo\application\utilities\interfaces\DataAccess;
 /**
  * 
  * 
@@ -51,7 +51,7 @@ class User implements interfaces\User {
 	 * 
 	 * @Inject
 	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess){
+	public function setDataAccess(DataAccess $dataAccess){
 		$this->dataAccess = $dataAccess;
 	}
 	
@@ -65,10 +65,10 @@ class User implements interfaces\User {
 		$result = $query->getResult();
         if(count($result) === 1){
         	if(! ($result[0] instanceof models\User)){
-        		throw new exceptions\DomainObjectNotFoundException();
+        		throw new DomainObjectNotFoundException();
         	}
         }else{
-        	throw new exceptions\DomainResultEmptyException();
+        	throw new DomainResultEmptyException();
         }
         
         return $result[0];

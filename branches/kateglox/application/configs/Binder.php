@@ -19,10 +19,11 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities;
-use kateglo\application\services;
 use kateglo\application\daos;
+use kateglo\application\services;
+use kateglo\application\utilities;
 use kateglo\application\faces;
+use kateglo\application\configs\interfaces;
 /**
  *
  *

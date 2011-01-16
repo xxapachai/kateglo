@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+
 /**
  *
  *
@@ -101,7 +100,7 @@ class Pronounciation {
 	 * @param kateglo\application\models\Syllabel $syllabel
 	 * @return void
 	 */
-	public function setSyllabel(models\Syllabel $syllabel) {
+	public function setSyllabel(Syllabel $syllabel) {
 		$this->syllabel = $syllabel;
 	}
 	

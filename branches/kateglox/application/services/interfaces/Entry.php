@@ -51,14 +51,14 @@ interface Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	function randomMisspelled($limit = 5);
 	
 	/**
 	 *
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	function randomEntry($limit = 10);
 	

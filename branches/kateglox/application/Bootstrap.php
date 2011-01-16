@@ -18,13 +18,12 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
 require_once 'Zend/Controller/Dispatcher/Stubbles.php';
 
 require_once 'Zend/Controller/Action/Helper/PhpTal.php';
 
 use kateglo\application\utilities\Injector;
-use kateglo\application\configs;
+use kateglo\application\configs\Configs;
 /**
  *
  *
@@ -55,7 +54,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = $this->getResource ( 'FrontController' );
 		
 		$dispatcher = new Zend_Controller_Dispatcher_Stubbles ();
-		$dispatcher->setControllerDirectory ( Injector::getInstance ( configs\interfaces\Configs::INTERFACE_NAME )->get ()->resources->frontController->controllerDirectory );
+		$dispatcher->setControllerDirectory ( Injector::getInstance ( Configs::INTERFACE_NAME )->get ()->resources->frontController->controllerDirectory );
 		$front->setDispatcher ( $dispatcher );
 		
 		$router = $front->getRouter ();

@@ -51,13 +51,13 @@ interface Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	function getRandom($limit = 10);
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	function getAll();
 	

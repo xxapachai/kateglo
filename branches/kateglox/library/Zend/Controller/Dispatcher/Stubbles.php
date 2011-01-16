@@ -22,8 +22,7 @@
 /** Zend_Controller_Dispatcher_Abstract */
 require_once 'Zend/Controller/Dispatcher/Standard.php';
 
-use kateglo\application\utilities;
-
+use kateglo\application\utilities\Injector;
 /**
  *  
  * 
@@ -78,9 +77,9 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
 		 * Instantiate controller with request, response, and invocation
 		 * arguments; throw exception if it's not an action controller
 		 */
-		utilities\Injector::get ()->bind ( 'Zend_Controller_Action_Interface' )->to ( $className );
+		Injector::get ()->bind ( 'Zend_Controller_Action_Interface' )->to ( $className );
 		/*@var $controller Zend_Controller_Action_Stubbles */
-		$controller = utilities\Injector::getInstance ( $className );
+		$controller = Injector::getInstance ( $className );
 		$controller->setRequest ( $request )->setResponse ( $response )->setInvokeArgs ( $this->getParams () );
 		$controller->setHelper ( new Zend_Controller_Action_HelperBroker ( $controller ) );		
 		$controller->init ();

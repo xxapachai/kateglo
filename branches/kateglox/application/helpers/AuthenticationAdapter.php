@@ -19,11 +19,10 @@ namespace kateglo\application\helpers;
  * and is licensed under the GPL2. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\daos\exceptions;
-use kateglo\application\daos;
-use kateglo\application\models;
-use kateglo\application\utilities;
+use kateglo\application\daos\exceptions\DomainResultEmptyException;
+use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
+use kateglo\application\utilities\DataAccess;
+use kateglo\application\daos\User;
 /**
  *
  *
@@ -101,17 +100,17 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 		
 		try{
 			/*@var $userObj kateglo\application\models\User */
-			$userObj = daos\User::getByUsername($this->username);
+			$userObj = User::getByUsername($this->username);
 			if($userObj->getPassword() == md5($this->password)){
 				$userObj->setLastLogin(new \DateTime());
-				utilities\DataAccess::getEntityManager()->persist($userObj);
+				DataAccess::getEntityManager()->persist($userObj);
 				$result = new \Zend_Auth_Result(\Zend_Auth_Result::SUCCESS, $userObj, array("Authentication success!"));
 			}else{
 				$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array("Authentication failed!"));
 			}
-		}catch (exceptions\DomainObjectNotFoundException $e){
+		}catch (DomainObjectNotFoundException $e){
 			$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));
-		}catch(exceptions\DomainResultEmptyException $e){
+		}catch(DomainResultEmptyException $e){
 			$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND, null, array("Authentication failed!"));
 		}
 

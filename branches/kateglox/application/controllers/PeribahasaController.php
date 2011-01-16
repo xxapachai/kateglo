@@ -131,6 +131,11 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles {
 		}
 	}
 	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @return void
+	 */
 	public function jsonAction() {	
 		try {
 			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
