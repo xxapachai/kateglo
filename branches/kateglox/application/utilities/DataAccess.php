@@ -19,11 +19,10 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\Common\Cache\ApcCache;
 use Doctrine\DBAL\Driver\Connection;
-
 use Doctrine\ORM\Configuration;
 use Doctrine\DBAL\DriverManager;
-use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
 use kateglo\application\configs\interfaces\Configs;
 /**
@@ -116,10 +115,10 @@ class DataAccess implements interfaces\DataAccess {
 					$this->setConnection();
 				}
 				if($this->metadataCache == null){
-					$this->metadataCache = new ArrayCache();
+					$this->metadataCache = new ApcCache();
 				}
 				if($this->queryCache == null){
-					$this->queryCache = new ArrayCache();
+					$this->queryCache = new ApcCache();
 				}
 				$config = new Configuration();
 				$config->setMetadataCacheImpl($this->metadataCache);
@@ -127,7 +126,7 @@ class DataAccess implements interfaces\DataAccess {
 				$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver());
 				$config->setProxyDir(realpath($this->configs->get()->cache->doctrine->proxy));
 				$config->setProxyNamespace($this->configs->get()->cache->doctrine->namespace);
-				 
+				//$config->setAutoGenerateProxyClasses(false); 
 				$this->entityManager = EntityManager::create($this->conn, $config);
 			}
 		}else{
