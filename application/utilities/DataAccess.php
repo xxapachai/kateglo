@@ -19,6 +19,8 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\DBAL\Driver\Connection;
+
 use Doctrine\ORM\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Common\Cache\ArrayCache;
@@ -148,7 +150,7 @@ class DataAccess implements interfaces\DataAccess {
 	 * @param Doctrine\DBAL\Connection $conn
 	 * @return void
 	 */
-	public function setConnection(DBAL\Connection $conn = null){
+	public function setConnection(Connection $conn = null){
 		if($conn === null){
 			if(! ($this->conn instanceof DriverManager) ){
 				$params = array("driver"=> $this->configs->get()->database->adapter,
