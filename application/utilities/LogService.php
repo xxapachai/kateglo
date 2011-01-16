@@ -19,8 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs;
-use kateglo\application\utilities\interfaces;
+use kateglo\application\configs\interfaces\Configs;
 /**
  *
  *
@@ -57,7 +56,7 @@ class LogService implements interfaces\LogService{
 	 *
 	 * @Inject
 	 */
-	public function setConfigs(configs\interfaces\Configs $configs){
+	public function setConfigs(Configs $configs){
 		$this->configs = $configs;
 	}
 

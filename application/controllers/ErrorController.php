@@ -18,9 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities;
-use kateglo\application\utilities\interfaces;
-use kateglo\application\faces;
+use kateglo\application\faces\interfaces\Search;
+use kateglo\application\utilities\interfaces\LogService;
 /**
  * 
  * 
@@ -54,7 +53,7 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(interfaces\LogService $log) {
+	public function setEntry(LogService $log) {
 		$this->log = $log;
 	}
 	
@@ -65,7 +64,7 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	 * 
 	 * @Inject
 	 */
-	public function setSearch(faces\interfaces\Search $search) {
+	public function setSearch(Search $search) {
 		$this->search = $search;
 	}
 	

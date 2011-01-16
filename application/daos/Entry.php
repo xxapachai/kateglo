@@ -19,10 +19,10 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\daos\interfaces;
-use kateglo\application\daos\exceptions;
+use kateglo\application\daos\exceptions\DomainResultEmptyException;
+use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
 use kateglo\application\models;
-use kateglo\application\utilities;
+use kateglo\application\utilities\interfaces\DataAccess;
 /**
  *
  *
@@ -51,7 +51,7 @@ class Entry implements interfaces\Entry {
 	 * 
 	 * @Inject
 	 */
-	public function setDataAccess(utilities\interfaces\DataAccess $dataAccess) {
+	public function setDataAccess(DataAccess $dataAccess) {
 		$this->dataAccess = $dataAccess;
 	}
 	
@@ -66,10 +66,10 @@ class Entry implements interfaces\Entry {
 		$result = $query->getResult ();
 		if (count ( $result ) === 1) {
 			if (! ($result [0] instanceof models\Entry)) {
-				throw new exceptions\DomainObjectNotFoundException ();
+				throw new DomainObjectNotFoundException ();
 			}
 		} else {
-			throw new exceptions\DomainResultEmptyException ();
+			throw new DomainResultEmptyException ();
 		}
 		
 		return $result [0];
@@ -84,7 +84,7 @@ class Entry implements interfaces\Entry {
 		$result = $query->getSingleResult ();
 		
 		if (! (is_numeric ( $result [1] ))) {
-			throw new exceptions\DomainResultEmptyException ( "result not found" );
+			throw new DomainResultEmptyException ( "result not found" );
 		}
 		
 		return $result [1];
@@ -93,7 +93,7 @@ class Entry implements interfaces\Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getRandom($limit = 10) {
 		$randomIdResult = $this->dataAccess->getConnection ()->query ( "SELECT entry_id FROM entry ORDER BY RAND() LIMIT " . $limit . " " );
@@ -114,17 +114,17 @@ class Entry implements interfaces\Entry {
 	/**
 	 * 
 	 * @see kateglo\application\daos\interfaces\Entry::getAll()
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getAll() {
 		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
 		$result = $query->getResult ();
 		if (count ( $result ) > 0) {
 			if (! ($result [0] instanceof models\Entry)) {
-				throw new exceptions\DomainObjectNotFoundException ( "wrong result" );
+				throw new DomainObjectNotFoundException ( "wrong result" );
 			}
 		} else {
-			throw new exceptions\DomainResultEmptyException ( "result not found" );
+			throw new DomainResultEmptyException ( "result not found" );
 		}
 		
 		return $result;
@@ -136,7 +136,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $limit
 	 * @param int $offset
 	 * @see kateglo\application\daos\interfaces\Entry::getSome()
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSome($limit, $offset) {
 		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
@@ -145,10 +145,10 @@ class Entry implements interfaces\Entry {
 		$result = $query->getResult ();
 		if (count ( $result ) > 0) {
 			if (! ($result [0] instanceof models\Entry)) {
-				throw new exceptions\DomainObjectNotFoundException ( "wrong result" );
+				throw new DomainObjectNotFoundException ( "wrong result" );
 			}
 		} else {
-			throw new exceptions\DomainResultEmptyException ( "result not found" );
+			throw new DomainResultEmptyException ( "result not found" );
 		}
 		
 		return $result;

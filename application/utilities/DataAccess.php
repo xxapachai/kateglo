@@ -19,12 +19,11 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\configs;
-use Doctrine\Common;
-use Doctrine\Common\Cache;
-use Doctrine\DBAL;
-use Doctrine\ORM;
+use Doctrine\ORM\Configuration;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\ORM\EntityManager;
+use kateglo\application\configs\interfaces\Configs;
 /**
  *
  *
@@ -79,7 +78,7 @@ class DataAccess implements interfaces\DataAccess {
 	 *
 	 * @Inject
 	 */
-	public function setConfigs(configs\interfaces\Configs $configs){
+	public function setConfigs(Configs $configs){
 		$this->configs = $configs;
 	}
 
@@ -89,7 +88,7 @@ class DataAccess implements interfaces\DataAccess {
 	 */
 	public function getEntityManager()
 	{
-		if(! ($this->entityManager instanceof ORM\EntityManager)){
+		if(! ($this->entityManager instanceof EntityManager)){
 			$this->setEntityManager(); 			 
 		}
 		return $this->entityManager;
@@ -108,26 +107,26 @@ class DataAccess implements interfaces\DataAccess {
 	 * @param Doctrine\ORM\EntityManager $entityManager
 	 * @return void
 	 */
-	public function setEntityManager(ORM\EntityManager $entityManager = null){
+	public function setEntityManager(EntityManager $entityManager = null){
 		if($entityManager === null){
-			if(! ($this->entityManager instanceof ORM\EntityManager)){
+			if(! ($this->entityManager instanceof EntityManager)){
 				if($this->conn == null){
 					$this->setConnection();
 				}
 				if($this->metadataCache == null){
-					$this->metadataCache = new Cache\ArrayCache();
+					$this->metadataCache = new ArrayCache();
 				}
 				if($this->queryCache == null){
-					$this->queryCache = new Cache\ArrayCache();
+					$this->queryCache = new ArrayCache();
 				}
-				$config = new ORM\Configuration();
+				$config = new Configuration();
 				$config->setMetadataCacheImpl($this->metadataCache);
 				$config->setQueryCacheImpl($this->queryCache);
 				$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver());
 				$config->setProxyDir(realpath($this->configs->get()->cache->doctrine->proxy));
 				$config->setProxyNamespace($this->configs->get()->cache->doctrine->namespace);
 				 
-				$this->entityManager = ORM\EntityManager::create($this->conn, $config);
+				$this->entityManager = EntityManager::create($this->conn, $config);
 			}
 		}else{
 			$this->entityManager = $entityManager;
@@ -139,7 +138,7 @@ class DataAccess implements interfaces\DataAccess {
 	 * @return Doctrine\DBAL\Connection
 	 */
 	public function getConnection(){
-		if(! ($this->conn instanceof DBAL\DriverManager)){
+		if(! ($this->conn instanceof DriverManager)){
 			$this->setConnection();
 		}
 		return $this->conn;
@@ -151,14 +150,14 @@ class DataAccess implements interfaces\DataAccess {
 	 */
 	public function setConnection(DBAL\Connection $conn = null){
 		if($conn === null){
-			if(! ($this->conn instanceof DBAL\DriverManager) ){
+			if(! ($this->conn instanceof DriverManager) ){
 				$params = array("driver"=> $this->configs->get()->database->adapter,
         					"host" => $this->configs->get()->database->host,
         					"port" => $this->configs->get()->database->port,
         					"dbname" => $this->configs->get()->database->name,
         					"user" => $this->configs->get()->database->username,
         					"password" => $this->configs->get()->database->password);
-				$this->conn = DBAL\DriverManager::getConnection($params, null);
+				$this->conn = DriverManager::getConnection($params, null);
 				$this->conn->setCharset($this->configs->get()->database->charset);
 			}
 		}else{

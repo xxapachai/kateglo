@@ -20,7 +20,6 @@ namespace kateglo\application\faces;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\utilities\collections\ArrayCollection;
 /**
  *
  *
@@ -69,7 +68,7 @@ class Hit {
 	
 	/**
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $documents;
 	
@@ -102,14 +101,14 @@ class Hit {
 	}
 
 	/**
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDocuments() {
 		return $this->documents;
 	}
 
 	/**
-	 * @param kateglo\application\utilities\collections\ArrayCollection $documents
+	 * @param Doctrine\Common\Collections\ArrayCollection $documents
 	 */
 	public function setDocuments(ArrayCollection $documents) {
 		$this->documents = $documents;

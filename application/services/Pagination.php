@@ -19,9 +19,9 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\faces;
-use kateglo\application\utilities\collections\ArrayCollection;
+use kateglo\application\faces\Page;
+use kateglo\application\faces\Pagination;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * 
  * 
@@ -95,7 +95,7 @@ class Pagination implements interfaces\Pagination {
 	private function doCreate($amount, $offset = 0, $limit = 10, $pageRange = 10) {
 		$pageCollection = new ArrayCollection ();
 		
-		$pagination = new faces\Pagination ();
+		$pagination = new Pagination ();
 		$pagination->setAmount ( $amount );
 		$pagination->setLimit ( $limit );
 		$pagination->setOffset ( $offset );
@@ -137,36 +137,36 @@ class Pagination implements interfaces\Pagination {
 			if ($pageMin > 1) { //create at least Prev Page element
 				if ($pageMin > 2) { //create First Page element
 					$page = 1;
-					$pageObject = new faces\Page ( $page, $start, 'First', false );
+					$pageObject = new Page ( $page, $start, 'First', false );
 					$pageCollection [] = $pageObject;
 				}
 				$page = $pageMin - 1;
 				$start = ($pageMin - 1) * $pagination->getLimit ();
-				$pageObject = new faces\Page ( $page, $start, 'Prev', false );
+				$pageObject = new Page ( $page, $start, 'Prev', false );
 				$pageCollection [] = $pageObject;
 			}
 			for($i = ( int ) $pageMin; $i <= ( int ) $pageMax; $i ++) { //create numbered Page Elements
 				if ($i === $pagination->getCurrentPage ()) { //current Page elements
 					$page = $i;
 					$start = ($page - 1) * $pagination->getLimit ();
-					$pageObject = new faces\Page ( $page, $start, ( string ) $page, true );
+					$pageObject = new Page ( $page, $start, ( string ) $page, true );
 					$pageCollection [] = $pageObject;
 				} else {
 					$page = $i;
 					$start = ($page - 1) * $pagination->getLimit ();
-					$pageObject = new faces\Page ( $page, $start, ( string ) $page, false );
+					$pageObject = new Page ( $page, $start, ( string ) $page, false );
 					$pageCollection [] = $pageObject;
 				}
 			}
 			if ($pageMax < $pagination->getPageAmount ()) { //create Next Page Element
 				$page = $pageMax + 1;
 				$start = ($page - 1) * $pagination->getLimit ();
-				$pageObject = new faces\Page ( $page, $start, 'Next', false );
+				$pageObject = new Page ( $page, $start, 'Next', false );
 				$pageCollection [] = $pageObject;
 				if ($page < $pagination->getPageAmount ()) { //create Last Page Element
 					$page = $pagination->getPageAmount ();
 					$start = ($page - 1) * $pagination->getLimit ();
-					$pageObject = new faces\Page ( $page, $start, 'Last', false );
+					$pageObject = new Page ( $page, $start, 'Last', false );
 					$pageCollection [] = $pageObject;
 				}
 			}
@@ -182,7 +182,7 @@ class Pagination implements interfaces\Pagination {
 	 * @param kateglo\application\faces\Pagination $pagination
 	 * @return array
 	 */
-	private function convert2Array(faces\Pagination $pagination) {
+	private function convert2Array(Pagination $pagination) {
 		$paginationArray = array ();
 		$paginationArray ['offset'] = $pagination->getOffset ();
 		$paginationArray ['limit'] = $pagination->getLimit ();

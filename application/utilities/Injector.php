@@ -19,8 +19,8 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs;
-use kateglo\application\utilities\exceptions;
+use kateglo\application\configs\Binder;
+use kateglo\application\utilities\exceptions\InjectorException;
 /**
  *
  *
@@ -51,7 +51,7 @@ class Injector {
 		}
 		$object = self::$container->getInjector ()->getInstance ( $className );
 		if (! ($object instanceof $className)) {
-			throw new exceptions\InjectorException ( 'Object instantiating failed!' );
+			throw new InjectorException ( 'Object instantiating failed!' );
 		}
 		return $object;
 	}
@@ -64,7 +64,7 @@ class Injector {
 		if ($container === null) {
 			if (! (self::$container instanceof \stubBinder)) {
 				self::$container = new \stubBinder ();
-				configs\Binder::bind ( self::$container );
+				Binder::bind ( self::$container );
 			}
 		} else {
 			self::$container = $container;

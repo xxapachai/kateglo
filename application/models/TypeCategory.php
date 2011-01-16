@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,7 +54,7 @@ class TypeCategory {
 	protected $category;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="categories", cascade={"persist"})
 	 */
 	protected $types;
@@ -65,7 +64,7 @@ class TypeCategory {
 	 * Construct
 	 */
 	function __construct() {
-		$this->types = new collections\ArrayCollection ();
+		$this->types = new ArrayCollection ();
 	}	
 	
 	/**
@@ -94,7 +93,7 @@ class TypeCategory {
 	 * @param kateglo\application\models\Type $type
 	 * @return void
 	 */
-	public function addType(models\Type $type) {
+	public function addType(Type $type) {
 		if (! $this->types->contains ( $type )) {
 			$this->types [] = $type;
 			$type->setCategory ( $this );
@@ -106,7 +105,7 @@ class TypeCategory {
 	 * @param kateglo\application\models\Type $type
 	 * @return void
 	 */
-	public function removeType(models\Type $type) {
+	public function removeType(Type $type) {
 		/*@var $removed kateglo\application\models\Type */
 		$removed = $this->types->removeElement ( $type );
 		if ($removed !== null) {
@@ -116,7 +115,7 @@ class TypeCategory {
 	
 	/**
 	 *
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getTypes() {
 		return $this->types;

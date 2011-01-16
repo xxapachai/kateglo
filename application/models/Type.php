@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,7 +54,7 @@ class Type {
 	protected $type;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Meaning")
 	 * @JoinTable(name="rel_meaning_type",
 	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
@@ -65,7 +64,7 @@ class Type {
 	private $meanings;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\TypeCategory")
 	 * @JoinTable(name="rel_type_category",
 	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
@@ -75,8 +74,8 @@ class Type {
 	private $categories;
 	
 	function __construct() {
-		$this->meanings = new collections\ArrayCollection ();
-		$this->categories = new collections\ArrayCollection ();
+		$this->meanings = new ArrayCollection ();
+		$this->categories = new ArrayCollection ();
 	}
 	
 	/**
@@ -109,7 +108,7 @@ class Type {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function addMeaning(models\Meaning $meaning) {
+	public function addMeaning(Meaning $meaning) {
 		if (! $this->meanings->contains ( $meaning )) {
 			$this->meanings [] = $meaning;
 			$meaning->addType ( $this );
@@ -121,7 +120,7 @@ class Type {
 	 * @param kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
-	public function removeMeaning(models\Meaning $meaning) {
+	public function removeMeaning(Meaning $meaning) {
 		/*@var $removed kateglo\application\models\Meaning */
 		$removed = $this->meanings->removeElement ( $meaning );
 		if ($removed !== null) {
@@ -131,7 +130,7 @@ class Type {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMeanings() {
 		return $this->meanings;
@@ -142,7 +141,7 @@ class Type {
 	 * @param kateglo\application\models\TypeCategory $category
 	 * @return void
 	 */
-	public function setCategory(models\TypeCategory $category) {
+	public function setCategory(TypeCategory $category) {
 		if (! $this->categories->contains ( $category )) {
 			$this->categories [0] = $category;
 			$category->addType ( $this );

@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+
 /**
  *
  *
@@ -125,7 +124,7 @@ class Source {
 	 * @param kateglo\application\models\SourceCategory $category
 	 * @return void
 	 */
-	public function setCategory(models\SourceCategory $category) {
+	public function setCategory(SourceCategory $category) {
 		$this->category = $category;
 	}
 	
@@ -153,7 +152,7 @@ class Source {
 	 * @param kateglo\application\models\Entry $entry
 	 * @return void
 	 */
-	public function setEntry(models\Entry $entry) {
+	public function setEntry(Entry $entry) {
 		$this->entry = $entry;
 	}
 	

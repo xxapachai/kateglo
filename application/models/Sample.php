@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+
 /**
  *
  *
@@ -95,7 +94,7 @@ class Sample {
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function setDefinition(models\Definition $definition) {
+	public function setDefinition(Definition $definition) {
 		$this->definition = $definition;
 	}
 	

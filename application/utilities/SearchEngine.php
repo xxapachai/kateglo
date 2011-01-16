@@ -19,12 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
-use kateglo\application\configs;
-use Doctrine\Common;
-use Doctrine\Common\Cache;
-use Doctrine\DBAL;
-use Doctrine\ORM;
+use kateglo\application\configs\interfaces\Configs;
 /**
  *
  *
@@ -61,7 +56,7 @@ class SearchEngine implements interfaces\SearchEngine {
 	 *
 	 * @Inject
 	 */
-	public function setConfigs(configs\interfaces\Configs $configs) {
+	public function setConfigs(Configs $configs) {
 		$this->configs = $configs;
 	}
 	

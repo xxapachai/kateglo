@@ -19,8 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\collections;
-use kateglo\application\models;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -55,7 +54,7 @@ class Clazz {
 	protected $clazz;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
 	 * @JoinTable(name="rel_definition_class",
 	 * joinColumns={@JoinColumn(name="rel_class_id", referencedColumnName="class_id")},
@@ -65,7 +64,7 @@ class Clazz {
 	private $definitions;
 	
 	/**
-	 * @var kateglo\application\utilities\collections\ArrayCollection
+	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\ClazzCategory")
 	 * @JoinTable(name="rel_class_category",
 	 * joinColumns={@JoinColumn(name="rel_class_id", referencedColumnName="class_id")},
@@ -75,8 +74,8 @@ class Clazz {
 	private $categories;
 	
 	function __construct() {
-		$this->definitions = new collections\ArrayCollection ();
-		$this->categories = new collections\ArrayCollection ();
+		$this->definitions = new ArrayCollection();
+		$this->categories = new ArrayCollection ();
 	}
 	
 	/**
@@ -109,7 +108,7 @@ class Clazz {
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function addDefinition(models\Definition $definition) {
+	public function addDefinition(Definition $definition) {
 		if (! $this->definitions->contains ( $definition )) {
 			$this->definitions [] = $definition;
 			$definition->setClazz ( $this );
@@ -121,7 +120,7 @@ class Clazz {
 	 * @param kateglo\application\models\Definition $definition
 	 * @return void
 	 */
-	public function removeDefinition(models\Definition $definition) {
+	public function removeDefinition(Definition $definition) {
 		/*@var $removed  kateglo\application\models\Definition */
 		$removed = $this->definitions->removeElement ( $definition );
 		if ($removed !== null) {
@@ -131,7 +130,7 @@ class Clazz {
 	
 	/**
 	 * 
-	 * @return kateglo\application\utilities\collections\ArrayCollection
+	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDefinitions() {
 		return $this->definitions;
@@ -142,7 +141,7 @@ class Clazz {
 	 * @param kateglo\application\models\ClazzCategory $category
 	 * @return void
 	 */
-	public function setCategory(models\ClazzCategory $category) {
+	public function setCategory(ClazzCategory $category) {
 		if (! $this->categories->contains ( $category )) {
 			$this->categories [0] = $category;
 			$category->addClazz ( $this );
@@ -154,7 +153,7 @@ class Clazz {
 	 * @param kateglo\application\models\ClazzCategory $category
 	 * @return void
 	 */
-	public function removeCategory(models\ClazzCategory $category) {
+	public function removeCategory(ClazzCategory $category) {
 		$removed = $this->categories->removeElement ( $category );
 		if ($removed !== null) {
 			$removed->removeType ();

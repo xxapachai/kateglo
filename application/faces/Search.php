@@ -19,7 +19,7 @@ namespace kateglo\application\faces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
- use kateglo\application\helpers;
+ use kateglo\application\helpers\HTTPMethod;
  /**
  * 
  * 
@@ -66,7 +66,7 @@ class Search implements interfaces\Search{
 	 * @return string
 	 */
 	public function getFormMethod(){
-		return helpers\HTTPMethod::GET;
+		return HTTPMethod::GET;
 	}
 	
 	/**
