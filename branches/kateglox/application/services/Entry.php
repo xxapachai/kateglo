@@ -23,7 +23,7 @@ use kateglo\application\faces\Hit;
 use kateglo\application\faces\Document;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\utilities\interfaces\SearchEngine;
-use kateglo\application\daos\interfaces;
+use kateglo\application\daos;
 /**
  * 
  * 
@@ -58,7 +58,7 @@ class Entry implements interfaces\Entry {
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(interfaces\Entry $entry) {
+	public function setEntry(daos\interfaces\Entry $entry) {
 		$this->entry = $entry;
 	}
 	

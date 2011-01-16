@@ -19,8 +19,8 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\faces;
 use kateglo\application\faces\Page;
-use kateglo\application\faces\Pagination;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * 
@@ -95,7 +95,7 @@ class Pagination implements interfaces\Pagination {
 	private function doCreate($amount, $offset = 0, $limit = 10, $pageRange = 10) {
 		$pageCollection = new ArrayCollection ();
 		
-		$pagination = new Pagination ();
+		$pagination = new faces\Pagination ();
 		$pagination->setAmount ( $amount );
 		$pagination->setLimit ( $limit );
 		$pagination->setOffset ( $offset );
