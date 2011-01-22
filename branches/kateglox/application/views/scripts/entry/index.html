@@ -99,6 +99,20 @@
 				</dd>
 			</dl>
 		</div>
+		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getGlossaries()) && count(entry.getGlossaries()) > 0 )">
+			<hr />
+			<div>
+				<dl class="glossary" tal:repeat="glossary entry/getGlossaries" >
+					<dt>
+						<span class="glossary-locale" tal:content="glossary/getLanguage/getLocale/getLocale">Locale</span>
+						<span tal:content="glossary/getLanguage/getLanguage">Language</span>
+						<span tal:omit-tag="true" tal:condition="php: is_object(glossary.getDiscipline())">
+							<span class="glossary-discipline" tal:content="glossary/getDiscipline/getDiscipline">Discipline</span>
+						</span>
+					</dt>
+				</dl>
+			</div>
+		</div>
 		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getSources()) && count(entry.getSources()) > 0 )">
 			<hr />
 			<div>

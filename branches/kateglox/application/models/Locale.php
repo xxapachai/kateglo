@@ -32,16 +32,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="source_category")
+ * @Table(name="locale")
  */
-class SourceCategory {
+class Locale {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="source_category_id")
+	 * @Column(type="integer", name="locale_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
@@ -49,22 +49,22 @@ class SourceCategory {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="source_category_name", unique=true, length=255)
+	 * @Column(type="string", name="locale_name", unique=true, length=255)
 	 */
-	protected $category;
+	protected $locale;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Language", mappedBy="locale", cascade={"persist"})
 	 */
-	protected $sources;
+	protected $languages;
 	
 	/**
 	 * 
 	 * Construct
 	 */
 	function __construct() {
-		$this->sources = new ArrayCollection ();
+		$this->languages = new ArrayCollection ();
 	}
 	
 	/**
@@ -75,39 +75,39 @@ class SourceCategory {
 	}
 	
 	/**
-	 * @return the $category
+	 * @return the $locale
 	 */
-	public function getCategory() {
-		return $this->category;
+	public function getLocale() {
+		return $this->locale;
 	}
 	
 	/**
-	 * @param string $category
+	 * @param string $locale
 	 */
-	public function setCategory($category) {
-		$this->category = $category;
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Source $source
-	 * @return void
-	 */
-	public function addSource(Source $source) {
-		$this->sources [] = $source;
-		$source->setCategory ( $this );
+	public function setLocale($locale) {
+		$this->$locale = $locale;
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Source $source
+	 * @param kateglo\application\models\Language $language
 	 * @return void
 	 */
-	public function removeSource(Misspelled $source) {
-		/*@var $removed kateglo\application\models\Source */
-		$removed = $this->sources->removeElement ( $source );
+	public function addLanguage(Language $language) {
+		$this->languages [] = $language;
+		$language->setLocale ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Language $language
+	 * @return void
+	 */
+	public function removeLanguage(Language $language) {
+		/*@var $removed kateglo\application\models\Language */
+		$removed = $this->languages->removeElement ( $language );
 		if ($removed !== null) {
-			$removed->removeCategory ();
+			$removed->removeLocale ();
 		}
 	}
 	
@@ -115,8 +115,8 @@ class SourceCategory {
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getSources() {
-		return $this->sources;
+	public function getLanguages() {
+		return $this->languages;
 	}
 }
 

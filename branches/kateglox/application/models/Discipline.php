@@ -63,8 +63,15 @@ class Discipline {
 	 */
 	private $definitions;
 	
+		/**
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="discipline", cascade={"persist"})
+	 */
+	protected $glossaries;
+	
 	public function __construct(){
 		$this->definitions = new ArrayCollection ();
+		$this->glossaries = new ArrayCollection ();
 	}
 	
 	/**
@@ -120,6 +127,37 @@ class Discipline {
     public function getDefinitions(){
         return $this->definitions;
     }
+    
+	/**
+	 *
+	 * @param kateglo\application\models\Glossary $glossary
+	 * @return void
+	 */
+	public function addGlossary(Glossary $glossary) {
+		$this->glossaries [] = $glossary;
+		$glossary->setDiscipline ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Glossary $glossary
+	 * @return void
+	 */
+	public function removeGlossary(Glossary $glossary) {
+		/*@var $removed kateglo\application\models\Glossary */
+		$removed = $this->glossaries->removeElement ( $glossary );
+		if ($removed !== null) {
+			$removed->removeDiscipline ();
+		}
+	}
+	
+	/**
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getGlossaries() {
+		return $this->glossaries;
+	}
 }
 
 ?>

@@ -19,6 +19,7 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
@@ -32,16 +33,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="source_category")
+ * @Table(name="language")
  */
-class SourceCategory {
+class Language {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="source_category_id")
+	 * @Column(type="integer", name="language_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
@@ -49,22 +50,25 @@ class SourceCategory {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="source_category_name", unique=true, length=255)
+	 * @Column(type="string", name="language_text", length=2100)
 	 */
-	protected $category;
+	protected $language;
+	
+	/**
+	 * @var kateglo\application\models\Locale
+	 * @ManyToOne(targetEntity="kateglo\application\models\Locale")
+	 * @JoinColumn(name="language_locale_id", referencedColumnName="locale_id")
+	 */
+	private $locale;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="language", cascade={"persist"})
 	 */
-	protected $sources;
+	protected $glossaries;
 	
-	/**
-	 * 
-	 * Construct
-	 */
 	function __construct() {
-		$this->sources = new ArrayCollection ();
+		$this->glossaries = new ArrayCollection ();	
 	}
 	
 	/**
@@ -75,39 +79,67 @@ class SourceCategory {
 	}
 	
 	/**
-	 * @return the $category
+	 * @return the $language
 	 */
-	public function getCategory() {
-		return $this->category;
+	public function getLanguage() {
+		return $this->language;
 	}
 	
 	/**
-	 * @param string $category
+	 * @param string $language
 	 */
-	public function setCategory($category) {
-		$this->category = $category;
+	public function setLanguage($language) {
+		$this->language = $language;
+	}
+	
+	/**
+	 * @return kateglo\application\models\Locale
+	 */
+	public function getLocale() {
+		return $this->locale;
+	}
+	
+	/**
+	 * @param kateglo\application\models\Locale $locale
+	 * @return void
+	 */
+	public function setLocale(Locale $locale) {
+		$this->locale = $locale;
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Source $source
 	 * @return void
 	 */
-	public function addSource(Source $source) {
-		$this->sources [] = $source;
-		$source->setCategory ( $this );
+	public function removeLocale() {
+		if ($this->locale !== null) {
+			/*@var $locale kateglo\application\models\Locale */
+			$locale = $this->locale;
+			$this->locale = null;
+			$locale->removeLanguage ( $this );
+		}
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Source $source
+	 * @param kateglo\application\models\Glossary $glossary
 	 * @return void
 	 */
-	public function removeSource(Misspelled $source) {
-		/*@var $removed kateglo\application\models\Source */
-		$removed = $this->sources->removeElement ( $source );
+	public function addGlossary(Glossary $glossary) {
+		$this->glossaries [] = $glossary;
+		$glossary->setLanguage ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Glossary $glossary
+	 * @return void
+	 */
+	public function removeGlossary(Glossary $glossary) {
+		/*@var $removed kateglo\application\models\Glossary */
+		$removed = $this->glossaries->removeElement ( $glossary );
 		if ($removed !== null) {
-			$removed->removeCategory ();
+			$removed->removeLanguage ();
 		}
 	}
 	
@@ -115,9 +147,10 @@ class SourceCategory {
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getSources() {
-		return $this->sources;
+	public function getGlossaries() {
+		return $this->glossaries;
 	}
+	
 }
 
 ?>
