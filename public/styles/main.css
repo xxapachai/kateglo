@@ -162,3 +162,16 @@ a:visited {
 	text-decoration: underline;
 	font-weight: normal;
 }
+
+.glossary{
+	font-weight: bold;
+}
+
+.glossary-discipline{
+	font-size: x-small;
+}
+
+.glossary-locale{
+	font-size: x-small;
+	font-style: italic;
+}

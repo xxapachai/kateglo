@@ -68,6 +68,7 @@ class Entry {
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="entry", cascade={"persist"})
+	 * @OrderBy({"language" = "ASC"})
 	 */
 	protected $glossaries;
 	

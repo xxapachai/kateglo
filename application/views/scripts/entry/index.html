@@ -107,7 +107,9 @@
 						<span class="glossary-locale" tal:content="glossary/getLanguage/getLocale/getLocale">Locale</span>
 						<span tal:content="glossary/getLanguage/getLanguage">Language</span>
 						<span tal:omit-tag="true" tal:condition="php: is_object(glossary.getDiscipline())">
-							<span class="glossary-discipline" tal:content="glossary/getDiscipline/getDiscipline">Discipline</span>
+							<span class="glossary-discipline" >
+								[<span tal:omit-tag="true" tal:content="glossary/getDiscipline/getDiscipline">Discipline</span>]
+							</span>
 						</span>
 					</dt>
 				</dl>
