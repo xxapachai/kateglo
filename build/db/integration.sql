@@ -537,3 +537,161 @@ left join kateglox2.definition on definition_meaning_id = meaning_id
 where definition_id is null
 group by abbr_key
 having definition is not null
+
+-----------------------------------------------------------------------------------------------------------------
+
+INSERT INTO kateglox2.language (language_text, language_locale_id) SELECT  REPLACE(REPLACE(REPLACE(convert(original using utf8), '&#257;', '?'), '&#299;', '?'), '&#363;', '?') as neworiginal, 1 from glossary group by neworiginal
+ON DUPLICATE KEY UPDATE language_text=language_text, language_locale_id=language_locale_id
+
+----------------------------------------------------------------------------------------------------------------
+
+insert into kateglox2.entry (entry_name) select REPLACE(REPLACE(REPLACE(convert(phrase using utf8), '&#257;', '?'), '&#299;', '?'), '&#363;', '?') as newphrase from glossary 
+ON DUPLICATE KEY UPDATE entry_name=entry_name
+
+------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE IF NOT EXISTS `testa` (
+  `phra` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `orig` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `disci` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  KEY `phra` (`phra`),
+  KEY `orig` (`orig`),
+  KEY `disci` (`disci`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `testa`
+--
+ALTER TABLE `testa`
+  ADD CONSTRAINT `testa_ibfk_3` FOREIGN KEY (`orig`) REFERENCES `language` (`language_text`),
+  ADD CONSTRAINT `testa_ibfk_1` FOREIGN KEY (`phra`) REFERENCES `entry` (`entry_name`),
+  ADD CONSTRAINT `testa_ibfk_2` FOREIGN KEY (`disci`) REFERENCES `discipline` (`discipline_name`);
+
+----------------------------------------------------------------------------------------------------
+
+INSERT
+INTO
+	testa 
+	(
+		phra,
+		orig,
+		disci) 	SELECT
+				REPLACE
+					(
+					REPLACE
+						(
+						REPLACE
+							(
+								CONVERT(phrase USING utf8) , '&#257;', '?'), 
+								'&#299;', '?'), '&#363;', '?') phra, 
+								REPLACE
+									(
+									REPLACE
+										(
+										REPLACE
+											(
+												CONVERT(original USING utf8), 
+												'&#257;', '?'), '&#299;', '?') , 
+												'&#363;', '?') orig, 
+												REPLACE
+													(
+													REPLACE
+														(
+														REPLACE
+															(
+															REPLACE
+																(
+																REPLACE
+																	(
+																	REPLACE
+																		(
+																		REPLACE
+																			(
+																				discipline
+																				,
+																				'agamaislam' 
+																				,
+																				'Agama Islam' 
+																			)
+																			,
+																			'kedokteranhewan' 
+																			,
+																			'Kedokteran Hewan' 
+																		)
+																		,
+																		'komunikasimassa' 
+																		,
+																		'Komunikasi Massa' 
+																	)
+																	,
+																	'minyakgas',
+																	'Minyak & Gas' 
+																)
+																,
+																'teknikkimia' ,
+																'Teknik Kimia' 
+															)
+															,
+															'teknologiinformasi' 
+															,
+															'Teknologi Informasi' 
+														)
+														,
+														'*umum*',
+														NULL 
+													)
+													disci 
+												FROM
+													kateglo.glossary
+
+---------------------------------------------------------------------------------------
+
+INSERT
+INTO
+	glossary 
+	(
+		glossary_entry_id,
+		glossary_language_id,
+		glossary_discipline_id) SELECT
+									(	SELECT
+											entry_id 
+										FROM
+											entry 
+										WHERE
+											entry_name = phra) AS entryid,
+											(	SELECT
+													language_id 
+												FROM
+													LANGUAGE 
+												WHERE
+													language_text = orig) AS 
+													languageid,
+													(	SELECT
+															discipline_id 
+														FROM
+															discipline 
+														WHERE
+															discipline_name = 
+															disci) AS 
+															disciplineid 
+														FROM
+															testa ON DUPLICATE 
+															KEY 
+														UPDATE
+															glossary_entry_id=
+															glossary_entry_id,
+															glossary_language_id=
+															glossary_language_id,
+															glossary_discipline_id=
+															glossary_discipline_id
+
+----------------------------------------------------------------------------------------------
+
+DROP TABLE `testa`
+
+------------------------------------------------------------------------------------------------
