@@ -57,6 +57,7 @@ class Glossary {
 	 * @var kateglo\application\models\Language
 	 * @ManyToOne(targetEntity="kateglo\application\models\Language")
 	 * @JoinColumn(name="glossary_language_id", referencedColumnName="language_id")
+	 * @OrderBy({"locale" = "ASC"})
 	 */
 	private $language;
 	
