@@ -57,7 +57,7 @@ class Entry implements interfaces\Entry {
 	
 	/**
 	 *
-	 * @see kateglo\application\daos\interfaces\Entry::getAll()
+	 * @see kateglo\application\daos\interfaces\Entry::getByEntry()
 	 * @param string $entry 
 	 * @return kateglo\application\models\Entry
 	 */
@@ -73,85 +73,6 @@ class Entry implements interfaces\Entry {
 		}
 		
 		return $result [0];
-	}
-	
-	/**
-	 *
-	 * @return int
-	 */
-	public function getTotalCount() {
-		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT COUNT(e.id) FROM " . models\Entry::CLASS_NAME . " e " );
-		$result = $query->getSingleResult ();
-		
-		if (! (is_numeric ( $result [1] ))) {
-			throw new DomainResultEmptyException ( "result not found" );
-		}
-		
-		return $result [1];
-	}
-	
-	/**
-	 *
-	 * @param int $limit
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getRandom($limit = 10) {
-		$randomIdResult = $this->dataAccess->getConnection ()->query ( "SELECT entry_id FROM entry ORDER BY RAND() LIMIT " . $limit . " " );
-		$idArray = array ();
-		foreach ( $randomIdResult as $idResult ) {
-			$idArray [] = $idResult ['entry_id'];
-		}
-		
-		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e WHERE e.id IN ('" . implode ( "','", $idArray ) . "')" );
-		$result = $query->getResult ();
-		if (count ( $result ) > 0) {
-			return $result;
-		} else {
-			throw new exceptions\DomainResultEmptyException ( "result not found" );
-		}
-	}
-	
-	/**
-	 * 
-	 * @see kateglo\application\daos\interfaces\Entry::getAll()
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getAll() {
-		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
-		$result = $query->getResult ();
-		if (count ( $result ) > 0) {
-			if (! ($result [0] instanceof models\Entry)) {
-				throw new DomainObjectNotFoundException ( "wrong result" );
-			}
-		} else {
-			throw new DomainResultEmptyException ( "result not found" );
-		}
-		
-		return $result;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param int $limit
-	 * @param int $offset
-	 * @see kateglo\application\daos\interfaces\Entry::getSome()
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getSome($limit, $offset) {
-		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
-		$query->setFirstResult ( $offset );
-		$query->setMaxResults ( $limit );
-		$result = $query->getResult ();
-		if (count ( $result ) > 0) {
-			if (! ($result [0] instanceof models\Entry)) {
-				throw new DomainObjectNotFoundException ( "wrong result" );
-			}
-		} else {
-			throw new DomainResultEmptyException ( "result not found" );
-		}
-		
-		return $result;
 	}
 
 }

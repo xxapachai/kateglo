@@ -41,34 +41,7 @@ interface Entry {
 	 * @return kateglo\application\models\Entry
 	 */
 	function getByEntry($entry);
-	
-	/**
-	 *
-	 * @return int
-	 */
-	function getTotalCount();
-	
-	/**
-	 *
-	 * @param int $limit
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getRandom($limit = 10);
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getAll();
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param int $limit
-	 * @param int $offset
-	 * @return Doctrine\ORM\Internal\Hydration\IterableResult
-	 */
-	function getSome($limit, $offset);
+
 }
 
 ?>

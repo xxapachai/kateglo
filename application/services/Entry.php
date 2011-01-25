@@ -89,7 +89,7 @@ class Entry implements interfaces\Entry {
 	 * @return int
 	 */
 	public function getTotalCount() {
-		$request = $this->searchEngine->getSolrService ()->search ( 'entry:*', 0, 1 );
+		$request = $this->searchEngine->search ( 'entry:*', 0, 1 );
 		if ($request->getHttpStatus () == 200) {
 			return $request->response->numFound;
 		} else {
@@ -103,7 +103,7 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\faces\Hit
 	 */
 	public function randomMisspelled($limit = 5) {
-		$request = $this->searchEngine->getSolrService ()->search ( 'spelled:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
+		$request = $this->searchEngine->search ( 'spelled:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
 		if ($request->getHttpStatus () == 200) {
 			return $this->convertResponse2Faces ( $request->response );
 		} else {
@@ -117,7 +117,7 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\faces\Hit
 	 */
 	public function randomEntry($limit = 10) {
-		$request = $this->searchEngine->getSolrService ()->search ( 'entry:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
+		$request = $this->searchEngine->search ( 'entry:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
 		if ($request->getHttpStatus () == 200) {
 			return $this->convertResponse2Faces ( $request->response );
 		} else {
@@ -136,9 +136,9 @@ class Entry implements interfaces\Entry {
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
 		try {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
-			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit, $params );
+			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Faces ( $request->response );
-		} catch ( \Apache_Solr_Exception $e ) {
+		} catch (\Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -154,9 +154,9 @@ class Entry implements interfaces\Entry {
 	public function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
 		try {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
-			$request = $this->searchEngine->getSolrService ()->search ( $searchText, $offset, $limit, $params );
+			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Array ( $request->response )->toArray ();
-		} catch ( \Apache_Solr_Exception $e ) {
+		} catch (\Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -251,7 +251,7 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\faces\Hit
 	 */
 	private function convertResponse2Faces($response) {
-		$hit = new Hit();
+		$hit = new Hit ();
 		$hit->setCount ( $response->numFound );
 		$hit->setStart ( $response->start );
 		$hit->setDocuments ( new ArrayCollection () );
