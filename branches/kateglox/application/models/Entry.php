@@ -67,10 +67,9 @@ class Entry {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="entry", cascade={"persist"})
-	 * @OrderBy({"language" = "ASC"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="entry", cascade={"persist"})
 	 */
-	protected $glossaries;
+	protected $equivalents;
 	
 	/**
 	 * 
@@ -80,7 +79,7 @@ class Entry {
 	public function __construct() {
 		$this->meanings = new ArrayCollection ();
 		$this->sources = new ArrayCollection ();
-		$this->glossaries = new ArrayCollection ();
+		$this->equivalents = new ArrayCollection ();
 	}
 	
 	/**
@@ -169,22 +168,22 @@ class Entry {
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Glossary $glossary
+	 * @param kateglo\application\models\Equivalent $equivalent
 	 * @return void
 	 */
-	public function addGlossary(Glossary $glossary) {
-		$this->glossaries [] = $glossary;
-		$glossary->setEntry ( $this );
+	public function addEquivalent(Equivalent $equivalent) {
+		$this->equivalents [] = $equivalent;
+		$equivalent->setEntry ( $this );
 	}
 	
 	/**
 	 *
-	 * @param kateglo\application\models\Glossary $glossary
+	 * @param kateglo\application\models\Equivalent $equivalent
 	 * @return void
 	 */
-	public function removeGlossary(Glossary $glossary) {
-		/*@var $removed kateglo\application\models\Glossary */
-		$removed = $this->glossaries->removeElement ( $glossary );
+	public function removeEquivalent(Equivalent $equivalent) {
+		/*@var $removed kateglo\application\models\Equivalent */
+		$removed = $this->equivalents->removeElement ( $equivalent );
 		if ($removed !== null) {
 			$removed->removeEntry ();
 		}
@@ -194,8 +193,8 @@ class Entry {
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getGlossaries() {
-		return $this->glossaries;
+	public function getEquivalents() {
+		return $this->equivalents;
 	}
 }
 

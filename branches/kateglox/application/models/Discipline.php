@@ -63,15 +63,19 @@ class Discipline {
 	 */
 	private $definitions;
 	
-		/**
+	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="discipline", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Equivalent")
+	 * @JoinTable(name="rel_equivalent_discipline",
+	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_equivalent_id", referencedColumnName="equivalent_id")}
+	 * )
 	 */
-	protected $glossaries;
+	protected $equivalents;
 	
 	public function __construct(){
 		$this->definitions = new ArrayCollection ();
-		$this->glossaries = new ArrayCollection ();
+		$this->equivalents = new ArrayCollection ();
 	}
 	
 	/**
@@ -129,35 +133,37 @@ class Discipline {
     }
     
 	/**
-	 *
-	 * @param kateglo\application\models\Glossary $glossary
+	 * 
+	 * @param kateglo\application\models\Equivalent $equivalent
 	 * @return void
-	 */
-	public function addGlossary(Glossary $glossary) {
-		$this->glossaries [] = $glossary;
-		$glossary->setDiscipline ( $this );
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Glossary $glossary
-	 * @return void
-	 */
-	public function removeGlossary(Glossary $glossary) {
-		/*@var $removed kateglo\application\models\Glossary */
-		$removed = $this->glossaries->removeElement ( $glossary );
-		if ($removed !== null) {
-			$removed->removeDiscipline ();
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getGlossaries() {
-		return $this->glossaries;
-	}
+	 */	
+	public function addEquivalent(Equivalent $equivalent){
+        if (!$this->equivalents->contains($equivalent)) {
+            $this->equivalents[] = $equivalent;
+            $equivalent->addDiscipline($this);
+        }
+    }
+
+    /**
+     * 
+     * @param kateglo\application\models\Equivalent $equivalent
+     * @return void
+     */
+    public function removeEquivalent(Equivalent $equivalent){
+    	/*@var $removed kateglo\application\models\Equivalent */
+        $removed = $this->equivalents->removeElement($equivalent);
+        if ($removed !== null) {
+            $removed->removeDiscipline($this);
+        }
+    }
+
+    /**
+     * 
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEquivalents(){
+        return $this->equivalents;
+    }
 }
 
 ?>
