@@ -99,23 +99,23 @@
 				</dd>
 			</dl>
 		</div>
-		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getGlossaries()) && count(entry.getGlossaries()) > 0 )">
+		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getEquivalents()) && count(entry.getEquivalents()) gt 0 )">
 			<hr />
 			<div>
-				<dl class="glossary" tal:repeat="glossary entry/getGlossaries" >
+				<dl class="glossary" tal:repeat="equivalent entry/getEquivalents" >
 					<dt>
-						<span class="glossary-locale" tal:content="glossary/getLanguage/getLocale/getLocale">Locale</span>
-						<span tal:content="glossary/getLanguage/getLanguage">Language</span>
-						<span tal:omit-tag="true" tal:condition="php: is_object(glossary.getDiscipline())">
-							<span class="glossary-discipline" >
-								[<span tal:omit-tag="true" tal:content="glossary/getDiscipline/getDiscipline">Discipline</span>]
+						<span class="glossary-locale" tal:content="equivalent/getForeign/getLanguage/getLanguage">Language</span>
+						<span tal:content="equivalent/getForeign/getForeign">Foreign</span>
+						<span tal:omit-tag="true" tal:condition="php: count(equivalent.getDisciplines()) gt 0">
+							<span class="glossary-discipline" tal:repeat="discipline equivalent/getDisciplines" >
+								[<span tal:omit-tag="true" tal:content="discipline/getDiscipline">Discipline</span>]
 							</span>
 						</span>
 					</dt>
 				</dl>
 			</div>
 		</div>
-		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getSources()) && count(entry.getSources()) > 0 )">
+		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getSources()) && count(entry.getSources()) gt 0 )">
 			<hr />
 			<div>
 				<dl class="source" tal:repeat="source entry/getSources" >

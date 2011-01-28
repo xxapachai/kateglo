@@ -15,7 +15,7 @@
 			<div class="search-form">
 				<form action="${formAction}" method="get" >
 					<div>
-						<input type="text" name="${search/getFieldName}" onfocus="this.select();" class="search-field" autocomplete="off" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
+						<input type="text" name="${search/getFieldName}" onfocus="this.select();" class="search-field" tal:attributes="value php: is_object(search) ? search.getFieldValue() : ''" /> 
 						<input type="submit" value="${search/getButtonValue}" />
 					</div>
 			 	</form>

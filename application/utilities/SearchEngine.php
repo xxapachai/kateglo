@@ -19,6 +19,8 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\helpers\HTTPMethod;
+
 use kateglo\application\configs\interfaces\Configs;
 /**
  *
@@ -99,7 +101,7 @@ class SearchEngine implements interfaces\SearchEngine {
 	 *
 	 * @throws Exception If an error occurs during the service call
 	 */
-	public function search($query, $offset = 0, $limit = 10, $params = array(), $method = self::METHOD_GET) {
+	public function search($query, $offset = 0, $limit = 10, $params = array(), $method = HTTPMethod::GET) {
 		return $this->getSolrService ()->search ( $query, $offset, $limit, $params, $method );
 	}
 }

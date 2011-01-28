@@ -304,6 +304,19 @@ function insertSolr(&$docStart, $segment = 100) {
 					$doc->addField ( 'sourceCategory', $source->getCategory ()->getCategory () );
 				}
 				
+				/*@var $equivalent kateglo\application\models\Equivalent */
+				foreach ( $entry->getEquivalents () as $equivalent ) {
+					$doc->addField ( 'foreign', $equivalent->getForeign()->getForeign() );					
+					
+					/*@var $discipline kateglo\application\models\Discipline */
+					foreach ($equivalent->getDisciplines() as $discipline) {
+						$doc->addField ( 'equivalentDiscipline', $discipline->getDiscipline() );
+					}				
+						
+					
+					$doc->addField ( 'language', $equivalent->getForeign()->getLanguage()->getLanguage() );
+				}
+				
 				$solr->addDocument ( $doc );
 				
 				$dataAccess->getEntityManager ()->detach ( $row [0] );

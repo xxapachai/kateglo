@@ -19,7 +19,6 @@ namespace kateglo\application\models;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
@@ -50,25 +49,22 @@ class Language {
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", name="language_text", length=2100)
+	 * @Column(type="string", name="language_name", unique=true, length=255)
 	 */
 	protected $language;
 	
 	/**
-	 * @var kateglo\application\models\Locale
-	 * @ManyToOne(targetEntity="kateglo\application\models\Locale")
-	 * @JoinColumn(name="language_locale_id", referencedColumnName="locale_id")
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Foreign", mappedBy="language", cascade={"persist"})
 	 */
-	private $locale;
+	protected $foreigns;
 	
 	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Glossary", mappedBy="language", cascade={"persist"})
+	 * 
+	 * Construct
 	 */
-	protected $glossaries;
-	
 	function __construct() {
-		$this->glossaries = new ArrayCollection ();	
+		$this->foreigns = new ArrayCollection ();
 	}
 	
 	/**
@@ -93,51 +89,23 @@ class Language {
 	}
 	
 	/**
-	 * @return kateglo\application\models\Locale
-	 */
-	public function getLocale() {
-		return $this->locale;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Locale $locale
+	 *
+	 * @param kateglo\application\models\Foreign $foreign
 	 * @return void
 	 */
-	public function setLocale(Locale $locale) {
-		$this->locale = $locale;
+	public function addForeign(Foreign $foreign) {
+		$this->foreigns [] = $foreign;
+		$foreign->setLanguage ( $this );
 	}
 	
 	/**
 	 *
+	 * @param kateglo\application\models\Foreign $foreign
 	 * @return void
 	 */
-	public function removeLocale() {
-		if ($this->locale !== null) {
-			/*@var $locale kateglo\application\models\Locale */
-			$locale = $this->locale;
-			$this->locale = null;
-			$locale->removeLanguage ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Glossary $glossary
-	 * @return void
-	 */
-	public function addGlossary(Glossary $glossary) {
-		$this->glossaries [] = $glossary;
-		$glossary->setLanguage ( $this );
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Glossary $glossary
-	 * @return void
-	 */
-	public function removeGlossary(Glossary $glossary) {
-		/*@var $removed kateglo\application\models\Glossary */
-		$removed = $this->glossaries->removeElement ( $glossary );
+	public function removeForeign(Foreign $foreign) {
+		/*@var $removed kateglo\application\models\Foreign */
+		$removed = $this->foreigns->removeElement ( $foreign );
 		if ($removed !== null) {
 			$removed->removeLanguage ();
 		}
@@ -147,10 +115,9 @@ class Language {
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getGlossaries() {
-		return $this->glossaries;
+	public function getForeigns() {
+		return $this->foreigns;
 	}
-	
 }
 
 ?>

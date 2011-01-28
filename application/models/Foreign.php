@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -32,44 +33,42 @@ namespace kateglo\application\models;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
  * @Entity
- * @Table(name="glossary")
+ * @Table(name="`foreign`")
  */
-class Glossary {
+class Foreign {
 	
 	const CLASS_NAME = __CLASS__;
 	
 	/**
 	 * @var int
 	 * @Id
-	 * @Column(type="integer", name="glossary_id")
+	 * @Column(type="integer", name="foreign_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
 	
 	/**
-	 * @var kateglo\application\models\Entry
-	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
-	 * @JoinColumn(name="glossary_entry_id", referencedColumnName="entry_id")
+	 *
+	 * @var string
+	 * @Column(type="string", name="foreign_name", length=2100)
 	 */
-	private $entry;
+	protected $foreign;
 	
 	/**
 	 * @var kateglo\application\models\Language
 	 * @ManyToOne(targetEntity="kateglo\application\models\Language")
-	 * @JoinColumn(name="glossary_language_id", referencedColumnName="language_id")
-	 * @OrderBy({"locale" = "ASC"})
+	 * @JoinColumn(name="foreign_language_id", referencedColumnName="language_id")
 	 */
 	private $language;
 	
 	/**
-	 * @var kateglo\application\models\Discipline
-	 * @ManyToOne(targetEntity="kateglo\application\models\Discipline")
-	 * @JoinColumn(name="glossary_discipline_id", referencedColumnName="discipline_id")
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="foreign", cascade={"persist"})
 	 */
-	private $discipline;
+	protected $equivalents;
 	
 	function __construct() {
-	
+		$this->equivalents = new ArrayCollection ();	
 	}
 	
 	/**
@@ -80,33 +79,19 @@ class Glossary {
 	}
 	
 	/**
-	 * @return kateglo\application\models\Entry
+	 * @return the $foreign
 	 */
-	public function getEntry() {
-		return $this->entry;
+	public function getForeign() {
+		return $this->foreign;
 	}
 	
 	/**
-	 * @param kateglo\application\models\Entry $entry
-	 * @return void
+	 * @param string $foreign
 	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
+	public function setForeign($foreign) {
+		$this->foreign = $foreign;
 	}
 	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeEntry() {
-		if ($this->entry !== null) {
-			/*@var $entry kateglo\application\models\Entry */
-			$entry = $this->entry;
-			$this->entry = null;
-			$entry->removeGlossary ( $this );
-		}
-	}
-
 	/**
 	 * @return kateglo\application\models\Language
 	 */
@@ -131,37 +116,41 @@ class Glossary {
 			/*@var $language kateglo\application\models\Language */
 			$language = $this->language;
 			$this->language = null;
-			$language->removeGlossary ( $this );
+			$language->removeForeign ( $this );
 		}
-	}	
-
-	/**
-	 * @return kateglo\application\models\Discipline
-	 */
-	public function getDiscipline() {
-		return $this->discipline;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Discipline $discipline
-	 * @return void
-	 */
-	public function setDiscipline(Discipline $discipline) {
-		$this->discipline = $discipline;
 	}
 	
 	/**
 	 *
+	 * @param kateglo\application\models\Equivalent $equivalent
 	 * @return void
 	 */
-	public function removeDiscipline() {
-		if ($this->discipline !== null) {
-			/*@var $discipline kateglo\application\models\Discipline */
-			$discipline = $this->discipline;
-			$this->discipline = null;
-			$discipline->removeGlossary ( $this );
+	public function addEquivalent(Equivalent $equivalent) {
+		$this->equivalents [] = $equivalent;
+		$equivalent->setForeign ( $this );
+	}
+	
+	/**
+	 *
+	 * @param kateglo\application\models\Equivalent $equivalent
+	 * @return void
+	 */
+	public function removeEquivalent(Equivalent $equivalent) {
+		/*@var $removed kateglo\application\models\Equivalent */
+		$removed = $this->equivalents->removeElement ( $equivalent );
+		if ($removed !== null) {
+			$removed->removeForeign ();
 		}
-	}	
+	}
+	
+	/**
+	 *
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getEquivalents() {
+		return $this->equivalents;
+	}
+	
 }
 
 ?>

@@ -540,8 +540,8 @@ having definition is not null
 
 -----------------------------------------------------------------------------------------------------------------
 
-INSERT INTO kateglox2.language (language_text, language_locale_id) SELECT  REPLACE(REPLACE(REPLACE(convert(original using utf8), '&#257;', '?'), '&#299;', '?'), '&#363;', '?') as neworiginal, 1 from glossary group by neworiginal
-ON DUPLICATE KEY UPDATE language_text=language_text, language_locale_id=language_locale_id
+INSERT INTO kateglox2.foreign (foreign_name, foreign_language_id) SELECT  REPLACE(REPLACE(REPLACE(convert(original using utf8), '&#257;', '?'), '&#299;', '?'), '&#363;', '?') as neworiginal, 1 from glossary where original != '' group by neworiginal
+ON DUPLICATE KEY UPDATE foreign_name=foreign_name, foreign_language_id=foreign_language_id
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -568,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `testa` (
 -- Constraints der Tabelle `testa`
 --
 ALTER TABLE `testa`
-  ADD CONSTRAINT `testa_ibfk_3` FOREIGN KEY (`orig`) REFERENCES `language` (`language_text`),
+  ADD CONSTRAINT `testa_ibfk_3` FOREIGN KEY (`orig`) REFERENCES `foreign` (`foreign_name`),
   ADD CONSTRAINT `testa_ibfk_1` FOREIGN KEY (`phra`) REFERENCES `entry` (`entry_name`),
   ADD CONSTRAINT `testa_ibfk_2` FOREIGN KEY (`disci`) REFERENCES `discipline` (`discipline_name`);
 
@@ -653,11 +653,10 @@ INTO
 
 INSERT
 INTO
-	glossary 
+	equivalent 
 	(
-		glossary_entry_id,
-		glossary_language_id,
-		glossary_discipline_id) SELECT
+		equivalent_entry_id,
+		equivalent_foreign_id) SELECT
 									(	SELECT
 											entry_id 
 										FROM
@@ -665,32 +664,49 @@ INTO
 										WHERE
 											entry_name = phra) AS entryid,
 											(	SELECT
-													language_id 
+													foreign_id 
 												FROM
-													LANGUAGE 
+													`foreign` 
 												WHERE
-													language_text = orig) AS 
-													languageid,
-													(	SELECT
-															discipline_id 
-														FROM
-															discipline 
-														WHERE
-															discipline_name = 
-															disci) AS 
-															disciplineid 
+													foreign_name = orig) AS 
+													languageid 
 														FROM
 															testa ON DUPLICATE 
 															KEY 
 														UPDATE
-															glossary_entry_id=
-															glossary_entry_id,
-															glossary_language_id=
-															glossary_language_id,
-															glossary_discipline_id=
-															glossary_discipline_id
+															equivalent_entry_id=
+															equivalent_entry_id,
+															equivalent_foreign_id=
+															equivalent_foreign_id
 
 ----------------------------------------------------------------------------------------------
+
+INSERT
+INTO
+	rel_equivalent_discipline 
+	(
+		rel_equivalent_id,
+		rel_discipline_id) 	SELECT
+								equivalent_id,
+								discipline_id 
+							FROM
+								equivalent 
+								LEFT JOIN entry 
+								ON entry_id = equivalent_entry_id 
+								LEFT JOIN `foreign` 
+								ON foreign_id = equivalent_foreign_id 
+								LEFT JOIN testa 
+								ON phra = entry_name AND
+								orig = foreign_name 
+								LEFT JOIN discipline 
+								ON discipline_name = disci 
+							WHERE
+								disci IS NOT NULL ON DUPLICATE KEY 
+							UPDATE
+								rel_equivalent_id= rel_equivalent_id,
+								rel_discipline_id= rel_discipline_id
+
+-----------------------------------------------------------------------------------------------
 
 DROP TABLE `testa`
 
