@@ -19,6 +19,8 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\faces\Equivalent;
+
 use kateglo\application\faces\Hit;
 use kateglo\application\faces\Document;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -138,7 +140,7 @@ class Entry implements interfaces\Entry {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Faces ( $request->response );
-		} catch (\Apache_Solr_Exception $e ) {
+		} catch ( Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -156,7 +158,7 @@ class Entry implements interfaces\Entry {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Array ( $request->response )->toArray ();
-		} catch (\Apache_Solr_Exception $e ) {
+		} catch ( Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -246,6 +248,34 @@ class Entry implements interfaces\Entry {
 	}
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hits
+	 */
+	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntry ( '( (entry:' . $searchText . ' OR foreign:'. $searchText .') AND foreign:* )', $offset, $limit, $params );
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	public function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;
+		return $this->searchEntryAsArray ( '( (entry:' . $searchText . ' OR foreign:'. $searchText .') AND foreign:* )', $offset, $limit, $params );
+	}
+	
+	/**
 	 * Enter description here ...
 	 * @param object $response
 	 * @return kateglo\application\faces\Hit
@@ -278,11 +308,42 @@ class Entry implements interfaces\Entry {
 			$document->setTypeCategories ( $this->convert2Array ( $fields, Document::TYPE_CATEGORY ) );
 			$document->setSource ( $this->convert2Array ( $fields, Document::SOURCE ) );
 			$document->setSourceCategories ( $this->convert2Array ( $fields, Document::SOURCE_CATEGORY ) );
+			$document->setLanguages ( $this->convert2Array ( $fields, Document::LANGUAGE ) );
+			$document->setEquivalentDisciplines ( $this->convert2Array ( $fields, Document::EQUIVALENT_DISCIPLINE ) );
+			$document->setForeigns ( $this->convert2Array ( $fields, Document::FOREIGN ) );
+			$document->setEquivalents ( $this->jsonConvertToEquivalent ( $this->convert2Array ( $fields, Document::EQUIVALENT ) ) );
 			
 			$hit->getDocuments ()->add ( $document );
 		}
 		
 		return $hit;
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param Doctrine\Common\Collections\ArrayCollection $array
+	 * @return Doctrine\Common\Collections\ArrayCollection|NULL
+	 */
+	private function jsonConvertToEquivalent($array) {
+		if ($array instanceof ArrayCollection) {
+			$newArray = new ArrayCollection ();
+			foreach ( $array as $json ) {
+				$decode = json_decode ( $json );
+				$equivalent = new Equivalent ();
+				$equivalent->setForeign ( $decode->{Equivalent::FOREIGN} );
+				$equivalent->setLanguage ( $decode->{Equivalent::LANGUAGE} );
+				$disciplines = new ArrayCollection ();
+				foreach ( $decode->{Equivalent::DISCIPLINE} as $discipline ) {
+					$disciplines->add ( $discipline );
+				}
+				$equivalent->setDisciplines ( $disciplines );
+				$newArray->add ( $equivalent );
+			}
+			return $newArray;
+		} else {
+			return null;
+		}
 	}
 	
 	/**

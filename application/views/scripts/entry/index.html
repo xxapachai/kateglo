@@ -12,16 +12,16 @@
 		<div tal:omit-tag="true" tal:condition="php: ( is_object(entry.getMeanings()) && count(entry.getMeanings()) > 0 )">
 			<dl class="meanings" tal:repeat="meaning entry/getMeanings">
 				<dt>
-					<div tal:omit-tag="true" tal:condition="php: ( is_object(meaning.getTypes()) && count(meaning.getTypes()) > 0 )">
+					<tal:block tal:condition="php: ( is_object(meaning.getTypes()) && count(meaning.getTypes()) > 0 )">
 						<div tal:repeat="type meaning/getTypes">
 							<span tal:omit-tag="true" tal:content="type/getType">Type</span>&nbsp;
 						</div>
-					</div>
-					<div tal:omit-tag="true" tal:condition="php: ( is_object(meaning.getSyllabels()) && count(meaning.getSyllabels()) > 0 )">
+					</tal:block>
+					<tal:block tal:condition="php: ( is_object(meaning.getSyllabels()) && count(meaning.getSyllabels()) > 0 )">
 						<div tal:repeat="syllabel meaning/getSyllabels">
 							<span tal:omit-tag="true" tal:content="syllabel/getSyllabel">Syllabel</span>&nbsp;
 						</div>
-					</div>
+					</tal:block>
 				</dt>
 				<dd>
 					<ol tal:condition="php: is_object(meaning.getDefinitions())">

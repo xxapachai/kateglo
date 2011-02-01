@@ -26,8 +26,8 @@ namespace kateglo\application\faces;
  * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2010-12-16 22:33:38 +0100 (Do, 16 Dez 2010) $
- * @version $LastChangedRevision: 267 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -153,6 +153,34 @@ class Document {
 	const SOURCE_CATEGORY = 'sourceCategory';
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const LANGUAGE = 'language';
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const EQUIVALENT_DISCIPLINE = 'equivalentDiscipline';
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const FOREIGN = 'foreign';
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const EQUIVALENT = 'equivalent';
+	
+	/**
 	 * Enter description here ...
 	 * @var int
 	 */
@@ -253,6 +281,31 @@ class Document {
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $sourceCategories;
+	
+	/**
+	 * Enter description here ...
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $languages;
+	
+	/**
+	 * Enter description here ...
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $equivalentDisciplines;
+	
+	/**
+	 * Enter description here ...
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $foreigns;
+	
+	/**
+	 * Enter description here ...
+	 * @var Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $equivalents;
+	
 	/**
 	 * @return the $id
 	 */
@@ -489,6 +542,68 @@ class Document {
 	 */
 	public function setSourceCategories($sourceCategories) {
 		$this->sourceCategories = $sourceCategories;
+	}
+	/**
+	 * @return the $languages
+	 */
+	public function getLanguages() {
+		return $this->languages;
+	}
+
+	/**
+	 * @param Doctrine\Common\Collections\ArrayCollection $languages
+	 */
+	public function setLanguages($languages) {
+		$this->languages = $languages;
+	}
+
+	/**
+	 * @return the $equivalentDisciplines
+	 */
+	public function getEquivalentDisciplines() {
+		return $this->equivalentDisciplines;
+	}
+
+	/**
+	 * @param Doctrine\Common\Collections\ArrayCollection $equivalentDisciplines
+	 */
+	public function setEquivalentDisciplines($equivalentDisciplines) {
+		$this->equivalentDisciplines = $equivalentDisciplines;
+	}
+
+	/**
+	 * @return the $foreigns
+	 */
+	public function getForeigns() {
+		return $this->foreigns;
+	}
+
+	/**
+	 * @param Doctrine\Common\Collections\ArrayCollection $foreigns
+	 */
+	public function setForeigns($foreigns) {
+		$this->foreigns = $foreigns;
+	}
+
+	/**
+	 * @return the $equivalents
+	 */
+	public function getEquivalentsAsArray() {
+		return json_decode($this->equivalents);
+	}
+	
+	/**
+	 * @return the $equivalents
+	 */
+	public function getEquivalents() {
+		return $this->equivalents;
+	}
+
+	/**
+	 * @param Doctrine\Common\Collections\ArrayCollection $equivalents
+	 */
+	public function setEquivalents($equivalents) {
+		$this->equivalents = $equivalents;
 	}
 
 }

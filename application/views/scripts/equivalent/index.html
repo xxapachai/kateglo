@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Kateglo - Tesaurus</title>
+<meta metal:use-macro="${appPath}/views/macros/head.html/head" />
+</head>
+<body metal:use-macro="${appPath}/views/macros/body.html/body">
+	<div tal:omit-tag="true"  metal:fill-slot="content">
+	    <table class="equivalent" border="1">
+	    	<tal:block  tal:repeat="hit hits/getDocuments">
+		    	<tal:block tal:define="global entry hit/getEntry;" />
+		    	<tal:block tal:repeat="equivalent hit/getEquivalents">	    		
+			    	<tr>
+			    		<td>
+			    			<!-- <span class="glossary-locale" tal:content="equivalent/getLanguage">Language</span>  -->
+							<span tal:content="equivalent/getForeign">Foreign</span>
+							<span tal:omit-tag="true" tal:condition="php: count(equivalent.getDisciplines()) gt 0">
+								<span class="glossary-discipline" tal:repeat="discipline equivalent/getDisciplines" >
+									[<span tal:omit-tag="true" tal:content="discipline">Discipline</span>]
+								</span>
+							</span>
+			    		</td>
+			    		<td>
+			    			<a href="entry/${entry}">${entry}</a>
+			    		</td>
+			    	</tr>
+		    	</tal:block>
+	    	</tal:block>
+	    </table>		    
+		<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination" >
+		</div>
+	</div>
+</body>
+</html>
