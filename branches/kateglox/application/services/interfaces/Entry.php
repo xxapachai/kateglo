@@ -147,5 +147,27 @@ interface Entry {
 	 * @return array
 	 */
 	function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hits
+	 */
+	function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array());
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return array
+	 */
+	function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array());
 }
 ?>

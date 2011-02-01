@@ -19,7 +19,7 @@ namespace kateglo\application\faces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -31,89 +31,88 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Hit {
+class Equivalent {
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const COUNT = 'count';
+	const FOREIGN = 'foreign';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const START = 'start';
+	const LANGUAGE = 'language';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const DOCUMENTS = 'documents';
+	const DISCIPLINE = 'discipline';
+		
+	/**
+	 * Enter description here ...
+	 * @var string
+	 */
+	private $foreign;
 	
 	/**
 	 * Enter description here ...
-	 * @var int
+	 * @var string
 	 */
-	private $count;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $start;
+	private $language;
 	
 	/**
 	 * Enter description here ...
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 */
-	private $documents;
+	private $disciplines;
+		
+	/**
+	 * @return the $foreign
+	 */
+	public function getForeign() {
+		return $this->foreign;
+	}
 	
 	/**
-	 * @return int
+	 * @param string $foreign
 	 */
-	public function getCount() {
-		return $this->count;
+	public function setForeign($foreign) {
+		$this->foreign = $foreign;
 	}
-
+	
 	/**
-	 * @param int $count
+	 * @return string
 	 */
-	public function setCount($count) {
-		$this->count = $count;
+	public function getLanguage() {
+		return $this->language;
 	}
-
+	
 	/**
-	 * @return int
+	 * @param string $entry
 	 */
-	public function getStart() {
-		return $this->start;
+	public function setLanguage($language) {
+		$this->language = $language;
 	}
-
-	/**
-	 * @param int $start
-	 */
-	public function setStart($start) {
-		$this->start = $start;
-	}
-
+	
 	/**
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getDocuments() {
-		return $this->documents;
+	public function getDisciplines() {
+		return $this->disciplines;
 	}
-
+	
 	/**
-	 * @param Doctrine\Common\Collections\ArrayCollection $documents
+	 * @param Doctrine\Common\Collections\ArrayCollection $disciplines
 	 */
-	public function setDocuments(ArrayCollection $documents) {
-		$this->documents = $documents;
+	public function setDisciplines($disciplines) {
+		$this->disciplines = $disciplines;
 	}
-
 	
 }
 

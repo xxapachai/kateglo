@@ -62,7 +62,36 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\models\Entry
 	 */
 	public function getByEntry($entry) {
-		$query = $this->dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e WHERE e.entry = '$entry'" );
+		$query = $this->dataAccess->getEntityManager ()->createQuery ( "
+			SELECT 	entry, meaning, antonym, definition, 
+					misspelled, relation, spelled, syllabel, 
+					synonym, type, clazz, clazzCategory, discipline,
+					equivalent, eqDiscipline, foreign, language, 
+					pronounciation,	sample, source, sourceCategory, 
+					typeCategory  
+			FROM " . models\Entry::CLASS_NAME . " entry 
+				LEFT JOIN entry.equivalents equivalent
+				LEFT JOIN entry.meanings meaning
+				LEFT JOIN entry.sources source
+				LEFT JOIN meaning.antonyms antonym
+				LEFT JOIN meaning.definitions definition
+				LEFT JOIN meaning.misspelleds misspelled
+				LEFT JOIN meaning.relations relation
+				LEFT JOIN meaning.spelled spelled
+				LEFT JOIN meaning.syllabels syllabel
+				LEFT JOIN syllabel.pronounciations pronounciation
+				LEFT JOIN meaning.synonyms synonym
+				LEFT JOIN meaning.types type
+				LEFT JOIN type.categories typeCategory
+				LEFT JOIN source.category sourceCategory
+				LEFT JOIN equivalent.disciplines eqDiscipline
+				LEFT JOIN equivalent.foreign foreign
+				LEFT JOIN foreign.language language
+				LEFT JOIN definition.disciplines discipline
+				LEFT JOIN definition.clazz clazz
+				LEFT JOIN definition.samples sample
+				LEFT JOIN clazz.categories clazzCategory
+			WHERE entry.entry = '$entry'" );
 		$result = $query->getResult ();
 		if (count ( $result ) === 1) {
 			if (! ($result [0] instanceof models\Entry)) {
