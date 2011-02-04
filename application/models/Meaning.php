@@ -55,49 +55,49 @@ class Meaning {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Definition", mappedBy="meaning", cascade={"all"})
 	 */
 	private $definitions;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="meanings", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="meanings", cascade={"all"})
 	 */
-	protected $types;
+	private $types;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Antonym", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Antonym", mappedBy="meaning", cascade={"all"})
 	 */
 	private $antonyms;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Synonym", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Synonym", mappedBy="meaning", cascade={"all"})
 	 */
 	private $synonyms;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Relation", mappedBy="meaning", cascade={"all"})
 	 */
 	private $relations;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Syllabel", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Syllabel", mappedBy="meaning", cascade={"all"})
 	 */
 	private $syllabels;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="meaning", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="meaning", cascade={"all"})
 	 */
 	private $misspelleds;
 	
 	/**
 	 * @var kateglo\application\models\Misspelled
-	 * @OneToOne(targetEntity="kateglo\application\models\Misspelled", mappedBy="misspelled", cascade={"persist"})
+	 * @OneToOne(targetEntity="kateglo\application\models\Misspelled", mappedBy="misspelled", cascade={"all"})
 	 */
 	private $spelled;
 	
@@ -105,7 +105,7 @@ class Meaning {
 	 * 
 	 * Construct
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection ();
 		$this->types = new ArrayCollection ();
 		$this->antonyms = new ArrayCollection ();

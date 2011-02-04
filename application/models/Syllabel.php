@@ -44,14 +44,14 @@ class Syllabel {
 	 * @Column(type="integer", name="syllabel_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="syllabel_text", unique=true, length=255)
 	 */
-	protected $syllabel;
+	private $syllabel;
 	
 	/**
 	 * @var kateglo\application\models\Meaning
@@ -62,7 +62,7 @@ class Syllabel {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"all"})
 	 */
 	private $pronounciations;
 	

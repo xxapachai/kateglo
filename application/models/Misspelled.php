@@ -62,11 +62,11 @@ class Misspelled {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="misspelleds", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="misspelleds", cascade={"all"})
 	 */
 	private $definitions;
 	
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection ();
 	}
 	

@@ -44,21 +44,21 @@ class Source {
 	 * @Column(type="integer", name="source_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="source_url", length=2100)
 	 */
-	protected $url;
+	private $url;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="source_text")
 	 */
-	protected $source;
+	private $source;
 	
 	/**
 	 * @var kateglo\application\models\Meaning
@@ -74,7 +74,7 @@ class Source {
 	 */
 	private $entry;
 	
-	function __construct() {
+	public function __construct() {
 	
 	}
 	

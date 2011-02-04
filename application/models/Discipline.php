@@ -44,14 +44,14 @@ class Discipline {
 	 * @Column(type="integer", name="discipline_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="discipline_name", unique=true, length=255)
 	 */
-	protected $discipline;
+	private $discipline;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
@@ -71,7 +71,7 @@ class Discipline {
 	 * inverseJoinColumns={@JoinColumn(name="rel_equivalent_id", referencedColumnName="equivalent_id")}
 	 * )
 	 */
-	protected $equivalents;
+	private $equivalents;
 	
 	public function __construct(){
 		$this->definitions = new ArrayCollection ();

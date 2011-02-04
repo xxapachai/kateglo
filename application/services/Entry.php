@@ -19,8 +19,8 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\faces\Equivalent;
 
+use kateglo\application\faces\Equivalent;
 use kateglo\application\faces\Hit;
 use kateglo\application\faces\Document;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -82,7 +82,6 @@ class Entry implements interfaces\Entry {
 	 */
 	public function getEntry($entry) {
 		$result = $this->entry->getByEntry ( $entry );
-		
 		return $result;
 	}
 	

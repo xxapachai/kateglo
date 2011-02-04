@@ -47,6 +47,42 @@ defined ( 'CONFIGS_PATH' ) || define ( 'CONFIGS_PATH', APPLICATION_PATH . DIRECT
  */
 $libraryPath = realpath ( KATEGLO_ROOT . DIRECTORY_SEPARATOR . 'library' );
 
+/** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/** +++ BEGIN : Initiate Doctrine Object Relational Mapper +++ */
+
+/**
+ *
+ * Define Doctrine Object Relational Mapper Library Path
+ * Default: www/doctrine
+ *
+ * @var string
+ */
+$doctrinePath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'doctrine' );
+
+/** Import Doctrine Class Loader */
+require_once $doctrinePath . DIRECTORY_SEPARATOR . 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'ClassLoader.php';
+
+/**
+ *
+ * Register autoloader for Doctrine
+ *
+ * @var Doctrine\Common\ClassLoader
+ */
+$doctrineLoader = new Doctrine\Common\ClassLoader ( 'Doctrine', realpath ( $doctrinePath ) );
+$doctrineLoader->register ();
+
+/**
+ *
+ * Register autoloader for Kateglo
+ *
+ * @var Doctrine\Common\ClassLoader
+ */
+$kategloLoader = new Doctrine\Common\ClassLoader ( 'kateglo', realpath ( $wwwRoot ) );
+$kategloLoader->register ();
+
+/** +++ End : Initiate Doctrine Object Relational Mapper +++ */
+/** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate Stubbles Inversion of Control +++ */
 
@@ -105,42 +141,6 @@ kateglo\library\Stubbles\stubBootstrap::init ( $stubblesPathes, $stubblesClassLo
 
 /** +++ END : Initiate Stubbles Inversion of Control +++ */
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-/** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/** +++ BEGIN : Initiate Doctrine Object Relational Mapper +++ */
-
-/**
- *
- * Define Doctrine Object Relational Mapper Library Path
- * Default: www/doctrine
- *
- * @var string
- */
-$doctrinePath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'doctrine' );
-
-/** Import Doctrine Class Loader */
-require_once $doctrinePath . DIRECTORY_SEPARATOR . 'Doctrine' . DIRECTORY_SEPARATOR . 'Common' . DIRECTORY_SEPARATOR . 'ClassLoader.php';
-
-/**
- *
- * Register autoloader for Doctrine
- *
- * @var Doctrine\Common\ClassLoader
- */
-$doctrineLoader = new Doctrine\Common\ClassLoader ( 'Doctrine', realpath ( $doctrinePath ) );
-$doctrineLoader->register ();
-
-/**
- *
- * Register autoloader for Kateglo
- *
- * @var Doctrine\Common\ClassLoader
- */
-$kategloLoader = new Doctrine\Common\ClassLoader ( 'kateglo', realpath ( $wwwRoot ) );
-$kategloLoader->register ();
-
-/** +++ End : Initiate Doctrine Object Relational Mapper +++ */
-/** ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /** +++++++++++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate PHPTal Template Engine +++ */

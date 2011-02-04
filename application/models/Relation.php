@@ -55,18 +55,18 @@ class Relation {
 	
 	/**
 	 * @var kateglo\application\models\Meaning
-	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"persist"})
+	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
 	 * @JoinColumn(name="relation_relation_id", referencedColumnName="meaning_id")
 	 */
 	private $relation;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="relations", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="relations", cascade={"all"})
 	 */
 	private $definitions;
 	
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection ();
 	}
 	

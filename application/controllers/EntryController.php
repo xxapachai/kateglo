@@ -18,6 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\Common\Cache\Cache;
 use kateglo\application\helpers\RouteParameter;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
@@ -51,6 +52,13 @@ class EntryController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
+	 * @var Doctrine\Common\Cache\Cache
+	 */
+	private $cache;
+	
+	/**
+	 * 
+	 * Enter description here ...
 	 * @param kateglo\application\services\interfaces\Entry $entry
 	 * 
 	 * @Inject
@@ -70,15 +78,36 @@ class EntryController extends Zend_Controller_Action_Stubbles {
 		$this->search = $search;
 	}
 	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param Doctrine\Common\Cache\Cache $cache
+	 * 
+	 * @Inject
+	 */
+	public function setCache(Cache $cache) {
+		$this->cache = $cache;
+	}
+	
 	public function indexAction() {
-		$this->view->appPath = APPLICATION_PATH;
-		$this->view->search = $this->search;
-		$this->view->formAction = '/kamus';
+		$this->_helper->viewRenderer->setNoRender ();
 		if ($this->_request->isGet ()) {
 			$text = urldecode ( $this->_request->getParam ( RouteParameter::TEXT ) );
 			if ($text !== '') {
-				$this->view->search->setFieldValue ( $text );
-				$this->view->entry = $this->entry->getEntry ( $text );
+				if ($this->cache->contains ( $text )) {
+					$content = $this->cache->fetch($text);
+				} else {
+					$this->view->appPath = APPLICATION_PATH;
+					$this->view->search = $this->search;
+					$this->view->formAction = '/kamus';
+					$this->view->search->setFieldValue ( $text );					
+					$this->view->entry = $this->entry->getEntry ( $text );					
+					$content = $this->_helper->viewRenderer->view->render ( $this->_helper->viewRenderer->getViewScript () );
+					$this->cache->save($text, $content, 0);
+				}
+				$this->getResponse()->appendBody($content);
+			} else {
+				header ( 'location: ' . $this->_request->getBaseUrl () );
 			}
 		} else {
 			header ( 'location: ' . $this->_request->getBaseUrl () );

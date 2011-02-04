@@ -44,14 +44,14 @@ class Pronounciation {
 	 * @Column(type="integer", name="pronounciation_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="pronounciation_text", length=255)
 	 */
-	protected $pronounciation;
+	private $pronounciation;
 	
 	/**
 	 * @var kateglo\application\models\Syllabel
@@ -60,7 +60,7 @@ class Pronounciation {
 	 */
 	private $syllabel;
 	
-	function __construct() {
+	public function __construct() {
 	
 	}
 	

@@ -44,14 +44,14 @@ class Type {
 	 * @Column(type="integer", name="type_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="type_name", unique=true, length=255)
 	 */
-	protected $type;
+	private $type;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
@@ -73,7 +73,7 @@ class Type {
 	 */
 	private $categories;
 	
-	function __construct() {
+	public function __construct() {
 		$this->meanings = new ArrayCollection ();
 		$this->categories = new ArrayCollection ();
 	}

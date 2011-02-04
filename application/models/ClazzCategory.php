@@ -44,26 +44,26 @@ class ClazzCategory {
 	 * @Column(type="integer", name="class_category_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="class_category_name", unique=true, length=255)
 	 */
-	protected $category;
+	private $category;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="categories", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="categories", cascade={"all"})
 	 */
-	protected $clazzes;
+	private $clazzes;
 	
 	/**
 	 * 
 	 * Construct
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->clazzes = new ArrayCollection ();
 	}
 	

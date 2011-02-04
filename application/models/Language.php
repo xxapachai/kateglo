@@ -44,26 +44,26 @@ class Language {
 	 * @Column(type="integer", name="language_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="language_name", unique=true, length=255)
 	 */
-	protected $language;
+	private $language;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Foreign", mappedBy="language", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Foreign", mappedBy="language", cascade={"all"})
 	 */
-	protected $foreigns;
+	private $foreigns;
 	
 	/**
 	 * 
 	 * Construct
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->foreigns = new ArrayCollection ();
 	}
 	
