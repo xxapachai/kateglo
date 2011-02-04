@@ -55,18 +55,18 @@ class Synonym {
 	
 	/**
 	 * @var kateglo\application\models\Meaning
-	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"persist"})
+	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
 	 * @JoinColumn(name="synonym_synonym_id", referencedColumnName="meaning_id")
 	 */
 	private $synonym;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="synonyms", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="synonyms", cascade={"all"})
 	 */
 	private $definitions;
 	
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection ();
 	}
 	

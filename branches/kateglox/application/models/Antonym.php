@@ -55,18 +55,18 @@ class Antonym {
 	
 	/**
 	 * @var kateglo\application\models\Meaning
-	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"persist"})
+	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
 	 * @JoinColumn(name="antonym_antonym_id", referencedColumnName="meaning_id")
 	 */
 	private $antonym;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="antonyms", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="antonyms", cascade={"all"})
 	 */
 	private $definitions;
 	
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection ();
 	}
 	

@@ -44,14 +44,14 @@ class Clazz {
 	 * @Column(type="integer", name="class_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="class_name", unique=true, length=255)
 	 */
-	protected $clazz;
+	private $clazz;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
@@ -73,7 +73,7 @@ class Clazz {
 	 */
 	private $categories;
 	
-	function __construct() {
+	public function __construct() {
 		$this->definitions = new ArrayCollection();
 		$this->categories = new ArrayCollection ();
 	}

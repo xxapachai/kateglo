@@ -45,7 +45,7 @@ class Equivalent {
 	 * @Column(type="integer", name="equivalent_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 * @var kateglo\application\models\Entry
@@ -63,11 +63,11 @@ class Equivalent {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="equivalents", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="equivalents", cascade={"all"})
 	 */
 	private $disciplines;
 	
-	function __construct() {
+	public function __construct() {
 		$this->disciplines = new ArrayCollection ();
 	}
 	

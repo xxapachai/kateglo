@@ -20,7 +20,7 @@
  */
 require_once 'Zend/Controller/Dispatcher/Stubbles.php';
 
-require_once 'Zend/Controller/Action/Helper/PhpTal.php';
+require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 
 use kateglo\application\utilities\Injector;
 use kateglo\application\configs\Configs;
@@ -68,9 +68,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		
 		$front->setParam ( 'bootstrap', $this );
 		
-		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80, new Zend_Controller_Action_Helper_PhpTal () );
-		Zend_Controller_Action_HelperBroker::getStack ()->{'ViewRenderer'} = true;
+		$talActionHelper = new Zend_Controller_Action_Helper_ViewRenderer();
+		$talActionHelper->setView(new Zend_View_PhpTal());
+		$talActionHelper->setViewSuffix('html');
+		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80,  $talActionHelper);
 		
+
 		$front->dispatch ();
 	}
 

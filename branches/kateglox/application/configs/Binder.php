@@ -19,6 +19,8 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\Common\Cache\ApcCache;
+
 use kateglo\application\daos;
 use kateglo\application\services;
 use kateglo\application\utilities;
@@ -37,7 +39,13 @@ use kateglo\application\configs\interfaces;
  */
 class Binder {
 	
-	public static function bind( \stubBinder $container) {
+	public static function bind(stubBinder $container) {
+		
+		//Stubbles check with class_exist() and throw exception if the class is not found
+		//This class is not loaded yet by Doctrine class loader.
+		//So this "Hacks" is necessary to load the class with Doctrine loader before injected by Stubbles
+		new ApcCache ();
+		
 		$container->bind ( interfaces\Configs::INTERFACE_NAME )->to ( Configs::$CLASS_NAME );
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
@@ -46,6 +54,7 @@ class Binder {
 		$container->bind ( utilities\interfaces\DataAccess::INTERFACE_NAME )->to ( utilities\DataAccess::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\LogService::INTERFACE_NAME )->to ( utilities\LogService::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\SearchEngine::INTERFACE_NAME )->to ( utilities\SearchEngine::$CLASS_NAME );
+		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
 		$container->bind ( faces\interfaces\Search::INTERFACE_NAME )->to ( faces\Search::$CLASS_NAME );
 	}
 }

@@ -44,26 +44,26 @@ class SourceCategory {
 	 * @Column(type="integer", name="source_category_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="source_category_name", unique=true, length=255)
 	 */
-	protected $category;
+	private $category;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"all"})
 	 */
-	protected $sources;
+	private $sources;
 	
 	/**
 	 * 
 	 * Construct
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->sources = new ArrayCollection ();
 	}
 	

@@ -60,19 +60,19 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="definitions", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="definitions", cascade={"all"})
 	 */
 	private $clazz;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions", cascade={"all"})
 	 */
 	private $disciplines;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Sample", mappedBy="definition", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Sample", mappedBy="definition", cascade={"all"})
 	 */
 	private $samples;
 	
@@ -116,7 +116,7 @@ class Definition {
 	 */
 	private $misspelleds;
 	
-	function __construct() {
+	public function __construct() {
 		$this->clazz = new ArrayCollection();
 		$this->disciplines = new ArrayCollection ();
 		$this->samples = new ArrayCollection ();

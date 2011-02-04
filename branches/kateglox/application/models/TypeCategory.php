@@ -44,26 +44,26 @@ class TypeCategory {
 	 * @Column(type="integer", name="type_category_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="type_category_name", unique=true, length=255)
 	 */
-	protected $category;
+	private $category;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="categories", cascade={"persist"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Type", mappedBy="categories", cascade={"all"})
 	 */
-	protected $types;
+	private $types;
 
 	/**
 	 * 
 	 * Construct
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->types = new ArrayCollection ();
 	}	
 	

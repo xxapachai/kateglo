@@ -45,14 +45,14 @@ class Foreign {
 	 * @Column(type="integer", name="foreign_id")
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="foreign_name", length=2100)
 	 */
-	protected $foreign;
+	private $foreign;
 	
 	/**
 	 * @var kateglo\application\models\Language
@@ -63,11 +63,11 @@ class Foreign {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="foreign", cascade={"persist"})
+	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="foreign", cascade={"all"})
 	 */
-	protected $equivalents;
+	private $equivalents;
 	
-	function __construct() {
+	public function __construct() {
 		$this->equivalents = new ArrayCollection ();	
 	}
 	

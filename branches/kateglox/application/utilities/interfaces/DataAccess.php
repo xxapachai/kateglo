@@ -19,6 +19,7 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\Common\Cache\Cache;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\ORM\EntityManager;
 /**
@@ -67,5 +68,35 @@ interface DataAccess {
 	 * @return void
 	 */
 	function setConnection(Connection $conn);
+
+	/**
+	 * @return Doctrine\Common\Cache\Cache
+	 */
+	function getMetadataCache() ;
+
+	/**
+	 * @param Doctrine\Common\Cache\Cache $metadataCache
+	 */
+	function setMetadataCache(Cache $metadataCache) ;
+
+	/**
+	 * @return Doctrine\Common\Cache\Cache
+	 */
+	function getQueryCache() ;
+
+	/**
+	 * @param Doctrine\Common\Cache\Cache $queryCache
+	 */
+	function setQueryCache(Cache $queryCache) ;
+
+	/**
+	 * @return Doctrine\Common\Cache\Cache
+	 */
+	function getResultCache() ;
+
+	/**
+	 * @param Doctrine\Common\Cache\Cache $resultCache
+	 */
+	function setResultCache(Cache $resultCache) ;
 }
 ?>

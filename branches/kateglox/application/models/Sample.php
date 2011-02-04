@@ -51,7 +51,7 @@ class Sample {
 	 * @var string
 	 * @Column(type="string", name="sample_text", unique=true, length=255)
 	 */
-	protected $sample;
+	private $sample;
 	
 	/**
 	 * @var kateglo\application\models\Definition
@@ -60,7 +60,7 @@ class Sample {
 	 */
 	private $definition;
 	
-	function __construct() {
+	public function __construct() {
 	
 	}
 	
