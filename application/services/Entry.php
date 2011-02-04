@@ -139,7 +139,7 @@ class Entry implements interfaces\Entry {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Faces ( $request->response );
-		} catch ( Apache_Solr_Exception $e ) {
+		} catch ( \Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -157,7 +157,7 @@ class Entry implements interfaces\Entry {
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->searchEngine->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Array ( $request->response )->toArray ();
-		} catch ( Apache_Solr_Exception $e ) {
+		} catch ( \Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
