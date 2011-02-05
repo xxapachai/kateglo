@@ -173,7 +173,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntry ( '(' . $searchText . ' AND synonym:*)', $offset, $limit, $params );
+		$params['fq'] = "synonym:*";
+		return $this->searchEntry ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -187,7 +188,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchThesaurusAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntryAsArray ( '(' . $searchText . ' AND synonym:*)', $offset, $limit, $params );
+		$params['fq'] = "synonym:*";
+		return $this->searchEntryAsArray ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -201,7 +203,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntry ( '(' . $searchText . ' AND typeExact:Perihbahasa)', $offset, $limit, $params );
+		$params['fq'] = "typeExact:Peribahasa";
+		return $this->searchEntry ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -215,7 +218,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchProverbAsArray($searchText, $asArray = false, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntryAsArray ( '(' . $searchText . ' AND typeExact:Perihbahasa)', $offset, $limit, $params );
+		$params['fq'] = "typeExact:Peribahasa";
+		return $this->searchEntryAsArray ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -229,7 +233,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntry ( '(' . $searchText . ' AND (typeExact:Akronim or typeExact:Singkatan ) )', $offset, $limit, $params );
+		$params['fq'] = "typeExact:Akronim or typeExact:Singkatan";
+		return $this->searchEntry ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -242,8 +247,9 @@ class Entry implements interfaces\Entry {
 	 * @return array
 	 */
 	public function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
-		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntryAsArray ( '(' . $searchText . ' AND (typeExact:Akronim or typeExact:Singkatan ) )', $offset, $limit, $params );
+		$searchText = (empty ( $searchText )) ? '*' : $searchText;		
+		$params['fq'] = "typeExact:Akronim or typeExact:Singkatan";
+		return $this->searchEntryAsArray ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -257,7 +263,9 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntry ( '( (entry:' . $searchText . ' OR foreign:'. $searchText .') AND foreign:* )', $offset, $limit, $params );
+		$params['fq'] = "foreign:*";
+		$params['qf'] = "entry foreign";
+		return $this->searchEntry ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**
@@ -271,7 +279,9 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ( $searchText )) ? '*' : $searchText;
-		return $this->searchEntryAsArray ( '( (entry:' . $searchText . ' OR foreign:'. $searchText .') AND foreign:* )', $offset, $limit, $params );
+		$params['fq'] = "foreign:*";
+		$params['qf'] = "entry foreign";
+		return $this->searchEntryAsArray ( $searchText, $offset, $limit, $params );
 	}
 	
 	/**

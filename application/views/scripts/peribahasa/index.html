@@ -11,7 +11,7 @@
 	    <div tal:repeat="hit hits/getDocuments">
 	    	<div>
 	    		<a tal:define="global entry hit/getEntry;" href="entry/${entry}">${entry}</a>	    		
-	    		<div tal:condition="php: ( hit.getDefinitions().count() gt 0 )">
+	    		<div tal:condition="php: ( is_object(hit.getDefinitions()) && hit.getDefinitions().count() gt 0 )">
 		    		<div tal:repeat="definition hit/getDefinitions" style="padding-left:15px;">    		
 		    			<div tal:content="definition">Peribahasa</div>
 		    		</div>
