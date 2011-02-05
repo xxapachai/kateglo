@@ -20,7 +20,6 @@ namespace kateglo\application\configs;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\Common\Cache\ApcCache;
-
 use kateglo\application\daos;
 use kateglo\application\services;
 use kateglo\application\utilities;
@@ -39,7 +38,7 @@ use kateglo\application\configs\interfaces;
  */
 class Binder {
 	
-	public static function bind(stubBinder $container) {
+	public static function bind(\stubBinder $container) {
 		
 		//Stubbles check with class_exist() and throw exception if the class is not found
 		//This class is not loaded yet by Doctrine class loader.
