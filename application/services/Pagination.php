@@ -182,7 +182,7 @@ class Pagination implements interfaces\Pagination {
 	 * @param kateglo\application\faces\Pagination $pagination
 	 * @return array
 	 */
-	private function convert2Array(Pagination $pagination) {
+	private function convert2Array(faces\Pagination $pagination) {
 		$paginationArray = array ();
 		$paginationArray ['offset'] = $pagination->getOffset ();
 		$paginationArray ['limit'] = $pagination->getLimit ();
