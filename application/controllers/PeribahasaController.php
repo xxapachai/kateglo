@@ -142,7 +142,7 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles {
 			$this->view->search->setFieldValue ( $searchText );
 			$hits = $this->entry->searchProverbAsArray ( $searchText, $this->offset, $this->limit);
 			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
-			$this->view->json = json_encode ( array ('hits' => $hits, 'pagination' => $pagination ) );
+			$this->_helper->json(array ('hits' => $hits, 'pagination' => $pagination ));
 		} catch ( EntryException $e ) {
 			$this->getResponse ()->setHttpResponseCode ( 500 );
 			$this->view->json = json_encode ( array ('error' => $e->getMessage () ) );
