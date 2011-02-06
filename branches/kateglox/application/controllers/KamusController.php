@@ -141,7 +141,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 			$this->_helper->json(array ('hits' => $hits, 'pagination' => $pagination ));
 		} catch ( EntryException $e ) {
 			$this->getResponse ()->setHttpResponseCode ( 500 );
-			$this->view->json = json_encode ( array ('error' => $e->getMessage () ) );
+			$this->_helper->json(array ('error' => $e->getMessage () ));
 		}
 	}
 }

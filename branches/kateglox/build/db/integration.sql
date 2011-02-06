@@ -711,3 +711,93 @@ INTO
 DROP TABLE `testa`
 
 ------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `testing` (
+  `entry_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `foreign_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `source_category_id` int(11) NOT NULL,
+  KEY `entry_name` (`entry_name`),
+  KEY `foreign_name` (`foreign_name`),
+  KEY `source_category_id` (`source_category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+ALTER TABLE `testing`
+  ADD CONSTRAINT `testing_ibfk_3` FOREIGN KEY (`source_category_id`) REFERENCES `source_category` (`source_category_id`),
+  ADD CONSTRAINT `testing_ibfk_1` FOREIGN KEY (`entry_name`) REFERENCES `entry` (`entry_name`),
+  ADD CONSTRAINT `testing_ibfk_2` FOREIGN KEY (`foreign_name`) REFERENCES `foreign` (`foreign_name`);
+
+-------------------------------------------------------------------------------------------------------
+
+INSERT
+INTO
+	kateglox2.testing 
+SELECT
+	REPLACE
+					(
+					REPLACE
+						(
+						REPLACE
+							(
+								CONVERT(phrase USING utf8) , '&#257;', '?'), 
+								'&#299;', '?'), '&#363;', '?') phra, 
+								REPLACE
+									(
+									REPLACE
+										(
+										REPLACE
+											(
+												CONVERT(original USING utf8), 
+												'&#257;', '?'), '&#299;', '?') , 
+												'&#363;', '?') orig, 
+	CASE 
+		WHEN ref_source = 'Pusba' 
+		THEN 1 
+		WHEN ref_source = 'Bahtera' 
+		THEN 3 
+		WHEN ref_source = 'DS' 
+		THEN 5 
+		WHEN ref_source = 'Kateglo' 
+		THEN 8 
+		WHEN ref_source = 'SM' 
+		THEN 2 
+		WHEN ref_source = 'Wikipedia' 
+		THEN 4 
+	END AS source_id 
+FROM
+	glossary
+WHERE phrase != '' AND phrase != '-'
+and original != '';
+
+---------------------------------------------------------------------------------
+
+INSERT
+INTO
+	kateglox2.rel_equivalent_source_category 
+	(
+		rel_equivalent_id,
+		rel_source_category_id) SELECT
+									equivalent_id,
+									testing.source_category_id 
+								FROM
+									kateglox2.testing 
+									LEFT JOIN kateglox2.entry 
+									ON entry.entry_name = testing.entry_name 
+									LEFT JOIN kateglox2.foreign 
+									ON FOREIGN.foreign_name = testing.
+									foreign_name 
+									LEFT JOIN kateglox2.equivalent 
+									ON equivalent_entry_id = entry.entry_id AND
+									equivalent_foreign_id = FOREIGN.foreign_id 
+									ON DUPLICATE KEY 
+									UPDATE
+										rel_equivalent_id=rel_equivalent_id,
+										rel_source_category_id= 
+										rel_source_category_id
+
+---------------------------------------------------------------------------------
+
+DROP TABLE `testing`
+
+
+---------------------------------------------------------------------------------
