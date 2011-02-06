@@ -123,7 +123,7 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
 			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
 			$this->view->search->setFieldValue ( $searchText );
 			/*@var $hits kateglo\application\faces\Hit */
-			$hits = $this->entry->searchAcronym ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, definition, id' ) );
+			$hits = $this->entry->searchAcronym ( $searchText, $this->offset, $this->limit );
 			$this->view->pagination = $this->pagination->create ( $hits->getCount (), $this->offset, $this->limit );
 			$this->view->hits = $hits;
 		} else {
@@ -140,7 +140,7 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
 		try {
 			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
 			$this->view->search->setFieldValue ( $searchText );
-			$hits = $this->entry->searchAcronymAsArray ( $searchText, $this->offset, $this->limit, array ('fl' => 'entry, definition, id' ) );
+			$hits = $this->entry->searchAcronymAsArray ( $searchText, $this->offset, $this->limit);
 			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
 			$this->view->json = json_encode ( array ('hits' => $hits, 'pagination' => $pagination ) );
 		} catch ( EntryException $e ) {
