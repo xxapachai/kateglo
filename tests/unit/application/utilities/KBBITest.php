@@ -44,11 +44,11 @@ class KBBITest extends PHPUnit_Framework_TestCase {
 	 * Prepares the environment before running a test.
 	 */
 	protected function setUp() {
-		parent::setUp ();		
-
-		$this->KBBI = new KBBI();
-		$this->KBBI->setConfigs(new Configs());
-		$this->KBBI->setCurl(new CURL());
+		parent::setUp ();
+		
+		$this->KBBI = new KBBI ();
+		$this->KBBI->setConfigs ( new Configs () );
+		$this->KBBI->setCurl ( new CURL () );
 	
 	}
 	
@@ -75,7 +75,7 @@ class KBBITest extends PHPUnit_Framework_TestCase {
 	 * Tests KBBI->setConfigs()
 	 */
 	public function testSetConfigs() {
-		$this->assertTrue(true);
+		$this->assertTrue ( true );
 	
 	}
 	
@@ -83,11 +83,22 @@ class KBBITest extends PHPUnit_Framework_TestCase {
 	 * Tests KBBI->getEntry()
 	 */
 	public function testGetEntry() {
+		$this->assertTrue ( true );
+	}
+	
+	/**
+	 * Tests KBBI->query()
+	 */
+	public function testQuery() {
 		
-		$result = $this->KBBI->getEntry('terbang');
+		$this->assertTrue ( true );
+	
+	}
+	
+	public function testParse(){
+		$result = $this->KBBI->parse ( 'kapal' );
 		
 		$result;
-	
 	}
 
 }

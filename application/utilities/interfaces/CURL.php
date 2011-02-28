@@ -36,186 +36,206 @@ interface CURL {
 	const INTERFACE_NAME = __CLASS__;
 	
 	function run();
-		
+	
 	/**
 	 * @return the $useragent
 	 */
-	function getUseragent() ;
-	
-	/**
-	 * @return the $url
-	 */
-	function getUrl() ;
-	
-	/**
-	 * @return the $followlocation
-	 */
-	function getFollowlocation() ;
-	
-	/**
-	 * @return the $timeout
-	 */
-	function getTimeout() ;
-	
-	/**
-	 * @return the $maxRedirects
-	 */
-	function getMaxRedirects() ;
-	
-	/**
-	 * @return the $cookieFileLocation
-	 */
-	function getCookieFileLocation() ;
-	
-	/**
-	 * @return the $post
-	 */
-	function getPost() ;
-	
-	/**
-	 * @return the $postFields
-	 */
-	function getPostFields() ;
-	
-	/**
-	 * @return the $referer
-	 */
-	function getReferer() ;
-	
-	/**
-	 * @return the $session
-	 */
-	function getSession() ;
-	
-	/**
-	 * @return the $result
-	 */
-	function getResult() ;
-	
-	/**
-	 * @return the $includeHeader
-	 */
-	function getIncludeHeader() ;
-	
-	/**
-	 * @return the $noBody
-	 */
-	function getNoBody() ;
-	
-	/**
-	 * @return the $status
-	 */
-	function getStatus() ;
-	
-	/**
-	 * @return the $binaryTransfer
-	 */
-	function getBinaryTransfer() ;
-	
-	/**
-	 * @return the $authentication
-	 */
-	function getAuthentication() ;
-	
-	/**
-	 * @return the $authName
-	 */
-	function getAuthName() ;
-	
-	/**
-	 * @return the $authPass
-	 */
-	function getAuthPass() ;
+	function getUseragent();
 	
 	/**
 	 * @param string $useragent
 	 */
-	function setUseragent($useragent) ;
+	function setUseragent($useragent);
+	
+	/**
+	 * @return the $url
+	 */
+	function getUrl();
 	
 	/**
 	 * @param string $url
 	 */
-	function setUrl($url) ;
+	function setUrl($url);
+	
+	/**
+	 * @return the $followlocation
+	 */
+	function getFollowlocation();
 	
 	/**
 	 * @param boolean $followlocation
 	 */
-	function setFollowlocation($followlocation) ;
+	function setFollowlocation($followlocation);
+	
+	/**
+	 * @return the $timeout
+	 */
+	function getTimeout();
 	
 	/**
 	 * @param int $timeout
 	 */
-	function setTimeout($timeout) ;
+	function setTimeout($timeout);
+	
+	/**
+	 * @return the $maxRedirects
+	 */
+	function getMaxRedirects();
 	
 	/**
 	 * @param int $maxRedirects
 	 */
-	function setMaxRedirects($maxRedirects) ;
+	function setMaxRedirects($maxRedirects);
+	
+	/**
+	 * @return the $cookieFileLocation
+	 */
+	function getCookieFileLocation();
 	
 	/**
 	 * @param string $cookieFileLocation
 	 */
-	function setCookieFileLocation($cookieFileLocation) ;
+	function setCookieFileLocation($cookieFileLocation);
+	
+	/**
+	 * @return the $post
+	 */
+	function getPost();
 	
 	/**
 	 * @param boolean $post
 	 */
-	function setPost($post) ;
+	function setPost($post);
+	
+	/**
+	 * @return the $postFields
+	 */
+	function getPostFields();
 	
 	/**
 	 * @param string $postFields
 	 */
-	function setPostFields($postFields) ;
+	function setPostFields($postFields);
+	
+	/**
+	 * @return the $referer
+	 */
+	function getReferer();
 	
 	/**
 	 * @param string $referer
 	 */
-	function setReferer($referer) ;
+	function setReferer($referer);
+	
+	/**
+	 * @return the $session
+	 */
+	function getSession();
 	
 	/**
 	 * @param resource(curl) $session
 	 */
-	function setSession($session) ;
+	function setSession($session);
+	
+	/**
+	 * @return the $result
+	 */
+	function getResult();
 	
 	/**
 	 * @param string $result
 	 */
-	function setResult($result) ;
+	function setResult($result);
+	
+	/**
+	 * @return the $includeHeader
+	 */
+	function getIncludeHeader();
 	
 	/**
 	 * @param boolean $includeHeader
 	 */
-	function setIncludeHeader($includeHeader) ;
+	function setIncludeHeader($includeHeader);
+	
+	/**
+	 * @return the $noBody
+	 */
+	function getNoBody();
 	
 	/**
 	 * @param boolean $noBody
 	 */
-	function setNoBody($noBody) ;
+	function setNoBody($noBody);
+	
+	/**
+	 * @return the $status
+	 */
+	function getStatus();
 	
 	/**
 	 * @param int $status
 	 */
-	function setStatus($status) ;
+	function setStatus($status);
+	
+	/**
+	 * @return the $binaryTransfer
+	 */
+	function getBinaryTransfer();
 	
 	/**
 	 * @param boolean $binaryTransfer
 	 */
-	function setBinaryTransfer($binaryTransfer) ;
+	function setBinaryTransfer($binaryTransfer);
+	
+	/**
+	 * @return the $proxy
+	 */
+	function getProxy();
+	
+	/**
+	 * @param string $proxy
+	 */
+	function setProxy($proxy);
+	
+	/**
+	 * @return the $proxyUserPwd
+	 */
+	function getProxyUserPwd();
+	
+	/**
+	 * @param string $proxyUserPwd
+	 */
+	function setProxyUserPwd($proxyUserPwd);
+	
+	/**
+	 * @return the $authentication
+	 */
+	function getAuthentication();
 	
 	/**
 	 * @param boolean $authentication
 	 */
-	function setAuthentication($authentication) ;
+	function setAuthentication($authentication);
+	
+	/**
+	 * @return the $authName
+	 */
+	function getAuthName();
 	
 	/**
 	 * @param string $authName
 	 */
-	function setAuthName($authName) ;
+	function setAuthName($authName);
+	
+	/**
+	 * @return the $authPass
+	 */
+	function getAuthPass();
 	
 	/**
 	 * @param string $authPass
 	 */
-	function setAuthPass($authPass) ;
+	function setAuthPass($authPass);
 
 }
 
