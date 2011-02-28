@@ -150,6 +150,20 @@ class CURL implements interfaces\CURL {
 	/**
 	 * 
 	 * Enter description here ...
+	 * @var string
+	 */
+	protected $proxy;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	protected $proxyUserPwd;
+	
+	/**
+	 * 
+	 * Enter description here ...
 	 * @var boolean
 	 */
 	protected $authentication;
@@ -191,6 +205,13 @@ class CURL implements interfaces\CURL {
 		curl_setopt ( $this->session, CURLOPT_MAXREDIRS, $this->maxRedirects );
 		curl_setopt ( $this->session, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt ( $this->session, CURLOPT_FOLLOWLOCATION, $this->followlocation );
+		if(!empty($this->proxy)){
+			curl_setopt ( $this->session, CURLOPT_PROXY, $this->proxy );
+		}
+		
+		if(!empty($this->proxyUserPwd)){
+			curl_setopt ( $this->session, CURLOPT_PROXYUSERPWD, $this->proxyUserPwd );
+		}
 		
 		if (! empty ( $this->cookieFileLocation )) {
 			curl_setopt ( $this->session, CURLOPT_COOKIEJAR, $this->cookieFileLocation );
@@ -247,252 +268,280 @@ class CURL implements interfaces\CURL {
 	public function getUseragent() {
 		return $this->useragent;
 	}
-	
-	/**
-	 * @return the $url
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
-	
-	/**
-	 * @return the $followlocation
-	 */
-	public function getFollowlocation() {
-		return $this->followlocation;
-	}
-	
-	/**
-	 * @return the $timeout
-	 */
-	public function getTimeout() {
-		return $this->timeout;
-	}
-	
-	/**
-	 * @return the $maxRedirects
-	 */
-	public function getMaxRedirects() {
-		return $this->maxRedirects;
-	}
-	
-	/**
-	 * @return the $cookieFileLocation
-	 */
-	public function getCookieFileLocation() {
-		return $this->cookieFileLocation;
-	}
-	
-	/**
-	 * @return the $post
-	 */
-	public function getPost() {
-		return $this->post;
-	}
-	
-	/**
-	 * @return the $postFields
-	 */
-	public function getPostFields() {
-		return $this->postFields;
-	}
-	
-	/**
-	 * @return the $referer
-	 */
-	public function getReferer() {
-		return $this->referer;
-	}
-	
-	/**
-	 * @return the $session
-	 */
-	public function getSession() {
-		return $this->session;
-	}
-	
-	/**
-	 * @return the $result
-	 */
-	public function getResult() {
-		return $this->result;
-	}
-	
-	/**
-	 * @return the $includeHeader
-	 */
-	public function getIncludeHeader() {
-		return $this->includeHeader;
-	}
-	
-	/**
-	 * @return the $noBody
-	 */
-	public function getNoBody() {
-		return $this->noBody;
-	}
-	
-	/**
-	 * @return the $status
-	 */
-	public function getStatus() {
-		return $this->status;
-	}
-	
-	/**
-	 * @return the $binaryTransfer
-	 */
-	public function getBinaryTransfer() {
-		return $this->binaryTransfer;
-	}
-	
-	/**
-	 * @return the $authentication
-	 */
-	public function getAuthentication() {
-		return $this->authentication;
-	}
-	
-	/**
-	 * @return the $authName
-	 */
-	public function getAuthName() {
-		return $this->authName;
-	}
-	
-	/**
-	 * @return the $authPass
-	 */
-	public function getAuthPass() {
-		return $this->authPass;
-	}
-	
+
 	/**
 	 * @param string $useragent
 	 */
 	public function setUseragent($useragent) {
 		$this->useragent = $useragent;
 	}
-	
+
+	/**
+	 * @return the $url
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
+
 	/**
 	 * @param string $url
 	 */
 	public function setUrl($url) {
 		$this->url = $url;
 	}
-	
+
+	/**
+	 * @return the $followlocation
+	 */
+	public function getFollowlocation() {
+		return $this->followlocation;
+	}
+
 	/**
 	 * @param boolean $followlocation
 	 */
 	public function setFollowlocation($followlocation) {
 		$this->followlocation = $followlocation;
 	}
-	
+
+	/**
+	 * @return the $timeout
+	 */
+	public function getTimeout() {
+		return $this->timeout;
+	}
+
 	/**
 	 * @param int $timeout
 	 */
 	public function setTimeout($timeout) {
 		$this->timeout = $timeout;
 	}
-	
+
+	/**
+	 * @return the $maxRedirects
+	 */
+	public function getMaxRedirects() {
+		return $this->maxRedirects;
+	}
+
 	/**
 	 * @param int $maxRedirects
 	 */
 	public function setMaxRedirects($maxRedirects) {
 		$this->maxRedirects = $maxRedirects;
 	}
-	
+
+	/**
+	 * @return the $cookieFileLocation
+	 */
+	public function getCookieFileLocation() {
+		return $this->cookieFileLocation;
+	}
+
 	/**
 	 * @param string $cookieFileLocation
 	 */
 	public function setCookieFileLocation($cookieFileLocation) {
 		$this->cookieFileLocation = $cookieFileLocation;
 	}
-	
+
+	/**
+	 * @return the $post
+	 */
+	public function getPost() {
+		return $this->post;
+	}
+
 	/**
 	 * @param boolean $post
 	 */
 	public function setPost($post) {
 		$this->post = $post;
 	}
-	
+
+	/**
+	 * @return the $postFields
+	 */
+	public function getPostFields() {
+		return $this->postFields;
+	}
+
 	/**
 	 * @param string $postFields
 	 */
 	public function setPostFields($postFields) {
 		$this->postFields = $postFields;
 	}
-	
+
+	/**
+	 * @return the $referer
+	 */
+	public function getReferer() {
+		return $this->referer;
+	}
+
 	/**
 	 * @param string $referer
 	 */
 	public function setReferer($referer) {
 		$this->referer = $referer;
 	}
-	
+
+	/**
+	 * @return the $session
+	 */
+	public function getSession() {
+		return $this->session;
+	}
+
 	/**
 	 * @param resource(curl) $session
 	 */
 	public function setSession($session) {
 		$this->session = $session;
 	}
-	
+
+	/**
+	 * @return the $result
+	 */
+	public function getResult() {
+		return $this->result;
+	}
+
 	/**
 	 * @param string $result
 	 */
 	public function setResult($result) {
 		$this->result = $result;
 	}
-	
+
+	/**
+	 * @return the $includeHeader
+	 */
+	public function getIncludeHeader() {
+		return $this->includeHeader;
+	}
+
 	/**
 	 * @param boolean $includeHeader
 	 */
 	public function setIncludeHeader($includeHeader) {
 		$this->includeHeader = $includeHeader;
 	}
-	
+
+	/**
+	 * @return the $noBody
+	 */
+	public function getNoBody() {
+		return $this->noBody;
+	}
+
 	/**
 	 * @param boolean $noBody
 	 */
 	public function setNoBody($noBody) {
 		$this->noBody = $noBody;
 	}
-	
+
+	/**
+	 * @return the $status
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
+
 	/**
 	 * @param int $status
 	 */
 	public function setStatus($status) {
 		$this->status = $status;
 	}
-	
+
+	/**
+	 * @return the $binaryTransfer
+	 */
+	public function getBinaryTransfer() {
+		return $this->binaryTransfer;
+	}
+
 	/**
 	 * @param boolean $binaryTransfer
 	 */
 	public function setBinaryTransfer($binaryTransfer) {
 		$this->binaryTransfer = $binaryTransfer;
 	}
-	
+
+	/**
+	 * @return the $proxy
+	 */
+	public function getProxy() {
+		return $this->proxy;
+	}
+
+	/**
+	 * @param string $proxy
+	 */
+	public function setProxy($proxy) {
+		$this->proxy = $proxy;
+	}
+
+	/**
+	 * @return the $proxyUserPwd
+	 */
+	public function getProxyUserPwd() {
+		return $this->proxyUserPwd;
+	}
+
+	/**
+	 * @param string $proxyUserPwd
+	 */
+	public function setProxyUserPwd($proxyUserPwd) {
+		$this->proxyUserPwd = $proxyUserPwd;
+	}
+
+	/**
+	 * @return the $authentication
+	 */
+	public function getAuthentication() {
+		return $this->authentication;
+	}
+
 	/**
 	 * @param boolean $authentication
 	 */
 	public function setAuthentication($authentication) {
 		$this->authentication = $authentication;
 	}
-	
+
+	/**
+	 * @return the $authName
+	 */
+	public function getAuthName() {
+		return $this->authName;
+	}
+
 	/**
 	 * @param string $authName
 	 */
 	public function setAuthName($authName) {
 		$this->authName = $authName;
 	}
-	
+
+	/**
+	 * @return the $authPass
+	 */
+	public function getAuthPass() {
+		return $this->authPass;
+	}
+
 	/**
 	 * @param string $authPass
 	 */
 	public function setAuthPass($authPass) {
 		$this->authPass = $authPass;
 	}
-
+	
 }
 
 ?>

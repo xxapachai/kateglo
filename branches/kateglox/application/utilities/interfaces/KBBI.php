@@ -32,7 +32,7 @@ namespace kateglo\application\utilities\interfaces;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 interface KBBI {
-
+	
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
@@ -41,7 +41,7 @@ interface KBBI {
 	 * @param string $entry
 	 * @return string
 	 */
-	function getEntry($entry);
+	function getEntry($entry, $result, $head = 0, $perintah = 'Cari', $perintah2 = '');
 }
 
 ?>
