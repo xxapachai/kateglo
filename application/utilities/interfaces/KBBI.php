@@ -41,7 +41,7 @@ interface KBBI {
 	 * @param string $entry
 	 * @return string
 	 */
-	function getEntry($entry, $result, $head = 0, $perintah = 'Cari', $perintah2 = '');
+	function getEntry($entry, $head = 0, $perintah = 'Cari', $perintah2 = '');
 }
 
 ?>
