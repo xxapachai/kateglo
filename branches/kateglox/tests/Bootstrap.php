@@ -100,8 +100,7 @@ require_once $talPath . DIRECTORY_SEPARATOR . 'PHPTAL.php';
 
 /** +++ END : Initiate PHPTal Template Engine +++ */
 /** +++++++++++++++++++++++++++++++++++++++++++++ */
-set_include_path ( realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'solr' ) );
-require_once ('Apache/Solr/Service.php');
+
 /** +++++++++++++++++++++++++++++++++++++++ */
 /** +++ BEGIN : Initiate Zend Framework +++ */
 
