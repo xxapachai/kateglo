@@ -47,6 +47,15 @@ class Clazz {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="class_version") 
+	 */
+	private $version;
+	
+	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="class_name", unique=true, length=255)
@@ -86,6 +95,20 @@ class Clazz {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 *
 	 * @param string $clazz

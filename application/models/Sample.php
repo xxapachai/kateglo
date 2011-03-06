@@ -47,6 +47,15 @@ class Sample {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="sample_version") 
+	 */
+	private $version;
+	
+	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="sample_text", unique=true, length=255)
@@ -72,6 +81,20 @@ class Sample {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 *
 	 * @param string $sample

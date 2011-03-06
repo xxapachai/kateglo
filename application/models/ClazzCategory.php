@@ -47,6 +47,15 @@ class ClazzCategory {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="class_category_version") 
+	 */
+	private $version;
+	
+	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="class_category_name", unique=true, length=255)
@@ -72,6 +81,20 @@ class ClazzCategory {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+	
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
 	}
 	
 	/**

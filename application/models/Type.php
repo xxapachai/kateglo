@@ -47,6 +47,15 @@ class Type {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="type_version") 
+	 */
+	private $version;
+	
+	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="type_name", unique=true, length=255)
@@ -86,6 +95,20 @@ class Type {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 *
 	 * @param string $type

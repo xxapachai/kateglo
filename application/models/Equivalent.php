@@ -48,6 +48,15 @@ class Equivalent {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="equivalent_version") 
+	 */
+	private $version;
+	
+	/**
 	 * @var kateglo\application\models\Entry
 	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
 	 * @JoinColumn(name="equivalent_entry_id", referencedColumnName="entry_id")
@@ -78,6 +87,20 @@ class Equivalent {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 * @return kateglo\application\models\Entry
 	 */

@@ -47,6 +47,15 @@ class Pronounciation {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="pronounciation_version") 
+	 */
+	private $version;
+	
+	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="pronounciation_text", length=255)
@@ -72,6 +81,20 @@ class Pronounciation {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 *
 	 * @param string pronounciation

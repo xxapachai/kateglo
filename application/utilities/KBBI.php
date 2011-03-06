@@ -178,10 +178,8 @@ class KBBI implements interfaces\KBBI {
 	public function parse($entry) {
 		$entries = $this->getEntry ( $entry );
 		$definitions = $this->getDefinitions ( $entries );
-		$kbbiData = '';
+		
 		$entryEntity = new Entry ();
-		$meaning = new Meaning ();
-		$entryEntity->addMeaning ( $meaning );
 		
 		if ($definitions->count () === 0) {
 			throw new \Exception ( 'nothing to parse' );
@@ -189,47 +187,54 @@ class KBBI implements interfaces\KBBI {
 			$entryEntity->setEntry ( $entry );
 		
 		}
-		
-		$lines = $this->createLines ( $definitions, $entry );
-		$serial = serialize ( $lines );
-		if (! $this->parseRedirect ( $lines, $entryEntity )) {
-			$this->parseStandard ( $lines, $entryEntity );
+		foreach ( $definitions as $definition ) {
+			$meaning = new Meaning ();
+			$entryEntity->addMeaning ( $meaning );
+			$lines = $this->createLines ( $definition, $entryEntity );
+			if (! $this->parseRedirect ( $lines, $entryEntity, $meaning )) {
+				$this->parseStandard ( $lines, $entryEntity, $meaning );
+			}
 		}
 	
 	}
 	
-	public function createLines(Collection $definitions, $entry) {
-		foreach ( $definitions as $value ) {
-			$kbbiData .= $kbbiData ? "\n<br>" : '';
-			$kbbiData .= $value;
-		}
+	public function createLines($definition, Entry $entry) {
+		$kbbiData = $definition;
+		//		foreach ( $definitions as $value ) {
+		//			$kbbiData .= $kbbiData ? "\n<br>" : '';
+		//			$kbbiData .= $value;
+		//		}
 		
+
 		// hack v
-		if (strtolower ( $entry ) == 'v')
+		if (strtolower ( $entry->getEntry () ) == 'v')
 			$kbbiData = str_replace ( '<b>V</b>, v', '<b>V, v</b>', $kbbiData );
-		if (strtolower ( $entry ) == 'amnesia') {
+		if (strtolower ( $entry->getEntry () ) == 'amnesia') {
 			$kbbiData = str_replace ( '<b>/</b>', '/', $kbbiData );
 			$kbbiData = str_replace ( '/</b>', '</b>/', $kbbiData );
 		}
-		if (strtolower ( $entry ) == 'data') {
+		if (strtolower ( $entry->getEntry () ) == 'data') {
 			$kbbiData = str_replace ( '<b>- data</b> <b>1', '<b>-- data 1</b>', $kbbiData );
 		}
 		
 		// parse into lines and process
 		$lines = preg_split ( '/[\n|\r](?:<br>)*(?:<\/i>)*/', $kbbiData );
-		return $lines;
+		
+		$arrayCollection = new ArrayCollection ( $lines );
+		
+		return $arrayCollection;
 	}
 	
-	public function parseStandard(array $lines, Entry $entry) {
+	public function parseStandard(Collection $lines, Entry $entry, Meaning $meaning) {
 		$pairs = $this->parsePairs ( $lines );
 		$newPairs = $this->parseCleansing ( $pairs );
 		$definitions = $this->parseDefinitions ( $newPairs );
-		$this->parseFinalize ( $definitions );
+		$newDefinitions = $this->parseFinalize ( $definitions );
 	}
 	
-	public function parsePairs($lines) {
+	public function parsePairs(Collection $lines) {
 		// normal
-		$lineCount = count ( $lines );
+		$lineCount = $lines->count ();
 		
 		$temporaryPair = array ();
 		// process each line
@@ -239,31 +244,31 @@ class KBBI implements interfaces\KBBI {
 			
 			// hack for me- peng-
 			$pattern = '/\(<b>.+<\/b>\)/U';
-			if ($lineCount == 1 && preg_match ( $pattern, $lines [0] )) {
-				$lines [0] = preg_replace ( $pattern, '', $lines [0] );
+			if ($lineCount == 1 && preg_match ( $pattern, $lines->get ( 0 ) )) {
+				$lines->set ( 0, preg_replace ( $pattern, '', $lines->get ( 0 ) ) );
 			}
 			
 			// hack for redirect
-			if ($lineCount == 2 && strpos ( $lines [$i], '</b>' ) === false && strpos ( $lines [$i], '?' ) !== false) {
-				$lines [$i] = str_replace ( '?', '</b>?', $lines [$i] );
+			if ($lineCount == 2 && strpos ( $lines->get ( $i ), '</b>' ) === false && strpos ( $lines->get ( $i ), '?' ) !== false) {
+				$lines->set ( $i, str_replace ( '?', '</b>?', $lines->get ( $i ) ) );
 			}
 			
 			// hack, found in titik
-			if (strpos ( $lines [$i], '--</i><b>' ) !== false) {
-				$lines [$i] = str_replace ( '--</i><b>', '--<b>', $lines [$i] );
+			if (strpos ( $lines->get ( $i ), '--</i><b>' ) !== false) {
+				$lines->set ( $i, str_replace ( '--</i><b>', '--<b>', $lines->get ( $i ) ) );
 			}
 			
 			$pattern = '/([-|~]*<b>.+<\/b>)/U';
-			$match = preg_split ( $pattern, $lines [$i], - 1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
-			$lines [$i] = $match;
+			$match = new ArrayCollection ( preg_split ( $pattern, $lines->get ( $i ), - 1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY ) );
+			$lines->set ( $i, $match );
 			
-			$lineCount2 = count ( $match );
+			$lineCount2 = $match->count ();
 			
 			// normal statement always paired
 			if ($lineCount2 > 1) {
 				for($j = 0; $j < $lineCount2 / 2; $j ++) {
-					$pair1 = trim ( $match [$j * 2] );
-					$pair2 = trim ( $match [$j * 2 + 1] );
+					$pair1 = trim ( $match->get ( $j * 2 ) );
+					$pair2 = trim ( $match->get ( $j * 2 + 1 ) );
 					$temporaryDefinition = '';
 					$temporarySample = '';
 					
@@ -332,7 +337,7 @@ class KBBI implements interfaces\KBBI {
 					// parse info
 					if (array_key_exists ( 'info', $temporaryPair [$i] [$j] )) {
 						if ($temporaryPair [$i] [$j] ['info'] != '') {
-							$this->parseInfoLexical ( $temporaryPair [$i] [$j] );
+							$temporaryPair [$i] [$j] = $this->parseInfoLexical ( $temporaryPair [$i] [$j] );
 						}
 					}
 					
@@ -396,14 +401,13 @@ class KBBI implements interfaces\KBBI {
 					}
 				} // .. but sometimes proverb isn't paired
 			} else {
-				$match = array ();
 				// hack if it's not started with <i>
-				if (array_key_exists ( 0, $lines [$i] )) {
-					if (strpos ( substr ( $lines [$i] [0], 0, 10 ), '<i>' ) === false) {
-						$lines [$i] [0] = '<i>' . $lines [$i] [0];
+				if (array_key_exists ( 0, $lines->get ( $i ) )) {
+					if (strpos ( substr ( $lines->get ( $i )->get ( 0 ), 0, 10 ), '<i>' ) === false) {
+						$lines->get ( $i )->set ( 0, '<i>' . $lines->get ( $i )->get ( 0 ) );
 					}
 					// split into word and meaning
-					$match = preg_split ( '/([-|~]*<i>)/U', $lines [$i] [0], - 1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
+					$match = preg_split ( '/([-|~]*<i>)/U', $lines->get ( $i )->get ( 0 ), - 1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
 				}
 				$lineCount2 = count ( $match );
 				for($j = 0; $j < $lineCount2 / 2; $j ++) {
@@ -631,7 +635,7 @@ class KBBI implements interfaces\KBBI {
 						if (array_key_exists ( 'sample', $phraseDefinition )) {
 							$definitions ['definitions'] [$definitionIndex] ['sample'] = $phraseDefinition ['sample'];
 						}
-						if (array_key_exists ( 'lex_class', $phraseDefinition ) && $phraseDefinition ['lex_class'] != $definitions ['lex_class'])
+						if (array_key_exists ( 'lex_class', $phraseDefinition ) && array_key_exists ( 'lex_class', $definitions ) && $phraseDefinition ['lex_class'] != $definitions ['lex_class'])
 							$definitions ['definitions'] [$definitionIndex] ['lex_class'] = $phraseDefinition ['lex_class'];
 						if (array_key_exists ( 'info', $phraseDefinition ) && array_key_exists ( 'info', $definitions ) && $phraseDefinition ['info'] != $definitions ['info'])
 							$definitions ['definitions'] [$definitionIndex] ['info'] = $phraseDefinition ['info'];
@@ -646,6 +650,7 @@ class KBBI implements interfaces\KBBI {
 	
 	public function parseFinalize(array $definitions) {
 		
+		$lastLexical = '';
 		/***** NOT MAKE SENSE !!!! ****/
 		// final
 		//$i = 0;
@@ -668,13 +673,15 @@ class KBBI implements interfaces\KBBI {
 			$lastType = $definitions ['type'];
 		}
 		// lexical
-		if ($definitions ['lex_class'])
+		if (array_key_exists ( 'lex_class', $definitions ))
 			$lastLexical = $definitions ['lex_class'];
 		else {
-			$definitions ['lex_class'] = $lastLexical;
+			if (! empty ( $lastLexical )) {
+				$definitions ['lex_class'] = $lastLexical;
+			}
 		}
 		// synonym
-		$this->parseSynonym ( $definitions );
+		$definitions = $this->parseSynonym ( $definitions );
 		// definitions
 		$j = 0;
 		if ($definitions ['definitions']) {
@@ -691,12 +698,14 @@ class KBBI implements interfaces\KBBI {
 		if ($definitions ['type'] != 'r') {
 			$definitions ['type'] = 'd';
 		}
-	
-	/***** NOT MAKE SENSE !!!! ****/
-	// increment
-	//			$i ++;
-	//		}
-	/***** NOT MAKE SENSE !!!! ****/
+		
+		/***** NOT MAKE SENSE !!!! ****/
+		// increment
+		//			$i ++;
+		//		}
+		/***** NOT MAKE SENSE !!!! ****/
+		
+		return $definitions;
 	}
 	
 	/**
@@ -705,11 +714,11 @@ class KBBI implements interfaces\KBBI {
 	 * @param array $lines
 	 * @param kateglo\application\models\Entry $entry
 	 */
-	public function parseRedirect(array $lines, Entry $entry) {
+	public function parseRedirect(Collection $lines, Entry $entry, Meaning $meaning) {
 		// try redirect: pair with no space
 		$isRedirect = false;
-		if (count ( $lines ) == 1) {
-			$redirectString = str_replace ( '&#183;', '', strip_tags ( $lines [0] ) );
+		if ($lines->count () == 1) {
+			$redirectString = str_replace ( '&#183;', '', strip_tags ( $lines->get ( 0 ) ) );
 			$redirectPair = explode ( '?', $redirectString );
 			if (count ( $redirectPair ) == 2) {
 				$redirectFrom = trim ( $redirectPair [0] );
@@ -724,7 +733,7 @@ class KBBI implements interfaces\KBBI {
 					$entryRedirect->setEntry ( $redirectTo );
 					$synonym = new Synonym ();
 					$synonym->setSynonym ( $meaningRedirect );
-					$synonym->setMeaning ( $entry->getMeanings ()->get ( 0 ) );
+					$synonym->setMeaning ( $meaning );
 				}
 			}
 		}
@@ -732,7 +741,7 @@ class KBBI implements interfaces\KBBI {
 	}
 	
 	private function parseInfoLexical($item) {
-		if ($item ['info']) {
+		if (array_key_exists ( 'info', $item )) {
 			$item ['info'] = preg_replace ( '/,$/U', '', $item ['info'] );
 			$infos = explode ( ' ', $item ['info'] );
 			$lexical = '';
@@ -750,13 +759,15 @@ class KBBI implements interfaces\KBBI {
 					$other .= $info;
 				}
 			}
-			if ($lexical)
+			if (! empty ( $lexical ))
 				$item ['lex_class'] = $lexical;
-			if ($other)
+			if (! empty ( $other ))
 				$item ['info'] = $other;
 			else
 				unset ( $item ['info'] );
 		}
+		
+		return $item;
 	}
 	
 	private function parseSynonym($clean) {
@@ -773,6 +784,7 @@ class KBBI implements interfaces\KBBI {
 				}
 			}
 		}
+		return $clean;
 	}
 	
 	/**
