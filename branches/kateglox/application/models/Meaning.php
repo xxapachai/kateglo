@@ -47,6 +47,15 @@ class Meaning {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="meaning_version") 
+	 */
+	private $version;
+	
+	/**
 	 * @var kateglo\application\models\Entry
 	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
 	 * @JoinColumn(name="meaning_entry_id", referencedColumnName="entry_id")
@@ -122,6 +131,20 @@ class Meaning {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 *
 	 * @param kateglo\application\models\Entry $entry

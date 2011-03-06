@@ -47,6 +47,15 @@ class Misspelled {
 	private $id;
 	
 	/**
+	 * 
+	 * Enter description here ...
+	 * @var int
+	 * @Version
+	 * @Column(type="integer", name="misspelled_version") 
+	 */
+	private $version;
+	
+	/**
 	 * @var kateglo\application\models\Meaning
 	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
 	 * @JoinColumn(name="misspelled_meaning_id", referencedColumnName="meaning_id")
@@ -77,6 +86,20 @@ class Misspelled {
 		return $this->id;
 	}
 	
+	/**
+	 * @return the $version
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * @param int $version
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+	}
+
 	/**
 	 * @return kateglo\application\models\Meaning
 	 */
