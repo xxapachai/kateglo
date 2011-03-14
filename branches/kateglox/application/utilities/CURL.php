@@ -19,7 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs\interfaces\Configs;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
@@ -38,7 +38,7 @@ class CURL implements interfaces\CURL {
 	
 	/**
 	 *
-	 * @var kateglo\application\configs\interfaces\Configs
+	 * @var kateglo\application\utilities\interfaces\Configs
 	 */
 	private $configs;
 	
@@ -253,7 +253,7 @@ class CURL implements interfaces\CURL {
 	
 	/**
 	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
+	 * @param kateglo\application\utilities\interfaces\Configs $configs 
 	 * @return void
 	 *
 	 * @Inject

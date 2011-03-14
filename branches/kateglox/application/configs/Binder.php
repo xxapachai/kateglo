@@ -19,12 +19,17 @@ namespace kateglo\application\configs;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\providers\EntityManager;
+
+use kateglo\application\providers\Connection;
+use kateglo\application\providers\Solr;
+use kateglo\application\providers\Config;
+use kateglo\application\providers\Log;
 use Doctrine\Common\Cache\ApcCache;
 use kateglo\application\daos;
 use kateglo\application\services;
 use kateglo\application\utilities;
 use kateglo\application\faces;
-use kateglo\application\configs\interfaces;
 /**
  *
  *
@@ -44,18 +49,23 @@ class Binder {
 		//This class is not loaded yet by Doctrine class loader.
 		//So this "Hacks" is necessary to load the class with Doctrine loader before injected by Stubbles
 		new ApcCache ();
-		
-		$container->bind ( interfaces\Configs::INTERFACE_NAME )->to ( Configs::$CLASS_NAME );
+				
+		$container->bind ( 'Zend_Log' )->toProviderClass ( Log::$CLASS_NAME );
+		$container->bind ( 'Zend_Config' )->toProviderClass ( Config::$CLASS_NAME );
+		$container->bind ( 'Apache_Solr_Service' )->toProviderClass ( Solr::$CLASS_NAME );
+		$container->bind ( 'Doctrine\DBAL\Driver\Connection' )->toProviderClass ( Connection::$CLASS_NAME );
+		$container->bind ( 'Doctrine\ORM\EntityManager' )->toProviderClass ( EntityManager::$CLASS_NAME );
+		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
+		$container->bind ( utilities\interfaces\Configs::INTERFACE_NAME )->to ( utilities\Configs::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\DataAccess::INTERFACE_NAME )->to ( utilities\DataAccess::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\LogService::INTERFACE_NAME )->to ( utilities\LogService::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\SearchEngine::INTERFACE_NAME )->to ( utilities\SearchEngine::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );		
+		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );
-		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
 		$container->bind ( faces\interfaces\Search::INTERFACE_NAME )->to ( faces\Search::$CLASS_NAME );
 	}
 }

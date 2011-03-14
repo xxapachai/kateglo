@@ -20,8 +20,6 @@ namespace kateglo\application\utilities;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\helpers\HTTPMethod;
-
-use kateglo\application\configs\interfaces\Configs;
 /**
  *
  *
@@ -47,29 +45,9 @@ class SearchEngine implements interfaces\SearchEngine {
 	
 	/**
 	 *
-	 * @var kateglo\application\configs\interfaces\Configs
-	 */
-	private $configs;
-	
-	/**
-	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setConfigs(Configs $configs) {
-		$this->configs = $configs;
-	}
-	
-	/**
-	 *
 	 * @return Apache_Solr_Service
 	 */
 	public function getSolrService() {
-		if (! ($this->service instanceof \Apache_Solr_Service)) {
-			$this->setSolrService ();
-		}
 		if ($this->service->ping ()) {
 			return $this->service;
 		} else {
@@ -81,13 +59,11 @@ class SearchEngine implements interfaces\SearchEngine {
 	 *
 	 * @param Apache_Solr_Service $service
 	 * @return void
+	 * 
+	 * @Inject
 	 */
 	public function setSolrService(\Apache_Solr_Service $service = null) {
-		if ($service === null) {
-			$this->service = new \Apache_Solr_Service ( $this->configs->get ()->solr->host, $this->configs->get ()->solr->port, $this->configs->get ()->solr->path );
-		} else {
-			$this->service = $service;
-		}
+		$this->service = $service;
 	}
 	
 	/**

@@ -55,48 +55,5 @@ interface DataAccess {
 	 * @return void
 	 */
 	function setEntityManager(EntityManager $entityManager);
-	
-	/**
-	 * 
-	 * @return Doctrine\DBAL\Connection
-	 */
-	function getConnection();
-	
-	/**
-	 * 
-	 * @param Doctrine\DBAL\Connection $conn
-	 * @return void
-	 */
-	function setConnection(Connection $conn);
-
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	function getMetadataCache() ;
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $metadataCache
-	 */
-	function setMetadataCache(Cache $metadataCache) ;
-
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	function getQueryCache() ;
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $queryCache
-	 */
-	function setQueryCache(Cache $queryCache) ;
-
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	function getResultCache() ;
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $resultCache
-	 */
-	function setResultCache(Cache $resultCache) ;
 }
 ?>

@@ -25,7 +25,7 @@ use kateglo\application\models\Meaning;
 use kateglo\application\models\Entry;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\utilities\interfaces\CURL;
-use kateglo\application\configs\interfaces\Configs;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
@@ -43,7 +43,7 @@ class KBBI implements interfaces\KBBI {
 	
 	/**
 	 *
-	 * @var kateglo\application\configs\interfaces\Configs
+	 * @var kateglo\application\utilities\interfaces\Configs
 	 */
 	private $configs;
 	
@@ -56,7 +56,7 @@ class KBBI implements interfaces\KBBI {
 	
 	/**
 	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
+	 * @param kateglo\application\utilities\interfaces\Configs $configs 
 	 * @return void
 	 *
 	 * @Inject

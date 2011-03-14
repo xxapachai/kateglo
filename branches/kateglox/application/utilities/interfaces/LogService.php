@@ -34,7 +34,7 @@ namespace kateglo\application\utilities\interfaces;
 interface LogService {
 
 	const INTERFACE_NAME = __CLASS__;
-	
+		
 	/**
 	 *
 	 * @return Zend_Log
