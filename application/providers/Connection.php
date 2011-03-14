@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\configs\interfaces;
+namespace kateglo\application\providers;
 /*
  *  $Id$
  *
@@ -19,34 +19,48 @@ namespace kateglo\application\configs\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use Doctrine\DBAL\DriverManager;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
- * @package kateglo\application\configs\interfaces
+ * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
  * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
  */
-interface Configs {
-
-	const INTERFACE_NAME = __CLASS__;
+class Connection extends \stubBaseObject implements \stubInjectionProvider {
+	
+	public static $CLASS_NAME = __CLASS__;
+	
+	private $configs;
 	
 	/**
 	 * 
-	 * @return Zend_Config_Ini
+	 * Enter description here ...
+	 * @param kateglo\application\utilities\interfaces\Configs $configs
+	 * 
+	 * @Inject
 	 */
-	function get();
+	public function setConfigs(Configs $configs) {
+		$this->configs = $configs;
+	}
 	
 	/**
-	 * 
-	 * @param Zend_Config_Ini $configs
-	 * @return void
+	 * (non-PHPdoc)
+	 * @see stubInjectionProvider::get()
 	 */
-	function set(\Zend_Config_Ini $configs);
-
+	public function get($name = NULL) {
+		$params = array ("driver" => $this->configs->get ()->database->adapter, "host" => $this->configs->get ()->database->host, "port" => $this->configs->get ()->database->port, "dbname" => $this->configs->get ()->database->name, "user" => $this->configs->get ()->database->username, "password" => $this->configs->get ()->database->password );
+		$connection = DriverManager::getConnection ( $params, null );
+		$connection->setCharset ( $this->configs->get ()->database->charset );
+		$connection->connect();
+		return $connection;
+	}
 }
+
 ?>

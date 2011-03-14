@@ -19,12 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use Doctrine\Common\Cache\Cache;
-use Doctrine\DBAL\Driver\Connection;
-use Doctrine\ORM\Configuration;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
-use kateglo\application\configs\interfaces\Configs;
 /**
  *
  *
@@ -50,53 +45,9 @@ class DataAccess implements interfaces\DataAccess {
 	
 	/**
 	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $metadataCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $queryCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $resultCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\DBAL\Connection
-	 */
-	private $conn = null;
-	
-	/**
-	 *
-	 * @var kateglo\application\configs\interfaces\Configs
-	 */
-	private $configs;
-	
-	/**
-	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setConfigs(Configs $configs) {
-		$this->configs = $configs;
-	}
-	
-	/**
-	 *
 	 * @return Doctrine\ORM\EntityManager
 	 */
 	public function getEntityManager() {
-		if (! ($this->entityManager instanceof EntityManager)) {
-			$this->setEntityManager ();
-		}
 		return $this->entityManager;
 	}
 	
@@ -112,98 +63,11 @@ class DataAccess implements interfaces\DataAccess {
 	 *
 	 * @param Doctrine\ORM\EntityManager $entityManager
 	 * @return void
-	 */
-	public function setEntityManager(EntityManager $entityManager = null) {
-		if ($entityManager === null) {
-			if (! ($this->entityManager instanceof EntityManager)) {
-				if ($this->conn == null) {
-					$this->setConnection ();
-				}
-				$config = new Configuration ();
-				$config->setMetadataCacheImpl ( $this->metadataCache );
-				$config->setQueryCacheImpl ( $this->queryCache );
-				$config->setMetadataDriverImpl ( $config->newDefaultAnnotationDriver () );
-				$config->setProxyDir ( realpath ( $this->configs->get ()->cache->doctrine->proxy ) );
-				$config->setProxyNamespace ( $this->configs->get ()->cache->doctrine->namespace );
-				//$config->setAutoGenerateProxyClasses(false); 
-				$this->entityManager = EntityManager::create ( $this->conn, $config );
-			}
-		} else {
-			$this->entityManager = $entityManager;
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\DBAL\Connection
-	 */
-	public function getConnection() {
-		if (! ($this->conn instanceof DriverManager)) {
-			$this->setConnection ();
-		}
-		return $this->conn;
-	}
-	
-	/**
-	 * @param Doctrine\DBAL\Connection $conn
-	 * @return void
-	 */
-	public function setConnection(Connection $conn = null) {
-		if ($conn === null) {
-			if (! ($this->conn instanceof DriverManager)) {
-				$params = array ("driver" => $this->configs->get ()->database->adapter, "host" => $this->configs->get ()->database->host, "port" => $this->configs->get ()->database->port, "dbname" => $this->configs->get ()->database->name, "user" => $this->configs->get ()->database->username, "password" => $this->configs->get ()->database->password );
-				$this->conn = DriverManager::getConnection ( $params, null );
-				$this->conn->setCharset ( $this->configs->get ()->database->charset );
-			}
-		} else {
-			$this->conn = $conn;
-		}
-		$this->conn->connect ();
-	}
-	
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getMetadataCache() {
-		return $this->metadataCache;
-	}
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $metadataCache
+	 * 
 	 * @Inject
 	 */
-	public function setMetadataCache(Cache $metadataCache) {
-		$this->metadataCache = $metadataCache;
-	}
-
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getQueryCache() {
-		return $this->queryCache;
-	}
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $queryCache
-	 * @Inject
-	 */
-	public function setQueryCache(Cache $queryCache) {
-		$this->queryCache = $queryCache;
-	}
-
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getResultCache() {
-		return $this->resultCache;
-	}
-
-	/**
-	 * @param Doctrine\Common\Cache\Cache $resultCache
-	 * @Inject
-	 */
-	public function setResultCache(Cache $resultCache) {
-		$this->resultCache = $resultCache;
+	public function setEntityManager(EntityManager $entityManager) {
+		$this->entityManager = $entityManager;
 	}
 
 }

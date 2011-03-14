@@ -19,7 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\configs\interfaces\Configs;
+
 /**
  *
  *
@@ -45,29 +45,9 @@ class LogService implements interfaces\LogService{
 	
 	/**
 	 *
-	 * @var kateglo\application\configs\interfaces\Configs
-	 */
-	private $configs;
-	
-	/**
-	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setConfigs(Configs $configs){
-		$this->configs = $configs;
-	}
-
-	/**
-	 *
 	 * @return Zend_Log
 	 */
 	public function get(){
-		if(! ($this->logInstance instanceof \Zend_Log)){
-			$this->set();
-		}
 
 		return $this->logInstance;
 	}
@@ -76,16 +56,11 @@ class LogService implements interfaces\LogService{
 	 * 
 	 * @param Zend_Log $logInstance
 	 * @return void
+	 * 
+	 * @Inject
 	 */
 	public function set(\Zend_Log $logInstance = null){
-		if($logInstance === null){
-			if(! ($this->logInstance instanceof \Zend_Log)){
-				$this->logInstance = new \Zend_Log();
-				$this->logInstance->addWriter(new \Zend_Log_Writer_Stream($this->configs->get()->errorLog));
-			}
-		}else{
 			$this->logInstance = $logInstance;
-		}
 	}
 }
 

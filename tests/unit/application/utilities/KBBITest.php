@@ -21,12 +21,11 @@ require_once 'tests/Bootstrap.php';
  */
 use kateglo\application\utilities\KBBI;
 use kateglo\application\models\Entry;
-use kateglo\application\configs\interfaces\Configs;
+use kateglo\application\utilities\interfaces\Configs;
 use kateglo\application\utilities\CURL;
 /**
  *
  *
- * @package kateglo\application\configs
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$

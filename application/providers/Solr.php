@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\utilities\interfaces;
+namespace kateglo\application\providers;
 /*
  *  $Id$
  *
@@ -19,47 +19,47 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\helpers\HTTPMethod;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
- * @package kateglo\application\utilities\interfaces
+ * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
  * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
  */
-interface SearchEngine {
+class Solr extends \stubBaseObject implements \stubInjectionProvider {
 	
-	const INTERFACE_NAME = __CLASS__;
-	
-	/**
-	 * 
-	 * @return \Apache_Solr_Service
-	 */
-	function getSolrService();
-	
-	/**
-	 * 
-	 * @param Apache_Solr_Service $service
-	 * @return void
-	 */
-	function setSolrService(\Apache_Solr_Service $service = null);
-	
-	/**
-	 * Simple Search interface
-	 *
-	 * @param string $query The raw query string
-	 * @param int $offset The starting offset for result documents
-	 * @param int $limit The maximum number of result documents to return
-	 * @param array $params key / value pairs for other query parameters (see Solr documentation), use arrays for parameter keys used more than once (e.g. facet.field)
-	 * @return Apache_Solr_Response
-	 *
-	 * @throws Exception If an error occurs during the service call
-	 */
-	function search($query, $offset = 0, $limit = 10, $params = array(), $method = HTTPMethod::GET);
+	public static $CLASS_NAME = __CLASS__;
 
+	/**
+	 *
+	 * @var kateglo\application\utilities\interfaces\Configs
+	 */
+	private $configs;
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param kateglo\application\utilities\interfaces\Configs $configs
+	 * 
+	 * @Inject
+	 */
+	public function setConfigs(Configs $configs){
+		$this->configs = $configs;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see stubInjectionProvider::get()
+	 */
+	public function get($name = NULL){
+		return new \Apache_Solr_Service ( $this->configs->get ()->solr->host, $this->configs->get ()->solr->port, $this->configs->get ()->solr->path );
+	}
 }
+
 ?>

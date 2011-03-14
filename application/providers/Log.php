@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\utilities\interfaces;
+namespace kateglo\application\providers;
 /*
  *  $Id$
  *
@@ -19,47 +19,49 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\helpers\HTTPMethod;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
- * @package kateglo\application\utilities\interfaces
+ * @package kateglo\application\utilities
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
  * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ *
  */
-interface SearchEngine {
+class Log extends \stubBaseObject implements \stubInjectionProvider {
 	
-	const INTERFACE_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
 	
 	/**
-	 * 
-	 * @return \Apache_Solr_Service
+	 *
+	 * @var kateglo\application\utilities\interfaces\Configs
 	 */
-	function getSolrService();
+	private $configs;
 	
 	/**
-	 * 
-	 * @param Apache_Solr_Service $service
+	 *
+	 * @param kateglo\application\configs\interfaces\Configs $configs 
 	 * @return void
+	 *
+	 * @Inject
 	 */
-	function setSolrService(\Apache_Solr_Service $service = null);
+	public function setConfigs(Configs $configs) {
+		$this->configs = $configs;
+	}
 	
 	/**
-	 * Simple Search interface
-	 *
-	 * @param string $query The raw query string
-	 * @param int $offset The starting offset for result documents
-	 * @param int $limit The maximum number of result documents to return
-	 * @param array $params key / value pairs for other query parameters (see Solr documentation), use arrays for parameter keys used more than once (e.g. facet.field)
-	 * @return Apache_Solr_Response
-	 *
-	 * @throws Exception If an error occurs during the service call
+	 * (non-PHPdoc)
+	 * @see stubInjectionProvider::get()
 	 */
-	function search($query, $offset = 0, $limit = 10, $params = array(), $method = HTTPMethod::GET);
-
+	public function get($name = NULL) {
+		$logInstance = new \Zend_Log ();
+		$logInstance->addWriter ( new \Zend_Log_Writer_Stream ( $this->configs->get ()->errorLog ) );
+		return $logInstance;
+	}
 }
+
 ?>

@@ -23,7 +23,7 @@ require_once 'Zend/Controller/Dispatcher/Stubbles.php';
 require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 
 use kateglo\application\utilities\Injector;
-use kateglo\application\configs\interfaces\Configs;
+use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *

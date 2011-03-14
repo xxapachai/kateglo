@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\utilities\interfaces;
 /*
- *  $Id$
+ *  $Id: Configs.php 266 2010-12-16 21:01:27Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,47 +19,34 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\helpers\HTTPMethod;
+
 /**
  *
  *
  * @package kateglo\application\utilities\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2010-12-16 22:01:27 +0100 (Do, 16 Dez 2010) $
+ * @version $LastChangedRevision: 266 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface SearchEngine {
-	
+interface Configs {
+
 	const INTERFACE_NAME = __CLASS__;
 	
 	/**
 	 * 
-	 * @return \Apache_Solr_Service
+	 * @return Zend_Config_Ini
 	 */
-	function getSolrService();
+	function get();
 	
 	/**
 	 * 
-	 * @param Apache_Solr_Service $service
+	 * @param Zend_Config $configs
 	 * @return void
 	 */
-	function setSolrService(\Apache_Solr_Service $service = null);
-	
-	/**
-	 * Simple Search interface
-	 *
-	 * @param string $query The raw query string
-	 * @param int $offset The starting offset for result documents
-	 * @param int $limit The maximum number of result documents to return
-	 * @param array $params key / value pairs for other query parameters (see Solr documentation), use arrays for parameter keys used more than once (e.g. facet.field)
-	 * @return Apache_Solr_Response
-	 *
-	 * @throws Exception If an error occurs during the service call
-	 */
-	function search($query, $offset = 0, $limit = 10, $params = array(), $method = HTTPMethod::GET);
+	function set(\Zend_Config $configs);
 
 }
 ?>
