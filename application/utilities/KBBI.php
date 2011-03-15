@@ -42,8 +42,9 @@ class KBBI implements interfaces\KBBI {
 	public static $CLASS_NAME = __CLASS__;
 	
 	/**
-	 *
-	 * @var kateglo\application\utilities\interfaces\Configs
+	 * 
+	 * Enter description here ...
+	 * @var Zend_Config
 	 */
 	private $configs;
 	
@@ -53,15 +54,15 @@ class KBBI implements interfaces\KBBI {
 	 * @var kateglo\application\utilities\interfaces\CURL
 	 */
 	private $curl;
-	
+		
 	/**
-	 *
-	 * @param kateglo\application\utilities\interfaces\Configs $configs 
-	 * @return void
-	 *
+	 * 
+	 * Enter description here ...
+	 * @param Zend_Config $configs
+	 * 
 	 * @Inject
 	 */
-	public function setConfigs(interfaces\Configs $configs) {
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	

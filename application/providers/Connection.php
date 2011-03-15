@@ -20,7 +20,6 @@ namespace kateglo\application\providers;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\DBAL\DriverManager;
-use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
@@ -32,21 +31,27 @@ use kateglo\application\utilities\interfaces\Configs;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
+ * @Singleton
  */
 class Connection extends \stubBaseObject implements \stubInjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var Zend_Config
+	 */
 	private $configs;
 	
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\utilities\interfaces\Configs $configs
+	 * @param Zend_Config $configs
 	 * 
 	 * @Inject
 	 */
-	public function setConfigs(Configs $configs) {
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	
@@ -55,9 +60,9 @@ class Connection extends \stubBaseObject implements \stubInjectionProvider {
 	 * @see stubInjectionProvider::get()
 	 */
 	public function get($name = NULL) {
-		$params = array ("driver" => $this->configs->get ()->database->adapter, "host" => $this->configs->get ()->database->host, "port" => $this->configs->get ()->database->port, "dbname" => $this->configs->get ()->database->name, "user" => $this->configs->get ()->database->username, "password" => $this->configs->get ()->database->password );
+		$params = array ("driver" => $this->configs->database->adapter, "host" => $this->configs->database->host, "port" => $this->configs->database->port, "dbname" => $this->configs->database->name, "user" => $this->configs->database->username, "password" => $this->configs->database->password );
 		$connection = DriverManager::getConnection ( $params, null );
-		$connection->setCharset ( $this->configs->get ()->database->charset );
+		$connection->setCharset ( $this->configs->database->charset );
 		$connection->connect();
 		return $connection;
 	}

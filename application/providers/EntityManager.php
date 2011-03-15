@@ -24,7 +24,6 @@ use Doctrine\DBAL\Driver;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM;
 use Doctrine\DBAL\DriverManager;
-use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
@@ -36,6 +35,7 @@ use kateglo\application\utilities\interfaces\Configs;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
+ * @Singleton
  */
 class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
 	
@@ -44,7 +44,7 @@ class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
 	/**
 	 * 
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\interfaces\Configs
+	 * @var Zend_Config
 	 */
 	private $configs;
 	
@@ -72,14 +72,15 @@ class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
 	 */
 	private $connection = null;
 	
+	
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param Configs $configs
+	 * @param Zend_Config $configs
 	 * 
 	 * @Inject
 	 */
-	public function setConfigs(Configs $configs) {
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	
@@ -92,8 +93,8 @@ class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
 		$config->setMetadataCacheImpl ( $this->metadataCache );
 		$config->setQueryCacheImpl ( $this->queryCache );
 		$config->setMetadataDriverImpl ( $config->newDefaultAnnotationDriver () );
-		$config->setProxyDir ( realpath ( $this->configs->get ()->cache->doctrine->proxy ) );
-		$config->setProxyNamespace ( $this->configs->get ()->cache->doctrine->namespace );
+		$config->setProxyDir ( realpath ( $this->configs->cache->doctrine->proxy ) );
+		$config->setProxyNamespace ( $this->configs->cache->doctrine->namespace );
 		$config->setAutoGenerateProxyClasses ( false );
 		return ORM\EntityManager::create ( $this->connection, $config );
 	}

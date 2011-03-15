@@ -34,9 +34,7 @@ namespace kateglo\application\utilities\interfaces;
 interface CURL {
 	
 	const INTERFACE_NAME = __CLASS__;
-	
-	function run();
-	
+		
 	/**
 	 * @return the $useragent
 	 */
@@ -236,6 +234,12 @@ interface CURL {
 	 * @param string $authPass
 	 */
 	function setAuthPass($authPass);
+		
+	/**
+	 * 
+	 * Enter description here ...
+	 */
+	function run();
 
 }
 

@@ -21,7 +21,6 @@ require_once 'tests/Bootstrap.php';
  */
 use kateglo\application\utilities\KBBI;
 use kateglo\application\models\Entry;
-use kateglo\application\utilities\interfaces\Configs;
 use kateglo\application\utilities\CURL;
 /**
  *
@@ -119,14 +118,12 @@ class KBBITest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function getCurl() {
-		$config = new stdClass ();
+		$config = new \Zend_Config ();
 		$config->curl = new stdClass ();
 		$config->curl->timeout = 5;
 		$config->curl->proxy = 'proxyMock';
 		$config->curl->proxyUserPwd = 'UserPwdMock';
 		
-		$stubConfigs = $this->getMock ( Configs::INTERFACE_NAME );
-		$stubConfigs->expects ( $this->any () )->method ( 'get' )->will ( $this->returnValue ( $config ) );
 		
 		$mockCurl = $this->getMock ( CURL::$CLASS_NAME, array ('setUrl', 'setPost', 'setPostFields', 'setTimeout', 'setProxy', 'setProxyUserPwd', 'run', 'getResult' ) );
 		$mockCurl->expects ( $this->once () )->method ( 'setUrl' )->with ( $this->equalTo ( 'some URL' ) );
@@ -138,7 +135,7 @@ class KBBITest extends PHPUnit_Framework_TestCase {
 		$mockCurl->expects ( $this->once () )->method ( 'run' )->will ( $this->returnValue ( 'nothing' ) );
 		$mockCurl->expects ( $this->once () )->method ( 'getResult' )->will ( $this->returnValue ( 'mock result' ) );
 		
-		$this->KBBI->setConfigs ( $stubConfigs );
+		$this->KBBI->setConfigs ( $config );
 		$this->KBBI->setCurl ( $mockCurl );
 		
 		$this->assertEquals ( 'mock result', $this->KBBI->getCurl ( 'some URL', 'some data' ) );

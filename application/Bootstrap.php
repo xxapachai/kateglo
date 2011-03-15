@@ -23,7 +23,6 @@ require_once 'Zend/Controller/Dispatcher/Stubbles.php';
 require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 
 use kateglo\application\utilities\Injector;
-use kateglo\application\utilities\interfaces\Configs;
 /**
  *
  *
@@ -54,7 +53,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = $this->getResource ( 'FrontController' );
 		
 		$dispatcher = new Zend_Controller_Dispatcher_Stubbles ();
-		$dispatcher->setControllerDirectory ( Injector::getInstance ( Configs::INTERFACE_NAME )->get ()->resources->frontController->controllerDirectory );
+		$dispatcher->setControllerDirectory ( Injector::getInstance ( 'Zend_Config' )->resources->frontController->controllerDirectory );
 		$front->setDispatcher ( $dispatcher );
 		
 		$router = $front->getRouter ();
@@ -68,12 +67,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		
 		$front->setParam ( 'bootstrap', $this );
 		
-		$talActionHelper = new Zend_Controller_Action_Helper_ViewRenderer();
-		$talActionHelper->setView(new Zend_View_PhpTal());
-		$talActionHelper->setViewSuffix('html');
-		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80,  $talActionHelper);
+		$talActionHelper = new Zend_Controller_Action_Helper_ViewRenderer ();
+		$talActionHelper->setView ( new Zend_View_PhpTal () );
+		$talActionHelper->setViewSuffix ( 'html' );
+		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80, $talActionHelper );
 		
-
 		$front->dispatch ();
 	}
 

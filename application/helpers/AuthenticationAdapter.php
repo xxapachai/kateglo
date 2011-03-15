@@ -103,7 +103,7 @@ class AuthenticationAdapter implements \Zend_Auth_Adapter_Interface {
 			$userObj = User::getByUsername($this->username);
 			if($userObj->getPassword() == md5($this->password)){
 				$userObj->setLastLogin(new \DateTime());
-				DataAccess::getEntityManager()->persist($userObj);
+				//getEntityManager()->persist($userObj);
 				$result = new \Zend_Auth_Result(\Zend_Auth_Result::SUCCESS, $userObj, array("Authentication success!"));
 			}else{
 				$result = new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID, null, array("Authentication failed!"));

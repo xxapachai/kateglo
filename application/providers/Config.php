@@ -31,6 +31,7 @@ namespace kateglo\application\providers;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
+ * @Singleton
  */
 class Config extends \stubBaseObject implements \stubInjectionProvider {
 	
