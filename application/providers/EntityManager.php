@@ -95,7 +95,7 @@ class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
 		$config->setMetadataDriverImpl ( $config->newDefaultAnnotationDriver () );
 		$config->setProxyDir ( realpath ( $this->configs->cache->doctrine->proxy ) );
 		$config->setProxyNamespace ( $this->configs->cache->doctrine->namespace );
-		$config->setAutoGenerateProxyClasses ( false );
+		$config->setAutoGenerateProxyClasses ( true );
 		return ORM\EntityManager::create ( $this->connection, $config );
 	}
 	
