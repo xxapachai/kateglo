@@ -19,7 +19,7 @@ namespace kateglo\application\providers;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\interfaces\Configs;
+
 /**
  *
  *
@@ -31,25 +31,27 @@ use kateglo\application\utilities\interfaces\Configs;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
+ * @Singleton
  */
 class Solr extends \stubBaseObject implements \stubInjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 
 	/**
-	 *
-	 * @var kateglo\application\utilities\interfaces\Configs
+	 * 
+	 * Enter description here ...
+	 * @var Zend_Config
 	 */
 	private $configs;
 	
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\utilities\interfaces\Configs $configs
+	 * @param Zend_Config $configs
 	 * 
 	 * @Inject
 	 */
-	public function setConfigs(Configs $configs){
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	
@@ -58,7 +60,7 @@ class Solr extends \stubBaseObject implements \stubInjectionProvider {
 	 * @see stubInjectionProvider::get()
 	 */
 	public function get($name = NULL){
-		return new \Apache_Solr_Service ( $this->configs->get ()->solr->host, $this->configs->get ()->solr->port, $this->configs->get ()->solr->path );
+		return new \Apache_Solr_Service ( $this->configs->solr->host, $this->configs->solr->port, $this->configs->solr->path );
 	}
 }
 

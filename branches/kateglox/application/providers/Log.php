@@ -19,7 +19,7 @@ namespace kateglo\application\providers;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\interfaces\Configs;
+
 /**
  *
  *
@@ -31,25 +31,27 @@ use kateglo\application\utilities\interfaces\Configs;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
+ * @Singleton
  */
 class Log extends \stubBaseObject implements \stubInjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 	
 	/**
-	 *
-	 * @var kateglo\application\utilities\interfaces\Configs
+	 * 
+	 * Enter description here ...
+	 * @var Zend_Config
 	 */
 	private $configs;
 	
 	/**
-	 *
-	 * @param kateglo\application\configs\interfaces\Configs $configs 
-	 * @return void
-	 *
+	 * 
+	 * Enter description here ...
+	 * @param Zend_Config $configs
+	 * 
 	 * @Inject
 	 */
-	public function setConfigs(Configs $configs) {
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	
@@ -59,7 +61,7 @@ class Log extends \stubBaseObject implements \stubInjectionProvider {
 	 */
 	public function get($name = NULL) {
 		$logInstance = new \Zend_Log ();
-		$logInstance->addWriter ( new \Zend_Log_Writer_Stream ( $this->configs->get ()->errorLog ) );
+		$logInstance->addWriter ( new \Zend_Log_Writer_Stream ( $this->configs->errorLog ) );
 		return $logInstance;
 	}
 }

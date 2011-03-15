@@ -19,10 +19,10 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use Doctrine\ORM\EntityManager;
 use kateglo\application\models;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
 use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
-use kateglo\application\utilities\interfaces\DataAccess;
 /**
  * 
  * 
@@ -40,19 +40,19 @@ class User implements interfaces\User {
 
 	/**
 	 * 
-	 * @var kateglo\application\utilities\interfaces\DataAccess
+	 * @var Doctrine\ORM\EntityManager
 	 */
-	private $dataAccess;
-		
+	private $entityManager;
+	
 	/**
 	 *
-	 * @param kateglo\application\utilities\interfaces\DataAccess $dataAccess
+	 * @param Doctrine\ORM\EntityManager $entityManager
 	 * @return void
 	 * 
 	 * @Inject
 	 */
-	public function setDataAccess(DataAccess $dataAccess){
-		$this->dataAccess = $dataAccess;
+	public function setEntityManager(EntityManager $entityManager) {
+		$this->entityManager = $entityManager;
 	}
 	
 	/**
@@ -61,7 +61,7 @@ class User implements interfaces\User {
 	 * @return kateglo\application\models\User
 	 */
 	public function getByUsername($username){
-		$query = $this->dataAccess->getEntityManager()->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
+		$query = $this->entityManager->createQuery("SELECT obj FROM ".models\User::CLASS_NAME." obj WHERE obj.username = '$username'");        
 		$result = $query->getResult();
         if(count($result) === 1){
         	if(! ($result[0] instanceof models\User)){

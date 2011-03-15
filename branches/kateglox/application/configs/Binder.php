@@ -1,5 +1,8 @@
 <?php
 namespace kateglo\application\configs;
+require_once 'Doctrine/Common/Cache/ApcCache.php';
+require_once 'Zend/Log.php';
+require_once 'Zend/Config.php';
 /*
  *  $Id$
  *
@@ -20,7 +23,6 @@ namespace kateglo\application\configs;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\providers\EntityManager;
-
 use kateglo\application\providers\Connection;
 use kateglo\application\providers\Solr;
 use kateglo\application\providers\Config;
@@ -48,7 +50,7 @@ class Binder {
 		//Stubbles check with class_exist() and throw exception if the class is not found
 		//This class is not loaded yet by Doctrine class loader.
 		//So this "Hacks" is necessary to load the class with Doctrine loader before injected by Stubbles
-		new ApcCache ();
+		//new ApcCache ();
 				
 		$container->bind ( 'Zend_Log' )->toProviderClass ( Log::$CLASS_NAME );
 		$container->bind ( 'Zend_Config' )->toProviderClass ( Config::$CLASS_NAME );
@@ -60,9 +62,6 @@ class Binder {
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\Configs::INTERFACE_NAME )->to ( utilities\Configs::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\DataAccess::INTERFACE_NAME )->to ( utilities\DataAccess::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\LogService::INTERFACE_NAME )->to ( utilities\LogService::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\SearchEngine::INTERFACE_NAME )->to ( utilities\SearchEngine::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );

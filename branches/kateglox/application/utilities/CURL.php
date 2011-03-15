@@ -19,7 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\interfaces;
+
 /**
  *
  *
@@ -37,8 +37,9 @@ class CURL implements interfaces\CURL {
 	public static $CLASS_NAME = __CLASS__;
 	
 	/**
-	 *
-	 * @var kateglo\application\utilities\interfaces\Configs
+	 * 
+	 * Enter description here ...
+	 * @var Zend_Config
 	 */
 	private $configs;
 	
@@ -196,69 +197,14 @@ class CURL implements interfaces\CURL {
 		$this->noBody = false;
 	}
 	
-	public function run() {
-		$this->session = curl_init ();
-		
-		curl_setopt ( $this->session, CURLOPT_URL, $this->url );
-		curl_setopt ( $this->session, CURLOPT_HTTPHEADER, array ('Expect:' ) );
-		curl_setopt ( $this->session, CURLOPT_TIMEOUT, $this->timeout );
-		curl_setopt ( $this->session, CURLOPT_MAXREDIRS, $this->maxRedirects );
-		curl_setopt ( $this->session, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt ( $this->session, CURLOPT_FOLLOWLOCATION, $this->followlocation );
-		if(!empty($this->proxy)){
-			curl_setopt ( $this->session, CURLOPT_PROXY, $this->proxy );
-		}
-		
-		if(!empty($this->proxyUserPwd)){
-			curl_setopt ( $this->session, CURLOPT_PROXYUSERPWD, $this->proxyUserPwd );
-		}
-		
-		if (! empty ( $this->cookieFileLocation )) {
-			curl_setopt ( $this->session, CURLOPT_COOKIEJAR, $this->cookieFileLocation );
-			curl_setopt ( $this->session, CURLOPT_COOKIEFILE, $this->cookieFileLocation );
-		}
-		if ($this->authentication) {
-			curl_setopt ( $this->session, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass );
-		}
-		if ($this->post) {
-			curl_setopt ( $this->session, CURLOPT_POST, true );
-			curl_setopt ( $this->session, CURLOPT_POSTFIELDS, $this->postFields );
-		
-		}
-		
-		if ($this->includeHeader) {
-			curl_setopt ( $this->session, CURLOPT_HEADER, true );
-		}
-		
-		if ($this->noBody) {
-			curl_setopt ( $this->session, CURLOPT_NOBODY, true );
-		}
-		
-		if ($this->binaryTransfer) {
-			curl_setopt ( $this->session, CURLOPT_BINARYTRANSFER, true );
-		}
-		
-		if (! empty ( $this->useragent )) {
-			curl_setopt ( $this->session, CURLOPT_USERAGENT, $this->useragent );
-		}
-		
-		if (! empty ( $this->referer )) {
-			curl_setopt ( $this->session, CURLOPT_REFERER, $this->referer );
-		}
-		
-		$this->result = curl_exec ( $this->session );
-		$this->status = curl_getinfo ( $this->session, CURLINFO_HTTP_CODE );
-		curl_close ( $this->session );
-	}
-	
 	/**
-	 *
-	 * @param kateglo\application\utilities\interfaces\Configs $configs 
-	 * @return void
-	 *
+	 * 
+	 * Enter description here ...
+	 * @param Zend_Config $configs
+	 * 
 	 * @Inject
 	 */
-	public function setConfigs(interfaces\Configs $configs) {
+	public function setConfigs(\Zend_Config $configs) {
 		$this->configs = $configs;
 	}
 	
@@ -540,6 +486,66 @@ class CURL implements interfaces\CURL {
 	 */
 	public function setAuthPass($authPass) {
 		$this->authPass = $authPass;
+	}
+
+	/**
+	 * 
+	 * Enter description here ...
+	 * @return void
+	 */
+	public function run() {
+		$this->session = curl_init ();
+		
+		curl_setopt ( $this->session, CURLOPT_URL, $this->url );
+		curl_setopt ( $this->session, CURLOPT_HTTPHEADER, array ('Expect:' ) );
+		curl_setopt ( $this->session, CURLOPT_TIMEOUT, $this->timeout );
+		curl_setopt ( $this->session, CURLOPT_MAXREDIRS, $this->maxRedirects );
+		curl_setopt ( $this->session, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt ( $this->session, CURLOPT_FOLLOWLOCATION, $this->followlocation );
+		if(!empty($this->proxy)){
+			curl_setopt ( $this->session, CURLOPT_PROXY, $this->proxy );
+		}
+		
+		if(!empty($this->proxyUserPwd)){
+			curl_setopt ( $this->session, CURLOPT_PROXYUSERPWD, $this->proxyUserPwd );
+		}
+		
+		if (! empty ( $this->cookieFileLocation )) {
+			curl_setopt ( $this->session, CURLOPT_COOKIEJAR, $this->cookieFileLocation );
+			curl_setopt ( $this->session, CURLOPT_COOKIEFILE, $this->cookieFileLocation );
+		}
+		if ($this->authentication) {
+			curl_setopt ( $this->session, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass );
+		}
+		if ($this->post) {
+			curl_setopt ( $this->session, CURLOPT_POST, true );
+			curl_setopt ( $this->session, CURLOPT_POSTFIELDS, $this->postFields );
+		
+		}
+		
+		if ($this->includeHeader) {
+			curl_setopt ( $this->session, CURLOPT_HEADER, true );
+		}
+		
+		if ($this->noBody) {
+			curl_setopt ( $this->session, CURLOPT_NOBODY, true );
+		}
+		
+		if ($this->binaryTransfer) {
+			curl_setopt ( $this->session, CURLOPT_BINARYTRANSFER, true );
+		}
+		
+		if (! empty ( $this->useragent )) {
+			curl_setopt ( $this->session, CURLOPT_USERAGENT, $this->useragent );
+		}
+		
+		if (! empty ( $this->referer )) {
+			curl_setopt ( $this->session, CURLOPT_REFERER, $this->referer );
+		}
+		
+		$this->result = curl_exec ( $this->session );
+		$this->status = curl_getinfo ( $this->session, CURLINFO_HTTP_CODE );
+		curl_close ( $this->session );
 	}
 	
 }

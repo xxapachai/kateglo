@@ -19,7 +19,6 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\faces\interfaces\Search;
-use kateglo\application\utilities\interfaces\LogService;
 /**
  * 
  * 
@@ -35,7 +34,7 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
-	 * @var kateglo\application\utilities\interfaces\LogService;
+	 * @var Zend_Log;
 	 */
 	private $log;
 	
@@ -49,11 +48,11 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param kateglo\application\utilities\interfaces\LogService $log
+	 * @param Zend_Log $log
 	 * 
 	 * @Inject
 	 */
-	public function setEntry(LogService $log) {
+	public function setEntry(\Zend_Log $log) {
 		$this->log = $log;
 	}
 	
@@ -72,8 +71,8 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 		$errors = $this->_getParam ( 'error_handler' );
 		
 		switch ($errors->type) {
-			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
-			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
+			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
+			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
 				
 				// 404 error -- controller or action not found
 				$this->getResponse ()->setHttpResponseCode ( 404 );
@@ -86,7 +85,7 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 				break;
 		}
 		//catch anything in log files
-		$this->log->get ()->log ( $errors->exception, \Zend_Log::ERR );
+		$this->log->log ( $errors->exception, \Zend_Log::ERR );
 		$this->view->exception = $errors->exception;
 		$this->view->request = $errors->request;
 		

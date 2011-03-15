@@ -174,7 +174,7 @@ require_once ('Apache/Solr/Service.php');
 $zfPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'ZendFramework' . DIRECTORY_SEPARATOR . 'library' );
 
 /** Ensure libraries is on include_path */
-set_include_path ( implode ( PATH_SEPARATOR, array (realpath ( $zfPath ), realpath ( $libraryPath ), get_include_path () ) ) );
+set_include_path ( implode ( PATH_SEPARATOR, array (realpath ( $zfPath ), realpath ( $libraryPath ), get_include_path (), $doctrinePath ) ) );
 
 /** Import Zend Framework Loader */
 require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
@@ -188,14 +188,13 @@ require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
 $application = new Zend_Application ( APPLICATION_ENV, CONFIGS_PATH );
 
 use kateglo\application\utilities\Injector;
-use kateglo\application\utilities\interfaces\LogService;
 
 /**
  * 
  * Get Log Service from Dependency Injector
- * @var kateglo\application\utilities\interfaces\LogService
+ * @var Zend_Log
  */
-$logService = Injector::getInstance ( LogService::INTERFACE_NAME );
+$logService = Injector::getInstance ( 'Zend_Log' );
 
 try {
 	//run kateglo
@@ -203,7 +202,7 @@ try {
 
 } catch ( Exception $e ) {
 	//catch anything in log files
-	$logService->get ()->log ( $e->getTraceAsString (), \Zend_Log::ERR );
+	$logService->log ( $e->getTraceAsString (), Zend_Log::ERR );
 }
 
 /** +++ END : Initiate Zend Framework +++ */
