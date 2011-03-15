@@ -19,7 +19,7 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\utilities\interfaces\Configs;
+use kateglo\application\utilities\interfaces;
 /**
  *
  *
@@ -258,7 +258,7 @@ class CURL implements interfaces\CURL {
 	 *
 	 * @Inject
 	 */
-	public function setConfigs(Configs $configs) {
+	public function setConfigs(interfaces\Configs $configs) {
 		$this->configs = $configs;
 	}
 	
