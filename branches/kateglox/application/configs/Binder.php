@@ -46,11 +46,6 @@ use kateglo\application\faces;
 class Binder {
 	
 	public static function bind(\stubBinder $container) {
-		
-		//Stubbles check with class_exist() and throw exception if the class is not found
-		//This class is not loaded yet by Doctrine class loader.
-		//So this "Hacks" is necessary to load the class with Doctrine loader before injected by Stubbles
-		//new ApcCache ();
 				
 		$container->bind ( 'Zend_Log' )->toProviderClass ( Log::$CLASS_NAME );
 		$container->bind ( 'Zend_Config' )->toProviderClass ( Config::$CLASS_NAME );
