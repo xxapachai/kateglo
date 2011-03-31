@@ -92,7 +92,8 @@ class Zend_View_PhpTal implements Zend_View_Interface
         } 
         if (isset($config['forceReparse'])) { 
             $this->setForceReparse($config['forceReparse']); 
-        } 
+        }
+        $this->_engine->setPostFilter(Injector::getInstance('kateglo\application\utilities\TalTidy'));
     } 
  
     /**
