@@ -1,181 +1,184 @@
-html,body {
-	background-color: #F3F2F2;
-	font-family: 'Trebuchet MS', Helvetica, Sans-Serif;
-	font-size: 14px;
-	margin: 0px;
-	padding: 0px;
+html, body {
+    background-color: #F3F2F2;
+    font-family: 'Trebuchet MS', Helvetica, Sans-Serif;
+    font-size: 14px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .clear {
-	clear: both;
+    clear: both;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 a:visited {
-	color: blue;
+    color: blue;
 }
 
 .body {
-	width: 600px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 30px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
 }
 
 .header {
-	height: 50px;
-	border: 0;
+    height: 50px;
+    border: 0;
 }
 
 .search {
-	display: inline;
-	float: right;
-	padding-top: 12px;
+    display: inline;
+    float: right;
+    padding-top: 12px;
 }
 
 .search-form {
-	
+
 }
 
 .search-field {
-	width: 250px;
+    width: 250px;
 }
 
 .logo {
-	display: inline;
-	float: left;
+    display: inline;
+    float: left;
 }
 
 .logoImg {
-	border: none;
+    border: none;
 }
 
 .navbar {
-	height: 30px;
-	background-color: #36528E;
-	color: white;
-	border: 0;
+    height: 30px;
+    background-color: #36528E;
+    color: white;
+    border: 0;
 }
 
 .menu {
-	
+
 }
 
 .menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .menu li {
-	float: left;
-	padding-left: 10px;
-	padding-top: 5px;
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
 }
 
 .menu li a {
-	color: white;
+    color: white;
 }
 
 .menu li a:HOVER {
-	color: white;
-	text-decoration: underline;
+    color: white;
+    text-decoration: underline;
 }
 
 .account {
-	float: right;
-	margin-right: 10px;
-	margin-top: 5px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .content {
-	background-color: white;
-	padding: 20px;
+    background-color: white;
+    padding: 20px;
 }
 
 .footer {
-	border-top: 3px solid #36528E;
-	padding-top: 15px;
+    border-top: 3px solid #36528E;
+    padding-top: 15px;
 }
 
 .footer-menu {
-	float: left;
+    float: left;
 }
 
 .footer-license {
-	float: right;
+    float: right;
+}
+
+.entry-header {
 }
 
 .meanings dt {
-	font-size: large;
-	font-weight: bold;
-	margin-bottom: 20px;
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .meanings dd dl {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .meanings dd dl dt {
-	font-size: large;
-	font-weight: bold;
-	margin-bottom: 10px;
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .class-sample {
-	font-style: italic;
-	font-size: small;
+    font-style: italic;
+    font-size: small;
 }
 
 .source dt {
-	font-size: large;
-	font-weight: bold;
-	margin-bottom: 10px;
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .pagination {
-	
+
 }
 
 .pagination ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .pagination li {
-	float: left;
-	padding-left: 10px;
-	padding-top: 5px;
-	font-weight: bolder;
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-weight: bolder;
 }
 
 .pagination li a {
-	color: blue;
-	font-weight: normal;
+    color: blue;
+    font-weight: normal;
 }
 
 .pagination li a:HOVER {
-	text-decoration: underline;
-	font-weight: normal;
+    text-decoration: underline;
+    font-weight: normal;
 }
 
-.glossary{
-	font-weight: bold;
+.glossary {
+    font-weight: bold;
 }
 
-.glossary-discipline{
-	font-size: x-small;
+.glossary-discipline {
+    font-size: x-small;
 }
 
-.glossary-locale{
-	font-size: x-small;
-	font-style: italic;
+.glossary-locale {
+    font-size: x-small;
+    font-style: italic;
 }
 
-.equivalent{
-	width: 100%;
+.equivalent {
+    width: 100%;
 }
