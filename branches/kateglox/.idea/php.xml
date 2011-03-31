@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpProjectConfiguration">
+    <sdk>
+      <PhpSdkConfig version="5.3.5" home="C:\Program Files\Zend\ZendServer\bin">
+        <include_paths>
+          <path value="D:\StormWorkspace\doctrine\Doctrine" />
+          <path value="D:\StormWorkspace\phptal\classes" />
+          <path value="D:\StormWorkspace\solr\Apache" />
+          <path value="D:\StormWorkspace\stubbles\src\main\php\net" />
+          <path value="D:\StormWorkspace\zendframework\library" />
+        </include_paths>
+      </PhpSdkConfig>
+    </sdk>
+  </component>
+</project>
+
