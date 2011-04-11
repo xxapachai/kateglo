@@ -153,7 +153,7 @@ kateglo\library\Stubbles\stubBootstrap::init ( $stubblesPathes, $stubblesClassLo
  * @var string
  */
 $talPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'phptal' . DIRECTORY_SEPARATOR . 'classes' );
-
+set_include_path ( realpath ( $talPath ) );
 /** Import PHPTal Template Engine Loader */
 require_once $talPath . DIRECTORY_SEPARATOR . 'PHPTAL.php';
 
