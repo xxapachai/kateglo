@@ -188,16 +188,14 @@ require_once 'Zend' . DIRECTORY_SEPARATOR . 'Application.php';
  */
 $application = new Zend_Application ( APPLICATION_ENV, CONFIGS_PATH );
 
-use kateglo\application\utilities;
-use kateglo\application\utilities\interfaces;
+use kateglo\application\providers;
 use kateglo\application\models;
 /**
  * 
  * Get Log Service from Dependency Injector
  * @var kateglo\application\utilities\interfaces\LogService
  */
-$logService = utilities\Injector::getInstance ( interfaces\LogService::INTERFACE_NAME );
-$dataAccess = utilities\Injector::getInstance ( interfaces\DataAccess::INTERFACE_NAME );
+$dataAccess = utilities\Injector::getInstance ( providers\EntityManager::$CLASS_NAME );
 
 require_once 'Zend/Search/Lucene.php';
 require_once 'Zend/Search/Lucene/Field.php';
@@ -205,13 +203,13 @@ require_once 'Zend/Search/Lucene/Document.php';
 
 $indexPath = KATEGLO_ROOT . '/build/index/entry_index';
 $entryIndex = Zend_Search_Lucene::create ( $indexPath );
-$query = $dataAccess->getEntityManager ()->createQuery ( "SELECT count(e.id) as summe FROM " . models\Entry::CLASS_NAME . " e " );
+$query = $dataAccess->get ()->createQuery ( "SELECT count(e.id) as summe FROM " . models\Entry::CLASS_NAME . " e " );
 $sum = $query->getSingleScalarResult ();
 
 $segment = 100;
 
 for($i = 0; $i <= $sum; $i = $i + $segment) {
-	$query = $dataAccess->getEntityManager ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
+	$query = $dataAccess->get ()->createQuery ( "SELECT e FROM " . models\Entry::CLASS_NAME . " e " );
 	$query->setFirstResult ( $i );
 	$query->setMaxResults ( $segment );
 	
