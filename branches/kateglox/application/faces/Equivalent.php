@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\faces;
 /*
- *  $Id$
+ *  $Id: Equivalent.php 285 2011-03-01 16:40:47Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\faces;
  * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-03-01 17:40:47 +0100 (Di, 01 Mrz 2011) $
+ * @version $LastChangedRevision: 285 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

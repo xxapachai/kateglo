@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\faces\interfaces;
 /*
- *  $Id$
+ *  $Id: Search.php 268 2011-01-16 14:39:03Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\faces\interfaces;
  * @package kateglo\application\faces\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-01-16 15:39:03 +0100 (So, 16 Jan 2011) $
+ * @version $LastChangedRevision: 268 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
