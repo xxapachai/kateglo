@@ -23,8 +23,6 @@
 /** Zend_View_Interface */  
 require_once 'Zend/View/Interface.php';  
   
-/** PHPTAL */  
-require_once 'PHPTAL.php';
 use kateglo\application\utilities\Injector;
 /**
  * A PHPTAL templating engine implementation.
