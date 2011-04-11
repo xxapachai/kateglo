@@ -7,17 +7,20 @@ Ext.onReady(function() {
             width: 600,
             maxHeight: 5000,
             minHeight: 600,
+            plain: true,
             activeTab: 0,
+            border: 0,
+            bodyBorder: 0,
             defaults :{
                 bodyPadding: 10
             },
             items: [
                 {
-                    title: 'Short Text',
+                    title: 'Entri',
                     contentEl: el.elements[0]
                 },
                 {
-                    title: 'Long Text',
+                    title: 'Sunting',
                     html: 'test'
                 }
             ]

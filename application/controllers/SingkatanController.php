@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id$
+ *  $Id: SingkatanController.php 290 2011-03-13 22:48:04Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,8 @@ use kateglo\application\services\exceptions\EntryException;
  * 
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-03-13 23:48:04 +0100 (So, 13 Mrz 2011) $
+ * @version $LastChangedRevision: 290 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

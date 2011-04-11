@@ -49,7 +49,7 @@
 
                         <div tal:omit-tag="true"
                              tal:condition="php: ( is_object(definition.getSamples()) && count(definition.getSamples()) > 0 )">
-                            <ul class="class-sample" tal:repeat="sample definition/getSamples">
+                            <ul class="sample" tal:repeat="sample definition/getSamples">
                                 <li tal:content="sample/getSample">Sample</li>
                             </ul>
                         </div>
@@ -80,18 +80,20 @@
                          tal:condition="php: ( is_object(meaning.getRelations()) && count(meaning.getRelations()) > 0 )">
                         <dt>Relasi</dt>
                         <dd>
-                            <ul tal:repeat="relation meaning/getRelations">
-                                <li tal:define="text relation/getRelation/getEntry/getEntry">
-                                    <div tal:omit-tag="true"
-                                         tal:condition="php: ( is_object(relation.getRelation().getTypes()) && count(relation.getRelation().getTypes()) > 0 )">
-                                        (
-                                        <div tal:omit-tag="true" tal:repeat="type relation/getRelation/getTypes">
-                                            <span tal:omit-tag="true" tal:content="type/getType">Type</span> &nbsp;
+                            <ul>
+                                <tal:block tal:repeat="relation meaning/getRelations">
+                                    <li tal:define="text relation/getRelation/getEntry/getEntry">
+                                        <div tal:omit-tag="true"
+                                             tal:condition="php: ( is_object(relation.getRelation().getTypes()) && count(relation.getRelation().getTypes()) > 0 )">
+                                            (
+                                            <div tal:omit-tag="true" tal:repeat="type relation/getRelation/getTypes">
+                                                <span tal:omit-tag="true" tal:content="type/getType">Type</span> &nbsp;
+                                            </div>
+                                            )
                                         </div>
-                                        )
-                                    </div>
-                                    <a href="/entry/${text}">${text}</a>
-                                </li>
+                                        <a href="/entry/${text}">${text}</a>
+                                    </li>
+                                </tal:block>
                             </ul>
                         </dd>
                     </div>

@@ -110,6 +110,12 @@ a:visited {
 }
 
 .entry-header {
+    font-size: xx-large;
+}
+
+.meanings {
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .meanings dt {
@@ -120,12 +126,44 @@ a:visited {
 
 .meanings dd dl {
     margin-top: 20px;
+    margin-left: 20px;
+}
+
+.meanings dd ol {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.meanings dd>ol>li {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 .meanings dd dl dt {
     font-size: large;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.meanings dd dl dd ul {
+    padding-left: 20px;
+}
+
+.meanings dd dl dd ul li {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.sample {
+    margin-left: 20px;
+    font-style: italic;
+}
+
+.sample li {
+    margin-bottom: 10px;
+    list-style-type: disc;
 }
 
 .class-sample {
