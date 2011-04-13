@@ -171,6 +171,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
 		try {
+			$params['spellcheck'] = 'true';
+			$params['spellcheck.build'] = "true";
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Array ( $request->response )->toArray ();

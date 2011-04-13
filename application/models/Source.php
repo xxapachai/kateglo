@@ -70,6 +70,13 @@ class Source {
 	private $source;
 	
 	/**
+	 *
+	 * @var string
+	 * @Column(type="string", name="source_text_clean")
+	 */
+	private $clean;
+	
+	/**
 	 * @var kateglo\application\models\Meaning
 	 * @ManyToOne(targetEntity="kateglo\application\models\SourceCategory")
 	 * @JoinColumn(name="source_category_id", referencedColumnName="source_category_id")
@@ -116,13 +123,6 @@ class Source {
 	}
 	
 	/**
-	 * @return the $category
-	 */
-	public function getSource() {
-		return $this->source;
-	}
-	
-	/**
 	 * @param string $url
 	 */
 	public function setUrl($url) {
@@ -130,10 +130,31 @@ class Source {
 	}
 	
 	/**
+	 * @return the $category
+	 */
+	public function getSource() {
+		return $this->source;
+	}
+	
+	/**
 	 * @param string $category
 	 */
 	public function setSource($source) {
 		$this->source = $source;
+	}
+	
+	/**
+	 * @return the $clean
+	 */
+	public function getClean() {
+		return $this->clean;
+	}
+	
+	/**
+	 * @param string $clean
+	 */
+	public function setClean($clean) {
+		$this->clean = $clean;
 	}
 	
 	/**
