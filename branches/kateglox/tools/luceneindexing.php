@@ -7,7 +7,7 @@ use kateglo\application\providers;
 use kateglo\application\utilities;
 use kateglo\application\models;
 
-function insertSolr(&$docStart, $segment = 100) {
+function insertSolr(&$docStart, $segment = 2000) {
 	try {
 		$solr = new Apache_Solr_Service ( 'localhost', '8080', '/solr/' );
 		
@@ -155,7 +155,7 @@ function insertSolr(&$docStart, $segment = 100) {
 }
 
 $myDocStart = 0;
-$mySegment = 100;
+$mySegment = 2000;
 
 insertSolr ( $myDocStart, $mySegment );
 
