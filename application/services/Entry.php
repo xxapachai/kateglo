@@ -135,7 +135,7 @@ class Entry implements interfaces\Entry {
 	 * @return kateglo\application\faces\Hit
 	 */
 	public function randomEntry($limit = 10) {
-		$request = $this->getSolr()->search ( 'entry:*', 0, $limit, array ('sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
+		$request = $this->getSolr()->search ( 'entry:*', 0, $limit, array ('fl' => 'entry, id', 'sort' => 'random_' . rand ( 1, 100000 ) . ' asc' ) );
 		if ($request->getHttpStatus () == 200) {
 			return $this->convertResponse2Faces ( $request->response );
 		} else {
@@ -153,6 +153,15 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
 		try {
+            $params['spellcheck'] = 'true';
+            $params['spellcheck.count'] = 10;
+            $params['mlt'] = 'true';
+            $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+            $params['mlt.mindf'] = 1;
+            $params['mlt.mintf'] = 1;
+            $params['mlt.count'] = 10;
+            $params['facet'] = 'true';
+            $params['facet.field=type&facet.field=typeCategory&facet.field=class&facet.field'] = 'classCategory';
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
 			return $this->convertResponse2Faces ( $request->response );
@@ -171,12 +180,19 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
 		try {
-			$params['spellcheck'] = 'true';
-			$params['spellcheck.build'] = "true";
-			$searchText = (empty ( $searchText )) ? '*' : $searchText;
-			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
-			return $this->convertResponse2Array ( $request->response )->toArray ();
-		} catch ( \Apache_Solr_Exception $e ) {
+            $params['spellcheck'] = 'true';
+            $params['spellcheck.count'] = 10;
+            $params['mlt'] = 'true';
+            $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+            $params['mlt.mindf'] = 1;
+            $params['mlt.mintf'] = 1;
+            $params['mlt.count'] = 10;
+            $params['facet'] = 'true';
+            $params['facet.field=typeExact&facet.field=typeCategoryExact&facet.field=classExact&facet.field'] = 'classCategoryExact';
+            $searchText = (empty ( $searchText )) ? '*' : $searchText;
+            $request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
+            return $this->convertResponse2Array ( $request->response )->toArray ();
+        } catch ( \Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );
 		}
 	}
@@ -365,7 +381,7 @@ class Entry implements interfaces\Entry {
 		if ($array instanceof ArrayCollection) {
 			$newArray = new ArrayCollection ();
 			foreach ( $array as $json ) {
-				$decode = json_decode ( $json );
+				$decode = json_decode ( $json  );
 				$equivalent = new Equivalent ();
 				$equivalent->setForeign ( $decode->{Equivalent::FOREIGN} );
 				$equivalent->setLanguage ( $decode->{Equivalent::LANGUAGE} );

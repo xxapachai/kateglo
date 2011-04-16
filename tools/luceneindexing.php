@@ -15,13 +15,10 @@ function insertSolr(&$docStart, $segment = 2000) {
 			die ( 'Can not access solr' );
 		}
 		
-		/**
-		 * 
-		 * Get Log Service from Dependency Injector
-		 * @var kateglo\application\utilities\interfaces\LogService
-		 */
+
+        /*@var $dataAccess kateglo\application\providers\EntityManager */
 		$dataAccess = utilities\Injector::getInstance ( providers\EntityManager::$CLASS_NAME );
-		
+        
 		$query = $dataAccess->get ()->createQuery ( "SELECT count(e.id) as summe FROM " . models\Entry::CLASS_NAME . " e " );
 		$sum = $query->getSingleScalarResult ();
 		
