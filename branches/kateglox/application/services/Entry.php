@@ -65,13 +65,7 @@ class Entry implements interfaces\Entry {
 	
 	/**
 	 *
-	 * @var Apache_Solr_Service
-	 */
-	private $service = null;
-	
-	/**
-	 *
-	 * @return Apache_Solr_Service
+	 * @return \Apache_Solr_Service
 	 */
 	public function getSolr() {
 		if ($this->solr->ping ()) {
@@ -83,7 +77,7 @@ class Entry implements interfaces\Entry {
 	
 	/**
 	 *
-	 * @param Apache_Solr_Service $service
+	 * @param \Apache_Solr_Service $solr
 	 * @return void
 	 * 
 	 * @Inject
@@ -164,6 +158,7 @@ class Entry implements interfaces\Entry {
             $params['facet.field=type&facet.field=typeCategory&facet.field=class&facet.field'] = 'classCategory';
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
+            //print_r(json_decode($request->getRawResponse()));die();
 			return $this->convertResponse2Faces ( $request->response );
 		} catch ( \Apache_Solr_Exception $e ) {
 			throw new exceptions\EntryException ( $e->getMessage () );

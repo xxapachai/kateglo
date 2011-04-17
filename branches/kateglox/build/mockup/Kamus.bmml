@@ -1,0 +1,67 @@
+<mockup version="1.0" skin="sketch" measuredW="1233" measuredH="1598" mockupW="1181" mockupH="1556">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="52" y="42" w="1181" h="1556" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="186" w="588" h="1379" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>0</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="439" y="122" w="175" h="58" measuredW="129" measuredH="40" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>../../public/images/kateglo40.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="936" y="139" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="445" y="193" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="947" y="194" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Masuk%20Log</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="754" y="136" w="182" h="-1" measuredW="47" measuredH="29" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entry</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="439" y="218" w="573" h="-1" measuredW="100" measuredH="5" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Canvas" x="449" y="232" w="552" h="1318" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Paragraph" x="456" y="284" w="537" h="1110" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>-an%0Akegiatan%20yang%20berkenaan%20dengan%20pelaku%20atau%20tindakan%20yang%20banyak%0Aintensitas%0Amelakukan%20sesuatu%20yang%20pelaku%20atau%20tindakannya%20banyak%20%28saling%29%0Asesuatu%20yang%20mempunyai%20sifat%0Ayang%20mempunyai%20atau%20mengandung%0Ayang%20menyerupai%0Aalat%20untuk%20mengukur%20atau%20menghitung%0Ahal%20atau%20cara%0Akumpulan%3B%20gugusan%0Atempat%3B%20lokasi%0Ahasil%20tindakan%0Ayang%20biasa%20dikenai%20tindakan%3B%20yang%20di-%0A%20%0A-anda%0Amenyatakan%20hormat%20atau%20kekeluargaan%0A%20%0A-asi%0A-isasi%0A%20%0A-da%0A-anda%0A%20%0A-el-%0Aterjadi%2C%20berlaku%2C%20atau%20melakukan%0Akumpulan%0Abenda%20yang%20kelopak%0Ayang%20melakukan%0Aalat%0A%20%0A-em-%0Aberulang-ulang%20atau%20terus-menerus%0Akumpulan%20%28banyak%2C%20aneka%29%0A%20%0A-er-%0Aberulang%20%28terus-menerus%29%0Aalat%0Ayang%20memiliki%2C%20mengandung%2C%20atau%20bersifat%0Amengandung%20%28bersifat%29%0A%20%0A-i%0Adi%3B%20pada%0Aberulang-ulang%0Amemberikan%0Aberkenaan%20dengan%3B%20berdasar%20pada%0A%20%0A-iah%0A-i%0A%20%0A-if%0Abersifat%20melakukan%20atau%20menunjukkan%20mutu%20kegiatan%0A%20%0A1%202%203%204%205%206%207%208%209%2010%20Next%20Last</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="466" y="251" w="-1" h="-1" measuredW="149" measuredH="25" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Did%20you%20mean%20%3A%20terbang</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Paragraph" x="67" y="261" w="347" h="641" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>More%20Like%20This%3A%0A%20%0Aterbang%0Abergerak%20atau%20melayang%20di%20udara%20dengan%20tenaga%20sayap%20%28tentang%20burung%20dsb%29%20atau%20dengan%20tenaga%20mesin%20%28tentang%20pesawat%20terbang%20dsb%29%0Aberhamburan%20atau%20melayang-layang%20di%20udara%20%28tentang%20debu%2C%20daun-daunan%2C%20dsb%29%0Amudah%20menjadi%20uap%20%28gas%29%3B%20mudah%20menguap%0Ahilang%20lenyap%20%28dicuri%20orang%29%0Aberlari%20cepat%0Amelarikan%20diri%3B%20kabur%0Anaik%20pesawat%20terbang%3B%20bepergian%20dengan%20pesawat%20terbang%0Arebana%0A%20%0Aterbang-terbang%0Atidak%20tetap%20tempat%20tinggalnya%0A%20%0Akelaikan%20terbang%3B%20kelayakan%20terbang%0A%20%0Alaik%20terbang%3B%20layak%20terbang%0A%20%0Aabu%20terbang%0Abuangan%20berbentuk%20partikel%20halus%2C%20tidak%20dapat%20terbakar%2C%20yang%20tersangkut%20dalam%20aliran%20gas%20yang%20keluar%20dari%20dalam%20tanur%20abu%20%28buangan%29%0A%20%0Abalon%20terbang%0Abalon%20yang%20diisi%20dengan%20gas%20yang%20lebih%20ringan%20daripada%20udara%20sehingga%20dapat%20terbang</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Paragraph" x="1033" y="232" w="200" h="262" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Type%0A%20%0ABentuk%20terikat%20%289%29%0AKata%20dasar%20mandiri%20%2810%29%0AKata%20dasar%20terikat%20%281%29%0AKata%20berimbuhan%20%288%29%0AKata%20ulang%20%285%29%0AGabungan%20kata%20%2812%29%0APeribahasa%20%285%29%0AIdiom%20%282%29%0AAkronim%20%281%29%0ASingkatan%20%287%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Paragraph" x="1033" y="552" w="200" h="336" measuredW="200" measuredH="140" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Class%0A%20%0ANomina%0ANumeralia%0APronomina%20%2818%29%0AVerba%20%2812%29%0AAdjektiva%20%288%29%0AAdverbia%20%283%29%0APreposisi%20%2811%29%0AKonjungtor%20%282%29%0AInterjeksi%20%281%29%0APartikula%20Penegas%20%285%29%0AAwalan%20%2823%29%0ASisipan%20%289%29%0AAkhiran%20%287%29%0AImbuhan%20Gabungan%20%2810%29</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
