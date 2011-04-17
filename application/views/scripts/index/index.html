@@ -24,7 +24,7 @@
 	   			<span tal:repeat="list entry/getDocuments"><a tal:define="global entry_name list/getEntry;" href="entry/${entry_name}">${entry_name}</a>  &nbsp;&nbsp;&nbsp;</span>
 	   		</p>
 	   		<p>
-	   			<strong>Entri acak:</strong>
+	   			<strong>Salah eja:</strong>
 	   			<br />
 	   			<span tal:repeat="list misspelled/getDocuments"> 
 	   				<a tal:define="global misspells list/getSpelled;" href="entry/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/getEntry;" href="entry/${misspelledEntry}">${misspelledEntry}</a> <br />
