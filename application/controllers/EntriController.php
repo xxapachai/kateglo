@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: EntryController.php 277 2011-02-04 09:34:52Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,12 +28,12 @@ use kateglo\application\services\interfaces\Entry;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-02-04 10:34:52 +0100 (Fr, 04 Feb 2011) $
- * @version $LastChangedRevision: 277 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class EntryController extends Zend_Controller_Action_Stubbles {
+class EntriController extends Zend_Controller_Action_Stubbles {
 
     /**
      *

@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\services;
 /*
- *  $Id: Entry.php 296 2011-03-15 12:27:05Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,8 +31,8 @@ use kateglo\application\daos;
  * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-15 13:27:05 +0100 (Di, 15 Mrz 2011) $
- * @version $LastChangedRevision: 296 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -136,7 +136,35 @@ class Entry implements interfaces\Entry {
 			throw new exceptions\EntryException ( 'Status: ' . $request->getHttpStatus () . ' Message: ' . $request->getHttpStatusMessage () );
 		}
 	}
-	
+
+    /**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit
+	 */
+	public function searchRaw($searchText, $offset = 0, $limit = 10, $params = array()) {
+		try {
+            $params['spellcheck'] = 'true';
+            $params['spellcheck.count'] = 10;
+            $params['mlt'] = 'true';
+            $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+            $params['mlt.mindf'] = 1;
+            $params['mlt.mintf'] = 1;
+            $params['mlt.count'] = 10;
+            $params['facet'] = 'true';
+            $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+			$searchText = (empty ( $searchText )) ? '*' : $searchText;
+            $this->getSolr()->setCreateDocuments(false);
+			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
+			return json_decode($request->getRawResponse());
+		} catch ( \Apache_Solr_Exception $e ) {
+			throw new exceptions\EntryException ( $e->getMessage () );
+		}
+	}
+
 	/**
 	 * 
 	 * @param string $searchText
@@ -155,7 +183,7 @@ class Entry implements interfaces\Entry {
             $params['mlt.mintf'] = 1;
             $params['mlt.count'] = 10;
             $params['facet'] = 'true';
-            $params['facet.field=type&facet.field=typeCategory&facet.field=class&facet.field'] = 'classCategory';
+            $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
 			$searchText = (empty ( $searchText )) ? '*' : $searchText;
 			$request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
             //print_r(json_decode($request->getRawResponse()));die();
@@ -183,7 +211,7 @@ class Entry implements interfaces\Entry {
             $params['mlt.mintf'] = 1;
             $params['mlt.count'] = 10;
             $params['facet'] = 'true';
-            $params['facet.field=typeExact&facet.field=typeCategoryExact&facet.field=classExact&facet.field'] = 'classCategoryExact';
+            $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
             $searchText = (empty ( $searchText )) ? '*' : $searchText;
             $request = $this->getSolr()->search ( $searchText, $offset, $limit, $params );
             return $this->convertResponse2Array ( $request->response )->toArray ();

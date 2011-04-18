@@ -6,12 +6,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ExtJS4" level="application" />
     <orderEntry type="module-library">
-      <library name="PHP 5.3.5">
+      <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../doctrine/Doctrine" />
-          <root url="file://$MODULE_DIR$/../phptal/classes" />
           <root url="file://$MODULE_DIR$/../solr/Apache" />
+          <root url="file://$MODULE_DIR$/../phptal/classes" />
           <root url="file://$MODULE_DIR$/../stubbles/src/main/php/net" />
+          <root url="file://$MODULE_DIR$/../doctrine/Doctrine" />
           <root url="file://$MODULE_DIR$/../zendframework/library" />
         </CLASSES>
         <SOURCES />

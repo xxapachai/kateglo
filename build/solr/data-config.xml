@@ -20,11 +20,11 @@
                     <field column="definition_text" name="definition" />
                     
                     <entity name="definition_class" query="select * from rel_definition_class where rel_definition_id='${definition.definition_id}'">
-                        <entity name="class" query="select * from class where class_id='${definition_class.rel_definition_id}'">
+                        <entity name="class" query="select * from class where class_id='${definition_class.rel_class_id}'">
                             <field column="class_name" name="class" />
                             
                             <entity name="rel_class_category" query="select * from rel_class_category where rel_class_id='${class.class_id}'">
-                                <entity name="class_category" query="select * from class_category where class_category_id='${rel_class_category.class_category_id}'">
+                                <entity name="class_category" query="select * from class_category where class_category_id='${rel_class_category.rel_class_category_id}'">
                                     <field column="class_category_name" name="classCategory" />
                                 </entity>
                             </entity>
