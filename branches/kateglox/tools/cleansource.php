@@ -1,3 +1,7 @@
+/** @noinspection PhpUndefinedNamespaceInspection */
+@noinspection PhpUndefinedNamespaceInspection */
+@noinspection PhpUndefinedNamespaceInspection */
+@noinspection PhpUndefinedNamespaceInspection */
 <?php
 gc_enable ();
 

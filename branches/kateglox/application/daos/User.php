@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\daos;
 /*
- *  $Id: User.php 293 2011-03-15 10:53:09Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,6 +19,7 @@ namespace kateglo\application\daos;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+/** @noinspection PhpUndefinedNamespaceInspection */
 use Doctrine\ORM\EntityManager;
 use kateglo\application\models;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
@@ -29,8 +30,8 @@ use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
  * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-15 11:53:09 +0100 (Di, 15 Mrz 2011) $
- * @version $LastChangedRevision: 293 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
