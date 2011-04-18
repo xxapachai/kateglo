@@ -113,7 +113,7 @@
 					
 					
             	</entity>
-            	<entity name="equivalent" query="select CONCAT('{&quot;foreign&quot;:&quot;',foreign_name,'&quot;,&quot;language&quot;:&quot;',language_name,'&quot;,&quot;discipline&quot;:[',disciplines,']}') as equivalents from (select foreign_name, language_name, CASE WHEN GROUP_CONCAT(discipline_name) is null THEN '' ELSE CONCAT('&quot;', GROUP_CONCAT(discipline_name SEPARATOR '&quot;,&quot;'), '&quot;') END as disciplines from equivalent LEFT JOIN `foreign` ON foreign_id = equivalent_foreign_id LEFT JOIN LANGUAGE ON language_id = foreign_language_id LEFT JOIN rel_equivalent_discipline ON rel_equivalent_id = equivalent_id LEFT JOIN discipline ON discipline_id = rel_discipline_id where equivalent_id = '${equivalents.equivalent_id}' GROUP BY equivalent_id) temp">
+            	<entity name="equivalent" query="select CONCAT('{&quot;foreign&quot;:&quot;',foreign_name,'&quot;,&quot;language&quot;:&quot;',language_name,'&quot;,&quot;discipline&quot;:[',disciplines,']}') as equivalents from (select foreign_name, language_name, CASE WHEN GROUP_CONCAT(discipline_name) is null THEN '' ELSE CONCAT('&quot;', GROUP_CONCAT(discipline_name SEPARATOR '&quot;,&quot;'), '&quot;') END as disciplines from equivalent LEFT JOIN `foreign` ON foreign_id = equivalent_foreign_id LEFT JOIN language ON language_id = foreign_language_id LEFT JOIN rel_equivalent_discipline ON rel_equivalent_id = equivalent_id LEFT JOIN discipline ON discipline_id = rel_discipline_id where equivalent_id = '${equivalents.equivalent_id}' GROUP BY equivalent_id) temp">
 					<field column="equivalents" name="equivalent" />
 				</entity>
             </entity>
