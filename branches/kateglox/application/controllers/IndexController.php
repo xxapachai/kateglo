@@ -126,15 +126,16 @@ class IndexController extends Zend_Controller_Action_Stubbles {
                         $eTag = md5(__CLASS__ . $content);
                         $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
                     }
-
-                    if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                        $this->getResponse()->setHttpResponseCode(304);
-                    } else {
-                        $this->getResponse()->setHeader('Etag', $eTag);
-                        $this->getResponse()->appendBody($content);
-                    }
                 } else {
                     $content = $this->renderHtml();
+                    $eTag = md5(__CLASS__ . $content);
+                }
+                
+                if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                    $this->getResponse()->setHttpResponseCode(304);
+                } else {
+                    $this->getResponse()->setHeader('Etag', $eTag);
+                    $this->getResponse()->appendBody($content);
                 }
             } else {
                 //Block other request method

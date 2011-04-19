@@ -17,7 +17,13 @@
                 <map>
                   <entry key="https://kateglo.googlecode.com/svn/branches">
                     <value>
-                      <list />
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1303235168328" />
+                          <option name="revision" value="313" />
+                          <option name="url" value="https://kateglo.googlecode.com/svn/branches/kateglox" />
+                        </SvnBranchItem>
+                      </list>
                     </value>
                   </entry>
                   <entry key="https://kateglo.googlecode.com/svn/tags">
