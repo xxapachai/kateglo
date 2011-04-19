@@ -20,6 +20,7 @@
  */
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use Doctrine\Common\Cache\Cache;
 /**
  *
  *
@@ -32,51 +33,145 @@ use kateglo\application\services\interfaces\Entry;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class IndexController extends Zend_Controller_Action_Stubbles {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 * 
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
-	 * 
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	public function indexAction() {		
-		$this->view->appPath = APPLICATION_PATH;
-		$this->view->search = $this->search;		
-		$this->view->amount = $this->entry->getTotalCount ();
-		$this->view->entry = $this->entry->randomEntry ();
-		$this->view->misspelled = $this->entry->randomMisspelled ();
-		$this->view->formAction = '/kamus';
-	
-	}
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\services\interfaces\Entry;
+     */
+    private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\faces\interfaces\Search;
+     */
+    private $search;
+
+    /**
+     *
+     * Enter description here ...
+     * @var Doctrine\Common\Cache\Cache
+     */
+    private $cache;
+
+    /**
+     *
+     * Enter description here ...
+     * @var Zend_Config
+     */
+    private $configs;
+
+    /**
+     *
+     * Enter description here ...
+     * @param Zend_Config $configs
+     *
+     * @Inject
+     */
+    public function setConfigs(\Zend_Config $configs) {
+        $this->configs = $configs;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param Doctrine\Common\Cache\Cache $cache
+     *
+     * @Inject
+     */
+    public function setCache(Cache $cache) {
+        $this->cache = $cache;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Entry $entry
+     *
+     * @Inject
+     */
+    public function setEntry(Entry $entry) {
+        $this->entry = $entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\faces\interfaces\Search $entry
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search) {
+        $this->search = $search;
+    }
+
+    /**
+     * @throws Exception
+     * @return void
+     */
+    public function indexAction() {
+        if ($this->requestJson()) {
+            $this->renderJson();
+        } else {
+            if ($this->getRequest()->isGet()) {
+                $this->_helper->viewRenderer->setNoRender();
+                if ($this->configs->cache->entry) {
+                    if ($this->cache->contains(__CLASS__)) {
+                        $cache = unserialize($this->cache->fetch(__CLASS__));
+                        $content = $cache['content'];
+                        $eTag = $cache['eTag'];
+                    } else {
+                        $content = $this->renderHtml();
+                        $eTag = md5(__CLASS__ . $content);
+                        $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
+                    }
+
+                    if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                        $this->getResponse()->setHttpResponseCode(304);
+                    } else {
+                        $this->getResponse()->setHeader('Etag', $eTag);
+                        $this->getResponse()->appendBody($content);
+                    }
+                } else {
+                    $content = $this->renderHtml();
+                }
+            } else {
+                //Block other request method
+                throw new Exception('Method not allowed');
+            }
+        }
+
+    }
+
+    /**
+     * @param  string $text
+     * @return string
+     */
+    private function renderHtml() {
+        $this->view->appPath = APPLICATION_PATH;
+        $this->view->search = $this->search;
+        $this->view->formAction = '/kamus';
+        return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+    }
+
+    /**
+     * @param  string $text
+     * @return string
+     */
+    private function renderJson() {
+        if ($this->getRequest()->isGet()) {
+            try {
+                $this->_helper->json(array('amount' => $this->entry->getTotalCount(), 'entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled()));
+            } catch (EntryException $e) {
+                $this->getResponse()->setHttpResponseCode(500);
+                $this->_helper->json(array('error' => $e->getMessage()));
+            }
+        } else {
+            $this->getResponse()->setHttpResponseCode(405);
+            $this->_helper->json(array('error' => 'Method not allowed'));
+        }
+    }
 }
+
 ?>
