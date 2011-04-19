@@ -112,12 +112,13 @@ class Entry implements interfaces\Entry {
     /**
      *
      * @param int $limit
-     * @return kateglo\application\faces\Hit
+     * @return \kateglo\application\faces\Hit
      */
     public function randomMisspelled($limit = 5) {
-        $request = $this->getSolr()->search('spelled:*', 0, $limit, array('sort' => 'random_' . rand(1, 100000) . ' asc'));
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search('spelled:*', 0, $limit, array('fl' => 'entry, spelled', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
         if ($request->getHttpStatus() == 200) {
-            return $this->convertResponse2Faces($request->response);
+            return $request->response;
         } else {
             throw new exceptions\EntryException ('Status: ' . $request->getHttpStatus() . ' Message: ' . $request->getHttpStatusMessage());
         }
@@ -126,12 +127,13 @@ class Entry implements interfaces\Entry {
     /**
      *
      * @param int $limit
-     * @return kateglo\application\faces\Hit
+     * @return \kateglo\application\faces\Hit
      */
     public function randomEntry($limit = 10) {
-        $request = $this->getSolr()->search('entry:*', 0, $limit, array('fl' => 'entry, id', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search('entry:*', 0, $limit, array('fl' => 'entry', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
         if ($request->getHttpStatus() == 200) {
-            return $this->convertResponse2Faces($request->response);
+            return $request->response;
         } else {
             throw new exceptions\EntryException ('Status: ' . $request->getHttpStatus() . ' Message: ' . $request->getHttpStatusMessage());
         }

@@ -101,14 +101,14 @@ class Hit {
 	}
 
 	/**
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getDocuments() {
 		return $this->documents;
 	}
 
 	/**
-	 * @param Doctrine\Common\Collections\ArrayCollection $documents
+	 * @param \Doctrine\Common\Collections\ArrayCollection $documents
 	 */
 	public function setDocuments(ArrayCollection $documents) {
 		$this->documents = $documents;

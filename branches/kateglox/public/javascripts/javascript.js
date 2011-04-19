@@ -1,5 +1,5 @@
 Ext.BLANK_IMAGE_URL = '/images/s.gif';
-Ext.onReady(function() {
+Ext.onReady(function() {//test
     if (Ext.select('h1.entry-header:first').elements.length != 0) {
         var el = Ext.select('div.content');
         var tabs = Ext.createWidget('tabpanel', {

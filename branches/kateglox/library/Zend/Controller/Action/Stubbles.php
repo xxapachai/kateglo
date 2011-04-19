@@ -88,6 +88,24 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
 		return $this;
 	}
 
+    /**
+     * @return bool
+     */
+    protected function requestJson() {
+        if (isset($_SERVER['HTTP_ACCEPT']) && !empty($_SERVER['HTTP_ACCEPT'])) {
+            $explodeAccepts = explode(';', $_SERVER['HTTP_ACCEPT']);
+            foreach ($explodeAccepts as $infos) {
+                if (!empty($infos)) {
+                    $explodeInfos = explode(',', $infos);
+                    if (in_array(strtolower('application/json'), array_map('strtolower', $explodeInfos))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
 
 ?>
