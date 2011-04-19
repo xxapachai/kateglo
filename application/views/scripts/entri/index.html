@@ -61,7 +61,7 @@
                         <dt>Sinonim</dt>
                         <dd>
                             <ul tal:repeat="synonym meaning/getSynonyms">
-                                <li tal:define="text synonym/getSynonym/getEntry/getEntry"><a href="/entry/${text}">${text}</a>
+                                <li tal:define="text synonym/getSynonym/getEntry/getEntry"><a href="/entri/${text}">${text}</a>
                                 </li>
                             </ul>
                         </dd>
@@ -71,7 +71,7 @@
                         <dt>Antonim</dt>
                         <dd>
                             <ul tal:repeat="antonym meaning/getAntonyms">
-                                <li tal:define="text antonym/getAntonym/getEntry/getEntry"><a href="/entry/${text}">${text}</a>
+                                <li tal:define="text antonym/getAntonym/getEntry/getEntry"><a href="/entri/${text}">${text}</a>
                                 </li>
                             </ul>
                         </dd>

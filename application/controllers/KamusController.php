@@ -26,7 +26,7 @@ use kateglo\application\services\interfaces\Entry;
 /**
  *
  *
- * 
+ *
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate: 2011-03-13 23:48:04 +0100 (So, 13 Mrz 2011) $
@@ -35,114 +35,119 @@ use kateglo\application\services\interfaces\Entry;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class KamusController extends Zend_Controller_Action_Stubbles {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-	
-	/**
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Pagination;
-	 */
-	private $pagination;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $limit;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $offset;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 * 
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
-	 * 
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Pagination $pagination
-	 * 
-	 * @Inject
-	 */
-	public function setPages(Pagination $pagination) {
-		$this->pagination = $pagination;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see Zend_Controller_Action::init()
-	 */
-	public function init() {
-		$this->view->search = $this->search;
-		$this->limit = (is_numeric ( $this->_request->getParam ( 'rows' ) ) ? intval ( $this->_request->getParam ( 'rows' ) ) : 10);
-		$this->offset = (is_numeric ( $this->_request->getParam ( 'start' ) ) ? intval ( $this->_request->getParam ( 'start' ) ) : 0);
-		$this->view->appPath = APPLICATION_PATH;
-	}
-	
-	/**
-	 * Enter description here ...
-	 */
-	public function indexAction() {
-		if ($this->_request->isGet ()) {
-			$this->view->formAction = '/kamus';
-			$searchText = $this->getRequest()->getParam ( $this->view->search->getFieldName () );
-			$this->view->search->setFieldValue ( $searchText );
-			/*@var $hits kateglo\application\faces\Hit */
-			$hits = $this->entry->searchEntry ( $searchText, $this->offset, $this->limit );
-			$this->view->pagination = $this->pagination->create ( $hits->getCount (), $this->offset, $this->limit );
-			$this->view->hits = $hits;
-		} else {
-			//Block other request type?
-		}
-	}
-	
-	/**
-	 * Enter description here ...
-	 */
-	public function jsonAction() {
-		try {			
-			$searchText = $this->getRequest()->getParam ( $this->view->search->getFieldName () );
-			$this->view->search->setFieldValue ( $searchText );
-			$hits = $this->entry->searchEntryAsArray ( $searchText, $this->offset, $this->limit );
-			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
-			$this->_helper->json(array ('hits' => $hits, 'pagination' => $pagination ));
-		} catch ( EntryException $e ) {
-			$this->getResponse ()->setHttpResponseCode ( 500 );
-			$this->_helper->json(array ('error' => $e->getMessage () ));
-		}
-	}
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\services\interfaces\Entry;
+     */
+    private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\faces\interfaces\Search;
+     */
+    private $search;
+
+    /**
+     * Enter description here ...
+     * @var kateglo\application\services\interfaces\Pagination;
+     */
+    private $pagination;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $limit;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $offset;
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Entry $entry
+     *
+     * @Inject
+     */
+    public function setEntry(Entry $entry) {
+        $this->entry = $entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\faces\interfaces\Search $entry
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search) {
+        $this->search = $search;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Pagination $pagination
+     *
+     * @Inject
+     */
+    public function setPages(Pagination $pagination) {
+        $this->pagination = $pagination;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Zend_Controller_Action::init()
+     */
+    public function init() {
+        $this->view->search = $this->search;
+        $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
+        $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
+        $this->view->appPath = APPLICATION_PATH;
+    }
+
+    /**
+     * Enter description here ...
+     */
+    public function indexAction() {
+        if ($this->_request->isGet()) {
+            $this->view->formAction = '/kamus';
+            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+            $this->view->search->setFieldValue($searchText);
+            try {
+                /*@var $hits kateglo\application\faces\Hit */
+                $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
+                $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
+                $this->view->hits = $hits;
+            } catch (Apache_Solr_Exception $e){
+                
+            }
+        } else {
+            //Block other request type?
+        }
+    }
+
+    /**
+     * Enter description here ...
+     */
+    public function jsonAction() {
+        try {
+            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+            $this->view->search->setFieldValue($searchText);
+            $hits = $this->entry->searchEntryAsArray($searchText, $this->offset, $this->limit);
+            $pagination = $this->pagination->createAsArray($hits[Hit::COUNT], $this->offset, $this->limit);
+            $this->_helper->json(array('hits' => $hits, 'pagination' => $pagination));
+        } catch (EntryException $e) {
+            $this->getResponse()->setHttpResponseCode(500);
+            $this->_helper->json(array('error' => $e->getMessage()));
+        }
+    }
 }
+
 ?>

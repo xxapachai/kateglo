@@ -21,13 +21,13 @@
 	   		<p>
 	   			<strong>Entri acak:</strong>
 	   			<br />
-	   			<span tal:repeat="list entry/getDocuments"><a tal:define="global entry_name list/getEntry;" href="entry/${entry_name}">${entry_name}</a>  &nbsp;&nbsp;&nbsp;</span>
+	   			<span tal:repeat="list entry/getDocuments"><a tal:define="global entry_name list/getEntry;" href="entri/${entry_name}">${entry_name}</a>  &nbsp;&nbsp;&nbsp;</span>
 	   		</p>
 	   		<p>
 	   			<strong>Salah eja:</strong>
 	   			<br />
 	   			<span tal:repeat="list misspelled/getDocuments"> 
-	   				<a tal:define="global misspells list/getSpelled;" href="entry/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/getEntry;" href="entry/${misspelledEntry}">${misspelledEntry}</a> <br />
+	   				<a tal:define="global misspells list/getSpelled;" href="entri/${misspells}">${misspells}</a>&nbsp;bukan&nbsp;<a tal:define="global misspelledEntry list/getEntry;" href="entri/${misspelledEntry}">${misspelledEntry}</a> <br />
 	   			</span>
 	   		</p>
 		</div>
