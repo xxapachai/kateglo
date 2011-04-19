@@ -10,7 +10,7 @@
 	<div tal:omit-tag="true"  metal:fill-slot="content">
 	    <div tal:repeat="hit hits/getDocuments">
 	    	<div>
-	    		<a tal:define="global entry hit/getEntry;" href="/entry/${entry}">${entry}</a>
+	    		<a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a>
 	    		<div tal:condition="php: ( hit.getSynonyms().count() gt 0 )">
 		    		<div tal:repeat="synonym hit/getSynonyms" style="padding-left:15px;">    		
 		    			<div tal:content="synonym">Synonym</div>

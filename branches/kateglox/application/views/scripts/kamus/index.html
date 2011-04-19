@@ -10,7 +10,7 @@
 	<div tal:omit-tag="true"  metal:fill-slot="content">
 	    <div tal:repeat="hit hits/getDocuments">
 	    	<div>
-	    		<a tal:define="global entry hit/getEntry;" href="/entry/${entry}">${entry}</a>
+	    		<a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a>
 		    		<div tal:repeat="definition hit/getDefinitions" style="padding-left:15px;">    		
 		    			<div tal:content="definition">Definition</div>
 		    		</div>
