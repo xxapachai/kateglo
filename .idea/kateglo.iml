@@ -8,11 +8,11 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../solr/Apache" />
-          <root url="file://$MODULE_DIR$/../phptal/classes" />
-          <root url="file://$MODULE_DIR$/../stubbles/src/main/php/net" />
-          <root url="file://$MODULE_DIR$/../doctrine/Doctrine" />
-          <root url="file://$MODULE_DIR$/../zendframework/library" />
+          <root url="file://D:/ZendWorkspace/solr/Apache" />
+          <root url="file://D:/ZendWorkspace/phptal/classes" />
+          <root url="file://D:/ZendWorkspace/stubbles/src/main/php/net" />
+          <root url="file://D:/ZendWorkspace/doctrine/Doctrine" />
+          <root url="file://D:/ZendWorkspace/zendframework/library" />
         </CLASSES>
         <SOURCES />
       </library>
