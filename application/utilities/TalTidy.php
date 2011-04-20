@@ -41,7 +41,7 @@ class TalTidy implements \PHPTAL_Filter {
      */
     public function filter($xhtml) {
         $tidy = new \tidy ();
-        $opts = array('indent' => true, 'indent-spaces' => 4, 'wrap' => 0, 'output-html' => true, 'force-output' => true, 'doctype' => 'strict', 'drop-font-tags' => true, 'drop-proprietary-attributes' => true, 'lower-literals' => true, 'quote-ampersand' => true);
+        $opts = array('indent' => true, 'indent-spaces' => 4, 'wrap' => 0, 'output-xhtml' => true, 'force-output' => true, 'doctype' => 'strict');
         $tidy->parseString($xhtml, $opts, 'utf8');
         $tidy->cleanRepair();
         $xhtml = (string)$tidy;
