@@ -81,6 +81,16 @@ interface Entry {
 	 * @return kateglo\application\faces\Hit
 	 */
 	function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit
+	 */
+	function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array());
 	
 	/**
 	 * 
