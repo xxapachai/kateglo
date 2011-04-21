@@ -19,9 +19,10 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\faces\interfaces\Search;
+use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -31,68 +32,77 @@ use kateglo\application\faces\interfaces\Search;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class ErrorController extends Zend_Controller_Action_Stubbles {
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var Zend_Log;
-	 */
-	private $log;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param Zend_Log $log
-	 * 
-	 * @Inject
-	 */
-	public function setEntry(\Zend_Log $log) {
-		$this->log = $log;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
-	 * 
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	public function errorAction() {
-		$errors = $this->_getParam ( 'error_handler' );
-		
-		switch ($errors->type) {
-			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
-			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
-				
-				// 404 error -- controller or action not found
-				$this->getResponse ()->setHttpResponseCode ( 404 );
-				$this->view->message = 'Page not found';
-				break;
-			default :
-				// application error 
-				$this->getResponse ()->setHttpResponseCode ( 500 );
-				$this->view->message = 'Application error';
-				break;
-		}
-		//catch anything in log files
-		$this->log->log ( $errors->exception, \Zend_Log::ERR );
-		$this->view->exception = $errors->exception;
-		$this->view->request = $errors->request;
-		
-		$this->view->appPath = APPLICATION_PATH;
-		$this->view->search = $this->search;
-		$this->view->formAction = '/kamus';
-	}
+    /**
+     *
+     * Enter description here ...
+     * @var Zend_Log;
+     */
+    private $log;
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\faces\interfaces\Search;
+     */
+    private $search;
+
+    /**
+     *
+     * Enter description here ...
+     * @param Zend_Log $log
+     *
+     * @Inject
+     */
+    public function setEntry(\Zend_Log $log) {
+        $this->log = $log;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\faces\interfaces\Search $entry
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search) {
+        $this->search = $search;
+    }
+
+    public function errorAction() {
+        $errors = $this->_getParam('error_handler');
+        switch ($errors->type) {
+            case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
+            case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
+
+                // 404 error -- controller or action not found
+                $this->getResponse()->setHttpResponseCode(404);
+                $this->view->message = 'Page not found';
+                break;
+            default :
+                // application error
+                $this->otherException($errors->exception);
+                break;
+        }
+        //catch anything in log files
+        $this->log->log($errors->exception, \Zend_Log::ERR);
+        $this->view->exception = $errors->exception;
+        $this->view->request = $errors->request;
+
+        $this->view->appPath = APPLICATION_PATH;
+        $this->view->search = $this->search;
+        $this->view->formAction = '/kamus';
+    }
+
+    private function otherException(Exception $exception) {
+        if ($exception instanceof HTTPMethodNotAllowedException) {
+            $this->getResponse()->setHttpResponseCode(405);
+            $this->view->message = 'Method not allowed.';
+        } else {
+            $this->getResponse()->setHttpResponseCode(500);
+            $this->view->message = 'Application error';
+        }
+    }
 
 }
+
 ?>
