@@ -20,6 +20,8 @@
  */
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\daos\User;
+use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 use Doctrine\Common\Cache\Cache;
 /**
  *
@@ -130,7 +132,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
                     $content = $this->renderHtml();
                     $eTag = md5(__CLASS__ . $content);
                 }
-                
+
                 if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
                     $this->getResponse()->setHttpResponseCode(304);
                 } else {
@@ -139,7 +141,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
                 }
             } else {
                 //Block other request method
-                throw new Exception('Method not allowed');
+                throw new HTTPMethodNotAllowedException('Method not allowed');
             }
         }
 
