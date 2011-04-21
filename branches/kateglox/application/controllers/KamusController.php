@@ -19,10 +19,11 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\faces\Hit;
-use kateglo\application\services\exceptions\EntryException;
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
+use Doctrine\Common\Cache\Cache;
 /**
  *
  *
@@ -71,6 +72,42 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
+     * @var Doctrine\Common\Cache\Cache
+     */
+    private $cache;
+
+    /**
+     *
+     * Enter description here ...
+     * @var Zend_Config
+     */
+    private $configs;
+
+    /**
+     *
+     * Enter description here ...
+     * @param Zend_Config $configs
+     *
+     * @Inject
+     */
+    public function setConfigs(\Zend_Config $configs) {
+        $this->configs = $configs;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param Doctrine\Common\Cache\Cache $cache
+     *
+     * @Inject
+     */
+    public function setCache(Cache $cache) {
+        $this->cache = $cache;
+    }
+
+    /**
+     *
+     * Enter description here ...
      * @param kateglo\application\services\interfaces\Entry $entry
      *
      * @Inject
@@ -110,42 +147,84 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
         $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
         $this->view->appPath = APPLICATION_PATH;
+        $this->view->formAction = '/kamus';
     }
 
     /**
-     * Enter description here ...
+     * @return void
      */
     public function indexAction() {
-        if ($this->_request->isGet()) {
-            $this->view->formAction = '/kamus';
-            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-            $this->view->search->setFieldValue($searchText);
-            try {
-                /*@var $hits kateglo\application\faces\Hit */
-                $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
-                $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
-                $this->view->hits = $hits;
-            } catch (Apache_Solr_Exception $e){
-                
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $this->view->search->setFieldValue($searchText);
+        try {
+            if ($this->requestJson()) {
+                $this->renderJson($searchText);
+            } else {
+                $this->renderHtml($searchText);
             }
-        } else {
-            //Block other request type?
+        } catch (Apache_Solr_Exception $e) {
+            $content = $this->_helper->viewRenderer->view->render('error/solr.html');
+            $this->getResponse()->appendBody($content);
         }
     }
 
     /**
-     * Enter description here ...
+     * @throws HTTPMethodNotAllowedException
+     * @return void
      */
-    public function jsonAction() {
-        try {
-            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-            $this->view->search->setFieldValue($searchText);
+    private function renderHtml($searchText) {
+        if ($this->getRequest()->isGet()) {
+            if ($this->configs->cache->entry) {
+                if ($this->cache->contains(__CLASS__)) {
+                    $cache = unserialize($this->cache->fetch(__CLASS__));
+                    $content = $cache['content'];
+                    $eTag = $cache['eTag'];
+                } else {
+                    $content = $this->html($searchText);
+                    $eTag = md5(__CLASS__ . $content);
+                    $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
+                }
+            } else {
+                $content = $this->html($searchText);
+                $eTag = md5(__CLASS__ . $content);
+            }
+
+            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                $this->getResponse()->setHttpResponseCode(304);
+            } else {
+                $this->getResponse()->setHeader('Etag', $eTag);
+                $this->getResponse()->appendBody($content);
+            }
+        } else {
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function html($searchText) {
+        /*@var $hits kateglo\application\faces\Hit */
+        $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
+        $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
+        $this->view->hits = $hits;
+        return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+    }
+
+    /**
+     * @throws HTTPMethodNotAllowedException
+     * @return void
+     */
+    private function renderJson($searchText) {
+        if ($this->getRequest()->isGet()) {
             $hits = $this->entry->searchEntryAsArray($searchText, $this->offset, $this->limit);
             $pagination = $this->pagination->createAsArray($hits[Hit::COUNT], $this->offset, $this->limit);
             $this->_helper->json(array('hits' => $hits, 'pagination' => $pagination));
-        } catch (EntryException $e) {
-            $this->getResponse()->setHttpResponseCode(500);
-            $this->_helper->json(array('error' => $e->getMessage()));
+        } else {
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
         }
     }
 }

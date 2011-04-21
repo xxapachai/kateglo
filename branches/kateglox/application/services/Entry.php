@@ -186,6 +186,30 @@ class Entry implements interfaces\Entry {
         return $this->convertResponse2Faces($request->response);
     }
 
+        /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit
+     */
+    public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
+        $params['spellcheck'] = 'true';
+        $params['spellcheck.count'] = 10;
+        $params['mlt'] = 'true';
+        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+        $params['mlt.mindf'] = 1;
+        $params['mlt.mintf'] = 1;
+        $params['mlt.count'] = 10;
+        $params['facet'] = 'true';
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+        $params['defType'] = 'dismax';
+        $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+        $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+        return $this->convertResponse2Faces($request->response);
+    }
+
     /**
      *
      * @param string $searchText
@@ -315,11 +339,11 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hits
      */
     public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, equivalent, id';
-        $params['fq'] = "foreign:*";
+        $params['q.alt'] = "foreign:*";
+        $params['defType'] = "dismax";
         $params['qf'] = "entry foreign";
-        return $this->searchEntry($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -332,9 +356,9 @@ class Entry implements interfaces\Entry {
      * @return array
      */
     public function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, equivalent, id';
-        $params['fq'] = "foreign:*";
+        $params['q.alt'] = "foreign:*";
+        $params['defType'] = "dismax";
         $params['qf'] = "entry foreign";
         return $this->searchEntryAsArray($searchText, $offset, $limit, $params);
     }

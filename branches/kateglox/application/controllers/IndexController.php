@@ -109,49 +109,55 @@ class IndexController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
-     * @throws Exception
      * @return void
      */
     public function indexAction() {
         if ($this->requestJson()) {
             $this->renderJson();
         } else {
-            if ($this->getRequest()->isGet()) {
-                $this->_helper->viewRenderer->setNoRender();
-                if ($this->configs->cache->entry) {
-                    if ($this->cache->contains(__CLASS__)) {
-                        $cache = unserialize($this->cache->fetch(__CLASS__));
-                        $content = $cache['content'];
-                        $eTag = $cache['eTag'];
-                    } else {
-                        $content = $this->renderHtml();
-                        $eTag = md5(__CLASS__ . $content);
-                        $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
-                    }
-                } else {
-                    $content = $this->renderHtml();
-                    $eTag = md5(__CLASS__ . $content);
-                }
-
-                if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                    $this->getResponse()->setHttpResponseCode(304);
-                } else {
-                    $this->getResponse()->setHeader('Etag', $eTag);
-                    $this->getResponse()->appendBody($content);
-                }
-            } else {
-                //Block other request method
-                throw new HTTPMethodNotAllowedException('Method not allowed');
-            }
+            $this->renderHtml();
         }
 
     }
 
     /**
-     * @param  string $text
-     * @return string
+     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
+     * @return void
      */
     private function renderHtml() {
+        if ($this->getRequest()->isGet()) {
+            $this->_helper->viewRenderer->setNoRender();
+            if ($this->configs->cache->entry) {
+                if ($this->cache->contains(__CLASS__)) {
+                    $cache = unserialize($this->cache->fetch(__CLASS__));
+                    $content = $cache['content'];
+                    $eTag = $cache['eTag'];
+                } else {
+                    $content = $this->html();
+                    $eTag = md5(__CLASS__ . $content);
+                    $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
+                }
+            } else {
+                $content = $this->html();
+                $eTag = md5(__CLASS__ . $content);
+            }
+
+            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                $this->getResponse()->setHttpResponseCode(304);
+            } else {
+                $this->getResponse()->setHeader('Etag', $eTag);
+                $this->getResponse()->appendBody($content);
+            }
+        } else {
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function html(){
         $this->view->appPath = APPLICATION_PATH;
         $this->view->search = $this->search;
         $this->view->formAction = '/kamus';
@@ -159,8 +165,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
-     * @param  string $text
-     * @return string
+     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
+     * @return void
      */
     private function renderJson() {
         if ($this->getRequest()->isGet()) {
@@ -171,8 +177,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
                 $this->_helper->json(array('error' => $e->getMessage()));
             }
         } else {
-            $this->getResponse()->setHttpResponseCode(405);
-            $this->_helper->json(array('error' => 'Method not allowed'));
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
         }
     }
 }

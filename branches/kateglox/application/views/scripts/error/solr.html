@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Kateglo - Kamus</title>
+    <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+</head>
+<body metal:use-macro="${appPath}/views/macros/body.html/body">
+<div tal:omit-tag="true" metal:fill-slot="content">
+    <div>
+        <p>Penelusuran Anda - <b tal:content="search/getFieldValue">search</b> - tidak dapat dilakukan karena memuat kesalahan sintaktis.</p>
+
+        <p>Saran:</p>
+        <ul>
+            <li>Pastikan semua sintaks penelusuran ditulis dengan benar.</li>
+            <li>Pelajari penggunaan sintaks penelusuran.</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
