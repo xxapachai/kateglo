@@ -23,7 +23,6 @@ use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
-use Doctrine\Common\Cache\Cache;
 /**
  *
  *
@@ -40,20 +39,20 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
-     * @var kateglo\application\services\interfaces\Entry;
+     * @var \kateglo\application\services\interfaces\Entry;
      */
     private $entry;
 
     /**
      *
      * Enter description here ...
-     * @var kateglo\application\faces\interfaces\Search;
+     * @var \kateglo\application\faces\interfaces\Search;
      */
     private $search;
 
     /**
      * Enter description here ...
-     * @var kateglo\application\services\interfaces\Pagination;
+     * @var \kateglo\application\services\interfaces\Pagination;
      */
     private $pagination;
 
@@ -72,42 +71,6 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
-     * @var Doctrine\Common\Cache\Cache
-     */
-    private $cache;
-
-    /**
-     *
-     * Enter description here ...
-     * @var Zend_Config
-     */
-    private $configs;
-
-    /**
-     *
-     * Enter description here ...
-     * @param Zend_Config $configs
-     *
-     * @Inject
-     */
-    public function setConfigs(\Zend_Config $configs) {
-        $this->configs = $configs;
-    }
-
-    /**
-     *
-     * Enter description here ...
-     * @param Doctrine\Common\Cache\Cache $cache
-     *
-     * @Inject
-     */
-    public function setCache(Cache $cache) {
-        $this->cache = $cache;
-    }
-
-    /**
-     *
-     * Enter description here ...
      * @param kateglo\application\services\interfaces\Entry $entry
      *
      * @Inject
@@ -117,9 +80,16 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
+     * @return \kateglo\application\services\interfaces\Entry
+     */
+    public function getEntry() {
+        return $this->entry;
+    }
+
+    /**
      *
      * Enter description here ...
-     * @param kateglo\application\faces\interfaces\Search $entry
+     * @param \kateglo\application\faces\interfaces\Search $entry
      *
      * @Inject
      */
@@ -130,12 +100,50 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
-     * @param kateglo\application\services\interfaces\Pagination $pagination
+     * @param \kateglo\application\services\interfaces\Pagination $pagination
      *
      * @Inject
      */
-    public function setPages(Pagination $pagination) {
+    public function setPagination(Pagination $pagination) {
         $this->pagination = $pagination;
+    }
+
+    /**
+     * @return \kateglo\application\services\interfaces\Pagination
+     */
+    public function getPagination() {
+        return $this->pagination;
+    }
+
+
+    /**
+     * @param int $offset
+     * @return void
+     */
+    public function setOffset($offset) {
+        $this->offset = $offset;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOffset() {
+        return $this->offset;
+    }
+
+    /**
+     * @param int $limit
+     * @return void
+     */
+    public function setLimit($limit) {
+        $this->limit = $limit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit() {
+        return $this->limit;
     }
 
     /**
@@ -157,74 +165,29 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
         $this->view->search->setFieldValue($searchText);
+        $object = $this;
+        $helper = $object->_helper;
         try {
             if ($this->requestJson()) {
-                $this->renderJson($searchText);
+                $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+                $this->generate($cacheId, function() use ($searchText, $object) {
+                    $hits = $object->getEntry()->searchEntryAsJSON($searchText, $object->getOffset(), $object->getLimit());
+                    $pagination = $object->getPagination()->createAsArray($hits->response->{Hit::COUNT}, $object->getOffset(), $object->getLimit());
+                    return array('hits' => $hits, 'pagination' => $pagination);
+                });
             } else {
-                $this->renderHtml($searchText);
+                $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+                $this->generate($cacheId, function() use ($searchText, $object, $helper) {
+                    /*@var $hits kateglo\application\faces\Hit */
+                    $hits = $object->getEntry()->searchEntry($searchText, $object->getOffset(), $object->getLimit());
+                    $object->view->pagination = $object->getPagination()->create($hits->getCount(), $object->getOffset(), $object->getLimit());
+                    $object->view->hits = $hits;
+                    return $helper->viewRenderer->view->render($helper->viewRenderer->getViewScript());
+                });
             }
         } catch (Apache_Solr_Exception $e) {
             $content = $this->_helper->viewRenderer->view->render('error/solr.html');
             $this->getResponse()->appendBody($content);
-        }
-    }
-
-    /**
-     * @throws HTTPMethodNotAllowedException
-     * @return void
-     */
-    private function renderHtml($searchText) {
-        if ($this->getRequest()->isGet()) {
-            if ($this->configs->cache->entry) {
-                if ($this->cache->contains(__CLASS__)) {
-                    $cache = unserialize($this->cache->fetch(__CLASS__));
-                    $content = $cache['content'];
-                    $eTag = $cache['eTag'];
-                } else {
-                    $content = $this->html($searchText);
-                    $eTag = md5(__CLASS__ . $content);
-                    $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
-                }
-            } else {
-                $content = $this->html($searchText);
-                $eTag = md5(__CLASS__ . $content);
-            }
-
-            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                $this->getResponse()->setHttpResponseCode(304);
-            } else {
-                $this->getResponse()->setHeader('Etag', $eTag);
-                $this->getResponse()->appendBody($content);
-            }
-        } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
-        }
-    }
-
-    /**
-     * @return string
-     */
-    private function html($searchText) {
-        /*@var $hits kateglo\application\faces\Hit */
-        $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
-        $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
-        $this->view->hits = $hits;
-        return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-    }
-
-    /**
-     * @throws HTTPMethodNotAllowedException
-     * @return void
-     */
-    private function renderJson($searchText) {
-        if ($this->getRequest()->isGet()) {
-            $hits = $this->entry->searchEntryAsArray($searchText, $this->offset, $this->limit);
-            $pagination = $this->pagination->createAsArray($hits[Hit::COUNT], $this->offset, $this->limit);
-            $this->_helper->json(array('hits' => $hits, 'pagination' => $pagination));
-        } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
         }
     }
 }

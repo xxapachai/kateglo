@@ -36,80 +36,126 @@ use kateglo\application\services\interfaces\Entry;
  */
 class TesaurusController extends Zend_Controller_Action_Stubbles {
 	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-	
-	/**
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Pagination;
-	 */
-	private $pagination;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $limit;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $offset;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 * 
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $search
-	 * 
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Pagination $entry
-	 * 
-	 * @Inject
-	 */
-	public function setPages(Pagination $pagination) {
-		$this->pagination = $pagination;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Entry;
+     */
+    private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\faces\interfaces\Search;
+     */
+    private $search;
+
+    /**
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Pagination;
+     */
+    private $pagination;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $limit;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $offset;
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Entry $entry
+     *
+     * @Inject
+     */
+    public function setEntry(Entry $entry) {
+        $this->entry = $entry;
+    }
+
+    /**
+     * @return \kateglo\application\services\interfaces\Entry
+     */
+    public function getEntry() {
+        return $this->entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\faces\interfaces\Search $entry
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search) {
+        $this->search = $search;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Pagination $pagination
+     *
+     * @Inject
+     */
+    public function setPagination(Pagination $pagination) {
+        $this->pagination = $pagination;
+    }
+
+    /**
+     * @return \kateglo\application\services\interfaces\Pagination
+     */
+    public function getPagination() {
+        return $this->pagination;
+    }
+
+
+    /**
+     * @param int $offset
+     * @return void
+     */
+    public function setOffset($offset) {
+        $this->offset = $offset;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOffset() {
+        return $this->offset;
+    }
+
+    /**
+     * @param int $limit
+     * @return void
+     */
+    public function setLimit($limit) {
+        $this->limit = $limit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit() {
+        return $this->limit;
+    }
 	
 	/**
 	 * (non-PHPdoc)
 	 * @see Zend_Controller_Action::init()
 	 */
 	public function init() {
-		$this->view->search = $this->search;
-		$this->limit = (is_numeric ( $this->_request->getParam ( 'rows' ) ) ? intval ( $this->_request->getParam ( 'rows' ) ) : 10);
-		$this->offset = (is_numeric ( $this->_request->getParam ( 'start' ) ) ? intval ( $this->_request->getParam ( 'start' ) ) : 0);
-		$this->view->appPath = APPLICATION_PATH;
+        $this->view->search = $this->search;
+        $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
+        $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
+        $this->view->appPath = APPLICATION_PATH;
+        $this->view->formAction = '/tesaurus';
 	}
 	
 	/**
@@ -118,35 +164,34 @@ class TesaurusController extends Zend_Controller_Action_Stubbles {
 	 * @return void
 	 */
 	public function indexAction() {
-		if ($this->_request->isGet ()) {
-			$this->view->formAction = '/tesaurus';
-			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
-			$this->view->search->setFieldValue ( $searchText );
-			/*@var $hits kateglo\application\faces\Hit */
-			$hits = $this->entry->searchThesaurus ( $searchText, $this->offset, $this->limit );
-			$this->view->pagination = $this->pagination->create ( $hits->getCount (), $this->offset, $this->limit );
-			$this->view->hits = $hits;
-		} else {
-			//Block other request type?
-		}
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @return void
-	 */
-	public function jsonAction() {
-		try {
-			$searchText = $this->_request->getParam ( $this->view->search->getFieldName () );
-			$this->view->search->setFieldValue ( $searchText );
-			$hits = $this->entry->searchThesaurusAsArray ( $searchText, $this->offset, $this->limit );
-			$pagination = $this->pagination->createAsArray ( $hits[Hit::COUNT], $this->offset, $this->limit );
-			$this->_helper->json(array ('hits' => $hits, 'pagination' => $pagination ));
-		} catch ( EntryException $e ) {
-			$this->getResponse ()->setHttpResponseCode ( 500 );
-			$this->_helper->json(array ('error' => $e->getMessage () ));
-		}
+
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $this->view->search->setFieldValue($searchText);
+        $object = $this;
+        $helper = $object->_helper;
+        try {
+            if ($this->requestJson()) {
+                $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+                $this->generate($cacheId, function() use ($searchText, $object) {
+                    $hits = $object->getEntry()->searchThesaurusAsJSON($searchText, $object->getOffset(), $object->getLimit());
+                    $pagination = $object->getPagination()->createAsArray($hits->response->{Hit::COUNT}, $object->getOffset(), $object->getLimit());
+                    return array('hits' => $hits, 'pagination' => $pagination);
+                });
+            } else {
+                $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+                $this->generate($cacheId, function() use ($searchText, $object, $helper) {
+                    /*@var $hits kateglo\application\faces\Hit */
+                    $hits = $object->getEntry()->searchThesaurus($searchText, $object->getOffset(), $object->getLimit());
+                    $object->view->pagination = $object->getPagination()->create($hits->getCount(), $object->getOffset(), $object->getLimit());
+                    $object->view->hits = $hits;
+                    return $helper->viewRenderer->view->render($helper->viewRenderer->getViewScript());
+                });
+            }
+        } catch (Apache_Solr_Exception $e) {
+            $content = $this->_helper->viewRenderer->view->render('error/solr.html');
+            $this->getResponse()->appendBody($content);
+        }
 	}
 }
 ?>

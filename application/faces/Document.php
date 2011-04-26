@@ -296,15 +296,21 @@ class Document {
 	
 	/**
 	 * Enter description here ...
-	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $foreigns;
 	
 	/**
 	 * Enter description here ...
-	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 */
 	private $equivalents;
+
+    /**
+	 * Enter description here ...
+	 * @var \kateglo\application\faces\Hit
+	 */
+	private $moreLikeThis;
 	
 	/**
 	 * @return the $id
@@ -600,11 +606,26 @@ class Document {
 	}
 
 	/**
-	 * @param Doctrine\Common\Collections\ArrayCollection $equivalents
+	 * @param \Doctrine\Common\Collections\ArrayCollection $equivalents
 	 */
 	public function setEquivalents($equivalents) {
 		$this->equivalents = $equivalents;
 	}
+
+    /**
+     * @param \kateglo\application\faces\Hit $moreLikeThis
+     * @return void
+     */
+    public function setMoreLikeThis($moreLikeThis) {
+        $this->moreLikeThis = $moreLikeThis;
+    }
+
+    /**
+     * @return \kateglo\application\faces\Hit
+     */
+    public function getMoreLikeThis() {
+        return $this->moreLikeThis;
+    }
 
 }
 

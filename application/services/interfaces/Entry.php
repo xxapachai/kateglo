@@ -70,7 +70,7 @@ interface Entry {
 	 * @param array $params
 	 * @return string
 	 */
-	function searchRaw($searchText, $offset = 0, $limit = 10, $params = array());
+	function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 
 	/**
 	 * 
@@ -94,16 +94,6 @@ interface Entry {
 	
 	/**
 	 * 
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return array
-	 */
-	function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
 	 * Enter description here ...
 	 * @param string $searchText
 	 * @param int $offset
@@ -122,7 +112,7 @@ interface Entry {
 	 * @param array $params
 	 * @return array
 	 */
-	function searchThesaurusAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 	
 	/**
 	 * 
@@ -144,7 +134,7 @@ interface Entry {
 	 * @param array $params
 	 * @return kateglo\application\faces\Hit|array
 	 */
-	function searchProverbAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 	
 	/**
 	 * 
@@ -166,7 +156,7 @@ interface Entry {
 	 * @param array $params
 	 * @return array
 	 */
-	function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 	
 	/**
 	 * 
@@ -188,6 +178,6 @@ interface Entry {
 	 * @param array $params
 	 * @return array
 	 */
-	function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array());
+	function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 }
 ?>

@@ -23,6 +23,7 @@ namespace kateglo\application\services;
 use kateglo\application\faces\Equivalent;
 use kateglo\application\faces\Hit;
 use kateglo\application\faces\Document;
+use kateglo\application\faces\Facet;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\daos;
 /**
@@ -147,7 +148,7 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return kateglo\application\faces\Hit
      */
-    public function searchRaw($searchText, $offset = 0, $limit = 10, $params = array()) {
+    public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -182,11 +183,12 @@ class Entry implements interfaces\Entry {
         $params['facet'] = 'true';
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-        return $this->convertResponse2Faces($request->response);
+        return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
     }
 
-        /**
+    /**
      *
      * @param string $searchText
      * @param int $offset
@@ -206,8 +208,9 @@ class Entry implements interfaces\Entry {
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+        $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-        return $this->convertResponse2Faces($request->response);
+        return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
     }
 
     /**
@@ -216,9 +219,9 @@ class Entry implements interfaces\Entry {
      * @param int $offset
      * @param int $limit
      * @param array $params
-     * @return array
+     * @return kateglo\application\faces\Hit
      */
-    public function searchEntryAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+    public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -228,9 +231,11 @@ class Entry implements interfaces\Entry {
         $params['mlt.count'] = 10;
         $params['facet'] = 'true';
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
-        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['defType'] = 'dismax';
+        $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+        $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-        return $this->convertResponse2Array($request->response)->toArray();
+        return json_decode($request->getRawResponse());
     }
 
     /**
@@ -258,11 +263,11 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return array
      */
-    public function searchThesaurusAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+    public function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
         $params['fq'] = "synonym:*";
-        return $this->searchEntryAsArray($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -290,11 +295,11 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return array
      */
-    public function searchProverbAsArray($searchText, $asArray = false, $offset = 0, $limit = 10, $params = array()) {
+    public function searchProverbAsJSON($searchText, $asArray = false, $offset = 0, $limit = 10, $params = array()) {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
         $params['fq'] = "typeExact:Peribahasa";
-        return $this->searchEntryAsArray($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -322,11 +327,11 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return array
      */
-    public function searchAcronymAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+    public function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
         $params['fq'] = "typeExact:Akronim or typeExact:Singkatan";
-        return $this->searchEntryAsArray($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -341,7 +346,6 @@ class Entry implements interfaces\Entry {
     public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['fl'] = 'entry, equivalent, id';
         $params['q.alt'] = "foreign:*";
-        $params['defType'] = "dismax";
         $params['qf'] = "entry foreign";
         return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
     }
@@ -355,12 +359,11 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return array
      */
-    public function searchEquivalentAsArray($searchText, $offset = 0, $limit = 10, $params = array()) {
+    public function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['fl'] = 'entry, equivalent, id';
         $params['q.alt'] = "foreign:*";
-        $params['defType'] = "dismax";
         $params['qf'] = "entry foreign";
-        return $this->searchEntryAsArray($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -370,41 +373,66 @@ class Entry implements interfaces\Entry {
      */
     private function convertResponse2Faces($response) {
         $hit = new Hit ();
-        $hit->setCount($response->numFound);
-        $hit->setStart($response->start);
+        $hit->setTime($response->responseHeader->{Hit::TIME});
+        $hit->setCount($response->response->numFound);
+        $hit->setStart($response->response->start);
         $hit->setDocuments(new ArrayCollection ());
-        for ($i = 0; $i < count($response->docs); $i++) {
-            /*@var $doc Apache_Solr_Document */
-            $doc = $response->docs [$i];
-            $fields = $doc->getFields();
+        for ($i = 0; $i < count($response->response->docs); $i++) {
 
-            $document = new Document ();
-            $document->setId($fields [Document::ID]);
-            $document->setEntry($fields [Document::ENTRY]);
-            $document->setAntonyms($this->convert2Array($fields, Document::ANTONYM));
-            $document->setDisciplines($this->convert2Array($fields, Document::DISCIPLINE));
-            $document->setSamples($this->convert2Array($fields, Document::SAMPLE));
-            $document->setDefinitions($this->convert2Array($fields, Document::DEFINITION));
-            $document->setClasses($this->convert2Array($fields, Document::CLAZZ));
-            $document->setClassCategories($this->convert2Array($fields, Document::CLAZZ_CATEGORY));
-            $document->setMisspelleds($this->convert2Array($fields, Document::MISSPELLED));
-            $document->setRelations($this->convert2Array($fields, Document::RELATION));
-            $document->setSynonyms($this->convert2Array($fields, Document::SYNONYM));
-            $document->setSpelled(array_key_exists(Document::SPELLED, $fields) ? $fields [Document::SPELLED] : '');
-            $document->setSyllabels($this->convert2Array($fields, Document::SYLLABEL));
-            $document->setTypes($this->convert2Array($fields, Document::TYPE));
-            $document->setTypeCategories($this->convert2Array($fields, Document::TYPE_CATEGORY));
-            $document->setSource($this->convert2Array($fields, Document::SOURCE));
-            $document->setSourceCategories($this->convert2Array($fields, Document::SOURCE_CATEGORY));
-            $document->setLanguages($this->convert2Array($fields, Document::LANGUAGE));
-            $document->setEquivalentDisciplines($this->convert2Array($fields, Document::EQUIVALENT_DISCIPLINE));
-            $document->setForeigns($this->convert2Array($fields, Document::FOREIGN));
-            $document->setEquivalents($this->jsonConvertToEquivalent($this->convert2Array($fields, Document::EQUIVALENT)));
+            $doc = $response->response->docs [$i];
+            $document = $this->createDocuments($doc);
 
+            $moreLikeThis = new Hit();
+            $moreLikeThis->setCount($response->moreLikeThis->{$document->getId()}->numFound);
+            $moreLikeThis->setStart($response->moreLikeThis->{$document->getId()}->start);
+            $moreLikeThis->setDocuments(new ArrayCollection ());
+            for ($j = 0; $j < count($response->moreLikeThis->{$document->getId()}->docs); $j++) {
+
+                $mltDoc = $response->moreLikeThis->{$document->getId()}->docs [$j];
+                $mltDocument = $this->createDocuments($doc);
+                $moreLikeThis->getDocuments()->add($mltDocument);
+            }
+            $document->setMoreLikeThis($moreLikeThis);
             $hit->getDocuments()->add($document);
         }
+        $hit->setFacet(new Facet());
+        $hit->getFacet()->setClazz(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ})));
+        $hit->getFacet()->setClazzCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY})));
+        $hit->getFacet()->setType(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE})));
+        $hit->getFacet()->setTypeCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY})));
 
         return $hit;
+    }
+
+    /**
+     * @param  $fields
+     * @return \kateglo\application\faces\Document
+     */
+    private function createDocuments($fields) {
+        $document = new Document ();
+        $document->setId($fields->{Document::ID});
+        $document->setEntry($fields->{Document::ENTRY});
+        $document->setAntonyms($this->convert2Array($fields, Document::ANTONYM));
+        $document->setDisciplines($this->convert2Array($fields, Document::DISCIPLINE));
+        $document->setSamples($this->convert2Array($fields, Document::SAMPLE));
+        $document->setDefinitions($this->convert2Array($fields, Document::DEFINITION));
+        $document->setClasses($this->convert2Array($fields, Document::CLAZZ));
+        $document->setClassCategories($this->convert2Array($fields, Document::CLAZZ_CATEGORY));
+        $document->setMisspelleds($this->convert2Array($fields, Document::MISSPELLED));
+        $document->setRelations($this->convert2Array($fields, Document::RELATION));
+        $document->setSynonyms($this->convert2Array($fields, Document::SYNONYM));
+        $document->setSpelled(property_exists($fields, Document::SPELLED) ? $fields->{Document::SPELLED} : '');
+        $document->setSyllabels($this->convert2Array($fields, Document::SYLLABEL));
+        $document->setTypes($this->convert2Array($fields, Document::TYPE));
+        $document->setTypeCategories($this->convert2Array($fields, Document::TYPE_CATEGORY));
+        $document->setSource($this->convert2Array($fields, Document::SOURCE));
+        $document->setSourceCategories($this->convert2Array($fields, Document::SOURCE_CATEGORY));
+        $document->setLanguages($this->convert2Array($fields, Document::LANGUAGE));
+        $document->setEquivalentDisciplines($this->convert2Array($fields, Document::EQUIVALENT_DISCIPLINE));
+        $document->setForeigns($this->convert2Array($fields, Document::FOREIGN));
+        $document->setEquivalents($this->jsonConvertToEquivalent($this->convert2Array($fields, Document::EQUIVALENT)));
+
+        return $document;
     }
 
     /**
@@ -436,36 +464,17 @@ class Entry implements interfaces\Entry {
 
     /**
      * Enter description here ...
-     * @param object $response
-     * @return array
-     */
-    private function convertResponse2Array($response) {
-        $hit = new ArrayCollection ();
-        $hit->set(Hit::COUNT, $response->numFound);
-        $hit->set(Hit::START, $response->start);
-        $hit->set(Hit::DOCUMENTS, new ArrayCollection ());
-        for ($i = 0; $i < count($response->docs); $i++) {
-            /*@var $doc Apache_Solr_Document */
-            $doc = $response->docs [$i];
-            $hit->get(Hit::DOCUMENTS)->add($doc->getFields());
-        }
-        $hit->set(Hit::DOCUMENTS, $hit->get(Hit::DOCUMENTS)->toArray());
-        return $hit;
-    }
-
-    /**
-     * Enter description here ...
      * @param array $source
      * @param string $key
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
     private function convert2Array($source, $key) {
-        if (array_key_exists($key, $source)) {
+        if (property_exists($source, $key)) {
             $array = new ArrayCollection ();
-            if (!is_array($source [$key])) {
-                $array->add($source [$key]);
+            if (!is_array($source->{$key})) {
+                $array->add($source->{$key});
             } else {
-                foreach ($source [$key] as $item) {
+                foreach ($source->{$key} as $item) {
                     $array->add($item);
                 }
             }
