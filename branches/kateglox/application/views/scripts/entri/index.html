@@ -91,7 +91,7 @@
                                             </div>
                                             )
                                         </div>
-                                        <a href="/entry/${text}">${text}</a>
+                                        <a href="/entri/${text}">${text}</a>
                                     </li>
                                 </tal:block>
                             </ul>
@@ -103,7 +103,7 @@
                         <dd>
                             <ul tal:repeat="misspelled meaning/getMisspelleds">
                                 <li tal:define="text misspelled/getMisspelled/getEntry/getEntry"><a
-                                        href="/entry/${text}">${text}</a></li>
+                                        href="/entri/${text}">${text}</a></li>
                             </ul>
                         </dd>
                     </div>
@@ -112,7 +112,7 @@
                         <dt>Ejaan yang benar</dt>
                         <dd>
                             <span tal:define="text meaning/getSpelled/getMeaning/getEntry/getEntry"><a
-                                    href="/entry/${text}">${text}</a></span>
+                                    href="/entri/${text}">${text}</a></span>
                         </dd>
                     </div>
                 </dl>

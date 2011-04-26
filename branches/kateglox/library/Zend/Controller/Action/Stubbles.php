@@ -24,9 +24,10 @@
  */
 require_once 'Zend/Controller/Action.php';
 
+use Doctrine\Common\Cache\Cache;
 /**
- *  
- * 
+ *
+ *
  * @package kateglo\library\Zend\Controller\Action
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -36,57 +37,100 @@ require_once 'Zend/Controller/Action.php';
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
-	
-	/**
-	 * Class constructor
-	 *
-	 * The request and response objects should be registered with the
-	 * controller, as should be any additional optional arguments; these will be
-	 * available via {@link getRequest()}, {@link getResponse()}, and
-	 * {@link getInvokeArgs()}, respectively.
-	 *
-	 * When overriding the constructor, please consider this usage as a best
-	 * practice and ensure that each is registered appropriately; the easiest
-	 * way to do so is to simply call parent::__construct($request, $response,
-	 * $invokeArgs).
-	 *
-	 * After the request, response, and invokeArgs are set, the
-	 * {@link $_helper helper broker} is initialized.
-	 *
-	 * Finally, {@link init()} is called as the final action of
-	 * instantiation, and may be safely overridden to perform initialization
-	 * tasks; as a general rule, override {@link init()} instead of the
-	 * constructor to customize an action controller's instantiation.
-	 *
-	 * @param Zend_Controller_Request_Abstract $request
-	 * @param Zend_Controller_Response_Abstract $response
-	 * @param array $invokeArgs Any additional invocation arguments
-	 * @return void
-	 */
-	public function __construct(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null, array $invokeArgs = array()) {
-	}
-	
-	/**
-	 * Set invocation arguments
-	 *
-	 * @param array $args
-	 * @return Zend_Controller_Action
-	 */
-	public function setInvokeArgs(array $args = array()) {
-		$this->_invokeArgs = $args;
-		return $this;
-	}
-	
-	/**
-	 * Set invocation helper
-	 *
-	 * @param Zend_Controller_Action_HelperBroker $helper
-	 * @return Zend_Controller_Action
-	 */
-	public function setHelper(Zend_Controller_Action_HelperBroker $helper) {
-		$this->_helper = $helper;
-		return $this;
-	}
+
+    /**
+     *
+     * Enter description here ...
+     * @var \Doctrine\Common\Cache\Cache
+     */
+    protected $cache;
+
+    /**
+     *
+     * Enter description here ...
+     * @var \Zend_Config
+     */
+    protected $configs;
+
+    /**
+     *
+     * Enter description here ...
+     * @param \Zend_Config $configs
+     *
+     * @Inject
+     */
+    public function setConfigs(\Zend_Config $configs) {
+        $this->configs = $configs;
+    }
+
+    /**
+     * @return \Zend_Config
+     */
+    public function getConfigs() {
+        return $this->configs;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param Doctrine\Common\Cache\Cache $cache
+     *
+     * @Inject
+     */
+    public function setCache(Cache $cache) {
+        $this->cache = $cache;
+    }
+
+    /**
+     * Class constructor
+     *
+     * The request and response objects should be registered with the
+     * controller, as should be any additional optional arguments; these will be
+     * available via {@link getRequest()}, {@link getResponse()}, and
+     * {@link getInvokeArgs()}, respectively.
+     *
+     * When overriding the constructor, please consider this usage as a best
+     * practice and ensure that each is registered appropriately; the easiest
+     * way to do so is to simply call parent::__construct($request, $response,
+     * $invokeArgs).
+     *
+     * After the request, response, and invokeArgs are set, the
+     * {@link $_helper helper broker} is initialized.
+     *
+     * Finally, {@link init()} is called as the final action of
+     * instantiation, and may be safely overridden to perform initialization
+     * tasks; as a general rule, override {@link init()} instead of the
+     * constructor to customize an action controller's instantiation.
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     * @param Zend_Controller_Response_Abstract $response
+     * @param array $invokeArgs Any additional invocation arguments
+     * @return void
+     */
+    public function __construct(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null, array $invokeArgs = array()) {
+    }
+
+    /**
+     * Set invocation arguments
+     *
+     * @param array $args
+     * @return Zend_Controller_Action
+     */
+    public function setInvokeArgs(array $args = array()) {
+        $this->_invokeArgs = $args;
+        return $this;
+    }
+
+    /**
+     * Set invocation helper
+     *
+     * @param Zend_Controller_Action_HelperBroker $helper
+     * @return Zend_Controller_Action
+     */
+    public function setHelper(Zend_Controller_Action_HelperBroker $helper) {
+        $this->_helper = $helper;
+        return $this;
+    }
 
     /**
      * @return bool
@@ -104,6 +148,44 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
             }
         }
         return false;
+    }
+
+
+    /**
+     * @throws HTTPMethodNotAllowedException
+     * @return void
+     */
+    protected function generate($cacheId, $callback) {
+        if ($this->getRequest()->isGet()) {
+            if ($this->configs->cache->entry) {
+                if ($this->cache->contains($cacheId)) {
+                    $cache = unserialize($this->cache->fetch($cacheId));
+                    $content = $cache['content'];
+                    $eTag = $cache['eTag'];
+                } else {
+                    $content = $callback();
+                    $eTag = md5($cacheId . $content);
+                    $this->cache->save($cacheId, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
+                }
+            } else {
+                $content = $callback();
+                $eTag = md5($cacheId . $content);
+            }
+
+            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                $this->getResponse()->setHttpResponseCode(304);
+            } else {
+                $this->getResponse()->setHeader('Etag', $eTag);
+                if ($this->requestJson()) {
+                    $this->_helper->json($content);
+                } else {
+                    $this->getResponse()->appendBody($content);
+                }
+            }
+        } else {
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
+        }
     }
 
 }
