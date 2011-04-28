@@ -80,13 +80,6 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
-     * @return \kateglo\application\services\interfaces\Entry
-     */
-    public function getEntry() {
-        return $this->entry;
-    }
-
-    /**
      *
      * Enter description here ...
      * @param \kateglo\application\faces\interfaces\Search $entry
@@ -108,13 +101,6 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->pagination = $pagination;
     }
 
-    /**
-     * @return \kateglo\application\services\interfaces\Pagination
-     */
-    public function getPagination() {
-        return $this->pagination;
-    }
-
 
     /**
      * @param int $offset
@@ -125,25 +111,11 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
-     * @return int
-     */
-    public function getOffset() {
-        return $this->offset;
-    }
-
-    /**
      * @param int $limit
      * @return void
      */
     public function setLimit($limit) {
         $this->limit = $limit;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLimit() {
-        return $this->limit;
     }
 
     /**
@@ -160,36 +132,48 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 
     /**
      * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('text/html')
      */
-    public function indexAction() {
+    public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
         $this->view->search->setFieldValue($searchText);
-        $object = $this;
-        $helper = $object->_helper;
         try {
-            if ($this->requestJson()) {
-                $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-                $this->generate($cacheId, function() use ($searchText, $object) {
-                    $hits = $object->getEntry()->searchEntryAsJSON($searchText, $object->getOffset(), $object->getLimit());
-                    $pagination = $object->getPagination()->createAsArray($hits->response->{Hit::COUNT}, $object->getOffset(), $object->getLimit());
-                    return array('hits' => $hits, 'pagination' => $pagination);
-                });
-            } else {
-                $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-                $this->generate($cacheId, function() use ($searchText, $object, $helper) {
-                    /*@var $hits kateglo\application\faces\Hit */
-                    $hits = $object->getEntry()->searchEntry($searchText, $object->getOffset(), $object->getLimit());
-                    $object->view->pagination = $object->getPagination()->create($hits->getCount(), $object->getOffset(), $object->getLimit());
-                    $object->view->hits = $hits;
-                    return $helper->viewRenderer->view->render($helper->viewRenderer->getViewScript());
-                });
-            }
+            $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            /*@var $hits kateglo\application\faces\Hit */
+            $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
+            $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
+            $this->view->hits = $hits;
+            return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
         } catch (Apache_Solr_Exception $e) {
             $content = $this->_helper->viewRenderer->view->render('error/solr.html');
             $this->getResponse()->appendBody($content);
         }
     }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('application/json')
+     */
+    public function indexJson() {
+        try {
+            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+            $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+            /*@var $hits kateglo\application\faces\Hit */
+            $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
+            $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
+            return array('hits' => $hits, 'pagination' => $pagination);
+        } catch (Apache_Solr_Exception $e) {
+            return array('error' => 'solr error');
+        }
+    }
+
+
 }
 
 ?>
