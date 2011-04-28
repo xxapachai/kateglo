@@ -22,7 +22,6 @@ use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
 use kateglo\application\daos\User;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
-use Doctrine\Common\Cache\Cache;
 /**
  *
  *
@@ -53,42 +52,6 @@ class IndexController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
-     * @var Doctrine\Common\Cache\Cache
-     */
-    private $cache;
-
-    /**
-     *
-     * Enter description here ...
-     * @var Zend_Config
-     */
-    private $configs;
-
-    /**
-     *
-     * Enter description here ...
-     * @param Zend_Config $configs
-     *
-     * @Inject
-     */
-    public function setConfigs(\Zend_Config $configs) {
-        $this->configs = $configs;
-    }
-
-    /**
-     *
-     * Enter description here ...
-     * @param Doctrine\Common\Cache\Cache $cache
-     *
-     * @Inject
-     */
-    public function setCache(Cache $cache) {
-        $this->cache = $cache;
-    }
-
-    /**
-     *
-     * Enter description here ...
      * @param kateglo\application\services\interfaces\Entry $entry
      *
      * @Inject
@@ -110,6 +73,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 
     /**
      * @return void
+     * @Get
      */
     public function indexAction() {
         if ($this->requestJson()) {

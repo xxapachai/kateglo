@@ -139,6 +139,12 @@ kateglo\library\Stubbles\stubBootstrap::init ( $stubblesPathes, $stubblesClassLo
  */
 \stubClassLoader::load ( 'net::stubbles::ioc::stubBinder' );
 
+/**
+ * Load the Stubbles Reflection
+ * Reflection ready to use.
+ */
+\stubClassLoader::load('net::stubbles::reflection::reflection');
+
 /** +++ END : Initiate Stubbles Inversion of Control +++ */
 /** ++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
