@@ -52,7 +52,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		/*@var $front Zend_Controller_Front */
 		$front = $this->getResource ( 'FrontController' );
 		
-		$dispatcher = new Zend_Controller_Dispatcher_Stubbles ();
+		$dispatcher = Injector::getInstance ('Zend_Controller_Dispatcher_Interface');
 		$dispatcher->setControllerDirectory ( Injector::getInstance ( 'Zend_Config' )->resources->frontController->controllerDirectory );
 		$front->setDispatcher ( $dispatcher );
 		

@@ -53,12 +53,14 @@ class Binder {
 		$container->bind ( 'Doctrine\DBAL\Driver\Connection' )->toProviderClass ( Connection::$CLASS_NAME );
 		$container->bind ( 'Doctrine\ORM\EntityManager' )->toProviderClass ( EntityManager::$CLASS_NAME );
 		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
+        $container->bind ( 'Zend_Controller_Dispatcher_Interface' )->to ( 'Zend_Controller_Dispatcher_Stubbles' );
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );
+		$container->bind ( utilities\interfaces\MimeParser::INTERFACE_NAME )->to ( utilities\MimeParser::$CLASS_NAME );
         $container->bind ( 'PHPTAL_Filter' )->to ( utilities\TalTidy::$CLASS_NAME );
 		$container->bind ( faces\interfaces\Search::INTERFACE_NAME )->to ( faces\Search::$CLASS_NAME );
 	}

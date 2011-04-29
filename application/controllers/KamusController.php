@@ -123,10 +123,10 @@ class KamusController extends Zend_Controller_Action_Stubbles {
      * @see Zend_Controller_Action::init()
      */
     public function init() {
+        parent::init();
         $this->view->search = $this->search;
         $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
         $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
-        $this->view->appPath = APPLICATION_PATH;
         $this->view->formAction = '/kamus';
     }
 
@@ -139,18 +139,23 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-        $this->view->search->setFieldValue($searchText);
-        try {
-            $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-            /*@var $hits kateglo\application\faces\Hit */
-            $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
-            $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
-            $this->view->hits = $hits;
-            return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-        } catch (Apache_Solr_Exception $e) {
-            $content = $this->_helper->viewRenderer->view->render('error/solr.html');
-            $this->getResponse()->appendBody($content);
+        $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            try {
+                $this->view->search->setFieldValue($searchText);
+                /** @var $hits kateglo\application\faces\Hit */
+                $hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
+                $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
+                $this->view->hits = $hits;
+                $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+            } catch (Apache_Solr_Exception $e) {
+                $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+            }
         }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
     }
 
     /**
@@ -160,17 +165,20 @@ class KamusController extends Zend_Controller_Action_Stubbles {
      * @Produces('application/json')
      */
     public function indexJson() {
-        try {
-            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-            $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-            $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-            /*@var $hits kateglo\application\faces\Hit */
-            $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
-            $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-            return array('hits' => $hits, 'pagination' => $pagination);
-        } catch (Apache_Solr_Exception $e) {
-            return array('error' => 'solr error');
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+        if (!$this->evaluatePreCondition($cacheId)) {
+            try {
+                /*@var $hits kateglo\application\faces\Hit */
+                $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
+                $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
+                $this->content = array('hits' => $hits, 'pagination' => $pagination);
+            } catch (Apache_Solr_Exception $e) {
+                $this->content = array('error' => 'query error');
+            }
         }
+        $this->responseBuilder($cacheId);
+        $this->_helper->json($this->content);
     }
 
 

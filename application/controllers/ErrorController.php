@@ -20,6 +20,7 @@
  */
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
+use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
 /**
  *
  *
@@ -68,6 +69,9 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
         $this->search = $search;
     }
 
+    /**
+     * @return void
+     */
     public function errorAction() {
         $errors = $this->_getParam('error_handler');
         switch ($errors->type) {
@@ -97,6 +101,9 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
         if ($exception instanceof HTTPMethodNotAllowedException) {
             $this->getResponse()->setHttpResponseCode(405);
             $this->view->message = 'Method not allowed.';
+        } elseif ($exception instanceof HTTPNotAcceptableException) {
+            $this->getResponse()->setHttpResponseCode(406);
+            $this->view->message = 'Not Acceptable.';
         } else {
             $this->getResponse()->setHttpResponseCode(500);
             $this->view->message = 'Application error';

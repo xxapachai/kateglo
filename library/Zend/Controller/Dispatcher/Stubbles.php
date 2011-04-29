@@ -23,6 +23,7 @@
 require_once 'Zend/Controller/Dispatcher/Standard.php';
 
 use kateglo\application\utilities\Injector;
+use kateglo\application\utilities\interfaces\MimeParser;
 /**
  *
  *
@@ -35,6 +36,23 @@ use kateglo\application\utilities\Injector;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Standard {
+
+    /**
+     * @var \kateglo\application\utilities\interfaces\MimeParser;
+     */
+    private $mimeParser;
+
+    /**
+     *
+     * @param \kateglo\application\utilities\interfaces\MimeParser $mimeParse
+     * @return void
+     *
+     * @Inject
+     */
+    public function setMimeParser(MimeParser $mimeParser) {
+        $this->mimeParser = $mimeParser;
+    }
+
     /**
      * Dispatch to a controller/action
      *
@@ -78,12 +96,9 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
          * arguments; throw exception if it's not an action controller
          */
         Injector::get()->bind('Zend_Controller_Action_Interface')->to($className);
-        /*@var $controller Zend_Controller_Action_Stubbles */
+        /** @var $controller Zend_Controller_Action_Stubbles */
         $controller = Injector::getInstance($className);
         $classObject = new stubReflectionClass($className);
-
-
-        $classObject->getMethod($this->getRawActionMethod($request))->hasAnnotation('Get');
 
         $controller->setRequest($request)->setResponse($response)->setInvokeArgs($this->getParams());
         $controller->setHelper(new Zend_Controller_Action_HelperBroker ($controller));
@@ -92,11 +107,12 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
             require_once 'Zend/Controller/Dispatcher/Exception.php';
             throw new Zend_Controller_Dispatcher_Exception ('Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface');
         }
-
+        
+        
         /**
          * Retrieve the action name
          */
-        $action = $this->getActionMethod($request);
+        $action = $this->rest($classObject, $request);
 
         /**
          * Dispatch the method call
@@ -133,7 +149,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         $controller = null;
     }
 
-            /**
+    /**
      * Determine the action name
      *
      * First attempt to retrieve from request; then from request params
@@ -144,8 +160,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
      * @param Zend_Controller_Request_Abstract $request
      * @return string
      */
-    public function getRawActionMethod(Zend_Controller_Request_Abstract $request)
-    {
+    private function getRawActionMethod(Zend_Controller_Request_Abstract $request) {
         $action = $request->getActionName();
         if (empty($action)) {
             $action = $this->getDefaultAction();
@@ -155,57 +170,102 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         return $action;
     }
 
-    protected function rest(stubReflectionClass $classObject, $actionMethod) {
-
-        if($actionMethod === 'index'){
-            $actionMethod = '';
-        }
-
-        $actionMethod  = '/'.$actionMethod;
-
-        $methods = $classObject->getMethods();
-
-        /** @var stubReflectionMethod $method */
-        foreach($methods as $method){
-            if($method->hasAnnotation('Path')){
-                if($method->getAnnotation('Path')->getValue() == $actionMethod){
-                    
+    protected function getActionPaths(stubReflectionClass $classObject, $actionMethod) {
+        $actions = $classObject->getMethods();
+        $actionPaths = new Doctrine\Common\Collections\ArrayCollection();
+        /** @var stubReflectionMethod $action */
+        foreach ($actions as $action) {
+            if ($action->hasAnnotation('Path')) {
+                if ($action->getAnnotation('Path')->getValue() == $actionMethod) {
+                    $actionPaths->add($action);
                 }
             }
         }
 
+        if ($actionPaths->count() === 0) {
+            throw new Exception('paths not found');
+        }
+        return $actionPaths;
+    }
 
-        if ($this->getRequest()->isGet()) {
-            if ($this->configs->cache->entry) {
-                if ($this->cache->contains($cacheId)) {
-                    $cache = unserialize($this->cache->fetch($cacheId));
-                    $content = $cache['content'];
-                    $eTag = $cache['eTag'];
-                } else {
-                    $content = $callback();
-                    $eTag = md5($cacheId . $content);
-                    $this->cache->save($cacheId, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
-                }
-            } else {
-                $content = $callback();
-                $eTag = md5($cacheId . $content);
+    protected function getActionMethods(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
+        $actionMethods = new Doctrine\Common\Collections\ArrayCollection();
+        $serverMethod = $request->getMethod();
+        if(ucfirst(strtolower($serverMethod)) === 'Head'){
+            $serverMethod = 'GET';
+        }
+        /** @var stubReflectionMethod $action */
+        foreach ($actionPaths as $action) {
+            if ($action->hasAnnotation(ucfirst(strtolower($serverMethod)))) {
+                $actionMethods->add($action);
             }
+        }
 
-            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                $this->getResponse()->setHttpResponseCode(304);
-            } else {
-                $this->getResponse()->setHeader('Etag', $eTag);
-                if ($this->requestJson()) {
-                    $this->_helper->json($content);
-                } else {
-                    $this->getResponse()->appendBody($content);
+        if ($actionMethods->count() === 0) {
+            throw new kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException();
+        }
+        return $actionMethods;
+    }
+
+    protected function getActionProduces(Doctrine\Common\Collections\ArrayCollection $actionMethods) {
+        $actionProduces = new Doctrine\Common\Collections\ArrayCollection();
+        /** @var stubReflectionMethod $action */
+        foreach ($actionMethods as $action) {
+            if ($action->hasAnnotation('Produces')) {
+                $actionProduces->add($action);
+            }
+        }
+
+        if ($actionProduces->count() === 0) {
+            throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+        }
+        return $actionProduces;
+    }
+
+    protected function decideMedia(Doctrine\Common\Collections\ArrayCollection $actionProduces, Zend_Controller_Request_Http $request) {
+        $supportedMediaAsArray = array();
+        $mediaActionSet = array();
+        /** @var stubReflectionMethod $action */
+        foreach ($actionProduces as $action) {
+            $getRawProduces = $action->getAnnotation('Produces')->getValue();
+            if (!empty($getRawProduces)) {
+                $getProducesAsArray = explode(',', $getRawProduces);
+                $supportedMediaAsArray = array_merge($supportedMediaAsArray, $getProducesAsArray);
+                foreach ($getProducesAsArray as $produce) {
+                    if (!array_key_exists($produce, $mediaActionSet)) {
+                        $mediaActionSet[$produce] = $action;
+                    } else {
+                        throw new Exception('media already served');
+                    }
                 }
             }
+        }
+
+        $mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $request->getServer('HTTP_ACCEPT'));
+        if (!empty($mediaDecision)) {
+            $action = $mediaActionSet[$mediaDecision];
+            return $action->getName();
         } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
+            throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
         }
     }
+
+    protected function rest(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
+        $actionMethod = $this->getRawActionMethod($request);
+
+        if ($actionMethod === 'index') {
+            $actionMethod = '';
+        } elseif ($actionMethod === 'error') {
+            return 'errorAction';
+        }
+
+        $actionMethod = '/' . $actionMethod;
+        $actionPaths = $this->getActionPaths($classObject, $actionMethod);
+        $actionMethods = $this->getActionMethods($actionPaths, $request);
+        $actionProduces = $this->getActionProduces($actionMethods);
+        return $this->decideMedia($actionProduces, $request);
+    }
+
 }
 
 ?>
