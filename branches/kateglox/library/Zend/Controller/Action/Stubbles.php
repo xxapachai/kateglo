@@ -53,6 +53,16 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
     protected $configs;
 
     /**
+     * @var string
+     */
+    protected $content;
+
+    /**
+     * @var string
+     */
+    protected $eTag;
+
+    /**
      *
      * Enter description here ...
      * @param \Zend_Config $configs
@@ -111,6 +121,13 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
     }
 
     /**
+     * @return void
+     */
+    public function init(){
+        $this->view->appPath = APPLICATION_PATH;
+    }
+
+    /**
      * Set invocation arguments
      *
      * @param array $args
@@ -133,58 +150,34 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
     }
 
     /**
-     * @return bool
-     */
-    protected function requestJson() {
-        if (isset($_SERVER['HTTP_ACCEPT']) && !empty($_SERVER['HTTP_ACCEPT'])) {
-            $explodeAccepts = explode(';', $_SERVER['HTTP_ACCEPT']);
-            foreach ($explodeAccepts as $infos) {
-                if (!empty($infos)) {
-                    $explodeInfos = explode(',', $infos);
-                    if (in_array(strtolower('application/json'), array_map('strtolower', $explodeInfos))) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-
-    /**
      * @throws HTTPMethodNotAllowedException
      * @return void
      */
-    protected function generate($cacheId, $callback) {
-        if ($this->getRequest()->isGet()) {
-            if ($this->configs->cache->entry) {
-                if ($this->cache->contains($cacheId)) {
-                    $cache = unserialize($this->cache->fetch($cacheId));
-                    $content = $cache['content'];
-                    $eTag = $cache['eTag'];
-                } else {
-                    $content = $callback();
-                    $eTag = md5($cacheId . $content);
-                    $this->cache->save($cacheId, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
-                }
-            } else {
-                $content = $callback();
-                $eTag = md5($cacheId . $content);
-            }
+    protected function responseBuilder($cacheId) {
+        $eTag = empty($this->eTag) ? md5($cacheId . $this->content) : $this->eTag;
+        if ($this->configs->cache->entry) {
+            $this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 0);
+        }
 
-            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                $this->getResponse()->setHttpResponseCode(304);
+        if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+            $this->getResponse()->setHttpResponseCode(304);
+        }else{
+            $this->getResponse()->setHeader('Etag', $eTag);
+        }
+    }
+
+    protected function evaluatePreCondition($cacheId) {
+        if ($this->configs->cache->entry) {
+            if ($this->cache->contains($cacheId)) {
+                $cache = unserialize($this->cache->fetch($cacheId));
+                $this->content = $cache['content'];
+                $this->eTag = $cache['eTag'];
+                return true;
             } else {
-                $this->getResponse()->setHeader('Etag', $eTag);
-                if ($this->requestJson()) {
-                    $this->_helper->json($content);
-                } else {
-                    $this->getResponse()->appendBody($content);
-                }
+                return false;
             }
         } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
+            return false;
         }
     }
 

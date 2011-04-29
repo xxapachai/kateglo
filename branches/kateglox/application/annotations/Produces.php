@@ -34,6 +34,11 @@ namespace kateglo\application\annotations;
 class Produces extends \stubAbstractAnnotation implements \stubAnnotation{
 
     /**
+     * @var string
+     */
+    private $value;
+
+    /**
      * returns a string representation of the class
      *
      * The result is a short but informative representation about the class and
@@ -155,6 +160,21 @@ class Produces extends \stubAbstractAnnotation implements \stubAnnotation{
      */
     public function setAnnotationName($name) {
         // TODO: Implement setAnnotationName() method.
+    }
+
+    /**
+     * @param string $value
+     * @return void
+     */
+    public function setValue($value) {
+        $this->value = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue() {
+        return $this->value;
     }
 }
 ?>
