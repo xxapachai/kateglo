@@ -107,8 +107,8 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
             require_once 'Zend/Controller/Dispatcher/Exception.php';
             throw new Zend_Controller_Dispatcher_Exception ('Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface');
         }
-        
-        
+
+
         /**
          * Retrieve the action name
          */
@@ -170,6 +170,12 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         return $action;
     }
 
+    /**
+     * @throws Exception
+     * @param stubReflectionClass $classObject
+     * @param  $actionMethod
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
     protected function getActionPaths(stubReflectionClass $classObject, $actionMethod) {
         $actions = $classObject->getMethods();
         $actionPaths = new Doctrine\Common\Collections\ArrayCollection();
@@ -188,10 +194,16 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         return $actionPaths;
     }
 
+    /**
+     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
+     * @param Doctrine\Common\Collections\ArrayCollection $actionPaths
+     * @param Zend_Controller_Request_Http $request
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
     protected function getActionMethods(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
         $actionMethods = new Doctrine\Common\Collections\ArrayCollection();
         $serverMethod = $request->getMethod();
-        if(ucfirst(strtolower($serverMethod)) === 'Head'){
+        if (ucfirst(strtolower($serverMethod)) === 'Head') {
             $serverMethod = 'GET';
         }
         /** @var stubReflectionMethod $action */
@@ -207,6 +219,11 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         return $actionMethods;
     }
 
+    /**
+     * @throws kateglo\application\controllers\exceptions\HTTPNotAcceptableException
+     * @param Doctrine\Common\Collections\ArrayCollection $actionMethods
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
     protected function getActionProduces(Doctrine\Common\Collections\ArrayCollection $actionMethods) {
         $actionProduces = new Doctrine\Common\Collections\ArrayCollection();
         /** @var stubReflectionMethod $action */
@@ -222,6 +239,12 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         return $actionProduces;
     }
 
+    /**
+     * @throws Exception|kateglo\application\controllers\exceptions\HTTPNotAcceptableException
+     * @param Doctrine\Common\Collections\ArrayCollection $actionProduces
+     * @param Zend_Controller_Request_Http $request
+     * @return string
+     */
     protected function decideMedia(Doctrine\Common\Collections\ArrayCollection $actionProduces, Zend_Controller_Request_Http $request) {
         $supportedMediaAsArray = array();
         $mediaActionSet = array();
@@ -240,16 +263,26 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
                 }
             }
         }
-
-        $mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $request->getServer('HTTP_ACCEPT'));
-        if (!empty($mediaDecision)) {
-            $action = $mediaActionSet[$mediaDecision];
-            return $action->getName();
-        } else {
+        $requestMedia = $request->getServer('HTTP_ACCEPT');
+        if(!empty($requestMedia)){
+            $mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $requestMedia);
+            if (!empty($mediaDecision)) {
+                $action = $mediaActionSet[$mediaDecision];
+                return $action->getName();
+            } else {
+                throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+            }
+        }else{
             throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
         }
+
     }
 
+    /**
+     * @param stubReflectionClass $classObject
+     * @param Zend_Controller_Request_Http $request
+     * @return string
+     */
     protected function rest(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
         $actionMethod = $this->getRawActionMethod($request);
 
