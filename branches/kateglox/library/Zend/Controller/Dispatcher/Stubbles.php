@@ -80,8 +80,11 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         Injector::get()->bind('Zend_Controller_Action_Interface')->to($className);
         /*@var $controller Zend_Controller_Action_Stubbles */
         $controller = Injector::getInstance($className);
-        $classObject = new \stubReflectionClass($className);
-        $classObject->getMethod($this->getActionMethod($request))->hasAnnotation('Get');
+        $classObject = new stubReflectionClass($className);
+
+
+        $classObject->getMethod($this->getRawActionMethod($request))->hasAnnotation('Get');
+
         $controller->setRequest($request)->setResponse($response)->setInvokeArgs($this->getParams());
         $controller->setHelper(new Zend_Controller_Action_HelperBroker ($controller));
         $controller->init();
@@ -128,6 +131,80 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
 
         // Destroy the page controller instance and reflection objects
         $controller = null;
+    }
+
+            /**
+     * Determine the action name
+     *
+     * First attempt to retrieve from request; then from request params
+     * using action key; default to default action
+     *
+     * Returns formatted action name
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     * @return string
+     */
+    public function getRawActionMethod(Zend_Controller_Request_Abstract $request)
+    {
+        $action = $request->getActionName();
+        if (empty($action)) {
+            $action = $this->getDefaultAction();
+            $request->setActionName($action);
+        }
+
+        return $action;
+    }
+
+    protected function rest(stubReflectionClass $classObject, $actionMethod) {
+
+        if($actionMethod === 'index'){
+            $actionMethod = '';
+        }
+
+        $actionMethod  = '/'.$actionMethod;
+
+        $methods = $classObject->getMethods();
+
+        /** @var stubReflectionMethod $method */
+        foreach($methods as $method){
+            if($method->hasAnnotation('Path')){
+                if($method->getAnnotation('Path')->getValue() == $actionMethod){
+                    
+                }
+            }
+        }
+
+
+        if ($this->getRequest()->isGet()) {
+            if ($this->configs->cache->entry) {
+                if ($this->cache->contains($cacheId)) {
+                    $cache = unserialize($this->cache->fetch($cacheId));
+                    $content = $cache['content'];
+                    $eTag = $cache['eTag'];
+                } else {
+                    $content = $callback();
+                    $eTag = md5($cacheId . $content);
+                    $this->cache->save($cacheId, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
+                }
+            } else {
+                $content = $callback();
+                $eTag = md5($cacheId . $content);
+            }
+
+            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+                $this->getResponse()->setHttpResponseCode(304);
+            } else {
+                $this->getResponse()->setHeader('Etag', $eTag);
+                if ($this->requestJson()) {
+                    $this->_helper->json($content);
+                } else {
+                    $this->getResponse()->appendBody($content);
+                }
+            }
+        } else {
+            //Block other request method
+            throw new HTTPMethodNotAllowedException('Method not allowed');
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\daos;
 /*
- *  $Id$
+ *  $Id: Entry.php 310 2011-04-18 11:39:34Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,8 @@ use kateglo\application\models;
  * @package kateglo\application\daos
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-04-18 13:39:34 +0200 (Mo, 18 Apr 2011) $
+ * @version $LastChangedRevision: 310 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

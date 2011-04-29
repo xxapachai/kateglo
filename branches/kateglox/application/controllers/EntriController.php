@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id$
+ *  $Id: EntriController.php 319 2011-04-28 16:58:08Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,8 +28,8 @@ use kateglo\application\services\interfaces\Entry;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-04-28 18:58:08 +0200 (Do, 28 Apr 2011) $
+ * @version $LastChangedRevision: 319 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

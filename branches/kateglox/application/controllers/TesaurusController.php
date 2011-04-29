@@ -164,7 +164,6 @@ class TesaurusController extends Zend_Controller_Action_Stubbles {
 	 * @return void
 	 */
 	public function indexAction() {
-
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
         $this->view->search->setFieldValue($searchText);
