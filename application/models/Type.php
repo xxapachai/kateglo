@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Type.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,161 +35,173 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="type")
  */
 class Type {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="type_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="type_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="type_name", unique=true, length=255)
-	 */
-	private $type;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinTable(name="rel_meaning_type",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_meaning_id", referencedColumnName="meaning_id")}
-	 * )
-	 */
-	private $meanings;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\TypeCategory")
-	 * @JoinTable(name="rel_type_category",
-	 * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_type_category_id", referencedColumnName="type_category_id")}
-	 * )
-	 */
-	private $categories;
-	
-	public function __construct() {
-		$this->meanings = new ArrayCollection ();
-		$this->categories = new ArrayCollection ();
-	}
-	
-	/**
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @param string $type
-	 * @return void
-	 */
-	public function setType($type) {
-		$this->type = $type;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getType() {
-		return $this->type;
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function addMeaning(Meaning $meaning) {
-		if (! $this->meanings->contains ( $meaning )) {
-			$this->meanings [] = $meaning;
-			$meaning->addType ( $this );
-		}
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function removeMeaning(Meaning $meaning) {
-		/*@var $removed kateglo\application\models\Meaning */
-		$removed = $this->meanings->removeElement ( $meaning );
-		if ($removed !== null) {
-			$removed->removeType ( $this );
-		}
-	}
-	
-	/**
-	 * 
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getMeanings() {
-		return $this->meanings;
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\models\TypeCategory $category
-	 * @return void
-	 */
-	public function setCategory(TypeCategory $category) {
-		if (! $this->categories->contains ( $category )) {
-			$this->categories [0] = $category;
-			$category->addType ( $this );
-		}
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\models\TypeCategory $category
-	 * @return void
-	 */
-	public function removeCategory() {
-		$removed = $this->categories->removeElement ( $this->categories->get(0) );
-		if ($removed !== null) {
-			$removed->removeType ( $this );
-		}
-	}
-	
-	/**
-	 * 
-	 * @return kateglo\application\models\TypeCategory
-	 */
-	public function getCategory() {
-		return $this->categories->get(0);
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="type_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="type_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="type_name", unique=true, length=255)
+     */
+    private $type;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Meaning")
+     * @JoinTable(name="rel_meaning_type",
+     * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
+     * inverseJoinColumns={@JoinColumn(name="rel_meaning_id", referencedColumnName="meaning_id")}
+     * )
+     */
+    private $meanings;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\TypeCategory")
+     * @JoinTable(name="rel_type_category",
+     * joinColumns={@JoinColumn(name="rel_type_id", referencedColumnName="type_id")},
+     * inverseJoinColumns={@JoinColumn(name="rel_type_category_id", referencedColumnName="type_category_id")}
+     * )
+     */
+    private $categories;
+
+    public function __construct() {
+        $this->meanings = new ArrayCollection ();
+        $this->categories = new ArrayCollection ();
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     *
+     * @param string $type
+     * @return void
+     */
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function addMeaning(Meaning $meaning) {
+        if (!$this->meanings->contains($meaning)) {
+            $this->meanings [] = $meaning;
+            $meaning->addType($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function removeMeaning(Meaning $meaning) {
+        /*@var $removed kateglo\application\models\Meaning */
+        $removed = $this->meanings->removeElement($meaning);
+        if ($removed !== null) {
+            $removed->removeType($this);
+        }
+    }
+
+    /**
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMeanings() {
+        return $this->meanings;
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\TypeCategory $category
+     * @return void
+     */
+    public function setCategory(TypeCategory $category) {
+        if (!$this->categories->contains($category)) {
+            $this->categories [0] = $category;
+            $category->addType($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\TypeCategory $category
+     * @return void
+     */
+    public function removeCategory() {
+        $removed = $this->categories->removeElement($this->categories->get(0));
+        if ($removed !== null) {
+            $removed->removeType($this);
+        }
+    }
+
+    /**
+     *
+     * @return kateglo\application\models\TypeCategory
+     */
+    public function getCategory() {
+        return $this->categories->get(0);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['type'] = $this->type;
+        $array['category'] = ($this->getCategory() instanceof TypeCategory) ? $this->getCategory()->toArray() : null;
+
+        return $array;
+    }
 }
 
 ?>

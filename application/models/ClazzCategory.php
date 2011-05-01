@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: ClazzCategory.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,114 +35,125 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="class_category")
  */
 class ClazzCategory {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="class_category_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="class_category_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="class_category_name", unique=true, length=255)
-	 */
-	private $category;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="categories", cascade={"all"})
-	 */
-	private $clazzes;
-	
-	/**
-	 * 
-	 * Construct
-	 */
-	public function __construct() {
-		$this->clazzes = new ArrayCollection ();
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-	
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
-	
-	/**
-	 * @return the $category
-	 */
-	public function getCategory() {
-		return $this->category;
-	}
-	
-	/**
-	 * @param string $category
-	 */
-	public function setCategory($category) {
-		$this->category = $category;
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Clazz $clazz
-	 * @return void
-	 */
-	public function addClazz(Clazz $clazz) {
-		if (! $this->clazzes->contains ( $clazz )) {
-			$this->clazzes [] = $clazz;
-			$clazz->setCategory ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Clazz $clazz
-	 * @return void
-	 */
-	public function removeClazz(Clazz $clazz) {
-		/*@var $removed kateglo\application\models\Clazz */
-		$removed = $this->types->removeElement ( $clazz );
-		if ($removed !== null) {
-			$removed->removeClazz ();
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getClazzes() {
-		return $this->clazzes;
-	}
+
+    const CLASS_NAME = __CLASS__;
+
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="class_category_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="class_category_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="class_category_name", unique=true, length=255)
+     */
+    private $category;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="categories", cascade={"all"})
+     */
+    private $clazzes;
+
+    /**
+     *
+     * Construct
+     */
+    public function __construct() {
+        $this->clazzes = new ArrayCollection ();
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     * @return the $category
+     */
+    public function getCategory() {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category) {
+        $this->category = $category;
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Clazz $clazz
+     * @return void
+     */
+    public function addClazz(Clazz $clazz) {
+        if (!$this->clazzes->contains($clazz)) {
+            $this->clazzes [] = $clazz;
+            $clazz->setCategory($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Clazz $clazz
+     * @return void
+     */
+    public function removeClazz(Clazz $clazz) {
+        /*@var $removed kateglo\application\models\Clazz */
+        $removed = $this->types->removeElement($clazz);
+        if ($removed !== null) {
+            $removed->removeClazz();
+        }
+    }
+
+    /**
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getClazzes() {
+        return $this->clazzes;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['category'] = $this->category;
+
+        return $array;
+    }
 }
 
 ?>

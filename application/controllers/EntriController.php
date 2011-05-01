@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: EntriController.php 319 2011-04-28 16:58:08Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,6 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use Doctrine\Common\Cache\Cache;
 use kateglo\application\helpers\RouteParameter;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
@@ -28,8 +27,8 @@ use kateglo\application\services\interfaces\Entry;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-04-28 18:58:08 +0200 (Do, 28 Apr 2011) $
- * @version $LastChangedRevision: 319 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -71,41 +70,59 @@ class EntriController extends Zend_Controller_Action_Stubbles {
         $this->search = $search;
     }
 
-    public function indexAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        if ($this->getRequest()->isGet()) {
-            $text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
-            if ($text !== '') {
-                if ($this->configs->cache->entry) {
-                    if ($this->cache->contains($text)) {
-                        $content = $this->cache->fetch($text);
-                    } else {
-                        $content = $this->renderEntry($text);
-                        $this->cache->save($text, $content, 0);
-                    }
-                } else {
-                    $content = $this->renderEntry($text);
-                }
-                $this->getResponse()->appendBody($content);
-            } else {
-                $this->getResponse()->setHeader('location', $this->_request->getBaseUrl());
-            }
-        } else {
-            $this->getResponse()->setHeader('location', $this->_request->getBaseUrl());
-        }
+    /**
+     * (non-PHPdoc)
+     * @see Zend_Controller_Action::init()
+     */
+    public function init() {
+        parent::init();
+        $this->view->search = $this->search;
     }
 
     /**
-     * @param  string $text
-     * @return string
+     * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('text/html')
      */
-    private function renderEntry($text) {
-        $this->view->appPath = APPLICATION_PATH;
-        $this->view->search = $this->search;
-        $this->view->formAction = '/kamus';
-        $this->view->search->setFieldValue($text);
-        $this->view->entry = $this->entry->getEntry($text);
-        return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+    public function indexHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
+        $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $text;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            try {
+                $this->view->search->setFieldValue($text);
+                $this->view->formAction = '/kamus';
+                $this->view->entry = $this->entry->getEntry($text);
+                $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+            } catch (Apache_Solr_Exception $e) {
+                $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+            }
+        }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
+    }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('application/json')
+     */
+    public function indexJson() {
+        $text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
+        $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $text;
+        if (!$this->evaluatePreCondition($cacheId)) {
+            try {
+                $this->content = $this->entry->getEntryAsJSON($text);
+            } catch (Apache_Solr_Exception $e) {
+                $this->content = array('error' => 'query error');
+            }
+        }
+        $this->responseBuilder($cacheId);
+        $this->_helper->json($this->content);
     }
 }
 

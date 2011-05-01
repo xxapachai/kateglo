@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Definition.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -87,7 +87,7 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym", mappedBy="antonyms", cascade={"all"})
 	 * @JoinTable(name="rel_antonym_definition",
 	 * joinColumns={@JoinColumn(name="rel_antonym_id", referencedColumnName="antonym_id")},
 	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
@@ -97,7 +97,7 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym", mappedBy="definitions")
 	 * @JoinTable(name="rel_synonym_definition",
 	 * joinColumns={@JoinColumn(name="rel_synonym_id", referencedColumnName="synonym_id")},
 	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
@@ -107,7 +107,7 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Relation")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Relation", mappedBy="definitions")
 	 * @JoinTable(name="rel_relation_definition",
 	 * joinColumns={@JoinColumn(name="rel_relation_id", referencedColumnName="relation_id")},
 	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
@@ -117,7 +117,7 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="definitions")
 	 * @JoinTable(name="rel_misspelled_definition",
 	 * joinColumns={@JoinColumn(name="rel_misspelled_id", referencedColumnName="misspelled_id")},
 	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
@@ -426,6 +426,30 @@ class Definition {
 	public function getMisspelleds() {
 		return $this->misspelleds;
 	}
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['definition'] = $this->definition;
+        $array['class'] = ($this->getClazz() instanceof Clazz) ? $this->getClazz()->toArray() : null;
+        
+        $array['disciplines'] = array();
+        $disciplines = $this->getDisciplines();
+        foreach($disciplines as $discipline){
+            $array['disciplines'][] = $discipline->toArray();
+        }
+
+        $array['samples'] = array();
+        $samples = $this->getSamples();
+        foreach($samples as $sample){
+            $array['samples'][] = $sample->toArray();
+        }
+
+        return $array;
+    }
 }
 
 ?>

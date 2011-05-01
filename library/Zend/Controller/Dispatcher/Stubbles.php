@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Stubbles.php 269 2011-01-16 16:42:14Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,8 +30,8 @@ use kateglo\application\utilities\interfaces\MimeParser;
  * @package kateglo\library\Zend\Controller\Dispatcher
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-01-16 17:42:14 +0100 (So, 16 Jan 2011) $
- * @version $LastChangedRevision: 269 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -189,7 +189,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         }
 
         if ($actionPaths->count() === 0) {
-            throw new Exception('paths not found');
+            throw new Exception('paths not found ');
         }
         return $actionPaths;
     }

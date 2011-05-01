@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\daos\interfaces;
 /*
- *  $Id: Entry.php 274 2011-01-25 22:48:14Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\daos\interfaces;
  * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-01-25 23:48:14 +0100 (Di, 25 Jan 2011) $
- * @version $LastChangedRevision: 274 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

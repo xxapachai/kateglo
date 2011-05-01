@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: KamusController.php 290 2011-03-13 22:48:04Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,19 +18,17 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\faces\Hit;
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
-use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 /**
  *
  *
  *
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-13 23:48:04 +0100 (So, 13 Mrz 2011) $
- * @version $LastChangedRevision: 290 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -180,8 +178,5 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
     }
-
-
 }
-
 ?>

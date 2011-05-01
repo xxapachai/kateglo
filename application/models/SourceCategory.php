@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: SourceCategory.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,112 +35,123 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="source_category")
  */
 class SourceCategory {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="source_category_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="source_category_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="source_category_name", unique=true, length=255)
-	 */
-	private $category;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"all"})
-	 */
-	private $sources;
-	
-	/**
-	 * 
-	 * Construct
-	 */
-	public function __construct() {
-		$this->sources = new ArrayCollection ();
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 * @return the $category
-	 */
-	public function getCategory() {
-		return $this->category;
-	}
-	
-	/**
-	 * @param string $category
-	 */
-	public function setCategory($category) {
-		$this->category = $category;
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Source $source
-	 * @return void
-	 */
-	public function addSource(Source $source) {
-		$this->sources [] = $source;
-		$source->setCategory ( $this );
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Source $source
-	 * @return void
-	 */
-	public function removeSource(Misspelled $source) {
-		/*@var $removed kateglo\application\models\Source */
-		$removed = $this->sources->removeElement ( $source );
-		if ($removed !== null) {
-			$removed->removeCategory ();
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getSources() {
-		return $this->sources;
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="source_category_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="source_category_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="source_category_name", unique=true, length=255)
+     */
+    private $category;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="category", cascade={"all"})
+     */
+    private $sources;
+
+    /**
+     *
+     * Construct
+     */
+    public function __construct() {
+        $this->sources = new ArrayCollection ();
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     * @return the $category
+     */
+    public function getCategory() {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category) {
+        $this->category = $category;
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Source $source
+     * @return void
+     */
+    public function addSource(Source $source) {
+        $this->sources [] = $source;
+        $source->setCategory($this);
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Source $source
+     * @return void
+     */
+    public function removeSource(Misspelled $source) {
+        /*@var $removed kateglo\application\models\Source */
+        $removed = $this->sources->removeElement($source);
+        if ($removed !== null) {
+            $removed->removeCategory();
+        }
+    }
+
+    /**
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSources() {
+        return $this->sources;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['category'] = $this->category;
+
+        return $array;
+    }
 }
 
 ?>

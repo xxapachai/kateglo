@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Misspelled.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,153 +35,167 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="misspelled")
  */
 class Misspelled {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="misspelled_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="misspelled_version") 
-	 */
-	private $version;
-	
-	/**
-	 * @var kateglo\application\models\Meaning
-	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinColumn(name="misspelled_meaning_id", referencedColumnName="meaning_id")
-	 */
-	private $meaning;
-	
-	/**
-	 * @var kateglo\application\models\Meaning
-	 * @OneToOne(targetEntity="kateglo\application\models\Meaning", inversedBy="spelled")
-	 * @JoinColumn(name="misspelled_misspelled_id", referencedColumnName="meaning_id")
-	 */
-	private $misspelled;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="misspelleds", cascade={"all"})
-	 */
-	private $definitions;
-	
-	public function __construct() {
-		$this->definitions = new ArrayCollection ();
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 * @return kateglo\application\models\Meaning
-	 */
-	public function getMeaning() {
-		return $this->meaning;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function setMeaning(Meaning $meaning) {
-		$this->meaning = $meaning;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeMeaning() {
-		if ($this->meaning !== null) {
-			/*@var $entry kateglo\application\models\Meaning */
-			$meaning = $this->meaning;
-			$this->meaning = null;
-			$meaning->removeMisspelled ( $this );
-		}
-	}
-	
-	/**
-	 * 
-	 * @return kateglo\application\models\Meaning
-	 */
-	public function getMisspelled() {
-		return $this->misspelled;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function setMisspelled(Meaning $meaning) {
-		if ($this->misspelled !== $meaning) {
-			$this->misspelled = $meaning;
-			$meaning->setSpelled ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Definition $definition
-	 * @return void
-	 */
-	public function addDefinition(Definition $definition) {
-		if (! $this->definitions->contains ( $definition )) {
-			$this->definitions [] = $definition;
-			$definition->addMisspelled ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Definition $definition
-	 * @return source
-	 */
-	public function removeDefinition(Definition $definition) {
-		/*@var $removed kateglo\application\models\Definition */
-		$removed = $this->definitions->removeElement ( $definition );
-		if ($removed !== null) {
-			$removed->removeMisspelled ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDefinitions() {
-		return $this->definitions;
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="misspelled_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="misspelled_version")
+     */
+    private $version;
+
+    /**
+     * @var kateglo\application\models\Meaning
+     * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
+     * @JoinColumn(name="misspelled_meaning_id", referencedColumnName="meaning_id")
+     */
+    private $meaning;
+
+    /**
+     * @var kateglo\application\models\Meaning
+     * @OneToOne(targetEntity="kateglo\application\models\Meaning", inversedBy="spelled")
+     * @JoinColumn(name="misspelled_misspelled_id", referencedColumnName="meaning_id")
+     */
+    private $misspelled;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Definition", mappedBy="misspelleds", cascade={"all"})
+     */
+    private $definitions;
+
+    public function __construct() {
+        $this->definitions = new ArrayCollection ();
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     * @return kateglo\application\models\Meaning
+     */
+    public function getMeaning() {
+        return $this->meaning;
+    }
+
+    /**
+     * @param kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function setMeaning(Meaning $meaning) {
+        $this->meaning = $meaning;
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function removeMeaning() {
+        if ($this->meaning !== null) {
+            /*@var $entry kateglo\application\models\Meaning */
+            $meaning = $this->meaning;
+            $this->meaning = null;
+            $meaning->removeMisspelled($this);
+        }
+    }
+
+    /**
+     *
+     * @return kateglo\application\models\Meaning
+     */
+    public function getMisspelled() {
+        return $this->misspelled;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function setMisspelled(Meaning $meaning) {
+        if ($this->misspelled !== $meaning) {
+            $this->misspelled = $meaning;
+            $meaning->setSpelled($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Definition $definition
+     * @return void
+     */
+    public function addDefinition(Definition $definition) {
+        if (!$this->definitions->contains($definition)) {
+            $this->definitions [] = $definition;
+            $definition->addMisspelled($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Definition $definition
+     * @return source
+     */
+    public function removeDefinition(Definition $definition) {
+        /*@var $removed kateglo\application\models\Definition */
+        $removed = $this->definitions->removeElement($definition);
+        if ($removed !== null) {
+            $removed->removeMisspelled($this);
+        }
+    }
+
+    /**
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDefinitions() {
+        return $this->definitions;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['meaning']['id'] = ($this->getMisspelled() instanceof Meaning) ? $this->getMisspelled()->getId() : null;
+        $array['meaning']['version'] = ($this->getMisspelled() instanceof Meaning) ? $this->getMisspelled()->getVersion() : null;
+        $array['meaning']['entry']['id'] = ($this->getMisspelled() instanceof Meaning) ? $this->getMisspelled()->getEntry()->getId() : null;
+        $array['meaning']['entry']['version'] = ($this->getMisspelled() instanceof Meaning) ? $this->getMisspelled()->getEntry()->getVersion() : null;
+        $array['meaning']['entry']['entry'] = ($this->getMisspelled() instanceof Meaning) ? $this->getMisspelled()->getEntry()->getEntry() : null;
+
+        return $array;
+    }
 }
 
 ?>
