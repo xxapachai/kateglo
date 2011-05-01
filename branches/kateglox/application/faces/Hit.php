@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\faces;
 /*
- *  $Id: Hit.php 276 2011-02-01 20:10:46Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-02-01 21:10:46 +0100 (Di, 01 Feb 2011) $
- * @version $LastChangedRevision: 276 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Discipline.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,99 +35,99 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="discipline")
  */
 class Discipline {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="discipline_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="discipline_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="discipline_name", unique=true, length=255)
-	 */
-	private $discipline;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Definition")
-	 * @JoinTable(name="rel_definition_discipline",
-	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
-	 * )
-	 */
-	private $definitions;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Equivalent")
-	 * @JoinTable(name="rel_equivalent_discipline",
-	 * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_equivalent_id", referencedColumnName="equivalent_id")}
-	 * )
-	 */
-	private $equivalents;
-	
-	public function __construct(){
-		$this->definitions = new ArrayCollection ();
-		$this->equivalents = new ArrayCollection ();
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 * @return the $discipline
-	 */
-	public function getDiscipline() {
-		return $this->discipline;
-	}
-	
-	/**
-	 * @param string $discipline
-	 */
-	public function setDiscipline($discipline) {
-		$this->discipline = $discipline;
-	}
-	
-	/**
-	 * 
-	 * @param kateglo\application\models\Definition $definition
-	 * @return void
-	 */	
-	public function addDefinition(Definition $definition){
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="discipline_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="discipline_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="discipline_name", unique=true, length=255)
+     */
+    private $discipline;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Definition")
+     * @JoinTable(name="rel_definition_discipline",
+     * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
+     * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
+     * )
+     */
+    private $definitions;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @ManyToMany(targetEntity="kateglo\application\models\Equivalent")
+     * @JoinTable(name="rel_equivalent_discipline",
+     * joinColumns={@JoinColumn(name="rel_discipline_id", referencedColumnName="discipline_id")},
+     * inverseJoinColumns={@JoinColumn(name="rel_equivalent_id", referencedColumnName="equivalent_id")}
+     * )
+     */
+    private $equivalents;
+
+    public function __construct() {
+        $this->definitions = new ArrayCollection ();
+        $this->equivalents = new ArrayCollection ();
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     * @return the $discipline
+     */
+    public function getDiscipline() {
+        return $this->discipline;
+    }
+
+    /**
+     * @param string $discipline
+     */
+    public function setDiscipline($discipline) {
+        $this->discipline = $discipline;
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Definition $definition
+     * @return void
+     */
+    public function addDefinition(Definition $definition) {
         if (!$this->definitions->contains($definition)) {
             $this->definitions[] = $definition;
             $definition->addDiscipline($this);
@@ -135,12 +135,12 @@ class Discipline {
     }
 
     /**
-     * 
+     *
      * @param kateglo\application\models\Definition $definition
      * @return void
      */
-    public function removeDefinition(Definition $definition){
-    	/*@var $removed kateglo\application\models\Definition */
+    public function removeDefinition(Definition $definition) {
+        /*@var $removed kateglo\application\models\Definition */
         $removed = $this->definitions->removeElement($definition);
         if ($removed !== null) {
             $removed->removeDiscipline($this);
@@ -148,19 +148,19 @@ class Discipline {
     }
 
     /**
-     * 
+     *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getDefinitions(){
+    public function getDefinitions() {
         return $this->definitions;
     }
-    
-	/**
-	 * 
-	 * @param kateglo\application\models\Equivalent $equivalent
-	 * @return void
-	 */	
-	public function addEquivalent(Equivalent $equivalent){
+
+    /**
+     *
+     * @param kateglo\application\models\Equivalent $equivalent
+     * @return void
+     */
+    public function addEquivalent(Equivalent $equivalent) {
         if (!$this->equivalents->contains($equivalent)) {
             $this->equivalents[] = $equivalent;
             $equivalent->addDiscipline($this);
@@ -168,12 +168,12 @@ class Discipline {
     }
 
     /**
-     * 
+     *
      * @param kateglo\application\models\Equivalent $equivalent
      * @return void
      */
-    public function removeEquivalent(Equivalent $equivalent){
-    	/*@var $removed kateglo\application\models\Equivalent */
+    public function removeEquivalent(Equivalent $equivalent) {
+        /*@var $removed kateglo\application\models\Equivalent */
         $removed = $this->equivalents->removeElement($equivalent);
         if ($removed !== null) {
             $removed->removeDiscipline($this);
@@ -181,11 +181,21 @@ class Discipline {
     }
 
     /**
-     * 
+     *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getEquivalents(){
+    public function getEquivalents() {
         return $this->equivalents;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['discipline'] = $this->discipline;
+        return $array;
     }
 }
 

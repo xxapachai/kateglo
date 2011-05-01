@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Syllabel.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,146 +35,162 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="syllabel")
  */
 class Syllabel {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="syllabel_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="syllabel_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="syllabel_text", unique=true, length=255)
-	 */
-	private $syllabel;
-	
-	/**
-	 * @var kateglo\application\models\Meaning
-	 * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
-	 * @JoinColumn(name="syllabel_meaning_id", referencedColumnName="meaning_id")
-	 */
-	private $meaning;
-	
-	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"all"})
-	 */
-	private $pronounciations;
-	
-	function __construct() {
-		$this->pronounciations = new ArrayCollection ();
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @param string $syllabel
-	 * @return void
-	 */
-	public function setSyllabel($syllabel) {
-		$this->syllabel = $syllabel;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getSyllabel() {
-		return $this->syllabel;
-	}
-	
-	/**
-	 * @return kateglo\application\models\Meaning
-	 */
-	public function getMeaning() {
-		return $this->meaning;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function setMeaning(Meaning $meaning) {
-		$this->meaning = $meaning;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeMeaning() {
-		if ($this->meaning !== null) {
-			/*@var $entry kateglo\application\models\Meaning */
-			$meaning = $this->meaning;
-			$this->meaning = null;
-			$meaning->removeSyllabel ( $this );
-		}
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Pronounciation $pronounciation
-	 * @return void
-	 */
-	public function addPronounciation(Pronounciation $pronounciation) {
-		$this->pronounciations [] = $pronounciation;
-		$pronounciation->setSyllabel ( $this );
-	}
-	
-	/**
-	 *
-	 * @param kateglo\application\models\Pronounciation $pronounciation
-	 * @return void
-	 */
-	public function removePronounciation(Pronounciation $pronounciation) {
-		/*@var $removed kateglo\application\models\Pronounciation */
-		$removed = $this->pronounciations->removeElement ( $pronounciation );
-		if ($removed !== null) {
-			$removed->removeSyllabel ();
-		}
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getPronounciations() {
-		return $this->pronounciations;
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="syllabel_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="syllabel_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="syllabel_text", unique=true, length=255)
+     */
+    private $syllabel;
+
+    /**
+     * @var kateglo\application\models\Meaning
+     * @ManyToOne(targetEntity="kateglo\application\models\Meaning")
+     * @JoinColumn(name="syllabel_meaning_id", referencedColumnName="meaning_id")
+     */
+    private $meaning;
+
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     * @OneToMany(targetEntity="kateglo\application\models\Pronounciation", mappedBy="syllabel", cascade={"all"})
+     */
+    private $pronounciations;
+
+    function __construct() {
+        $this->pronounciations = new ArrayCollection ();
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     *
+     * @param string $syllabel
+     * @return void
+     */
+    public function setSyllabel($syllabel) {
+        $this->syllabel = $syllabel;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getSyllabel() {
+        return $this->syllabel;
+    }
+
+    /**
+     * @return kateglo\application\models\Meaning
+     */
+    public function getMeaning() {
+        return $this->meaning;
+    }
+
+    /**
+     * @param kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function setMeaning(Meaning $meaning) {
+        $this->meaning = $meaning;
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function removeMeaning() {
+        if ($this->meaning !== null) {
+            /*@var $entry kateglo\application\models\Meaning */
+            $meaning = $this->meaning;
+            $this->meaning = null;
+            $meaning->removeSyllabel($this);
+        }
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Pronounciation $pronounciation
+     * @return void
+     */
+    public function addPronounciation(Pronounciation $pronounciation) {
+        $this->pronounciations [] = $pronounciation;
+        $pronounciation->setSyllabel($this);
+    }
+
+    /**
+     *
+     * @param kateglo\application\models\Pronounciation $pronounciation
+     * @return void
+     */
+    public function removePronounciation(Pronounciation $pronounciation) {
+        /*@var $removed kateglo\application\models\Pronounciation */
+        $removed = $this->pronounciations->removeElement($pronounciation);
+        if ($removed !== null) {
+            $removed->removeSyllabel();
+        }
+    }
+
+    /**
+     *
+     * @return Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPronounciations() {
+        return $this->pronounciations;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['syllabel'] = $this->syllabel;
+        $array['pronounciations'] = array();
+        $pronounciations = $this->getPronounciations();
+        foreach ($pronounciations as $pronounciation) {
+            $array['pronounciations'][] = $pronounciation->toArray();
+        }
+
+        return $array;
+    }
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: IndexController.php 268 2011-01-16 14:39:03Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,8 +28,8 @@ use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
  * @package kateglo\application\controllers
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-01-16 15:39:03 +0100 (So, 16 Jan 2011) $
- * @version $LastChangedRevision: 268 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -72,79 +72,54 @@ class IndexController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Zend_Controller_Action::init()
+     */
+    public function init() {
+        parent::init();
+        $this->view->search = $this->search;
+    }
+
+    /**
      * @return void
      * @Get
+     * @Path('/')
+     * @Produces('text/html')
      */
-    public function indexAction() {
-        if ($this->requestJson()) {
-            $this->renderJson();
-        } else {
-            $this->renderHtml();
-        }
+    public function indexHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $cacheId = __CLASS__ . '\\' . 'html';
 
-    }
-
-    /**
-     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
-     * @return void
-     */
-    private function renderHtml() {
-        if ($this->getRequest()->isGet()) {
-            $this->_helper->viewRenderer->setNoRender();
-            if ($this->configs->cache->entry) {
-                if ($this->cache->contains(__CLASS__)) {
-                    $cache = unserialize($this->cache->fetch(__CLASS__));
-                    $content = $cache['content'];
-                    $eTag = $cache['eTag'];
-                } else {
-                    $content = $this->html();
-                    $eTag = md5(__CLASS__ . $content);
-                    $this->cache->save(__CLASS__, serialize(array('content' => $content, 'eTag' => $eTag)), 0);
-                }
-            } else {
-                $content = $this->html();
-                $eTag = md5(__CLASS__ . $content);
-            }
-
-            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
-                $this->getResponse()->setHttpResponseCode(304);
-            } else {
-                $this->getResponse()->setHeader('Etag', $eTag);
-                $this->getResponse()->appendBody($content);
-            }
-        } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
-        }
-    }
-
-    /**
-     * @return string
-     */
-    private function html(){
-        $this->view->appPath = APPLICATION_PATH;
-        $this->view->search = $this->search;
-        $this->view->formAction = '/kamus';
-        return $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-    }
-
-    /**
-     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
-     * @return void
-     */
-    private function renderJson() {
-        if ($this->getRequest()->isGet()) {
+        if (!$this->evaluatePreCondition($cacheId)) {
             try {
-                $this->_helper->json(array('amount' => $this->entry->getTotalCount(), 'entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled()));
-            } catch (EntryException $e) {
-                $this->getResponse()->setHttpResponseCode(500);
-                $this->_helper->json(array('error' => $e->getMessage()));
+                $this->view->formAction = '/kamus';
+                $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+            } catch (Apache_Solr_Exception $e) {
+                $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
             }
-        } else {
-            //Block other request method
-            throw new HTTPMethodNotAllowedException('Method not allowed');
         }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
     }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('application/json')
+     */
+    public function indexJson() {
+
+        try {
+            $this->content = array('amount' => $this->entry->getTotalCount(), 'entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled());
+        } catch (Apache_Solr_Exception $e) {
+            $this->content = array('error' => 'query error');
+        }
+
+        $this->_helper->json($this->content);
+    }
+
 }
 
 ?>

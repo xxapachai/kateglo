@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\services;
 /*
- *  $Id: Pagination.php 310 2011-04-18 11:39:34Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @package kateglo\application\services
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-04-18 13:39:34 +0200 (Mo, 18 Apr 2011) $
- * @version $LastChangedRevision: 310 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */

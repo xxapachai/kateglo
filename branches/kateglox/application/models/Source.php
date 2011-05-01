@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Source.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\models;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,184 +35,197 @@ namespace kateglo\application\models;
  * @Table(name="source")
  */
 class Source {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="source_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="source_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="source_url", length=2100)
-	 */
-	private $url;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="source_text")
-	 */
-	private $source;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="source_text_clean")
-	 */
-	private $clean;
-	
-	/**
-	 * @var kateglo\application\models\Meaning
-	 * @ManyToOne(targetEntity="kateglo\application\models\SourceCategory")
-	 * @JoinColumn(name="source_category_id", referencedColumnName="source_category_id")
-	 */
-	private $category;
-	
-	/**
-	 * @var kateglo\application\models\Entry
-	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
-	 * @JoinColumn(name="source_entry_id", referencedColumnName="entry_id")
-	 */
-	private $entry;
-	
-	public function __construct() {
-	
-	}
-	
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 * @return the $url
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
-	
-	/**
-	 * @param string $url
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
-	}
-	
-	/**
-	 * @return the $category
-	 */
-	public function getSource() {
-		return $this->source;
-	}
-	
-	/**
-	 * @param string $category
-	 */
-	public function setSource($source) {
-		$this->source = $source;
-	}
-	
-	/**
-	 * @return the $clean
-	 */
-	public function getClean() {
-		return $this->clean;
-	}
-	
-	/**
-	 * @param string $clean
-	 */
-	public function setClean($clean) {
-		$this->clean = $clean;
-	}
-	
-	/**
-	 * @return kateglo\application\models\SourceCategory
-	 */
-	public function getCategory() {
-		return $this->category;
-	}
-	
-	/**
-	 * @param kateglo\application\models\SourceCategory $category
-	 * @return void
-	 */
-	public function setCategory(SourceCategory $category) {
-		$this->category = $category;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeCategory() {
-		if ($this->category !== null) {
-			/*@var $category kateglo\application\models\SourceCategory */
-			$category = $this->category;
-			$this->category = null;
-			$category->removeSource ( $this );
-		}
-	}
-	
-	/**
-	 * @return kateglo\application\models\Entry
-	 */
-	public function getEntry() {
-		return $this->entry;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Entry $entry
-	 * @return void
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeEntry() {
-		if ($this->entry !== null) {
-			/*@var $entry kateglo\application\models\Entry */
-			$entry = $this->entry;
-			$this->entry = null;
-			$entry->removeSource ( $this );
-		}
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="source_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="source_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="source_url", length=2100)
+     */
+    private $url;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="source_text")
+     */
+    private $source;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="source_text_clean")
+     */
+    private $clean;
+
+    /**
+     * @var kateglo\application\models\Meaning
+     * @ManyToOne(targetEntity="kateglo\application\models\SourceCategory")
+     * @JoinColumn(name="source_category_id", referencedColumnName="source_category_id")
+     */
+    private $category;
+
+    /**
+     * @var kateglo\application\models\Entry
+     * @ManyToOne(targetEntity="kateglo\application\models\Entry")
+     * @JoinColumn(name="source_entry_id", referencedColumnName="entry_id")
+     */
+    private $entry;
+
+    public function __construct() {
+
+    }
+
+    /**
+     * @return the $id
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     * @return the $url
+     */
+    public function getUrl() {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+    /**
+     * @return the $category
+     */
+    public function getSource() {
+        return $this->source;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setSource($source) {
+        $this->source = $source;
+    }
+
+    /**
+     * @return the $clean
+     */
+    public function getClean() {
+        return $this->clean;
+    }
+
+    /**
+     * @param string $clean
+     */
+    public function setClean($clean) {
+        $this->clean = $clean;
+    }
+
+    /**
+     * @return kateglo\application\models\SourceCategory
+     */
+    public function getCategory() {
+        return $this->category;
+    }
+
+    /**
+     * @param kateglo\application\models\SourceCategory $category
+     * @return void
+     */
+    public function setCategory(SourceCategory $category) {
+        $this->category = $category;
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function removeCategory() {
+        if ($this->category !== null) {
+            /*@var $category kateglo\application\models\SourceCategory */
+            $category = $this->category;
+            $this->category = null;
+            $category->removeSource($this);
+        }
+    }
+
+    /**
+     * @return kateglo\application\models\Entry
+     */
+    public function getEntry() {
+        return $this->entry;
+    }
+
+    /**
+     * @param kateglo\application\models\Entry $entry
+     * @return void
+     */
+    public function setEntry(Entry $entry) {
+        $this->entry = $entry;
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function removeEntry() {
+        if ($this->entry !== null) {
+            /*@var $entry kateglo\application\models\Entry */
+            $entry = $this->entry;
+            $this->entry = null;
+            $entry->removeSource($this);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['url'] = $this->url;
+        $array['source'] = $this->source;
+        $array['clean'] = $this->clean;
+        $array['category'] = ($this->getCategory() instanceof SourceCategory) ? $this->getCategory()->toArray() : null;
+
+        return $array;
+    }
 }
 
 ?>

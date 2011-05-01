@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Stubbles.php 266 2010-12-16 21:01:27Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,8 +31,8 @@ use Doctrine\Common\Cache\Cache;
  * @package kateglo\library\Zend\Controller\Action
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2010-12-16 22:01:27 +0100 (Do, 16 Dez 2010) $
- * @version $LastChangedRevision: 266 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
@@ -166,6 +166,10 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * @param  string $cacheId
+     * @return bool
+     */
     protected function evaluatePreCondition($cacheId) {
         if ($this->configs->cache->entry) {
             if ($this->cache->contains($cacheId)) {
@@ -173,12 +177,9 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
                 $this->content = $cache['content'];
                 $this->eTag = $cache['eTag'];
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
 }

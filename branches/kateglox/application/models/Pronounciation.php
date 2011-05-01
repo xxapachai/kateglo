@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\models;
 /*
- *  $Id: Pronounciation.php 286 2011-03-06 10:56:42Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ namespace kateglo\application\models;
  * @package kateglo\application\models
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-03-06 11:56:42 +0100 (So, 06 Mrz 2011) $
- * @version $LastChangedRevision: 286 $
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  *
@@ -35,110 +35,121 @@ namespace kateglo\application\models;
  * @Table(name="pronounciation")
  */
 class Pronounciation {
-	
-	const CLASS_NAME = __CLASS__;
-	
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="pronounciation_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="pronounciation_version") 
-	 */
-	private $version;
-	
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="pronounciation_text", length=255)
-	 */
-	private $pronounciation;
-	
-	/**
-	 * @var kateglo\application\models\Syllabel
-	 * @ManyToOne(targetEntity="kateglo\application\models\Syllabel")
-	 * @JoinColumn(name="pronounciation_syllabel_id", referencedColumnName="syllabel_id")
-	 */
-	private $syllabel;
-	
-	public function __construct() {
-	
-	}
-	
-	/**
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @param string pronounciation
-	 * @return void
-	 */
-	public function setPronounciation($pronounciation) {
-		$this->pronounciation = $pronounciation;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getPronounciation() {
-		return $this->pronounciation;
-	}
-	
-	/**
-	 * @return kateglo\application\models\Syllabel
-	 */
-	public function getSyllabel() {
-		return $this->syllabel;
-	}
-	
-	/**
-	 * @param kateglo\application\models\Syllabel $syllabel
-	 * @return void
-	 */
-	public function setSyllabel(Syllabel $syllabel) {
-		$this->syllabel = $syllabel;
-	}
-	
-	/**
-	 *
-	 * @return void
-	 */
-	public function removeSyllabel() {
-		if ($this->syllabel !== null) {
-			/*@var $entry kateglo\application\models\Syllabel */
-			$syllabel = $this->syllabel;
-			$this->syllabel = null;
-			$syllabel->removePronounciation ( $this );
-		}
-	}
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="pronounciation_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="pronounciation_version")
+     */
+    private $version;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="pronounciation_text", length=255)
+     */
+    private $pronounciation;
+
+    /**
+     * @var kateglo\application\models\Syllabel
+     * @ManyToOne(targetEntity="kateglo\application\models\Syllabel")
+     * @JoinColumn(name="pronounciation_syllabel_id", referencedColumnName="syllabel_id")
+     */
+    private $syllabel;
+
+    public function __construct() {
+
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @return the $version
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion($version) {
+        $this->version = $version;
+    }
+
+    /**
+     *
+     * @param string pronounciation
+     * @return void
+     */
+    public function setPronounciation($pronounciation) {
+        $this->pronounciation = $pronounciation;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getPronounciation() {
+        return $this->pronounciation;
+    }
+
+    /**
+     * @return kateglo\application\models\Syllabel
+     */
+    public function getSyllabel() {
+        return $this->syllabel;
+    }
+
+    /**
+     * @param kateglo\application\models\Syllabel $syllabel
+     * @return void
+     */
+    public function setSyllabel(Syllabel $syllabel) {
+        $this->syllabel = $syllabel;
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function removeSyllabel() {
+        if ($this->syllabel !== null) {
+            /*@var $entry kateglo\application\models\Syllabel */
+            $syllabel = $this->syllabel;
+            $this->syllabel = null;
+            $syllabel->removePronounciation($this);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['pronounciation'] = $this->pronounciation;
+
+        return $array;
+    }
 }
 
 ?>
