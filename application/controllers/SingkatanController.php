@@ -21,6 +21,7 @@
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\faces\Hit;
 /**
  *
  *
@@ -108,7 +109,7 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
         $this->view->search = $this->search;
         $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
         $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
-        $this->view->formAction = '/kamus';
+        $this->view->formAction = '/singkatan';
     }
 
     /**
