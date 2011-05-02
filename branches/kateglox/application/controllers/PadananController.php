@@ -21,6 +21,7 @@
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\faces\Hit;
 /**
  *
  *
