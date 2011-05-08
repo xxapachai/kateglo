@@ -7,7 +7,31 @@
     <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
-<div tal:omit-tag="true" metal:fill-slot="content">
+<tal:block metal:fill-slot="header">
+    <section id="header">
+        <div class="grid_1 nomargin-left">&nbsp;</div>
+        <div id="wordoftheday" class="grid_7">
+            <h4>Kata hari ini:</h4>
+
+            <h3>Leluasa</h3>
+            <a class="link" href=""><span>Tautan</span></a>
+
+        </div>
+        <!-- /#wordoftheday -->
+        <div id="meaning" class="grid_12 nomargin-right">
+            <ul>
+                <li>lapang: pekarangannya --</li>
+                <li>bebas: ternaknya -- ke sana-ke sini karena lepas dari tambatnya</li>
+                <li>tidak terbatas (terlarang dsb): makanannya -- sejak dua bulan terakhir ini</li>
+                <li>boleh berbuat sesuka hati: karena bapaknya berpengaruh, tampaknya anak itu -- di desanya
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </section>
+    <br/>
+</tal:block>
+<tal:block metal:fill-slot="content">
 
     <section id="random" class="grid_6 nomargin-left">
         <h3>
@@ -32,6 +56,54 @@
         <!-- /.datalist -->
     </section>
     <div class="grid_1">&nbsp;</div>
-</div>
+
+    <section id="rightcolumn" class="grid_6 nomargin-right">
+        <div id="login">
+            <h3>Masuk Log</h3>
+
+            <div class="login-form">
+                <label>Pengguna</label>
+                <input type="text" class="text" name="user"/>
+            </div>
+            <div class="login-form">
+                <label>Kata sandi</label>
+                <input type="password" class="text" name="password"/>
+            </div>
+            <div class="login-form">
+                <input type="checkbox" class="check" value="1" name="remember"/> Remember me
+            </div>
+            <div class="login-form">
+                <input type="submit" class="submit" value="Masuk"/>
+                <br/>
+
+                <p><a href="">Daftarkan saya</a> / <a href="">Lupa kata sandi</a></p>
+            </div>
+
+        </div>
+        <div id="social">
+            <div id="social-content">
+                <p>Atau gunakan situs-situs sosial di bawah ini untuk mendaftarkan diri dan atau masuk
+                    log. </p>
+                <ul>
+                    <li class="facebook"><a href="">Facebook</a></li>
+                    <li class="twitter"><a href="">Twitter</a></li>
+                    <li class="yahoo"><a href="">Yahoo</a></li>
+                    <li class="google"><a href="">Google</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <!-- /#social-content -->
+        </div>
+    </section>
+    <div class="clear"></div>
+</tal:block>
+<tal:block metal:fill-slot="footer-stats">
+    <div id="stats">
+        <p>Saat ini terdapat <strong>1234</strong> entri <a href="/">glosarium</a>, <strong>72233</strong>
+            entri <a href="/">kamus</a>, <strong>2012</strong> entri <a href="/">peribahasa</a>, serta
+            <strong>3423</strong> entri <a href="/">singkatan</a> dan <a href="/">akronim</a>.</p>
+    </div>
+    <!-- /#stats -->
+</tal:block>
 </body>
 </html>
