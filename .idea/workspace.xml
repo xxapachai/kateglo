@@ -3,189 +3,23 @@
   <component name="AnalysisUIOptions">
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/application/utilities/TalTidy.php" line="42" mnemonic="7" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/bg_body.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/bg_separator.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/kateglo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/960" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/960/960_24_col.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/960/reset.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/960/text.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.buildpath" afterPath="$PROJECT_DIR$/.buildpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/libs/960" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/libs/html5.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/libs/jquery-1.6-debug.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/libs/jquery-1.6.min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/styles/960" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/kateglo.iml" afterPath="$PROJECT_DIR$/.idea/kateglo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.project" afterPath="$PROJECT_DIR$/.project" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/.jsdtscope" afterPath="$PROJECT_DIR$/.settings/.jsdtscope" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.php.core.prefs" afterPath="$PROJECT_DIR$/.settings/org.eclipse.php.core.prefs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.container" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.container" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.name" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/Kateglo.bmml" afterPath="$PROJECT_DIR$/build/db/Kateglo.bmml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kateglo.uml" afterPath="$PROJECT_DIR$/build/db/kateglo.uml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kateglox.notation" afterPath="$PROJECT_DIR$/build/db/kateglox.notation" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kategloxComponent.jpg" afterPath="$PROJECT_DIR$/build/db/kategloxComponent.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kategloxUseCase.jpg" afterPath="$PROJECT_DIR$/build/db/kategloxUseCase.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kategloxdb.jpg" afterPath="$PROJECT_DIR$/build/db/kategloxdb.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kategloxdb.sql.zip" afterPath="$PROJECT_DIR$/build/db/kategloxdb.sql.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/design.png" afterPath="$PROJECT_DIR$/build/design-prototype/design.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/logo.png" afterPath="$PROJECT_DIR$/build/design-prototype/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/mockup/Entry.bmml" afterPath="$PROJECT_DIR$/build/mockup/Entry.bmml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/mockup/Kamus.bmml" afterPath="$PROJECT_DIR$/build/mockup/Kamus.bmml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/mockup/Kateglo.bmml" afterPath="$PROJECT_DIR$/build/mockup/Kateglo.bmml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/mockup/Start.bmml" afterPath="$PROJECT_DIR$/build/mockup/Start.bmml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/dataimport.properties" afterPath="$PROJECT_DIR$/build/solr/dataimport.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/uml/kateglo.uml" afterPath="$PROJECT_DIR$/build/uml/kateglo.uml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/uml/kateglox.notation" afterPath="$PROJECT_DIR$/build/uml/kateglox.notation" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/uml/kategloxComponent.jpg" afterPath="$PROJECT_DIR$/build/uml/kategloxComponent.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/uml/kategloxUseCase.jpg" afterPath="$PROJECT_DIR$/build/uml/kategloxUseCase.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/uml/kategloxdb.jpg" afterPath="$PROJECT_DIR$/build/uml/kategloxdb.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/diverse/PUPI_Pusba.gif" afterPath="$PROJECT_DIR$/diverse/PUPI_Pusba.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/favicon.ico" afterPath="$PROJECT_DIR$/public/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/404_bg.jpg" afterPath="$PROJECT_DIR$/public/images/404_bg.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/404_uh_oh.jpg" afterPath="$PROJECT_DIR$/public/images/404_uh_oh.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/ajax-loader.gif" afterPath="$PROJECT_DIR$/public/images/ajax-loader.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/cc-by-nc-sa.png" afterPath="$PROJECT_DIR$/public/images/cc-by-nc-sa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/container_bg.gif" afterPath="$PROJECT_DIR$/public/images/container_bg.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/indonesia.png" afterPath="$PROJECT_DIR$/public/images/indonesia.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/kateglo40.png" afterPath="$PROJECT_DIR$/public/images/kateglo40.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/s.gif" afterPath="$PROJECT_DIR$/public/images/s.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/uk.png" afterPath="$PROJECT_DIR$/public/images/uk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/PURNAA.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/PURNAA.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/eh2purm.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/eh2purm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" afterPath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/Bootstrap.php" afterPath="$PROJECT_DIR$/application/Bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/annotations/Get.php" afterPath="$PROJECT_DIR$/application/annotations/Get.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/annotations/Path.php" afterPath="$PROJECT_DIR$/application/annotations/Path.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/annotations/Post.php" afterPath="$PROJECT_DIR$/application/annotations/Post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/annotations/Produces.php" afterPath="$PROJECT_DIR$/application/annotations/Produces.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/Binder.php" afterPath="$PROJECT_DIR$/application/configs/Binder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/EntriController.php" afterPath="$PROJECT_DIR$/application/controllers/EntriController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/ErrorController.php" afterPath="$PROJECT_DIR$/application/controllers/ErrorController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/KamusController.php" afterPath="$PROJECT_DIR$/application/controllers/KamusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/PadananController.php" afterPath="$PROJECT_DIR$/application/controllers/PadananController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/PeribahasaController.php" afterPath="$PROJECT_DIR$/application/controllers/PeribahasaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/SingkatanController.php" afterPath="$PROJECT_DIR$/application/controllers/SingkatanController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/TesaurusController.php" afterPath="$PROJECT_DIR$/application/controllers/TesaurusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/exceptions/HTTPMethodNotAllowedException.php" afterPath="$PROJECT_DIR$/application/controllers/exceptions/HTTPMethodNotAllowedException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/exceptions/HTTPNotAcceptableException.php" afterPath="$PROJECT_DIR$/application/controllers/exceptions/HTTPNotAcceptableException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Entry.php" afterPath="$PROJECT_DIR$/application/daos/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/User.php" afterPath="$PROJECT_DIR$/application/daos/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/exceptions/DomainObjectNotFoundException.php" afterPath="$PROJECT_DIR$/application/daos/exceptions/DomainObjectNotFoundException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/exceptions/DomainResultEmptyException.php" afterPath="$PROJECT_DIR$/application/daos/exceptions/DomainResultEmptyException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/User.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Document.php" afterPath="$PROJECT_DIR$/application/faces/Document.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Equivalent.php" afterPath="$PROJECT_DIR$/application/faces/Equivalent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Facet.php" afterPath="$PROJECT_DIR$/application/faces/Facet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Hit.php" afterPath="$PROJECT_DIR$/application/faces/Hit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Page.php" afterPath="$PROJECT_DIR$/application/faces/Page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Pagination.php" afterPath="$PROJECT_DIR$/application/faces/Pagination.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Search.php" afterPath="$PROJECT_DIR$/application/faces/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/interfaces/Search.php" afterPath="$PROJECT_DIR$/application/faces/interfaces/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/AuthenticationAdapter.php" afterPath="$PROJECT_DIR$/application/helpers/AuthenticationAdapter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/HTTPMethod.php" afterPath="$PROJECT_DIR$/application/helpers/HTTPMethod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/RouteParameter.php" afterPath="$PROJECT_DIR$/application/helpers/RouteParameter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Antonym.php" afterPath="$PROJECT_DIR$/application/models/Antonym.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Clazz.php" afterPath="$PROJECT_DIR$/application/models/Clazz.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/ClazzCategory.php" afterPath="$PROJECT_DIR$/application/models/ClazzCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Definition.php" afterPath="$PROJECT_DIR$/application/models/Definition.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Discipline.php" afterPath="$PROJECT_DIR$/application/models/Discipline.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Entry.php" afterPath="$PROJECT_DIR$/application/models/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Equivalent.php" afterPath="$PROJECT_DIR$/application/models/Equivalent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Foreign.php" afterPath="$PROJECT_DIR$/application/models/Foreign.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Language.php" afterPath="$PROJECT_DIR$/application/models/Language.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Meaning.php" afterPath="$PROJECT_DIR$/application/models/Meaning.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Misspelled.php" afterPath="$PROJECT_DIR$/application/models/Misspelled.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Pronounciation.php" afterPath="$PROJECT_DIR$/application/models/Pronounciation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Relation.php" afterPath="$PROJECT_DIR$/application/models/Relation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Sample.php" afterPath="$PROJECT_DIR$/application/models/Sample.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Source.php" afterPath="$PROJECT_DIR$/application/models/Source.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/SourceCategory.php" afterPath="$PROJECT_DIR$/application/models/SourceCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Syllabel.php" afterPath="$PROJECT_DIR$/application/models/Syllabel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Synonym.php" afterPath="$PROJECT_DIR$/application/models/Synonym.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Type.php" afterPath="$PROJECT_DIR$/application/models/Type.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/TypeCategory.php" afterPath="$PROJECT_DIR$/application/models/TypeCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/User.php" afterPath="$PROJECT_DIR$/application/models/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/providers/Config.php" afterPath="$PROJECT_DIR$/application/providers/Config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/providers/Connection.php" afterPath="$PROJECT_DIR$/application/providers/Connection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/providers/EntityManager.php" afterPath="$PROJECT_DIR$/application/providers/EntityManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/providers/Log.php" afterPath="$PROJECT_DIR$/application/providers/Log.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/providers/Solr.php" afterPath="$PROJECT_DIR$/application/providers/Solr.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/Entry.php" afterPath="$PROJECT_DIR$/application/services/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/Pagination.php" afterPath="$PROJECT_DIR$/application/services/Pagination.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/exceptions/AuthenticationException.php" afterPath="$PROJECT_DIR$/application/services/exceptions/AuthenticationException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/exceptions/EntryException.php" afterPath="$PROJECT_DIR$/application/services/exceptions/EntryException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/exceptions/SolrException.php" afterPath="$PROJECT_DIR$/application/services/exceptions/SolrException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/services/interfaces/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/Pagination.php" afterPath="$PROJECT_DIR$/application/services/interfaces/Pagination.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/CURL.php" afterPath="$PROJECT_DIR$/application/utilities/CURL.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/Injector.php" afterPath="$PROJECT_DIR$/application/utilities/Injector.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/KBBI.php" afterPath="$PROJECT_DIR$/application/utilities/KBBI.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/MimeParser.php" afterPath="$PROJECT_DIR$/application/utilities/MimeParser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/TalTidy.php" afterPath="$PROJECT_DIR$/application/utilities/TalTidy.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/exceptions/InjectorException.php" afterPath="$PROJECT_DIR$/application/utilities/exceptions/InjectorException.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/interfaces/CURL.php" afterPath="$PROJECT_DIR$/application/utilities/interfaces/CURL.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/interfaces/KBBI.php" afterPath="$PROJECT_DIR$/application/utilities/interfaces/KBBI.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/utilities/interfaces/MimeParser.php" afterPath="$PROJECT_DIR$/application/utilities/interfaces/MimeParser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/macros/body.html" afterPath="$PROJECT_DIR$/application/views/macros/body.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/macros/head.html" afterPath="$PROJECT_DIR$/application/views/macros/head.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/macros/pagination.html" afterPath="$PROJECT_DIR$/application/views/macros/pagination.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/cari/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/cari/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/entri/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/entri/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/error/error.html" afterPath="$PROJECT_DIR$/application/views/scripts/error/error.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/error/solr.html" afterPath="$PROJECT_DIR$/application/views/scripts/error/solr.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/index/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/index/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/kamus/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/kamus/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/padanan/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/padanan/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/peribahasa/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/peribahasa/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/singkatan/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/singkatan/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/scripts/tesaurus/index.html" afterPath="$PROJECT_DIR$/application/views/scripts/tesaurus/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/integration.sql" afterPath="$PROJECT_DIR$/build/db/integration.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/db/kateglox2.sql" afterPath="$PROJECT_DIR$/build/db/kateglox2.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/html/assets/960/960_24_col.css" afterPath="$PROJECT_DIR$/build/design-prototype/html/assets/960/960_24_col.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/html/assets/960/reset.css" afterPath="$PROJECT_DIR$/build/design-prototype/html/assets/960/reset.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/html/assets/960/text.css" afterPath="$PROJECT_DIR$/build/design-prototype/html/assets/960/text.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/design-prototype/html/index.html" afterPath="$PROJECT_DIR$/build/design-prototype/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/data-config.xml" afterPath="$PROJECT_DIR$/build/solr/data-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/elevate.xml" afterPath="$PROJECT_DIR$/build/solr/elevate.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/mapping-ISOLatin1Accent.txt" afterPath="$PROJECT_DIR$/build/solr/mapping-ISOLatin1Accent.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/protwords.txt" afterPath="$PROJECT_DIR$/build/solr/protwords.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/scripts.conf" afterPath="$PROJECT_DIR$/build/solr/scripts.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/spellings.txt" afterPath="$PROJECT_DIR$/build/solr/spellings.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/stopwords.txt" afterPath="$PROJECT_DIR$/build/solr/stopwords.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/solr/synonyms.txt" afterPath="$PROJECT_DIR$/build/solr/synonyms.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/diverse/mimeparse.php" afterPath="$PROJECT_DIR$/diverse/mimeparse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/Stubbles/bootstrap.php" afterPath="$PROJECT_DIR$/library/Stubbles/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/Zend/Controller/Action/Stubbles.php" afterPath="$PROJECT_DIR$/library/Zend/Controller/Action/Stubbles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/Zend/Controller/Dispatcher/Stubbles.php" afterPath="$PROJECT_DIR$/library/Zend/Controller/Dispatcher/Stubbles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/Zend/View/PhpTal.php" afterPath="$PROJECT_DIR$/library/Zend/View/PhpTal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/javascript.js" afterPath="$PROJECT_DIR$/public/javascripts/javascript.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/styles/main.css" afterPath="$PROJECT_DIR$/public/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/Bootstrap.php" afterPath="$PROJECT_DIR$/tests/Bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/unit/application/utilities/KBBITest.php" afterPath="$PROJECT_DIR$/tests/unit/application/utilities/KBBITest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/bootstrap.php" afterPath="$PROJECT_DIR$/tools/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/cleansource.php" afterPath="$PROJECT_DIR$/tools/cleansource.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/dbmigration.php" afterPath="$PROJECT_DIR$/tools/dbmigration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/luceneindexing.php" afterPath="$PROJECT_DIR$/tools/luceneindexing.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/phpluceneindexing.php" afterPath="$PROJECT_DIR$/tools/phpluceneindexing.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/test.xml" afterPath="$PROJECT_DIR$/tools/test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/testing.php" afterPath="$PROJECT_DIR$/tools/testing.php" />
-      <change type="MOVED" beforePath="D:\StormWorkspace\kateglo\build\design-prototype\html\assets\js\kateglo.js" afterPath="$PROJECT_DIR$/build/design-prototype/html/assets/js/javascript.js" />
+      <change type="MOVED" beforePath="D:\StormWorkspace\kateglo\public\styles\960\960_24_col.css" afterPath="$PROJECT_DIR$/public/libs/960/960_24_col.css" />
+      <change type="MOVED" beforePath="D:\StormWorkspace\kateglo\public\styles\960\reset.css" afterPath="$PROJECT_DIR$/public/libs/960/reset.css" />
+      <change type="MOVED" beforePath="D:\StormWorkspace\kateglo\public\styles\960\text.css" afterPath="$PROJECT_DIR$/public/libs/960/text.css" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -208,57 +42,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="javascript.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/javascript.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="52" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/design-prototype/html/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="4" selection-start="5738" selection-end="5850" vertical-scroll-proportion="-53.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="body.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/macros/body.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="44" selection-start="871" selection-end="871" vertical-scroll-proportion="-15.038462">
-              <folding>
-                <element signature="tag#section#0;tag#content#0;tag#div#1;tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-              </folding>
+            <state line="54" column="23" selection-start="2480" selection-end="2480" vertical-scroll-proportion="1.9615384">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="javascript.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/javascript.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="3" selection-start="1218" selection-end="1218" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/scripts/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="15" vertical-scroll-proportion="-0.0">
+            <state line="9" column="10" selection-start="432" selection-end="432" vertical-scroll-proportion="0.2859813">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
+      <file leaf-file-name="960_24_col.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/libs/960/960_24_col.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="110" selection-start="3688" selection-end="3688" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+      <file leaf-file-name="html5.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/libs/html5.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="47" selection-start="3661" selection-end="3661" vertical-scroll-proportion="0.124087594">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -267,14 +90,14 @@
       <file leaf-file-name="head.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/macros/head.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="82" selection-start="1053" selection-end="1173" vertical-scroll-proportion="-8.5">
+            <state line="7" column="41" selection-start="453" selection-end="453" vertical-scroll-proportion="-4.576923">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhpTal.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/Zend/View/PhpTal.php">
+      <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/styles/main.css">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -324,12 +147,12 @@
         <option value="$PROJECT_DIR$/application/controllers/EntriController.php" />
         <option value="$PROJECT_DIR$/application/controllers/IndexController.php" />
         <option value="$PROJECT_DIR$/build/design-prototype/html/index.html" />
-        <option value="$PROJECT_DIR$/application/views/scripts/index/index.html" />
         <option value="$PROJECT_DIR$/application/utilities/TalTidy.php" />
-        <option value="$PROJECT_DIR$/application/views/macros/body.html" />
+        <option value="$PROJECT_DIR$/application/services/Entry.php" />
         <option value="$PROJECT_DIR$/application/views/macros/head.html" />
         <option value="$PROJECT_DIR$/public/javascripts/javascript.js" />
-        <option value="$PROJECT_DIR$/application/services/Entry.php" />
+        <option value="$PROJECT_DIR$/application/views/macros/body.html" />
+        <option value="$PROJECT_DIR$/application/views/scripts/index/index.html" />
       </list>
     </option>
   </component>
@@ -346,13 +169,10 @@
           <State>
             <id>JavaScript</id>
           </State>
-          <State>
-            <id>PHP</id>
-          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>PhpUndefinedFieldInspection</id>
+            <id>HTML</id>
           </State>
         </selected-state>
       </profile-state>
@@ -387,6 +207,20 @@
       <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="kateglo" />
@@ -453,7 +287,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -476,82 +328,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Zend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Zend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stubbles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -664,70 +440,6 @@
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="design-prototype" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="design-prototype" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="960" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -757,7 +469,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -775,7 +491,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="index" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -793,7 +517,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="faces" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="macros" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -811,25 +539,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="daos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -851,6 +561,46 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -860,14 +610,14 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="135" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="46" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="149" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="123" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="118" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="129" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="803" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -875,7 +625,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="829" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.lastSelected" value="project.propSubversion" />
+    <property name="options.lastSelected" value="JavaScript.Libraries" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
@@ -886,11 +636,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\StormWorkspace\kateglo\public\libs\960" />
+      <recent name="D:\StormWorkspace\kateglo\public\libs" />
       <recent name="D:\StormWorkspace\kateglo\public\images" />
       <recent name="D:\StormWorkspace\kateglo\public\styles\960" />
       <recent name="D:\StormWorkspace\kateglo\public\styles" />
-      <recent name="D:\ZendWorkspace\kateglo\application\controllers\exceptions" />
-      <recent name="D:\ZendWorkspace\kateglo\application\utilities\interfaces" />
     </key>
   </component>
   <component name="RunManager">
@@ -900,13 +650,6 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method>
         <option name="FtpUpload" enabled="false">
@@ -914,6 +657,13 @@
           <server_name />
         </option>
       </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
     </configuration>
     <list size="0" />
   </component>
@@ -967,9 +717,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32013202" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20627062" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16294643" sideWeight="0.32343236" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296131" sideWeight="0.67161715" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296131" sideWeight="0.6732673" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -977,8 +728,7 @@
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20627062" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32673267" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32673267" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1000,7 +750,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing Web Design for Start site" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing Web Design for Start site&#10;Move Javascripts to the bottom" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1027,19 +777,82 @@
     <MESSAGE value="Implementing REST" />
     <MESSAGE value="Set SVN Property" />
     <MESSAGE value="Implementing Web Design for Start site" />
+    <MESSAGE value="Implementing Web Design for Start site&#10;Move Javascripts to the bottom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/Bootstrap.php">
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="13" selection-start="1969" selection-end="1969" vertical-scroll-proportion="0.33333334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/design-prototype/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="4" selection-start="5738" selection-end="5850" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="110" selection-start="3688" selection-end="3688" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="47" selection-start="3661" selection-end="3661" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/Zend/View/PhpTal.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/design-prototype/html/assets/js/html5.js">
+    <entry file="file://$PROJECT_DIR$/application/utilities/TalTidy.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="37" selection-start="37" selection-end="91" vertical-scroll-proportion="0.0">
+        <state line="42" column="10" selection-start="1701" selection-end="1990" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/styles/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/libs/jquery-1.6.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/libs/html5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/libs/960/960_24_col.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/macros/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="41" selection-start="453" selection-end="453" vertical-scroll-proportion="-4.576923">
           <folding />
         </state>
       </provider>
@@ -1051,95 +864,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/styles/style.css">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/javascript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/styles/960/960_24_col.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/TalTidy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="10" selection-start="1701" selection-end="1990" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/Zend/View/PhpTal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="27" column="3" selection-start="1218" selection-end="1218" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/macros/body.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="44" selection-start="871" selection-end="871" vertical-scroll-proportion="-15.038462">
-          <folding>
-            <element signature="tag#section#0;tag#content#0;tag#div#1;tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="13" selection-start="1969" selection-end="1969" vertical-scroll-proportion="0.33333334">
+        <state line="54" column="23" selection-start="2480" selection-end="2480" vertical-scroll-proportion="1.9615384">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/scripts/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="15" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/design-prototype/html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="4" selection-start="5738" selection-end="5850" vertical-scroll-proportion="-53.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/macros/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="82" selection-start="1053" selection-end="1173" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/javascript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="52" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="110" selection-start="3688" selection-end="3688" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="47" selection-start="3661" selection-end="3661" vertical-scroll-proportion="0.124087594">
+        <state line="9" column="10" selection-start="432" selection-end="432" vertical-scroll-proportion="0.2859813">
           <folding />
         </state>
       </provider>
