@@ -125,7 +125,7 @@ class Entry implements interfaces\Entry {
      * @param int $limit
      * @return \kateglo\application\faces\Hit
      */
-    public function randomMisspelled($limit = 5) {
+    public function randomMisspelled($limit = 6) {
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search('spelled:*', 0, $limit, array('fl' => 'entry, spelled', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
         if ($request->getHttpStatus() == 200) {
@@ -140,9 +140,9 @@ class Entry implements interfaces\Entry {
      * @param int $limit
      * @return \kateglo\application\faces\Hit
      */
-    public function randomEntry($limit = 10) {
+    public function randomEntry($limit = 5) {
         $this->getSolr()->setCreateDocuments(false);
-        $request = $this->getSolr()->search('entry:*', 0, $limit, array('fl' => 'entry', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
+        $request = $this->getSolr()->search('entry:* AND definition:*', 0, $limit, array('fl' => 'entry, definition', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
         if ($request->getHttpStatus() == 200) {
             return $request->response;
         } else {

@@ -1,6 +1,6 @@
 Ext.BLANK_IMAGE_URL = '/images/s.gif';
 Ext.onReady(function() {
-    if (Ext.get('entry-amount') != null) {
+    if (Ext.get('entry-random') != null) {
         Ext.Ajax.defaultHeaders = {
             'Accept': 'application/json'
         };
@@ -8,15 +8,21 @@ Ext.onReady(function() {
             url: '/',
             success: function(response, opts) {
                 var obj = Ext.decode(response.responseText);
-                Ext.select('img.loader').remove();
-                Ext.fly('entry-amount').insertHtml('afterBegin', obj.amount);
-
+                Ext.select('li.loader').remove();
+                //Ext.fly('entry-amount').insertHtml('afterBegin', obj.amount);
+                
                 Ext.each(obj.entry.docs, function(entry, index) {
-                    Ext.fly('entry-random').insertHtml('beforeEnd', '<span><a href="entri/'+entry.entry+'">'+entry.entry+'</a>  &nbsp;&nbsp;&nbsp;</span>');
+                    var definition = '';
+                    if(Ext.isArray(entry.definition)){
+                        definition = entry.definition[0];
+                    }else{
+                        definition = entry.definition;
+                    }
+                    Ext.fly('entry-random').insertHtml('beforeEnd', '<li><strong><a href="entri/'+entry.entry+'">'+entry.entry+'</a></strong><p>'+definition+'</p></li>');
                 });
 
                 Ext.each(obj.misspelled.docs, function(entry, index) {
-                    Ext.fly('misspelled-random').insertHtml('beforeEnd', '<span><a href="entri/'+entry.spelled+'">'+entry.spelled+'</a>&nbsp;bukan&nbsp;<a href="entri/'+entry.entry+'">'+entry.entry+'</a></span><br/>');
+                    Ext.fly('misspelled-random').insertHtml('beforeEnd', '<li><strong><a href="entri/'+entry.spelled+'">'+entry.spelled+'</a></strong><p>bukan <a href="entri/'+entry.entry+'">'+entry.entry+'</a></p></li>');
                 });
 
             },

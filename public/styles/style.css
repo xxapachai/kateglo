@@ -1,0 +1,342 @@
+/* HTML Tags */
+body {
+	background:#EFEFEF url("../images/bg_body.jpg") repeat-y top center;
+	color:#333;
+}
+a {
+	color:#1A559A;
+}
+
+/* HTML5 Tags */
+article,aside,footer,header,nav,section {  
+    display: block;  
+}
+
+/* Global Classes */
+.nomargin-left { margin-left:0 !important; }
+.nomargin-right { margin-right:0 !important; }
+.nomargin { margin:0 !important; }
+.noborder { border:0 !important; }
+.floatleft { float:left; }
+.floatright { float:right; }
+.alignright { text-align:right; }
+.aligncenter { text-align:center; }
+.alignleft { text-align:left; }
+.bg 
+
+#container {
+
+}
+
+/* Header */
+header {
+	margin-top:20px;
+}
+h1#logo {
+	width:265px;
+	background:transparent url("../images/kateglo.png") no-repeat 0 0;
+	height:73px;
+	display:block;
+	margin-bottom:0;
+}
+h1#logo a {
+	display:block;
+	width:265px;
+	height:73px;
+	text-indent: -9000px;
+	text-decoration: none;
+}
+h2#desc {
+	font-size:15px;
+	font-weight: normal;
+	position:relative;
+	top:-20px;
+	margin-left:74px;
+	width:350px;
+}
+
+/* Navigation */
+nav {
+	height:37px;
+	background:transparent url("../images/kateglo.png") no-repeat 0 -112px;
+}
+nav li {
+	float:left;
+	list-style: none;
+	line-height:37px;
+	margin:0;
+	display:block;
+	text-transform: uppercase;
+}
+nav li a {
+	display:block;
+	float:left;
+	padding:0 20px;
+	text-decoration: none;
+	line-height:37px;
+	color:#999;
+	background:transparent url("../images/bg_separator.gif") repeat-y top right;
+}
+nav li:last-child a {
+	background:none;
+}
+nav li.current_page a {
+	background:transparent url("../images/kateglo.png") no-repeat 0 -149px;
+	color:#FFF;
+}
+nav li a:hover {
+	background:transparent url("../images/kateglo.png") no-repeat 0 -197px;
+	color:#FFF;
+}
+
+/* Search block */
+section#search {
+	height:65px;
+	background:transparent url("../images/kateglo.png") no-repeat 0 -197px;
+	margin-top:2px;
+	position:relative;
+}
+section#search span {
+	position:absolute;
+	font-size:15px;
+	color:#999;
+	top:10px;
+	left:10px;
+}
+.search-box {
+	background:transparent url("../images/kateglo.png") no-repeat -190px -480px;
+	height:39px;
+	position:relative;
+	top:12px;
+}
+.search-box .text {
+	width:540px;
+	font-size:16px;
+	position:relative;
+	top:8px;
+	left:10px;
+	border:0;
+	background:none;
+	color:#999;
+}
+.search-box .search-submit {
+	border:0;
+	font-size:14px;
+	position:relative;
+	top:5px;
+	text-indent: -9000px;
+	background:none;
+}
+section#search p {
+	font-size:12px;
+	padding-top:13px;
+}
+section#search p a {
+	color:#FFDCDB;
+}
+
+
+/* Header Block */
+section#header {
+	height:184px;
+	position:relative;
+	background:transparent url("../images/kateglo.png") no-repeat 0px -270px;
+}
+#wordoftheday { color: #FFF; }
+#wordoftheday h4 {
+	font-weight:normal;
+	font-size:15px;
+	margin-bottom:0;
+	margin-top:40px;
+}
+#wordoftheday h3 {
+	font:40px 'Cabin', Helvetica, Arial, Serif;
+	text-shadow: 1px 1px 3px #000;
+}
+#wordoftheday a.link {
+	width:110px;
+	height:40px;
+	position:absolute;
+	background:transparent url("../images/kateglo.png") no-repeat 0px -480px;
+	display:block;
+	color:#FFF;
+	text-decoration: none;
+	left:-7px;
+}
+#wordoftheday a.link span {
+	line-height:34px;
+	color:#D1E4F0;
+	display:block;
+	padding-left:35px;
+}
+
+#meaning ul {
+	margin-left:15px;
+	margin-top:10px;
+}
+#meaning li {
+	list-style: none;
+	margin:0 0 5px 0;
+	width:400px;
+	background:transparent url("../images/kateglo.png") no-repeat 0px -978px;
+	padding-left:23px;
+	font-size:13px;
+	min-height:17px;
+	line-height:22px;
+	color:#564F2C;
+}
+
+content#main {
+	padding-top:20px;
+}
+content#main section h3 {
+	text-transform: uppercase;
+	color:#CC0000;
+	line-height:20px;
+	font-size:25px;
+	font-family: 'Cabin', Helvetica, Arial, Serif;
+	font-weight: normal;
+	border-bottom:1px dotted #CCC;
+	margin-bottom:0;
+	padding-bottom:10px;
+}
+content#main section small {
+	display:block;
+	margin:0;
+	font-size:16px;
+	color:#999;
+}
+ul.datalist li {
+	border-bottom:1px dotted #CCC;
+	list-style: none;
+	margin:0;
+	padding:5px 0;
+}
+ul.datalist p {
+	margin-bottom:0;
+}
+ul.datalist li strong {
+	color:#CC0000;
+	font-size:15px;
+	text-transform: uppercase;
+}
+ul.datalist strong a {
+	color:#CC0000;
+}
+
+#login {
+	height:260px;
+	background:transparent url("../images/kateglo.png") no-repeat 0px -670px;
+}
+#login h3 {
+	padding-top:10px;
+	font-size:18px !important;
+	border:0 !important;
+}
+#login h3, 
+#login .login-form {
+	width:200px;
+	margin-left:10px;
+}
+#login .login-form {
+	padding:5px 0;
+}
+.login-form .text {
+	font-size:14px;
+}
+#social {
+	background:#F1CB09;
+	padding-top:10px;
+}
+#social-content {
+	padding-bottom:20px;
+}
+#social p {
+	width:200px;
+	margin-left:10px;
+}
+.submit {
+	background:#333;
+	color:#FFF;
+	text-transform: uppercase;
+	padding:5px 10px;
+	border:0;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-size:16px;
+}
+#login p {
+	margin-top:10px;
+}
+#social ul {
+	margin-left:25px;
+	margin-bottom:20px;
+}
+#social li {
+	width:32px;
+	height:32px;
+	display:block;
+	float:left;
+	list-style: none;
+	margin:0 18px 0 0;
+}
+#social li:last-child {
+	margin-right:0;
+}
+#social li a {
+	text-indent: -9000px;
+	width:32px;
+	height:32px;
+	display:block;
+	float:left;
+	background:transparent url("../images/kateglo.png") no-repeat -337px 0;
+}
+#social li.facebook a {
+	background-position: -337px 0;
+}
+#social li.twitter a {
+	background-position: -384px 0;
+}
+#social li.yahoo a {
+	background-position: -435px 0;
+}
+#social li.google a {
+	background-position: -486px 0;
+}
+
+
+/* Footer */
+footer { margin-top:30px }
+#license {
+	top:13px;
+	position:relative;
+	height:15px;
+	display:block;
+	width:80px;
+	margin-left:15px;
+}
+#license a {
+	text-indent: -9000px;
+	width:80px;
+	display:block;
+	width:80px;
+	height:15px;
+	height:15px;
+	line-height:18px;
+	background:transparent url("../images/kateglo.png") no-repeat -336px -59px;
+}
+#stats {
+	background:#EDEDED;
+	text-align:center;
+	padding:12px 0;
+}
+#bottom {
+	background:#CC0000;
+	color:#FFF;
+	text-align:center;
+	line-height:40px;
+}
+#bottom p, #stats p { margin-bottom: 0; }
+#bottom a {
+	color:#FFF;
+}
