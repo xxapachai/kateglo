@@ -40,11 +40,11 @@ class TalTidy implements \PHPTAL_Filter {
      * @return string
      */
     public function filter($xhtml) {
-        $tidy = new \tidy ();
-        $opts = array('indent' => true, 'indent-spaces' => 4, 'wrap' => 0, 'output-xhtml' => true, 'force-output' => true, 'doctype' => 'strict');
-        $tidy->parseString($xhtml, $opts, 'utf8');
-        $tidy->cleanRepair();
-        $xhtml = (string)$tidy;
+//        $tidy = new \tidy ();
+//        $opts = array('indent' => true, 'indent-spaces' => 4, 'wrap' => 0, 'output-xhtml' => true, 'force-output' => true, 'doctype' => 'strict');
+//        $tidy->parseString($xhtml, $opts, 'utf8');
+//        $tidy->cleanRepair();
+//        $xhtml = (string)$tidy;
         return $xhtml;
     }
 }

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Kateglo - Beranda</title>
@@ -8,34 +8,30 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 <div tal:omit-tag="true" metal:fill-slot="content">
-    <div style="text-align: center">
-        <p>
-            Selamat datang di <strong>Kateglo (Beta)</strong> - <a href="/kamus">kamus</a>,
-            <a href="/tesaurus">tesaurus</a>, dan glosarium bahasa Indonesia.
-        </p>
 
-        <p>
-            Silakan gunakan kotak pencarian di bagian atas halaman untuk mencari <a href="/entri/entri">entri</a> yang
-            Anda inginkan.
-        </p>
-        <br />
-        <p>
-            Saat ini terdapat <span id="entry-amount"></span><img class="loader" src="/images/ajax-loader.gif" alt="tunggu sebentar.." /> entri
-            <a href="/kamus">kamus</a>.
-        </p>
-        <br />
-        <p id="entry-random">
-            <strong>Entri acak:</strong>
-            <br/>
-            <img class="loader" src="/images/ajax-loader.gif" alt="tunggu sebentar.." />
-        </p>
-        <br />
-        <p id="misspelled-random">
-            <strong>Salah eja:</strong>
-            <br/>
-            <img class="loader" src="/images/ajax-loader.gif" alt="tunggu sebentar.." />
-        </p>
-    </div>
+    <section id="random" class="grid_6 nomargin-left">
+        <h3>
+            <small>entry</small>
+            Acak
+        </h3>
+        <ul class="datalist" id="entry-random">
+            <li class="loader"><img src="/images/ajax-loader.gif" alt="tunggu sebentar.."/></li>
+        </ul>
+        <!-- /.datalist -->
+    </section>
+    <div class="grid_1">&nbsp;</div>
+
+    <section id="misspelled" class="grid_6">
+        <h3>
+            <small>salah</small>
+            Eja
+        </h3>
+        <ul class="datalist" id="misspelled-random">
+            <li class="loader"><img src="/images/ajax-loader.gif" alt="tunggu sebentar.."/></li>
+        </ul>
+        <!-- /.datalist -->
+    </section>
+    <div class="grid_1">&nbsp;</div>
 </div>
 </body>
 </html>
