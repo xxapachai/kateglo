@@ -93,6 +93,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
                 $this->view->formAction = '/kamus';
+                $this->view->amount = $this->entry->getTotalCount();
+                $this->view->entry = $this->wordOfTheDay();
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
             } catch (Apache_Solr_Exception $e) {
                 $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
@@ -112,12 +114,37 @@ class IndexController extends Zend_Controller_Action_Stubbles {
     public function indexJson() {
 
         try {
-            $this->content = array('amount' => $this->entry->getTotalCount(), 'entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled());
+            $this->content = array('entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled());
         } catch (Apache_Solr_Exception $e) {
             $this->content = array('error' => 'query error');
         }
 
         $this->_helper->json($this->content);
+    }
+
+    private function wordOfTheDay() {
+        $word[9] = 'kamus';
+        $word[10] = 'tesaurus';
+        $word[11] = 'padanan';
+        $word[12] = 'terjemahan';
+        $word[13] = 'peribahasa';
+        $word[14] = 'singkatan';
+        $word[15] = 'akronim';
+        $word[16] = 'aplikasi';
+        $word[17] = 'beranda';
+
+        $entry = !empty($word[intval(date("j"))]) ? $word[intval(date("j"))] : 'kamus';
+        $result = $this->entry->getEntry($entry);
+        $return['entry'] = $result->getEntry();
+        $return['definitions'] = array();
+        foreach($result->getMeanings() as $meaning){
+            foreach($meaning->getDefinitions() as $definition){
+                $return['definitions'][] = $definition->getDefinition();
+                if(count($return['definitions']) === 4) break;
+            }
+            if(count($return['definitions']) === 4) break;
+        }
+        return $return;
     }
 
 }
