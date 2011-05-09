@@ -5,7 +5,7 @@ $(document).ready(function() {
             type: 'GET',
             dataType: 'json',
             success : function(data, status, xhr){
-                $('li.loader').remove();
+                $('.loader').remove();
                 $.each(data.entry.docs, function(index, entry){
                     if($.isArray(entry.definition)){
                         definition = entry.definition[0];

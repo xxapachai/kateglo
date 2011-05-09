@@ -112,7 +112,12 @@ class Entry implements interfaces\Entry {
      * @return int
      */
     public function getTotalCount() {
-        $request = $this->getSolr()->search('entry:*', 0, 1);
+        $entry = $this->searchEntryAsJSON('', 0, 0);
+        $thesaurus = $this->searchThesaurusAsJSON('', 0, 0);
+        $equivalent = $this->searchEquivalentAsJSON('', 0, 0);
+        $proverb = $this->searchProverbAsJSON('', 0, 0);
+        $acronym = $this->searchAcronymAsJSON('', 0, 0);
+        return array('entry' => $entry->response->numFound, 'thesaurus' => $thesaurus->response->numFound, 'equivalent' => $equivalent->response->numFound, 'proverb' => $proverb->response->numFound, 'acronym' => $acronym->response->numFound);
         if ($request->getHttpStatus() == 200) {
             return $request->response->numFound;
         } else {
@@ -159,6 +164,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
+        $params['fl'] = 'entry, synonym, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -183,6 +189,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
+        $params['fl'] = 'entry, synonym, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -207,6 +214,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
+        $params['fl'] = 'entry, synonym, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -232,6 +240,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
+        $params['fl'] = 'entry, synonym, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -305,7 +314,7 @@ class Entry implements interfaces\Entry {
      * @param array $params
      * @return array
      */
-    public function searchProverbAsJSON($searchText, $asArray = false, $offset = 0, $limit = 10, $params = array()) {
+    public function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
         $params['fq'] = "typeExact:Peribahasa";
@@ -373,7 +382,7 @@ class Entry implements interfaces\Entry {
         $params['fl'] = 'entry, equivalent, id';
         $params['q.alt'] = "foreign:*";
         $params['qf'] = "entry foreign";
-        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
     }
 
     /**
