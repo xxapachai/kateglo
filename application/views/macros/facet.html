@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Kateglo - Pagination</title>
+</head>
+<body tal:omit-tag="true" metal:define-macro="facet">
+<div>Hasil pencarian: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</div>
+<div style="width: 200px; display: table-cell;">
+    <h5>Bentuk Kata</h5>
+    <ul tal:repeat="type hits/getFacet/getType">
+        <li tal:condition="php: type GT 0">
+            <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
+                <a href="${formAction}/?${search/getFieldName}=type:%22${repeat/type/key}%22">${repeat/type/key}
+                    (${type})</a>
+            </tal:block>
+            <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
+                <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND type:%22${repeat/type/key}%22">${repeat/type/key}
+                    (${type})</a>
+            </tal:block>
+        </li>
+    </ul>
+    <br/><br/>
+    <h5>Kelas Kata</h5>
+    <ul tal:repeat="clazz hits/getFacet/getClazz">
+        <li tal:condition="php: clazz GT 0">
+            <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
+                <a href="${formAction}/?${search/getFieldName}=class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
+                    (${clazz})</a>
+            </tal:block>
+            <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
+                <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
+                    (${clazz})</a>
+            </tal:block>
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>

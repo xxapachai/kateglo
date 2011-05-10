@@ -34,11 +34,9 @@
             <section id="search">
                 <div class="grid_1 nomargin-left">&nbsp;</div>
                 <div class="search-box grid_15">
-                    <form action="${formAction}" method="get">
+                    <form name="search" action="${formAction}" method="GET">
                         <input type="text" class="text" name="${search/getFieldName}"
-                               value="Ketik yang dicari, kemudian tekan tombol enter"
-                               onfocus="if(this.value == 'Ketik yang dicari, kemudian tekan tombol enter') this.value = '';"
-                               onblur="if(this.value == '') this.value = 'Ketik yang dicari, kemudian tekan tombol enter';"/>
+                               value="${search/getFieldValue}"/>
                         <input type="submit" class="search-submit" value="${search/getButtonValue}"/>
                     </form>
                 </div>
