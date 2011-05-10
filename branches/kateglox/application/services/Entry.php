@@ -164,7 +164,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['fl'] = 'entry, synonym, id';
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -189,7 +189,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['fl'] = 'entry, synonym, id';
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -214,7 +214,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['fl'] = 'entry, synonym, id';
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';
@@ -240,7 +240,7 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['fl'] = 'entry, synonym, id';
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['mlt'] = 'true';

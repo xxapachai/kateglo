@@ -32,106 +32,106 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Hit {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const COUNT = 'numFound';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const START = 'start';
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var string
-	 */
-	const TIME = 'QTime';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const DOCUMENTS = 'documents';
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $count;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $start;
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const COUNT = 'numFound';
 
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $time;
-	
-	/**
-	 * Enter description here ...
-	 * @var Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $documents;
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const START = 'start';
 
-	/**
-	 * Enter description here ...
-	 * @var \kateglo\application\faces\Facet
-	 */
-	private $facet;
-	
-	/**
-	 * @return int
-	 */
-	public function getCount() {
-		return $this->count;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const TIME = 'QTime';
 
-	/**
-	 * @param int $count
-	 */
-	public function setCount($count) {
-		$this->count = $count;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const DOCUMENTS = 'documents';
 
-	/**
-	 * @return int
-	 */
-	public function getStart() {
-		return $this->start;
-	}
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $count;
 
-	/**
-	 * @param int $start
-	 */
-	public function setStart($start) {
-		$this->start = $start;
-	}
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $start;
 
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDocuments() {
-		return $this->documents;
-	}
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $time;
 
-	/**
-	 * @param \Doctrine\Common\Collections\ArrayCollection $documents
-	 */
-	public function setDocuments(ArrayCollection $documents) {
-		$this->documents = $documents;
-	}
+    /**
+     * Enter description here ...
+     * @var Doctrine\Common\Collections\ArrayCollection
+     */
+    private $documents;
+
+    /**
+     * Enter description here ...
+     * @var \kateglo\application\faces\Facet
+     */
+    private $facet;
+
+    /**
+     * @return int
+     */
+    public function getCount() {
+        return $this->count;
+    }
+
+    /**
+     * @param int $count
+     */
+    public function setCount($count) {
+        $this->count = $count;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStart() {
+        return $this->start;
+    }
+
+    /**
+     * @param int $start
+     */
+    public function setStart($start) {
+        $this->start = $start;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDocuments() {
+        return $this->documents;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $documents
+     */
+    public function setDocuments(ArrayCollection $documents) {
+        $this->documents = $documents;
+    }
 
     /**
      * @param \kateglo\application\faces\Facet $facet
@@ -161,6 +161,14 @@ class Hit {
      */
     public function getTime() {
         return $this->time;
+    }
+
+    /**
+     * @param int $time
+     * @return void
+     */
+    public function getTimeInSeconds($time) {
+        return number_format($this->time/1000, 3, ',', '.' );
     }
 
 

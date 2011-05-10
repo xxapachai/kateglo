@@ -340,3 +340,30 @@ footer { margin-top:30px }
 #bottom a {
 	color:#FFF;
 }
+
+.pagination {
+
+}
+
+.pagination ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination li {
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-weight: bolder;
+}
+
+.pagination li a {
+    color: blue;
+    font-weight: normal;
+}
+
+.pagination li a:HOVER {
+    text-decoration: underline;
+    font-weight: normal;
+}

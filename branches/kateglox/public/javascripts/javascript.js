@@ -29,4 +29,29 @@ $(document).ready(function() {
             }
         })
     }
+
+    if ($('input[name=query]') != null) {
+
+        var element = $('input[name=query]');
+
+        if (element.val() == '') {
+            element.val('Ketik yang dicari, kemudian tekan tombol enter');
+        } else {
+            element.attr('style', 'color:black;');
+        }
+
+        element.focus(function() {
+            if ($(this).val() == 'Ketik yang dicari, kemudian tekan tombol enter') {
+                $(this).val('');
+                $(this).attr('style', 'color:black;');
+            }
+        });
+        element.blur(function() {
+            if ($(this).val() == '') {
+                $(this).val('Ketik yang dicari, kemudian tekan tombol enter');
+                $(this).removeAttr('style');
+            }
+        });
+
+    }
 });
