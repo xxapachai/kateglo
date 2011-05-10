@@ -88,7 +88,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      */
     public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
-        $cacheId = __CLASS__ . '\\' . 'html';
+        $cacheId = __CLASS__ . '\\' . 'html'.date('d.m.Y');
 
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
