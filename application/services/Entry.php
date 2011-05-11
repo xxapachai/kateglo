@@ -149,7 +149,7 @@ class Entry implements interfaces\Entry {
      */
     public function randomEntry($limit = 5) {
         $this->getSolr()->setCreateDocuments(false);
-        $request = $this->getSolr()->search('entry:* AND definition:*', 0, $limit, array('fl' => 'entry, definition', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
+        $request = $this->getSolr()->search('entry:* AND definition:* AND type:"Kata dasar mandiri"', 0, $limit, array('fl' => 'entry, definition', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
         if ($request->getHttpStatus() == 200) {
             return $request->response;
         } else {
@@ -169,6 +169,9 @@ class Entry implements interfaces\Entry {
         if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
         $params['mlt'] = 'true';
         $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
         $params['mlt.mindf'] = 1;
@@ -177,6 +180,7 @@ class Entry implements interfaces\Entry {
         $params['facet'] = 'true';
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return json_decode($request->getRawResponse());
@@ -194,6 +198,9 @@ class Entry implements interfaces\Entry {
         if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
         $params['mlt'] = 'true';
         $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
         $params['mlt.mindf'] = 1;
@@ -202,6 +209,7 @@ class Entry implements interfaces\Entry {
         $params['facet'] = 'true';
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
@@ -219,6 +227,9 @@ class Entry implements interfaces\Entry {
         if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
         $params['mlt'] = 'true';
         $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
         $params['mlt.mindf'] = 1;
@@ -228,6 +239,7 @@ class Entry implements interfaces\Entry {
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
@@ -245,6 +257,9 @@ class Entry implements interfaces\Entry {
         if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
         $params['mlt'] = 'true';
         $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
         $params['mlt.mindf'] = 1;
@@ -254,6 +269,7 @@ class Entry implements interfaces\Entry {
         $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return json_decode($request->getRawResponse());
@@ -422,21 +438,25 @@ class Entry implements interfaces\Entry {
         $hit->getFacet()->setType(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE})));
         $hit->getFacet()->setTypeCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY})));
 
-
-        $hit->setSpellcheck(new Spellcheck());
-        $spellcheck = get_object_vars($response->spellcheck->{Spellcheck::SUGGESTIONS});
-        $hit->getSpellcheck()->setCorrectlySpelled($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
-        unset($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
-        $hit->getSpellcheck()->setCollation($spellcheck[Spellcheck::COLLATION]);
-        unset($spellcheck[Spellcheck::COLLATION]);
-        $suggestions = new ArrayCollection();
-        foreach ($spellcheck as $item) {
-            foreach ($item->{Spellcheck::SUGGESTION} as $suggestion) {
-                $suggestions->add(new Suggestion($suggestion->{Suggestion::WORD}, $suggestion->{Suggestion::FREQUENCY}));
+        if (isset($response->spellcheck)) {
+            $hit->setSpellcheck(new Spellcheck());
+            $spellcheck = get_object_vars($response->spellcheck->{Spellcheck::SUGGESTIONS});
+            if (array_key_exists(Spellcheck::CORRECTLY_SPELLED, $spellcheck)) {
+                $hit->getSpellcheck()->setCorrectlySpelled($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
+                unset($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
             }
+            if (array_key_exists(Spellcheck::COLLATION, $spellcheck)) {
+                $hit->getSpellcheck()->setCollation($spellcheck[Spellcheck::COLLATION]);
+                unset($spellcheck[Spellcheck::COLLATION]);
+            }
+            $suggestions = new ArrayCollection();
+            foreach ($spellcheck as $item) {
+                foreach ($item->{Spellcheck::SUGGESTION} as $suggestion) {
+                    $suggestions->add(new Suggestion($suggestion->{Suggestion::WORD}, $suggestion->{Suggestion::FREQUENCY}));
+                }
+            }
+            $hit->getSpellcheck()->setSuggestions($suggestions);
         }
-        $hit->getSpellcheck()->setSuggestions($suggestions);
-
         return $hit;
     }
 
@@ -444,7 +464,8 @@ class Entry implements interfaces\Entry {
      * @param  $fields
      * @return \kateglo\application\faces\Document
      */
-    private function createDocuments($fields) {
+    private
+    function createDocuments($fields) {
         $document = new Document ();
         $document->setId($fields->{Document::ID});
         $document->setEntry($fields->{Document::ENTRY});
@@ -477,7 +498,8 @@ class Entry implements interfaces\Entry {
      * @param Doctrine\Common\Collections\ArrayCollection $array
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private function jsonConvertToEquivalent($array) {
+    private
+    function jsonConvertToEquivalent($array) {
         if ($array instanceof ArrayCollection) {
             $newArray = new ArrayCollection ();
             foreach ($array as $json) {
@@ -504,7 +526,8 @@ class Entry implements interfaces\Entry {
      * @param string $key
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private function convert2Array($source, $key) {
+    private
+    function convert2Array($source, $key) {
         if (property_exists($source, $key)) {
             $array = new ArrayCollection ();
             if (!is_array($source->{$key})) {
