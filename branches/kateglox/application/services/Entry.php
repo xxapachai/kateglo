@@ -24,6 +24,8 @@ use kateglo\application\faces\Equivalent;
 use kateglo\application\faces\Hit;
 use kateglo\application\faces\Document;
 use kateglo\application\faces\Facet;
+use kateglo\application\faces\Spellcheck;
+use kateglo\application\faces\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\daos;
 /**
@@ -419,6 +421,21 @@ class Entry implements interfaces\Entry {
         $hit->getFacet()->setClazzCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY})));
         $hit->getFacet()->setType(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE})));
         $hit->getFacet()->setTypeCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY})));
+
+
+        $hit->setSpellcheck(new Spellcheck());
+        $spellcheck = get_object_vars($response->spellcheck->{Spellcheck::SUGGESTIONS});
+        $hit->getSpellcheck()->setCorrectlySpelled($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
+        unset($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
+        $hit->getSpellcheck()->setCollation($spellcheck[Spellcheck::COLLATION]);
+        unset($spellcheck[Spellcheck::COLLATION]);
+        $suggestions = new ArrayCollection();
+        foreach ($spellcheck as $item) {
+            foreach ($item->{Spellcheck::SUGGESTION} as $suggestion) {
+                $suggestions->add(new Suggestion($suggestion->{Suggestion::WORD}, $suggestion->{Suggestion::FREQUENCY}));
+            }
+        }
+        $hit->getSpellcheck()->setSuggestions($suggestions);
 
         return $hit;
     }

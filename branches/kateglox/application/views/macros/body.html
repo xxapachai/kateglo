@@ -21,12 +21,12 @@
 
             <nav>
                 <ul>
-                    <li class="current_page"><a href="/">Beranda</a></li>
-                    <li><a href="/kamus">Kamus</a></li>
-                    <li><a href="/tesaurus">Tesaurus</a></li>
-                    <li><a href="/padanan">Padanan</a></li>
-                    <li><a href="/peribahasa">Peribahasa</a></li>
-                    <li><a href="/singkatan">Singkatan</a></li>
+                    <li tal:attributes="class php: formAction EQ '/' ? 'current_page' : null"><a href="/">Beranda</a></li>
+                    <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null"><a href="/kamus">Kamus</a></li>
+                    <li tal:attributes="class php: formAction EQ '/tesaurus' ? 'current_page' : null"><a href="/tesaurus">Tesaurus</a></li>
+                    <li tal:attributes="class php: formAction EQ '/padanan' ? 'current_page' : null"><a href="/padanan">Padanan</a></li>
+                    <li tal:attributes="class php: formAction EQ '/peribahasa' ? 'current_page' : null"><a href="/peribahasa">Peribahasa</a></li>
+                    <li tal:attributes="class php: formAction EQ '/singkatan' ? 'current_page' : null"><a href="/singkatan">Singkatan</a></li>
                     <li><a href="/">Aplikasi</a></li>
                 </ul>
             </nav>

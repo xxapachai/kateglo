@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Kateglo - Pagination</title>
+</head>
+<body tal:omit-tag="true" metal:define-macro="suggestion">
+<div>Hasil pencarian: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</div>
+<tal:block tal:condition="php: hits.getCount() EQ 0">
+    <p>
+        <span style="color:#cc0000" class="spell">Mungkin maksud Anda adalah: </span>
+        <a class="spell" href="${formAction}?query=${hits/getSpellcheck/getCollation}"><b>${hits/getSpellcheck/getCollation}</b></a>
+    </p>
+
+    <div>
+        <p>
+            Penelusuran Anda - <b>${search/getFieldValue}</b> - tidak cocok dengan
+            dokumen apa pun.
+        </p>
+
+        <p>Saran:</p>
+        <ul>
+            <li>Pastikan semua kata dieja dengan benar.</li>
+            <li>Coba kata kunci yang lain.</li>
+            <li>Coba kata kunci yang lebih umum.</li>
+            <li>Coba kurangi kata kunci.</li>
+        </ul>
+    </div>
+
+    <p>
+        <span style="color:#cc0000" class="spell">Kemungkinan lain adalah: </span>
+        <tal:block tal:repeat="suggestion hits/getSpellcheck/getSuggestions">
+            <a class="spell" href="${formAction}?query=${suggestion/getWord}"><b>${suggestion/getWord}</b></a>&nbsp;
+        </tal:block>
+    </p>
+</tal:block>
+</body>
+</html>

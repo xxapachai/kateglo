@@ -19,7 +19,7 @@ namespace kateglo\application\faces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -31,89 +31,71 @@ namespace kateglo\application\faces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Equivalent {
+class Suggestion {
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const FOREIGN = 'foreign';
+	const WORD = 'word';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const LANGUAGE = 'language';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const DISCIPLINE = 'discipline';
-		
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $foreign;
+	const FREQUENCY = 'freq';
 	
 	/**
 	 * Enter description here ...
 	 * @var string
 	 */
-	private $language;
+	private $word;
 	
 	/**
 	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 * @var int
 	 */
-	private $disciplines;
-		
-	/**
-	 * @return the $foreign
-	 */
-	public function getForeign() {
-		return $this->foreign;
-	}
-	
-	/**
-	 * @param string $foreign
-	 */
-	public function setForeign($foreign) {
-		$this->foreign = $foreign;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-	
-	/**
-	 * @param string $entry
-	 */
-	public function setLanguage($language) {
-		$this->language = $language;
-	}
-	
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDisciplines() {
-		return $this->disciplines;
-	}
-	
-	/**
-	 * @param \Doctrine\Common\Collections\ArrayCollection $disciplines
-	 */
-	public function setDisciplines($disciplines) {
-		$this->disciplines = $disciplines;
-	}
-	
+	private $frequency;
+
+    /**
+     * 
+     */
+    public function __construct($word, $frequency){
+        $this->word = $word;
+        $this->frequency = $frequency;
+    }
+
+    /**
+     * @param int $frequency
+     * @return void
+     */
+    public function setFrequency($frequency) {
+        $this->frequency = $frequency;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFrequency() {
+        return $this->frequency;
+    }
+
+    /**
+     * @param string $word
+     * @return void
+     */
+    public function setWord($word) {
+        $this->word = $word;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWord() {
+        return $this->word;
+    }
 }
 
 ?>
