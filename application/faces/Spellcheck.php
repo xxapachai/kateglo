@@ -19,7 +19,7 @@ namespace kateglo\application\faces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -31,89 +31,105 @@ namespace kateglo\application\faces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Equivalent {
+class Spellcheck {
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const FOREIGN = 'foreign';
+	const SPELLCHECK = 'spellcheck';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const LANGUAGE = 'language';
+	const SUGGESTIONS = 'suggestions';
+
+    /**
+	 *
+	 * Enter description here ...
+	 * @var string
+	 */
+	const SUGGESTION = 'suggestion';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const DISCIPLINE = 'discipline';
-		
+	const CORRECTLY_SPELLED = 'correctlySpelled';
+
 	/**
+	 *
 	 * Enter description here ...
 	 * @var string
 	 */
-	private $foreign;
-	
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $language;
+	const COLLATION = 'collation';
 	
 	/**
 	 * Enter description here ...
 	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 */
-	private $disciplines;
-		
-	/**
-	 * @return the $foreign
-	 */
-	public function getForeign() {
-		return $this->foreign;
-	}
+	private $suggestions;
 	
 	/**
-	 * @param string $foreign
+	 * Enter description here ...
+	 * @var boolean
 	 */
-	public function setForeign($foreign) {
-		$this->foreign = $foreign;
-	}
+	private $correctlySpelled;
 	
 	/**
-	 * @return string
+	 * Enter description here ...
+	 * @var string
 	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-	
-	/**
-	 * @param string $entry
-	 */
-	public function setLanguage($language) {
-		$this->language = $language;
-	}
-	
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDisciplines() {
-		return $this->disciplines;
-	}
-	
-	/**
-	 * @param \Doctrine\Common\Collections\ArrayCollection $disciplines
-	 */
-	public function setDisciplines($disciplines) {
-		$this->disciplines = $disciplines;
-	}
-	
+	private $collation;
+
+    /**
+     * @param string $collation
+     * @return void
+     */
+    public function setCollation($collation) {
+        $this->collation = $collation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollation() {
+        return $this->collation;
+    }
+
+    /**
+     * @param boolean $correctlySpelled
+     * @return void
+     */
+    public function setCorrectlySpelled($correctlySpelled) {
+        $this->correctlySpelled = $correctlySpelled;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getCorrectlySpelled() {
+        return $this->correctlySpelled;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $suggestions
+     * @return void
+     */
+    public function setSuggestions($suggestions) {
+        $this->suggestions = $suggestions;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSuggestions() {
+        return $this->suggestions;
+    }
 }
 
 ?>

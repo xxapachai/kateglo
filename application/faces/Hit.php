@@ -92,6 +92,12 @@ class Hit {
     private $facet;
 
     /**
+     * Enter description here ...
+     * @var \kateglo\application\faces\Spellcheck
+     */
+    private $spellcheck;
+
+    /**
      * @return int
      */
     public function getCount() {
@@ -169,6 +175,21 @@ class Hit {
      */
     public function getTimeInSeconds($time) {
         return number_format($this->time/1000, 3, ',', '.' );
+    }
+
+    /**
+     * @param \kateglo\application\faces\Spellcheck $spellcheck
+     * @return void
+     */
+    public function setSpellcheck($spellcheck) {
+        $this->spellcheck = $spellcheck;
+    }
+
+    /**
+     * @return \kateglo\application\faces\Spellcheck
+     */
+    public function getSpellcheck() {
+        return $this->spellcheck;
     }
 
 

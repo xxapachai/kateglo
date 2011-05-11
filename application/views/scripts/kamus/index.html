@@ -8,23 +8,24 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
+    <tal:block tal:condition="php: hits.getCount() GT 0">
+        <tal:block metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
+        <div class="facet-class" style="width: 500px; display: table-cell;">
 
-    <tal:block metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
-    <div class="facet-class" style="width: 500px; display: table-cell;">
+            <div tal:repeat="hit hits/getDocuments">
+                <div>
+                    <a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a>
 
-        <div tal:repeat="hit hits/getDocuments">
-            <div>
-                <a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a>
-
-                <div tal:repeat="definition hit/getDefinitions" style="padding-left:15px;">
-                    <div tal:content="definition">Definition</div>
+                    <div tal:repeat="definition hit/getDefinitions" style="padding-left:15px;">
+                        <div tal:content="definition">Definition</div>
+                    </div>
                 </div>
+                <br/>
             </div>
-            <br/>
+            <div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
         </div>
-        <div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
-    </div>
-    
+    </tal:block>
+    <tal:block metal:use-macro="${appPath}/views/macros/suggestion.html/suggestion"/>
 </tal:block>
 </body>
 </html>

@@ -87,22 +87,27 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      * @Produces('text/html')
      */
     public function indexHtml() {
-        $this->_helper->viewRenderer->setNoRender();
-        $cacheId = __CLASS__ . '\\' . 'html'.date('d.m.Y');
+        if ($this->getRequest()->getParam('query') == '') {
+            $this->_helper->viewRenderer->setNoRender();
+            $cacheId = __CLASS__ . '\\' . 'html' . date('d.m.Y');
 
-        if (!$this->evaluatePreCondition($cacheId)) {
-            try {
-                $this->view->formAction = '/kamus';
-                $this->view->amount = $this->entry->getTotalCount();
-                $this->view->entry = $this->wordOfTheDay();
-                $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-            } catch (Apache_Solr_Exception $e) {
-                $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+            if (!$this->evaluatePreCondition($cacheId)) {
+                try {
+                    $this->view->formAction = '/';
+                    $this->view->amount = $this->entry->getTotalCount();
+                    $this->view->entry = $this->wordOfTheDay();
+                    $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+                } catch (Apache_Solr_Exception $e) {
+                    $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+                }
             }
-        }
 
-        $this->responseBuilder($cacheId);
-        $this->getResponse()->appendBody($this->content);
+            $this->responseBuilder($cacheId);
+            $this->getResponse()->appendBody($this->content);
+        } else {
+            $this->getResponse()->setHttpResponseCode(303);
+            $this->getResponse()->setHeader('location', '/kamus?query=' . $this->getRequest()->getParam('query'));
+        }
     }
 
     /**
@@ -111,7 +116,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      * @Path('/')
      * @Produces('application/json')
      */
-    public function indexJson() {
+    public
+    function indexJson() {
 
         try {
             $this->content = array('entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled());
@@ -122,7 +128,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
         $this->_helper->json($this->content);
     }
 
-    private function wordOfTheDay() {
+    private
+    function wordOfTheDay() {
         $word[9] = 'kamus';
         $word[10] = 'tesaurus';
         $word[11] = 'padanan';
@@ -137,12 +144,12 @@ class IndexController extends Zend_Controller_Action_Stubbles {
         $result = $this->entry->getEntry($entry);
         $return['entry'] = $result->getEntry();
         $return['definitions'] = array();
-        foreach($result->getMeanings() as $meaning){
-            foreach($meaning->getDefinitions() as $definition){
+        foreach ($result->getMeanings() as $meaning) {
+            foreach ($meaning->getDefinitions() as $definition) {
                 $return['definitions'][] = $definition->getDefinition();
-                if(count($return['definitions']) === 4) break;
+                if (count($return['definitions']) === 4) break;
             }
-            if(count($return['definitions']) === 4) break;
+            if (count($return['definitions']) === 4) break;
         }
         return $return;
     }

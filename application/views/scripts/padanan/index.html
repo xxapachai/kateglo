@@ -7,8 +7,8 @@
 <meta metal:use-macro="${appPath}/views/macros/head.html/head" />
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
-	<div tal:omit-tag="true"  metal:fill-slot="content">
-	    <table class="equivalent" border="1">
+	<div metal:fill-slot="content">
+	    <table>
 	    	<tal:block  tal:repeat="hit hits/getDocuments">
 		    	<tal:block tal:define="global entry hit/getEntry;" />
 		    	<tal:block tal:repeat="equivalent hit/getEquivalents">	    		
