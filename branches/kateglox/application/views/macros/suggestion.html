@@ -6,13 +6,14 @@
     <title>Kateglo - Pagination</title>
 </head>
 <body tal:omit-tag="true" metal:define-macro="suggestion">
-<div>Hasil pencarian: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</div>
 <tal:block tal:condition="php: hits.getCount() EQ 0">
-    <p>
-        <span style="color:#cc0000" class="spell">Mungkin maksud Anda adalah: </span>
-        <a class="spell" href="${formAction}?query=${hits/getSpellcheck/getCollation}"><b>${hits/getSpellcheck/getCollation}</b></a>
-    </p>
-
+    <p>Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>
+    <tal:block tal:condition="php: hits.getSpellcheck().getCollation() NE ''">
+        <p>
+            <span style="color:#cc0000" class="spell">Mungkin maksud Anda adalah: </span>
+            <a class="spell" href="${formAction}?query=${hits/getSpellcheck/getCollation}"><b>${hits/getSpellcheck/getCollation}</b></a>
+        </p>
+    </tal:block>
     <div>
         <p>
             Penelusuran Anda - <b>${search/getFieldValue}</b> - tidak cocok dengan
@@ -25,15 +26,21 @@
             <li>Coba kata kunci yang lain.</li>
             <li>Coba kata kunci yang lebih umum.</li>
             <li>Coba kurangi kata kunci.</li>
+            <tal:block tal:condition="php: hits.getSpellcheck().getSuggestions().count() EQ 0 AND hits.getSpellcheck().getCorrectlySpelled()">
+                <li>Telusuri entri <a href="/kamus?query=${search/getFieldValue}">${search/getFieldValue}</a> di <a href="/kamus">kamus</a>.</li>
+            </tal:block>
         </ul>
     </div>
 
-    <p>
-        <span style="color:#cc0000" class="spell">Kemungkinan lain adalah: </span>
-        <tal:block tal:repeat="suggestion hits/getSpellcheck/getSuggestions">
-            <a class="spell" href="${formAction}?query=${suggestion/getWord}"><b>${suggestion/getWord}</b></a>&nbsp;
-        </tal:block>
-    </p>
+    <tal:block tal:condition="php: hits.getSpellcheck().getSuggestions().count() GT 0">
+        <p>
+            <span style="color:#cc0000" class="spell">Kemungkinan lain yang dapat dilihat di kamus: </span>
+            <tal:block tal:repeat="suggestion hits/getSpellcheck/getSuggestions">
+                <a class="spell" href="/kamus?query=${suggestion/getWord}"><b>${suggestion/getWord}</b></a>&nbsp;
+            </tal:block>
+        </p>
+    </tal:block>
+
 </tal:block>
 </body>
 </html>
