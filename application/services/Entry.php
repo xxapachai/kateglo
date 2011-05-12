@@ -178,7 +178,7 @@ class Entry implements interfaces\Entry {
         $params['mlt.mintf'] = 1;
         $params['mlt.count'] = 10;
         $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
@@ -207,7 +207,7 @@ class Entry implements interfaces\Entry {
         $params['mlt.mintf'] = 1;
         $params['mlt.count'] = 10;
         $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
@@ -236,7 +236,7 @@ class Entry implements interfaces\Entry {
         $params['mlt.mintf'] = 1;
         $params['mlt.count'] = 10;
         $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
         $params['spellcheck.q'] = $searchText;
@@ -266,7 +266,7 @@ class Entry implements interfaces\Entry {
         $params['mlt.mintf'] = 1;
         $params['mlt.count'] = 10;
         $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact');
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
         $params['spellcheck.q'] = $searchText;
