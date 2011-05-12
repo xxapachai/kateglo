@@ -384,6 +384,7 @@ class Entry implements interfaces\Entry {
         $params['fl'] = 'entry, equivalent, id';
         $params['q.alt'] = "foreign:*";
         $params['qf'] = "entry foreign";
+        $params['fq'] = "foreign:*";
         return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
     }
 
@@ -400,6 +401,7 @@ class Entry implements interfaces\Entry {
         $params['fl'] = 'entry, equivalent, id';
         $params['q.alt'] = "foreign:*";
         $params['qf'] = "entry foreign";
+        $params['fq'] = "foreign:*";
         return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
     }
 
