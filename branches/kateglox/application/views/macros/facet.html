@@ -6,7 +6,7 @@
     <title>Kateglo - Pagination</title>
 </head>
 <body tal:omit-tag="true" metal:define-macro="facet">
-<div>Hasil pencarian: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</div>
+<p>Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>
 <div style="width: 200px; display: table-cell;">
     <h5>Bentuk Kata</h5>
     <ul tal:repeat="type hits/getFacet/getType">
