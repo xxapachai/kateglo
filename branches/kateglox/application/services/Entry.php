@@ -439,6 +439,7 @@ class Entry implements interfaces\Entry {
         $hit->getFacet()->setClazzCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY})));
         $hit->getFacet()->setType(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE})));
         $hit->getFacet()->setTypeCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY})));
+        $hit->getFacet()->setDiscipline(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::DISCIPLINE})));
 
         if (isset($response->spellcheck)) {
             $hit->setSpellcheck(new Spellcheck());
