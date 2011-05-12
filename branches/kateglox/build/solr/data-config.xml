@@ -1,123 +1,160 @@
 <dataConfig>
-    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/kateglox2" user="root" password="" />	
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/kateglox2" user="root"
+                password=""/>
     <document name="entries">
         <entity name="entry" query="select * from entry">
-        
-            <field column="entry_id" name="id" />
-            <field column="entry_name" name="entry" />
-			
+
+            <field column="entry_id" name="id"/>
+            <field column="entry_name" name="entry"/>
+
             <entity name="meaning" query="select * from meaning where meaning_entry_id='${entry.entry_id}'">
-            
+
                 <entity name="antonym" query="select * from antonym where antonym_meaning_id='${meaning.meaning_id}'">
-                    <entity name="antonym_meaning" query="select * from meaning where meaning_id='${antonym.antonym_antonym_id}'">
-                        <entity name="antonym_meaning_entry" query="select * from entry where entry_id='${antonym_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="antonym" />
+                    <entity name="antonym_meaning"
+                            query="select * from meaning where meaning_id='${antonym.antonym_antonym_id}'">
+                        <entity name="antonym_meaning_entry"
+                                query="select * from entry where entry_id='${antonym_meaning.meaning_entry_id}'">
+                            <field column="entry_name" name="antonym"/>
                         </entity>
                     </entity>
                 </entity>
-                
-                <entity name="definition" query="select * from definition where definition_meaning_id='${meaning.meaning_id}'">
-                    <field column="definition_text" name="definition" />
-                    
-                    <entity name="definition_class" query="select * from rel_definition_class where rel_definition_id='${definition.definition_id}'">
-                        <entity name="class" query="select * from class where class_id='${definition_class.rel_class_id}'">
-                            <field column="class_name" name="class" />
-                            
-                            <entity name="rel_class_category" query="select * from rel_class_category where rel_class_id='${class.class_id}'">
-                                <entity name="class_category" query="select * from class_category where class_category_id='${rel_class_category.rel_class_category_id}'">
-                                    <field column="class_category_name" name="classCategory" />
+
+                <entity name="definition"
+                        query="select * from definition where definition_meaning_id='${meaning.meaning_id}'">
+                    <field column="definition_text" name="definition"/>
+
+                    <entity name="definition_class"
+                            query="select * from rel_definition_class where rel_definition_id='${definition.definition_id}'">
+                        <entity name="class"
+                                query="select * from class where class_id='${definition_class.rel_class_id}'">
+                            <field column="class_name" name="class"/>
+
+                            <entity name="rel_class_category"
+                                    query="select * from rel_class_category where rel_class_id='${class.class_id}'">
+                                <entity name="class_category"
+                                        query="select * from class_category where class_category_id='${rel_class_category.rel_class_category_id}'">
+                                    <field column="class_category_name" name="classCategory"/>
                                 </entity>
                             </entity>
                         </entity>
                     </entity>
-                    
-                    <entity name="sample" query="select * from sample where sample_definition_id='${definition.definition_id}'">
-                    	<field column="sample_text" name="sample" />
+
+                    <entity name="definition_discipline"
+                            query="select * from rel_definition_discipline where rel_definition_id='${definition.definition_id}'">
+                        <entity name="definition" query="select * from discipline where discipline_id='${definition_discipline.rel_discipline_id}'">
+                            <field column="discipline_name" name="discipline" />
+                        </entity>
                     </entity>
-                    
+
+                    <entity name="sample"
+                            query="select * from sample where sample_definition_id='${definition.definition_id}'">
+                        <field column="sample_text" name="sample"/>
+                    </entity>
+
                 </entity>
-                
-                <entity name="misspelled" query="select * from misspelled where misspelled_meaning_id='${meaning.meaning_id}'">
-                    <entity name="misspelled_meaning" query="select * from meaning where meaning_id='${misspelled.misspelled_misspelled_id}'">
-                        <entity name="misspelled_meaning_entry" query="select * from entry where entry_id='${misspelled_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="misspelled" />
+
+                <entity name="misspelled"
+                        query="select * from misspelled where misspelled_meaning_id='${meaning.meaning_id}'">
+                    <entity name="misspelled_meaning"
+                            query="select * from meaning where meaning_id='${misspelled.misspelled_misspelled_id}'">
+                        <entity name="misspelled_meaning_entry"
+                                query="select * from entry where entry_id='${misspelled_meaning.meaning_entry_id}'">
+                            <field column="entry_name" name="misspelled"/>
                         </entity>
                     </entity>
                 </entity>
-                
-                <entity name="relation" query="select * from relation where relation_meaning_id='${meaning.meaning_id}'">
-                    <entity name="relation_meaning" query="select * from meaning where meaning_id='${relation.relation_relation_id}'">
-                        <entity name="relation_meaning_entry" query="select * from entry where entry_id='${relation_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="relation" />
+
+                <entity name="relation"
+                        query="select * from relation where relation_meaning_id='${meaning.meaning_id}'">
+                    <entity name="relation_meaning"
+                            query="select * from meaning where meaning_id='${relation.relation_relation_id}'">
+                        <entity name="relation_meaning_entry"
+                                query="select * from entry where entry_id='${relation_meaning.meaning_entry_id}'">
+                            <field column="entry_name" name="relation"/>
                         </entity>
                     </entity>
                 </entity>
-                
+
                 <entity name="synonym" query="select * from synonym where synonym_meaning_id='${meaning.meaning_id}'">
-                    <entity name="synonym_meaning" query="select * from meaning where meaning_id='${synonym.synonym_synonym_id}'">
-                        <entity name="synonym_meaning_entry" query="select * from entry where entry_id='${synonym_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="synonym" />
+                    <entity name="synonym_meaning"
+                            query="select * from meaning where meaning_id='${synonym.synonym_synonym_id}'">
+                        <entity name="synonym_meaning_entry"
+                                query="select * from entry where entry_id='${synonym_meaning.meaning_entry_id}'">
+                            <field column="entry_name" name="synonym"/>
                         </entity>
                     </entity>
                 </entity>
-                
-                <entity name="spelled" query="select * from misspelled where misspelled_misspelled_id='${meaning.meaning_id}'">
-                    <entity name="spelled_meaning" query="select * from meaning where meaning_id='${spelled.misspelled_meaning_id}'">
-                        <entity name="spelled_meaning_entry" query="select * from entry where entry_id='${spelled_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="spelled" />
+
+                <entity name="spelled"
+                        query="select * from misspelled where misspelled_misspelled_id='${meaning.meaning_id}'">
+                    <entity name="spelled_meaning"
+                            query="select * from meaning where meaning_id='${spelled.misspelled_meaning_id}'">
+                        <entity name="spelled_meaning_entry"
+                                query="select * from entry where entry_id='${spelled_meaning.meaning_entry_id}'">
+                            <field column="entry_name" name="spelled"/>
                         </entity>
                     </entity>
                 </entity>
-                
-                <entity name="syllabel" query="select * from syllabel where syllabel_meaning_id='${meaning.meaning_id}'">
-                    <field column="syllabel_text" name="syllabel" />
+
+                <entity name="syllabel"
+                        query="select * from syllabel where syllabel_meaning_id='${meaning.meaning_id}'">
+                    <field column="syllabel_text" name="syllabel"/>
                 </entity>
-                
-                <entity name="meaning_type" query="select * from rel_meaning_type where rel_meaning_id='${meaning.meaning_id}'">
+
+                <entity name="meaning_type"
+                        query="select * from rel_meaning_type where rel_meaning_id='${meaning.meaning_id}'">
                     <entity name="type" query="select * from type where type_id='${meaning_type.rel_type_id}'">
-                        <field column="type_name" name="type" />
-                        
-                        <entity name="rel_type_category" query="select * from rel_type_category where rel_type_id='${type.type_id}'">
-                            <entity name="type_category" query="select * from type_category where type_category_id='${rel_type_category.rel_type_category_id}'">
-                                <field column="type_category_name" name="typeCategory" />
+                        <field column="type_name" name="type"/>
+
+                        <entity name="rel_type_category"
+                                query="select * from rel_type_category where rel_type_id='${type.type_id}'">
+                            <entity name="type_category"
+                                    query="select * from type_category where type_category_id='${rel_type_category.rel_type_category_id}'">
+                                <field column="type_category_name" name="typeCategory"/>
                             </entity>
                         </entity>
                     </entity>
                 </entity>
-                
+
             </entity>
-            
+
             <entity name="source" query="select * from source where source_entry_id='${entry.entry_id}'">
-            	<field column="source_text_clean" name="source" />
-            	
-                <entity name="source_category" query="select * from source_category where source_category_id = '${source.source_category_id}'">
-                    <field column="source_category_name" name="sourceCategory" />
+                <field column="source_text_clean" name="source"/>
+
+                <entity name="source_category"
+                        query="select * from source_category where source_category_id = '${source.source_category_id}'">
+                    <field column="source_category_name" name="sourceCategory"/>
                 </entity>
             </entity>
-            
+
             <entity name="equivalents" query="select * from equivalent where equivalent_entry_id='${entry.entry_id}'">
-            	<entity name="foreign" query="select * from `foreign` where foreign_id = '${equivalents.equivalent_foreign_id}'">
-            	    <field column="foreign_name" name="foreign" />
-            	    
-            	    <entity name="language" query="select * from language where language_id='${foreign.foreign_language_id}'">
-            	        <field column="language_name" name="language" />
-						
-						<entity name="rel_equivalent_discipline" query="select * from rel_equivalent_discipline where rel_equivalent_id='${equivalent.equivalent_id}'">
-							<entity name="equivalent_discipline" query="select * from discipline where discipline_id='${rel_equivalent_discipline.rel_discipline_id}'">
-								<field column="discipline_name" name="equivalentDiscipline" />
-							</entity>
-							
-						</entity>
-						
-            	    </entity>
-					
-					
-            	</entity>
-            	<entity name="equivalent" query="select CONCAT('{&quot;foreign&quot;:&quot;',foreign_name,'&quot;,&quot;language&quot;:&quot;',language_name,'&quot;,&quot;discipline&quot;:[',disciplines,']}') as equivalents from (select foreign_name, language_name, CASE WHEN GROUP_CONCAT(discipline_name) is null THEN '' ELSE CONCAT('&quot;', GROUP_CONCAT(discipline_name SEPARATOR '&quot;,&quot;'), '&quot;') END as disciplines from equivalent LEFT JOIN `foreign` ON foreign_id = equivalent_foreign_id LEFT JOIN language ON language_id = foreign_language_id LEFT JOIN rel_equivalent_discipline ON rel_equivalent_id = equivalent_id LEFT JOIN discipline ON discipline_id = rel_discipline_id where equivalent_id = '${equivalents.equivalent_id}' GROUP BY equivalent_id) temp">
-					<field column="equivalents" name="equivalent" />
-				</entity>
+                <entity name="foreign"
+                        query="select * from `foreign` where foreign_id = '${equivalents.equivalent_foreign_id}'">
+                    <field column="foreign_name" name="foreign"/>
+
+                    <entity name="language"
+                            query="select * from language where language_id='${foreign.foreign_language_id}'">
+                        <field column="language_name" name="language"/>
+
+                        <entity name="rel_equivalent_discipline"
+                                query="select * from rel_equivalent_discipline where rel_equivalent_id='${equivalents.equivalent_id}'">
+                            <entity name="equivalent_discipline"
+                                    query="select * from discipline where discipline_id='${rel_equivalent_discipline.rel_discipline_id}'">
+                                <field column="discipline_name" name="equivalentDiscipline"/>
+                            </entity>
+
+                        </entity>
+
+                    </entity>
+
+
+                </entity>
+                <entity name="equivalent"
+                        query="select CONCAT('{&quot;foreign&quot;:&quot;',foreign_name,'&quot;,&quot;language&quot;:&quot;',language_name,'&quot;,&quot;discipline&quot;:[',disciplines,']}') as equivalents from (select foreign_name, language_name, CASE WHEN GROUP_CONCAT(discipline_name) is null THEN '' ELSE CONCAT('&quot;', GROUP_CONCAT(discipline_name SEPARATOR '&quot;,&quot;'), '&quot;') END as disciplines from equivalent LEFT JOIN `foreign` ON foreign_id = equivalent_foreign_id LEFT JOIN language ON language_id = foreign_language_id LEFT JOIN rel_equivalent_discipline ON rel_equivalent_id = equivalent_id LEFT JOIN discipline ON discipline_id = rel_discipline_id where equivalent_id = '${equivalents.equivalent_id}' GROUP BY equivalent_id) temp">
+                    <field column="equivalents" name="equivalent"/>
+                </entity>
             </entity>
-            
+
         </entity>
     </document>
 </dataConfig>
