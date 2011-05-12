@@ -32,58 +32,71 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Facet {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const TYPE = 'typeExact';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const TYPE_CATEGORY = 'typeCategoryExact';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const CLAZZ = 'classExact';
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var string
-	 */
-	const CLAZZ_CATEGORY = 'classCategoryExact';
-	
-	/**
-	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $type;
-	
-	/**
-	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $typeCategory;
-	
-	/**
-	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $clazz;
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const TYPE = 'typeExact';
 
-	/**
-	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $clazzCategory;
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const TYPE_CATEGORY = 'typeCategoryExact';
+
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const CLAZZ = 'classExact';
+
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const CLAZZ_CATEGORY = 'classCategoryExact';
+
+    /**
+     *
+     * Enter description here ...
+     * @var string
+     */
+    const DISCIPLINE = 'disciplineExact';
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $type;
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $typeCategory;
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $clazz;
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $clazzCategory;
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $discipline;
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $clazz
@@ -143,6 +156,21 @@ class Facet {
      */
     public function getTypeCategory() {
         return $this->typeCategory;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $discipline
+     * @return void
+     */
+    public function setDiscipline($discipline) {
+        $this->discipline = $discipline;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDiscipline() {
+        return $this->discipline;
     }
 }
 
