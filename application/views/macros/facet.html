@@ -13,7 +13,7 @@
     <tal:block tal:condition="php: hits.getFacet().getType().count() GT 0">
         <h5>Bentuk Kata</h5>
         <ul tal:repeat="type hits/getFacet/getType">
-            <li>
+            <li tal:condition="php: type GT 0">
                 <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
                     <a href="${formAction}/?${search/getFieldName}=type:%22${repeat/type/key}%22">${repeat/type/key}
                         (${type})</a>
@@ -29,7 +29,7 @@
     <tal:block tal:condition="php: hits.getFacet().getClazz().count() GT 0">
         <h5>Kelas Kata</h5>
         <ul tal:repeat="clazz hits/getFacet/getClazz">
-            <li>
+            <li tal:condition="php: clazz GT 0">
                 <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
                     <a href="${formAction}/?${search/getFieldName}=class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
                         (${clazz})</a>
@@ -45,13 +45,13 @@
     <tal:block tal:condition="php: hits.getFacet().getDiscipline().count() GT 0">
         <h5>Disiplin</h5>
         <ul tal:repeat="discipline hits/getFacet/getDiscipline">
-            <li>
+            <li tal:condition="php: discipline GT 0">
                 <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
-                    <a href="${formAction}/?${search/getFieldName}=class:%22${repeat/discipline/key}%22">${repeat/discipline/key}
+                    <a href="${formAction}/?${search/getFieldName}=discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
                         (${discipline})</a>
                 </tal:block>
                 <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND class:%22${repeat/discipline/key}%22">${repeat/discipline/key}
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
                         (${discipline})</a>
                 </tal:block>
             </li>
