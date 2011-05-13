@@ -92,11 +92,11 @@ class PadananController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
-     * @param kateglo\application\services\interfaces\Pagination $entry
+     * @param \kateglo\application\services\interfaces\Pagination $pagination
      *
      * @Inject
      */
-    public function setPages(Pagination $pagination) {
+    public function setPagination(Pagination $pagination) {
         $this->pagination = $pagination;
     }
 
@@ -161,6 +161,26 @@ class PadananController extends Zend_Controller_Action_Stubbles {
         }
         $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
+    }
+
+        /**
+     * @return void
+     * @Get
+     * @Path('/detail')
+     * @Produces('text/html')
+     */
+    public function detailHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $cacheId = __CLASS__ . '\\' . 'detailHtml' . '\\' . $searchText;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->search->setFieldValue($searchText);
+            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+        }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
     }
 }
 

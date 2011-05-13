@@ -79,13 +79,6 @@ class TesaurusController extends Zend_Controller_Action_Stubbles {
     }
 
     /**
-     * @return \kateglo\application\services\interfaces\Entry
-     */
-    public function getEntry() {
-        return $this->entry;
-    }
-
-    /**
      *
      * Enter description here ...
      * @param \kateglo\application\faces\interfaces\Search $entry
@@ -105,44 +98,6 @@ class TesaurusController extends Zend_Controller_Action_Stubbles {
      */
     public function setPagination(Pagination $pagination) {
         $this->pagination = $pagination;
-    }
-
-    /**
-     * @return \kateglo\application\services\interfaces\Pagination
-     */
-    public function getPagination() {
-        return $this->pagination;
-    }
-
-
-    /**
-     * @param int $offset
-     * @return void
-     */
-    public function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOffset() {
-        return $this->offset;
-    }
-
-    /**
-     * @param int $limit
-     * @return void
-     */
-    public function setLimit($limit) {
-        $this->limit = $limit;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLimit() {
-        return $this->limit;
     }
 
     /**
@@ -206,6 +161,26 @@ class TesaurusController extends Zend_Controller_Action_Stubbles {
         }
         $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
+    }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/detail')
+     * @Produces('text/html')
+     */
+    public function detailHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $cacheId = __CLASS__ . '\\' . 'detailHtml' . '\\' . $searchText;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->search->setFieldValue($searchText);
+            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+        }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
     }
 }
 

@@ -100,23 +100,6 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->pagination = $pagination;
     }
 
-
-    /**
-     * @param int $offset
-     * @return void
-     */
-    public function setOffset($offset) {
-        $this->offset = $offset;
-    }
-
-    /**
-     * @param int $limit
-     * @return void
-     */
-    public function setLimit($limit) {
-        $this->limit = $limit;
-    }
-
     /**
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
@@ -138,7 +121,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-        $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+        $cacheId = __CLASS__ . '\\' . 'indexHtml' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
@@ -165,7 +148,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
      */
     public function indexJson() {
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-        $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+        $cacheId = __CLASS__ . '\\' . 'indexJson' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
                 /*@var $hits kateglo\application\faces\Hit */
@@ -179,5 +162,26 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
     }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/detail')
+     * @Produces('text/html')
+     */
+    public function detailHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $cacheId = __CLASS__ . '\\' . 'detailHtml' . '\\' . $searchText;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->search->setFieldValue($searchText);
+            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+        }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
+    }
 }
+
 ?>
