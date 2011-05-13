@@ -21,12 +21,18 @@
 
             <nav>
                 <ul>
-                    <li tal:attributes="class php: formAction EQ '/' ? 'current_page' : null"><a href="/">Beranda</a></li>
-                    <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null"><a href="/kamus">Kamus</a></li>
-                    <li tal:attributes="class php: formAction EQ '/tesaurus' ? 'current_page' : null"><a href="/tesaurus">Tesaurus</a></li>
-                    <li tal:attributes="class php: formAction EQ '/padanan' ? 'current_page' : null"><a href="/padanan">Padanan</a></li>
-                    <li tal:attributes="class php: formAction EQ '/peribahasa' ? 'current_page' : null"><a href="/peribahasa">Peribahasa</a></li>
-                    <li tal:attributes="class php: formAction EQ '/singkatan' ? 'current_page' : null"><a href="/singkatan">Singkatan</a></li>
+                    <li tal:attributes="class php: formAction EQ '/' ? 'current_page' : null"><a href="/">Beranda</a>
+                    </li>
+                    <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null"><a href="/kamus">Kamus</a>
+                    </li>
+                    <li tal:attributes="class php: formAction EQ '/tesaurus' ? 'current_page' : null">
+                        <a href="/tesaurus">Tesaurus</a></li>
+                    <li tal:attributes="class php: formAction EQ '/padanan' ? 'current_page' : null"><a href="/padanan">Padanan</a>
+                    </li>
+                    <li tal:attributes="class php: formAction EQ '/peribahasa' ? 'current_page' : null">
+                        <a href="/peribahasa">Peribahasa</a></li>
+                    <li tal:attributes="class php: formAction EQ '/singkatan' ? 'current_page' : null">
+                        <a href="/singkatan">Singkatan</a></li>
                     <li><a href="/">Aplikasi</a></li>
                 </ul>
             </nav>
@@ -42,8 +48,8 @@
                 </div>
                 <div class="grid_4 nomargin-right">
                     <p>
-                        <a href="/">Petunjuk pencarian</a><br/>
-                        <a href="/">Pencarian lebih detil</a>
+                        <a href="/">Petunjuk penelusuran</a><br/>
+                        <a href="${formAction}/detail">Penelusuran lebih detail</a>
                     </p>
                 </div>
                 <div class="clear"></div>
@@ -84,8 +90,9 @@
 
 </div>
 
-<script type="text/javascript" src="/libs/html5.js"></script>
-<script type="text/javascript" src="/libs/jquery-1.6-debug.js"></script>
+<script type="text/javascript" src="/libs/html5.js"/>
+<script type="text/javascript" src="/libs/jquery-1.6-debug.js"/>
+<script type="text/javascript" src="/libs/jquery-typewatch-2.0.0-debug.js"/>
 <script type="text/javascript" src="/javascripts/javascript.js"/>
 </body>
 </html>

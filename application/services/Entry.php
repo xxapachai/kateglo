@@ -166,21 +166,8 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
-        $params['spellcheck'] = 'true';
-        $params['spellcheck.count'] = 10;
-        $params['spellcheck.collate'] = 'true';
-        $params['spellcheck.maxCollationTries'] = 1000;
-        $params['spellcheck.extendedResults'] = 'true';
-        $params['mlt'] = 'true';
-        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
-        $params['mlt.mindf'] = 1;
-        $params['mlt.mintf'] = 1;
-        $params['mlt.count'] = 10;
-        $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+        $params = $this->getDefaultParams($searchText, $params);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
-        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return json_decode($request->getRawResponse());
@@ -195,21 +182,8 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
-        $params['spellcheck'] = 'true';
-        $params['spellcheck.count'] = 10;
-        $params['spellcheck.collate'] = 'true';
-        $params['spellcheck.maxCollationTries'] = 1000;
-        $params['spellcheck.extendedResults'] = 'true';
-        $params['mlt'] = 'true';
-        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
-        $params['mlt.mindf'] = 1;
-        $params['mlt.mintf'] = 1;
-        $params['mlt.count'] = 10;
-        $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+        $params = $this->getDefaultParams($searchText, $params);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
-        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
@@ -224,22 +198,9 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
-        $params['spellcheck'] = 'true';
-        $params['spellcheck.count'] = 10;
-        $params['spellcheck.collate'] = 'true';
-        $params['spellcheck.maxCollationTries'] = 1000;
-        $params['spellcheck.extendedResults'] = 'true';
-        $params['mlt'] = 'true';
-        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
-        $params['mlt.mindf'] = 1;
-        $params['mlt.mintf'] = 1;
-        $params['mlt.count'] = 10;
-        $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+        $params = $this->getDefaultParams($searchText, $params);
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
-        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
@@ -254,22 +215,9 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
-        $params['spellcheck'] = 'true';
-        $params['spellcheck.count'] = 10;
-        $params['spellcheck.collate'] = 'true';
-        $params['spellcheck.maxCollationTries'] = 1000;
-        $params['spellcheck.extendedResults'] = 'true';
-        $params['mlt'] = 'true';
-        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
-        $params['mlt.mindf'] = 1;
-        $params['mlt.mintf'] = 1;
-        $params['mlt.count'] = 10;
-        $params['facet'] = 'true';
-        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+        $params = $this->getDefaultParams($searchText, $params);
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
-        $params['spellcheck.q'] = $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
         return json_decode($request->getRawResponse());
@@ -403,6 +351,29 @@ class Entry implements interfaces\Entry {
         $params['qf'] = "entry foreign";
         $params['fq'] = "foreign:*";
         return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+    }
+
+    /**
+     * @param string $searchText
+     * @param array $params
+     * @return array
+     */
+    private function getDefaultParams($searchText, $params = array()) {
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
+        $params['spellcheck'] = 'true';
+        $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
+        $params['mlt'] = 'true';
+        $params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+        $params['mlt.mindf'] = 1;
+        $params['mlt.mintf'] = 1;
+        $params['mlt.count'] = 10;
+        $params['facet'] = 'true';
+        $params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'sourceCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+        $params['spellcheck.q'] = $searchText;
+        return $params;
     }
 
     /**

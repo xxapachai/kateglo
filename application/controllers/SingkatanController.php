@@ -25,7 +25,7 @@ use kateglo\application\faces\Hit;
 /**
  *
  *
- * 
+ *
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -34,72 +34,72 @@ use kateglo\application\faces\Hit;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class SingkatanController extends Zend_Controller_Action_Stubbles {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-	
-	/**
-	 * Enter description here ...
-	 * @var kateglo\application\services\interfaces\Pagination;
-	 */
-	private $pagination;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $limit;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $offset;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 * 
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $search
-	 * 
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Pagination $entry
-	 * 
-	 * @Inject
-	 */
-	public function setPages(Pagination $pagination) {
-		$this->pagination = $pagination;
-	}
-	
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\services\interfaces\Entry;
+     */
+    private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var kateglo\application\faces\interfaces\Search;
+     */
+    private $search;
+
+    /**
+     * Enter description here ...
+     * @var kateglo\application\services\interfaces\Pagination;
+     */
+    private $pagination;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $limit;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $offset;
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Entry $entry
+     *
+     * @Inject
+     */
+    public function setEntry(Entry $entry) {
+        $this->entry = $entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\faces\interfaces\Search $search
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search) {
+        $this->search = $search;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Pagination $pagination
+     *
+     * @Inject
+     */
+    public function setPagination(Pagination $pagination) {
+        $this->pagination = $pagination;
+    }
+
     /**
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
@@ -162,5 +162,26 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
         $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
     }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/detail')
+     * @Produces('text/html')
+     */
+    public function detailHtml() {
+        $this->_helper->viewRenderer->setNoRender();
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $cacheId = __CLASS__ . '\\' . 'detailHtml' . '\\' . $searchText;
+
+        if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->search->setFieldValue($searchText);
+            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+        }
+
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
+    }
 }
+
 ?>
