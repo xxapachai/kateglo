@@ -42,6 +42,22 @@
         </ul>
         <br/><br/>
     </tal:block>
+    <tal:block tal:condition="php: hits.getFacet().getSource().count() GT 0">
+        <h5>Sumber</h5>
+        <ul tal:repeat="source hits/getFacet/getSource">
+            <li tal:condition="php: source GT 0">
+                <tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
+                    <a href="${formAction}/?${search/getFieldName}=sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
+                        (${source})</a>
+                </tal:block>
+                <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
+                        (${source})</a>
+                </tal:block>
+            </li>
+        </ul>
+        <br/><br/>
+    </tal:block>
     <tal:block tal:condition="php: hits.getFacet().getDiscipline().count() GT 0">
         <h5>Disiplin</h5>
         <ul tal:repeat="discipline hits/getFacet/getDiscipline">

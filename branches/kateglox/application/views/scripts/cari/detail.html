@@ -4,7 +4,7 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Kateglo - Beranda</title>
+    <title>Kateglo - Penelusuran Lanjutan</title>
     <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
@@ -27,7 +27,8 @@
                         <td class="label"><label>dengan <b>frasa persis</b>:</label></td>
                         <td class="input"><input type="text" value="" id="exactWord" style="width:100%"/></td>
                         <td id="phrase-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="phrase-tip-span" style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
+                            <span id="phrase-tip-span"
+                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +47,8 @@
                             </table>
                         </td>
                         <td id="or-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="or-tip-span" style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
+                            <span id="or-tip-span"
+                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +58,8 @@
                         <td class="label"><label>kata/frasa yang tidak diinginkan ini:</label></td>
                         <td class="input"><input type="text" value="" id="noWord" style="width:100%"/></td>
                         <td id="not-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="not-tip-span" style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
+                            <span id="not-tip-span"
+                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
                         </td>
                     </tr>
                     </tbody>
@@ -65,7 +68,7 @@
                 <table cellspacing="0" cellpadding="2" width="100%">
                     <tbody>
                     <tr>
-                        <td class="label disabled"><label><b>Jumlah</b> hasil temuan pada tiap tampilan laman:</label></td>
+                        <td class="label"><label><b>Jumlah</b> hasil temuan pada tiap tampilan laman:</label></td>
                         <td><select name="num">
                             <option value="10" selected="">10 hasil temuan</option>
                             <option value="20">20 hasil temuan</option>
@@ -77,46 +80,39 @@
                     </tr>
                     <tr>
                         <td class="label"><label>Memiliki <b>padanan</b> dalam bahasa:</label></td>
-                        <td><select name="lr">
+                        <td><select name="language">
                             <option value="" selected="">bahasa apa saja</option>
-                            <option value="en">Inggris</option>
+                            <tal:block tal:repeat="language staticData/getLanguage">
+                                <option value="${language/getLanguage}">${language/getLanguage}</option>
+                            </tal:block>
                         </select></td>
                     </tr>
                     <tr>
                         <td class="label"><label>Memiliki kata dengan <b>bentuk</b>:</label></td>
-                        <td><select name="as_filetype">
+                        <td><select name="type">
                             <option value="" selected="">apa saja</option>
-                            <option value="pdf">Kata dasar mandiri</option>
-                            <option value="ps">Akronim</option>
+                            <tal:block tal:repeat="type staticData/getType">
+                                <option value="${type/getType}">${type/getType}</option>
+                            </tal:block>
                         </select></td>
                     </tr>
                     <tr>
                         <td class="label"><label>Memiliki kata dengan <b>kelas</b>:</label></td>
-                        <td><select name="as_filetype">
+                        <td><select name="class">
                             <option value="" selected="">apa saja</option>
-                            <option value="pdf">Nomina</option>
-                            <option value="ps">Verba</option>
-                            <option value="pdf">Adjektiva</option>
-                            <option value="ps">Adverbia</option>
-                            <option value="pdf">Numeralia</option>
-                            <option value="ps">Pronomina</option>
-                            <option value="ps">Preposisi</option>
-                            <option value="ps">Konjungtor</option>
+                            <tal:block tal:repeat="clazz staticData/getClazz">
+                                <option value="${clazz/getClazz}">${clazz/getClazz}</option>
+                            </tal:block>
                         </select></td>
                     </tr>
                     <tr>
                         <td class="label"><label>Digunakan dalam <b>disiplin</b> ilmu:</label></td>
                         <td>
-                            <select name="as_filetype">
+                            <select name="discipline">
                                 <option value="" selected="">apa saja</option>
-                                <option value="pdf">Linguistik</option>
-                                <option value="ps">Fisika</option>
-                                <option value="pdf">Hukum</option>
-                                <option value="ps">Kedokteran</option>
-                                <option value="pdf">Geografi</option>
-                                <option value="ps">Antropologi</option>
-                                <option value="ps">Kimia</option>
-                                <option value="ps">Pertanian</option>
+                            <tal:block tal:repeat="discipline staticData/getDiscipline">
+                                <option value="${discipline/getDiscipline}">${discipline/getDiscipline}</option>
+                            </tal:block>
                             </select>
                         </td>
                     </tr>
@@ -124,12 +120,29 @@
                         <td class="label"><label>Dengan istilah yang saya pilih muncul di:</label></td>
                         <td>
                             <select name="area">
-                                <option value="/cari" tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana saja di laman</option>
-                                <option value="/kamus" tal:attributes="selected php: formAction EQ '/kamus' ? 'selected': NULL">Kamus</option>
-                                <option value="/tesaurus" tal:attributes="selected php: formAction EQ '/tesaurus' ? 'selected': NULL">Tesaurus</option>
-                                <option value="/padanan" tal:attributes="selected php: formAction EQ '/padanan' ? 'selected': NULL">Padanan</option>
-                                <option value="/peribahasa" tal:attributes="selected php: formAction EQ '/peribahasa' ? 'selected': NULL">Peribahasa</option>
-                                <option value="/singkatan" tal:attributes="selected php: formAction EQ '/singkatan' ? 'selected': NULL">Akronim dan Singkatan</option>
+                                <option value="/cari"
+                                        tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana
+                                    saja di laman
+                                </option>
+                                <option value="/kamus"
+                                        tal:attributes="selected php: formAction EQ '/kamus' ? 'selected': NULL">Kamus
+                                </option>
+                                <option value="/tesaurus"
+                                        tal:attributes="selected php: formAction EQ '/tesaurus' ? 'selected': NULL">
+                                    Tesaurus
+                                </option>
+                                <option value="/padanan"
+                                        tal:attributes="selected php: formAction EQ '/padanan' ? 'selected': NULL">
+                                    Padanan
+                                </option>
+                                <option value="/peribahasa"
+                                        tal:attributes="selected php: formAction EQ '/peribahasa' ? 'selected': NULL">
+                                    Peribahasa
+                                </option>
+                                <option value="/singkatan"
+                                        tal:attributes="selected php: formAction EQ '/singkatan' ? 'selected': NULL">
+                                    Akronim dan Singkatan
+                                </option>
                             </select>
                         </td>
                     </tr>
