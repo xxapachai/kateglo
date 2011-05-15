@@ -34,7 +34,7 @@ use kateglo\application\faces\Hit;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class KamusController extends Zend_Controller_Action_Stubbles {
+class CariController extends Zend_Controller_Action_Stubbles {
 
     /**
      *
