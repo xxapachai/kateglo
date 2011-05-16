@@ -93,7 +93,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 
             if (!$this->evaluatePreCondition($cacheId)) {
                 try {
-                    $this->view->formAction = '/';
+                    $this->view->formAction = '/cari';
                     $this->view->amount = $this->entry->getTotalCount();
                     $this->view->entry = $this->wordOfTheDay();
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
@@ -106,7 +106,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
             $this->getResponse()->appendBody($this->content);
         } else {
             $this->getResponse()->setHttpResponseCode(303);
-            $this->getResponse()->setHeader('location', '/kamus?query=' . $this->getRequest()->getParam('query'));
+            $this->getResponse()->setHeader('location', '/cari?query=' . $this->getRequest()->getParam('query'));
         }
     }
 
@@ -130,13 +130,13 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 
     private
     function wordOfTheDay() {
-        $word[9] = 'kamus';
-        $word[10] = 'tesaurus';
-        $word[11] = 'padanan';
-        $word[12] = 'terjemahan';
-        $word[13] = 'peribahasa';
-        $word[14] = 'singkatan';
-        $word[15] = 'akronim';
+        $word[18] = 'kamus';
+        $word[19] = 'tesaurus';
+        $word[20] = 'padanan';
+        $word[21] = 'terjemahan';
+        $word[22] = 'peribahasa';
+        $word[23] = 'singkatan';
+        $word[24] = 'akronim';
         $word[16] = 'aplikasi';
         $word[17] = 'beranda';
 

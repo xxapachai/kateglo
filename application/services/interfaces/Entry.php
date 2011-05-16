@@ -21,8 +21,8 @@ namespace kateglo\application\services\interfaces;
  */
 
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -32,152 +32,163 @@ namespace kateglo\application\services\interfaces;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 interface Entry {
-	
-	const INTERFACE_NAME = __CLASS__;
-	
-	/**
-	 * 
-	 * @param string $entry
-	 * @return kateglo\application\models\Entry
-	 */
-	function getEntry($entry);
-	
-	/**
-	 * 
-	 * @return int
-	 */
-	function getTotalCount();
-	
-	/**
-	 *
-	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
-	 */
-	function randomMisspelled($limit = 5);
-	
-	/**
-	 *
-	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
-	 */
-	function randomEntry($limit = 10);
+
+    const INTERFACE_NAME = __CLASS__;
 
     /**
-	 *
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return string
-	 */
-	function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
-
-	/**
-	 * 
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hit
-	 */
-	function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
+     *
+     * @param string $entry
+     * @return kateglo\application\models\Entry
+     */
+    function getEntry($entry);
 
     /**
-	 *
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hit
-	 */
-	function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hit
-	 */
-	function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return array
-	 */
-	function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hit|array
-	 */
-	function searchProverb($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hit|array
-	 */
-	function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hits
-	 */
-	function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return array
-	 */
-	function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return kateglo\application\faces\Hits
-	 */
-	function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array());
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return array
-	 */
-	function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+     *
+     * @return int
+     */
+    function getTotalCount();
+
+    /**
+     *
+     * @param int $limit
+     * @return \kateglo\application\faces\Hit
+     */
+    function randomMisspelled($limit = 5);
+
+    /**
+     *
+     * @param int $limit
+     * @return \kateglo\application\faces\Hit
+     */
+    function randomEntry($limit = 10);
+
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return string
+     */
+    function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit
+     */
+    function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit
+     */
+    function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit
+     */
+    function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit
+     */
+    function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return array
+     */
+    function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit|array
+     */
+    function searchProverb($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit|array
+     */
+    function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hits
+     */
+    function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return array
+     */
+    function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hits
+     */
+    function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return array
+     */
+    function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 }
+
 ?>

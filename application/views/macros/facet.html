@@ -19,7 +19,7 @@
                         (${type})</a>
                 </tal:block>
                 <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND type:%22${repeat/type/key}%22">${repeat/type/key}
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} type:%22${repeat/type/key}%22">${repeat/type/key}
                         (${type})</a>
                 </tal:block>
             </li>
@@ -35,7 +35,7 @@
                         (${clazz})</a>
                 </tal:block>
                 <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
                         (${clazz})</a>
                 </tal:block>
             </li>
@@ -51,7 +51,7 @@
                         (${source})</a>
                 </tal:block>
                 <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
                         (${source})</a>
                 </tal:block>
             </li>
@@ -67,7 +67,7 @@
                         (${discipline})</a>
                 </tal:block>
                 <tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} AND discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
+                    <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
                         (${discipline})</a>
                 </tal:block>
             </li>
