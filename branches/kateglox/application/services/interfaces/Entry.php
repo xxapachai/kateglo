@@ -109,6 +109,28 @@ interface Entry {
      * @param int $offset
      * @param int $limit
      * @param array $params
+     * @return kateglo\application\faces\Hit|array
+     */
+    function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return kateglo\application\faces\Hit|array
+     */
+    function searchDictionaryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+    /**
+     *
+     * Enter description here ...
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
      * @return kateglo\application\faces\Hit
      */
     function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
