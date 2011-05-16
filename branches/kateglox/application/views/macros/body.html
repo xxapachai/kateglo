@@ -21,7 +21,7 @@
 
             <nav>
                 <ul>
-                    <li tal:attributes="class php: formAction EQ '/' ? 'current_page' : null"><a href="/">Beranda</a>
+                    <li tal:attributes="class php: formAction EQ '/' OR formAction EQ '/cari' ? 'current_page' : null"><a href="/">Beranda</a>
                     </li>
                     <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null"><a href="/kamus">Kamus</a>
                     </li>
