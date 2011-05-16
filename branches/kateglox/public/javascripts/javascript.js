@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     }
 
-    var detailSearchOptions = {callback: advancedSearch, wait:20, highlight:false, captureLength: 1};
+    var detailSearchOptions = {callback: advancedSearch, wait:1, highlight:false, captureLength: -1};
 
     if ($('#detail-search').length > 0) {
         $('#allWord').typeWatch(detailSearchOptions);
