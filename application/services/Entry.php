@@ -199,6 +199,7 @@ class Entry implements interfaces\Entry {
      */
     public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params = $this->getDefaultParams($searchText, $params);
+        $params['qf'] = array_key_exists('qf', $params) ? $params['qf'] : 'entry definition sample source discipline synonym antonym class classCategory misspelled relation spelled syllabel type typeCategory sourceCategory language equivalentDiscipline equivalent';
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
         $this->getSolr()->setCreateDocuments(false);
@@ -216,6 +217,7 @@ class Entry implements interfaces\Entry {
      */
     public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params = $this->getDefaultParams($searchText, $params);
+        $params['qf'] = array_key_exists('qf', $params) ? $params['qf'] : 'entry definition sample source discipline synonym antonym class classCategory misspelled relation spelled syllabel type typeCategory sourceCategory language equivalentDiscipline equivalent';
         $params['defType'] = 'dismax';
         $params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
         $this->getSolr()->setCreateDocuments(false);
@@ -441,10 +443,10 @@ class Entry implements interfaces\Entry {
      * @param array $fields
      * @return array
      */
-    private function convertFacets($facets){
+    private function convertFacets($facets) {
         $newFacets = $facets;
-        foreach ($facets as $key => $value){
-            if($value == 0){
+        foreach ($facets as $key => $value) {
+            if ($value == 0) {
                 unset($newFacets[$key]);
             }
         }
