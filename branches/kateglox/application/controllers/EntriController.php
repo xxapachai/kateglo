@@ -93,7 +93,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
                 $this->view->search->setFieldValue($text);
-                $this->view->formAction = '/kamus';
+                $this->view->formAction = '/cari';
                 $this->view->entry = $this->entry->getEntry($text);
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
             } catch (Apache_Solr_Exception $e) {
