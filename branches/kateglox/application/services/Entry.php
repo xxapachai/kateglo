@@ -183,6 +183,7 @@ class Entry implements interfaces\Entry {
      */
     public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params = $this->getDefaultParams($searchText, $params);
+        $params['df'] = array_key_exists('df', $params) ? $params['df'] : 'entryDefinition';
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
@@ -272,6 +273,7 @@ class Entry implements interfaces\Entry {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
         $params['fq'] = "synonym:*";
+        $params['df'] = "entrySynonym";
         return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
@@ -288,6 +290,7 @@ class Entry implements interfaces\Entry {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
         $params['fq'] = "synonym:*";
+        $params['df'] = "entrySynonym";
         return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
@@ -366,10 +369,9 @@ class Entry implements interfaces\Entry {
      */
     public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['fl'] = 'entry, equivalent, id';
-        $params['q.alt'] = "foreign:*";
-        $params['qf'] = "entry foreign";
         $params['fq'] = "foreign:*";
-        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
+        $params['df'] = 'entryForeign';
+        return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -383,10 +385,9 @@ class Entry implements interfaces\Entry {
      */
     public function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params['fl'] = 'entry, equivalent, id';
-        $params['q.alt'] = "foreign:*";
-        $params['qf'] = "entry foreign";
         $params['fq'] = "foreign:*";
-        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+        $params['df'] = 'entryForeign';
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**

@@ -482,6 +482,12 @@ any data added to them will be ignored outright.  -->
 
         <field name="content" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
+        <field name="entryDefinition" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
+               termPositions="true" termOffsets="true"/>
+        <field name="entrySynonym" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
+               termPositions="true" termOffsets="true"/>
+        <field name="entryForeign" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
+               termPositions="true" termOffsets="true"/>
 
         <field name="entryExact" type="string" indexed="true" stored="false" multiValued="false" termVectors="true"
                termPositions="true" termOffsets="true"/>
@@ -547,6 +553,15 @@ any data added to them will be ignored outright.  -->
     <copyField source="language" dest="content"/>
     <copyField source="equivalentDiscipline" dest="content"/>
     <copyField source="foreign" dest="content"/>
+
+    <copyField source="entry" dest="entryDefinition"/>
+    <copyField source="definition" dest="entryDefinition"/>
+
+    <copyField source="entry" dest="entrySynonym"/>
+    <copyField source="synonym" dest="entrySynonym"/>
+
+    <copyField source="entry" dest="entryForeign"/>
+    <copyField source="foreign" dest="entryForeign"/>
 
     <copyField source="entry" dest="spell"/>
 
