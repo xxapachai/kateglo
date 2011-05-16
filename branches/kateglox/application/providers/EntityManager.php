@@ -38,129 +38,130 @@ use Doctrine\DBAL\DriverManager;
  * @Singleton
  */
 class EntityManager extends \stubBaseObject implements \stubInjectionProvider {
-	
-	public static $CLASS_NAME = __CLASS__;
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var Zend_Config
-	 */
-	private $configs;
-	
-	/**
-	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $metadataCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $queryCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\Common\Cache\Cache
-	 */
-	private $resultCache = null;
-	
-	/**
-	 *
-	 * @var Doctrine\DBAL\Connection
-	 */
-	private $connection = null;
-	
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param Zend_Config $configs
-	 * 
-	 * @Inject
-	 */
-	public function setConfigs(\Zend_Config $configs) {
-		$this->configs = $configs;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see stubInjectionProvider::get()
-	 */
-	public function get($name = NULL) {
-		$config = new Configuration ();
-		$config->setMetadataCacheImpl ( $this->metadataCache );
-		$config->setQueryCacheImpl ( $this->queryCache );
-		$config->setMetadataDriverImpl ( $config->newDefaultAnnotationDriver () );
-		$config->setProxyDir ( realpath ( $this->configs->cache->doctrine->proxy ) );
-		$config->setProxyNamespace ( $this->configs->cache->doctrine->namespace );
-		$config->setAutoGenerateProxyClasses ( true );
-		return ORM\EntityManager::create ( $this->connection, $config );
-	}
-	
-	/**
-	 *
-	 * @return Doctrine\DBAL\Connection
-	 */
-	public function getConnection() {
-		return $this->connection;
-	}
-	
-	/**
-	 * @param Doctrine\DBAL\Connection $conn
-	 * @return void
-	 * 
-	 * @Inject
-	 */
-	public function setConnection(Driver\Connection $connection) {
-		$this->connection = $connection;
-	}
-	
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getMetadataCache() {
-		return $this->metadataCache;
-	}
-	
-	/**
-	 * @param Doctrine\Common\Cache\Cache $metadataCache
-	 * @Inject
-	 */
-	public function setMetadataCache(Cache $metadataCache) {
-		$this->metadataCache = $metadataCache;
-	}
-	
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getQueryCache() {
-		return $this->queryCache;
-	}
-	
-	/**
-	 * @param Doctrine\Common\Cache\Cache $queryCache
-	 * @Inject
-	 */
-	public function setQueryCache(Cache $queryCache) {
-		$this->queryCache = $queryCache;
-	}
-	
-	/**
-	 * @return Doctrine\Common\Cache\Cache
-	 */
-	public function getResultCache() {
-		return $this->resultCache;
-	}
-	
-	/**
-	 * @param Doctrine\Common\Cache\Cache $resultCache
-	 * @Inject
-	 */
-	public function setResultCache(Cache $resultCache) {
-		$this->resultCache = $resultCache;
-	}
+
+    public static $CLASS_NAME = __CLASS__;
+
+    /**
+     *
+     * Enter description here ...
+     * @var Zend_Config
+     */
+    private $configs;
+
+    /**
+     *
+     * @var Doctrine\Common\Cache\Cache
+     */
+    private $metadataCache = null;
+
+    /**
+     *
+     * @var Doctrine\Common\Cache\Cache
+     */
+    private $queryCache = null;
+
+    /**
+     *
+     * @var Doctrine\Common\Cache\Cache
+     */
+    private $resultCache = null;
+
+    /**
+     *
+     * @var Doctrine\DBAL\Connection
+     */
+    private $connection = null;
+
+
+    /**
+     *
+     * Enter description here ...
+     * @param Zend_Config $configs
+     *
+     * @Inject
+     */
+    public function setConfigs(\Zend_Config $configs) {
+        $this->configs = $configs;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see stubInjectionProvider::get()
+     */
+    public function get($name = NULL) {
+        $config = new Configuration ();
+        $config->setMetadataCacheImpl($this->metadataCache);
+        $config->setQueryCacheImpl($this->queryCache);
+        $config->setResultCacheImpl($this->resultCache);
+        $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver());
+        $config->setProxyDir(realpath($this->configs->cache->doctrine->proxy));
+        $config->setProxyNamespace($this->configs->cache->doctrine->namespace);
+        $config->setAutoGenerateProxyClasses(true);
+        return ORM\EntityManager::create($this->connection, $config);
+    }
+
+    /**
+     *
+     * @return Doctrine\DBAL\Connection
+     */
+    public function getConnection() {
+        return $this->connection;
+    }
+
+    /**
+     * @param Doctrine\DBAL\Connection $conn
+     * @return void
+     *
+     * @Inject
+     */
+    public function setConnection(Driver\Connection $connection) {
+        $this->connection = $connection;
+    }
+
+    /**
+     * @return Doctrine\Common\Cache\Cache
+     */
+    public function getMetadataCache() {
+        return $this->metadataCache;
+    }
+
+    /**
+     * @param Doctrine\Common\Cache\Cache $metadataCache
+     * @Inject
+     */
+    public function setMetadataCache(Cache $metadataCache) {
+        $this->metadataCache = $metadataCache;
+    }
+
+    /**
+     * @return Doctrine\Common\Cache\Cache
+     */
+    public function getQueryCache() {
+        return $this->queryCache;
+    }
+
+    /**
+     * @param Doctrine\Common\Cache\Cache $queryCache
+     * @Inject
+     */
+    public function setQueryCache(Cache $queryCache) {
+        $this->queryCache = $queryCache;
+    }
+
+    /**
+     * @return Doctrine\Common\Cache\Cache
+     */
+    public function getResultCache() {
+        return $this->resultCache;
+    }
+
+    /**
+     * @param Doctrine\Common\Cache\Cache $resultCache
+     * @Inject
+     */
+    public function setResultCache(Cache $resultCache) {
+        $this->resultCache = $resultCache;
+    }
 }
 
 ?>

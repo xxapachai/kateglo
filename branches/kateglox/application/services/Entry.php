@@ -360,6 +360,7 @@ class Entry implements interfaces\Entry {
      */
     private function getDefaultParams($searchText, $params = array()) {
         if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
+        $params['q.op'] = 'AND';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
         $params['spellcheck.collate'] = 'true';
@@ -406,12 +407,12 @@ class Entry implements interfaces\Entry {
             $hit->getDocuments()->add($document);
         }
         $hit->setFacet(new Facet());
-        $hit->getFacet()->setClazz(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ})));
-        $hit->getFacet()->setClazzCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY})));
-        $hit->getFacet()->setType(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE})));
-        $hit->getFacet()->setTypeCategory(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY})));
-        $hit->getFacet()->setDiscipline(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::DISCIPLINE})));
-        $hit->getFacet()->setSource(new ArrayCollection(get_object_vars($response->facet_counts->facet_fields->{Facet::SOURCE})));
+        $hit->getFacet()->setClazz(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ}))));
+        $hit->getFacet()->setClazzCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY}))));
+        $hit->getFacet()->setType(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE}))));
+        $hit->getFacet()->setTypeCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY}))));
+        $hit->getFacet()->setDiscipline(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::DISCIPLINE}))));
+        $hit->getFacet()->setSource(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::SOURCE}))));
 
         if (isset($response->spellcheck)) {
             $hit->setSpellcheck(new Spellcheck());
@@ -436,11 +437,25 @@ class Entry implements interfaces\Entry {
     }
 
     /**
+     *
+     * @param array $fields
+     * @return array
+     */
+    private function convertFacets($facets){
+        $newFacets = $facets;
+        foreach ($facets as $key => $value){
+            if($value == 0){
+                unset($newFacets[$key]);
+            }
+        }
+        return $newFacets;
+    }
+
+    /**
      * @param  $fields
      * @return \kateglo\application\faces\Document
      */
-    private
-    function createDocuments($fields) {
+    private function createDocuments($fields) {
         $document = new Document ();
         $document->setId($fields->{Document::ID});
         $document->setEntry($fields->{Document::ENTRY});
@@ -473,8 +488,7 @@ class Entry implements interfaces\Entry {
      * @param Doctrine\Common\Collections\ArrayCollection $array
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private
-    function jsonConvertToEquivalent($array) {
+    private function jsonConvertToEquivalent($array) {
         if ($array instanceof ArrayCollection) {
             $newArray = new ArrayCollection ();
             foreach ($array as $json) {
@@ -501,8 +515,7 @@ class Entry implements interfaces\Entry {
      * @param string $key
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private
-    function convert2Array($source, $key) {
+    private function convert2Array($source, $key) {
         if (property_exists($source, $key)) {
             $array = new ArrayCollection ();
             if (!is_array($source->{$key})) {

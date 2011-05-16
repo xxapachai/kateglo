@@ -67,6 +67,7 @@ class Entry implements interfaces\Entry {
 			FROM " . models\Entry::CLASS_NAME . " entry 
 			WHERE entry.entry = :entry");
         $query->setParameter('entry', $entry);
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) === 1) {
             if (!($result [0] instanceof models\Entry)) {
@@ -88,6 +89,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	type
 			FROM " . models\Type::CLASS_NAME . " type");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\Type)) {
@@ -109,6 +111,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	typeCategory
 			FROM " . models\TypeCategory::CLASS_NAME . " typeCategory");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\TypeCategory)) {
@@ -130,6 +133,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	class
 			FROM " . models\Clazz::CLASS_NAME . " class");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\Clazz)) {
@@ -151,6 +155,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	classCategory
 			FROM " . models\ClazzCategory::CLASS_NAME . " classCategory");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\ClazzCategory)) {
@@ -172,6 +177,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	sourceCategory
 			FROM " . models\SourceCategory::CLASS_NAME . " sourceCategory");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\SourceCategory)) {
@@ -193,6 +199,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	discipline
 			FROM " . models\Discipline::CLASS_NAME . " discipline");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\Discipline)) {
@@ -214,6 +221,7 @@ class Entry implements interfaces\Entry {
         $query = $this->entityManager->createQuery("
 			SELECT 	language
 			FROM " . models\Language::CLASS_NAME . " language");
+        $query->useResultCache(true, 43200, __METHOD__);
         $result = $query->getResult();
         if (count($result) > 0) {
             if (!($result [0] instanceof models\Language)) {

@@ -21,6 +21,7 @@
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\faces\Hit;
 /**
  *
@@ -41,6 +42,13 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
      * @var kateglo\application\services\interfaces\Entry;
      */
     private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\StaticData;
+     */
+    private $staticData;
 
     /**
      *
@@ -76,6 +84,17 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
      */
     public function setEntry(Entry $entry) {
         $this->entry = $entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\Entry $entry
+     *
+     * @Inject
+     */
+    public function setStaticData(StaticData $staticData) {
+        $this->staticData = $staticData;
     }
 
     /**
@@ -176,6 +195,7 @@ class SingkatanController extends Zend_Controller_Action_Stubbles {
 
         if (!$this->evaluatePreCondition($cacheId)) {
             $this->view->search->setFieldValue($searchText);
+            $this->view->staticData = $this->staticData->getStaticData();
             $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
         }
 

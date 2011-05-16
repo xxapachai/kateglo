@@ -14,7 +14,7 @@
         <div>
             <div>Gunakan formulir penelusuran dibawah maka permohonan penelusuran detail akan ditampilkan diatas</div>
         </div>
-        <form method="GET" action="/search" name="f">
+        <form method="GET" action="${formAction}" name="advancedSearchForm">
             <div><h3>Temukan Hasil</h3>
                 <table cellspacing="0" cellpadding="2" width="100%">
                     <tbody>
@@ -69,8 +69,8 @@
                     <tbody>
                     <tr>
                         <td class="label"><label><b>Jumlah</b> hasil temuan pada tiap tampilan laman:</label></td>
-                        <td><select name="num">
-                            <option value="10" selected="">10 hasil temuan</option>
+                        <td><select name="rows">
+                            <option value="10" selected="selected">10 hasil temuan</option>
                             <option value="20">20 hasil temuan</option>
                             <option value="30">30 hasil temuan</option>
                             <option value="50">50 hasil temuan</option>
@@ -79,18 +79,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="label"><label>Memiliki <b>padanan</b> dalam bahasa:</label></td>
-                        <td><select name="language">
-                            <option value="" selected="">bahasa apa saja</option>
-                            <tal:block tal:repeat="language staticData/getLanguage">
-                                <option value="${language/getLanguage}">${language/getLanguage}</option>
-                            </tal:block>
-                        </select></td>
-                    </tr>
-                    <tr>
                         <td class="label"><label>Memiliki kata dengan <b>bentuk</b>:</label></td>
                         <td><select name="type">
-                            <option value="" selected="">apa saja</option>
+                            <option value="all" selected="selected">apa saja</option>
                             <tal:block tal:repeat="type staticData/getType">
                                 <option value="${type/getType}">${type/getType}</option>
                             </tal:block>
@@ -99,7 +90,7 @@
                     <tr>
                         <td class="label"><label>Memiliki kata dengan <b>kelas</b>:</label></td>
                         <td><select name="class">
-                            <option value="" selected="">apa saja</option>
+                            <option value="all" selected="selected">apa saja</option>
                             <tal:block tal:repeat="clazz staticData/getClazz">
                                 <option value="${clazz/getClazz}">${clazz/getClazz}</option>
                             </tal:block>
@@ -109,7 +100,7 @@
                         <td class="label"><label>Digunakan dalam <b>disiplin</b> ilmu:</label></td>
                         <td>
                             <select name="discipline">
-                                <option value="" selected="">apa saja</option>
+                                <option value="all" selected="selected">apa saja</option>
                             <tal:block tal:repeat="discipline staticData/getDiscipline">
                                 <option value="${discipline/getDiscipline}">${discipline/getDiscipline}</option>
                             </tal:block>
@@ -117,9 +108,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="label"><label>Dengan istilah yang saya pilih muncul di:</label></td>
+                        <td class="label"><label>Memiliki <b>padanan</b> dalam bahasa:</label></td>
+                        <td><select name="language">
+                            <option value="all" selected="selected">apa saja</option>
+                            <tal:block tal:repeat="language staticData/getLanguage">
+                                <option value="${language/getLanguage}">${language/getLanguage}</option>
+                            </tal:block>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label>Memiliki <b>sumber</b> dari:</label></td>
+                        <td><select name="source">
+                            <option value="all" selected="selected">mana saja</option>
+                            <tal:block tal:repeat="source staticData/getSource">
+                                <option value="${source/getCategory}">${source/getCategory}</option>
+                            </tal:block>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label>Dengan penelusuran yang saya pilih ditampilkan di:</label></td>
                         <td>
-                            <select name="area">
+                            <select name="siteArea">
                                 <option value="/cari"
                                         tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana
                                     saja di laman
@@ -152,7 +161,7 @@
                     <table cellspacing="0" cellpadding="0style=&quot;margin-top:.5em&quot;" width="100%">
                         <tbody>
                         <tr>
-                            <td style="text-align:right"><input type="submit" value="Penelusuran Kateglo"/></td>
+                            <td style="text-align:right"><input type="submit" name="submitAdvancedSearch" value="Penelusuran Kateglo"/></td>
                         </tr>
                         </tbody>
                     </table>
