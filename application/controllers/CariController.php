@@ -146,7 +146,7 @@ class CariController extends Zend_Controller_Action_Stubbles {
             try {
                 $this->view->search->setFieldValue($searchText);
                 /** @var $hits kateglo\application\faces\Hit */
-                $hits = $this->entry->searchEntryAsDisMax($searchText, $this->offset, $this->limit);
+                $hits = $this->entry->searchDictionary($searchText, $this->offset, $this->limit);
                 $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
                 $this->view->hits = $hits;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
@@ -171,7 +171,7 @@ class CariController extends Zend_Controller_Action_Stubbles {
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
                 /*@var $hits kateglo\application\faces\Hit */
-                $hits = $this->entry->searchEntryAsDisMaxJSON($searchText, $this->offset, $this->limit);
+                $hits = $this->entry->searchDictionary($searchText, $this->offset, $this->limit);
                 $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
                 $this->content = array('hits' => $hits, 'pagination' => $pagination);
             } catch (Apache_Solr_Exception $e) {

@@ -235,11 +235,11 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit|
      */
     public function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "entry:*";
         $params['fq'] = "entry:*";
-        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
+        $params['df'] = "content";
+        return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -252,11 +252,11 @@ class Entry implements interfaces\Entry {
      * @return array
      */
     public function searchDictionaryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "entry:*";
         $params['fq'] = "entry:*";
-        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+        $params['df'] = "content";
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -269,11 +269,10 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit
      */
     public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry synonym';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
-        $params['q.alt'] = "synonym:*";
         $params['fq'] = "synonym:*";
-        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
+        return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -286,11 +285,10 @@ class Entry implements interfaces\Entry {
      * @return array
      */
     public function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry synonym';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
-        $params['q.alt'] = "synonym:*";
         $params['fq'] = "synonym:*";
-        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -303,11 +301,10 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hit|
      */
     public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "typeExact:Peribahasa";
         $params['fq'] = "typeExact:Peribahasa";
-        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
+        return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -320,11 +317,10 @@ class Entry implements interfaces\Entry {
      * @return array
      */
     public function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "typeExact:Peribahasa";
         $params['fq'] = "typeExact:Peribahasa";
-        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -337,11 +333,10 @@ class Entry implements interfaces\Entry {
      * @return kateglo\application\faces\Hits
      */
     public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "typeExact:Akronim OR typeExact:Singkatan";
         $params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
-        return $this->searchEntryAsDisMax($searchText, $offset, $limit, $params);
+        return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
     /**
@@ -354,11 +349,10 @@ class Entry implements interfaces\Entry {
      * @return array
      */
     public function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params['qf'] = 'entry definition';
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, definition, id';
-        $params['q.alt'] = "typeExact:Akronim OR typeExact:Singkatan";
         $params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
-        return $this->searchEntryAsDisMaxJSON($searchText, $offset, $limit, $params);
+        return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
     /**
