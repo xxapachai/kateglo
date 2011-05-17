@@ -183,7 +183,6 @@ class Entry implements interfaces\Entry {
      */
     public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
         $params = $this->getDefaultParams($searchText, $params);
-        $params['df'] = array_key_exists('df', $params) ? $params['df'] : 'entryDefinition';
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
@@ -273,7 +272,6 @@ class Entry implements interfaces\Entry {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
         $params['fq'] = "synonym:*";
-        $params['df'] = "entrySynonym";
         return $this->searchEntry($searchText, $offset, $limit, $params);
     }
 
@@ -290,7 +288,6 @@ class Entry implements interfaces\Entry {
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $params['fl'] = 'entry, synonym, id';
         $params['fq'] = "synonym:*";
-        $params['df'] = "entrySynonym";
         return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
     }
 
