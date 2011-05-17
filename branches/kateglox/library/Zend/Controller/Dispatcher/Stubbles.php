@@ -127,7 +127,9 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
         }
 
         try {
-            $controller->dispatch($action);
+            if (!empty($action)) {
+                $controller->dispatch($action);
+            }
         } catch (Exception $e) {
             // Clean output buffer on error
             $curObLevel = ob_get_level();
@@ -203,7 +205,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
     protected function getActionMethods(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
         $actionMethods = new Doctrine\Common\Collections\ArrayCollection();
         $serverMethod = $request->getMethod();
-        if (ucfirst(strtolower($serverMethod)) === 'Head') {
+        if (strtoupper($serverMethod) === 'HEAD') {
             $serverMethod = 'GET';
         }
         /** @var stubReflectionMethod $action */
@@ -264,7 +266,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
             }
         }
         $requestMedia = $request->getServer('HTTP_ACCEPT');
-        if(!empty($requestMedia)){
+        if (!empty($requestMedia)) {
             $mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $requestMedia);
             if (!empty($mediaDecision)) {
                 $action = $mediaActionSet[$mediaDecision];
@@ -272,10 +274,33 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
             } else {
                 throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
             }
-        }else{
+        } else {
             throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
         }
 
+    }
+
+    /**
+     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
+     * @param Doctrine\Common\Collections\ArrayCollection $actionPaths
+     * @param Zend_Controller_Request_Http $request
+     * @return void
+     */
+    protected function generateOptions(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
+        $methodArray = array('GET', 'POST', 'PUT', 'DELETE');
+        $allowArray = array();
+        foreach ($methodArray as $method) {
+            foreach ($actionPaths as $action) {
+                if ($action->hasAnnotation(ucfirst(strtolower($method)))) {
+                    !in_array($method, $allowArray) ? $allowArray[] = $method : null;
+                }
+            }
+        }
+        if(in_array('GET', $allowArray)){
+            $allowArray[] = 'HEAD';
+        }
+        $allowArray[] = 'OPTIONS';
+        $this->getResponse()->setHeader('Allow', implode(', ', $allowArray));
     }
 
     /**
@@ -283,20 +308,29 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
      * @param Zend_Controller_Request_Http $request
      * @return string
      */
-    protected function rest(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
+    protected
+    function rest(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
         $actionMethod = $this->getRawActionMethod($request);
-
+        $serverMethod = strtoupper($request->getMethod());
         if ($actionMethod === 'index') {
             $actionMethod = '';
         } elseif ($actionMethod === 'error') {
             return 'errorAction';
         }
-
-        $actionMethod = '/' . $actionMethod;
-        $actionPaths = $this->getActionPaths($classObject, $actionMethod);
-        $actionMethods = $this->getActionMethods($actionPaths, $request);
-        $actionProduces = $this->getActionProduces($actionMethods);
-        return $this->decideMedia($actionProduces, $request);
+        if ($actionMethod === '*' && $serverMethod === 'OPTIONS') {
+            return;
+        } else {
+            $actionMethod = '/' . $actionMethod;
+            $actionPaths = $this->getActionPaths($classObject, $actionMethod);
+            if ($serverMethod === 'OPTIONS') {
+                $this->generateOptions($actionPaths, $request);
+                return;
+            } else {
+                $actionMethods = $this->getActionMethods($actionPaths, $request);
+                $actionProduces = $this->getActionProduces($actionMethods);
+                return $this->decideMedia($actionProduces, $request);
+            }
+        }
     }
 
 }

@@ -42,7 +42,7 @@ class PadananController extends Zend_Controller_Action_Stubbles {
      * @var kateglo\application\services\interfaces\Entry;
      */
     private $entry;
-    
+
     /**
      *
      * Enter description here ...
@@ -140,22 +140,22 @@ class PadananController extends Zend_Controller_Action_Stubbles {
     public function indexAction() {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-        $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-
-        if (!$this->evaluatePreCondition($cacheId)) {
-            try {
+        try {
+            $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            if (!$this->evaluatePreCondition($cacheId)) {
                 $this->view->search->setFieldValue($searchText);
                 /** @var $hits kateglo\application\faces\Hit */
                 $hits = $this->entry->searchEquivalent($searchText, $this->offset, $this->limit);
                 $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
                 $this->view->hits = $hits;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-            } catch (Apache_Solr_Exception $e) {
-                $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
-            }
-        }
 
-        $this->responseBuilder($cacheId);
+            }
+            $this->responseBuilder($cacheId);
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+        }
         $this->getResponse()->appendBody($this->content);
     }
 
@@ -167,18 +167,19 @@ class PadananController extends Zend_Controller_Action_Stubbles {
      */
     public function jsonAction() {
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-        $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-        if (!$this->evaluatePreCondition($cacheId)) {
-            try {
+        try {
+            $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            if (!$this->evaluatePreCondition($cacheId)) {
                 /*@var $hits kateglo\application\faces\Hit */
                 $hits = $this->entry->searchEquivalentAsJSON($searchText, $this->offset, $this->limit);
                 $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
                 $this->content = array('hits' => $hits, 'pagination' => $pagination);
-            } catch (Apache_Solr_Exception $e) {
-                $this->content = array('error' => 'query error');
             }
+            $this->responseBuilder($cacheId);
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
         }
-        $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
     }
 
