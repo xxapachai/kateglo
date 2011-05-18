@@ -6,6 +6,7 @@
       <w>entri</w>
       <w>etag</w>
       <w>informations</w>
+      <w>inversed</w>
       <w>kamus</w>
       <w>kateglo</w>
       <w>padanan</w>
@@ -14,6 +15,7 @@
       <w>solr</w>
       <w>spellcheck</w>
       <w>stubbles</w>
+      <w>typewatch</w>
     </words>
   </dictionary>
 </component>

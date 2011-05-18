@@ -94,7 +94,10 @@ class EntriController extends Zend_Controller_Action_Stubbles {
             try {
                 $this->view->search->setFieldValue($text);
                 $this->view->formAction = '/cari';
-                $this->view->entry = $this->entry->getEntry($text);
+                /** @var $entry \kateglo\application\models\Entry */
+                $entry = $this->entry->getEntry($text);
+                $this->view->entry = $entry;
+                $cacheId .= $entry->getVersion();
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
             } catch (Apache_Solr_Exception $e) {
                 $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
@@ -116,7 +119,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
         $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $text;
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
-                $this->content = $this->entry->getEntryAsJSON($text);
+                $entry = $this->entry->getEntryAsArray($text);
+                $this->content = $entry;
+                $cacheId .= $entry['version'];
             } catch (Apache_Solr_Exception $e) {
                 $this->content = array('error' => 'query error');
             }

@@ -63,11 +63,37 @@ class Entry implements interfaces\Entry {
      */
     public function getByEntry($entry) {
         $query = $this->entityManager->createQuery("
-			SELECT 	entry
-			FROM " . models\Entry::CLASS_NAME . " entry 
+			SELECT 	entry, meanings, sources, equivalents, sourceCategory, foreign, language, definitions, types,
+			        typeCategories, antonyms, synonyms, syllabels, pronounciations, misspelleds, spelled, clazz,
+			        clazzCategories, disciplines, samples, defAntonyms, defSynonyms, defRelations, defMisspelleds
+			FROM " . models\Entry::CLASS_NAME . " entry
+			    LEFT JOIN entry.meanings meanings
+			        LEFT JOIN meanings.definitions definitions
+			            LEFT JOIN definitions.clazz clazz
+			                LEFT JOIN clazz.categories clazzCategories
+			            LEFT JOIN definitions.disciplines disciplines
+			            LEFT JOIN definitions.samples samples
+			            LEFT JOIN definitions.antonyms defAntonyms
+			            LEFT JOIN definitions.synonyms defSynonyms
+			            LEFT JOIN definitions.relations defRelations
+			            LEFT JOIN definitions.misspelleds defMisspelleds
+			        LEFT JOIN meanings.types types
+			            LEFT JOIN types.categories typeCategories
+			        LEFT JOIN meanings.antonyms antonyms
+			        LEFT JOIN meanings.synonyms synonyms
+			        LEFT JOIN meanings.relations relations
+			        LEFT JOIN meanings.syllabels syllabels
+			            LEFT JOIN syllabels.pronounciations pronounciations
+			        LEFT JOIN meanings.misspelleds misspelleds
+			        LEFT JOIN meanings.spelled spelled
+			    LEFT JOIN entry.sources sources
+			        LEFT JOIN sources.category sourceCategory
+			    LEFT JOIN entry.equivalents equivalents
+			        LEFT JOIN equivalents.foreign foreign
+			            LEFT JOIN foreign.language language
 			WHERE entry.entry = :entry");
         $query->setParameter('entry', $entry);
-        $query->useResultCache(true, 43200, __METHOD__);
+        $query->useResultCache(true, 43200, __METHOD__.':'.$entry);
         $result = $query->getResult();
         if (count($result) === 1) {
             if (!($result [0] instanceof models\Entry)) {

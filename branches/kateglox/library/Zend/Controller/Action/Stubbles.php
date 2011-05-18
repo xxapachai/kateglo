@@ -156,7 +156,7 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
     protected function responseBuilder($cacheId) {
         $eTag = empty($this->eTag) ? md5($cacheId . $this->content) : $this->eTag;
         if ($this->configs->cache->entry) {
-            $this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 0);
+            $this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 3600);
         }
 
         if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {

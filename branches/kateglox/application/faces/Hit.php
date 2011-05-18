@@ -173,7 +173,7 @@ class Hit {
      * @param int $time
      * @return void
      */
-    public function getTimeInSeconds($time) {
+    public function getTimeInSeconds() {
         return number_format($this->time/1000, 3, ',', '.' );
     }
 

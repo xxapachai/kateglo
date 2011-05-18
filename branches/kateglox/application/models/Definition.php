@@ -87,40 +87,40 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym", mappedBy="antonyms", cascade={"all"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym", inversedBy="definitions")
 	 * @JoinTable(name="rel_antonym_definition",
-	 * joinColumns={@JoinColumn(name="rel_antonym_id", referencedColumnName="antonym_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
+	 * joinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_antonym_id", referencedColumnName="antonym_id")}
 	 * )
 	 */
 	private $antonyms;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym", mappedBy="definitions")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym", inversedBy="definitions")
 	 * @JoinTable(name="rel_synonym_definition",
-	 * joinColumns={@JoinColumn(name="rel_synonym_id", referencedColumnName="synonym_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
+	 * joinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_synonym_id", referencedColumnName="synonym_id")}
 	 * )
 	 */
 	private $synonyms;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Relation", mappedBy="definitions")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Relation", inversedBy="definitions")
 	 * @JoinTable(name="rel_relation_definition",
-	 * joinColumns={@JoinColumn(name="rel_relation_id", referencedColumnName="relation_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
+	 * joinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_relation_id", referencedColumnName="relation_id")}
 	 * )
 	 */
 	private $relations;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled", mappedBy="definitions")
+	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled", inversedBy="definitions")
 	 * @JoinTable(name="rel_misspelled_definition",
-	 * joinColumns={@JoinColumn(name="rel_misspelled_id", referencedColumnName="misspelled_id")},
-	 * inverseJoinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")}
+	 * joinColumns={@JoinColumn(name="rel_definition_id", referencedColumnName="definition_id")},
+	 * inverseJoinColumns={@JoinColumn(name="rel_misspelled_id", referencedColumnName="misspelled_id")}
 	 * )
 	 */
 	private $misspelleds;
@@ -446,6 +446,30 @@ class Definition {
         $samples = $this->getSamples();
         foreach($samples as $sample){
             $array['samples'][] = $sample->toArray();
+        }
+
+        $array['antonyms'] = array();
+        $antonyms = $this->getAntonyms();
+        foreach($antonyms as $antonym){
+            $array['antonyms'][] = $antonym->toArray();
+        }
+
+        $array['synonyms'] = array();
+        $synonyms = $this->getSynonyms();
+        foreach($synonyms as $synonym){
+            $array['synonyms'][] = $synonym->toArray();
+        }
+
+        $array['relations'] = array();
+        $relations = $this->getRelations();
+        foreach($relations as $relation){
+            $array['relations'][] = $relation->toArray();
+        }
+
+        $array['misspelleds'] = array();
+        $misspelleds = $this->getMisspelleds();
+        foreach($misspelleds as $misspelled){
+            $array['misspelleds'][] = $misspelled->toArray();
         }
 
         return $array;
