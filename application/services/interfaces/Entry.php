@@ -44,6 +44,13 @@ interface Entry {
 
     /**
      *
+     * @param string $entry
+     * @return string
+     */
+    function getEntryAsArray($entry);
+
+    /**
+     *
      * @return int
      */
     function getTotalCount();

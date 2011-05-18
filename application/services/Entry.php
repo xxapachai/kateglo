@@ -92,7 +92,7 @@ class Entry implements interfaces\Entry {
     /**
      *
      * @param string $entry
-     * @return kateglo\application\models\Entry
+     * @return \kateglo\application\models\Entry
      */
     public function getEntry($entry) {
         $result = $this->entry->getByEntry($entry);
@@ -104,7 +104,7 @@ class Entry implements interfaces\Entry {
      * @param string $entry
      * @return string
      */
-    public function getEntryAsJSON($entry) {
+    public function getEntryAsArray($entry) {
         $result = $this->entry->getByEntry($entry);
         return $result->toArray();
     }

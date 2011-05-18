@@ -20,20 +20,28 @@
             </header>
 
             <nav>
-                <ul>
-                    <li tal:attributes="class php: formAction EQ '/' OR formAction EQ '/cari' ? 'current_page' : null"><a href="/">Beranda</a>
+                <ul tal:define="searchFieldValue search/getFieldValue">
+                    <li tal:attributes="class php: formAction EQ '/' OR formAction EQ '/cari' ? 'current_page' : null">
+                        <a href="/">Beranda</a>
                     </li>
-                    <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null"><a href="/kamus">Kamus</a>
+                    <li tal:attributes="class php: formAction EQ '/kamus' ? 'current_page' : null">
+                        <a tal:attributes="href php: empty(searchFieldValue) ? '/kamus' : '/kamus?query='.searchFieldValue">Kamus</a>
                     </li>
                     <li tal:attributes="class php: formAction EQ '/tesaurus' ? 'current_page' : null">
-                        <a href="/tesaurus">Tesaurus</a></li>
-                    <li tal:attributes="class php: formAction EQ '/padanan' ? 'current_page' : null"><a href="/padanan">Padanan</a>
+                        <a tal:attributes="href php: empty(searchFieldValue) ? '/tesaurus' : '/tesaurus?query='.searchFieldValue">Tesaurus</a>
+                    </li>
+                    <li tal:attributes="class php: formAction EQ '/padanan' ? 'current_page' : null">
+                        <a tal:attributes="href php: empty(searchFieldValue) ? '/padanan' : '/padanan?query='.searchFieldValue">Padanan</a>
                     </li>
                     <li tal:attributes="class php: formAction EQ '/peribahasa' ? 'current_page' : null">
-                        <a href="/peribahasa">Peribahasa</a></li>
+                        <a tal:attributes="href php: empty(searchFieldValue) ? '/peribahasa' : '/peribahasa?query='.searchFieldValue">Peribahasa</a>
+                    </li>
                     <li tal:attributes="class php: formAction EQ '/singkatan' ? 'current_page' : null">
-                        <a href="/singkatan">Singkatan</a></li>
-                    <li><a href="/">Aplikasi</a></li>
+                        <a tal:attributes="href php: empty(searchFieldValue) ? '/singkatan' : '/singkatan?query='.searchFieldValue">Singkatan</a>
+                    </li>
+                    <li>
+                        <a href="/">Aplikasi</a>
+                    </li>
                 </ul>
             </nav>
 
