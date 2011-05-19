@@ -224,6 +224,19 @@ ul.datalist strong a {
 	color:#CC0000;
 }
 
+#random h3 {
+	background:transparent url("../images/kateglo.png") no-repeat 0 -549px;
+	padding-left:55px;
+	line-height:50;
+	height:50px;
+}
+#misspelled h3 {
+	background:transparent url("../images/kateglo.png") no-repeat 0 -612px;
+	padding-left:55px;
+	line-height:50;
+	height:50px;
+}
+
 #login {
 	height:260px;
 	background:transparent url("../images/kateglo.png") no-repeat 0px -670px;
