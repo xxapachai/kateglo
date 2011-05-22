@@ -84,7 +84,7 @@ class Definition {
 	 * @OneToMany(targetEntity="kateglo\application\models\Sample", mappedBy="definition", cascade={"all"})
 	 */
 	private $samples;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Antonym", inversedBy="definitions")
@@ -94,7 +94,7 @@ class Definition {
 	 * )
 	 */
 	private $antonyms;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Synonym", inversedBy="definitions")
@@ -104,7 +104,7 @@ class Definition {
 	 * )
 	 */
 	private $synonyms;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Relation", inversedBy="definitions")
@@ -114,7 +114,7 @@ class Definition {
 	 * )
 	 */
 	private $relations;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @ManyToMany(targetEntity="kateglo\application\models\Misspelled", inversedBy="definitions")
@@ -294,9 +294,9 @@ class Definition {
 	public function getSamples() {
 		return $this->samples;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Antonym $antonym
 	 * @return void
 	 */
@@ -306,9 +306,9 @@ class Definition {
 			$antonym->addDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Antonym $antonym
 	 * @return void
 	 */
@@ -319,17 +319,17 @@ class Definition {
 			$removed->removeDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getAntonyms() {
 		return $this->antonyms;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Synonym $synonym
 	 * @return void
 	 */
@@ -339,9 +339,9 @@ class Definition {
 			$synonym->addDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Synonym $synonym
 	 * @return void
 	 */
@@ -352,17 +352,17 @@ class Definition {
 			$removed->removeDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSynonyms() {
 		return $this->synonyms;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
@@ -372,9 +372,9 @@ class Definition {
 			$relation->addDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Relation $relation
 	 * @return void
 	 */
@@ -385,17 +385,17 @@ class Definition {
 			$removed->removeDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getRelations() {
 		return $this->relations;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Misspelled $misspelled
 	 * @return void
 	 */
@@ -405,9 +405,9 @@ class Definition {
 			$misspelled->addDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param kateglo\application\models\Misspelled $misspelled
 	 * @return void
 	 */
@@ -418,9 +418,9 @@ class Definition {
 			$removed->removeDefinition ( $this );
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMisspelleds() {
