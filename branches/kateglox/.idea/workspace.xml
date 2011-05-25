@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/scripts/cpanel" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/mockup/searchResult.bmml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/controllers/CpanelController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/scripts/cpanel/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/PURNAA.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/PURNAA.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,7 +32,7 @@
       <file leaf-file-name="CpanelController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/CpanelController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="8" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0">
+            <state line="48" column="8" selection-start="1778" selection-end="1778" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -56,7 +50,7 @@
       <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="23" selection-start="198" selection-end="202" vertical-scroll-proportion="0.030303031">
+            <state line="41" column="35" selection-start="1146" selection-end="1146" vertical-scroll-proportion="1.2424242">
               <folding />
             </state>
           </provider>
@@ -484,15 +478,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1374" height="748" extended-state="1" />
-    <editor active="true" />
+    <frame x="-4" y="-4" width="1374" height="748" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32673267" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31902552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16294643" sideWeight="0.32343236" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296131" sideWeight="0.6732673" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296131" sideWeight="0.6732673" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -595,7 +589,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/CpanelController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="8" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" />
+        <state line="48" column="8" selection-start="1778" selection-end="1778" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/scripts/cpanel/index.html">
@@ -642,7 +638,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="23" selection-start="198" selection-end="202" vertical-scroll-proportion="0.030303031">
+        <state line="41" column="35" selection-start="1146" selection-end="1146" vertical-scroll-proportion="1.2424242">
           <folding />
         </state>
       </provider>
