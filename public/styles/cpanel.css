@@ -1,0 +1,15 @@
+.cpanel_sprite {
+    background: url(/images/cpanel_sprite.png) no-repeat top left !important;
+}
+
+.cpanel_application_form_add {
+    background-position: 0 0 !important;
+}
+
+.cpanel_application_form_magnify {
+    background-position: 0 -67px !important;
+}
+
+.cpanel_application_view_detail {
+    background-position: 0 -132px !important;
+}

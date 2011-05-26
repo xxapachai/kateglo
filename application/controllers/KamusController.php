@@ -126,7 +126,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     public function init() {
         parent::init();
         $this->view->search = $this->search;
-        $this->limit = (is_numeric($this->_request->getParam('rows')) ? intval($this->_request->getParam('rows')) : 10);
+        $this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit')) : 10);
         $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
         $this->view->formAction = '/kamus';
     }
@@ -173,7 +173,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
                 /*@var $hits kateglo\application\faces\Hit */
                 $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
                 $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-                $this->content = array('hits' => $hits, 'pagination' => $pagination);
+                $this->content = array('hits' => $hits->response->docs, 'pagination' => $pagination);
             }
             $this->responseBuilder($cacheId);
         } catch (Apache_Solr_Exception $e) {
