@@ -1,6 +1,22 @@
-Ext.require(['*']);
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath({
+    'kateglo.borders': '/javascripts/cpanel/borders',
+    'kateglo.menus' : '/javascripts/cpanel/menus',
+    'kateglo.models' : '/javascripts/cpanel/models',
+    'kateglo.stores' : '/javascripts/cpanel/stores',
+    'Ext.ux': '/ext4/examples/ux'
+});
+Ext.require(['*',
+    'kateglo.borders.Header',
+    'kateglo.borders.Menu',
+    'kateglo.borders.Content',
+    'kateglo.models.Entry',
+    'kateglo.stores.Entry',
+    'Ext.ux.form.SearchField'
+]);
 Ext.onReady(function() {
 
+    Ext.QuickTips.init();
     Ext.create('Ext.Viewport', {
         layout: {
             type: 'border',
@@ -10,59 +26,9 @@ Ext.onReady(function() {
             split: false
         },
         items: [
-            {
-                region: 'north',
-                height: 50,
-                border: false,
-                padding: '0 0 1 0',
-                html: 'north'
-            },
-            {
-                region: 'west',
-                split:true,
-                border: false,
-                animate: false,
-                activeOnTop: true,
-                collapsible: true,
-                hideCollapseTool: true,
-                width: 250,
-                layout: 'accordion',
-                items:[
-                    {
-                        title: 'Panel 1',
-                        html: 'Content'
-                    },
-                    {
-                        title: 'Panel 2',
-                        id: 'panel2',
-                        html: 'Content'
-                    },
-                    {
-                        title: 'Panel 3',
-                        id: 'panel3',
-                        html: 'Content'
-                    }
-                ]
-            },
-            {
-                region: 'center',
-                xtype: 'tabpanel',
-                border: false,
-                activeTab: 0,
-                defaults: {
-                    border: false
-                },
-                items: [
-                    {
-                        title: 'Tab 1',
-                        html : 'A simple tab'
-                    },
-                    {
-                        title: 'Tab 2',
-                        html : 'Another one'
-                    }
-                ]
-            }
+            new kateglo.borders.Header(),
+            new kateglo.borders.Menu(),
+            new kateglo.borders.Content()
         ]
     });
 });
