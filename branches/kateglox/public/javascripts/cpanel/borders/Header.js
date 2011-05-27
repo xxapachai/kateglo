@@ -1,14 +1,11 @@
 Ext.define('kateglo.borders.Header', {
-    extend: 'Ext.panel.Panel',
+    extend: 'Ext.Component',
 
     initComponent: function() {
         Ext.apply(this, {
             region: 'north',
-            height: 30,
-            border: false,
-            padding: 0,
-            margin: 0,
-            html: 'north'
+            height: 10,
+            html: ''
         });
         this.callParent(arguments);
     }

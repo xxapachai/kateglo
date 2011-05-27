@@ -8,8 +8,9 @@ Ext.define('kateglo.borders.Menu', {
         Ext.apply(this, {
             region: 'west',
             layout: 'accordion',
-            split:true,
-            border: false,
+            title: 'Control Panel',
+            margins: '0 0 5 5',
+            split: true,
             multi: false,
             animate: false,
             activeOnTop: true,
