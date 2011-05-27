@@ -18,13 +18,7 @@ Ext.onReady(function() {
 
     Ext.QuickTips.init();
     Ext.create('Ext.Viewport', {
-        layout: {
-            type: 'border',
-            padding: 0
-        },
-        defaults: {
-            split: false
-        },
+        layout: 'border',
         items: [
             new kateglo.borders.Header(),
             new kateglo.borders.Menu(),

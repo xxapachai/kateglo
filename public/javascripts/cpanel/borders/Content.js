@@ -4,10 +4,10 @@ Ext.define('kateglo.borders.Content', {
     initComponent: function() {
         Ext.apply(this, {
             region: 'center',
-            border: false,
             activeTab: 0,
+            margins: '0 5 5 0',
+            split: true,
             defaults: {
-                border: false
             },
             items: [
                 {
