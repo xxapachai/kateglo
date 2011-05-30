@@ -23,8 +23,7 @@ Ext.define('kateglo.utils.SearchField', {
     },
 
     onTrigger1Click : function() {
-        Ext.getCmp('resultContainer').removeAll();
-        Ext.getCmp('resultContainer').add(Ext.getCmp('resultContainer').emptyResultText);
+        Ext.getCmp('resultContainer').insert(0, Ext.getCmp('resultContainer').emptyResultText);
         var me = this,
                 store = me.store,
                 proxy = store.getProxy(),
@@ -43,8 +42,7 @@ Ext.define('kateglo.utils.SearchField', {
     ,
 
     onTrigger2Click : function() {
-        Ext.getCmp('resultContainer').removeAll();
-        Ext.getCmp('resultContainer').add(Ext.getCmp('resultContainer').showResultText);
+        Ext.getCmp('resultContainer').insert(0, Ext.getCmp('resultContainer').showResultText);
         var me = this,
                 store = me.store,
                 proxy = store.getProxy(),
