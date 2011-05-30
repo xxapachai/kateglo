@@ -1,9 +1,5 @@
 Ext.define('kateglo.borders.Menu', {
     extend: 'Ext.panel.Panel',
-
-    requires : [
-        'kateglo.menus.Search'
-    ],
     initComponent: function() {
         Ext.apply(this, {
             region: 'west',
