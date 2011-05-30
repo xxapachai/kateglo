@@ -1,10 +1,8 @@
 Ext.define("kateglo.stores.Entry", {
-    extend: 'Ext.data.TreeStore',
+    extend: 'Ext.data.Store',
     model: 'kateglo.models.Entry',
-    pageSize: 500,
-    root: {
-        expanded: true
-    },
+    pageSize: 10000000,
+    data: {'hits' : []},
     proxy: {
         type: 'rest',
         url : '/kamus',

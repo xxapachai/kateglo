@@ -1,12 +1,11 @@
 Ext.define('kateglo.menus.Search', {
     extend: 'Ext.panel.Panel',
-
-    layout: 'hbox',
+    layout: 'border',
     initComponent: function() {
         Ext.apply(this, {
             title: 'Entri',
             iconCls: 'cpanel_sprite cpanel_application_form_magnify',
-            tbar: [ '->',
+            tbar: [
                 {
                     text: 'Entri Baru',
                     iconCls: 'cpanel_sprite cpanel_application_form_add'
@@ -16,24 +15,23 @@ Ext.define('kateglo.menus.Search', {
                     iconCls: 'cpanel_sprite cpanel_application_view_detail'
                 }
             ],
-            defaults: {
-                border: false,
-                margin: 4
-            },
             items:[
-                {
-                    dockedItems: [
-                        {
-                            dock: 'top',
-                            xtype: 'searchfield',
-                            emptyText: 'Ketik yang dicari, kemudian tekan enter',
-                            store : this.store
-                        }
-                    ]
-                },
-                new Ext.tree.Panel({
-                    rootVisible: false,
-                    lines: false,
+                new kateglo.utils.SearchField({
+                    region: 'north',
+                    emptyText: 'Ketik yang dicari, kemudian tekan enter',
+                    store : this.store
+                }),
+                new Ext.grid.Panel({
+                    region: 'center',
+                    border: false,
+                    forceFit: true,
+                    hideHeaders: true,
+                    columns:[
+                        {dataIndex: 'text'}
+                    ],
+                    viewConfig: {
+                        emptyText: '<div style="text-align: center;"><i>No Records Found</i></div>'
+                    },
                     store: this.store
                 })
             ]
