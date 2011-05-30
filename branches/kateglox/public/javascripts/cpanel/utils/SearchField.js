@@ -1,34 +1,35 @@
 Ext.define('kateglo.utils.SearchField', {
     extend: 'Ext.form.field.Trigger',
-    
+
     trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
-    
+
     trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger',
-    
+
     hasSearch : false,
     paramName : 'query',
-    
-    initComponent: function(){
+
+    initComponent: function() {
         this.callParent(arguments);
-        this.on('specialkey', function(f, e){
-            if(e.getKey() == e.ENTER){
+        this.on('specialkey', function(f, e) {
+            if (e.getKey() == e.ENTER) {
                 this.onTrigger2Click();
             }
         }, this);
     },
-    
-    afterRender: function(){
+
+    afterRender: function() {
         this.callParent();
         this.triggerEl.item(0).setDisplayed('none');
-        this.store.removeAll();
     },
-    
-    onTrigger1Click : function(){
+
+    onTrigger1Click : function() {
+        Ext.getCmp('resultContainer').removeAll();
+        Ext.getCmp('resultContainer').add(Ext.getCmp('resultContainer').emptyResultText);
         var me = this,
-            store = me.store,
-            proxy = store.getProxy(),
-            val;
-            
+                store = me.store,
+                proxy = store.getProxy(),
+                val;
+
         if (me.hasSearch) {
             me.setValue('');
             proxy.extraParams[me.paramName] = '';
@@ -38,14 +39,17 @@ Ext.define('kateglo.utils.SearchField', {
             me.triggerEl.item(0).setDisplayed('none');
             me.doComponentLayout();
         }
-    },
+    }
+    ,
 
-    onTrigger2Click : function(){
+    onTrigger2Click : function() {
+        Ext.getCmp('resultContainer').removeAll();
+        Ext.getCmp('resultContainer').add(Ext.getCmp('resultContainer').showResultText);
         var me = this,
-            store = me.store,
-            proxy = store.getProxy(),
-            value = me.getValue();
-            
+                store = me.store,
+                proxy = store.getProxy(),
+                value = me.getValue();
+
         if (value.length < 1) {
             me.onTrigger1Click();
             return;
@@ -57,4 +61,5 @@ Ext.define('kateglo.utils.SearchField', {
         me.triggerEl.item(0).setDisplayed('block');
         me.doComponentLayout();
     }
-});
+})
+        ;
