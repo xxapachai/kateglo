@@ -10,6 +10,14 @@
     background-position: 0 -67px !important;
 }
 
-.cpanel_application_view_detail {
+.cpanel_application_gear {
     background-position: 0 -132px !important;
+}
+
+.cpanel_application_view_detail {
+    background-position: 0 -198px !important;
+}
+
+.cpanel_database_gear {
+    background-position: 0 -265px !important;
 }

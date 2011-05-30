@@ -12,7 +12,7 @@ Ext.define('kateglo.borders.Menu', {
             activeOnTop: true,
             collapsible: true,
             hideCollapseTool: true,
-            width: 270,
+            width: 300,
             items:[
                 new kateglo.menus.Search(),
                 {
