@@ -1,6 +1,6 @@
 Ext.define('kateglo.borders.Content', {
     extend: 'Ext.tab.Panel',
-
+    id: 'kateglo.borders.Content',
     initComponent: function() {
         Ext.apply(this, {
             region: 'center',
@@ -10,14 +10,12 @@ Ext.define('kateglo.borders.Content', {
             defaults: {
             },
             items: [
-                {
-                    title: 'Tab 1',
-                    html : 'A simple tab'
-                },
-                {
-                    title: 'Tab 2',
-                    html : 'Another one'
-                }
+                new Ext.Component({
+                    title: 'Beranda',
+                    html : 'Beranda Content',
+                    iconCls: 'cpanel_sprite cpanel_house',
+                    closable: true
+                })
             ]
         });
         this.callParent(arguments);

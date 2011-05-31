@@ -57,6 +57,7 @@ class Binder {
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
+        $container->bind ( services\interfaces\Cpanel::INTERFACE_NAME )->to ( services\CPanel::$CLASS_NAME );
 		$container->bind ( services\interfaces\StaticData::INTERFACE_NAME )->to ( services\StaticData::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );

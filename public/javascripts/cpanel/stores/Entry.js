@@ -6,7 +6,7 @@ Ext.define("kateglo.stores.Entry", {
         type: 'rest',
         url : '/kamus',
         headers: {
-            Accept: 'application/json'
+            Accept: 'extjs/json'
         },
         reader: {
             type: 'json',

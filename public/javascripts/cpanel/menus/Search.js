@@ -7,7 +7,7 @@ Ext.define('kateglo.menus.Search', {
             iconCls: 'cpanel_sprite cpanel_database_gear',
             tbar: [ '->',
                 {
-                    iconCls: 'cpanel_sprite cpanel_application_gear',
+                    iconCls: 'cpanel_sprite cpanel_cog',
                     menu: {
                         style: {
                             overflow: 'visible'
@@ -42,17 +42,8 @@ Ext.define('kateglo.menus.Search', {
                     },
                     emptyResultText:this.emptyResultText,
 
-                    showResultText: new Ext.grid.Panel({
+                    showResultText: new kateglo.grids.MenuSearchResult({
                         scope: this,
-                        border: false,
-                        forceFit: true,
-                        hideHeaders: true,
-                        columns:[
-                            {dataIndex: 'text'}
-                        ],
-                        viewConfig: {
-                            emptyText: '<div style="margin: 10px; text-align: center; color: #888;"><i>Penelusuran Anda tidak cocok dengan dokumen apa pun.</i></div>'
-                        },
                         store: this.store
                     }),
                     items: [
