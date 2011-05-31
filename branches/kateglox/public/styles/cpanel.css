@@ -1,23 +1,63 @@
+.x-panel-header-icon, .x-window-header-icon {
+    height: 17px !important;
+}
+
+.x-tab-default-top button, .x-tab-default-top .x-tab-inner {
+    height: 17px !important;
+}
+
 .cpanel_sprite {
     background: url(/images/cpanel_sprite.png) no-repeat top left !important;
 }
 
-.cpanel_application_form_add {
+.cpanel_accept {
     background-position: 0 0 !important;
 }
 
-.cpanel_application_form_magnify {
-    background-position: 0 -67px !important;
+.cpanel_add {
+    background-position: 0 -66px !important;
 }
 
-.cpanel_application_gear {
+.cpanel_application_form {
     background-position: 0 -132px !important;
 }
 
-.cpanel_application_view_detail {
+.cpanel_application_form_add {
     background-position: 0 -198px !important;
 }
 
+.cpanel_application_form_magnify {
+    background-position: 0 -264px !important;
+}
+
+.cpanel_application_view_detail {
+    background-position: 0 -330px !important;
+}
+
+.cpanel_cancel {
+    background-position: 0 -396px !important;
+}
+
+.cpanel_cog {
+    background-position: 0 -462px !important;
+}
+
 .cpanel_database_gear {
-    background-position: 0 -265px !important;
+    background-position: 0 -528px !important;
+}
+
+.cpanel_database_save {
+    background-position: 0 -594px !important;
+}
+
+.cpanel_delete {
+    background-position: 0 -660px !important;
+}
+
+.cpanel_disk {
+    background-position: 0 -726px !important;
+}
+
+.cpanel_house {
+    background-position: 0 -792px !important;
 }

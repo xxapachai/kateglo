@@ -3,5 +3,6 @@ Ext.define("kateglo.models.Entry", {
     fields: [
         {name:'id', mapping: 'id'},
         {name:'text', mapping: 'entry'}
-    ]
+    ],
+    idProperty: 'id'
 });

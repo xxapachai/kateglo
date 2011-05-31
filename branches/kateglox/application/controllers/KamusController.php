@@ -21,6 +21,7 @@
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\services\interfaces\CPanel;
 use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\faces\Hit;
 /**
@@ -42,6 +43,13 @@ class KamusController extends Zend_Controller_Action_Stubbles {
      * @var \kateglo\application\services\interfaces\Entry;
      */
     private $entry;
+
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\CPanel;
+     */
+    private $cpanel;
 
     /**
      *
@@ -89,6 +97,17 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      *
      * Enter description here ...
+     * @param kateglo\application\services\interfaces\CPanel $cpanel
+     *
+     * @Inject
+     */
+    public function setCPanel(CPanel $cpanel) {
+        $this->cpanel = $cpanel;
+    }
+
+    /**
+     *
+     * Enter description here ...
      * @param kateglo\application\services\interfaces\Entry $entry
      *
      * @Inject
@@ -126,8 +145,10 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     public function init() {
         parent::init();
         $this->view->search = $this->search;
-        $this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit')) : 10);
-        $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start')) : 0);
+        $this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
+                : 10);
+        $this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
+                : 0);
         $this->view->formAction = '/kamus';
     }
 
@@ -141,7 +162,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
         try {
-            $cacheId = __CLASS__ . '\\' . 'indexHtml' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
             if (!$this->evaluatePreCondition($cacheId)) {
                 $this->view->search->setFieldValue($searchText);
                 /** @var $hits kateglo\application\faces\Hit */
@@ -168,10 +189,34 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     public function indexJson() {
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
         try {
-            $cacheId = __CLASS__ . '\\' . 'indexJson' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
             if (!$this->evaluatePreCondition($cacheId)) {
                 /*@var $hits kateglo\application\faces\Hit */
                 $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
+                $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
+                $this->content = array('hits' => $hits, 'pagination' => $pagination);
+            }
+            $this->responseBuilder($cacheId);
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
+    }
+
+    /**
+     * @return void
+     * @Get
+     * @Path('/')
+     * @Produces('extjs/json')
+     */
+    public function indexExtJsJson() {
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        try {
+            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            if (!$this->evaluatePreCondition($cacheId)) {
+                /*@var $hits kateglo\application\faces\Hit */
+                $hits = $this->cpanel->searchEntryAsJSON($searchText, $this->offset, $this->limit);
                 $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
                 $this->content = array('hits' => $hits->response->docs, 'pagination' => $pagination);
             }
