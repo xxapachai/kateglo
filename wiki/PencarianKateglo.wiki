@@ -1,6 +1,7 @@
 #summary Fitur pencarian kateglo
 
 =Pencarian dasar=
+
 Untuk mencari suatu entri, anda dapat langsung mengetikkan kata kunci dalam kotak pencarian. Lalu tekan *Enter*.
 Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab yang ada, lalu ketik kata kunci. Terdapat beberapa kategori:
   * Kamus
@@ -10,23 +11,49 @@ Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab
   * Singkatan
 
 ==Bentuk kata==
+  * Nama alfabet
+  * Bentuk terikat (imbuhan/klitika)
   * Kata dasar mandiri
-  * Akronim
+  * Kata dasar terikat
+  * Kata berimbuhan
+  * Kata ulang
+  * Gabungan kata
   * Peribahasa
+  * Ungkapan
+  * Singkatan
+  * Akronim
 ==Kelas kata==
-  * Nomina
-  * Adjektiva
-  * Verba
-  * Adverbia
-  * Preposisi
-  * Injeksi
-  * Numeralia
+  * Nomina (n)
+  * Numeralia (num)
+  * Pronomina (pron)
+  * Verba (v)
+  * Adjektiva (a)
+  * Adverbia (adv)
+  * Preposisi (pre)
+  * Konjungtor (k)
+  * Interjeksi (i)
+  * Partikula penegas (p)
+  * Awalan (prefiks)
+  * Sisipan (infiks)
+  * Akhiran (sufiks)
+  * Imbuhan gabungan (konfiks)
 ==Sumber==
-  * KBBI
-  * Pusba
+  * Pusat Bahasa
+  * Sofia Mansoor
+  * Wikipedia
+  * Daisy Subakti
+  * KBBI IV
+  * KBBI III
+  * Bahtera
+  * Kateglo
+  * Publik
 ==Disiplin ilmu==
+  * Bahasa
   * Linguistik
   * Matematika
+  * Teknik
+  * Komputer
+  * Jurnalistik  
   * Administrasi
   * Kimia
   * Olahraga
@@ -41,8 +68,10 @@ Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab
   * Psikologi
   * Statistika
   * Susastra
+  * Musik
 
 =Pencarian lanjut=
+
 Klik *Penelusuran lebih detail* untuk mencari entri dengan beberapa aturan tambahan. Gunakan formulir yang ada untuk membuat pencarian lebih spesifik.
 Aturan yang dapat ditambahkan berupa:
 
@@ -68,14 +97,15 @@ Aturan umum ada beberapa, yaitu:
 Perintah dapat langsung digunakan dalam kotak pencarian tanpa harus menuju ke *Penelusuran lebih detail*.
 
 ===Query===
-  * Frase (“”)
-  * Hal spesifik (spec:)
-  * Pengecualian (-)
-  * Karakter dan lema acak
-  * Persis (+)
-  * Operator (AND) / (OR) / (NOT)
+  * Frase (`“”`)
+  * Hal spesifik (`spec:`)
+  * Pengecualian (`-`)
+  * Karakter acak (`*`) / (`?`)
+  * Persis (`+`)
+  * Operator (`AND`) / (`OR`) / (`NOT`)
 
 =Hasil Pencarian=
+
 Jika anda telah mendapatkan hasil pencarian, anda dapat langsung menemukan entri yang anda cari serta berapa banyak entri yang ditelusuri oleh kateglo. Anda juga bisa memberi tambahan aturan spesifik berdasarkan *bentuk kata*, *kelas kata*, *sumber*, ataupun *disiplin ilmu*.
 
 Setiap halaman hasil biasanya terdapat 10 entri. Anda dapat melihat halaman hasil yang lain dengan mengklik *Lanjut* atau *Terakhir*, atau langsung dari urutan ke berapa.
