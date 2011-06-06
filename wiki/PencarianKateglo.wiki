@@ -71,7 +71,7 @@ Perintah dapat langsung digunakan dalam kotak pencarian tanpa harus menuju ke *P
   * Frase (“”)
   * Hal spesifik (spec:)
   * Pengecualian (-)
-  * Karakter dan lema acak (*) / (?)
+  * Karakter dan lema acak
   * Persis (+)
   * Operator (AND) / (OR) / (NOT)
 
