@@ -2,7 +2,7 @@
 
 ==Fitur Utama==
 
-Di beranda awal, anda akan diberi pilihan untuk mencari suatu lema dari keseluruhan isi basis data kateglo. Di pilahan lain, terdapat beberapa pilihan sumber spesifik:
+Di beranda awal, anda akan diberi pilihan untuk mencari suatu lema dari keseluruhan isi basis data kateglo. Di pilihan lain, terdapat beberapa pilihan sumber spesifik:
 
   * Kamus
   * Tesaurus
