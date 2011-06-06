@@ -11,6 +11,18 @@ Di pilihan lain, terdapat beberapa pilihan sumber spesifik:
   * Peribahasa
   * Singkatan
 
+===Kotak Pencarian===
+
+Terdapat kotak pencarian yang dapat anda isi dengan kata kunci tentang hal yang anda cari. Disediakan juga pihan:
+
+===Petunjuk penelusuran===
+
+Petunjuk penelusuran berisi informasi yang membantu anda untuk menemukan hal yang anda cari.
+
+===Penelusuran lebih detail===
+
+Penelusuran lebih detail memberi lebih banyak pilihan untuk anda dalam mencari hal yang ingin ditemukan secara spesifik melalui beberapa aturan pencarian.
+
 =Fitur Tambahan=
 
   * Kata Hari Ini
