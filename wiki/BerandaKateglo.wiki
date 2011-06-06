@@ -1,5 +1,3 @@
-#summary Beranda awal kateglo
-
 =Fitur Utama=
 
 Di beranda awal, anda akan diberi pilihan untuk mencari suatu lema dari keseluruhan isi basis data kateglo. Di pilihan lain, terdapat beberapa pilihan sumber spesifik sesuai kebutuhan:
@@ -9,7 +7,7 @@ Di beranda awal, anda akan diberi pilihan untuk mencari suatu lema dari keseluru
   * Peribahasa
   * Singkatan
 
-===Kotak Pencarian===
+===Kotak pencarian===
 Terdapat kotak pencarian yang dapat anda isi dengan kata kunci tentang hal yang anda cari. Disediakan juga pihan:
 
 ===Petunjuk penelusuran===
@@ -20,13 +18,13 @@ Penelusuran lebih detail memberi lebih banyak pilihan untuk anda dalam mencari h
 
 =Fitur Tambahan=
 
-===Kata Hari Ini===
+  * ===Kata hari ini===
 Menampilkan satu kata spesial setiap hari dengan beberapa deskripsi makna.
-===Entri Acak===
+  * ===Entri acak===
 Menampilkan beberapa entri kata secara acak dari basis data kateglo dengan sedikit deskripsi makna.
-===Salah Eja===
+  * ===Salah eja===
 Menampilkan beberapa entri kata yang paling sering salah dieja dengan perbaikannya.
-===Catatan Informasi===
+  * ===Catatan informasi===
 Menampilkan catatan yang memberi informasi jumlah entri yang ada dalam basis data kateglo. Berdasarkan entri kamus, tesaurus, padanan, peribahasa, dan singkatan.
 
 =Fitur Pengguna=
