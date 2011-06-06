@@ -9,3 +9,19 @@ Di beranda awal, anda akan diberi pilihan untuk mencari suatu lema dari keseluru
   * Padanan
   * Peribahasa
   * Singkatan
+
+=Fitur Tambahan=
+
+  * Kata Hari Ini
+  * Entri Acak
+  * Salah Eja
+  * Catatan Informasi
+
+=Fitur Pengguna=
+
+==Pendaftaran==
+Anda dapat berkontribusi untuk kateglo dengan menjadi pengguna. Daftarkan diri anda dahulu dengan mengklik *Daftarkan saya*. Jika sudah, anda dapat masuk log menggunakan nama pengguna dan kata sandi anda.
+
+Anda juga bisa mendaftar melalui akun situs sosial yang sudah anda punya seperti Google, Yahoo!, Facebook, ataupun Twitter.
+
+Jika anda lupa kata sandi anda, anda dapat mengklik *Lupa kata sandi*. Lalu ikuti prosedur untuk mendapatkan ulang kata sandi anda.
