@@ -18,13 +18,13 @@ Penelusuran lebih detail memberi lebih banyak pilihan untuk anda dalam mencari h
 
 =Fitur Tambahan=
 
-  * ===Kata hari ini===
+===Kata hari ini===
 Menampilkan satu kata spesial setiap hari dengan beberapa deskripsi makna.
-  * ===Entri acak===
+===Entri acak===
 Menampilkan beberapa entri kata secara acak dari basis data kateglo dengan sedikit deskripsi makna.
-  * ===Salah eja===
+===Salah eja===
 Menampilkan beberapa entri kata yang paling sering salah dieja dengan perbaikannya.
-  * ===Catatan informasi===
+===Catatan informasi===
 Menampilkan catatan yang memberi informasi jumlah entri yang ada dalam basis data kateglo. Berdasarkan entri kamus, tesaurus, padanan, peribahasa, dan singkatan.
 
 =Fitur Pengguna=
