@@ -1,75 +1,69 @@
-<mockup version="1.0" skin="sketch" measuredW="1170" measuredH="855" mockupW="890" mockupH="818">
+<mockup version="1.0" skin="sketch" measuredW="1257" measuredH="1578" mockupW="1181" mockupH="1556">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="280" y="37" w="890" h="818" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
-      </controlProperties>
-    </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="186" w="588" h="618" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
-      <controlProperties>
-        <borderColor>0</borderColor>
-      </controlProperties>
-    </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="439" y="122" w="175" h="58" measuredW="129" measuredH="40" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="472" y="152" w="354" h="114" measuredW="129" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <src>../../public/images/kateglo40.png</src>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="936" y="139" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="860" y="292" w="67" h="28" measuredW="67" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Search</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="445" y="193" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="103" y="105" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="947" y="194" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="1162" y="104" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Masuk%20Log</text>
       </controlProperties>
     </control>
-    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="754" y="136" w="182" h="-1" measuredW="47" measuredH="29" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="404" y="289" w="456" h="-1" measuredW="47" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Entry</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="439" y="218" w="573" h="-1" measuredW="100" measuredH="5" zOrder="7" locked="false" isInGroup="-1"/>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="481" y="252" w="487" h="70" measuredW="1148" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="239" y="356" w="-1" h="-1" measuredW="878" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Selamat%20datang%20di%20Kateglo%20%28Beta%29%20-%20kamus%2C%20tesaurus%2C%20dan%20glosarium%20bahasa%20Indonesia.Silakan%20gunakan%20kotak%20pencarian%20di%20bagian%20atas%20halaman%20untuk%20mencari%20entri%20yang%20Anda%20inginkan.</text>
+        <text>Saat%20ini%20terdapat%20228428%20entri%20kamus%2C%2036441%20entri%20tesaurus%2C%20164602%20entri%20padanan%2C%202089%20entri%20peribahasa%2C%20serta%203386%20entri%20singkatan</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="578" y="318" w="-1" h="-1" measuredW="250" measuredH="25" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="76" y="22" w="1181" h="1556" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Saat%20ini%20terdapat%20228428%20entri%20kamus.</text>
+        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="657" y="354" w="-1" h="-1" measuredW="76" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Link" x="936" y="301" w="-1" h="-1" measuredW="133" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Entri%20acak%3A</text>
+        <text>Penelusuran%20lanjutan</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Canvas" x="558" y="316" w="291" h="31" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1"/>
-    <control controlID="12" controlTypeID="com.balsamiq.mockups::Canvas" x="483" y="378" w="485" h="137" measuredW="100" measuredH="70" zOrder="12" locked="false" isInGroup="-1"/>
-    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="485" y="385" w="479" h="115" measuredW="1496" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Link" x="936" y="276" w="-1" h="-1" measuredW="135" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
-        <align>center</align>
-        <text>menambuhkan%20%20%20%20sistem%20saraf%20parasimpatetik%20%20%20%20model%20evaluasi%20kesenjangan%3B%20model%20evaluasi%20diskrepansi%3B%20model%20penilaian%20diskrepa%20%20%20%20koordinat%20pusat%20massa%20%28p%29%20%20%20%20lelak%20%20%20%20menata%20%20%20%20HLN%20%20%20%20pemikiran%20proses%20primer%20%20%20%20kecak%20%20%20%20makan%20emas%20%20%20</text>
+        <text>Petunjuk%20Penelusuran</text>
       </controlProperties>
     </control>
-    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="658" y="526" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="1106" y="104" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Salah%20eja%3A</text>
+        <text>Daftar</text>
       </controlProperties>
     </control>
-    <control controlID="15" controlTypeID="com.balsamiq.mockups::Canvas" x="578" y="566" w="258" h="190" measuredW="100" measuredH="70" zOrder="15" locked="false" isInGroup="-1"/>
-    <control controlID="16" controlTypeID="com.balsamiq.mockups::Paragraph" x="614" y="581" w="-1" h="-1" measuredW="200" measuredH="140" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Paragraph" x="228" y="402" w="904" h="36" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <align>center</align>
-        <text>kongko%20bukan%20kongkow%20%0Alinen%20bukan%20linan%20%0Asedingin%20bukan%20sidingin%20%0Asementelah%20bukan%20mentelah%20%0Akerahi%20bukan%20krail</text>
+        <text>Entri%20hari%20ini%20%20%B7%20Entri%20acak%20%B7%20Salah%20eja%20%B7%20Blog%20%B7%20Mobile%20%B7%20%20Kontak%20%20%B7%20%20Tentang%20Kateglo%20%20%B7%20%20FAQ%20%20%B7%20%20Privacy%20%20%B7%20%20Terms%20%20%B7%20%20API%20%20%B7%20%20Aplikasi%20%20%B7%20%20Twitter%20%20%B7%20%20Facebook</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Paragraph" x="311" y="492" w="695" h="36" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>All%20the%20words%20are%20brought%20to%20you%20by%20Kateglo%2C%20the%20free%20online%20Indonesia%20dictionary%20and%20thesaurus.%20%A9%202011</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Paragraph" x="315" y="449" w="667" h="43" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>a%20%B7%20b%20%B7%20c%20%B7%20d%20%B7%20e%20%B7%20f%20%B7%20g%20%B7%20h%20%B7%20i%20%B7%20j%20%B7%20k%20%B7%20l%20%B7%20m%20%B7%20n%20%B7%20o%20%B7%20p%20%B7%20q%20%B7%20r%20%B7%20s%20%B7%20t%20%B7%20u%20%B7%20v%20%B7%20w%20%B7%20x%20%B7%20y%20%B7%20z</text>
       </controlProperties>
     </control>
   </controls>
