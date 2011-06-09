@@ -1,50 +1,172 @@
-<mockup version="1.0" skin="sketch" measuredW="1170" measuredH="1217" mockupW="1103" mockupH="1180">
+<mockup version="1.0" skin="sketch" measuredW="1257" measuredH="1578" mockupW="1181" mockupH="1556">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="280" y="37" w="890" h="1180" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
-      </controlProperties>
-    </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="186" w="588" h="998" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
-      <controlProperties>
-        <borderColor>0</borderColor>
-      </controlProperties>
-    </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="439" y="122" w="175" h="58" measuredW="129" measuredH="40" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="326" y="145" w="143" h="43" measuredW="129" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <src>../../public/images/kateglo40.png</src>
         <text/>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="936" y="139" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="900" y="159" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Search</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::LinkBar" x="445" y="193" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
-      </controlProperties>
-    </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="947" y="194" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Masuk%20Log</text>
-      </controlProperties>
-    </control>
-    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="754" y="136" w="182" h="-1" measuredW="47" measuredH="29" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="500" y="159" w="400" h="-1" measuredW="47" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Entry</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="439" y="218" w="573" h="-1" measuredW="100" measuredH="5" zOrder="7" locked="false" isInGroup="-1"/>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::Paragraph" x="450" y="233" w="549" h="936" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="76" y="22" w="1181" h="1556" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>abang%0AKata%20dasar%20mandiri%20%0Aabang%20%0ANomina%20%20%28Nomina%29%20%20kakak%20laki-laki%3B%20saudara%20laki-laki%20yang%20lebih%20tua%0Aabang%20nya%20tiga%20tahun%20lebih%20tua%0ANomina%20%20%28Nomina%29%20%20panggilan%20kepada%20orang%20laki-laki%20yang%20lebih%20tua%20atau%20tidak%20dikenal%0Atahukah%20abang%20jalan%20ke%20kantor%20pos%3F%0ANomina%20%20%28Nomina%29%20%20panggilan%20istri%20kepada%20suami%0Asudah%20dua%20hari%20abang%20tidak%20pulang%0ANomina%20%20%28Nomina%29%20%20sebutan%20untuk%20penjual%20sayur%2C%20penjual%20ikan%2C%20pengemudi%20becak%2C%20dsb%0Aia%20biasa%20belanja%20pada%20abang%20sayur%20yang%20lewat%20di%20depan%20rumahnya%0AAdjektiva%20%20merah%0A%20%0ASinonim%0Aakang%0Abang%0Ada%0Akakak%0Akakanda%0Akakang%0Akanda%0Akangmas%0Amas%0Amerah%0Araka%0Auda%0Ada%0Ada%0Auda%0A%20%0AAntonim%0Aadik%0ARelasi%0Aberabang%0A%20%0AKamus%20Besar%20Bahasa%20Indonesia%0A1abang%20n%201%20kakak%20laki-laki%3B%20saudara%20laki-laki%20yg%20lebih%20tua%3A%20--%20nya%20tiga%20tahun%20lebih%20tua%3B%202%20panggilan%20kpd%20orang%20laki-laki%20yg%20lebih%20tua%20atau%20tidak%20dikenal%3A%20tahukah%20--%20jalan%20ke%20kantor%20pos%3F%3B%203%20panggilan%20istri%20kpd%20suami%3A%20sudah%20dua%20hari%20--%20tidak%20pulang%3B%204%20sebutan%20untuk%20penjual%20sayur%2C%20penjual%20ikan%2C%20pengemudi%20becak%2C%20dsb%3A%20ia%20biasa%20belanja%20pd%20--%20sayur%20yg%20lewat%20di%20depan%20rumahnya%3B%0A%20%0Aber%B7a%B7bang%20v%201%20mempunyai%20abang%3B%202%20menyebut%20dng%20sebutan%20abang%20%28kakak%29%3B%20memanggil%20abang%3A%20ia%20%7E%20kpd%20saya%0A%20%0A2abang%20Jw%20a%20merah</text>
+        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Paragraph" x="67" y="261" w="347" h="641" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::LinkBar" x="103" y="105" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>More%20Like%20This%3A%0A%20%0Aterbang%0Abergerak%20atau%20melayang%20di%20udara%20dengan%20tenaga%20sayap%20%28tentang%20burung%20dsb%29%20atau%20dengan%20tenaga%20mesin%20%28tentang%20pesawat%20terbang%20dsb%29%0Aberhamburan%20atau%20melayang-layang%20di%20udara%20%28tentang%20debu%2C%20daun-daunan%2C%20dsb%29%0Amudah%20menjadi%20uap%20%28gas%29%3B%20mudah%20menguap%0Ahilang%20lenyap%20%28dicuri%20orang%29%0Aberlari%20cepat%0Amelarikan%20diri%3B%20kabur%0Anaik%20pesawat%20terbang%3B%20bepergian%20dengan%20pesawat%20terbang%0Arebana%0A%20%0Aterbang-terbang%0Atidak%20tetap%20tempat%20tinggalnya%0A%20%0Akelaikan%20terbang%3B%20kelayakan%20terbang%0A%20%0Alaik%20terbang%3B%20layak%20terbang%0A%20%0Aabu%20terbang%0Abuangan%20berbentuk%20partikel%20halus%2C%20tidak%20dapat%20terbakar%2C%20yang%20tersangkut%20dalam%20aliran%20gas%20yang%20keluar%20dari%20dalam%20tanur%20abu%20%28buangan%29%0A%20%0Abalon%20terbang%0Abalon%20yang%20diisi%20dengan%20gas%20yang%20lebih%20ringan%20daripada%20udara%20sehingga%20dapat%20terbang</text>
+        <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Link" x="1162" y="104" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Masuk%20Log</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Link" x="1106" y="104" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Daftar</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="183" y="240" w="-1" h="-1" measuredW="82" measuredH="51" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>Entri</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="178" y="306" w="-1" h="-1" measuredW="93" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>Ar%u2219%u2219%u2219%B7ti%20per%B7ta%B7ma</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="178" y="644" w="-1" h="-1" measuredW="79" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>Ar%B7ti%20ke%B7du%B7a</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="271" y="308" w="27" h="19" measuredW="10" measuredH="19" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <size>9</size>
+        <text>1</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="257" y="646" w="27" h="19" measuredW="11" measuredH="19" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <size>9</size>
+        <text>2</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Label" x="180" y="330" w="-1" h="-1" measuredW="40" measuredH="25" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>/%u02C8vi%20z%u0259/</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Label" x="179" y="669" w="-1" h="-1" measuredW="101" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>/%u02C8mak%20na%2C%20%u02C8ma%u2019na/</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Label" x="179" y="350" w="-1" h="-1" measuredW="342" measuredH="25" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>Bentuk%20Kata%20%28Kategori%20bentuk%20kata%29%2C%20Bentuk%20kata%20lain</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="180" y="692" w="-1" h="-1" measuredW="206" measuredH="25" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kata%20dasar%20mandiri%20%28Kata%20dasar%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Paragraph" x="202" y="403" w="654" h="140" measuredW="200" measuredH="140" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>1.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20definisi%20organ%20badan%20yang%20berwarna%20kemerah-merahan%20di%20bagian%20kanan%20atas%20%0A%20%20%20%20rongga%20perut%2C%20gunanya%20untuk%20mengambil%20sari-sari%20makanan%20di%20dalam%20darah%20dan%20menghasilkan%20empedu.%0A%20%0A2.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20daging%20dari%20hati%20sebagai%20bahan%20makanan%20%28terutama%20hati%20dari%20binatang%20sembelihan%29.</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Paragraph" x="202" y="744" w="654" h="140" measuredW="200" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>3.%20%20sesuatu%20yang%20ada%20di%20dalam%20tubuh%20manusia%20yang%20dianggap%20sebagai%20tempat%20segala%20%0A%20%20%20%20perasaan%20batin%20dan%20tempat%20menyimpan%20pengertian%20%28perasaan%20dsb%29.%0A4.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20apa%20yang%20terasa%20dalam%20batin.%0A%20%0A%20%0A5%20%20sifat%20%28tabiat%29%20batin%20manusia.</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Label" x="204" y="380" w="-1" h="-1" measuredW="123" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <italic>true</italic>
+        <text>numeralia%20%28nomina%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Label" x="202" y="725" w="-1" h="-1" measuredW="41" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <italic>true</italic>
+        <text>verba</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Label" x="202" y="888" w="-1" h="-1" measuredW="205" measuredH="25" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <italic>true</italic>
+        <text>preposisi%20%28kata%20tugas%29%2C%20adverbia</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Paragraph" x="202" y="913" w="654" h="140" measuredW="200" measuredH="140" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>6.%20definisi%20organ%20badan%20yang%20berwarna%20kemerah-merahan%20di%20bagian%20kanan%20atas%20rongga%20perut%2C%20%0A%20%20%20%20gunanya%20untuk%20mengambil%20sari-sari%20makanan%20di%20dalam%20darah%20dan%20menghasilkan%20empedu.%0A7.%20daging%20dari%20hati%20sebagai%20bahan%20makanan%20%28terutama%20hati%20dari%20binatang%20sembelihan%29.</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="220" y="403" w="-1" h="-1" measuredW="105" measuredH="25" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%28Anatomi%2C%20Kimia%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="224" y="464" w="-1" h="-1" measuredW="92" measuredH="25" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%28Disiplin%20Ilmu%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Label" x="219" y="785" w="-1" h="-1" measuredW="92" measuredH="25" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%28Disiplin%20Ilmu%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Label" x="257" y="443" w="-1" h="-1" measuredW="275" measuredH="25" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>Contoh%20kalimat%20masakan%20sambal%20goreng%20hati.</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Label" x="257" y="487" w="-1" h="-1" measuredW="206" measuredH="25" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>Sebagai%20contoh%20kalimat%20yang%20lain</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="243" y="810" w="-1" h="-1" measuredW="206" measuredH="25" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>Sebagai%20contoh%20kalimat%20yang%20lain</text>
       </controlProperties>
     </control>
   </controls>

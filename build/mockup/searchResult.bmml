@@ -26,7 +26,7 @@
         <text>Penelusuran%20lanjutan</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="338" y="126" w="-1" h="-1" measuredW="528" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="79" y="125" w="-1" h="-1" measuredW="527" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan%2C%20Aplikasi</text>
       </controlProperties>
@@ -54,7 +54,7 @@
       </controlProperties>
     </control>
     <control controlID="13" controlTypeID="com.balsamiq.mockups::Canvas" x="325" y="250" w="412" h="33" measuredW="100" measuredH="70" zOrder="12" locked="false" isInGroup="-1"/>
-    <control controlID="14" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="334" y="256" w="-1" h="-1" measuredW="173" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="334" y="256" w="-1" h="-1" measuredW="171" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Akronim%2C%20nomina%2C%20Fisika</text>
       </controlProperties>
@@ -77,6 +77,16 @@
     <control controlID="18" controlTypeID="com.balsamiq.mockups::Paragraph" x="325" y="841" w="321" h="41" measuredW="200" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text>%3C%3C%20%3C%206%207%208%209%2010%2011%2012%2013%2014%2015%20%3E%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Link" x="1147" y="124" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Masuk%20Log</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Link" x="1091" y="124" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Daftar</text>
       </controlProperties>
     </control>
   </controls>
