@@ -26,7 +26,7 @@
         <text>Penelusuran%20lanjutan</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="79" y="125" w="-1" h="-1" measuredW="527" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="79" y="125" w="-1" h="-1" measuredW="528" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan%2C%20Aplikasi</text>
       </controlProperties>
@@ -87,6 +87,26 @@
     <control controlID="20" controlTypeID="com.balsamiq.mockups::Link" x="1091" y="124" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Daftar</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Paragraph" x="228" y="969" w="904" h="36" measuredW="200" measuredH="140" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entri%20hari%20ini%20%20%B7%20Entri%20acak%20%B7%20Salah%20eja%20%B7%20Blog%20%B7%20Mobile%20%B7%20%20Kontak%20%20%B7%20%20Tentang%20Kateglo%20%20%B7%20%20FAQ%20%20%B7%20%20Privacy%20%20%B7%20%20Terms%20%20%B7%20%20API%20%20%B7%20%20Aplikasi%20%20%B7%20%20Twitter%20%20%B7%20%20Facebook</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Paragraph" x="311" y="1059" w="695" h="36" measuredW="200" measuredH="140" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>All%20the%20words%20are%20brought%20to%20you%20by%20Kateglo%2C%20the%20free%20online%20Indonesia%20dictionary%20and%20thesaurus.%20%A9%202011</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Paragraph" x="315" y="1016" w="667" h="43" measuredW="200" measuredH="140" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>a%20%B7%20b%20%B7%20c%20%B7%20d%20%B7%20e%20%B7%20f%20%B7%20g%20%B7%20h%20%B7%20i%20%B7%20j%20%B7%20k%20%B7%20l%20%B7%20m%20%B7%20n%20%B7%20o%20%B7%20p%20%B7%20q%20%B7%20r%20%B7%20s%20%B7%20t%20%B7%20u%20%B7%20v%20%B7%20w%20%B7%20x%20%B7%20y%20%B7%20z</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Link" x="730" y="203" w="-1" h="-1" measuredW="135" measuredH="25" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Petunjuk%20Penelusuran</text>
       </controlProperties>
     </control>
   </controls>
