@@ -1,0 +1,169 @@
+<mockup version="1.0" skin="sketch" measuredW="1257" measuredH="1580" mockupW="1181" mockupH="1556">
+  <controls>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="326" y="145" w="143" h="43" measuredW="129" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>../../public/images/kateglo40.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="900" y="159" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="500" y="159" w="400" h="-1" measuredW="47" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entry</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="76" y="24" w="1181" h="1556" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::LinkBar" x="103" y="105" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Link" x="1162" y="104" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Masuk%20Log</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Link" x="1106" y="104" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Daftar</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="183" y="194" w="-1" h="-1" measuredW="147" measuredH="90" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>60</size>
+        <text>Entri</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::LinkBar" x="183" y="274" w="-1" h="-1" measuredW="496" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Definisi%2C%20Tesaurus%2C%20Padanan%2C%20Sumber%2C%20Korpus%2C%20Diskusi%20%283%29%2C%20share</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Paragraph" x="224" y="1229" w="904" h="36" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entri%20hari%20ini%20%20%B7%20Entri%20acak%20%B7%20Salah%20eja%20%B7%20Blog%20%B7%20Mobile%20%B7%20%20Kontak%20%20%B7%20%20Tentang%20Kateglo%20%20%B7%20%20FAQ%20%20%B7%20%20Privacy%20%20%B7%20%20Terms%20%20%B7%20%20API%20%20%B7%20%20Aplikasi%20%20%B7%20%20Twitter%20%20%B7%20%20Facebook</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Paragraph" x="307" y="1319" w="695" h="36" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>All%20the%20words%20are%20brought%20to%20you%20by%20Kateglo%2C%20the%20free%20online%20Indonesia%20dictionary%20and%20thesaurus.%20%A9%202011</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Paragraph" x="311" y="1276" w="667" h="43" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>a%20%B7%20b%20%B7%20c%20%B7%20d%20%B7%20e%20%B7%20f%20%B7%20g%20%B7%20h%20%B7%20i%20%B7%20j%20%B7%20k%20%B7%20l%20%B7%20m%20%B7%20n%20%B7%20o%20%B7%20p%20%B7%20q%20%B7%20r%20%B7%20s%20%B7%20t%20%B7%20u%20%B7%20v%20%B7%20w%20%B7%20x%20%B7%20y%20%B7%20z</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Link" x="682" y="194" w="-1" h="-1" measuredW="135" measuredH="25" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Petunjuk%20Penelusuran</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Link" x="832" y="193" w="-1" h="-1" measuredW="133" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Penelusuran%20lanjutan</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="321" w="633" h="-1" measuredW="100" measuredH="5" zOrder="14" locked="false" isInGroup="-1"/>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="381" w="633" h="-1" measuredW="100" measuredH="5" zOrder="15" locked="false" isInGroup="-1"/>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::LinkBar" x="183" y="326" w="-1" h="-1" measuredW="427" measuredH="25" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terbaru%2C%20Terlama%2C%20Buka%20semua%2C%20Tutup%20Semua%2C%20Topik%20baru</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Tree" x="179" y="806" w="622" h="239" measuredW="300" measuredH="225" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <text>%5B+%5D%20Schlechter%20code%20ist%20keine%20Frage%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20McByte%20%20%20%20%20%20%20%20%2002.06.2011%2000%3A06%0A%5B-%5D%20Es%20hat%20keine%20Zukunft%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20butchdork%20%20%20%20%20%2002.06.2011%2000%3A25%20%20%20%20%20%0A%20-%20Der%20Einzige%20Weg%2C%20aus%20PHP%20etwas%20brauch%20%20%20%20%20%20%20%20%20%20%20%20%20%20xxxxxxx%20%20%20%20%20%20%2002.06.2011%2009%3A32%0A%20%20-%20Das%20ding%20will%20einfach%20nicht%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mode7%20%20%20%20%20%20%20%20%20%20%2002.06.2011%2001%3A22%0A%20-%20Der%20Einzige%20Weg%2C%20aus%20PHP%20etwas%20...%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Trollala%20%20%20%20%20%20%20%20%20%2002.06.2011%2012%3A30%0A%5B+%5D%20Ich%20mag%20ja%20PHP%2C%20aber...%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mode7%20%20%20%20%20%20%20%20%20%20%2002.06.2011%2002%3A24</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Label" x="183" y="356" w="-1" h="-1" measuredW="498" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%3E%20F%FCr%20solche%20Sp%E4%DFe%20ist%20Zeit%2C%20aber%20Unicode%20bekommen%20die%20immer%20noch%20nicht%20hin%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::HRule" x="168" y="797" w="633" h="-1" measuredW="100" measuredH="5" zOrder="19" locked="false" isInGroup="-1"/>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::HRule" x="168" y="1025" w="633" h="-1" measuredW="100" measuredH="5" zOrder="20" locked="false" isInGroup="-1"/>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::HRule" x="168" y="1055" w="633" h="-1" measuredW="100" measuredH="5" zOrder="21" locked="false" isInGroup="-1"/>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::LinkBar" x="168" y="1030" w="-1" h="-1" measuredW="427" measuredH="25" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terbaru%2C%20Terlama%2C%20Buka%20semua%2C%20Tutup%20Semua%2C%20Topik%20baru</text>
+      </controlProperties>
+    </control>
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::Paragraph" x="175" y="510" w="609" h="307" measuredW="200" measuredH="140" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>...ist%20wegwerfen%20und%20neu%20machen.%20Sorry.%20%0A%20%0AEin%20Misthaufen%20von%20API%20mit%20inkonsistenten%20Parametern%2C%20kaputten%0AFunktionalit%E4ten%20%28wann%20kommt%20mysql_really_really_really_escape%28%29%3F%29.%0AEine%20Sprache%2C%20die%20elementarste%20Dinge%20entweder%20gar%20nicht%20kann%20oder%20die%0Aschlechtestm%F6gliche%20Umsetzung%20gew%E4hlt%20hat.%20Baustellen%20ohne%20Ende%20bei%0ASyntax%2C%20Struktur%2C%20Sicherheit%2C%20Performance.%20Total%20kaputtes%0AI/O-Handling.%20Miserable%20Skalierbarkeit%2C%20unbrauchbares%20Multithreading%2C%0Aja%20noch%20nicht%20mal%20elementarste%20Plausibilit%E4tspr%FCfungen%20zur%20Compile%0ATime%20kriegt%20das%20Ding%20wirklich%20zuverl%E4ssig%20hin.%20%0A%20%0APHP%20sollte%20in%20die%20Lehrb%FCcher%20eingehen.%20Als%20schlechtes%20Beispiel.%20Aber%0Awer%20sowas%20ernsthaft%20zum%20Entwickeln%20einsetzt%2C%20wird%20entweder%20gezwungen%0Aoder%20kennt%20nix%20anderes%20oder%20ist%20einfach%20nur%20dumm</text>
+      </controlProperties>
+    </control>
+    <control controlID="76" controlTypeID="com.balsamiq.mockups::Paragraph" x="183" y="396" w="-1" h="-1" measuredW="200" measuredH="140" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <text>2.%20Juni%202011%2000%3A06</text>
+      </controlProperties>
+    </control>
+    <control controlID="79" controlTypeID="com.balsamiq.mockups::IconLabel" x="741" y="388" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ThumbsUpIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::IconLabel" x="768" y="389" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ThumbsDownIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::Paragraph" x="175" y="417" w="374" h="140" measuredW="200" measuredH="140" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Der%20einzige%20Weg%2C%20aus%20PHP%20etwas%20brauchbares%20zu%20machen...</text>
+      </controlProperties>
+    </control>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Label" x="175" y="468" w="314" h="25" measuredW="296" measuredH="25" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>McByte%20%28lebih%20dari%201000%20post%20sejak%2026.09.2000%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::IconLabel" x="692" y="410" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>StarIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::IconLabel" x="708" y="411" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>StarIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::IconLabel" x="757" y="410" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>StarIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::IconLabel" x="724" y="411" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>StarIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::IconLabel" x="741" y="411" w="-1" h="-1" measuredW="16" measuredH="41" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>StarIcon%7Cxsmall</icon>
+        <text>%20</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
