@@ -1,0 +1,161 @@
+<mockup version="1.0" skin="sketch" measuredW="1257" measuredH="1578" mockupW="1181" mockupH="1556">
+  <controls>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="326" y="145" w="143" h="43" measuredW="129" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>../../public/images/kateglo40.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="900" y="159" w="-1" h="-1" measuredW="67" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextInput" x="500" y="159" w="400" h="-1" measuredW="47" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entry</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="76" y="22" w="1181" h="1556" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www%2Ckateglo.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::LinkBar" x="103" y="105" w="-1" h="-1" measuredW="454" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Link" x="1162" y="104" w="-1" h="-1" measuredW="71" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Masuk%20Log</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Link" x="1106" y="104" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Daftar</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="183" y="194" w="-1" h="-1" measuredW="147" measuredH="90" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>60</size>
+        <text>Entri</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::LinkBar" x="183" y="274" w="-1" h="-1" measuredW="496" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Definisi%2C%20Tesaurus%2C%20Padanan%2C%20Sumber%2C%20Korpus%2C%20Diskusi%20%283%29%2C%20share</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Paragraph" x="224" y="1229" w="904" h="36" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Entri%20hari%20ini%20%20%B7%20Entri%20acak%20%B7%20Salah%20eja%20%B7%20Blog%20%B7%20Mobile%20%B7%20%20Kontak%20%20%B7%20%20Tentang%20Kateglo%20%20%B7%20%20FAQ%20%20%B7%20%20Privacy%20%20%B7%20%20Terms%20%20%B7%20%20API%20%20%B7%20%20Aplikasi%20%20%B7%20%20Twitter%20%20%B7%20%20Facebook</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Paragraph" x="307" y="1319" w="695" h="36" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>All%20the%20words%20are%20brought%20to%20you%20by%20Kateglo%2C%20the%20free%20online%20Indonesia%20dictionary%20and%20thesaurus.%20%A9%202011</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Paragraph" x="311" y="1276" w="667" h="43" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>a%20%B7%20b%20%B7%20c%20%B7%20d%20%B7%20e%20%B7%20f%20%B7%20g%20%B7%20h%20%B7%20i%20%B7%20j%20%B7%20k%20%B7%20l%20%B7%20m%20%B7%20n%20%B7%20o%20%B7%20p%20%B7%20q%20%B7%20r%20%B7%20s%20%B7%20t%20%B7%20u%20%B7%20v%20%B7%20w%20%B7%20x%20%B7%20y%20%B7%20z</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="183" y="339" w="-1" h="-1" measuredW="77" measuredH="34" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Sinonim</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Label" x="183" y="459" w="-1" h="-1" measuredW="81" measuredH="34" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Antonim</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::HRule" x="184" y="367" w="633" h="-1" measuredW="100" measuredH="5" zOrder="14" locked="false" isInGroup="-1"/>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="485" w="633" h="-1" measuredW="100" measuredH="5" zOrder="15" locked="false" isInGroup="-1"/>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Paragraph" x="186" y="373" w="631" h="82" measuredW="200" measuredH="140" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adduce%20%20%B7%20%20bear%20%20%B7%20%20carry%20%20%B7%20%20cast%20%20%B7%20%20cause%20%20%B7%20%20command%20%20%B7%20%20conduct%20%20%B7%20%20conjure%20%20%B7%20%20convey%20%20%B7%20%20deduce%20%20%B7%20%20draw%20%20%B7%20%20encash%20%20%B7%20%20fetch%20%20%B7%20%20get%20%20%B7%20%20guide%20%20%B7%20%20have%20%20%B7%20%20import%20%20%B7%20%20induce%20%20%B7%20%20land%20%20%B7%20%20laugh%20%20%B7%20%20lead%20%20%B7%20%20lull%20%20%B7%20%20move%20%20%B7%20%20net%20%20%B7%20%20persuade%20%20%B7%20%20pray%20%20%B7%20%20procure%20%20%B7%20%20produce%20%20%B7%20%20realize%20%20%B7%20%20reason%20%20%B7%20%20reduce%20%20%B7%20%20reflect%20%20%B7%20%20retrieve%20%20%B7%20%20ridicule%20%20%B7%20%20throw%20%20%B7%20%20transport%20%20%B7%20%20works</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Paragraph" x="183" y="489" w="631" h="82" measuredW="200" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adduce%20%20%B7%20%20bear%20%20%B7%20%20carry%20%20%B7%20%20cast%20%20%B7%20%20cause%20%20%B7%20%20command%20%20%B7%20%20conduct%20%20%B7%20%20conjure%20%20%B7%20%20convey%20%20%B7%20%20deduce%20%20%B7%20%20draw%20%20%B7%20%20encash%20%20%B7%20%20fetch%20%20%B7%20%20get%20%20%B7%20%20guide%20%20%B7%20%20have%20%20%B7%20%20import%20%20%B7%20%20induce%20%20%B7%20%20land%20%20%B7%20%20laugh%20%20%B7%20%20lead%20%20%B7%20%20lull%20%20%B7%20%20move%20%20%B7%20%20net%20%20%B7%20%20persuade%20%20%B7%20%20pray%20%20%B7%20%20procure%20%20%B7%20%20produce%20%20%B7%20%20realize%20%20%B7%20%20reason%20%20%B7%20%20reduce%20%20%B7%20%20reflect%20%20%B7%20%20retrieve%20%20%B7%20%20ridicule%20%20%B7%20%20throw%20%20%B7%20%20transport%20%20%B7%20%20works</text>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="748" y="343" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contoh%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Link" x="682" y="194" w="-1" h="-1" measuredW="135" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Petunjuk%20Penelusuran</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Link" x="832" y="193" w="-1" h="-1" measuredW="133" measuredH="25" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Penelusuran%20lanjutan</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Label" x="748" y="463" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contoh%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="183" y="577" w="-1" h="-1" measuredW="60" measuredH="34" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Relasi</text>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="603" w="633" h="-1" measuredW="100" measuredH="5" zOrder="23" locked="false" isInGroup="-1"/>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Paragraph" x="183" y="607" w="631" h="82" measuredW="200" measuredH="140" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adduce%20%20%B7%20%20bear%20%20%B7%20%20carry%20%20%B7%20%20cast%20%20%B7%20%20cause%20%20%B7%20%20command%20%20%B7%20%20conduct%20%20%B7%20%20conjure%20%20%B7%20%20convey%20%20%B7%20%20deduce%20%20%B7%20%20draw%20%20%B7%20%20encash%20%20%B7%20%20fetch%20%20%B7%20%20get%20%20%B7%20%20guide%20%20%B7%20%20have%20%20%B7%20%20import%20%20%B7%20%20induce%20%20%B7%20%20land%20%20%B7%20%20laugh%20%20%B7%20%20lead%20%20%B7%20%20lull%20%20%B7%20%20move%20%20%B7%20%20net%20%20%B7%20%20persuade%20%20%B7%20%20pray%20%20%B7%20%20procure%20%20%B7%20%20produce%20%20%B7%20%20realize%20%20%B7%20%20reason%20%20%B7%20%20reduce%20%20%B7%20%20reflect%20%20%B7%20%20retrieve%20%20%B7%20%20ridicule%20%20%B7%20%20throw%20%20%B7%20%20transport%20%20%B7%20%20works</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Label" x="748" y="581" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contoh%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Label" x="183" y="689" w="-1" h="-1" measuredW="100" measuredH="34" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Salah%20Eja</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="715" w="633" h="-1" measuredW="100" measuredH="5" zOrder="27" locked="false" isInGroup="-1"/>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Paragraph" x="183" y="719" w="631" h="82" measuredW="200" measuredH="140" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adduce%20%20%B7%20%20bear%20%20%B7%20%20carry%20%20%B7%20%20cast%20%20%B7%20%20cause%20%20%B7%20%20command%20%20%B7%20%20conduct%20%20%B7%20%20conjure%20%20%B7%20%20convey%20%20%B7%20%20deduce%20%20%B7%20%20draw%20%20%B7%20%20encash%20%20%B7%20%20fetch%20%20%B7%20%20get%20%20%B7%20%20guide%20%20%B7%20%20have%20%20%B7%20%20import%20%20%B7%20%20induce%20%20%B7%20%20land%20%20%B7%20%20laugh%20%20%B7%20%20lead%20%20%B7%20%20lull%20%20%B7%20%20move%20%20%B7%20%20net%20%20%B7%20%20persuade%20%20%B7%20%20pray%20%20%B7%20%20procure%20%20%B7%20%20produce%20%20%B7%20%20realize%20%20%B7%20%20reason%20%20%B7%20%20reduce%20%20%B7%20%20reflect%20%20%B7%20%20retrieve%20%20%B7%20%20ridicule%20%20%B7%20%20throw%20%20%B7%20%20transport%20%20%B7%20%20works</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Label" x="748" y="693" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contoh%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Label" x="183" y="801" w="-1" h="-1" measuredW="72" measuredH="34" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Variasi</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::HRule" x="183" y="827" w="633" h="-1" measuredW="100" measuredH="5" zOrder="31" locked="false" isInGroup="-1"/>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Paragraph" x="183" y="831" w="631" h="82" measuredW="200" measuredH="140" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adduce%20%20%B7%20%20bear%20%20%B7%20%20carry%20%20%B7%20%20cast%20%20%B7%20%20cause%20%20%B7%20%20command%20%20%B7%20%20conduct%20%20%B7%20%20conjure%20%20%B7%20%20convey%20%20%B7%20%20deduce%20%20%B7%20%20draw%20%20%B7%20%20encash%20%20%B7%20%20fetch%20%20%B7%20%20get%20%20%B7%20%20guide%20%20%B7%20%20have%20%20%B7%20%20import%20%20%B7%20%20induce%20%20%B7%20%20land%20%20%B7%20%20laugh%20%20%B7%20%20lead%20%20%B7%20%20lull%20%20%B7%20%20move%20%20%B7%20%20net%20%20%B7%20%20persuade%20%20%B7%20%20pray%20%20%B7%20%20procure%20%20%B7%20%20produce%20%20%B7%20%20realize%20%20%B7%20%20reason%20%20%B7%20%20reduce%20%20%B7%20%20reflect%20%20%B7%20%20retrieve%20%20%B7%20%20ridicule%20%20%B7%20%20throw%20%20%B7%20%20transport%20%20%B7%20%20works</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Label" x="748" y="805" w="-1" h="-1" measuredW="69" measuredH="25" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contoh%20%3E%3E</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

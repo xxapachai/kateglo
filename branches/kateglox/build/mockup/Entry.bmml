@@ -169,7 +169,7 @@
         <text>Sebagai%20contoh%20kalimat%20yang%20lain</text>
       </controlProperties>
     </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::LinkBar" x="183" y="274" w="-1" h="-1" measuredW="495" measuredH="25" zOrder="28" locked="false" isInGroup="-1">
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::LinkBar" x="183" y="274" w="-1" h="-1" measuredW="496" measuredH="25" zOrder="28" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Definisi%2C%20Tesaurus%2C%20Padanan%2C%20Sumber%2C%20Korpus%2C%20Diskusi%20%283%29%2C%20share</text>
       </controlProperties>
