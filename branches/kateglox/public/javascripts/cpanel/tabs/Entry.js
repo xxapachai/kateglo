@@ -3,7 +3,6 @@ Ext.define('kateglo.tabs.Entry', {
     closable: true,
     border: false,
     fieldDefaults: {
-        labelAlign: 'top',
         margin: '20 10 10 20'
     },
     iconCls: 'cpanel_sprite cpanel_application_form',
@@ -12,7 +11,7 @@ Ext.define('kateglo.tabs.Entry', {
             text: 'Save',
             iconCls: 'cpanel_sprite cpanel_disk'
         },
-            '->',
+        '->',
         {
             text: 'Delete',
             iconCls: 'cpanel_sprite cpanel_delete'
@@ -23,7 +22,7 @@ Ext.define('kateglo.tabs.Entry', {
             text: 'Save',
             iconCls: 'cpanel_sprite cpanel_disk'
         },
-            '->',
+        '->',
         {
             text: 'Delete',
             iconCls: 'cpanel_sprite cpanel_delete'
@@ -35,7 +34,26 @@ Ext.define('kateglo.tabs.Entry', {
                 new Ext.form.field.Text({
                     name: 'entry',
                     fieldLabel: 'Entri',
+                    labelWidth: 30,
+                    width: 500,
                     value: this.recordResult.get('text')
+                }),
+                new Ext.tab.Panel({
+                    layout: 'fit',
+                    items: [
+                        {
+                            title: 'Arti',
+                            html : 'Arti'
+                        },
+                        {
+                            title: 'Padanan',
+                            html : 'Padanan'
+                        },
+                        {
+                            title: 'Sumber',
+                            html : 'Sumber'
+                        }
+                    ]
                 })
             ]
         });
