@@ -6,7 +6,8 @@ Ext.Loader.setPath({
     'kateglo.stores' : '/javascripts/cpanel/stores',
     'kateglo.utils' : '/javascripts/cpanel/utils',
     'kateglo.grids' : '/javascripts/cpanel/grids',
-    'kateglo.tabs' : '/javascripts/cpanel/tabs'
+    'kateglo.tabs' : '/javascripts/cpanel/tabs',
+    'kateglo.modules.entry.tabs' : '/javascripts/cpanel/modules/entry/tabs'
 });
 Ext.require(['*',
     'kateglo.borders.Header',
@@ -17,6 +18,7 @@ Ext.require(['*',
     'kateglo.menus.Search',
     'kateglo.utils.SearchField',
     'kateglo.tabs.Entry',
+    'kateglo.modules.entry.tabs.Meaning',
     'kateglo.grids.MenuSearchResult'
 ]);
 Ext.onReady(function() {

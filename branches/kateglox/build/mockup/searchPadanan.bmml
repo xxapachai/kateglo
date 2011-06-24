@@ -26,7 +26,7 @@
         <text>Penelusuran%20lanjutan</text>
       </controlProperties>
     </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="79" y="125" w="-1" h="-1" measuredW="528" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::LinkBar" x="79" y="125" w="-1" h="-1" measuredW="527" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Beranda%2C%20Kamus%2C%20Tesaurus%2C%20Padanan%2C%20Peribahasa%2C%20Singkatan%2C%20Aplikasi</text>
       </controlProperties>
@@ -129,86 +129,86 @@
         <text>abadi</text>
       </controlProperties>
     </control>
-    <control controlID="30" controlTypeID="com.balsamiq.mockups::Label" x="376" y="353" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="28" locked="false" isInGroup="-1">
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Label" x="464" y="353" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="28" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="376" y="381" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="29" locked="false" isInGroup="-1">
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="464" y="381" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="29" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="376" y="406" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="30" locked="false" isInGroup="-1">
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="462" y="406" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="30" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="376" y="435" w="86" h="25" measuredW="86" measuredH="25" zOrder="31" locked="false" isInGroup="-1">
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="462" y="435" w="86" h="25" measuredW="86" measuredH="25" zOrder="31" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="34" controlTypeID="com.balsamiq.mockups::Label" x="376" y="463" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="32" locked="false" isInGroup="-1">
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Label" x="462" y="463" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="32" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="35" controlTypeID="com.balsamiq.mockups::Label" x="465" y="353" w="-1" h="-1" measuredW="55" measuredH="25" zOrder="33" locked="false" isInGroup="-1">
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Label" x="553" y="353" w="-1" h="-1" measuredW="56" measuredH="25" zOrder="33" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Inggris%3A</text>
       </controlProperties>
     </control>
-    <control controlID="36" controlTypeID="com.balsamiq.mockups::Label" x="464" y="381" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="34" locked="false" isInGroup="-1">
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Label" x="552" y="381" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="34" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Perancis%3A</text>
       </controlProperties>
     </control>
-    <control controlID="37" controlTypeID="com.balsamiq.mockups::Label" x="464" y="406" w="-1" h="-1" measuredW="60" measuredH="25" zOrder="35" locked="false" isInGroup="-1">
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Label" x="550" y="406" w="-1" h="-1" measuredW="60" measuredH="25" zOrder="35" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Belanda%3A</text>
       </controlProperties>
     </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="464" y="435" w="-1" h="-1" measuredW="55" measuredH="25" zOrder="36" locked="false" isInGroup="-1">
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="550" y="435" w="-1" h="-1" measuredW="55" measuredH="25" zOrder="36" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Jerman%3A</text>
       </controlProperties>
     </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::Label" x="464" y="463" w="-1" h="-1" measuredW="41" measuredH="25" zOrder="37" locked="false" isInGroup="-1">
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Label" x="550" y="463" w="-1" h="-1" measuredW="41" measuredH="25" zOrder="37" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Arab%3A</text>
       </controlProperties>
     </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="520" y="353" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="38" locked="false" isInGroup="-1">
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="608" y="353" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="38" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>eternal</text>
       </controlProperties>
     </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="527" y="381" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="39" locked="false" isInGroup="-1">
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="615" y="381" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="39" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>eternal</text>
       </controlProperties>
     </control>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="520" y="406" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="40" locked="false" isInGroup="-1">
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="606" y="406" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="40" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>eternal</text>
       </controlProperties>
     </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::Label" x="515" y="435" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="41" locked="false" isInGroup="-1">
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Label" x="601" y="435" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="41" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>eternal</text>
       </controlProperties>
     </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="507" y="463" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="42" locked="false" isInGroup="-1">
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="593" y="463" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="42" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>eternal</text>
@@ -234,72 +234,100 @@
         <text>abdi</text>
       </controlProperties>
     </control>
-    <control controlID="49" controlTypeID="com.balsamiq.mockups::Label" x="356" y="489" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="47" locked="false" isInGroup="-1">
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Label" x="460" y="489" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="47" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="356" y="514" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="48" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="460" y="514" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="48" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="51" controlTypeID="com.balsamiq.mockups::Label" x="356" y="539" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="49" locked="false" isInGroup="-1">
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Label" x="460" y="539" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="49" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="356" y="563" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="50" locked="false" isInGroup="-1">
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="460" y="563" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="50" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>dalam%20bahasa</text>
       </controlProperties>
     </control>
-    <control controlID="53" controlTypeID="com.balsamiq.mockups::Label" x="442" y="489" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="51" locked="false" isInGroup="-1">
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Label" x="546" y="489" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="51" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Perancis%3A</text>
       </controlProperties>
     </control>
-    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="442" y="514" w="-1" h="-1" measuredW="60" measuredH="25" zOrder="52" locked="false" isInGroup="-1">
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Label" x="546" y="514" w="-1" h="-1" measuredW="60" measuredH="25" zOrder="52" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Belanda%3A</text>
       </controlProperties>
     </control>
-    <control controlID="55" controlTypeID="com.balsamiq.mockups::Label" x="442" y="539" w="-1" h="-1" measuredW="43" measuredH="25" zOrder="53" locked="false" isInGroup="-1">
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::Label" x="546" y="539" w="-1" h="-1" measuredW="43" measuredH="25" zOrder="53" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Rusia%3A</text>
       </controlProperties>
     </control>
-    <control controlID="56" controlTypeID="com.balsamiq.mockups::Label" x="442" y="563" w="-1" h="-1" measuredW="41" measuredH="25" zOrder="54" locked="false" isInGroup="-1">
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Label" x="546" y="563" w="-1" h="-1" measuredW="41" measuredH="25" zOrder="54" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Arab%3A</text>
       </controlProperties>
     </control>
-    <control controlID="57" controlTypeID="com.balsamiq.mockups::Label" x="500" y="489" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="55" locked="false" isInGroup="-1">
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Label" x="604" y="489" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="55" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>abdi</text>
       </controlProperties>
     </control>
-    <control controlID="58" controlTypeID="com.balsamiq.mockups::Label" x="500" y="514" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="56" locked="false" isInGroup="-1">
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Label" x="604" y="514" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="56" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>abdi</text>
       </controlProperties>
     </control>
-    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="485" y="539" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="57" locked="false" isInGroup="-1">
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="589" y="539" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="57" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>abdi</text>
       </controlProperties>
     </control>
-    <control controlID="60" controlTypeID="com.balsamiq.mockups::Label" x="479" y="563" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="58" locked="false" isInGroup="-1">
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Label" x="583" y="563" w="-1" h="-1" measuredW="30" measuredH="25" zOrder="58" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <text>abdi</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Label" x="368" y="353" w="-1" h="-1" measuredW="96" measuredH="25" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%5C%5BDisiplin%2C%20Ilmu%5C%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Label" x="368" y="381" w="-1" h="-1" measuredW="84" measuredH="25" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%5C%5BKomunikasi%5C%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Label" x="366" y="406" w="-1" h="-1" measuredW="57" measuredH="25" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%5C%5BHukum%5C%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Label" x="364" y="489" w="-1" h="-1" measuredW="57" measuredH="25" zOrder="62" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <italic>true</italic>
+        <text>%5C%5BBiologi%5C%5D</text>
       </controlProperties>
     </control>
   </controls>

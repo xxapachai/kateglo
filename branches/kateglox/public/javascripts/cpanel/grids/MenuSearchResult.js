@@ -16,14 +16,30 @@ Ext.define('kateglo.grids.MenuSearchResult', {
         itemdblclick : function(me, record, item, index, event) {
             var contentContainer = Ext.getCmp('kateglo.borders.Content');
             if (Ext.getCmp('kateglo.tabs.Entry.' + record.getId()) == undefined) {
-                var entryTab = new kateglo.tabs.Entry({
-                    id: 'kateglo.tabs.Entry.' + record.getId(),
-                    title: 'Entri - ' + record.get('text'),
-                    recordResult: record
+                var box = Ext.MessageBox.wait('Loading Entry Object.', 'Please wait!');
+                Ext.Ajax.defaultHeaders = {
+                    'Accept': 'application/json'
+                };
+                Ext.Ajax.request({
+                    url: '/entri/' + record.get('text'),
+                    timeout: 60000,
+                    success: function(response, request) {
+                        responseObj = Ext.JSON.decode(response.responseText);
+                        var entryTab = new kateglo.tabs.Entry({
+                            id: 'kateglo.tabs.Entry.' + responseObj.id,
+                            title: 'Entri - ' + responseObj.entry,
+                            recordResult: responseObj
+                        });
+                        contentContainer.add(entryTab);
+                        contentContainer.doLayout();
+                        entryTab.show();
+                        box.hide();
+                    },
+                    failure: function(response, request) {
+                        Ext.MessageBox.alert('Failed', 'Ajax request Error!!');
+                    }
                 });
-                contentContainer.add(entryTab);
-                contentContainer.doLayout();
-                entryTab.show();
+
             }
             else {
                 Ext.getCmp('kateglo.tabs.Entry.' + record.getId()).show();
