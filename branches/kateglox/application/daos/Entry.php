@@ -67,7 +67,7 @@ class Entry implements interfaces\Entry {
 			FROM " . models\Entry::CLASS_NAME . " entry
 			WHERE entry.entry = :entry");
         $query->setParameter('entry', $entry);
-        $query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+        //$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
         $result = $query->getResult();
         if (count($result) === 1) {
             if (!($result [0] instanceof models\Entry)) {
