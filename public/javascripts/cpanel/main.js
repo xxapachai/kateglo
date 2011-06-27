@@ -14,11 +14,13 @@ Ext.require(['*',
     'kateglo.borders.Menu',
     'kateglo.borders.Content',
     'kateglo.models.Entry',
+    'kateglo.models.Type',
     'kateglo.stores.Entry',
     'kateglo.menus.Search',
     'kateglo.utils.SearchField',
     'kateglo.tabs.Entry',
     'kateglo.modules.entry.tabs.Meaning',
+    'kateglo.modules.entry.tabs.Type',
     'kateglo.grids.MenuSearchResult'
 ]);
 Ext.onReady(function() {
