@@ -33,162 +33,162 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class StaticData {
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $type;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $type;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $typeCategory;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $typeCategory;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $clazz;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $clazz;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $clazzCategory;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $clazzCategory;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $discipline;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $discipline;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $source;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $source;
 
-    /**
-     * Enter description here ...
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $language;
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $language;
 
-    public function construct(){
-        $this->clazz = new ArrayCollection();
-        $this->clazzCategory = new ArrayCollection();
-        $this->discipline = new ArrayCollection();
-        $this->language = new ArrayCollection();
-        $this->source = new ArrayCollection();
-        $this->type = new ArrayCollection();
-        $this->typeCategory = new ArrayCollection();
-    }
+	public function construct() {
+		$this->clazz = new ArrayCollection();
+		$this->clazzCategory = new ArrayCollection();
+		$this->discipline = new ArrayCollection();
+		$this->language = new ArrayCollection();
+		$this->source = new ArrayCollection();
+		$this->type = new ArrayCollection();
+		$this->typeCategory = new ArrayCollection();
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $clazz
-     * @return void
-     */
-    public function setClazz($clazz) {
-        $this->clazz = $clazz;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $clazz
+	 * @return void
+	 */
+	public function setClazz($clazz) {
+		$this->clazz = $clazz;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClazz() {
-        return $this->clazz;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClazz() {
+		return $this->clazz;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $clazzCategory
-     * @return void
-     */
-    public function setClazzCategory($clazzCategory) {
-        $this->clazzCategory = $clazzCategory;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $clazzCategory
+	 * @return void
+	 */
+	public function setClazzCategory($clazzCategory) {
+		$this->clazzCategory = $clazzCategory;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClazzCategory() {
-        return $this->clazzCategory;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClazzCategory() {
+		return $this->clazzCategory;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $type
-     * @return void
-     */
-    public function setType($type) {
-        $this->type = $type;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $type
+	 * @return void
+	 */
+	public function setType($type) {
+		$this->type = $type;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getType() {
-        return $this->type;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getType() {
+		return $this->type;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $typeCategory
-     * @return void
-     */
-    public function setTypeCategory($typeCategory) {
-        $this->typeCategory = $typeCategory;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $typeCategory
+	 * @return void
+	 */
+	public function setTypeCategory($typeCategory) {
+		$this->typeCategory = $typeCategory;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTypeCategory() {
-        return $this->typeCategory;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getTypeCategory() {
+		return $this->typeCategory;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $discipline
-     * @return void
-     */
-    public function setDiscipline($discipline) {
-        $this->discipline = $discipline;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $discipline
+	 * @return void
+	 */
+	public function setDiscipline($discipline) {
+		$this->discipline = $discipline;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getDiscipline() {
-        return $this->discipline;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getDiscipline() {
+		return $this->discipline;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $source
-     * @return void
-     */
-    public function setSource($source) {
-        $this->source = $source;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $source
+	 * @return void
+	 */
+	public function setSource($source) {
+		$this->source = $source;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSource() {
-        return $this->source;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getSource() {
+		return $this->source;
+	}
 
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $language
-     * @return void
-     */
-    public function setLanguage($language) {
-        $this->language = $language;
-    }
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $language
+	 * @return void
+	 */
+	public function setLanguage($language) {
+		$this->language = $language;
+	}
 
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 }
 
 ?>
