@@ -33,12 +33,13 @@ Ext.define('kateglo.tabs.Entry', {
                     border: false,
                     region: 'north',
                     fieldDefaults: {
-                        margin: '20 10 10 20'
+                        margin: '20 10 10 20',
+                        labelAlign: 'top'
                     }, items: [new Ext.form.field.Text({
                         name: 'entry',
                         fieldLabel: 'Entri',
                         labelWidth: 30,
-                        width: 500,
+                        anchor: '100%',
                         value: this.recordResult.entry
                     })]
                 }),

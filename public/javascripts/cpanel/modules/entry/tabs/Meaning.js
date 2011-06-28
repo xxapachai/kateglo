@@ -21,11 +21,11 @@ Ext.define('kateglo.modules.entry.tabs.Meaning', {
                     });
                     component.add(meaningTabs);
                 }
+
                 for (var i = 0; i < component.recordResult.meanings.length; i++) {
-                    var tab = new Ext.panel.Panel({
+                    var tab = new Ext.form.Panel({
                         title: 'Arti ' + (i + 1),
                         border: false,
-                        layout: 'border',
                         tbar: [
                             '->',
                             {
@@ -33,26 +33,16 @@ Ext.define('kateglo.modules.entry.tabs.Meaning', {
                                 iconCls: 'cpanel_sprite cpanel_delete'
                             }
                         ],
-                        items: [new Ext.tab.Panel({
-                            region: 'center',
-                            items: [
-                            new kateglo.modules.entry.tabs.Type(),
-                            {
-                                title: 'Definisi'
-                            },
-                            {
-                                title: 'Thesaurus'
-                            },
-                            {
-                                title: 'Syllabel'
-                            },
-                            {
-                                title: 'Salah Eja'
-                            }]})
-                        ]
+                        fieldDefaults: {
+                            labelAlign: 'top',
+                            margin: '20 10 10 20'
+                        },
+                        items: [new kateglo.modules.entry.forms.Type({
+                            recordResult: component.recordResult.meanings[i].types
+                        })]
                     });
                     meaningTabs.add(tab);
-                    if(i == 0){
+                    if (i == 0) {
                         meaningTabs.setActiveTab(tab);
                     }
                 }

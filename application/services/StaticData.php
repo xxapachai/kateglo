@@ -36,103 +36,133 @@ use kateglo\application\daos;
  */
 class StaticData implements interfaces\StaticData {
 
-    public static $CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
 
-    /**
-     *
-     * @var \kateglo\application\daos\interfaces\Entry
-     */
-    private $entry;
+	/**
+	 *
+	 * @var \kateglo\application\daos\interfaces\Entry
+	 */
+	private $entry;
 
-    /**
-     *
-     * @params \kateglo\application\daos\interfaces\Entry $entry
-     * @return void
-     *
-     * @Inject
-     */
-    public function setEntry(daos\interfaces\Entry $entry) {
-        $this->entry = $entry;
-    }
+	/**
+	 *
+	 * @params \kateglo\application\daos\interfaces\Entry $entry
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setEntry(daos\interfaces\Entry $entry) {
+		$this->entry = $entry;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \kateglo\application\faces\StaticData
-     */
-    public function getStaticData() {
-        $staticData = new faces\StaticData();
-        $staticData->setClazz($this->entry->getClasses());
-        $staticData->setClazzCategory($this->entry->getClassCategories());
-        $staticData->setDiscipline($this->entry->getDisciplines());
-        $staticData->setSource($this->entry->getSourceCategories());
-        $staticData->setType($this->entry->getTypes());
-        $staticData->setTypeCategory($this->entry->getTypeCategories());
-        $staticData->setLanguage($this->entry->getLanguages());
-        return $staticData;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \kateglo\application\faces\StaticData
+	 */
+	public function getStaticData() {
+		$staticData = new faces\StaticData();
+		$staticData->setClazz($this->entry->getClasses());
+		$staticData->setClazzCategory($this->entry->getClassCategories());
+		$staticData->setDiscipline($this->entry->getDisciplines());
+		$staticData->setSource($this->entry->getSourceCategories());
+		$staticData->setType($this->entry->getTypes());
+		$staticData->setTypeCategory($this->entry->getTypeCategories());
+		$staticData->setLanguage($this->entry->getLanguages());
+		return $staticData;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTypes() {
-        $result = $this->entry->getTypes();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \kateglo\application\faces\StaticData
+	 */
+	public function getStaticDataAsArray() {
+		$staticData = array (
+				'class' => $this->createArrayObject($this->entry->getClasses()),
+				'classCategory' => $this->createArrayObject($this->entry->getClassCategories()),
+				'discipline' => $this->createArrayObject($this->entry->getDisciplines()),
+				'source' => $this->createArrayObject($this->entry->getSourceCategories()),
+				'type' => $this->createArrayObject($this->entry->getTypes()),
+				'typeCategory' => $this->createArrayObject($this->entry->getTypeCategories()),
+				'language' => $this->createArrayObject($this->entry->getLanguages())
+		);
+		return $staticData;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTypeCategories() {
-        $result = $this->entry->getTypeCategories();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getTypes() {
+		$result = $this->entry->getTypes();
+		return $result;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClasses() {
-        $result = $this->entry->getClasses();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getTypeCategories() {
+		$result = $this->entry->getTypeCategories();
+		return $result;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClassCategories() {
-        $result = $this->entry->getClassCategories();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClasses() {
+		$result = $this->entry->getClasses();
+		return $result;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSourceCategories() {
-        $result = $this->entry->getSourceCategories();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClassCategories() {
+		$result = $this->entry->getClassCategories();
+		return $result;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getDisciplines() {
-        $result = $this->entry->getDisciplines();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getSourceCategories() {
+		$result = $this->entry->getSourceCategories();
+		return $result;
+	}
 
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getLanguages() {
-        $result = $this->entry->getLanguages();
-        return $result;
-    }
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getDisciplines() {
+		$result = $this->entry->getDisciplines();
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getLanguages() {
+		$result = $this->entry->getLanguages();
+		return $result;
+	}
+
+	/**
+	 *
+	 * @param $modelArray array
+	 * @return Doctrine\Common\Collections\ArrayCollection
+	 */
+	private function createArrayObject($modelArray) {
+		$modelAsArray = array();
+		foreach ($modelArray as $objectModel) {
+			$modelAsArray[] = $objectModel->toArray();
+		}
+		return $modelAsArray;
+	}
 }
 
 ?>

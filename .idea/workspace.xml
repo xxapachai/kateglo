@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/controllers/StaticController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Type.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/utils/BoxSelect.js" />
+      <change type="DELETED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\tabs\Type.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Entry.php" afterPath="$PROJECT_DIR$/application/daos/Entry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/StaticData.php" afterPath="$PROJECT_DIR$/application/faces/StaticData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/StaticData.php" afterPath="$PROJECT_DIR$/application/services/StaticData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/StaticData.php" afterPath="$PROJECT_DIR$/application/services/interfaces/StaticData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/models/Type.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/models/Type.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/styles/cpanel.css" afterPath="$PROJECT_DIR$/public/styles/cpanel.css" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,46 +42,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Content.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/borders/Content.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="58" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Meaning.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="47" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cpanel.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/styles/cpanel.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="11" selection-start="331" selection-end="341" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MenuSearchResult.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="34" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entry.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="26" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
+            <state line="37" column="28" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -78,23 +54,14 @@
       <file leaf-file-name="Entry.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="63" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.0">
+            <state line="36" column="41" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.ini" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="23" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntriController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
+      <file leaf-file-name="Entry.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Entry.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -102,19 +69,64 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
+      <file leaf-file-name="Type.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Type.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="4" column="36" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
+      <file leaf-file-name="Entry.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="10" selection-start="2536" selection-end="2536" vertical-scroll-proportion="0.634103">
+            <state line="3" column="23" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Type.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="0" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="24" selection-start="795" selection-end="795" vertical-scroll-proportion="0.3943834">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Type.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Type.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="23" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BoxSelect.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/utils/BoxSelect.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="685" column="0" selection-start="19493" selection-end="19493" vertical-scroll-proportion="-12.2">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Search.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/Search.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,22 +146,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" />
-        <option value="$PROJECT_DIR$/application/services/interfaces/CPanel.php" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/models/Entry.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/panels/Entry.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/Search.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/borders/Content.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/utils/BoxSelectItem.js" />
         <option value="$PROJECT_DIR$/public/styles/cpanel.css" />
-        <option value="$PROJECT_DIR$/application/configs/application.ini" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/Entry.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Entry.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Type.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Meaning.js" />
+        <option value="$PROJECT_DIR$/application/faces/StaticData.php" />
+        <option value="$PROJECT_DIR$/application/controllers/StaticController.php" />
+        <option value="$PROJECT_DIR$/application/services/interfaces/StaticData.php" />
+        <option value="$PROJECT_DIR$/application/services/StaticData.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/models/Type.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js" />
-        <option value="$PROJECT_DIR$/application/daos/Entry.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Type.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/utils/BoxSelect.js" />
       </list>
     </option>
   </component>
@@ -425,6 +437,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entry" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cpanel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -469,15 +515,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cpanel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grids" />
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -491,19 +529,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
+              <option name="myItemId" value="Zend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cpanel" />
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="borders" />
+              <option name="myItemId" value="Zend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Dispatcher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Zend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stubbles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -549,7 +645,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="daos" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -567,11 +667,109 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="daos" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cpanel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="macros" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -705,11 +903,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\tabs" />
-      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\tabs" />
-      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\grids" />
-      <recent name="D:\ZendWorkspace\kateglo\application\services\interfaces" />
-      <recent name="D:\ZendWorkspace\kateglo\application\services" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\stores" />
+      <recent name="D:\ZendWorkspace\kateglo\application\controllers" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\forms" />
+      <recent name="D:\ZendWorkspace\kateglo\public\images" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\utils" />
     </key>
   </component>
   <component name="RunManager">
@@ -759,7 +957,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">D:\Documents and Settings\purnaa\Application Data\Subversion</configuration>
+    <configuration useDefault="true">C:\Documents and Settings\eh2purm\Application Data\Subversion</configuration>
     <myIsUseDefaultProxy>true</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -767,16 +965,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\StormWorkspace\kateglo" />
-          <option name="myCopyRoot" value="D:\StormWorkspace\kateglo" />
+          <option name="myVcsRoot" value="D:\ZendWorkspace\kateglo" />
+          <option name="myCopyRoot" value="D:\ZendWorkspace\kateglo" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\StormWorkspace\kateglo" />
-          <option name="myCopyRoot" value="D:\StormWorkspace\kateglo" />
+          <option name="myVcsRoot" value="D:\ZendWorkspace\kateglo" />
+          <option name="myCopyRoot" value="D:\ZendWorkspace\kateglo" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -790,16 +988,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1374" height="748" extended-state="0" />
-    <editor active="true" />
+    <frame x="-4" y="-4" width="1288" height="1004" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3223684" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31743422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16294643" sideWeight="0.32343236" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24488248" sideWeight="0.67763156" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2546634" sideWeight="0.67763156" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275463" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -808,6 +1005,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20601852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3223684" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32730263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -839,7 +1037,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cpanel bug fix&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cpanel&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -874,100 +1072,122 @@
     <MESSAGE value="Init CPanel&#10;" />
     <MESSAGE value="Init CPanel Bug Fix&#10;" />
     <MESSAGE value="Mock Ups&#10;" />
-    <MESSAGE value="Cpanel&#10;" />
     <MESSAGE value="Cpanel &amp; mock ups&#10;" />
     <MESSAGE value="Cpanel bug fix&#10;" />
+    <MESSAGE value="Cpanel&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/models/Misspelled.php">
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/StaticData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="16" selection-start="1802" selection-end="1802" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="41" selection-start="793" selection-end="793" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="362" column="24" selection-start="13062" selection-end="13062" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="17" selection-start="663" selection-end="808" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/Search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="30" selection-start="713" selection-end="713" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/utils/SearchField.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="48" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/borders/Content.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="58" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="47" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/styles/cpanel.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="11" selection-start="331" selection-end="341" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="34" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="26" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="63" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.0">
+        <state line="41" column="29" selection-start="1713" selection-end="1849" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="23" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
+    <entry file="file://$PROJECT_DIR$/library/Stubbles/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.1001221">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/Zend/Controller/Dispatcher/Stubbles.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/StaticController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="57" selection-start="2569" selection-end="2569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/StaticData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="10" selection-start="3352" selection-end="3352" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Type.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="36" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/Search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Entry.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="10" selection-start="2536" selection-end="2536" vertical-scroll-proportion="0.634103">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tabs/Meaning.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="28" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="41" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="23" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Type.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="23" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/utils/BoxSelect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="685" column="0" selection-start="19493" selection-end="19493" vertical-scroll-proportion="-12.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="795" selection-end="795" vertical-scroll-proportion="0.3943834">
           <folding />
         </state>
       </provider>

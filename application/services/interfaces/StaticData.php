@@ -45,6 +45,12 @@ interface StaticData {
 	 * Enter description here ...
 	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
+    function getStaticDataAsArray();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
 	function getTypes();
 
     /**
