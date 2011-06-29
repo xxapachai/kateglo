@@ -3,7 +3,6 @@ Ext.define('kateglo.modules.entry.tabs.Meaning', {
     title: 'Arti',
     layout: 'fit',
     closable: false,
-    border: false,
     iconCls: 'cpanel_sprite cpanel_application_form',
     tbar: [
         {

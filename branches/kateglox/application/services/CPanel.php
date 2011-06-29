@@ -74,7 +74,7 @@ class CPanel implements interfaces\CPanel {
         if ($this->solr->ping()) {
             return $this->solr;
         } else {
-            throw new exceptions\SolrException ();
+            throw new exceptions\SolrException ('Solr Service unavailable.');
         }
     }
 

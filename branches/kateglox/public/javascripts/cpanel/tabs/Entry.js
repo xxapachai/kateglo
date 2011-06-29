@@ -3,66 +3,23 @@ Ext.define('kateglo.tabs.Entry', {
     closable: true,
     border: false,
     layout: 'border',
+    padding: '5 5 5 5',
     iconCls: 'cpanel_sprite cpanel_application_form',
-    tbar: [
-        {
-            text: 'Save',
-            iconCls: 'cpanel_sprite cpanel_disk'
-        },
-        '->',
-        {
-            text: 'Delete',
-            iconCls: 'cpanel_sprite cpanel_delete'
-        }
-    ],
-    bbar: [
-        {
-            text: 'Save',
-            iconCls: 'cpanel_sprite cpanel_disk'
-        },
-        '->',
-        {
-            text: 'Delete',
-            iconCls: 'cpanel_sprite cpanel_delete'
-        }
-    ],
     initComponent: function() {
         Ext.apply(this, {
             items: [
-                new Ext.form.Panel({
-                    border: false,
-                    region: 'north',
-                    fieldDefaults: {
-                        margin: '20 10 10 20',
-                        labelAlign: 'top'
-                    }, items: [new Ext.form.field.Text({
-                        name: 'entry',
-                        fieldLabel: 'Entri',
-                        labelWidth: 30,
-                        anchor: '100%',
-                        value: this.recordResult.entry
-                    })]
+                new kateglo.modules.entry.tree.Explorer({
+                    region: 'east',
+                    recordResult: this.recordResult
                 }),
                 new Ext.panel.Panel({
+                    id: 'entryContent',
                     region: 'center',
-                    layout: 'border',
+                    layout:'fit',
                     border: false,
-                    items: [new Ext.tab.Panel({
-                        region: 'center',
-                        border: false,
-                        items:[
-                            new kateglo.modules.entry.tabs.Meaning({
-                                recordResult: this.recordResult
-                            }),
-                            {
-                                title: 'Padanan',
-                                html : 'Padanan'
-                            },
-                            {
-                                title: 'Sumber',
-                                html : 'Sumber'
-                            }
-                        ]})]
+                    items: new kateglo.modules.entry.forms.Entry({
+                        recordResult: this.recordResult
+                    })
                 })
             ]
         });
