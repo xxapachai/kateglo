@@ -9,11 +9,12 @@ Ext.define('kateglo.tabs.Entry', {
         Ext.apply(this, {
             items: [
                 new kateglo.modules.entry.tree.Explorer({
+                    id: 'entryExplorer'+this.recordResult.id,
                     region: 'east',
                     recordResult: this.recordResult
                 }),
                 new Ext.panel.Panel({
-                    id: 'entryContent',
+                    id: 'entryContent'+this.recordResult.id,
                     region: 'center',
                     layout:'fit',
                     border: false,

@@ -3,7 +3,7 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
     title: 'Entri Explorer',
     hideHeaders: true,
     split: true,
-    width: 200, id: 'Arti',
+    width: 200,
     rootVisible: false,
     collapsible: true,
     hideCollapseTool: true,
@@ -32,25 +32,29 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                 for (var j = 0; j < component.recordResult.meanings[i].definitions.length; j++) {
                     definitions.push({
                         text: component.recordResult.meanings[i].definitions[j].definition,
+                        obj: "definition",
                         leaf: true
                     });
                 }
                 var definition = {
                     text: 'Definisi',
-                    expanded: false,
+                    obj: "definitions",
+                    expanded: true,
                     children: definitions
                 };
 
                 meanings.push({
                     text: i + 1,
+                    obj: "meaning",
+                    expanded: true,
                     children: [
-                        {text: 'Bentuk', leaf: true},
+                        {text: 'Bentuk', obj: "type", leaf: true},
                         definition,
-                        {text: 'Sinonim', leaf: true},
-                        {text: 'Antonim', leaf: true},
-                        {text: 'Relasi', leaf: true},
-                        {text: 'Silabel', leaf: true},
-                        {text: 'Salah eja', leaf: true}
+                        {text: 'Sinonim', obj: "synonym", leaf: true},
+                        {text: 'Antonim', obj: "antonym", leaf: true},
+                        {text: 'Relasi', obj: "relation", leaf: true},
+                        {text: 'Silabel', obj: "syllabel", leaf: true},
+                        {text: 'Salah eja', obj: "misspelled", leaf: true}
                     ]
                 });
             }
@@ -61,28 +65,42 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                 user:"",
                 status:"",
                 children: [
-                    { text:"Entri", leaf: true },
-                    { text: 'Arti', expanded: true,
+                    { text:"Entri", obj: "entry", leaf: true },
+                    { text: 'Arti', obj: "meanings", expanded: true,
                         children: meanings
                     },
-                    { text: "Padanan", leaf:true },
-                    { text: "Sumber", leaf:true }
+                    { text: "Padanan", obj: "equivalent", leaf:true },
+                    { text: "Sumber", obj: "source", leaf:true }
                 ]
             });
         },
-        itemdblclick: function(view, record, item, index, event){
-            var console = window.console;
-            console.log(view);
-            console.log(record);
-            console.log(item);
-            console.log(index);
-            console.log(event);
+        itemdblclick: function(view, record, item, index, event) {
+            if (record.raw.obj) {
+                var comp = Ext.getCmp('entryContent' + view.panel.recordResult.id);
+                switch (record.raw.obj) {
+                    case "entry":
+                        comp.removeAll();
+                        comp.add(new kateglo.modules.entry.forms.Entry({
+                            recordResult: view.panel.recordResult
+                        }));
+                        break;
+                    case "type":
+                        comp.removeAll();
+                        comp.add(new kateglo.modules.entry.forms.Type({
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].types
+                        }));
+                        break;
+                    default:
+
+                }
+            }
         }
     },
-    store: new Ext.data.TreeStore({}),
     initComponent: function() {
         Ext.apply(this, {
-
+            store: new Ext.data.TreeStore({
+                storeId: 'Entry'+this.recordResult.id
+            })
         });
         this.callParent(arguments);
     }

@@ -31,7 +31,6 @@ Ext.define('kateglo.grids.MenuSearchResult', {
                             recordResult: responseObj
                         });
                         contentContainer.add(entryTab);
-                        contentContainer.doLayout();
                         entryTab.show();
                         box.hide();
                     },
