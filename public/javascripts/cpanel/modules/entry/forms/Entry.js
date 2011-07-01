@@ -7,10 +7,6 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
             iconCls: 'cpanel_sprite cpanel_disk'
         }
     ],
-    fieldDefaults: {
-        margin: '20 10 10 20',
-        labelAlign: 'top'
-    },
     listeners: {
         beforerender: function(component) {
             //alert(component.recordResult.entry);
@@ -20,9 +16,8 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
         Ext.apply(this, {
             items: [
                 new Ext.form.field.Text({
+                    margin: '20 10 10 20',
                     name: 'entry',
-                    fieldLabel: 'Entri',
-                    labelWidth: 30,
                     anchor: '100%',
                     value: this.recordResult.entry
                 })

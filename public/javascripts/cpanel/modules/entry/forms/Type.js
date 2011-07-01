@@ -1,22 +1,42 @@
 Ext.define('kateglo.modules.entry.forms.Type', {
-    extend: 'kateglo.utils.BoxSelect',
-    name: 'type',
-    fieldLabel: 'Bentuk kata',
-    displayField: 'name',
-    valueField: 'id',
-    queryMode: 'local',
-    anchor: '100%',
-    hideTrigger: true,
-    store: new kateglo.stores.Type(),
-    listeners:{
-        beforerender : {
-            fn: function(component) {
-                var initVal = new Array();
-                for(var i = 0; i < component.recordResult.length; i++){
-                    initVal.push(component.recordResult[i].id)
+    extend: 'Ext.form.Panel',
+    title: 'Bentuk Kata',
+    tbar: [
+        {
+            text: 'Save',
+            iconCls: 'cpanel_sprite cpanel_disk'
+        }
+    ],
+    listeners: {
+        beforerender: function(component) {
+            var store = new kateglo.stores.Type();
+            var box = Ext.MessageBox.wait('Loading Types.', 'Please wait!');
+            store.load({
+                scope: this,
+                callback: function(records, operation, success) {
+                    var initVal = new Array();
+                    for (var i = 0; i < component.recordResult.length; i++) {
+                        initVal.push(component.recordResult[i].id)
+                    }
+
+                    var comboBox = new kateglo.utils.BoxSelect({
+                        margin: '20 10 10 20',
+                        name: 'type',
+                        displayField: 'name',
+                        valueField: 'id',
+                        queryMode: 'local',
+                        anchor: '100%',
+                        hideTrigger: true,
+                        store: store,
+                        recordResult: component.recordResult,
+                        value: initVal
+                    });
+
+                    component.add(comboBox);
+                    box.hide();
                 }
-                component.setValue(initVal);
-            }
+
+            });
         }
     },
     initComponent: function() {
