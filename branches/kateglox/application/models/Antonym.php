@@ -191,6 +191,18 @@ class Antonym {
         $array['meaning']['entry']['version'] = ($this->getAntonym() instanceof Meaning) ? $this->getAntonym()->getEntry()->getVersion() : null;
         $array['meaning']['entry']['entry'] = ($this->getAntonym() instanceof Meaning) ? $this->getAntonym()->getEntry()->getEntry() : null;
 
+        $array['meaning']['definitions'] = array();
+
+        $definitions = ($this->getAntonym() instanceof Meaning) ? $this->getAntonym()->getDefinitions() : array();
+
+        /** @var $definition \kateglo\application\models\Definition */
+        foreach($definitions as $definition){
+            $defArray['id'] = $definition->getId();
+            $defArray['version'] = $definition->getVersion();
+            $defArray['definition'] = $definition->getDefinition();
+            $array['meaning']['definitions'][] = $defArray;
+        }
+
 
         return $array;
     }

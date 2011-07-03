@@ -136,14 +136,14 @@ class Definition {
 	}
 	
 	/**
-	 * @return the $id
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * @return the $version
+	 * @return int
 	 */
 	public function getVersion() {
 		return $this->version;
@@ -157,21 +157,21 @@ class Definition {
 	}
 
 	/**
-	 * @return the $definition
+	 * @return string $definition
 	 */
 	public function getDefinition() {
 		return $this->definition;
 	}
 	
 	/**
-	 * @param string $definition
+	 * @param string
 	 */
 	public function setDefinition($definition) {
 		$this->definition = $definition;
 	}
 	
 	/**
-	 * @return the $meaning
+	 * @return kateglo\application\models\Meaning
 	 */
 	public function getMeaning() {
 		return $this->meaning;
