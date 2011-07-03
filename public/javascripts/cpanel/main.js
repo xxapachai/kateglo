@@ -1,4 +1,4 @@
-Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setConfig({enabled: true, disableCaching: false});
 Ext.Loader.setPath({
     'kateglo.borders': '/javascripts/cpanel/borders',
     'kateglo.menus' : '/javascripts/cpanel/menus',

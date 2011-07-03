@@ -191,6 +191,18 @@ class Synonym {
         $array['meaning']['entry']['version'] = ($this->getSynonym() instanceof Meaning) ? $this->getSynonym()->getEntry()->getVersion() : null;
         $array['meaning']['entry']['entry'] = ($this->getSynonym() instanceof Meaning) ? $this->getSynonym()->getEntry()->getEntry() : null;
 
+         $array['meaning']['definitions'] = array();
+
+        $definitions = ($this->getSynonym() instanceof Meaning) ? $this->getSynonym()->getDefinitions() : array();
+
+        /** @var $definition \kateglo\application\models\Definition */
+        foreach($definitions as $definition){
+            $defArray['id'] = $definition->getId();
+            $defArray['version'] = $definition->getVersion();
+            $defArray['definition'] = $definition->getDefinition();
+            $array['meaning']['definitions'][] = $defArray;
+        }
+
         return $array;
     }
 }

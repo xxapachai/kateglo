@@ -4,6 +4,7 @@ Ext.define("kateglo.stores.Type", {
     proxy: {
         type: 'rest',
         url : '/static',
+        noCache: false,
         headers: {
             Accept: 'application/json'
         },
