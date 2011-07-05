@@ -1,4 +1,4 @@
-Ext.Loader.setConfig({enabled: true, disableCaching: false});
+Ext.Loader.setConfig({enabled: true, disableCaching: true});
 Ext.Loader.setPath({
     'kateglo.borders': '/javascripts/cpanel/borders',
     'kateglo.menus' : '/javascripts/cpanel/menus',
@@ -13,19 +13,22 @@ Ext.Loader.setPath({
 });
 Ext.require(['*',
     'kateglo.borders.Header',
+    'kateglo.menus.Search',
     'kateglo.borders.Menu',
     'kateglo.borders.Content',
     'kateglo.models.Entry',
     'kateglo.models.Type',
     'kateglo.stores.Entry',
     'kateglo.stores.Type',
-    'kateglo.menus.Search',
     'kateglo.utils.SearchField',
     'kateglo.utils.BoxSelect',
     'kateglo.tabs.Entry',
     'kateglo.modules.entry.tabs.Meaning',
     'kateglo.modules.entry.forms.Type',
     'kateglo.modules.entry.forms.Entry',
+    'kateglo.modules.entry.forms.Antonym',
+    'kateglo.modules.entry.forms.Synonym',
+    'kateglo.modules.entry.forms.Relation',
     'kateglo.modules.entry.tree.Explorer',
     'kateglo.grids.MenuSearchResult'
 ]);

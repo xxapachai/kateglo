@@ -90,6 +90,24 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                             recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].types
                         }));
                         break;
+                    case "antonym":
+                        comp.removeAll();
+                        comp.add(new kateglo.modules.entry.forms.Antonym({
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].antonyms
+                        }));
+                        break;
+                    case "synonym":
+                        comp.removeAll();
+                        comp.add(new kateglo.modules.entry.forms.Synonym({
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].synonyms
+                        }));
+                        break;
+                    case "relation":
+                        comp.removeAll();
+                        comp.add(new kateglo.modules.entry.forms.Relation({
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].relations
+                        }));
+                        break;
                     default:
 
                 }
