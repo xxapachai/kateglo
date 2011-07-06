@@ -1,6 +1,7 @@
 Ext.define('kateglo.modules.entry.forms.Synonym', {
     extend: 'Ext.form.Panel',
     title: 'Synonym',
+    layout: 'border',
     tbar: [
         {
             text: 'Save',
@@ -9,39 +10,84 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
     ],
     listeners: {
         beforerender: function(component) {
-            //alert(component.recordResult.entry);
+            var data = new Array();
+
+            for (var i = 0; i < component.recordResult.length; i++) {
+                var meaning = Array();
+                meaning.push(component.recordResult[i].id);
+                meaning.push(component.recordResult[i].meaning.entry.id);
+                meaning.push(component.recordResult[i].meaning.entry.entry);
+                meaning.push(component.recordResult[i].meaning.definitions[0].definition);
+
+                var definitions = '<ul>';
+                for (var j = 0; j < component.recordResult[i].meaning.definitions.length; j++) {
+                    definitions += '<li>' + component.recordResult[i].meaning.definitions[j].definition + '</li>';
+                }
+                definitions += '</ul>';
+                meaning.push(definitions);
+
+                data.push(meaning);
+            }
+
+            var grid = new Ext.grid.Panel({
+                region: 'center',
+                split: true,
+                border: false,
+                store: new Ext.data.ArrayStore({
+                    model: 'kateglo.models.Meaning',
+                    data: data
+                }),
+                plugins: [
+                    {
+                        ptype: 'rowexpander',
+                        rowBodyTpl : [
+                            '<p><b>Entri:</b> {entry}</p><br>',
+                            '<p><b>Definisi:</b> {definitions}</p>'
+                        ]
+                    }
+                ],
+                anchor: '100%',
+                columns: [
+                    {
+                        text : 'Id',
+                        width: 20,
+                        sortable: true,
+                        dataIndex: 'id'
+                    },
+                    {
+                        text : 'Entri',
+                        flex: 1,
+                        sortable: true,
+                        dataIndex: 'entry'
+                    },
+                    {
+                        text : 'Definisi',
+                        flex: 1,
+                        sortable: true,
+                        dataIndex: 'definition'
+                    }
+                ]
+            });
+
+            component.add(grid);
         }
     },
     initComponent: function() {
         Ext.apply(this, {
             items: [
-                new Ext.form.field.ComboBox({
-                    margin: '20 10 10 20',
-                    name: 'entry',
-                    anchor: '100%',
-                    store: new kateglo.stores.Entry()
-                }),
-                new Ext.grid.Panel({
-                    margin: '20 10 10 20',
-                    store: new Ext.data.Store({
-                        model: 'kateglo.models.Type'
-                    }),
-                    anchor: '100%',
-                    columns: [
-                        {
-                            text     : 'Company',
-                            flex     : 1,
-                            sortable : false,
-                            dataIndex: 'company'
-                        },
-                        {
-                            text     : 'Price',
-                            width    : 75,
-                            sortable : true,
-                            renderer : 'usMoney',
-                            dataIndex: 'price'
-                        }
-                    ]
+                new Ext.form.Panel({
+                    border: false,
+                    split: true,
+                    region: 'north',
+                    collapsible: true,
+                    hideCollapseTool: true,
+                    items: [
+                        new Ext.form.field.ComboBox({
+                            margin: '20 10 10 20',
+                            name: 'entry',
+                            anchor: '100%',
+                            store: new kateglo.stores.Entry()
+                        })]
                 })
             ]
         });

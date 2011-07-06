@@ -70,11 +70,15 @@ class CPanel implements interfaces\CPanel {
      *
      * @return \Apache_Solr_Service
      */
-    public function getSolr() {
+    public function getSolr($try = 0) {
         if ($this->solr->ping()) {
             return $this->solr;
         } else {
-            throw new exceptions\SolrException ('Solr Service unavailable.');
+			if($try < 20){
+				return $this->getSolr($try++);
+			}else{
+            	throw new exceptions\SolrException ();
+			}
         }
     }
 
