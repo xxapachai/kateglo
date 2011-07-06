@@ -70,11 +70,15 @@ class Entry implements interfaces\Entry {
      *
      * @return \Apache_Solr_Service
      */
-    public function getSolr() {
+    public function getSolr($try = 0) {
         if ($this->solr->ping()) {
             return $this->solr;
         } else {
-            throw new exceptions\SolrException ();
+			if($try < 20){
+				return $this->getSolr($try++);
+			}else{
+            	throw new exceptions\SolrException ();
+			}
         }
     }
 
