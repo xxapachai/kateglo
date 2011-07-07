@@ -9,7 +9,8 @@ Ext.Loader.setPath({
     'kateglo.tabs' : '/javascripts/cpanel/tabs',
     'kateglo.modules.entry.tabs' : '/javascripts/cpanel/modules/entry/tabs',
     'kateglo.modules.entry.tree' : '/javascripts/cpanel/modules/entry/tree',
-    'kateglo.modules.entry.forms' : '/javascripts/cpanel/modules/entry/forms'
+    'kateglo.modules.entry.forms' : '/javascripts/cpanel/modules/entry/forms',
+    'kateglo.modules.entry.utils' : '/javascripts/cpanel/modules/entry/utils'
 });
 Ext.require(['*',
     'kateglo.borders.Header',
@@ -25,12 +26,14 @@ Ext.require(['*',
     'kateglo.utils.BoxSelect',
     'kateglo.utils.RowExpander',
     'kateglo.tabs.Entry',
+    'kateglo.modules.entry.utils.MeaningGridBeforeRender',
     'kateglo.modules.entry.tabs.Meaning',
     'kateglo.modules.entry.forms.Type',
     'kateglo.modules.entry.forms.Entry',
     'kateglo.modules.entry.forms.Antonym',
     'kateglo.modules.entry.forms.Synonym',
     'kateglo.modules.entry.forms.Relation',
+    'kateglo.modules.entry.forms.MeaningComboBox',
     'kateglo.modules.entry.tree.Explorer',
     'kateglo.menus.Search',
     'kateglo.grids.MenuSearchResult'
