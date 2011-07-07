@@ -150,25 +150,31 @@ class CPanel implements interfaces\CPanel {
 			$entries[] = $value->id;
 		}
 		$result = array();
-		try {
-			$meanings = $this->entry->getMeanings($entries);
-			/** @var $meaning \kateglo\application\models\Meaning */
-			foreach ($meanings as $meaning) {
-				$array = array();
-				$array['id'] = $meaning->getId();
-				$array['entryId'] = $meaning->getEntry()->getId();
-				$array['entry'] = $meaning->getEntry()->getEntry();
-				$definitions = $meaning->getDefinitions();
-				$array['definition'] = $definitions->first()->getDefinition();
-				$array['definitions'] = array();
-				/** @var $definition \kateglo\application\models\Definition */
-				foreach ($definitions as $definition) {
-					$array['definitions'][] = $definition->getDefinition();
+		if (count($entries) > 0) {
+			try {
+				$meanings = $this->entry->getMeanings($entries);
+				foreach ($entries as $entryId) {
+					/** @var $meaning \kateglo\application\models\Meaning */
+					foreach ($meanings as $meaning) {
+						if ($meaning->getEntry()->getId() == $entryId) {
+							$array = array();
+							$array['id'] = $meaning->getId();
+							$array['entryId'] = $meaning->getEntry()->getId();
+							$array['entry'] = $meaning->getEntry()->getEntry();
+							$definitions = $meaning->getDefinitions();
+							$array['definition'] = $definitions->first()->getDefinition();
+							$array['definitions'] = array();
+							/** @var $definition \kateglo\application\models\Definition */
+							foreach ($definitions as $definition) {
+								$array['definitions'][] = $definition->getDefinition();
+							}
+							$result[] = $array;
+						}
+					}
 				}
-				$result[] = $array;
+			} catch (DomainResultEmptyException $e) {
+				return array();
 			}
-		} catch (DomainResultEmptyException $e) {
-			return array();
 		}
 		return $result;
 	}
