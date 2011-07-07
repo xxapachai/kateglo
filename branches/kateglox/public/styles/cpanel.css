@@ -1,3 +1,17 @@
+.x-action-col-icon{
+    width: 16px;
+    height: 16px;
+}
+
+ul.rowexpander{
+    margin-left: 2em;
+    padding: 5px;
+}
+
+ul.rowexpander li{
+    list-style: disc outside none;
+}
+
 .x-boxselect ul.x-boxselect-list {
     height: auto;
     cursor: text;

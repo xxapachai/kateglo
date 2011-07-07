@@ -1,16 +1,16 @@
-Ext.define("kateglo.stores.Type", {
+Ext.define("kateglo.stores.Meaning", {
     extend: 'Ext.data.Store',
-    model: 'kateglo.models.Type',
+    model: 'kateglo.models.Meaning',
+    pageSize: 10000000,
     proxy: {
         type: 'rest',
-        url : '/cpanel/static',
-        noCache: false,
+        url : '/kamus/arti',
         headers: {
             Accept: 'application/json'
         },
         reader: {
             type: 'json',
-            root: 'type'
+            totalProperty: 'numFound'
         }
     }
 });

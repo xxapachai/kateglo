@@ -78,11 +78,18 @@ interface Entry {
      */
     function getDisciplines();
 
-        /**
+    /**
      * Enter description here ...
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     function getLanguages();
+
+	/**
+     * Enter description here ...
+	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getMeanings($entries);
 
 }
 

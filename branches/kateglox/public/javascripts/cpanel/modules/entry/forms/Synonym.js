@@ -13,18 +13,18 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
             var data = new Array();
 
             for (var i = 0; i < component.recordResult.length; i++) {
-                var meaning = Array();
-                meaning.push(component.recordResult[i].id);
-                meaning.push(component.recordResult[i].meaning.entry.id);
-                meaning.push(component.recordResult[i].meaning.entry.entry);
-                meaning.push(component.recordResult[i].meaning.definitions[0].definition);
+                var meaning = new Object();
+                meaning.id = component.recordResult[i].id;
+                meaning.entryId = component.recordResult[i].meaning.entry.id;
+                meaning.entry = component.recordResult[i].meaning.entry.entry;
+                meaning.definition = component.recordResult[i].meaning.definitions[0].definition;
 
-                var definitions = '<ul>';
+                var definitions = '<ul class="rowexpander">';
                 for (var j = 0; j < component.recordResult[i].meaning.definitions.length; j++) {
                     definitions += '<li>' + component.recordResult[i].meaning.definitions[j].definition + '</li>';
                 }
                 definitions += '</ul>';
-                meaning.push(definitions);
+                meaning.definitions = definitions;
 
                 data.push(meaning);
             }
@@ -33,7 +33,7 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
                 region: 'center',
                 split: true,
                 border: false,
-                store: new Ext.data.ArrayStore({
+                store: new Ext.data.Store({
                     model: 'kateglo.models.Meaning',
                     data: data
                 }),
@@ -41,7 +41,6 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
                     {
                         ptype: 'rowexpander',
                         rowBodyTpl : [
-                            '<p><b>Entri:</b> {entry}</p><br>',
                             '<p><b>Definisi:</b> {definitions}</p>'
                         ]
                     }
@@ -65,6 +64,22 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
                         flex: 1,
                         sortable: true,
                         dataIndex: 'definition'
+                    },
+                    {
+                        xtype: 'actioncolumn',
+                        width: 25,
+                        items: [
+                            {
+                                iconCls   : 'cpanel_sprite cpanel_delete',
+                                text: 'Delete',
+                                scope: this,
+                                tooltip: 'Delete Entry',
+                                handler: function(grid, rowIndex, colIndex) {
+                                    var rec = grid.store.getAt(rowIndex);
+                                    alert("delete " + rec.get('entry'));
+                                }
+                            }
+                        ]
                     }
                 ]
             });
@@ -86,7 +101,7 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
                             margin: '20 10 10 20',
                             name: 'entry',
                             anchor: '100%',
-                            store: new kateglo.stores.Entry()
+                            store: new kateglo.stores.Meaning()
                         })]
                 })
             ]

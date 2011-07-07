@@ -28,6 +28,7 @@ use kateglo\application\faces\Spellcheck;
 use kateglo\application\faces\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\daos;
+use kateglo\application\daos\exceptions\DomainResultEmptyException;
 /**
  *
  *
@@ -41,104 +42,147 @@ use kateglo\application\daos;
  */
 class CPanel implements interfaces\CPanel {
 
-    public static $CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
 
-    /**
-     *
-     * @var kateglo\application\daos\interfaces\Entry
-     */
-    private $entry;
+	/**
+	 *
+	 * @var \kateglo\application\daos\interfaces\Entry
+	 */
+	private $entry;
 
-    /**
-     *
-     * @var Apache_Solr_Service
-     */
-    private $solr;
+	/**
+	 *
+	 * @var Apache_Solr_Service
+	 */
+	private $solr;
 
-    /**
-     *
-     * @params kateglo\application\daos\interfaces\Entry $entry
-     * @return void
-     *
-     * @Inject
-     */
-    public function setEntry(daos\interfaces\Entry $entry) {
-        $this->entry = $entry;
-    }
+	/**
+	 *
+	 * @params kateglo\application\daos\interfaces\Entry $entry
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setEntry(daos\interfaces\Entry $entry) {
+		$this->entry = $entry;
+	}
 
-    /**
-     *
-     * @return \Apache_Solr_Service
-     */
-    public function getSolr($try = 0) {
-        if ($this->solr->ping()) {
-            return $this->solr;
-        } else {
-			if($try < 20){
+	/**
+	 *
+	 * @return \Apache_Solr_Service
+	 */
+	public function getSolr($try = 0) {
+		if ($this->solr->ping()) {
+			return $this->solr;
+		} else {
+			if ($try < 20) {
 				return $this->getSolr($try++);
-			}else{
-            	throw new exceptions\SolrException ();
+			} else {
+				throw new exceptions\SolrException ();
 			}
-        }
-    }
+		}
+	}
 
-    /**
-     *
-     * @param \Apache_Solr_Service $solr
-     * @return void
-     *
-     * @Inject
-     */
-    public function setSolr(\Apache_Solr_Service $solr = null) {
-        $this->solr = $solr;
-    }
+	/**
+	 *
+	 * @param \Apache_Solr_Service $solr
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setSolr(\Apache_Solr_Service $solr = null) {
+		$this->solr = $solr;
+	}
 
-    /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
-     */
-    public function getEntry($entry) {
-        $result = $this->entry->getByEntry($entry);
-        return $result;
-    }
+	/**
+	 *
+	 * @param string $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function getEntry($entry) {
+		$result = $this->entry->getByEntry($entry);
+		return $result;
+	}
 
-    /**
-     *
-     * @param string $entry
-     * @return string
-     */
-    public function getEntryAsArray($entry) {
-        $result = $this->entry->getByEntry($entry);
-        return $result->toArray();
-    }
+	/**
+	 *
+	 * @param string $entry
+	 * @return string
+	 */
+	public function getEntryAsArray($entry) {
+		$result = $this->entry->getByEntry($entry);
+		return $result->toArray();
+	}
 
-    /**
-     *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     * @param array $params
-     * @return kateglo\application\faces\Hit
-     */
-    public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-        $params = $this->getDefaultParams($searchText, $params);
-        $searchText = (empty ($searchText)) ? '*' : $searchText;
-        $this->getSolr()->setCreateDocuments(false);
-        $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-        return json_decode($request->getRawResponse());
-    }
+	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return kateglo\application\faces\Hit
+	 */
+	public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$params = $this->getDefaultParams($searchText, $params);
+		$searchText = (empty ($searchText)) ? '*' : $searchText;
+		$this->getSolr()->setCreateDocuments(false);
+		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+		return json_decode($request->getRawResponse());
+	}
 
-    /**
-     * @param string $searchText
-     * @param array $params
-     * @return array
-     */
-    private function getDefaultParams($searchText, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, id';
-        $params['q.op'] = 'AND';
-        return $params;
-    }
+	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function searchMeaningAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$params = $this->getDefaultParams($searchText, $params);
+		$searchText = (empty ($searchText)) ? '*' : $searchText;
+		$this->getSolr()->setCreateDocuments(false);
+		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+		$entries = array();
+		$decode = json_decode($request->getRawResponse());
+		$response = $decode->response->docs;
+		foreach ($response as $value) {
+			$entries[] = $value->id;
+		}
+		$result = array();
+		try {
+			$meanings = $this->entry->getMeanings($entries);
+			/** @var $meaning \kateglo\application\models\Meaning */
+			foreach ($meanings as $meaning) {
+				$array = array();
+				$array['id'] = $meaning->getId();
+				$array['entryId'] = $meaning->getEntry()->getId();
+				$array['entry'] = $meaning->getEntry()->getEntry();
+				$definitions = $meaning->getDefinitions();
+				$array['definition'] = $definitions->first()->getDefinition();
+				$array['definitions'] = array();
+				/** @var $definition \kateglo\application\models\Definition */
+				foreach ($definitions as $definition) {
+					$array['definitions'][] = $definition->getDefinition();
+				}
+				$result[] = $array;
+			}
+		} catch (DomainResultEmptyException $e) {
+			return array();
+		}
+		return $result;
+	}
+
+	/**
+	 * @param string $searchText
+	 * @param array $params
+	 * @return array
+	 */
+	private function getDefaultParams($searchText, $params = array()) {
+		if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, id';
+		$params['q.op'] = 'AND';
+		return $params;
+	}
 
 }
 
