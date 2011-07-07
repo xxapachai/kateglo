@@ -18,6 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
+use kateglo\application\services\interfaces\StaticData;
 /**
  *
  *
@@ -31,23 +32,61 @@
  */
 class CpanelController extends Zend_Controller_Action_Stubbles {
 
-    /**
-     * (non-PHPdoc)
-     * @see Zend_Controller_Action::init()
-     */
-    public function init() {
-        parent::init();
-    }
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\StaticData;
+	 */
+	private $staticData;
 
-    /**
-     * @return void
-     * @Get
-     * @Path('/')
-     * @Produces('text/html')
-     */
-    public function indexHtml() {
-        
-    }
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\StaticData $staticData
+	 *
+	 * @Inject
+	 */
+	public function setStaticData(StaticData $staticData) {
+		$this->staticData = $staticData;
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Controller_Action::init()
+	 */
+	public function init() {
+		parent::init();
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/')
+	 * @Produces('text/html')
+	 */
+	public function indexHtml() {
+
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/static')
+	 * @Produces('application/json')
+	 */
+	public function staticJson() {
+		try {
+			$cacheId = __METHOD__ ;
+			if (!$this->evaluatePreCondition($cacheId)) {
+				$this->content = $this->staticData->getStaticDataAsArray();
+			}
+			$this->responseBuilder($cacheId);
+		} catch (Apache_Solr_Exception $e) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->content = array('error' => 'query error');
+		}
+		$this->_helper->json($this->content);
+	}
 }
 
 ?>

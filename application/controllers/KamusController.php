@@ -248,6 +248,29 @@ class KamusController extends Zend_Controller_Action_Stubbles {
         $this->responseBuilder($cacheId);
         $this->getResponse()->appendBody($this->content);
     }
+
+	/**
+     * @return void
+     * @Get
+     * @Path('/arti')
+     * @Produces('application/json')
+     */
+    public function artiJson() {
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        try {
+            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            if (!$this->evaluatePreCondition($cacheId)) {
+                /*@var $hits array */
+                $hits = $this->cpanel->searchMeaningAsJSON($searchText, $this->offset, $this->limit);
+                $this->content = $hits;
+            }
+            $this->responseBuilder($cacheId);
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
+    }
 }
 
 ?>

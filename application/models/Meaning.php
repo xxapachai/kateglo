@@ -156,7 +156,7 @@ class Meaning {
 
     /**
      *
-     * @return kateglo\application\models\Entry
+     * @return \kateglo\application\models\Entry
      */
     public function getEntry() {
         return $this->entry;
@@ -202,7 +202,7 @@ class Meaning {
 
     /**
      *
-     * @return Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getDefinitions() {
         return $this->definitions;

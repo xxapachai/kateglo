@@ -234,6 +234,33 @@ class Entry implements interfaces\Entry {
         return $result;
     }
 
+	/**
+     * Enter description here ...
+	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+	public function getMeanings($entries){
+		/**@var $query \Doctrine\ORM\Query */
+        $query = $this->entityManager->createQuery("
+			SELECT 	meaning
+			FROM " . models\Meaning::CLASS_NAME . " meaning
+			LEFT JOIN meaning.entry entry
+			WHERE entry.id IN (".implode(', ', $entries).")");
+        //$query->setParameter('entries', implode(', ', $entries));
+        //$query->useResultCache(true, 43200, __METHOD__);
+        $result = $query->getResult();
+		
+        if (count($result) > 0) {
+            if (!($result [0] instanceof models\Meaning)) {
+                throw new DomainObjectNotFoundException ();
+            }
+        } else {
+            throw new DomainResultEmptyException ();
+        }
+
+        return $result;
+	}
+
 }
 
 ?>
