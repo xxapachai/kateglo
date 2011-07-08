@@ -5,6 +5,7 @@ Ext.define("kateglo.stores.Meaning", {
     proxy: {
         type: 'rest',
         url : '/kamus/arti',
+        noCache: false,
         headers: {
             Accept: 'application/json'
         },

@@ -79,33 +79,33 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                 var comp = Ext.getCmp('entryContent' + view.panel.recordResult.id);
                 switch (record.raw.obj) {
                     case "entry":
-                        comp.removeAll();
+                        comp.removeAll(true);
                         comp.add(new kateglo.modules.entry.forms.Entry({
                             recordResult: view.panel.recordResult
                         }));
                         break;
                     case "type":
-                        comp.removeAll();
+                        comp.removeAll(true);
                         comp.add(new kateglo.modules.entry.forms.Type({
-                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].types
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1]
                         }));
                         break;
                     case "antonym":
-                        comp.removeAll();
+                        comp.removeAll(true);
                         comp.add(new kateglo.modules.entry.forms.Antonym({
-                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].antonyms
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1]
                         }));
                         break;
                     case "synonym":
-                        comp.removeAll();
+                        comp.removeAll(true);
                         comp.add(new kateglo.modules.entry.forms.Synonym({
-                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].synonyms
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1]
                         }));
                         break;
                     case "relation":
-                        comp.removeAll();
+                        comp.removeAll(true);
                         comp.add(new kateglo.modules.entry.forms.Relation({
-                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1].relations
+                            recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1]
                         }));
                         break;
                     default:
