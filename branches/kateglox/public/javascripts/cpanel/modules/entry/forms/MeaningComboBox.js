@@ -13,8 +13,8 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                     name: 'entry',
                     anchor: '100%',
                     store: new kateglo.stores.Meaning(),
+                    emptyText: 'Ketik yang dicari, pilih salah satu dari hasil yang ditampilkan, kemudian tekan enter',
                     listConfig: {
-                        emptyText: 'No matching Entries found.',
                         getInnerTpl: function() {
                             return '<div>' +
                                     '<b>{entry}</b>' +
@@ -22,6 +22,12 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                                     '<tpl for="definitions"><li>{.}</li></tpl>' +
                                     '</ul>' +
                                     '</div>';
+                        }
+                    },
+                    listeners:{
+                        scope: this,
+                        select: function(field, value) {
+                            field.up().up().getComponent(1).getStore().add(value);
                         }
                     }
                 })

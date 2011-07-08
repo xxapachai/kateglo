@@ -15,8 +15,8 @@ Ext.define('kateglo.modules.entry.forms.Type', {
                 scope: this,
                 callback: function(records, operation, success) {
                     var initVal = new Array();
-                    for (var i = 0; i < component.recordResult.length; i++) {
-                        initVal.push(component.recordResult[i].id)
+                    for (var i = 0; i < component.recordResult.types.length; i++) {
+                        initVal.push(component.recordResult.types[i].id)
                     }
 
                     var comboBox = new kateglo.utils.BoxSelect({
@@ -28,7 +28,7 @@ Ext.define('kateglo.modules.entry.forms.Type', {
                         anchor: '100%',
                         hideTrigger: true,
                         store: store,
-                        recordResult: component.recordResult,
+                        recordResult: component.recordResult.types,
                         value: initVal
                     });
 

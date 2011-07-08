@@ -8,13 +8,13 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
             iconCls: 'cpanel_sprite cpanel_disk'
         }
     ],
-    listeners: {
-        beforerender: kateglo.modules.entry.utils.MeaningGridBeforeRender.beforeRender
-    },
     initComponent: function() {
         Ext.apply(this, {
             items: [
-                new kateglo.modules.entry.forms.MeaningComboBox()
+                new kateglo.modules.entry.forms.MeaningComboBox(),
+                new kateglo.modules.entry.grids.Relation({
+                    recordResult: this.recordResult.synonyms
+                })
             ]
         });
         this.callParent(arguments);
