@@ -4,16 +4,10 @@ Ext.define('kateglo.modules.entry.grids.Equivalent', {
     split: true,
     anchor: '100%',
     plugins: [
-        {
-            ptype: 'rowexpander',
-            rowBodyTpl : [
-                '<p><b>Definisi:</b> ' +
-                '<ul class="rowexpander">' +
-                '<tpl for="definitions"><li>{.}</li></tpl>' +
-                '</ul>' +
-                '</p>'
-            ]
-        }
+        new Ext.grid.plugin.RowEditing({
+            clicksToMoveEditor: 1,
+            autoCancel: false
+        })
     ],
     constructor: function() {
         this.columns = [
