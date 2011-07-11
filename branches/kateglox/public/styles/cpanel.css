@@ -1,14 +1,14 @@
-.x-action-col-icon{
+.x-action-col-icon {
     width: 16px;
     height: 16px;
 }
 
-ul.rowexpander{
+ul.rowexpander {
     margin-left: 2em;
     padding: 5px;
 }
 
-ul.rowexpander li{
+ul.rowexpander li {
     list-style: disc outside none;
 }
 
@@ -106,30 +106,35 @@ ul.rowexpander li{
     background-position: 0 -330px !important;
 }
 
-.cpanel_cancel {
+.cpanel_arrow_undo {
     background-position: 0 -396px !important;
 }
 
-.cpanel_cog {
+.cpanel_cancel {
     background-position: 0 -462px !important;
 }
 
-.cpanel_database_gear {
+.cpanel_cog {
     background-position: 0 -528px !important;
 }
 
-.cpanel_database_save {
+.cpanel_database_gear {
     background-position: 0 -594px !important;
 }
 
-.cpanel_delete {
+.cpanel_database_save {
     background-position: 0 -660px !important;
 }
 
-.cpanel_disk {
+.cpanel_delete {
     background-position: 0 -726px !important;
 }
 
-.cpanel_house {
+.cpanel_disk {
     background-position: 0 -792px !important;
 }
+
+.cpanel_house {
+    background-position: 0 -858px !important;
+}
+

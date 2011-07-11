@@ -108,6 +108,12 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                             recordResult: view.panel.recordResult.meanings[record.parentNode.raw.text - 1]
                         }));
                         break;
+                    case "equivalent":
+                        comp.removeAll(true);
+                        comp.add(new kateglo.modules.entry.grids.Equivalent({
+                            recordResult: view.panel.recordResult.equivalents
+                        }));
+                        break;
                     default:
 
                 }
