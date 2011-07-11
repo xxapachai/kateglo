@@ -1,8 +1,7 @@
-Ext.define('kateglo.modules.entry.grids.Relation', {
+Ext.define('kateglo.modules.entry.grids.Equivalent', {
     extend: 'Ext.grid.Panel',
     region: 'center',
     split: true,
-    border: false,
     anchor: '100%',
     plugins: [
         {
@@ -62,7 +61,7 @@ Ext.define('kateglo.modules.entry.grids.Relation', {
             }),
             listeners: {
                 beforerender: function(component) {
-                    var data = new Array();
+                    /*var data = new Array();
                     for (var i = 0; i < component.recordResult.length; i++) {
                         var meaning = new Object();
                         meaning.id = component.recordResult[i].meaning.id;
@@ -78,7 +77,7 @@ Ext.define('kateglo.modules.entry.grids.Relation', {
 
                         data.push(meaning);
                     }
-                    component.getStore().loadData(data, false);
+                    component.getStore().loadData(data, false);*/
                 }
             }
         });

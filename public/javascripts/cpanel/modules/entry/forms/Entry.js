@@ -5,6 +5,11 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
         {
             text: 'Save',
             iconCls: 'cpanel_sprite cpanel_disk'
+        },
+        '->',
+        {
+            text: 'Reset',
+            iconCls: 'cpanel_sprite cpanel_arrow_undo'
         }
     ],
     listeners: {

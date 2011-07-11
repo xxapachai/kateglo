@@ -27,7 +27,10 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                     listeners:{
                         scope: this,
                         select: function(field, value) {
-                            field.up().up().getComponent(1).getStore().add(value);
+                            var store = field.up().up().getComponent(1).getStore();
+                            if (store.getById(value[0].getId()) == null) {
+                                store.add(value[0]);
+                            }
                         }
                     }
                 })
