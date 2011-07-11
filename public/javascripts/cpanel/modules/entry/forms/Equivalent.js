@@ -17,7 +17,7 @@ Ext.define('kateglo.modules.entry.forms.Equivalent', {
         Ext.apply(this, {
             items: [
                 new kateglo.modules.entry.grids.Equivalent({
-                    recordResult: this.recordResult.antonyms
+                    recordResult: this.recordResult
                 })
             ]
         });
