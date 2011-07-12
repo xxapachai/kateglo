@@ -3,12 +3,16 @@
 =Pencarian dasar=
 
 Untuk mencari suatu entri, anda dapat langsung mengetikkan kata kunci dalam kotak pencarian. Lalu tekan *Enter*.
-Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab yang ada, lalu ketik kata kunci. Terdapat beberapa kategori:
+Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab yang ada, lalu ketik kata kunci. Terdapat beberapa (pembatasan pencarian):
   * Kamus
   * Tesaurus
   * Padanan
   * Peribahasa
   * Singkatan
+
+=Penelusuran Lanjutan=
+
+(Penjelasan)
 
 ==Bentuk kata==
   * Nama alfabet
@@ -72,7 +76,8 @@ Jika ingin mencari berdasarkan kategori entri, klik salah satu kategori dari tab
 
 =Pencarian lanjut=
 
-Klik *Penelusuran lebih detail* untuk mencari entri dengan beberapa aturan tambahan. Gunakan formulir yang ada untuk membuat pencarian lebih spesifik.
+Klik *Penelusuran lebih detail* untuk mencari entri dengan beberapa aturan tambahan.
+Gunakan formulir yang ada untuk membuat pencarian lebih spesifik.
 Aturan yang dapat ditambahkan berupa:
 
 ==Aturan umum==
@@ -109,3 +114,25 @@ Perintah dapat langsung digunakan dalam kotak pencarian tanpa harus menuju ke *P
 Jika anda telah mendapatkan hasil pencarian, anda dapat langsung menemukan entri yang anda cari serta berapa banyak entri yang ditelusuri oleh kateglo. Anda juga bisa memberi tambahan aturan spesifik berdasarkan *bentuk kata*, *kelas kata*, *sumber*, ataupun *disiplin ilmu*.
 
 Setiap halaman hasil biasanya terdapat 10 entri. Anda dapat melihat halaman hasil yang lain dengan mengklik *Lanjut* atau *Terakhir*, atau langsung dari urutan ke berapa.
+
+=Pencarian di beranda=
+Mencari kata di seluruh basis data kateglo. hasil yang ditampilkan entri dan definisinya.
+
+==Tabulasi==
+
+Data entri yang ada terbagi menjadi beberapa bagian:
+
+===Kamus===
+Mencari kata yang ada di dalam entri. Hasil yang ditampilkan entri dan definisinya.
+
+===Tesaurus===
+Mencari kata yang ada di di dalam entri. Hasil yang ditampilkan entri dan sinonimnya.
+
+===Padanan===
+Mencari kata yang ada di dalam entri dan padanan bahasa asing. Hasil yang ditampilkan entri dan padanannya.
+
+===Peribahasa===
+Mencari kata yang ada di dalam entri yang memiliki bentuk kata peribahasa. Hasil yang ditampilkan entri dan definisinya.
+
+===Singkatan===
+Mencari kata yang ada di dalam entri yang memiliki bentuk kata singkatan atau akronim. Hasil yang ditampilkan entri dan definisinya.
