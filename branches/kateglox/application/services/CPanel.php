@@ -180,6 +180,49 @@ class CPanel implements interfaces\CPanel {
 	}
 
 	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function searchForeignAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
+		$params = $this->getDefaultParams($searchText, $params);
+		$params['fl'] = 'foreign';
+		$params['fq'] = "foreign:*";
+		$params['df'] = "foreign";
+		$searchText = (empty ($searchText)) ? '*' : $searchText;
+		$this->getSolr()->setCreateDocuments(false);
+		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+		$foreigns = array();
+		$decode = json_decode($request->getRawResponse());
+		$response = $decode->response->docs;
+		foreach ($response as $foreignArray) {
+			foreach ($foreignArray->foreign as $value) {
+				$foreigns[] = (str_replace('?', 'a', $value));
+			}
+		}
+		$result = array();
+		if (count($foreigns) > 0) {
+			try {
+				$foreignObjs = $this->entry->getForeigns($foreigns);
+				foreach ($foreigns as $foreignName) {
+					/** @var $foreign \kateglo\application\models\Foreign */
+					foreach ($foreignObjs as $foreign) {
+						if ($foreign->getForeign() == $foreignName) {
+							$result[] = $foreign->toArray();
+						}
+					}
+				}
+			} catch (DomainResultEmptyException $e) {
+				return array();
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * @param string $searchText
 	 * @param array $params
 	 * @return array

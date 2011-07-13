@@ -1,6 +1,6 @@
-Ext.define('kateglo.modules.entry.forms.Antonym', {
-    extend: 'Ext.form.Panel',
-    title: 'Antonym',
+Ext.define('kateglo.modules.entry.panels.Synonym', {
+    extend: 'Ext.panel.Panel',
+    title: 'Synonym',
     layout: 'border',
     tbar: [
         {
@@ -18,7 +18,7 @@ Ext.define('kateglo.modules.entry.forms.Antonym', {
             items: [
                 new kateglo.modules.entry.forms.MeaningComboBox(),
                 new kateglo.modules.entry.grids.Relation({
-                    recordResult: this.recordResult.antonyms
+                    recordResult: this.recordResult.synonyms
                 })
             ]
         });

@@ -33,31 +33,51 @@ namespace kateglo\application\services\interfaces;
  */
 interface CPanel {
 
-    const INTERFACE_NAME = __CLASS__;
+	const INTERFACE_NAME = __CLASS__;
 
-    /**
-     *
-     * @param string $entry
-     * @return kateglo\application\models\Entry
-     */
-    function getEntry($entry);
+	/**
+	 *
+	 * @param string $entry
+	 * @return kateglo\application\models\Entry
+	 */
+	function getEntry($entry);
 
-    /**
-     *
-     * @param string $entry
-     * @return string
-     */
-    function getEntryAsArray($entry);
+	/**
+	 *
+	 * @param string $entry
+	 * @return string
+	 */
+	function getEntryAsArray($entry);
 
-    /**
-     *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     * @param array $params
-     * @return string
-     */
-    function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return string
+	 */
+	function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function searchMeaningAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+	/**
+	 *
+	 * @param string $searchText
+	 * @param int $offset
+	 * @param int $limit
+	 * @param array $params
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function searchForeignAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 
 }
 

@@ -33,63 +33,70 @@ namespace kateglo\application\daos\interfaces;
  */
 interface Entry {
 
-    const INTERFACE_NAME = __CLASS__;
-
-    /**
-     *
-     * @param string $entry
-     * @return kateglo\application\models\Entry
-     */
-    function getByEntry($entry);
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getTypes();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getTypeCategories();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getClasses();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getClassCategories();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getSourceCategories();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getDisciplines();
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getLanguages();
+	const INTERFACE_NAME = __CLASS__;
 
 	/**
-     * Enter description here ...
+	 *
+	 * @param string $entry
+	 * @return kateglo\application\models\Entry
+	 */
+	function getByEntry($entry);
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getTypes();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getTypeCategories();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getClasses();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getClassCategories();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getSourceCategories();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getDisciplines();
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getLanguages();
+
+	/**
+	 * Enter description here ...
 	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    function getMeanings($entries);
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getMeanings($entries);
+
+	/**
+	 * Enter description here ...
+	 * @param $foreigns \Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getForeigns($foreigns);
 
 }
 

@@ -116,7 +116,7 @@ class Foreign {
     }
 
     /**
-     * @return kateglo\application\models\Language
+     * @return \kateglo\application\models\Language
      */
     public function getLanguage() {
         return $this->language;

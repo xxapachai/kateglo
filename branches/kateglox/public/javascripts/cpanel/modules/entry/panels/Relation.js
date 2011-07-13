@@ -1,6 +1,6 @@
-Ext.define('kateglo.modules.entry.forms.Synonym', {
-    extend: 'Ext.form.Panel',
-    title: 'Synonym',
+Ext.define('kateglo.modules.entry.panels.Relation', {
+    extend: 'Ext.panel.Panel',
+    title: 'Relation',
     layout: 'border',
     tbar: [
         {
@@ -18,7 +18,7 @@ Ext.define('kateglo.modules.entry.forms.Synonym', {
             items: [
                 new kateglo.modules.entry.forms.MeaningComboBox(),
                 new kateglo.modules.entry.grids.Relation({
-                    recordResult: this.recordResult.synonyms
+                    recordResult: this.recordResult.relations
                 })
             ]
         });

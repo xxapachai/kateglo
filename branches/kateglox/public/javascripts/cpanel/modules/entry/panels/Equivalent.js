@@ -1,6 +1,6 @@
-Ext.define('kateglo.modules.entry.forms.Relation', {
-    extend: 'Ext.form.Panel',
-    title: 'Relation',
+Ext.define('kateglo.modules.entry.panels.Equivalent', {
+    extend: 'Ext.panel.Panel',
+    title: 'Equivalent',
     layout: 'border',
     tbar: [
         {
@@ -16,9 +16,10 @@ Ext.define('kateglo.modules.entry.forms.Relation', {
     initComponent: function() {
         Ext.apply(this, {
             items: [
-                new kateglo.modules.entry.forms.MeaningComboBox(),
-                new kateglo.modules.entry.grids.Relation({
-                    recordResult: this.recordResult.relations
+                new kateglo.modules.entry.grids.Equivalent({
+                    recordResult: this.recordResult
+                }),new kateglo.modules.entry.forms.Equivalent({
+                    recordResult: this.recordResult
                 })
             ]
         });

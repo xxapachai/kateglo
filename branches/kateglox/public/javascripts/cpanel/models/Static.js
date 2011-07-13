@@ -1,4 +1,4 @@
-Ext.define("kateglo.models.Type", {
+Ext.define("kateglo.models.Static", {
     extend: 'Ext.data.Model',
     fields: [
         {name:'id', mapping: 'id'},

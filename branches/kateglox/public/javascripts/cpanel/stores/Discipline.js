@@ -1,4 +1,4 @@
-Ext.define("kateglo.stores.Type", {
+Ext.define("kateglo.stores.Discipline", {
     extend: 'Ext.data.Store',
     model: 'kateglo.models.Static',
     proxy: {
@@ -10,7 +10,7 @@ Ext.define("kateglo.stores.Type", {
         },
         reader: {
             type: 'json',
-            root: 'type'
+            root: 'discipline'
         }
     }
 });

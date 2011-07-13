@@ -1,16 +1,17 @@
-Ext.define("kateglo.stores.Type", {
+Ext.define("kateglo.stores.Foreign", {
     extend: 'Ext.data.Store',
-    model: 'kateglo.models.Static',
+    model: 'kateglo.models.Foreign',
+    pageSize: 10000000,
     proxy: {
         type: 'rest',
-        url : '/cpanel/static',
+        url : '/padanan/asing',
         noCache: false,
         headers: {
             Accept: 'application/json'
         },
         reader: {
             type: 'json',
-            root: 'type'
+            totalProperty: 'numFound'
         }
     }
 });
