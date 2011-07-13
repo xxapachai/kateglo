@@ -3,32 +3,36 @@ Ext.define('kateglo.modules.entry.grids.Equivalent', {
     region: 'center',
     split: true,
     anchor: '100%',
-    plugins: [
-        new Ext.grid.plugin.RowEditing({
-            clicksToMoveEditor: 1,
-            autoCancel: false
-        })
-    ],
+    border: false,
     constructor: function() {
         this.columns = [
             {
                 text : 'Id',
-                width: 40,
+                width: 50,
                 sortable: true,
                 align: 'right',
                 dataIndex: 'id'
             },
             {
-                text : 'Entri',
+                text : 'Bahasa',
                 flex: 1,
                 sortable: true,
-                dataIndex: 'entry'
+                dataIndex: 'language'
             },
             {
-                text : 'Definisi',
+                text : 'Disiplin',
+                flex: 1,
+                sortable: false,
+                dataIndex: 'disciplines'
+            },
+            {
+                text : 'Padanan',
                 flex: 1,
                 sortable: true,
-                dataIndex: 'definition'
+                dataIndex: 'foreign',
+                editor: {
+                    allowBlank: false
+                }
             },
             {
                 xtype: 'actioncolumn',
@@ -51,27 +55,36 @@ Ext.define('kateglo.modules.entry.grids.Equivalent', {
     initComponent: function() {
         Ext.apply(this, {
             store: new Ext.data.Store({
-                model: 'kateglo.models.Meaning'
+                model: 'kateglo.models.Equivalent'
             }),
             listeners: {
+                itemClick: function(view, record, item, index, event){
+                    var parentComp = view.panel.up();
+                    console.log();
+                    console.log(record);
+                    console.log(item);
+                    console.log(index);
+                    console.log(event);
+                },
                 beforerender: function(component) {
-                    /*var data = new Array();
+                    var data = new Array();
                     for (var i = 0; i < component.recordResult.length; i++) {
-                        var meaning = new Object();
-                        meaning.id = component.recordResult[i].meaning.id;
-                        meaning.entryId = component.recordResult[i].meaning.entry.id;
-                        meaning.entry = component.recordResult[i].meaning.entry.entry;
-                        meaning.definition = component.recordResult[i].meaning.definitions[0].definition;
+                        var equivalent = new Object();
+                        equivalent.id = component.recordResult[i].id;
+                        equivalent.foreignId = component.recordResult[i].foreign.id;
+                        equivalent.foreign = component.recordResult[i].foreign.foreign;
+                        equivalent.languageId = component.recordResult[i].foreign.language.id;
+                        equivalent.language = component.recordResult[i].foreign.language.language;
 
-                        var definitions = new Array();
-                        for (var j = 0; j < component.recordResult[i].meaning.definitions.length; j++) {
-                            definitions.push(component.recordResult[i].meaning.definitions[j].definition);
+                        var disciplines = new Array();
+                        for (var j = 0; j < component.recordResult[i].disciplines.length; j++) {
+                            disciplines.push(component.recordResult[i].disciplines[j].discipline);
                         }
-                        meaning.definitions = definitions;
+                        equivalent.disciplines = disciplines;
 
-                        data.push(meaning);
+                        data.push(equivalent);
                     }
-                    component.getStore().loadData(data, false);*/
+                    component.getStore().loadData(data, false);
                 }
             }
         });

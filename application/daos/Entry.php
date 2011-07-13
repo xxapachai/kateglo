@@ -36,229 +36,254 @@ use kateglo\application\models;
  */
 class Entry implements interfaces\Entry {
 
-    public static $CLASS_NAME = __CLASS__;
+	public static $CLASS_NAME = __CLASS__;
 
-    /**
-     *
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $entityManager;
+	/**
+	 *
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $entityManager;
 
-    /**
-     *
-     * @param \Doctrine\ORM\EntityManager $entityManager
-     * @return void
-     *
-     * @Inject
-     */
-    public function setEntityManager(EntityManager $entityManager) {
-        $this->entityManager = $entityManager;
-    }
+	/**
+	 *
+	 * @param \Doctrine\ORM\EntityManager $entityManager
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setEntityManager(EntityManager $entityManager) {
+		$this->entityManager = $entityManager;
+	}
 
-    /**
-     *
-     * @see kateglo\application\daos\interfaces\Entry::getByEntry()
-     * @param string $entry
-     * @return kateglo\application\models\Entry
-     */
-    public function getByEntry($entry) {
-        $query = $this->entityManager->createQuery("
+	/**
+	 *
+	 * @see kateglo\application\daos\interfaces\Entry::getByEntry()
+	 * @param string $entry
+	 * @return kateglo\application\models\Entry
+	 */
+	public function getByEntry($entry) {
+		$query = $this->entityManager->createQuery("
 			SELECT 	entry
 			FROM " . models\Entry::CLASS_NAME . " entry
 			WHERE entry.entry = :entry");
-        $query->setParameter('entry', $entry);
-        //$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
-        $result = $query->getResult();
-        if (count($result) === 1) {
-            if (!($result [0] instanceof models\Entry)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
+		$query->setParameter('entry', $entry);
+		//$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+		$result = $query->getResult();
+		if (count($result) === 1) {
+			if (!($result [0] instanceof models\Entry)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
 
-        return $result [0];
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTypes() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	type
-			FROM " . models\Type::CLASS_NAME . " type");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\Type)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTypeCategories() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	typeCategory
-			FROM " . models\TypeCategory::CLASS_NAME . " typeCategory");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\TypeCategory)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClasses() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	class
-			FROM " . models\Clazz::CLASS_NAME . " class");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\Clazz)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getClassCategories() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	classCategory
-			FROM " . models\ClazzCategory::CLASS_NAME . " classCategory");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\ClazzCategory)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSourceCategories() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	sourceCategory
-			FROM " . models\SourceCategory::CLASS_NAME . " sourceCategory");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\SourceCategory)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getDisciplines() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	discipline
-			FROM " . models\Discipline::CLASS_NAME . " discipline");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\Discipline)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Enter description here ...
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getLanguages() {
-        /**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
-			SELECT 	language
-			FROM " . models\Language::CLASS_NAME . " language");
-        $query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\Language)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
-
-        return $result;
-    }
+		return $result [0];
+	}
 
 	/**
-     * Enter description here ...
-	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-	public function getMeanings($entries){
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getTypes() {
 		/**@var $query \Doctrine\ORM\Query */
-        $query = $this->entityManager->createQuery("
+		$query = $this->entityManager->createQuery("
+			SELECT 	type
+			FROM " . models\Type::CLASS_NAME . " type");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Type)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getTypeCategories() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	typeCategory
+			FROM " . models\TypeCategory::CLASS_NAME . " typeCategory");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\TypeCategory)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClasses() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	class
+			FROM " . models\Clazz::CLASS_NAME . " class");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Clazz)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getClassCategories() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	classCategory
+			FROM " . models\ClazzCategory::CLASS_NAME . " classCategory");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\ClazzCategory)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getSourceCategories() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	sourceCategory
+			FROM " . models\SourceCategory::CLASS_NAME . " sourceCategory");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\SourceCategory)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getDisciplines() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	discipline
+			FROM " . models\Discipline::CLASS_NAME . " discipline");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Discipline)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getLanguages() {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	language
+			FROM " . models\Language::CLASS_NAME . " language");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Language)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getMeanings($entries) {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
 			SELECT 	meaning
 			FROM " . models\Meaning::CLASS_NAME . " meaning
 			LEFT JOIN meaning.entry entry
-			WHERE entry.id IN (".implode(', ', $entries).")");
-        //$query->setParameter('entries', implode(', ', $entries));
-        //$query->useResultCache(true, 43200, __METHOD__);
-        $result = $query->getResult();
-		
-        if (count($result) > 0) {
-            if (!($result [0] instanceof models\Meaning)) {
-                throw new DomainObjectNotFoundException ();
-            }
-        } else {
-            throw new DomainResultEmptyException ();
-        }
+			WHERE entry.id IN (" . implode(', ', $entries) . ")");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
 
-        return $result;
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Meaning)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Enter description here ...
+	 * @param $foreigns \Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getForeigns($foreigns) {
+		/**@var $query \Doctrine\ORM\Query */
+		$query = $this->entityManager->createQuery("
+			SELECT 	foreign
+			FROM " . models\Foreign::CLASS_NAME . " foreign
+			WHERE foreign.foreign IN (?1)");
+		$query->setParameter(1, "'".implode("', '", $foreigns)."'");
+		//$query->useResultCache(true, 43200, __METHOD__);
+		$result = $query->getResult();
+
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\Foreign)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result;
 	}
 
 }
