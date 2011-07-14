@@ -3,1052 +3,12 @@
   <component name="AnalysisUIOptions">
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/grids/Equivalent.js" line="69" mnemonic="7" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/accept.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/application_form.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/application_form_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/application_form_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/application_view_detail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/arrow_undo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/cog.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/database_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/database_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/house.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used/icons used.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons used" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/accept.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/anchor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_cascade.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_double.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_form.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_form_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_form_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_form_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_form_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_get.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_home.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_osx.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_osx_terminal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_put.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_side_boxes.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_side_contract.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_side_expand.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_side_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_side_tree.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_split.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_tile_horizontal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_tile_vertical.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_columns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_detail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_gallery.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_view_tile.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_xp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/application_xp_terminal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_branch.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_divide.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_in.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_inout.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_join.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_merge.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_out.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_redo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_refresh_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_rotate_anticlockwise.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_rotate_clockwise.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_switch.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_turn_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_turn_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_undo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/arrow_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/asterisk_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/asterisk_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/attach.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_bronze_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_bronze_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_bronze_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_gold_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_gold_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_gold_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_silver_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_silver_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/award_star_silver_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_put.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/basket_remove.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bell_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bin_closed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bin_empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bomb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_addresses.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_open.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/book_previous.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/box.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/brick_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bricks.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/briefcase.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bug_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/building_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_arrow_bottom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_arrow_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_arrow_top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_arrow_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_feed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_pink.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_purple.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_toggle_minus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_toggle_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_wrench.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/bullet_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cake.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calculator_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_view_day.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_view_month.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/calendar_view_week.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/camera_small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/car.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/car_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/car_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_put.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cart_remove.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_burn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_eject.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cd_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_bar_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_curve_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_line_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_organisation.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_organisation_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_organisation_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/chart_pie_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_pause.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_play.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/clock_stop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cog_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/coins.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/coins_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/coins_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/color_swatch.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/color_wheel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comment.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comment_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comment_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comment_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comments.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comments_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/comments_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/compress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/computer_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/connect.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/contrast.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/contrast_decrease.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/contrast_high.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/contrast_increase.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/contrast_low.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_eject.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_eject_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_end.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_end_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_equalizer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_equalizer_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_fastforward.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_fastforward_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_pause.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_pause_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_play.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_play_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_repeat.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_repeat_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_rewind.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_rewind_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_start.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_start_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_stop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/control_stop_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/controller.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/controller_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/controller_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/controller_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/creditcards.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cross.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/css.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/css_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/css_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/css_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/css_valid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cup_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cursor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cut.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/cut_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_connect.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/database_table.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/date_previous.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/disconnect.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/disk_multiple.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/door.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/door_in.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/door_open.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/door_out.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drink.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drink_empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_burn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_cd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_cd_empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_network.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_rename.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_user.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/drive_web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/dvd_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_attach.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_open.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/email_open_image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_evilgrin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_grin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_happy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_smile.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_surprised.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_tongue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_unhappy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_waii.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/emoticon_wink.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/error_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/error_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/error_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/exclamation.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/eye.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/feed_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/female.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/film_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/find.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_pink.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_purple.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/flag_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_bell.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_brick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_bug.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_database.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_explore.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_feed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_find.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_heart.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_lightbulb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_page.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_page_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_palette.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_table.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_user.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/folder_wrench.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/font.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/font_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/font_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/font_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/group_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/heart.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/heart_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/heart_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/help.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/hourglass.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/hourglass_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/hourglass_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/hourglass_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/hourglass_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/house.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/house_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/house_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/html.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/html_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/html_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/html_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/html_valid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/image_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/image_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/image_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/image_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/images.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/information.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ipod.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ipod_cast.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ipod_cast_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ipod_cast_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ipod_sound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/joystick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/joystick_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/joystick_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/joystick_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/key_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/key_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/key_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/keyboard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/keyboard_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/keyboard_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/keyboard_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_content.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_header.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/layout_sidebar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightbulb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightbulb_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightbulb_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightbulb_off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightning_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightning_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lightning_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_break.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/link_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_break.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lock_open.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_flatbed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/lorry_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/magifier_zoom_out.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/magnifier.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/magnifier_zoom_in.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/male.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/map_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_bronze_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_bronze_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_bronze_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_bronze_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_bronze_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_gold_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_gold_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_gold_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_gold_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_gold_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_silver_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_silver_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_silver_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_silver_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/medal_silver_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_dollar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_euro.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_pound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/money_yen.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/monitor_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/mouse.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/mouse_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/mouse_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/mouse_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/music.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/new.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/newspaper.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/newspaper_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/newspaper_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/newspaper_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/newspaper_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/note_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/overlays.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/package_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_attach.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_code.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_excel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_find.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_paintbrush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_paste.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_acrobat.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_actionscript.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_c.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_cd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_code.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_code_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_coldfusion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_compressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_cplusplus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_csharp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_cup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_database.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_dvd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_excel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_find.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_freehand.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_get.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_h.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_horizontal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_medal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_office.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_paint.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_paintbrush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_paste.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_php.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_powerpoint.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_put.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_ruby.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_stack.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_swoosh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_text.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_text_width.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_tux.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_vector.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_visualstudio.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_width.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_word.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_world.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_wrench.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_white_zip.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_word.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/page_world.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/paintbrush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/paintcan.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/palette.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/paste_plain.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/paste_word.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pencil.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pencil_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pencil_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pencil_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/phone.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/phone_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/phone_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/phone_sound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/photo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/photo_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/photo_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/photo_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/photos.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/picture_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pictures.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pilcrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pill.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pill_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pill_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/pill_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_disabled.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/plugin_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/printer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/printer_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/printer_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/printer_empty.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/printer_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rainbow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_disk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_user.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/report_word.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/resultset_first.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/resultset_last.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/resultset_next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/resultset_previous.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rosette.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rss.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rss_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rss_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rss_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/rss_valid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_get.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/ruby_put.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_code.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_code_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_palette.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/script_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_chart.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_compressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_connect.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_database.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/server_uncompressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shading.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_bottom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_center.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_middle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_align_top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_flip_horizontal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_flip_vertical.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_handles.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_move_back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_move_backwards.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_move_forwards.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_move_front.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_rotate_anticlockwise.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_rotate_clockwise.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_square_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shape_ungroup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shield.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shield_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shield_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/shield_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sitemap.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sitemap_color.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound_low.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound_mute.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sound_none.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/spellcheck.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_8ball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_basketball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_football.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_golf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_raquet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_shuttlecock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_soccer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sport_tennis.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/status_away.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/status_busy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/status_offline.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/status_online.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/stop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/style.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/style_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/style_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/style_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/style_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/sum.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tab.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tab_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tab_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tab_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tab_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_gear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_multiple.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_relationship.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_row_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_row_insert.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/table_sort.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_blue_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_blue_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_blue_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_pink.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_purple.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tag_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/telephone_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/television.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/television_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/television_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_align_center.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_align_justify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_align_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_align_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_allcaps.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_bold.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_columns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_dropcaps.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_heading_6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_horizontalrule.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_indent.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_indent_remove.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_italic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_kerning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_letter_omega.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_letterspacing.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_linespacing.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_list_bullets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_list_numbers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_lowercase.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_padding_bottom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_padding_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_padding_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_padding_top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_replace.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_signature.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_smallcaps.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_strikethrough.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_subscript.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_superscript.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_underline.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/text_uppercase.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/textfield.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/textfield_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/textfield_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/textfield_key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/textfield_rename.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/thumb_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/thumb_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/time.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/time_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/time_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/time_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/timeline_marker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/transmit_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/tux.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_comment.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_female.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_gray.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/user_suit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vcard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vcard_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vcard_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vcard_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vector.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vector_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/vector_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/wand.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_clouds.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_cloudy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_lightning.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_rain.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_snow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/weather_sun.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/webcam.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/webcam_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/webcam_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/webcam_error.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/world_link.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/wrench.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/wrench_orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/xhtml.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/xhtml_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/xhtml_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/xhtml_go.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/xhtml_valid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/zoom.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/zoom_in.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons/zoom_out.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/icons" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/models/Equivalent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/models/Foreign.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Equivalent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Discipline.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Foreign.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Language.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/PadananController.php" afterPath="$PROJECT_DIR$/application/controllers/PadananController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Entry.php" afterPath="$PROJECT_DIR$/application/daos/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Foreign.php" afterPath="$PROJECT_DIR$/application/models/Foreign.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/CPanel.php" afterPath="$PROJECT_DIR$/application/services/CPanel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/CPanel.php" afterPath="$PROJECT_DIR$/application/services/interfaces/CPanel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Equivalent.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Equivalent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/grids/Equivalent.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/grids/Equivalent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Type.js" />
-      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\models\Type.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/models/Static.js" />
-      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\forms\Antonym.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Antonym.js" />
-      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\forms\Relation.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Relation.js" />
-      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\modules\entry\forms\Synonym.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Synonym.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/javascript.js" afterPath="$PROJECT_DIR$/public/javascripts/javascript.js" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1080,24 +40,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PadananController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/PadananController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="51" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Meaning.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Meaning.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="25" selection-start="330" selection-end="368" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="KamusController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/KamusController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -1107,19 +49,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPanel.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CPanel.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/services/CPanel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="202" column="30" selection-start="6170" selection-end="6170" vertical-scroll-proportion="0.32855436">
+            <state line="202" column="48" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Entry.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="290" column="2" selection-start="8504" selection-end="8504" vertical-scroll-proportion="0.0">
+            <state line="272" column="36" selection-start="8124" selection-end="8126" vertical-scroll-proportion="0.53285545">
               <folding />
             </state>
           </provider>
@@ -1148,10 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/grids/Equivalent.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Antonym.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Relation.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Synonym.js" />
         <option value="$PROJECT_DIR$/application/services/interfaces/CPanel.php" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/models/Foreign.js" />
@@ -1161,9 +99,13 @@
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Foreign.js" />
         <option value="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
         <option value="$PROJECT_DIR$/application/models/Foreign.php" />
-        <option value="$PROJECT_DIR$/application/services/CPanel.php" />
-        <option value="$PROJECT_DIR$/application/daos/Entry.php" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Equivalent.js" />
+        <option value="$PROJECT_DIR$/application/daos/Entry.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/javascript.js" />
+        <option value="$PROJECT_DIR$/application/services/CPanel.php" />
+        <option value="$PROJECT_DIR$/../doctrine/Doctrine/ORM/Query/Parser.php" />
+        <option value="$PROJECT_DIR$/../doctrine/Doctrine/Common/Lexer.php" />
+        <option value="$PROJECT_DIR$/../doctrine/Doctrine/ORM/Query/Lexer.php" />
       </list>
     </option>
   </component>
@@ -1221,64 +163,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="public">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="kateglo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="public">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="javascripts">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1798,6 +682,64 @@
         </subPane>
       </pane>
       <pane id="Favorites" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="kateglo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="javascripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1939,14 +881,14 @@
     <frame x="-4" y="-4" width="1288" height="1004" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31944445" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3049473" sideWeight="0.32407406" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29278183" sideWeight="0.6805556" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30413625" sideWeight="0.6805556" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979724" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275463" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1954,9 +896,9 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20601852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31944445" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32730263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39768976" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1985,7 +927,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cpanel&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Icons&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1998,7 +940,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Versioning Solr Configuration" />
     <MESSAGE value="Refactoring files&#10;Add Mockups" />
     <MESSAGE value="Routing ajax to boost performance" />
     <MESSAGE value="Bug Fix" />
@@ -2023,119 +964,104 @@
     <MESSAGE value="Cpanel &amp; mock ups&#10;" />
     <MESSAGE value="Cpanel bug fix&#10;" />
     <MESSAGE value="Cpanel&#10;" />
+    <MESSAGE value="Icons&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="34" selection-start="9038" selection-end="9073" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Foreign.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="44" selection-start="255" selection-end="255" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/panels/Equivalent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="50" selection-start="607" selection-end="607" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="27" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="34" selection-start="101" selection-end="125" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/CPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="4" selection-start="2182" selection-end="2182" vertical-scroll-proportion="0.5848596">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Language.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="20" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="23" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.8754579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/KamusController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1936" selection-end="2074" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Meaning.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="330" selection-end="368" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="95" column="23" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.8754579" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Foreign.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="37" selection-start="371" selection-end="371" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="37" selection-start="371" selection-end="371" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Foreign.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="24" selection-start="1584" selection-end="1585" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="290" column="2" selection-start="8504" selection-end="8504" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Equivalent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="43" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="35" column="24" selection-start="1584" selection-end="1585" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/PadananController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="51" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0">
+        <state line="24" column="51" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Meaning.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="25" selection-start="330" selection-end="368" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/KamusController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="0" selection-start="1936" selection-end="2074" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Language.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="20" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Equivalent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="43" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/javascript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="55" selection-start="5188" selection-end="5193" vertical-scroll-proportion="-0.1318822">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/solr/data-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="85" selection-start="6955" selection-end="6955" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/services/CPanel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="30" selection-start="6170" selection-end="6170" vertical-scroll-proportion="0.32855436">
+        <state line="202" column="48" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/ORM/Query/Lexer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="45" selection-start="4751" selection-end="4751" vertical-scroll-proportion="0.37531486">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/Common/Lexer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="210" column="33" selection-start="5946" selection-end="5946" vertical-scroll-proportion="0.5433456">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/ORM/Query/Parser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2551" column="0" selection-start="86348" selection-end="86348" vertical-scroll-proportion="0.5428937">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/ORM/Query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="34" selection-start="6103" selection-end="6103" vertical-scroll-proportion="0.30585423">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="272" column="36" selection-start="8124" selection-end="8126" vertical-scroll-proportion="0.53285545">
           <folding />
         </state>
       </provider>

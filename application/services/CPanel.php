@@ -200,7 +200,7 @@ class CPanel implements interfaces\CPanel {
 		$response = $decode->response->docs;
 		foreach ($response as $foreignArray) {
 			foreach ($foreignArray->foreign as $value) {
-				$foreigns[] = (str_replace('?', 'a', $value));
+				$foreigns[] = addslashes($value);
 			}
 		}
 		$result = array();
