@@ -88,7 +88,7 @@ advancedSearch = function() {
 
     var language = '';
     var type = '';
-    var class = '';
+    var clazz = '';
     var discipline = '';
     var source = '';
 
@@ -124,7 +124,7 @@ advancedSearch = function() {
     });
 
     $('select[name=class] option:selected').each(function() {
-        class = ($(this).val() == 'all') ? '' :  'class:"'+$(this).val()+'"';
+        clazz = ($(this).val() == 'all') ? '' :  'class:"'+$(this).val()+'"';
     });
 
     $('select[name=discipline] option:selected').each(function() {
@@ -157,7 +157,7 @@ advancedSearch = function() {
     jQuery.trim(noWordArray.join(' ')) != '' ? searchTextArray.push(noWordArray.join(' ')) : '';
     jQuery.trim(language) != '' ? searchTextArray.push(language) : '';
     jQuery.trim(type) != '' ? searchTextArray.push(type) : '';
-    jQuery.trim(class) != '' ? searchTextArray.push(class) : '';
+    jQuery.trim(clazz) != '' ? searchTextArray.push(clazz) : '';
     jQuery.trim(discipline) != '' ? searchTextArray.push(discipline) : '';
     jQuery.trim(source) != '' ? searchTextArray.push(source) : '';
 

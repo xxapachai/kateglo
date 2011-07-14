@@ -270,8 +270,7 @@ class Entry implements interfaces\Entry {
 		$query = $this->entityManager->createQuery("
 			SELECT 	foreign
 			FROM " . models\Foreign::CLASS_NAME . " foreign
-			WHERE foreign.foreign IN (?1)");
-		$query->setParameter(1, "'".implode("', '", $foreigns)."'");
+			WHERE foreign.foreign IN ('".implode("', '", $foreigns)."')");
 		//$query->useResultCache(true, 43200, __METHOD__);
 		$result = $query->getResult();
 
