@@ -4,6 +4,7 @@ Ext.define('kateglo.modules.entry.grids.Equivalent', {
     split: true,
     anchor: '100%',
     border: false,
+    allowDeselect: true,
     constructor: function() {
         this.columns = [
             {
@@ -60,11 +61,11 @@ Ext.define('kateglo.modules.entry.grids.Equivalent', {
             listeners: {
                 itemClick: function(view, record, item, index, event){
                     var parentComp = view.panel.up();
-                    console.log();
-                    console.log(record);
-                    console.log(item);
-                    console.log(index);
-                    console.log(event);
+                    //console.log(view.panel.getSelectionModel().getLastSelected());
+                    //console.log(record);
+                    //console.log(item);
+                    //console.log(index);
+                    //console.log(event);
                 },
                 beforerender: function(component) {
                     var data = new Array();

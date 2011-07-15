@@ -23,6 +23,7 @@ use Doctrine\ORM\EntityManager;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
 use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
 use kateglo\application\models;
+use Doctrine\ORM\Query\ResultSetMapping;
 /**
  *
  *
@@ -266,11 +267,19 @@ class Entry implements interfaces\Entry {
 	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getForeigns($foreigns) {
+		$rsm = new ResultSetMapping();
+		$rsm->addEntityResult(models\Foreign::CLASS_NAME, 'frg');
+		$rsm->addFieldResult('frg', 'foreign_id', 'id');
+		$rsm->addFieldResult('frg', 'foreign_version', 'version');
+		$rsm->addFieldResult('frg', 'foreign_name', 'foreign');
+		$rsm->addJoinedEntityResult(models\Language::CLASS_NAME, 'lang', 'frg', 'language');
+		$rsm->addFieldResult('lang', 'language_id', 'id');
+		$rsm->addFieldResult('lang', 'language_version', 'version');
+		$rsm->addFieldResult('lang', 'language_name', 'language');
+		$sql = 'select * from `foreign` frg left join language lang on frg.foreign_language_id = lang.language_id '.
+			   "where frg.foreign_name in ('".implode("', '", array_map('addslashes',$foreigns))."')";
 		/**@var $query \Doctrine\ORM\Query */
-		$query = $this->entityManager->createQuery("
-			SELECT 	foreign
-			FROM " . models\Foreign::CLASS_NAME . " foreign
-			WHERE foreign.foreign IN ('".implode("', '", $foreigns)."')");
+		$query = $this->entityManager->createNativeQuery($sql, $rsm);
 		//$query->useResultCache(true, 43200, __METHOD__);
 		$result = $query->getResult();
 
