@@ -1,6 +1,6 @@
 Ext.define("kateglo.stores.Discipline", {
     extend: 'Ext.data.Store',
-    model: 'kateglo.models.Static',
+    model: 'kateglo.models.Discipline',
     proxy: {
         type: 'rest',
         url : '/cpanel/static',

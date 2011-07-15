@@ -191,7 +191,8 @@ class CPanel implements interfaces\CPanel {
 		$params = $this->getDefaultParams($searchText, $params);
 		$params['fl'] = 'foreign';
 		$params['fq'] = "foreign:*";
-		$params['df'] = "foreign";
+		$params['qf'] = "foreign";
+		$params['defType'] = "dismax";
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$this->getSolr()->setCreateDocuments(false);
 		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
@@ -200,7 +201,7 @@ class CPanel implements interfaces\CPanel {
 		$response = $decode->response->docs;
 		foreach ($response as $foreignArray) {
 			foreach ($foreignArray->foreign as $value) {
-				$foreigns[] = addslashes($value);
+				$foreigns[] = $value;
 			}
 		}
 		$result = array();
