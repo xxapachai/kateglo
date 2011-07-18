@@ -1,6 +1,6 @@
 Ext.define('kateglo.modules.entry.forms.Equivalent', {
     extend: 'Ext.form.Panel',
-    region: 'south',
+    region: 'north',
     split: true,
     collapsible: true,
     hideCollapseTool: true,
@@ -10,33 +10,40 @@ Ext.define('kateglo.modules.entry.forms.Equivalent', {
         Ext.apply(this, {
             items: [
                 new Ext.form.field.ComboBox({
-                    margin: '20 10 10 20',
+                    margin: '20 10 5 20',
                     labelAlign: 'top',
                     name: 'Foreign',
                     displayField: 'foreign',
                     valueField: 'id',
                     fieldLabel: 'Equivalent',
                     anchor: '100%',
+                    hideTrigger: true,
                     listConfig: {
                         getInnerTpl: function() {
                             return '<div>' +
-                                    '<i>[{language.language}]</i>' +
-                                    ' {foreign}' +
-                                    '</div>';
+                                '<i>[{language.language}]</i>' +
+                                ' {foreign}' +
+                                '</div>';
                         }
                     },
                     store: new kateglo.stores.Foreign()
                 }),
                 new kateglo.utils.BoxSelect({
-                    margin: '20 10 10 20',
+                    margin: '5 10 20 20',
                     labelAlign: 'top',
                     name: 'disciplines',
                     displayField: 'name',
                     valueField: 'id',
+                    queryMode: 'local',
                     fieldLabel: 'Disiplin',
                     anchor: '100%',
                     hideTrigger: true,
-                    store: new kateglo.stores.Discipline()
+                    store: new kateglo.stores.Discipline(),
+                    listeners:{
+                        beforerender: function(component){
+                            component.store.load();
+                        }
+                    }
                 })
 
             ]

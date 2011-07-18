@@ -12,6 +12,7 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                     margin: '20 10 10 20',
                     name: 'entry',
                     anchor: '100%',
+                    hideTrigger: true,
                     store: new kateglo.stores.Meaning(),
                     emptyText: 'Ketik yang dicari, pilih salah satu dari hasil yang ditampilkan, kemudian tekan enter',
                     listConfig: {
