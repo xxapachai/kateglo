@@ -140,6 +140,8 @@ class CPanel implements interfaces\CPanel {
 	 */
 	public function searchMeaningAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
+		$params['qf'] = "entry content";
+		$params['defType'] = "dismax";
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$this->getSolr()->setCreateDocuments(false);
 		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);

@@ -14,7 +14,25 @@ Ext.define('kateglo.borders.Menu', {
             hideCollapseTool: true,
             width: 300,
             items:[
-                new kateglo.menus.Search(),
+                new Ext.tab.Panel({
+                    border: false,
+                    plain: true,
+                    title: 'Basis Data',
+                    iconCls: 'cpanel_sprite cpanel_database_gear',
+                    items: [
+                        new kateglo.menus.Search(),
+                        {
+                            title: 'Padanan',
+                            html: 'Padanan',
+                            border: false
+                        },
+                        {
+                            title: 'Sumber',
+                            html: 'Sumber',
+                            border: false
+                        }
+                    ]
+                }),
                 {
                     title: 'Panel 2',
                     id: 'panel2',

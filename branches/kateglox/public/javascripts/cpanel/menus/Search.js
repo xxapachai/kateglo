@@ -1,10 +1,10 @@
 Ext.define('kateglo.menus.Search', {
     extend: 'Ext.panel.Panel',
     layout: 'border',
+    border: false,
     initComponent: function() {
         Ext.apply(this, {
-            title: 'Entri Basis Data',
-            iconCls: 'cpanel_sprite cpanel_database_gear',
+            title: 'Entri',
             tbar: [ '->',
                 {
                     iconCls: 'cpanel_sprite cpanel_cog',

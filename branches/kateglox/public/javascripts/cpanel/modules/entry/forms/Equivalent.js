@@ -3,6 +3,7 @@ Ext.define('kateglo.modules.entry.forms.Equivalent', {
     region: 'north',
     split: true,
     collapsible: true,
+    border: false,
     hideCollapseTool: true,
     listeners: {
     },
@@ -18,12 +19,13 @@ Ext.define('kateglo.modules.entry.forms.Equivalent', {
                     fieldLabel: 'Equivalent',
                     anchor: '100%',
                     hideTrigger: true,
+                    forceSelection: true,
                     listConfig: {
                         getInnerTpl: function() {
                             return '<div>' +
-                                '<i>[{language.language}]</i>' +
-                                ' {foreign}' +
-                                '</div>';
+                                    '<i>[{language.language}]</i>' +
+                                    ' {foreign}' +
+                                    '</div>';
                         }
                     },
                     store: new kateglo.stores.Foreign()
@@ -40,12 +42,11 @@ Ext.define('kateglo.modules.entry.forms.Equivalent', {
                     hideTrigger: true,
                     store: new kateglo.stores.Discipline(),
                     listeners:{
-                        beforerender: function(component){
+                        beforerender: function(component) {
                             component.store.load();
                         }
                     }
                 })
-
             ]
         });
         this.callParent(arguments);
