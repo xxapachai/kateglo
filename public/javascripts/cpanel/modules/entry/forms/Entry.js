@@ -1,21 +1,41 @@
 Ext.define('kateglo.modules.entry.forms.Entry', {
     extend: 'Ext.form.Panel',
     title: 'Entri',
+    origTitle: this.title,
     tbar: [
         {
             text: 'Save',
-            iconCls: 'cpanel_sprite cpanel_disk'
+            iconCls: 'cpanel_sprite cpanel_disk',
+            disabled: true,
+            handler: function() {
+                var formPanel = this.up('form').getForm();
+                formPanel.submit({
+                    url: '/entri/' + formPanel.recordResult.id,
+                    method: 'POST',
+                    params: {
+                        id: formPanel.recordResult.id,
+                        version: formPanel.recordResult.version
+                    },
+                    success: function(form, action) {
+                        Ext.Msg.alert('Success', action.result.msg);
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Failed', 'something is wrong');
+                    }
+
+                });
+            }
         },
         '->',
         {
             text: 'Reset',
-            iconCls: 'cpanel_sprite cpanel_arrow_undo'
+            iconCls: 'cpanel_sprite cpanel_arrow_undo',
+            handler: function() {
+                this.up('form').getForm().reset();
+            }
         }
     ],
     listeners: {
-        beforerender: function(component) {
-            //alert(component.recordResult.entry);
-        }
     },
     initComponent: function() {
         Ext.apply(this, {
@@ -24,7 +44,28 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                     margin: '20 10 10 20',
                     name: 'entry',
                     anchor: '100%',
-                    value: this.recordResult.entry
+                    checkChangeBuffer: 1000,
+                    value: this.recordResult.entry,
+                    listeners: {
+                        change: function(field, newValue, oldValue) {
+                            var tabPanel = field.up('panel').up('panel').up('panel');
+                            var formPanel = field.up('form');
+                            var saveButton = formPanel.getDockedItems('toolbar')[0].getComponent(0);
+                            if (!tabPanel.origTitle)
+                                tabPanel.origTitle = tabPanel.title;
+                            if (!formPanel.origTitle)
+                                formPanel.origTitle = formPanel.title;
+                            if (field.isDirty()) {
+                                formPanel.setTitle('*' + formPanel.origTitle);
+                                tabPanel.setTitle('*' + tabPanel.origTitle);
+                                saveButton.enable();
+                            } else {
+                                formPanel.setTitle(formPanel.origTitle);
+                                tabPanel.setTitle(tabPanel.origTitle);
+                                saveButton.disable();
+                            }
+                        }
+                    }
                 })
             ]
         });

@@ -11,8 +11,11 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                 new Ext.form.field.ComboBox({
                     margin: '20 10 10 20',
                     name: 'entry',
+                    displayField: 'entry',
+                    valueField: 'id',
                     anchor: '100%',
                     hideTrigger: true,
+                    forceSelection: true,
                     store: new kateglo.stores.Meaning(),
                     emptyText: 'Ketik yang dicari, pilih salah satu dari hasil yang ditampilkan, kemudian tekan enter',
                     listConfig: {
@@ -32,6 +35,7 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                             if (store.getById(value[0].getId()) == null) {
                                 store.add(value[0]);
                             }
+                            field.selectText(0, field.value.length);
                         }
                     }
                 })
