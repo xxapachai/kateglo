@@ -24,6 +24,7 @@ require_once 'Zend/Controller/Dispatcher/Standard.php';
 
 use kateglo\application\utilities\Injector;
 use kateglo\application\utilities\interfaces\MimeParser;
+use kateglo\application\utilities\REST;
 /**
  *
  *
@@ -37,301 +38,120 @@ use kateglo\application\utilities\interfaces\MimeParser;
  */
 class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Standard {
 
-    /**
-     * @var \kateglo\application\utilities\interfaces\MimeParser;
-     */
-    private $mimeParser;
+	/**
+	 * @var \kateglo\application\utilities\interfaces\MimeParser;
+	 */
+	private $mimeParser;
 
-    /**
-     *
-     * @param \kateglo\application\utilities\interfaces\MimeParser $mimeParse
-     * @return void
-     *
-     * @Inject
-     */
-    public function setMimeParser(MimeParser $mimeParser) {
-        $this->mimeParser = $mimeParser;
-    }
+	/**
+	 *
+	 * @param \kateglo\application\utilities\interfaces\MimeParser $mimeParse
+	 * @return void
+	 *
+	 * @Inject
+	 */
+	public function setMimeParser(MimeParser $mimeParser) {
+		$this->mimeParser = $mimeParser;
+	}
 
-    /**
-     * Dispatch to a controller/action
-     *
-     * By default, if a controller is not dispatchable, dispatch() will throw
-     * an exception. If you wish to use the default controller instead, set the
-     * param 'useDefaultControllerAlways' via {@link setParam()}.
-     *
-     * @param Zend_Controller_Request_Abstract $request
-     * @param Zend_Controller_Response_Abstract $response
-     * @return void
-     * @throws Zend_Controller_Dispatcher_Exception
-     */
-    public function dispatch(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response) {
-        $this->setResponse($response);
+	/**
+	 * Dispatch to a controller/action
+	 *
+	 * By default, if a controller is not dispatchable, dispatch() will throw
+	 * an exception. If you wish to use the default controller instead, set the
+	 * param 'useDefaultControllerAlways' via {@link setParam()}.
+	 *
+	 * @param Zend_Controller_Request_Abstract $request
+	 * @param Zend_Controller_Response_Abstract $response
+	 * @return void
+	 * @throws Zend_Controller_Dispatcher_Exception
+	 */
+	public function dispatch(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response) {
+		$this->setResponse($response);
 
-        /**
-         * Get controller class
-         */
-        if (!$this->isDispatchable($request)) {
-            $controller = $request->getControllerName();
-            if (!$this->getParam('useDefaultControllerAlways') && !empty ($controller)) {
-                require_once 'Zend/Controller/Dispatcher/Exception.php';
-                throw new Zend_Controller_Dispatcher_Exception ('Invalid controller specified (' . $request->getControllerName() . ')');
-            }
+		/**
+		 * Get controller class
+		 */
+		if (!$this->isDispatchable($request)) {
+			$controller = $request->getControllerName();
+			if (!$this->getParam('useDefaultControllerAlways') && !empty ($controller)) {
+				require_once 'Zend/Controller/Dispatcher/Exception.php';
+				throw new Zend_Controller_Dispatcher_Exception ('Invalid controller specified (' . $request->getControllerName() . ')');
+			}
 
-            $className = $this->getDefaultControllerClass($request);
-        } else {
-            $className = $this->getControllerClass($request);
-            if (!$className) {
-                $className = $this->getDefaultControllerClass($request);
-            }
-        }
+			$className = $this->getDefaultControllerClass($request);
+		} else {
+			$className = $this->getControllerClass($request);
+			if (!$className) {
+				$className = $this->getDefaultControllerClass($request);
+			}
+		}
 
-        /**
-         * Load the controller class file
-         */
-        $className = $this->loadClass($className);
+		/**
+		 * Load the controller class file
+		 */
+		$className = $this->loadClass($className);
 
-        /**
-         * Instantiate controller with request, response, and invocation
-         * arguments; throw exception if it's not an action controller
-         */
-        Injector::get()->bind('Zend_Controller_Action_Interface')->to($className);
-        /** @var $controller Zend_Controller_Action_Stubbles */
-        $controller = Injector::getInstance($className);
-        $classObject = new stubReflectionClass($className);
+		/**
+		 * Instantiate controller with request, response, and invocation
+		 * arguments; throw exception if it's not an action controller
+		 */
+		Injector::get()->bind('Zend_Controller_Action_Interface')->to($className);
+		/** @var $controller Zend_Controller_Action_Stubbles */
+		$controller = Injector::getInstance($className);
+		$classObject = new stubReflectionClass($className);
 
-        $controller->setRequest($request)->setResponse($response)->setInvokeArgs($this->getParams());
-        $controller->setHelper(new Zend_Controller_Action_HelperBroker ($controller));
-        $controller->init();
-        if (!($controller instanceof Zend_Controller_Action_Interface) && !($controller instanceof Zend_Controller_Action)) {
-            require_once 'Zend/Controller/Dispatcher/Exception.php';
-            throw new Zend_Controller_Dispatcher_Exception ('Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface');
-        }
+		$controller->setRequest($request)->setResponse($response)->setInvokeArgs($this->getParams());
+		$controller->setHelper(new Zend_Controller_Action_HelperBroker ($controller));
+		$controller->init();
+		if (!($controller instanceof Zend_Controller_Action_Interface) && !($controller instanceof Zend_Controller_Action)) {
+			require_once 'Zend/Controller/Dispatcher/Exception.php';
+			throw new Zend_Controller_Dispatcher_Exception ('Controller "' . $className . '" is not an instance of Zend_Controller_Action_Interface');
+		}
 
 
-        /**
-         * Retrieve the action name
-         */
-        $action = $this->rest($classObject, $request);
+		/**
+		 * Retrieve the action name
+		 */
+		$rest = new REST($classObject, $request);
+		$action = $rest->getAction();
 
-        /**
-         * Dispatch the method call
-         */
-        $request->setDispatched(true);
+		/**
+		 * Dispatch the method call
+		 */
+		$request->setDispatched(true);
 
-        // by default, buffer output
-        $disableOb = $this->getParam('disableOutputBuffering');
-        $obLevel = ob_get_level();
-        if (empty ($disableOb)) {
-            ob_start();
-        }
+		// by default, buffer output
+		$disableOb = $this->getParam('disableOutputBuffering');
+		$obLevel = ob_get_level();
+		if (empty ($disableOb)) {
+			ob_start();
+		}
 
-        try {
-            if (!empty($action)) {
-                $controller->dispatch($action);
-            }
-        } catch (Exception $e) {
-            // Clean output buffer on error
-            $curObLevel = ob_get_level();
-            if ($curObLevel > $obLevel) {
-                do {
-                    ob_get_clean();
-                    $curObLevel = ob_get_level();
-                } while ($curObLevel > $obLevel);
-            }
-            throw $e;
-        }
+		try {
+			if (!empty($action)) {
+				$controller->dispatch($action);
+			}
+		} catch (Exception $e) {
+			// Clean output buffer on error
+			$curObLevel = ob_get_level();
+			if ($curObLevel > $obLevel) {
+				do {
+					ob_get_clean();
+					$curObLevel = ob_get_level();
+				} while ($curObLevel > $obLevel);
+			}
+			throw $e;
+		}
 
-        if (empty ($disableOb)) {
-            $content = ob_get_clean();
-            $response->appendBody($content);
-        }
+		if (empty ($disableOb)) {
+			$content = ob_get_clean();
+			$response->appendBody($content);
+		}
 
-        // Destroy the page controller instance and reflection objects
-        $controller = null;
-    }
-
-    /**
-     * Determine the action name
-     *
-     * First attempt to retrieve from request; then from request params
-     * using action key; default to default action
-     *
-     * Returns formatted action name
-     *
-     * @param Zend_Controller_Request_Abstract $request
-     * @return string
-     */
-    private function getRawActionMethod(Zend_Controller_Request_Abstract $request) {
-        $action = $request->getActionName();
-        if (empty($action)) {
-            $action = $this->getDefaultAction();
-            $request->setActionName($action);
-        }
-
-        return $action;
-    }
-
-    /**
-     * @throws Exception
-     * @param stubReflectionClass $classObject
-     * @param  $actionMethod
-     * @return Doctrine\Common\Collections\ArrayCollection
-     */
-    protected function getActionPaths(stubReflectionClass $classObject, $actionMethod) {
-        $actions = $classObject->getMethods();
-        $actionPaths = new Doctrine\Common\Collections\ArrayCollection();
-        /** @var stubReflectionMethod $action */
-        foreach ($actions as $action) {
-            if ($action->hasAnnotation('Path')) {
-                if ($action->getAnnotation('Path')->getValue() == $actionMethod) {
-                    $actionPaths->add($action);
-                }
-            }
-        }
-
-        if ($actionPaths->count() === 0) {
-            throw new Exception('paths not found ');
-        }
-        return $actionPaths;
-    }
-
-    /**
-     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
-     * @param Doctrine\Common\Collections\ArrayCollection $actionPaths
-     * @param Zend_Controller_Request_Http $request
-     * @return Doctrine\Common\Collections\ArrayCollection
-     */
-    protected function getActionMethods(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
-        $actionMethods = new Doctrine\Common\Collections\ArrayCollection();
-        $serverMethod = $request->getMethod();
-        if (strtoupper($serverMethod) === 'HEAD') {
-            $serverMethod = 'GET';
-        }
-        /** @var stubReflectionMethod $action */
-        foreach ($actionPaths as $action) {
-            if ($action->hasAnnotation(ucfirst(strtolower($serverMethod)))) {
-                $actionMethods->add($action);
-            }
-        }
-
-        if ($actionMethods->count() === 0) {
-            throw new kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException();
-        }
-        return $actionMethods;
-    }
-
-    /**
-     * @throws kateglo\application\controllers\exceptions\HTTPNotAcceptableException
-     * @param Doctrine\Common\Collections\ArrayCollection $actionMethods
-     * @return Doctrine\Common\Collections\ArrayCollection
-     */
-    protected function getActionProduces(Doctrine\Common\Collections\ArrayCollection $actionMethods) {
-        $actionProduces = new Doctrine\Common\Collections\ArrayCollection();
-        /** @var stubReflectionMethod $action */
-        foreach ($actionMethods as $action) {
-            if ($action->hasAnnotation('Produces')) {
-                $actionProduces->add($action);
-            }
-        }
-
-        if ($actionProduces->count() === 0) {
-            throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
-        }
-        return $actionProduces;
-    }
-
-    /**
-     * @throws Exception|kateglo\application\controllers\exceptions\HTTPNotAcceptableException
-     * @param Doctrine\Common\Collections\ArrayCollection $actionProduces
-     * @param Zend_Controller_Request_Http $request
-     * @return string
-     */
-    protected function decideMedia(Doctrine\Common\Collections\ArrayCollection $actionProduces, Zend_Controller_Request_Http $request) {
-        $supportedMediaAsArray = array();
-        $mediaActionSet = array();
-        /** @var stubReflectionMethod $action */
-        foreach ($actionProduces as $action) {
-            $getRawProduces = $action->getAnnotation('Produces')->getValue();
-            if (!empty($getRawProduces)) {
-                $getProducesAsArray = explode(',', $getRawProduces);
-                $supportedMediaAsArray = array_merge($supportedMediaAsArray, $getProducesAsArray);
-                foreach ($getProducesAsArray as $produce) {
-                    if (!array_key_exists($produce, $mediaActionSet)) {
-                        $mediaActionSet[$produce] = $action;
-                    } else {
-                        throw new Exception('media already served');
-                    }
-                }
-            }
-        }
-        $requestMedia = $request->getServer('HTTP_ACCEPT');
-        if (!empty($requestMedia)) {
-            $mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $requestMedia);
-            if (!empty($mediaDecision)) {
-                $action = $mediaActionSet[$mediaDecision];
-                return $action->getName();
-            } else {
-                throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
-            }
-        } else {
-            throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
-        }
-
-    }
-
-    /**
-     * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
-     * @param Doctrine\Common\Collections\ArrayCollection $actionPaths
-     * @param Zend_Controller_Request_Http $request
-     * @return void
-     */
-    protected function generateOptions(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
-        $methodArray = array('GET', 'POST', 'PUT', 'DELETE');
-        $allowArray = array();
-        foreach ($methodArray as $method) {
-            foreach ($actionPaths as $action) {
-                if ($action->hasAnnotation(ucfirst(strtolower($method)))) {
-                    !in_array($method, $allowArray) ? $allowArray[] = $method : null;
-                }
-            }
-        }
-        if(in_array('GET', $allowArray)){
-            $allowArray[] = 'HEAD';
-        }
-        $allowArray[] = 'OPTIONS';
-        $this->getResponse()->setHeader('Allow', implode(', ', $allowArray));
-    }
-
-    /**
-     * @param stubReflectionClass $classObject
-     * @param Zend_Controller_Request_Http $request
-     * @return string
-     */
-    protected
-    function rest(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
-        $actionMethod = $this->getRawActionMethod($request);
-        $serverMethod = strtoupper($request->getMethod());
-        if ($actionMethod === 'index') {
-            $actionMethod = '';
-        } elseif ($actionMethod === 'error') {
-            return 'errorAction';
-        }
-        if ($actionMethod === '*' && $serverMethod === 'OPTIONS') {
-            return;
-        } else {
-            $actionMethod = '/' . $actionMethod;
-            $actionPaths = $this->getActionPaths($classObject, $actionMethod);
-            if ($serverMethod === 'OPTIONS') {
-                $this->generateOptions($actionPaths, $request);
-                return;
-            } else {
-                $actionMethods = $this->getActionMethods($actionPaths, $request);
-                $actionProduces = $this->getActionProduces($actionMethods);
-                return $this->decideMedia($actionProduces, $request);
-            }
-        }
-    }
+		// Destroy the page controller instance and reflection objects
+		$controller = null;
+	}
 
 }
 

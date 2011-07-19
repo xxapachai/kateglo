@@ -58,6 +58,31 @@ class Entry implements interfaces\Entry {
 
 	/**
 	 *
+	 * @see kateglo\application\daos\interfaces\Entry::getById()
+	 * @param int $id
+	 * @return kateglo\application\models\Entry
+	 */
+	public function getById($id) {
+		$query = $this->entityManager->createQuery("
+			SELECT 	entry
+			FROM " . models\Entry::CLASS_NAME . " entry
+			WHERE entry.id = :id");
+		$query->setParameter('id', $id);
+		//$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+		$result = $query->getResult();
+		if (count($result) === 1) {
+			if (!($result [0] instanceof models\Entry)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+
+		return $result [0];
+	}
+
+	/**
+	 *
 	 * @see kateglo\application\daos\interfaces\Entry::getByEntry()
 	 * @param string $entry
 	 * @return kateglo\application\models\Entry
@@ -276,8 +301,8 @@ class Entry implements interfaces\Entry {
 		$rsm->addFieldResult('lang', 'language_id', 'id');
 		$rsm->addFieldResult('lang', 'language_version', 'version');
 		$rsm->addFieldResult('lang', 'language_name', 'language');
-		$sql = 'select * from `foreign` frg left join language lang on frg.foreign_language_id = lang.language_id '.
-			   "where frg.foreign_name in ('".implode("', '", array_map('addslashes',$foreigns))."')";
+		$sql = 'select * from `foreign` frg left join language lang on frg.foreign_language_id = lang.language_id ' .
+			   "where frg.foreign_name in ('" . implode("', '", array_map('addslashes', $foreigns)) . "')";
 		/**@var $query \Doctrine\ORM\Query */
 		$query = $this->entityManager->createNativeQuery($sql, $rsm);
 		//$query->useResultCache(true, 43200, __METHOD__);
