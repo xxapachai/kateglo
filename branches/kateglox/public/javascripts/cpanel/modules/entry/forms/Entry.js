@@ -9,12 +9,18 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
             disabled: true,
             handler: function() {
                 var formPanel = this.up('form').getForm();
-                formPanel.submit({
-                    url: '/entri/' + formPanel.recordResult.id,
+                Ext.Ajax.defaultHeaders = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                };
+                Ext.Ajax.request({
+                    url: '/entri',
                     method: 'POST',
-                    params: {
+                    timeout: 60000,
+                    jsonData: {
                         id: formPanel.recordResult.id,
-                        version: formPanel.recordResult.version
+                        version: formPanel.recordResult.version,
+                        entry: formPanel.getValues().entry
                     },
                     success: function(form, action) {
                         Ext.Msg.alert('Success', action.result.msg);
@@ -22,7 +28,6 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                     failure: function(form, action) {
                         Ext.Msg.alert('Failed', 'something is wrong');
                     }
-
                 });
             }
         },

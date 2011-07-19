@@ -56,10 +56,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$dispatcher->setControllerDirectory ( Injector::getInstance ( 'Zend_Config' )->resources->frontController->controllerDirectory );
 		$front->setDispatcher ( $dispatcher );
 		
-		$router = $front->getRouter ();
-		$route = new Zend_Controller_Router_Route ( 'entri/:text', array ('controller' => 'entri', 'text' => '' ) );
+//		$router = $front->getRouter ();
+//		$route = new Zend_Controller_Router_Route ( 'entri/:text', array ('controller' => 'entri', 'text' => '' ) );
+//
+//		$router->addRoute ( 'kateglo', $route );
 		
-		$router->addRoute ( 'kateglo', $route );
 		$default = $front->getDefaultModule ();
 		if (null === $front->getControllerDirectory ( $default )) {
 			throw new Zend_Application_Bootstrap_Exception ( 'No default controller directory registered with front controller' );
