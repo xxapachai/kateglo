@@ -19,7 +19,9 @@ namespace kateglo\application\utilities;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use Doctrine\Common\Collections\ArrayCollection;
+use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
+use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
 /**
  *
  *
@@ -37,12 +39,12 @@ class REST implements interfaces\REST {
 
 
 	/**
-	 * @var stubReflectionClass
+	 * @var \stubReflectionClass
 	 */
 	private $classObject;
 
 	/**
-	 * @var Zend_Controller_Request_Http
+	 * @var \Zend_Controller_Request_Http
 	 */
 	private $request;
 
@@ -51,71 +53,114 @@ class REST implements interfaces\REST {
 	 * @param Zend_Controller_Request_Http $request
 	 * @return string
 	 */
-	public function __construct(stubReflectionClass $classObject, Zend_Controller_Request_Http $request) {
+	public function __construct(\stubReflectionClass $classObject, \Zend_Controller_Request_Http $request) {
 		$this->request = $request;
 		$this->classObject = $classObject;
 	}
 
+	/**
+	 * @throws \Exception
+	 * @return array|string
+	 */
 	public function getAction() {
-		$actionMethod = $this->getRawActionMethod($request);
-		$requestPath = array_slice(explode('/', $this->request->getPathInfo()), 2);
-		$serverMethod = strtoupper($request->getMethod());
+		$actionMethod = $this->request->getActionName();
+		$requestPath = array_map('urlencode', array_slice(explode('/', $this->request->getPathInfo()), 1));
+		$serverMethod = strtoupper($this->request->getMethod());
 
 		if ($actionMethod === 'error') {
-			return 'errorAction';
+			return array('action' => 'errorAction', 'args' => array());
 		}
-		if ($actionMethod === '*' && $serverMethod === 'OPTIONS') {
+
+		if ($requestPath[0] == '' || $requestPath[0] == $this->request->getControllerName()) {
+			$requestPath = array_slice($requestPath, 1);
+		}
+
+		if (count($requestPath) > 0 && trim($requestPath[max(array_keys($requestPath))]) == '') {
+			array_pop($requestPath);
+			if (count($requestPath) > 0 && trim($requestPath[max(array_keys($requestPath))]) == '') {
+				throw new \Exception('Ambigous URI');
+			}
+		}
+
+		$lastResource = count($requestPath) > 0 ? trim($requestPath[max(array_keys($requestPath))]) : '';
+		if ($lastResource === '*' && $serverMethod === 'OPTIONS') {
 			return;
 		} else {
-			$actionMethod = '/' . $actionMethod;
-			$actionPaths = $this->getActionPaths($classObject, $actionMethod);
+			$actionUri = '/' . implode('/', $requestPath);
+			$actionPaths = $this->getActionPaths($actionUri);
 			if ($serverMethod === 'OPTIONS') {
-				$this->generateOptions($actionPaths, $request);
+				$this->generateOptions($actionPaths);
 				return;
 			} else {
-				$actionMethods = $this->getActionMethods($actionPaths, $request);
+				$actionMethods = $this->getActionMethods($actionPaths);
 				$actions = $this->getActionProduces($actionMethods);
 				if ($serverMethod === 'POST' || $serverMethod === 'PUT') {
 					$actions = $this->getActionConsumes($actions);
 				}
-				return $this->decideMedia($actions, $request);
+				return $this->decideMedia($actions);
 			}
 		}
 	}
 
 	/**
-	 * @throws Exception
-	 * @param stubReflectionClass $classObject
-	 * @param  $actionMethod
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @throws \Exception
+	 * @param string $actionUri
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
-	protected function getActionPaths(stubReflectionClass $classObject, $actionMethod) {
-		$actions = $classObject->getMethods();
-		$actionPaths = new Doctrine\Common\Collections\ArrayCollection();
+	protected function getActionPaths($actionUri) {
+		$actionUriArray = array_map('urlencode', array_slice(explode('/', $actionUri), 1));
+		
+		$actions = $this->classObject->getMethods();
+		$actionPaths = array();
+		$countActionUri = count($actionUriArray);
 		/** @var stubReflectionMethod $action */
 		foreach ($actions as $action) {
 			if ($action->hasAnnotation('Path')) {
-				if ($action->getAnnotation('Path')->getValue() == $actionMethod) {
-					$actionPaths->add($action);
+				$actionPath = array_map('urlencode', array_slice(explode('/', $action->getAnnotation('Path')->getValue()), 1));
+				if (count($actionPath) === $countActionUri) {
+					$actionArray['action'] = $action;
+					$actionArray['path'] = $actionPath;
+					$actionPaths[] = $actionArray;
 				}
 			}
 		}
 
-		if ($actionPaths->count() === 0) {
+		$getActions = array();
+		for ($i = 0; $i < $countActionUri; $i++) {
+			foreach ($actionPaths as $path) {
+				if ($path['path'][$i] == $actionUriArray[$i]) {
+					$getActions[] = $path;
+				}
+			}
+			if (count($getActions) == 0) {
+				foreach ($actionPaths as $path) {
+					if (strpos($path['path'][$i], urlencode('{')) === 0) {
+						$getActions[] = $path;
+					}
+				}
+			}
+			$actionPaths = $getActions;
+			$getActions = array();
+		}
+		$getActions = array();
+		foreach($actionPaths as $path){
+			$getActions[] = $path['action'];
+		}
+		$actionPaths = $getActions;
+		if (count($actionPaths) === 0) {
 			throw new Exception('paths not found ');
 		}
-		return $actionPaths;
+		return new ArrayCollection($actionPaths);
 	}
 
 	/**
 	 * @throws kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException
 	 * @param Doctrine\Common\Collections\ArrayCollection $actionPaths
-	 * @param Zend_Controller_Request_Http $request
 	 * @return Doctrine\Common\Collections\ArrayCollection
 	 */
-	protected function getActionMethods(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
-		$actionMethods = new Doctrine\Common\Collections\ArrayCollection();
-		$serverMethod = $request->getMethod();
+	protected function getActionMethods(ArrayCollection $actionPaths) {
+		$actionMethods = new ArrayCollection();
+		$serverMethod = $$this->request->getMethod();
 		if (strtoupper($serverMethod) === 'HEAD') {
 			$serverMethod = 'GET';
 		}
@@ -127,18 +172,18 @@ class REST implements interfaces\REST {
 		}
 
 		if ($actionMethods->count() === 0) {
-			throw new kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException();
+			throw new HTTPMethodNotAllowedException();
 		}
 		return $actionMethods;
 	}
 
 	/**
 	 * @throws kateglo\application\controllers\exceptions\HTTPNotAcceptableException
-	 * @param Doctrine\Common\Collections\ArrayCollection $actionMethods
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @param \Doctrine\Common\Collections\ArrayCollection $actionMethods
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
-	protected function getActionConsumes(Doctrine\Common\Collections\ArrayCollection $actionMethods) {
-		$actionProduces = new Doctrine\Common\Collections\ArrayCollection();
+	protected function getActionConsumes(ArrayCollection $actionMethods) {
+		$actionProduces = new ArrayCollection();
 		/** @var stubReflectionMethod $action */
 		foreach ($actionMethods as $action) {
 			if ($action->hasAnnotation('Consumes')) {
@@ -147,18 +192,18 @@ class REST implements interfaces\REST {
 		}
 
 		if ($actionProduces->count() === 0) {
-			throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+			throw new HTTPNotAcceptableException();
 		}
 		return $actionProduces;
 	}
 
 	/**
 	 * @throws kateglo\application\controllers\exceptions\HTTPNotAcceptableException
-	 * @param Doctrine\Common\Collections\ArrayCollection $actionMethods
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @param \Doctrine\Common\Collections\ArrayCollection $actionMethods
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
-	protected function getActionProduces(Doctrine\Common\Collections\ArrayCollection $actionMethods) {
-		$actionProduces = new Doctrine\Common\Collections\ArrayCollection();
+	protected function getActionProduces(ArrayCollection $actionMethods) {
+		$actionProduces = new ArrayCollection();
 		/** @var stubReflectionMethod $action */
 		foreach ($actionMethods as $action) {
 			if ($action->hasAnnotation('Produces')) {
@@ -167,7 +212,7 @@ class REST implements interfaces\REST {
 		}
 
 		if ($actionProduces->count() === 0) {
-			throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+			throw new HTTPNotAcceptableException();
 		}
 		return $actionProduces;
 	}
@@ -178,7 +223,7 @@ class REST implements interfaces\REST {
 	 * @param Zend_Controller_Request_Http $request
 	 * @return string
 	 */
-	protected function decideMedia(Doctrine\Common\Collections\ArrayCollection $actionProduces, Zend_Controller_Request_Http $request) {
+	protected function decideMedia(ArrayCollection $actionProduces) {
 		$supportedMediaAsArray = array();
 		$mediaActionSet = array();
 		/** @var stubReflectionMethod $action */
@@ -196,17 +241,17 @@ class REST implements interfaces\REST {
 				}
 			}
 		}
-		$requestMedia = $request->getServer('HTTP_ACCEPT');
+		$requestMedia = $this->request->getServer('HTTP_ACCEPT');
 		if (!empty($requestMedia)) {
 			$mediaDecision = $this->mimeParser->bestMatch($supportedMediaAsArray, $requestMedia);
 			if (!empty($mediaDecision)) {
 				$action = $mediaActionSet[$mediaDecision];
 				return $action->getName();
 			} else {
-				throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+				throw new HTTPNotAcceptableException();
 			}
 		} else {
-			throw new kateglo\application\controllers\exceptions\HTTPNotAcceptableException();
+			throw new HTTPNotAcceptableException();
 		}
 
 	}
@@ -217,7 +262,7 @@ class REST implements interfaces\REST {
 	 * @param Zend_Controller_Request_Http $request
 	 * @return void
 	 */
-	protected function generateOptions(Doctrine\Common\Collections\ArrayCollection $actionPaths, Zend_Controller_Request_Http $request) {
+	protected function generateOptions(ArrayCollection $actionPaths) {
 		$methodArray = array('GET', 'POST', 'PUT', 'DELETE');
 		$allowArray = array();
 		foreach ($methodArray as $method) {
