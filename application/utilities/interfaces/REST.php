@@ -19,7 +19,8 @@ namespace kateglo\application\utilities\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use Doctrine\Common\Collections\ArrayCollection;
+use kateglo\application\utilities\interfaces\MimeParser;
 /**
  *
  *
@@ -32,10 +33,55 @@ namespace kateglo\application\utilities\interfaces;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 interface REST {
-	
+
 	const INTERFACE_NAME = __CLASS__;
-	
-    
+
+	/**
+	 * @param \stubReflectionClass $classObject
+	 * @return void
+	 */
+	function setClassObject(\stubReflectionClass $classObject);
+
+	/**
+	 * @return \stubReflectionClass
+	 */
+	function getClassObject();
+
+	/**
+	 * @param \Zend_Controller_Request_Http $request
+	 * @return void
+	 */
+	function setRequest(\Zend_Controller_Request_Http $request);
+
+	/**
+	 * @return \Zend_Controller_Request_Http
+	 */
+	function getRequest();
+
+	/**
+	 * @param \Zend_Controller_Dispatcher_Stubbles $dispatcher
+	 * @return void
+	 */
+	function setDispatcher(\Zend_Controller_Dispatcher_Stubbles $dispatcher) ;
+
+	/**
+	 * @return \Zend_Controller_Dispatcher_Stubbles
+	 */
+	function getDispatcher() ;
+	/**
+	 *
+	 * @param \kateglo\application\utilities\interfaces\MimeParser $mimeParse
+	 * @return void
+	 */
+	function setMimeParser(MimeParser $mimeParser);
+
+
+	/**
+	 * @throws \Exception
+	 * @return array|string
+	 */
+	function getAction();
+
 }
 
 ?>

@@ -183,7 +183,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      * @return void
      * @Get
-     * @Path('/arti/{bleb}')
+     * @Path('/')
      * @Produces('application/json')
      */
     public function indexJson() {
@@ -207,7 +207,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      * @return void
      * @Get
-     * @Path('/arti/angin')
+     * @Path('/arti')
      * @Produces('extjs/json')
      */
     public function indexExtJsJson() {

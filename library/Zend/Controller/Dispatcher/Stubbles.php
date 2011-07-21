@@ -23,8 +23,7 @@
 require_once 'Zend/Controller/Dispatcher/Standard.php';
 
 use kateglo\application\utilities\Injector;
-use kateglo\application\utilities\interfaces\MimeParser;
-use kateglo\application\utilities\REST;
+use kateglo\application\utilities\interfaces\REST;
 /**
  *
  *
@@ -39,19 +38,19 @@ use kateglo\application\utilities\REST;
 class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Standard {
 
 	/**
-	 * @var \kateglo\application\utilities\interfaces\MimeParser;
+	 * @var \kateglo\application\utilities\interfaces\REST
 	 */
-	private $mimeParser;
+	private $rest;
 
 	/**
 	 *
-	 * @param \kateglo\application\utilities\interfaces\MimeParser $mimeParse
+	 * @param \kateglo\application\utilities\interfaces\REST $rest
 	 * @return void
 	 *
 	 * @Inject
 	 */
-	public function setMimeParser(MimeParser $mimeParser) {
-		$this->mimeParser = $mimeParser;
+	public function setREST(REST $rest) {
+		$this->rest = $rest;
 	}
 
 	/**
@@ -113,9 +112,10 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
 		/**
 		 * Retrieve the action name
 		 */
-		$rest = new REST($classObject, $request);
-		$action = $rest->getAction();
-
+		$this->rest->setClassObject($classObject);
+		$this->rest->setRequest($request);
+		$action = $this->rest->getAction();
+		$action['action'] = new ReflectionMethod($className, $action['action']);
 		/**
 		 * Dispatch the method call
 		 */
