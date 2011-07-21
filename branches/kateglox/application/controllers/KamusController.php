@@ -207,7 +207,7 @@ class KamusController extends Zend_Controller_Action_Stubbles {
     /**
      * @return void
      * @Get
-     * @Path('/arti')
+     * @Path('/')
      * @Produces('extjs/json')
      */
     public function indexExtJsJson() {

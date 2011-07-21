@@ -413,7 +413,7 @@ class REST implements interfaces\REST {
 
 			if ($serverMethod === 'POST' || $serverMethod === 'PUT') {
 				if ($parameter->hasAnnotation('ConsumeParam')) {
-					$args[$parameter->getName()] = \http_get_request_body();
+					$args[$parameter->getName()] = $this->request->getRawBody();
 					continue;
 				}
 			}
