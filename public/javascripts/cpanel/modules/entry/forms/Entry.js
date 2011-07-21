@@ -23,7 +23,7 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                         entry: formPanel.getValues().entry
                     },
                     success: function(form, action) {
-                        Ext.Msg.alert('Success', action.result.msg);
+                        Ext.Msg.alert('Success', action.jsonData.entry);
                     },
                     failure: function(form, action) {
                         Ext.Msg.alert('Failed', 'something is wrong');

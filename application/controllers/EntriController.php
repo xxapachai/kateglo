@@ -32,7 +32,8 @@ use kateglo\application\services\interfaces\Entry;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class EntriController extends Zend_Controller_Action_Stubbles {
+class EntriController extends Zend_Controller_Action_Stubbles
+{
 
     /**
      *
@@ -55,7 +56,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
      *
      * @Inject
      */
-    public function setEntry(Entry $entry) {
+    public function setEntry(Entry $entry)
+    {
         $this->entry = $entry;
     }
 
@@ -66,7 +68,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
      *
      * @Inject
      */
-    public function setSearch(Search $search) {
+    public function setSearch(Search $search)
+    {
         $this->search = $search;
     }
 
@@ -74,7 +77,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->view->search = $this->search;
     }
@@ -85,7 +89,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
      * @Path('/')
      * @Produces('text/html')
      */
-    public function indexHtml() {
+    public function indexHtml()
+    {
         $this->_helper->viewRenderer->setNoRender();
         $text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
         $cacheId = __CLASS__ . '\\' . 'html' . '\\' . $text;
@@ -111,11 +116,12 @@ class EntriController extends Zend_Controller_Action_Stubbles {
     /**
      * @return void
      * @Get
-     * @Path('/')
+     * @Path('/{entry}')
+     * @PathParam{text}(entry)
      * @Produces('application/json')
      */
-    public function indexJson() {
-        $text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
+    public function indexJson($text)
+    {
         $cacheId = __CLASS__ . '\\' . 'json' . '\\' . $text;
         if (!$this->evaluatePreCondition($cacheId)) {
             try {
@@ -127,6 +133,21 @@ class EntriController extends Zend_Controller_Action_Stubbles {
             }
         }
         $this->responseBuilder($cacheId);
+        $this->_helper->json($this->content);
+    }
+
+    /**
+     * @return void
+     * @Post
+     * @Path('/')
+     * @Produces('application/json')
+     * @Consumes('application/json')
+     * @ConsumeParam{requestEntry}
+     */
+    public function updateEntry($requestEntry)
+    {
+        $this->content = json_decode($requestEntry);
+
         $this->_helper->json($this->content);
     }
 }
