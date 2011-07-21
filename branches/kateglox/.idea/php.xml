@@ -8,6 +8,7 @@
           <path value="D:\ZendWorkspace\phptal\classes" />
           <path value="D:\ZendWorkspace\solr\Apache" />
           <path value="D:\ZendWorkspace\zendframework\library" />
+          <path value="D:\ZendWorkspace\stubbles\src\main\php\net" />
         </include_paths>
       </PhpSdkConfig>
     </sdk>

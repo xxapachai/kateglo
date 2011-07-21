@@ -21,6 +21,8 @@
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
+use kateglo\application\controllers\exceptions\HTTPNotFoundException;
+use kateglo\application\controllers\exceptions\HTTPUnsupportedMediaTypeException;
 /**
  *
  *
@@ -33,82 +35,88 @@ use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class ErrorController extends Zend_Controller_Action_Stubbles {
-    /**
-     *
-     * Enter description here ...
-     * @var Zend_Log;
-     */
-    private $log;
+	/**
+	 *
+	 * Enter description here ...
+	 * @var Zend_Log;
+	 */
+	private $log;
 
-    /**
-     *
-     * Enter description here ...
-     * @var kateglo\application\faces\interfaces\Search;
-     */
-    private $search;
+	/**
+	 *
+	 * Enter description here ...
+	 * @var kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
 
-    /**
-     *
-     * Enter description here ...
-     * @param Zend_Log $log
-     *
-     * @Inject
-     */
-    public function setEntry(\Zend_Log $log) {
-        $this->log = $log;
-    }
+	/**
+	 *
+	 * Enter description here ...
+	 * @param Zend_Log $log
+	 *
+	 * @Inject
+	 */
+	public function setEntry(\Zend_Log $log) {
+		$this->log = $log;
+	}
 
-    /**
-     *
-     * Enter description here ...
-     * @param kateglo\application\faces\interfaces\Search $entry
-     *
-     * @Inject
-     */
-    public function setSearch(Search $search) {
-        $this->search = $search;
-    }
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\faces\interfaces\Search $entry
+	 *
+	 * @Inject
+	 */
+	public function setSearch(Search $search) {
+		$this->search = $search;
+	}
 
-    /**
-     * @return void
-     */
-    public function errorAction() {
-        $errors = $this->_getParam('error_handler');
-        switch ($errors->type) {
-            case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
-            case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
+	/**
+	 * @return void
+	 */
+	public function errorAction() {
+		$errors = $this->_getParam('error_handler');
+		switch ($errors->type) {
+			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER :
+			case \Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION :
 
-                // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
-                break;
-            default :
-                // application error
-                $this->otherException($errors->exception);
-                break;
-        }
-        //catch anything in log files
-        $this->log->log($errors->exception, \Zend_Log::ERR);
-        $this->view->exception = $errors->exception;
-        $this->view->request = $errors->request;
+				// 404 error -- controller or action not found
+				$this->getResponse()->setHttpResponseCode(404);
+				$this->view->message = 'Page not found';
+				break;
+			default :
+				// application error
+				$this->otherException($errors->exception);
+				break;
+		}
+		//catch anything in log files
+		$this->log->log($errors->exception, \Zend_Log::ERR);
+		$this->view->exception = $errors->exception;
+		$this->view->request = $errors->request;
 
-        $this->view->appPath = APPLICATION_PATH;
-        $this->view->search = $this->search;
-        $this->view->formAction = '/kamus';
-    }
+		$this->view->appPath = APPLICATION_PATH;
+		$this->view->search = $this->search;
+		$this->view->formAction = '/kamus';
+	}
 
-    private function otherException(Exception $exception) {
-        if ($exception instanceof HTTPMethodNotAllowedException) {
-            $this->getResponse()->setHttpResponseCode(405);
-            $this->view->message = 'Method not allowed.';
-        } elseif ($exception instanceof HTTPNotAcceptableException) {
-            $this->getResponse()->setHttpResponseCode(406);
-            $this->view->message = 'Not Acceptable.';
-        } else {
-            $this->getResponse()->setHttpResponseCode(500);
-            $this->view->message = 'Application error';
-        }
-    }
+	private function otherException(Exception $exception) {
+		if ($exception instanceof HTTPMethodNotAllowedException) {
+			$this->getResponse()->setHttpResponseCode(405);
+			$this->view->message = 'Method not allowed.';
+		} elseif ($exception instanceof HTTPNotAcceptableException) {
+			$this->getResponse()->setHttpResponseCode(406);
+			$this->view->message = 'Not Acceptable.';
+		} elseif ($exception instanceof HTTPNotFoundException) {
+			$this->getResponse()->setHttpResponseCode(404);
+			$this->view->message = 'Not Found.';
+		} elseif ($exception instanceof HTTPUnsupportedMediaTypeException) {
+			$this->getResponse()->setHttpResponseCode(415);
+			$this->view->message = 'Unsupported Media Type.';
+		} else {
+			$this->getResponse()->setHttpResponseCode(500);
+			$this->view->message = 'Application error';
+		}
+	}
 
 }
 

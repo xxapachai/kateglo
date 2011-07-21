@@ -158,7 +158,8 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
 	public function dispatch($action) {
 		// Notify helpers of action preDispatch state
 		$this->_helper->notifyPreDispatch();
-
+		/** @var \ReflectionMethod $actionMethod */
+		$actionMethod = $action['action'];
 		$this->preDispatch();
 		if ($this->getRequest()->isDispatched()) {
 			if (null === $this->_classMethods) {
@@ -166,13 +167,13 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
 			}
 
 			// preDispatch() didn't change the action, so we can continue
-			if ($this->getInvokeArg('useCaseSensitiveActions') || in_array($action, $this->_classMethods)) {
+			if ($this->getInvokeArg('useCaseSensitiveActions') || in_array($actionMethod->getName(), $this->_classMethods)) {
 				if ($this->getInvokeArg('useCaseSensitiveActions')) {
 					trigger_error('Using case sensitive actions without word separators is deprecated; please do not rely on this "feature"');
 				}
-				$this->$action();
+				$actionMethod->invokeArgs($this, $action['args']);
 			} else {
-				$this->__call($action['action'], $action['args']);
+				$this->__call($actionMethod->getName(), $action['args']);
 			}
 			$this->postDispatch();
 		}
