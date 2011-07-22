@@ -319,6 +319,21 @@ class Entry implements interfaces\Entry {
 		return $result;
 	}
 
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function update(models\Entry $entry) {
+		if ($entry->getId() !== null) {
+			$entry = $this->entityManager->merge($entry);
+			$this->entityManager->persist($entry);
+			$this->entityManager->flush();
+			return $entry;
+		}else{
+			throw \Exception('Cannot update without id.');
+		}
+	}
+
 }
 
 ?>
