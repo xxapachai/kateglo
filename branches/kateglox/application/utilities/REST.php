@@ -154,7 +154,7 @@ class REST implements interfaces\REST {
 		if ($lastResource === '*' && $serverMethod === 'OPTIONS') {
 			return array('action' => null, 'args' => array());
 		} else {
-			$actionUri = '/' . implode('/', $requestPath);
+			$actionUri = '/' . implode('/', array_map('urldecode', $requestPath));
 			$actionPaths = $this->getActionPaths($actionUri);
 			if ($serverMethod === 'OPTIONS') {
 				$this->generateOptions($actionPaths);
@@ -424,7 +424,7 @@ class REST implements interfaces\REST {
 					if (strpos($actionPath[$i], urlencode('{')) === 0) {
 						$pathName = preg_replace('/[{}]/', '', urldecode($actionPath[$i]));
 						if ($pathName === $parameter->getAnnotation('PathParam')->getValue()) {
-							$args[$parameter->getName()] = $this->requestPath[$i];
+							$args[$parameter->getName()] = urldecode($this->requestPath[$i]);
 						}
 					}
 				}

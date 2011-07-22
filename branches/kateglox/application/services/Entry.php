@@ -28,6 +28,7 @@ use kateglo\application\faces\Spellcheck;
 use kateglo\application\faces\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\services\exceptions\IllegalTypeException;
+use kateglo\application\models;
 use kateglo\application\daos;
 /**
  *
@@ -46,19 +47,19 @@ class Entry implements interfaces\Entry {
 
 	/**
 	 *
-	 * @var kateglo\application\daos\interfaces\Entry
+	 * @var \kateglo\application\daos\interfaces\Entry
 	 */
 	private $entry;
 
 	/**
 	 *
-	 * @var Apache_Solr_Service
+	 * @var \Apache_Solr_Service
 	 */
 	private $solr;
 
 	/**
 	 *
-	 * @params kateglo\application\daos\interfaces\Entry $entry
+	 * @params \kateglo\application\daos\interfaces\Entry $entry
 	 * @return void
 	 *
 	 * @Inject
@@ -194,7 +195,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return \kateglo\application\faces\Hit
 	 */
 	public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -210,7 +211,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return \kateglo\application\faces\Hit
 	 */
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -226,7 +227,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return \kateglo\application\faces\Hit
 	 */
 	public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -245,7 +246,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return \kateglo\application\faces\Hit
 	 */
 	public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -265,7 +266,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit|
+	 * @return \kateglo\application\faces\Hit|
 	 */
 	public function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -299,7 +300,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return \kateglo\application\faces\Hit
 	 */
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -331,7 +332,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit|
+	 * @return \kateglo\application\faces\Hit|
 	 */
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -363,7 +364,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hits
+	 * @return \kateglo\application\faces\Hits
 	 */
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -395,7 +396,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hits
+	 * @return \kateglo\application\faces\Hits
 	 */
 	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params['fl'] = 'entry, equivalent, id';
@@ -418,6 +419,32 @@ class Entry implements interfaces\Entry {
 		$params['fq'] = "foreign:*";
 		$params['df'] = 'entryForeign';
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
+	}
+
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function update(models\Entry $entry) {
+		$docs = $this->searchDocumentById($entry->getId());
+		$docs->setField('entry', $entry->getEntry());
+		$entry = $this->entry->update($entry);
+		$this->solr->addDocument($docs);
+		$this->solr->commit();
+		return $entry;
+	}
+
+	/**
+	 * @param int $id
+	 * @return \Apache_Solr_Document
+	 */
+	private function searchDocumentById($id) {
+		$params['fl'] = 'id, entry, antonym, discipline, sample, definition, class, classCategory, misspelled, relation, synonym, spelled, syllabel, type, typeCategory, source, sourceCategory, language, equivalentDiscipline, foreign, equivalent';
+		$params['df'] = 'id';
+		$request = $this->getSolr()->search($id, 0, 2, $params);
+		/** @var \Apache_Solr_Document $docs */
+		$docs = $request->response->docs[0];
+		return $docs;
 	}
 
 	/**

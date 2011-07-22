@@ -23,6 +23,7 @@ use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
 use kateglo\application\controllers\exceptions\HTTPNotFoundException;
 use kateglo\application\controllers\exceptions\HTTPUnsupportedMediaTypeException;
+use kateglo\application\controllers\exceptions\HTTPBadRequestException;
 /**
  *
  *
@@ -109,6 +110,9 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 		} elseif ($exception instanceof HTTPNotFoundException) {
 			$this->getResponse()->setHttpResponseCode(404);
 			$this->view->message = 'Not Found.';
+		} elseif ($exception instanceof HTTPBadRequestException) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->view->message = 'Bad Request.';
 		} elseif ($exception instanceof HTTPUnsupportedMediaTypeException) {
 			$this->getResponse()->setHttpResponseCode(415);
 			$this->view->message = 'Unsupported Media Type.';

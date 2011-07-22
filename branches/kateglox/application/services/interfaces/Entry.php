@@ -19,7 +19,7 @@ namespace kateglo\application\services\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\models;
 /**
  *
  *
@@ -232,6 +232,12 @@ interface Entry {
 	 * @return array
 	 */
 	function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
+
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	function update(models\Entry $entry);
 }
 
 ?>

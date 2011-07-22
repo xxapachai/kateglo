@@ -35,9 +35,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Table(name="entry")
  */
 class Entry {
-	
+
 	const CLASS_NAME = __CLASS__;
-	
+
 	/**
 	 * @var int
 	 * @Id
@@ -45,59 +45,66 @@ class Entry {
 	 * @GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-	
+
 	/**
-	 * 
+	 *
 	 * Enter description here ...
 	 * @var int
 	 * @Version
-	 * @Column(type="integer", name="entry_version") 
+	 * @Column(type="integer", name="entry_version")
 	 */
 	private $version;
-	
+
 	/**
 	 *
 	 * @var string
 	 * @Column(type="string", name="entry_name", unique=true, length=255)
 	 */
 	private $entry;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"all"})
 	 */
 	private $meanings;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"all"})
 	 */
 	private $sources;
-	
+
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="entry", cascade={"all"})
 	 */
 	private $equivalents;
-	
+
 	/**
-	 * 
+	 *
 	 * Constructor
-	 * 
+	 *
 	 */
 	public function __construct() {
 		$this->meanings = new ArrayCollection ();
 		$this->sources = new ArrayCollection ();
 		$this->equivalents = new ArrayCollection ();
 	}
-	
+
+	/**
+	 * @param int $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+
 	/**
 	 * @return the $id
 	 */
 	public function getId() {
 		return $this->id;
 	}
-	
+
 	/**
 	 * @return the $version
 	 */
@@ -118,7 +125,7 @@ class Entry {
 	public function getEntry() {
 		return $this->entry;
 	}
-	
+
 	/**
 	 * @param string $entry
 	 * @return void
@@ -126,7 +133,7 @@ class Entry {
 	public function setEntry($entry) {
 		$this->entry = $entry;
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Meaning $meaning
@@ -134,9 +141,9 @@ class Entry {
 	 */
 	public function addMeaning(Meaning $meaning) {
 		$this->meanings [] = $meaning;
-		$meaning->setEntry ( $this );
+		$meaning->setEntry($this);
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Meaning $meaning
@@ -144,12 +151,12 @@ class Entry {
 	 */
 	public function removeMeaning(Meaning $meaning) {
 		/*@var $removed kateglo\application\models\Meaning */
-		$removed = $this->meanings->removeElement ( $meaning );
+		$removed = $this->meanings->removeElement($meaning);
 		if ($removed !== null) {
-			$removed->removeEntry ();
+			$removed->removeEntry();
 		}
 	}
-	
+
 	/**
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
@@ -157,7 +164,7 @@ class Entry {
 	public function getMeanings() {
 		return $this->meanings;
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Source $source
@@ -165,9 +172,9 @@ class Entry {
 	 */
 	public function addSource(Source $source) {
 		$this->sources [] = $source;
-		$source->setEntry ( $this );
+		$source->setEntry($this);
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Source $source
@@ -175,12 +182,12 @@ class Entry {
 	 */
 	public function removeSource(Source $source) {
 		/*@var $removed kateglo\application\models\Source */
-		$removed = $this->sources->removeElement ( $source );
+		$removed = $this->sources->removeElement($source);
 		if ($removed !== null) {
-			$removed->removeEntry ();
+			$removed->removeEntry();
 		}
 	}
-	
+
 	/**
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
@@ -188,7 +195,7 @@ class Entry {
 	public function getSources() {
 		return $this->sources;
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Equivalent $equivalent
@@ -196,9 +203,9 @@ class Entry {
 	 */
 	public function addEquivalent(Equivalent $equivalent) {
 		$this->equivalents [] = $equivalent;
-		$equivalent->setEntry ( $this );
+		$equivalent->setEntry($this);
 	}
-	
+
 	/**
 	 *
 	 * @param kateglo\application\models\Equivalent $equivalent
@@ -206,12 +213,12 @@ class Entry {
 	 */
 	public function removeEquivalent(Equivalent $equivalent) {
 		/*@var $removed kateglo\application\models\Equivalent */
-		$removed = $this->equivalents->removeElement ( $equivalent );
+		$removed = $this->equivalents->removeElement($equivalent);
 		if ($removed !== null) {
-			$removed->removeEntry ();
+			$removed->removeEntry();
 		}
 	}
-	
+
 	/**
 	 *
 	 * @return Doctrine\Common\Collections\ArrayCollection
@@ -220,34 +227,34 @@ class Entry {
 		return $this->equivalents;
 	}
 
-    /**
-     * @return array
-     */
-    public function toArray(){
-        $array['id'] = $this->id;
-        $array['version'] = $this->version;
-        $array['entry'] = $this->entry;
-        
-        $array['meanings'] = array();
-        $meanings = $this->getMeanings();
-        foreach ($meanings as $meaning){
-            $array['meanings'][] = $meaning->toArray();
-        }
+	/**
+	 * @return array
+	 */
+	public function toArray() {
+		$array['id'] = $this->id;
+		$array['version'] = $this->version;
+		$array['entry'] = $this->entry;
 
-        $array['equivalents'] = array();
-        $equivalents = $this->getEquivalents();
-        foreach($equivalents as $equivalent){
-            $array['equivalents'][] = $equivalent->toArray();
-        }
+		$array['meanings'] = array();
+		$meanings = $this->getMeanings();
+		foreach ($meanings as $meaning) {
+			$array['meanings'][] = $meaning->toArray();
+		}
 
-        $array['sources'] = array();
-        $sources = $this->getSources();
-        foreach($sources as $source){
-            $array['sources'][] = $source->toArray();
-        }
+		$array['equivalents'] = array();
+		$equivalents = $this->getEquivalents();
+		foreach ($equivalents as $equivalent) {
+			$array['equivalents'][] = $equivalent->toArray();
+		}
 
-        return $array;
-    }
+		$array['sources'] = array();
+		$sources = $this->getSources();
+		foreach ($sources as $source) {
+			$array['sources'][] = $source->toArray();
+		}
+
+		return $array;
+	}
 }
 
 ?>

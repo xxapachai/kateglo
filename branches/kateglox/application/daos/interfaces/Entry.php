@@ -19,7 +19,7 @@ namespace kateglo\application\daos\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\models;
 /**
  *
  *
@@ -97,6 +97,12 @@ interface Entry {
 	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	function getForeigns($foreigns);
+
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	function update(models\Entry $entry);
 
 }
 
