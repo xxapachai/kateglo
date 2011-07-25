@@ -1,10 +1,10 @@
-Ext.define('kateglo.menus.Search', {
+Ext.define('kateglo.menus.SearchSource', {
     extend: 'Ext.panel.Panel',
     layout: 'border',
     border: false,
     initComponent: function() {
         Ext.apply(this, {
-            title: 'Entri',
+            title: 'Sumber',
             tbar: [ '->',
                 {
                     iconCls: 'cpanel_sprite cpanel_cog',
@@ -26,7 +26,7 @@ Ext.define('kateglo.menus.Search', {
                 }
             ],
             items:[
-                new kateglo.utils.SearchField({
+                new kateglo.menus.SearchField({
                     region: 'north',
                     emptyText: 'Ketik yang dicari, kemudian tekan enter',
                     store : this.store
@@ -41,9 +41,8 @@ Ext.define('kateglo.menus.Search', {
                         border: false
                     },
                     emptyResultText:this.emptyResultText,
-
+                    errorResultText:this.errorResultText,
                     showResultText: new kateglo.grids.MenuSearchResult({
-                        scope: this,
                         store: this.store
                     }),
                     items: [
@@ -58,6 +57,9 @@ Ext.define('kateglo.menus.Search', {
 
     emptyResultText:{
         html: '<div style="margin: 10px; text-align: center; color: #888;"><i>Gunakan fungsi penelusuran entri diatas untuk menemukan entri yang dicari.</i></div>'
+    },
+    errorResultText:{
+        html: '<div style="margin: 10px; text-align: center; color: #888;"><i>Error pada basis data. Pastikan semua kata dieja dengan benar atau coba beberapa saat lagi.</i></div>'
     },
     store: new kateglo.stores.Entry()
 

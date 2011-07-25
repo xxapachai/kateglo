@@ -52,5 +52,4 @@ Ext.define('kateglo.grids.MenuSearchResult', {
         this.callParent(arguments);
     }
 
-})
-        ;
+});

@@ -20,17 +20,9 @@ Ext.define('kateglo.borders.Menu', {
                     title: 'Basis Data',
                     iconCls: 'cpanel_sprite cpanel_database_gear',
                     items: [
-                        new kateglo.menus.Search(),
-                        {
-                            title: 'Padanan',
-                            html: 'Padanan',
-                            border: false
-                        },
-                        {
-                            title: 'Sumber',
-                            html: 'Sumber',
-                            border: false
-                        }
+                        new kateglo.menus.SearchEntry(),
+                        new kateglo.menus.SearchEquivalent(),
+                        new kateglo.menus.SearchSource()
                     ]
                 }),
                 {

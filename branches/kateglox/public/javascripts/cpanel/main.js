@@ -44,7 +44,10 @@ Ext.require(['*',
     'kateglo.modules.entry.forms.MeaningComboBox',
     'kateglo.modules.entry.panels.Equivalent',
     'kateglo.modules.entry.tree.Explorer',
-    'kateglo.menus.Search',
+    'kateglo.menus.SearchEntry',
+    'kateglo.menus.SearchEquivalent',
+    'kateglo.menus.SearchSource',
+    'kateglo.menus.SearchField',
     'kateglo.grids.MenuSearchResult'
 ]);
 Ext.onReady(function() {

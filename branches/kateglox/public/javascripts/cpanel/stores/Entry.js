@@ -1,7 +1,7 @@
 Ext.define("kateglo.stores.Entry", {
     extend: 'Ext.data.Store',
     model: 'kateglo.models.Entry',
-    pageSize: 10000000,
+    pageSize: 1000,
     proxy: {
         type: 'rest',
         url : '/kamus',
@@ -10,8 +10,7 @@ Ext.define("kateglo.stores.Entry", {
         },
         reader: {
             type: 'json',
-            root: 'hits',
-            totalProperty: 'numFound'
+            root: 'hits'
         }
     }
 });

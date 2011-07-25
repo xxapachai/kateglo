@@ -1,38 +1,19 @@
-Ext.define('kateglo.utils.SearchField', {
-    extend: 'Ext.form.field.Trigger',
-
-    trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
-
-    trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger',
-
-    hasSearch : false,
-    paramName : 'query',
-
-    initComponent: function() {
-        this.callParent(arguments);
-        this.on('specialkey', function(f, e) {
-            if (e.getKey() == e.ENTER) {
-                this.onTrigger2Click();
-            }
-        }, this);
-    },
-
-    afterRender: function() {
-        this.callParent();
-        this.triggerEl.item(0).setDisplayed('none');
-    },
+Ext.define('kateglo.menus.SearchField', {
+    extend: 'kateglo.utils.SearchField',
 
     onTrigger1Click : function() {
         var me = this,
-                store = me.store,
-                proxy = store.getProxy(),
-                val;
+            store = me.store,
+            proxy = store.getProxy(),
+            resultContainer = this.up().getComponent('resultContainer'),
+            val;
 
         if (me.hasSearch) {
             me.setValue('');
             proxy.extraParams[me.paramName] = '';
             proxy.extraParams.start = 0;
             store.removeAll();
+            resultContainer.insert(0, resultContainer.emptyResultText);
             me.hasSearch = false;
             me.triggerEl.item(0).setDisplayed('none');
             me.doComponentLayout();
@@ -40,6 +21,7 @@ Ext.define('kateglo.utils.SearchField', {
     },
 
     onTrigger2Click : function() {
+        //console.log(this);
         var me = this,
                 store = me.store,
                 proxy = store.getProxy(),
@@ -51,7 +33,17 @@ Ext.define('kateglo.utils.SearchField', {
         }
         proxy.extraParams[me.paramName] = value;
         proxy.extraParams.start = 0;
-        store.load();
+        store.load({
+            scope: this,
+            callback: function(records, operation, success){
+                resultContainer = this.up().getComponent('resultContainer');
+                if(success){
+                    resultContainer.insert(0, resultContainer.showResultText);
+                }else{
+                    resultContainer.insert(0, resultContainer.errorResultText);
+                }
+            }
+        });
         me.hasSearch = true;
         me.triggerEl.item(0).setDisplayed('block');
         me.doComponentLayout();
