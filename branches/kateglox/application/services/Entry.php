@@ -431,6 +431,31 @@ class Entry implements interfaces\Entry {
 	}
 
 	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function insert(models\Entry $entry) {
+		$docs = new \Apache_Solr_Document();
+		$entry = $this->entry->insert($entry);
+		$docs->setField('entry', $entry->getEntry());
+		$docs->setField('id', $entry->getEntry());
+		$this->solr->addDocument($docs);
+		$this->solr->commit();
+		return $entry;
+	}
+
+	/**
+	 * @param int $entry
+	 * @return void
+	 */
+	public function delete($id) {
+		$docs = new \Apache_Solr_Document();
+		$entry = $this->entry->delete($id);
+		$this->solr->deleteById($id);
+		$this->solr->commit();
+	}
+
+	/**
 	 * @param int $id
 	 * @return \Apache_Solr_Document
 	 */

@@ -1,6 +1,5 @@
-Ext.define('kateglo.modules.entry.forms.Entry', {
+Ext.define('kateglo.forms.NewEntry', {
     extend: 'Ext.form.Panel',
-    title: 'Entri',
     origTitle: this.title,
     tbar: [
         {
@@ -11,38 +10,34 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                 var form = this.up('form').getForm();
                 var formPanel = this.up('form');
                 var tabPanel = this.up('panel').up('panel').up('panel');
+                var contentContainer = this.up('panel').up('panel').up('panel').up();
                 var saveButton = formPanel.getDockedItems('toolbar')[0].getComponent(0);
                 var resetButton = formPanel.getDockedItems('toolbar')[0].getComponent(2);
                 var contentPanel = this.up('panel').up('panel');
-                var box = Ext.MessageBox.wait('Updating Entry Object.', 'Please wait!');
+                var box = Ext.MessageBox.wait('Creating Entry Object.', 'Please wait!');
                 Ext.Ajax.defaultHeaders = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 };
                 Ext.Ajax.request({
                     url: '/entri',
-                    method: 'POST',
+                    method: 'PUT',
                     timeout: 60000,
                     jsonData: {
-                        id: form.recordResult.id,
-                        version: form.recordResult.version,
                         entry: form.getValues().entry
                     },
                     success: function(response, request) {
                         responseObj = Ext.JSON.decode(response.responseText);
-                        form.recordResult.id = responseObj.id;
-                        form.recordResult.version = responseObj.version;
-                        form.recordResult.entry = responseObj.entry;
-                        tabPanel.origTitle = 'Entri - ' + responseObj.entry;
-                        formPanel.origTitle = responseObj.entry;
-                        formPanel.setTitle(formPanel.origTitle);
-                        tabPanel.setTitle(tabPanel.origTitle);
-                        contentPanel.insert(0, new kateglo.modules.entry.forms.Entry({
-                            recordResult: form.recordResult
-                        }));
-                        formPanel.destroy();
+                        var entryTab = new kateglo.tabs.Entry({
+                            id: 'kateglo.tabs.Entry.' + responseObj.id,
+                            title: 'Entri - ' + responseObj.entry,
+                            recordResult: responseObj
+                        });
+                        contentContainer.add(entryTab);
+                        entryTab.show();
+                        tabPanel.destroy();
+                        kateglo.utils.Message.msg('Success', 'Entry object created');
                         box.hide();
-                        kateglo.utils.Message.msg('Success', 'Entry object saved');
                     },
                     failure: function(response, request) {
                         box.hide();
@@ -69,7 +64,6 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                     name: 'entry',
                     anchor: '100%',
                     checkChangeBuffer: 1000,
-                    value: this.recordResult.entry,
                     allowBlank: false,
                     listeners: {
                         change: function(field, newValue, oldValue) {
@@ -79,15 +73,11 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                             var resetButton = formPanel.getDockedItems('toolbar')[0].getComponent(2);
                             if (!tabPanel.origTitle)
                                 tabPanel.origTitle = tabPanel.title;
-                            if (!formPanel.origTitle)
-                                formPanel.origTitle = formPanel.title;
                             if (field.isDirty() && field.isValid()) {
-                                formPanel.setTitle('*' + formPanel.origTitle);
                                 tabPanel.setTitle('*' + tabPanel.origTitle);
                                 saveButton.enable();
                                 resetButton.enable();
                             } else {
-                                formPanel.setTitle(formPanel.origTitle);
                                 tabPanel.setTitle(tabPanel.origTitle);
                                 saveButton.disable();
                                 resetButton.disable();

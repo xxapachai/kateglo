@@ -19,7 +19,42 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
         '->',
         {
             text: 'Delete',
-            iconCls: 'cpanel_sprite cpanel_delete'
+            iconCls: 'cpanel_sprite cpanel_delete',
+            handler: function() {
+                var confirmBox = new Ext.window.MessageBox({
+                    buttonText: {
+                        yes: 'Ya',
+                        no: 'Tidak'
+                    },
+                    defaultButton: 2
+                });
+                confirmBox.confirm('Delete Entry', 'Kamu yakin? Entri akan hilang semua!',
+                        function(buttonId, text, option) {
+                            if (buttonId == 'yes') {
+                                var box = Ext.MessageBox.wait('Deleting Entry Object.', 'Please wait!');
+                                var tabPanel = this.up('panel').up('panel');
+                                Ext.Ajax.defaultHeaders = {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                };
+                                Ext.Ajax.request({
+                                    url: '/entri/id/'+tabPanel.recordResult.id,
+                                    method: 'DELETE',
+                                    timeout: 60000,
+                                    success: function(response, request) {
+                                        tabPanel.destroy();
+                                        kateglo.utils.Message.msg('Success', 'Entry object deleted');
+                                        box.hide();
+                                    },
+                                    failure: function(response, request) {
+                                        box.hide();
+                                        Ext.Msg.alert('Failed', 'something is wrong');
+                                    }
+                                });
+                            }
+                        }, this);
+
+            }
         }
     ],
     listeners: {
@@ -123,7 +158,7 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
     initComponent: function() {
         Ext.apply(this, {
             store: new Ext.data.TreeStore({
-                storeId: 'Entry'+this.recordResult.id
+                storeId: 'Entry' + this.recordResult.id
             })
         });
         this.callParent(arguments);

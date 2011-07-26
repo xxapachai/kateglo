@@ -329,8 +329,39 @@ class Entry implements interfaces\Entry {
 			$this->entityManager->persist($entry);
 			$this->entityManager->flush();
 			return $entry;
-		}else{
+		} else {
 			throw \Exception('Cannot update without id.');
+		}
+	}
+
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function insert(models\Entry $entry) {
+		if ($entry->getEntry() !== null) {
+			if ($entry->getMeanings()->count() === 0) {
+				$entry->addMeaning(new models\Meaning());
+			}
+			$this->entityManager->persist($entry);
+			$this->entityManager->flush();
+			return $entry;
+		} else {
+			throw \Exception('Cannot create without entry.');
+		}
+	}
+
+	/**
+	 * @param int $id
+	 * @return void
+	 */
+	public function delete($id) {
+		if (is_int($id)) {
+			$entry = $this->entityManager->find(models\Entry::CLASS_NAME, $id);
+			$this->entityManager->remove($entry);
+			$this->entityManager->flush();
+		} else {
+			throw \Exception('Cannot create without entry.');
 		}
 	}
 

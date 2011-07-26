@@ -84,13 +84,13 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * @return void
 	 * @Get
-	 * @Path('/')
+	 * @Path('/{entry}')
+	 * @PathParam{text}(entry)
 	 * @Produces('text/html')
 	 */
-	public function indexHtml() {
+	public function indexHtml($text) {
 		$this->_helper->viewRenderer->setNoRender();
-		$text = urldecode($this->getRequest()->getParam(RouteParameter::TEXT));
-		$cacheId = __CLASS__ . '\\' . 'html' . '\\' . $text;
+		$cacheId = __METHOD__ . '\\' . 'html' . '\\' . $text;
 
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
@@ -100,7 +100,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				$entry = $this->entry->getEntry($text);
 				$this->view->entry = $entry;
 				$cacheId .= $entry->getVersion();
-				$this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
+				$this->content = $this->_helper->viewRenderer->view->render('entri/index.html');
 			} catch (Apache_Solr_Exception $e) {
 				$this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
 			}
@@ -118,7 +118,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @Produces('application/json')
 	 */
 	public function indexJson($text) {
-		$cacheId = __CLASS__ . '\\' . 'json' . '\\' . $text;
+		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $text;
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
 				$entry = $this->entry->getEntryAsArray($text);
@@ -128,6 +128,55 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				$this->content = array('error' => 'query error');
 			}
 		}
+		$this->responseBuilder($cacheId);
+		$this->_helper->json($this->content);
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/id/{entryId}')
+	 * @PathParam{id}(entryId)
+	 * @Produces('text/html')
+	 */
+	public function entryByIdAsHtml($id) {
+		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $id;
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$entry = $this->entry->getEntryByIdAsArray($id);
+				$this->content = $entry;
+				$cacheId .= $entry['version'];
+			} catch (Apache_Solr_Exception $e) {
+				$this->content = array('error' => 'query error');
+			}
+		}
+		$eTag = empty($this->eTag) ? md5($cacheId . serialize($this->content)) : $this->eTag;
+		if ($this->configs->cache->entry) {
+			$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 3600);
+		}
+		$this->getResponse()->setHttpResponseCode(303);
+		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($entry['entry']));
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/id/{entryId}')
+	 * @PathParam{id}(entryId)
+	 * @Produces('application/json')
+	 */
+	public function entryByIdAsJson($id) {
+		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $id;
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$entry = $this->entry->getEntryByIdAsArray($id);
+				$this->content = $entry;
+				$cacheId .= $entry['version'];
+			} catch (Apache_Solr_Exception $e) {
+				$this->content = array('error' => 'query error');
+			}
+		}
+
 		$this->responseBuilder($cacheId);
 		$this->_helper->json($this->content);
 	}
@@ -158,7 +207,46 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 		} else {
 			throw new HTTPBadRequestException('Invalid JSON');
 		}
+	}
 
+	/**
+	 * @return void
+	 * @Put
+	 * @Path('/')
+	 * @Produces('application/json')
+	 * @Consumes('application/json')
+	 * @ConsumeParam{requestEntry}
+	 */
+	public function insertEntry($requestEntry) {
+		$entryObj = json_decode($requestEntry);
+		if ($entryObj !== null) {
+			if (property_exists($entryObj, 'entry')) {
+				$entry = new models\Entry();
+				$entry->setEntry($entryObj->entry);
+				$entry = $this->entry->insert($entry);
+				$this->_helper->json($entry->toArray());
+			} else {
+				throw new HTTPBadRequestException('Property not found');
+			}
+		} else {
+			throw new HTTPBadRequestException('Invalid JSON');
+		}
+	}
+
+	/**
+	 * @return void
+	 * @Delete
+	 * @Path('/id/{entryId}')
+	 * @PathParam{id}(entryId)
+	 * @Produces('application/json')
+	 */
+	public function deleteEntry($id) {
+		if ($id !== null && is_numeric($id)) {
+				$this->entry->delete(intval($id));
+				$this->_helper->json(array());
+		} else {
+			throw new HTTPBadRequestException('Invalid JSON');
+		}
 	}
 }
 
