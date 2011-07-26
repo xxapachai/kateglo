@@ -21,7 +21,7 @@ Ext.define('kateglo.grids.MenuSearchResult', {
                     'Accept': 'application/json'
                 };
                 Ext.Ajax.request({
-                    url: '/entri/' + record.get('text'),
+                    url: '/entri/id/' + record.get('id'),
                     timeout: 60000,
                     success: function(response, request) {
                         responseObj = Ext.JSON.decode(response.responseText);

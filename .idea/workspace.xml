@@ -5,19 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/forms" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/annotations/Delete.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/annotations/Put.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/forms/NewEntry.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/tabs/NewEntry.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/utils/Message.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/CPanel.php" afterPath="$PROJECT_DIR$/application/services/CPanel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/EntriController.php" afterPath="$PROJECT_DIR$/application/controllers/EntriController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Entry.php" afterPath="$PROJECT_DIR$/application/daos/Entry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Entry.php" afterPath="$PROJECT_DIR$/application/models/Entry.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/Entry.php" afterPath="$PROJECT_DIR$/application/services/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/services/interfaces/Entry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/Zend/Controller/Action/Stubbles.php" afterPath="$PROJECT_DIR$/library/Zend/Controller/Action/Stubbles.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Entry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Entry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/utils/SearchField.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/utils/SearchField.js" />
-      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\menus\Search.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/styles/cpanel.css" afterPath="$PROJECT_DIR$/public/styles/cpanel.css" />
+      <change type="MOVED" beforePath="D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\cpanel_sprite.png" afterPath="$PROJECT_DIR$/public/images/cpanel_sprite.png" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,73 +49,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SearchEntry.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js">
+      <file leaf-file-name="NewEntry.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/forms/NewEntry.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="57" selection-start="1541" selection-end="1599" vertical-scroll-proportion="0.0">
+            <state line="11" column="16" selection-start="375" selection-end="431" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchEquivalent.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js">
+      <file leaf-file-name="EntriController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="57" selection-start="1606" selection-end="1606" vertical-scroll-proportion="0.0">
+            <state line="244" column="48" selection-start="7122" selection-end="7122" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchSource.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js">
+      <file leaf-file-name="Delete.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/annotations/Delete.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="21" selection-start="2140" selection-end="2140" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchField.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="33" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entry.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Entry.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="57" selection-start="1712" selection-end="1712" vertical-scroll-proportion="0.6642247">
+            <state line="33" column="12" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="251" column="23" selection-start="6342" selection-end="6342" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="452" column="37" selection-start="14279" selection-end="14285" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="116" column="20" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Service.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../solr/Apache/Solr/Service.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="844" column="20" selection-start="23301" selection-end="23301" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entry.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="329" column="42" selection-start="10099" selection-end="10099" vertical-scroll-proportion="0.0">
+            <state line="359" column="72" selection-start="10804" selection-end="10804" vertical-scroll-proportion="0.7022293">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuSearchResult.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js">
+      <file leaf-file-name="Explorer.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="24" selection-start="1133" selection-end="1186" vertical-scroll-proportion="0.0">
+            <state line="42" column="51" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js">
+      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="27" selection-start="745" selection-end="863" vertical-scroll-proportion="0.0">
+            <state line="223" column="16" selection-start="5216" selection-end="5216" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -126,22 +153,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/controllers/EntriController.php" />
-        <option value="$PROJECT_DIR$/application/utilities/REST.php" />
-        <option value="$PROJECT_DIR$/application/services/Entry.php" />
-        <option value="$PROJECT_DIR$/application/services/CPanel.php" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/Search.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/utils/SearchField.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/tabs/NewEntry.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js" />
-        <option value="$PROJECT_DIR$/application/daos/Entry.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Entry.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/utils/Message.js" />
+        <option value="$PROJECT_DIR$/public/styles/cpanel.css" />
+        <option value="$PROJECT_DIR$/application/annotations/Put.php" />
+        <option value="$PROJECT_DIR$/application/annotations/Delete.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/forms/NewEntry.js" />
+        <option value="$PROJECT_DIR$/application/models/Entry.php" />
+        <option value="$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js" />
+        <option value="$PROJECT_DIR$/application/services/interfaces/Entry.php" />
+        <option value="$PROJECT_DIR$/application/controllers/EntriController.php" />
+        <option value="$PROJECT_DIR$/application/services/Entry.php" />
+        <option value="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
+        <option value="$PROJECT_DIR$/application/daos/Entry.php" />
       </list>
     </option>
   </component>
@@ -302,7 +329,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
+              <option name="myItemId" value="styles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,7 +403,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="stores" />
+              <option name="myItemId" value="tabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cpanel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entry" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tree" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -440,33 +501,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cpanel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menus" />
+              <option name="myItemId" value="grids" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -518,7 +553,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cpanel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="borders" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -648,7 +727,43 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="design-prototype" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -707,6 +822,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="daos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="daos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interfaces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -857,12 +994,224 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\menus" />
-      <recent name="D:\ZendWorkspace\kateglo\application\controllers\exceptions" />
       <recent name="D:\ZendWorkspace\kateglo\application\annotations" />
-      <recent name="D:\ZendWorkspace\kateglo\application\utilities\interfaces" />
-      <recent name="D:\ZendWorkspace\kateglo\application\utilities" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\utils" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\forms" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\tabs" />
+      <recent name="D:\ZendWorkspace\kateglo\public\javascripts\cpanel\menus" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="Moments ago" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\application\configs\application.ini</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\styles</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\styles\style.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\styles\main.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\cc-by-nc-sa.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\bg_body.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\404_uh_oh.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\kateglo.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\cpanel_sprite.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\ajax-loader.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\bg_separator.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\kateglo40.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\container_bg.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\images\404_bg.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs\html5.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs\960</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs\960\960_24_col.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs\960\reset.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\libs\960\text.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\javascripts</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype0\javascripts\javascript.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\logo.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\images</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\images\bg_body.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\images\kateglo.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\images\bg_separator.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\css\style.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\js\javascript.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\js\html5.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\960</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\960\960_24_col.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\960\reset.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\assets\960\text.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\html\index.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\kateglo-search-result.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype1\design.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\entry_tesaurus.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\start.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\entry_sumber.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\entry.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\letters.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\search_result.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\entry_padanan.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSerif-Regular-webfont.eot</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\OpenSans-Regular-webfont.ttf</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSans-webfont.ttf</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\OpenSans-Regular-webfont.svg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSans-webfont.svg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSerif-Regular-webfont.ttf</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\OpenSans-Regular-webfont.woff</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSans-webfont.woff</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSerif-Regular-webfont.svg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSerif-Regular-webfont.woff</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\OpenSans-Regular-webfont.eot</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\font\DroidSans-webfont.eot</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\css\kateglo.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\404.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\search_padanan.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img\logo_kateglo_depan.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img\img_sprite.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img\favicon.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img\404.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\img\arrow.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\js\jquery-ui-1.8.14.custom.min.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\js\jquery-1.5.1.min.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\prototype2\advanced_search.html</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\styles\style.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\styles\main.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\javascripts\javascript.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\cc-by-nc-sa.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\bg_body.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\404_uh_oh.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\kateglo.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\cpanel_sprite.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\ajax-loader.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\bg_separator.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\kateglo40.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\container_bg.gif</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\images\404_bg.jpg</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\libs\960\960_24_col.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\libs\960\reset.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\libs\960\text.css</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\public\libs\html5.js</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\html\assets</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\html\index.html</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\logo.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\kateglo-search-result.png</PATH>
+            <PATH vcs="svn" revision="420">D:\ZendWorkspace\kateglo\build\design-prototype\design.png</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -969,10 +1318,10 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20601852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20601852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3049473" sideWeight="0.32407406" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29359287" sideWeight="0.6805556" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29359287" sideWeight="0.7939815" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275463" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -1054,114 +1403,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="56" selection-start="892" selection-end="892" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="30" selection-start="2010" selection-end="2010" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/grids/Equivalent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="22" selection-start="1904" selection-end="1904" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="50" selection-start="2524" selection-end="2524" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/utils/SearchField.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="54" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="57" selection-start="1541" selection-end="1599" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="21" selection-start="2140" selection-end="2140" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="312" selection-end="312" vertical-scroll-proportion="0.31825274">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="33" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/tabs/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="27" selection-start="745" selection-end="863" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/ORM/UnitOfWork.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1226" column="21" selection-start="46273" selection-end="46273" vertical-scroll-proportion="0.016129032">
+        <state line="35" column="28" selection-start="1437" selection-end="1437" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../doctrine/Doctrine/ORM/EntityManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="463" column="31" selection-start="14423" selection-end="14423" vertical-scroll-proportion="0.45905706">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="329" column="42" selection-start="10099" selection-end="10099" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="24" selection-start="1133" selection-end="1186" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="57" selection-start="1606" selection-end="1606" vertical-scroll-proportion="0.0">
+        <state line="457" column="20" selection-start="14223" selection-end="14223" vertical-scroll-proportion="0.33280253">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/forms/Entry.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="57" selection-start="1712" selection-end="1712" vertical-scroll-proportion="0.6642247">
+        <state line="44" column="24" selection-start="2218" selection-end="2277" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/utils/Message.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/styles/cpanel.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/annotations/Put.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="9" selection-start="1510" selection-end="1510" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/annotations/Delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="12" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="223" column="16" selection-start="5216" selection-end="5216" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/forms/NewEntry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="16" selection-start="375" selection-end="431" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/modules/entry/tree/Explorer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="51" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="244" column="48" selection-start="7122" selection-end="7122" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="251" column="23" selection-start="6342" selection-end="6342" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../solr/Apache/Solr/Service.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="844" column="20" selection-start="23301" selection-end="23301" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="452" column="37" selection-start="14279" selection-end="14285" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="20" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="359" column="72" selection-start="10804" selection-end="10804" vertical-scroll-proportion="0.7022293">
           <folding />
         </state>
       </provider>

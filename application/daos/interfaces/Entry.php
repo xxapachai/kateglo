@@ -104,6 +104,18 @@ interface Entry {
 	 */
 	function update(models\Entry $entry);
 
+	/**
+	 * @param \kateglo\application\models\Entry $entry
+	 * @return \kateglo\application\models\Entry
+	 */
+	function insert(models\Entry $entry);
+
+	/**
+	 * @param int id
+	 * @return void
+	 */
+	function delete($id);
+
 }
 
 ?>

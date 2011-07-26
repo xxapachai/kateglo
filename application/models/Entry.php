@@ -136,7 +136,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Meaning $meaning
+	 * @param \kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
 	public function addMeaning(Meaning $meaning) {
@@ -146,7 +146,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Meaning $meaning
+	 * @param \kateglo\application\models\Meaning $meaning
 	 * @return void
 	 */
 	public function removeMeaning(Meaning $meaning) {
@@ -159,7 +159,7 @@ class Entry {
 
 	/**
 	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getMeanings() {
 		return $this->meanings;
@@ -167,7 +167,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Source $source
+	 * @param \kateglo\application\models\Source $source
 	 * @return void
 	 */
 	public function addSource(Source $source) {
@@ -177,7 +177,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Source $source
+	 * @param \kateglo\application\models\Source $source
 	 * @return void
 	 */
 	public function removeSource(Source $source) {
@@ -190,7 +190,7 @@ class Entry {
 
 	/**
 	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getSources() {
 		return $this->sources;
@@ -198,7 +198,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Equivalent $equivalent
+	 * @param \kateglo\application\models\Equivalent $equivalent
 	 * @return void
 	 */
 	public function addEquivalent(Equivalent $equivalent) {
@@ -208,7 +208,7 @@ class Entry {
 
 	/**
 	 *
-	 * @param kateglo\application\models\Equivalent $equivalent
+	 * @param \kateglo\application\models\Equivalent $equivalent
 	 * @return void
 	 */
 	public function removeEquivalent(Equivalent $equivalent) {
@@ -221,7 +221,7 @@ class Entry {
 
 	/**
 	 *
-	 * @return Doctrine\Common\Collections\ArrayCollection
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	public function getEquivalents() {
 		return $this->equivalents;
