@@ -358,8 +358,10 @@ class Entry implements interfaces\Entry {
 	public function delete($id) {
 		if (is_int($id)) {
 			$entry = $this->entityManager->find(models\Entry::CLASS_NAME, $id);
+			$result = clone($entry);
 			$this->entityManager->remove($entry);
 			$this->entityManager->flush();
+			return $result;
 		} else {
 			throw \Exception('Cannot create without entry.');
 		}

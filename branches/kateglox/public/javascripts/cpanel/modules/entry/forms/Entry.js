@@ -56,9 +56,7 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
             text: 'Reset',
             iconCls: 'cpanel_sprite cpanel_arrow_undo',
             disabled: true,
-            handler: function() {
-                this.up('form').getForm().reset();
-            }
+            handler: kateglo.modules.entry.utils.Form.reset
         }
     ],
     initComponent: function() {
@@ -72,27 +70,7 @@ Ext.define('kateglo.modules.entry.forms.Entry', {
                     value: this.recordResult.entry,
                     allowBlank: false,
                     listeners: {
-                        change: function(field, newValue, oldValue) {
-                            var tabPanel = field.up('panel').up('panel').up('panel');
-                            var formPanel = field.up('form');
-                            var saveButton = formPanel.getDockedItems('toolbar')[0].getComponent(0);
-                            var resetButton = formPanel.getDockedItems('toolbar')[0].getComponent(2);
-                            if (!tabPanel.origTitle)
-                                tabPanel.origTitle = tabPanel.title;
-                            if (!formPanel.origTitle)
-                                formPanel.origTitle = formPanel.title;
-                            if (field.isDirty() && field.isValid()) {
-                                formPanel.setTitle('*' + formPanel.origTitle);
-                                tabPanel.setTitle('*' + tabPanel.origTitle);
-                                saveButton.enable();
-                                resetButton.enable();
-                            } else {
-                                formPanel.setTitle(formPanel.origTitle);
-                                tabPanel.setTitle(tabPanel.origTitle);
-                                saveButton.disable();
-                                resetButton.disable();
-                            }
-                        }
+                        change: kateglo.modules.entry.utils.Form.change
                     }
                 })
             ]
