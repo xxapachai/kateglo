@@ -64,7 +64,7 @@ class Relation {
 
     /**
      * @var kateglo\application\models\Meaning
-     * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
+     * @OneToOne(targetEntity="kateglo\application\models\Meaning")
      * @JoinColumn(name="relation_relation_id", referencedColumnName="meaning_id")
      */
     private $relation;

@@ -69,13 +69,13 @@ class Definition {
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="definitions", cascade={"all"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Clazz", mappedBy="definitions")
 	 */
 	private $clazz;
 	
 	/**
 	 * @var Doctrine\Common\Collections\ArrayCollection
-	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions", cascade={"all"})
+	 * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="definitions")
 	 */
 	private $disciplines;
 	
