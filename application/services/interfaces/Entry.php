@@ -247,7 +247,7 @@ interface Entry {
 
 	/**
 	 * @param int $id
-	 * @return void
+	 * @return \kateglo\application\models\Entry
 	 */
 	function delete($id);
 }

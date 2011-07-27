@@ -21,6 +21,8 @@
 use kateglo\application\helpers\RouteParameter;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\controllers\exceptions\HTTPBadRequestException;
+use kateglo\application\controllers\exceptions\HTTPNotFoundException;
+use kateglo\application\daos\exceptions\DomainResultEmptyException;
 use kateglo\application\services;
 use kateglo\application\models;
 /**
@@ -82,6 +84,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var string $text
 	 * @return void
 	 * @Get
 	 * @Path('/{entry}')
@@ -90,7 +93,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function indexHtml($text) {
 		$this->_helper->viewRenderer->setNoRender();
-		$cacheId = __METHOD__ . '\\' . 'html' . '\\' . $text;
+		$cacheId = __METHOD__ . '\\' . $text;
 
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
@@ -99,10 +102,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				/** @var $entry \kateglo\application\models\Entry */
 				$entry = $this->entry->getEntry($text);
 				$this->view->entry = $entry;
-				$cacheId .= $entry->getVersion();
 				$this->content = $this->_helper->viewRenderer->view->render('entri/index.html');
-			} catch (Apache_Solr_Exception $e) {
-				$this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
 			}
 		}
 
@@ -111,6 +113,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var string $text
 	 * @return void
 	 * @Get
 	 * @Path('/{entry}')
@@ -118,14 +121,13 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @Produces('application/json')
 	 */
 	public function indexJson($text) {
-		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $text;
+		$cacheId = __METHOD__ . '\\' . $text;
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
 				$entry = $this->entry->getEntryAsArray($text);
 				$this->content = $entry;
-				$cacheId .= $entry['version'];
-			} catch (Apache_Solr_Exception $e) {
-				$this->content = array('error' => 'query error');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
 			}
 		}
 		$this->responseBuilder($cacheId);
@@ -133,6 +135,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var int $id
 	 * @return void
 	 * @Get
 	 * @Path('/id/{entryId}')
@@ -140,25 +143,25 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @Produces('text/html')
 	 */
 	public function entryByIdAsHtml($id) {
-		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $id;
+		$cacheId = __METHOD__ . '\\' . $id;
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
 				$entry = $this->entry->getEntryByIdAsArray($id);
 				$this->content = $entry;
-				$cacheId .= $entry['version'];
-			} catch (Apache_Solr_Exception $e) {
-				$this->content = array('error' => 'query error');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
 			}
 		}
-		$eTag = empty($this->eTag) ? md5($cacheId . serialize($this->content)) : $this->eTag;
-		if ($this->configs->cache->entry) {
-			$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 3600);
+		if ($this->configs->cache->entry && !$this->cache->contains($cacheId)) {
+			$eTag = empty($this->eTag) ? md5($cacheId . serialize($this->content)) : $this->eTag;
+			$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 0);
 		}
 		$this->getResponse()->setHttpResponseCode(303);
-		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($entry['entry']));
+		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($this->content['entry']));
 	}
 
 	/**
+	 * @var int $id
 	 * @return void
 	 * @Get
 	 * @Path('/id/{entryId}')
@@ -166,14 +169,13 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @Produces('application/json')
 	 */
 	public function entryByIdAsJson($id) {
-		$cacheId = __METHOD__ . '\\' . 'json' . '\\' . $id;
+		$cacheId = __METHOD__ . '\\' . $id;
 		if (!$this->evaluatePreCondition($cacheId)) {
 			try {
 				$entry = $this->entry->getEntryByIdAsArray($id);
 				$this->content = $entry;
-				$cacheId .= $entry['version'];
-			} catch (Apache_Solr_Exception $e) {
-				$this->content = array('error' => 'query error');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
 			}
 		}
 
@@ -182,6 +184,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var string $requestEntry
 	 * @return void
 	 * @Post
 	 * @Path('/')
@@ -200,6 +203,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				$entry->setVersion($entryObj->version);
 				$entry->setId($entryObj->id);
 				$entry = $this->entry->update($entry);
+				if ($this->configs->cache->entry) {
+					$this->saveAllCache($entry);
+				}
 				$this->_helper->json($entry->toArray());
 			} else {
 				throw new HTTPBadRequestException('Property not found');
@@ -210,6 +216,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var string $requestEntry
 	 * @return void
 	 * @Put
 	 * @Path('/')
@@ -224,6 +231,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				$entry = new models\Entry();
 				$entry->setEntry($entryObj->entry);
 				$entry = $this->entry->insert($entry);
+				if ($this->configs->cache->entry) {
+					$this->saveAllCache($entry);
+				}
 				$this->_helper->json($entry->toArray());
 			} else {
 				throw new HTTPBadRequestException('Property not found');
@@ -234,6 +244,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 * @var int $id
 	 * @return void
 	 * @Delete
 	 * @Path('/id/{entryId}')
@@ -242,11 +253,92 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function deleteEntry($id) {
 		if ($id !== null && is_numeric($id)) {
-				$this->entry->delete(intval($id));
-				$this->_helper->json(array());
+			$entry = $this->entry->delete(intval($id));
+			print_r($entry); die();
+			if ($this->configs->cache->entry) {
+				$this->deleteAllCache($entry);
+			}
+			$this->_helper->json(array());
 		} else {
-			throw new HTTPBadRequestException('Invalid JSON');
+			throw new HTTPBadRequestException('Undefined Identity');
 		}
+	}
+
+	/**
+	 * @var string $requestEntry
+	 * @return void
+	 * @Post
+	 * @Path('/id/{entryId}/arti/{artiId}/type')
+	 * @PathParam{entryId}(entryId)
+	 * @PathParam{meaningId}(entryId)
+	 * @Produces('application/json')
+	 * @Consumes('application/json')
+	 * @ConsumeParam{requestEntry}
+	 */
+	public function updateType($entryId, $meaningId, $requestEntry) {
+		if ($entryId !== null && is_numeric($entryId) && $meaningId !== null && is_numeric($meaningId)) {
+			$typeJSONObj = json_decode($requestEntry);
+			if ($typeJSONObj !== null) {
+				if (property_exists($typeJSONObj, 'type') && is_array($typeJSONObj->type)) {
+					foreach ($typeJSONObj->type as $value) {
+						if (!is_numeric($value)) {
+							throw new HTTPBadRequestException('Unidentified Identity');
+						}
+					}
+				} else {
+					throw new HTTPBadRequestException('Property not found');
+				}
+			} else {
+				throw new HTTPBadRequestException('Invalid JSON');
+			}
+		} else {
+			throw new HTTPBadRequestException('Unidentified Identity');
+		}
+	}
+
+	/**
+	 * @param kateglo\application\models\Entry $entry
+	 * @return void
+	 */
+	private function saveAllCache(models\Entry $entry) {
+		$entryAsArray = $entry->toArray();
+		$serializeEntryAsArray = serialize($entryAsArray);
+		$cacheId = __CLASS__ . '::entryByIdAsJson' . '\\' . $entry->getId();
+		$eTag = md5($cacheId . $serializeEntryAsArray);
+		$this->cache->save($cacheId, serialize(array('content' => $entryAsArray, 'eTag' => $eTag)), 0);
+
+		$cacheId = __CLASS__ . '::entryByIdAsHtml' . '\\' . $entry->getId();
+		$eTag = md5($cacheId . $serializeEntryAsArray);
+		$this->cache->save($cacheId, serialize(array('content' => $entryAsArray, 'eTag' => $eTag)), 0);
+
+		$cacheId = __CLASS__ . '::indexJson' . '\\' . $entry->getEntry();
+		$eTag = md5($cacheId . $serializeEntryAsArray);
+		$this->cache->save($cacheId, serialize(array('content' => $entryAsArray, 'eTag' => $eTag)), 0);
+
+		$cacheId = __CLASS__ . '::indexHtml' . '\\' . $entry->getEntry();
+		$this->view->entry = $entry;
+		$content = $this->_helper->viewRenderer->view->render('entri/index.html');
+		$eTag = md5($cacheId . serialize($content));
+		$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 0);
+	}
+
+	/**
+	 * @param kateglo\application\models\Entry $entry
+	 * @return void
+	 */
+	private function deleteAllCache(models\Entry $entry) {
+		print_r($entry); die();
+		$cacheId = __CLASS__ . '::entryByIdAsJson' . '\\' . $entry->getId();
+		$this->cache->delete($cacheId);
+
+		$cacheId = __CLASS__ . '::entryByIdAsHtml' . '\\' . $entry->getId();
+		$this->cache->delete($cacheId);
+
+		$cacheId = __CLASS__ . '::indexJson' . '\\' . $entry->getEntry();
+		$this->cache->delete($cacheId);
+
+		$cacheId = __CLASS__ . '::indexHtml' . '\\' . $entry->getEntry();
+		$this->cache->delete($cacheId);
 	}
 }
 

@@ -189,15 +189,15 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
 	 * @return void
 	 */
 	protected function responseBuilder($cacheId) {
-		$eTag = empty($this->eTag) ? md5($cacheId . serialize($this->content)) : $this->eTag;
-		if ($this->configs->cache->entry) {
-			$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $eTag)), 3600);
+		if ($this->configs->cache->entry && !$this->cache->contains($cacheId)) {
+			$this->eTag = md5($cacheId . serialize($this->content));
+			$this->cache->save($cacheId, serialize(array('content' => $this->content, 'eTag' => $this->eTag)), 3600);
 		}
 
-		if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $eTag) {
+		if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $this->eTag) {
 			$this->getResponse()->setHttpResponseCode(304);
 		} else {
-			$this->getResponse()->setHeader('Etag', $eTag);
+			$this->getResponse()->setHeader('Etag', $this->eTag);
 		}
 	}
 

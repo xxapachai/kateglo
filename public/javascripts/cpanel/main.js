@@ -11,7 +11,8 @@ Ext.Loader.setPath({
     'kateglo.modules.entry.tree' : '/javascripts/cpanel/modules/entry/tree',
     'kateglo.modules.entry.forms' : '/javascripts/cpanel/modules/entry/forms',
     'kateglo.modules.entry.grids' : '/javascripts/cpanel/modules/entry/grids',
-    'kateglo.modules.entry.panels' : '/javascripts/cpanel/modules/entry/panels'
+    'kateglo.modules.entry.panels' : '/javascripts/cpanel/modules/entry/panels',
+    'kateglo.modules.entry.utils' : '/javascripts/cpanel/modules/entry/utils'
 });
 Ext.require(['*',
     'kateglo.borders.Header',
@@ -37,6 +38,7 @@ Ext.require(['*',
     'kateglo.tabs.Entry',
     'kateglo.tabs.NewEntry',
     'kateglo.forms.NewEntry',
+    'kateglo.modules.entry.utils.Form',
     'kateglo.modules.entry.grids.Relation',
     'kateglo.modules.entry.grids.Equivalent',
     'kateglo.modules.entry.forms.Type',

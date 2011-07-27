@@ -4,12 +4,59 @@ Ext.define('kateglo.modules.entry.forms.Type', {
     tbar: [
         {
             text: 'Save',
-            iconCls: 'cpanel_sprite cpanel_disk'
+            iconCls: 'cpanel_sprite cpanel_disk',
+            disabled: true,
+            handler: function() {
+                var form = this.up('form').getForm();
+                var formPanel = this.up('form');
+                var tabPanel = this.up('panel').up('panel').up('panel');
+                var saveButton = formPanel.getDockedItems('toolbar')[0].getComponent(0);
+                var resetButton = formPanel.getDockedItems('toolbar')[0].getComponent(2);
+                var contentPanel = this.up('panel').up('panel');
+                console.log(Ext.JSON.encode(form.getValues()));
+//                var box = Ext.MessageBox.wait('Updating Entry Object.', 'Please wait!');
+//                Ext.Ajax.defaultHeaders = {
+//                    'Accept': 'application/json',
+//                    'Content-Type': 'application/json'
+//                };
+//                Ext.Ajax.request({
+//                    url: '/entri',
+//                    method: 'POST',
+//                    timeout: 60000,
+//                    jsonData: {
+//                        id: form.recordResult.id,
+//                        version: form.recordResult.version,
+//                        entry: form.getValues().entry
+//                    },
+//                    success: function(response, request) {
+//                        responseObj = Ext.JSON.decode(response.responseText);
+//                        form.recordResult.id = responseObj.id;
+//                        form.recordResult.version = responseObj.version;
+//                        form.recordResult.entry = responseObj.entry;
+//                        tabPanel.origTitle = 'Entri - ' + responseObj.entry;
+//                        formPanel.origTitle = responseObj.entry;
+//                        formPanel.setTitle(formPanel.origTitle);
+//                        tabPanel.setTitle(tabPanel.origTitle);
+//                        contentPanel.insert(0, new kateglo.modules.entry.forms.Entry({
+//                            recordResult: form.recordResult
+//                        }));
+//                        formPanel.destroy();
+//                        box.hide();
+//                        kateglo.utils.Message.msg('Success', 'Entry object saved');
+//                    },
+//                    failure: function(response, request) {
+//                        box.hide();
+//                        Ext.Msg.alert('Failed', 'something is wrong');
+//                    }
+//                });
+            }
         },
         '->',
         {
             text: 'Reset',
-            iconCls: 'cpanel_sprite cpanel_arrow_undo'
+            iconCls: 'cpanel_sprite cpanel_arrow_undo',
+            disabled: true,
+            handler: kateglo.modules.entry.utils.Form.reset
         }
     ],
     listeners: {
@@ -34,7 +81,10 @@ Ext.define('kateglo.modules.entry.forms.Type', {
                         hideTrigger: true,
                         store: store,
                         recordResult: component.recordResult.types,
-                        value: initVal
+                        value: initVal,
+                        listeners: {
+                            change: kateglo.modules.entry.utils.Form.change
+                        }
                     });
 
                     component.add(comboBox);
