@@ -3,117 +3,33 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Kateglo - Beranda</title>
-    <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Beranda</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
-<tal:block metal:fill-slot="header">
-    <section id="header" tal:define="wordOfTheDay entry/entry">
-        <div class="grid_1 nomargin-left">&nbsp;</div>
-        <div id="wordoftheday" class="grid_7">
-            <h4>Kata hari ini:</h4>
 
-            <h3 tal:content="entry/entry">Word of the Day</h3>
-            <a class="link" href="/entri/${wordOfTheDay}"><span>Tautan</span></a>
-
-        </div>
-        <!-- /#wordoftheday -->
-        <div id="meaning" class="grid_12 nomargin-right">
-            <ul>
-                <tal:block tal:repeat="definition entry/definitions">
-                    <li tal:content="definition">Definition</li>
-                </tal:block>
-            </ul>
-        </div>
-        <div class="clear"></div>
-    </section>
-    <br/>
-</tal:block>
 <tal:block metal:fill-slot="content">
+	<div class="w940 start">
+		<h1 class="logo">Kateglo</h1>
 
-    <section id="random" class="grid_6 nomargin-left">
-        <h3>
-            <small>entry</small>
-            Acak
-        </h3>
-        <ul class="datalist" id="entry-random">
-            <li class="loader">
-                <tal:block metal:use-macro="${appPath}/views/macros/loader.html/small"/>
-            </li>
-        </ul>
-        <!-- /.datalist -->
-    </section>
-    <div class="grid_1">&nbsp;</div>
+		<form name="search" action="${formAction}" method="GET" class="telusur">
+			<input type="text" name="${search/getFieldName}"
+			       value="${search/getFieldValue}"/>
+			<input class="submit" type="submit" value="${search/getButtonValue}"/>
+			<p><a href="#">Petunjuk Penelusuran</a> <a href="${formAction}/detail">Penelusuran lanjutan</a></p>
+		</form>
 
-    <section id="misspelled" class="grid_6">
-        <h3>
-            <small>salah</small>
-            Eja
-        </h3>
-        <ul class="datalist" id="misspelled-random">
-            <li class="loader">
-                <tal:block metal:use-macro="${appPath}/views/macros/loader.html/small"/>
-            </li>
-        </ul>
-        <!-- /.datalist -->
-    </section>
-    <div class="grid_1">&nbsp;</div>
-
-    <section id="rightcolumn" class="grid_6 nomargin-right">
-        <div id="login">
-            <h3>Masuk Log</h3>
-
-            <div class="login-form">
-                <label>Pengguna</label>
-                <input type="text" class="text" name="user"/>
-            </div>
-            <div class="login-form">
-                <label>Kata sandi</label>
-                <input type="password" class="text" name="password"/>
-            </div>
-            <div class="login-form">
-                <input type="checkbox" class="check" value="1" name="remember"/> Remember me
-            </div>
-            <div class="login-form">
-                <input type="submit" class="submit" value="Masuk"/>
-                <br/>
-
-                <p><a href="">Daftarkan saya</a> / <a href="">Lupa kata sandi</a></p>
-            </div>
-
-        </div>
-        <div id="social">
-            <div id="social-content">
-                <p>Atau gunakan situs-situs sosial di bawah ini untuk mendaftarkan diri dan atau masuk
-                    log. </p>
-                <ul>
-                    <li class="facebook"><a href="">Facebook</a></li>
-                    <li class="twitter"><a href="">Twitter</a></li>
-                    <li class="yahoo"><a href="">Yahoo</a></li>
-                    <li class="google"><a href="">Google</a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <!-- /#social-content -->
-        </div>
-    </section>
-    <div class="clear"></div>
-</tal:block>
-<tal:block metal:fill-slot="footer-stats">
-    <div id="stats">
-        <p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/entry">entry-amount</strong> entri
-            <a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/thesaurus">thesaurus-amount</strong>
-            entri <a href="/entri/tesaurus">tesaurus</a>,
-            <strong id="equivalent-amount" tal:content="amount/equivalent">equivalent-amount</strong> entri
-            <a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/proverb">proverb-amount</strong>
-            entri <a href="/entri/peribahasa">peribahasa</a>,
-            serta
-            <strong id="acronym-amount" tal:content="amount/acronym">acronym-amount</strong> entri
-            <a href="/entri/singkatan">singkatan</a>.
-        </p>
-    </div>
-    <!-- /#stats -->
+		<p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/entry">entry-amount</strong> entri
+			<a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/thesaurus">thesaurus-amount</strong>
+			entri <a href="/entri/tesaurus">tesaurus</a>,
+			<strong id="equivalent-amount" tal:content="amount/equivalent">equivalent-amount</strong> entri
+			<a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/proverb">proverb-amount</strong>
+			entri <a href="/entri/peribahasa">peribahasa</a>,
+			serta
+			<strong id="acronym-amount" tal:content="amount/acronym">acronym-amount</strong> entri
+			<a href="/entri/singkatan">singkatan</a>.</p>
+	</div>
 </tal:block>
 </body>
 </html>

@@ -7,13 +7,12 @@
 </head>
 <body tal:omit-tag="true" metal:define-macro="pagination">
 <div class="pagination" tal:condition="php: is_object(pagination)">
-    <ul tal:repeat="page pagination/getPages">
-        <li tal:condition="not: page/isCurrent">
+    <tal:block tal:repeat="page pagination/getPages">
+        <tal:block tal:condition="not: page/isCurrent">
             <a href="${formAction}/?${search/getFieldName}=${search/getFieldValue}&start=${page/getStart}">${page/getText}</a>
-        </li>
-        <li tal:condition="page/isCurrent" tal:content="page/getText"><strong>Text</strong></li>
-    </ul>
-    <br/>
+        </tal:block>
+        <strong tal:condition="page/isCurrent" tal:content="page/getText">Text</strong>
+    </tal:block>
 </div>
 </body>
 </html>
