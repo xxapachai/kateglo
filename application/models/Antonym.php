@@ -64,7 +64,7 @@ class Antonym {
 
     /**
      * @var kateglo\application\models\Meaning
-     * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
+     * @OneToOne(targetEntity="kateglo\application\models\Meaning")
      * @JoinColumn(name="antonym_antonym_id", referencedColumnName="meaning_id")
      */
     private $antonym;

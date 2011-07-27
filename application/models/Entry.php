@@ -63,19 +63,19 @@ class Entry {
 	private $entry;
 
 	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"all"})
 	 */
 	private $meanings;
 
 	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"all"})
 	 */
 	private $sources;
 
 	/**
-	 * @var Doctrine\Common\Collections\ArrayCollection
+	 * @var \Doctrine\Common\Collections\ArrayCollection
 	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="entry", cascade={"all"})
 	 */
 	private $equivalents;

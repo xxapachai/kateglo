@@ -64,7 +64,7 @@ class Synonym {
 
     /**
      * @var kateglo\application\models\Meaning
-     * @OneToOne(targetEntity="kateglo\application\models\Meaning", cascade={"all"})
+     * @OneToOne(targetEntity="kateglo\application\models\Meaning")
      * @JoinColumn(name="synonym_synonym_id", referencedColumnName="meaning_id")
      */
     private $synonym;

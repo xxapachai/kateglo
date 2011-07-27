@@ -72,7 +72,7 @@ class Equivalent {
 
     /**
      * @var Doctrine\Common\Collections\ArrayCollection
-     * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="equivalents", cascade={"all"})
+     * @ManyToMany(targetEntity="kateglo\application\models\Discipline", mappedBy="equivalents")
      */
     private $disciplines;
 
