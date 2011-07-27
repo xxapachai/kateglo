@@ -98,7 +98,7 @@ class Search implements interfaces\Search{
 	 * @return string
 	 */
 	public function getButtonValue(){
-		return "Cari";
+		return "Telusuri";
 	}
 }
 ?>
