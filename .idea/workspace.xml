@@ -4,7 +4,10 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="" />
+    <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/kateglo" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,10 +29,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="kateglo.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="kateglo.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/styles/kateglo.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="332" column="17" selection-start="6010" selection-end="6010" vertical-scroll-proportion="0.031894933">
+            <state line="332" column="17" selection-start="6010" selection-end="6010" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -44,10 +47,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/scripts/kamus/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="18" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.0">
+            <state line="34" column="18" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.575">
               <folding />
             </state>
           </provider>
@@ -204,6 +207,30 @@
     </navigator>
     <panes>
       <pane id="Favorites" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -258,30 +285,6 @@
             <PATH_ELEMENT USER_OBJECT="javascripts">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -6087,13 +6090,12 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31641287" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3049473" sideWeight="0.32407406" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30932525" sideWeight="0.68358713" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3358605" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32656515" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -6102,6 +6104,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20601852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31641287" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32730263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979724" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -6206,25 +6209,26 @@
         <state line="56" column="10" selection-start="1956" selection-end="1960" vertical-scroll-proportion="-18.192308" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/styles/kateglo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="332" column="17" selection-start="6010" selection-end="6010" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/macros/facet.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="53" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="8" column="53" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/scripts/kamus/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="18" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.0">
+        <state line="34" column="18" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.575">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/design-prototype/prototype2/search_result.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="1" selection-start="789" selection-end="805" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="29" column="1" selection-start="789" selection-end="805" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/faces/Pagination.php">
@@ -6244,30 +6248,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/macros/pagination.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="12" column="20" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/macros/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="99" selection-start="952" selection-end="952" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="17" column="99" selection-start="952" selection-end="952" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/scripts/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="82" selection-start="842" selection-end="869" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/styles/kateglo.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="332" column="17" selection-start="6010" selection-end="6010" vertical-scroll-proportion="0.031894933">
-          <folding />
-        </state>
+        <state line="19" column="82" selection-start="842" selection-end="869" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
   </component>
