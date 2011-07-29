@@ -110,24 +110,6 @@ class IndexController extends Zend_Controller_Action_Stubbles {
         }
     }
 
-    /**
-     * @return void
-     * @Get
-     * @Path('/')
-     * @Produces('application/json')
-     */
-    public
-    function indexJson() {
-
-        try {
-            $this->content = array('entry' => $this->entry->randomEntry(), 'misspelled' => $this->entry->randomMisspelled());
-        } catch (Apache_Solr_Exception $e) {
-            $this->content = array('error' => 'query error');
-        }
-
-        $this->_helper->json($this->content);
-    }
-
     private
     function wordOfTheDay() {
         $word[18] = 'kamus';

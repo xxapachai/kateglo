@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Kateglo - Tesaurus</title>
-    <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Tesaurus</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
-    <tal:block tal:condition="php: hits.getCount() GT 0">
-        <tal:block metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
-        <div class="facet-class" style="width: 500px; display: table-cell;">
+	<div class="w940" tal:condition="php: hits.getCount() GT 0">
+		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+		<tal:block metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
+		<content>
+			<div class="content">
+				<div class="cumb">
+					<a class="close" href="#">&times;</a>
 
-            <div tal:repeat="hit hits/getDocuments">
-                <div>
-                    <a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a>
-
-                    <div tal:condition="php: ( hit.getSynonyms().count() gt 0 )">
-                        <div tal:repeat="synonym hit/getSynonyms" style="padding-left:15px;">
-                            <div tal:content="synonym">Synonym</div>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-            </div>
-            <div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
-        </div>
-    </tal:block>
-    <tal:block metal:use-macro="${appPath}/views/macros/suggestion.html/suggestion"/>
+					<p><a href="#">Akronim</a> <a href="#">nomina</a> <strong>Fisika</strong></p>
+				</div>
+				<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
+				<div class="result">
+					<tal:block tal:repeat="hit hits/getDocuments">
+						<p>
+							<a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a><br/>
+							<tal:block tal:condition="php: ( hit.getSynonyms().count() gt 0 )">
+								<tal:block tal:repeat="synonym hit/getSynonyms">
+									<tal:block tal:content="synonym">Synonym</tal:block>
+									<br/>
+								</tal:block>
+							</tal:block>
+						</p>
+					</tal:block>
+				</div>
+				<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
+			</div>
+		</content>
+		<div class="clear"></div>
+	</div>
+	<tal:block metal:use-macro="${appPath}/views/macros/suggestion.html/suggestion"/>
 </tal:block>
 </body>
 </html>

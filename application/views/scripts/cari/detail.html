@@ -3,173 +3,110 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Kateglo - Penelusuran Lanjutan</title>
-    <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Penelusuran Lanjutan</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
-
 <tal:block metal:fill-slot="content">
-    <div id="detail-search">
-        <div>
-            <div>Gunakan formulir penelusuran dibawah maka permohonan penelusuran detail akan ditampilkan diatas</div>
-        </div>
-        <form method="GET" action="${formAction}" name="advancedSearchForm">
-            <div><h3>Temukan Hasil</h3>
-                <table cellspacing="0" cellpadding="2" width="100%">
-                    <tbody>
-                    <tr>
-                        <td class="label"><label>mengandung <b>seluruh</b> kata berikut:</label></td>
-                        <td class="input"><input type="text" value="" id="allWord" style="width:100%"/></td>
-                        <td id="query_tip"></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>dengan <b>frasa persis</b>:</label></td>
-                        <td class="input"><input type="text" value="" id="exactWord" style="width:100%"/></td>
-                        <td id="phrase-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="phrase-tip-span"
-                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>dengan sedikitnya <b>salah satu</b> kata dari:</label></td>
-                        <td id="or-cell" class="input">
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tbody>
-                                <tr>
-                                    <td width="31%"><input type="text" style="width:100%" value="" id="someWord0"/></td>
-                                    <td class="hint">&nbsp;atau&nbsp;</td>
-                                    <td width="31%"><input type="text" style="width:100%" value="" id="someWord1"/></td>
-                                    <td class="hint">&nbsp;atau&nbsp;</td>
-                                    <td width="31%"><input type="text" style="width:100%" value="" id="someWord2"/></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td id="or-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="or-tip-span"
-                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><h3 style="margin-top:.7em">Tapi jangan tampilkan</h3></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>kata/frasa yang tidak diinginkan ini:</label></td>
-                        <td class="input"><input type="text" value="" id="noWord" style="width:100%"/></td>
-                        <td id="not-tip" style="width: 1.2em; text-align: right; ">
-                            <span id="not-tip-span"
-                                  style="text-decoration:underline;color:#99f;cursor:pointer;font-size:90%;margin-left:.3em">tip</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <h3 style="margin-top:1em">Ingin lebih detail?</h3>
-                <table cellspacing="0" cellpadding="2" width="100%">
-                    <tbody>
-                    <tr>
-                        <td class="label"><label><b>Jumlah</b> hasil temuan pada tiap tampilan laman:</label></td>
-                        <td><select name="rows">
-                            <option value="10" selected="selected">10 hasil temuan</option>
-                            <option value="20">20 hasil temuan</option>
-                            <option value="30">30 hasil temuan</option>
-                            <option value="50">50 hasil temuan</option>
-                            <option value="100">100 hasil temuan</option>
-                        </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Memiliki kata dengan <b>bentuk</b>:</label></td>
-                        <td><select name="type">
-                            <option value="all" selected="selected">apa saja</option>
-                            <tal:block tal:repeat="type staticData/getType">
-                                <option value="${type/getType}">${type/getType}</option>
-                            </tal:block>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Memiliki kata dengan <b>kelas</b>:</label></td>
-                        <td><select name="class">
-                            <option value="all" selected="selected">apa saja</option>
-                            <tal:block tal:repeat="clazz staticData/getClazz">
-                                <option value="${clazz/getClazz}">${clazz/getClazz}</option>
-                            </tal:block>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Digunakan dalam <b>disiplin</b> ilmu:</label></td>
-                        <td>
-                            <select name="discipline">
-                                <option value="all" selected="selected">apa saja</option>
-                            <tal:block tal:repeat="discipline staticData/getDiscipline">
-                                <option value="${discipline/getDiscipline}">${discipline/getDiscipline}</option>
-                            </tal:block>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Memiliki <b>padanan</b> dalam bahasa:</label></td>
-                        <td><select name="language">
-                            <option value="all" selected="selected">apa saja</option>
-                            <tal:block tal:repeat="language staticData/getLanguage">
-                                <option value="${language/getLanguage}">${language/getLanguage}</option>
-                            </tal:block>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Memiliki <b>sumber</b> dari:</label></td>
-                        <td><select name="source">
-                            <option value="all" selected="selected">mana saja</option>
-                            <tal:block tal:repeat="source staticData/getSource">
-                                <option value="${source/getCategory}">${source/getCategory}</option>
-                            </tal:block>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td class="label"><label>Dengan penelusuran yang saya pilih ditampilkan di:</label></td>
-                        <td>
-                            <select name="siteArea">
-                                <option value="/cari"
-                                        tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana
-                                    saja di laman
-                                </option>
-                                <option value="/kamus"
-                                        tal:attributes="selected php: formAction EQ '/kamus' ? 'selected': NULL">Kamus
-                                </option>
-                                <option value="/tesaurus"
-                                        tal:attributes="selected php: formAction EQ '/tesaurus' ? 'selected': NULL">
-                                    Tesaurus
-                                </option>
-                                <option value="/padanan"
-                                        tal:attributes="selected php: formAction EQ '/padanan' ? 'selected': NULL">
-                                    Padanan
-                                </option>
-                                <option value="/peribahasa"
-                                        tal:attributes="selected php: formAction EQ '/peribahasa' ? 'selected': NULL">
-                                    Peribahasa
-                                </option>
-                                <option value="/singkatan"
-                                        tal:attributes="selected php: formAction EQ '/singkatan' ? 'selected': NULL">
-                                    Akronim dan Singkatan
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="toggle link" id="opt-handle">
-                    <table cellspacing="0" cellpadding="0style=&quot;margin-top:.5em&quot;" width="100%">
-                        <tbody>
-                        <tr>
-                            <td style="text-align:right"><input type="submit" name="submitAdvancedSearch" value="Penelusuran Kateglo"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
-    </div>
-
+	<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+	<content>
+		<div class="content">
+			Gunakan formulir penelusuran dibawah maka permohonan penelusuran detail akan ditampilkan diatas
+			<form method="GET" action="${formAction}" name="advancedSearchForm" class="advance">
+				<hr/>
+				<h3>Temukan Hasil</h3>
+				<label>mengandung seluruh kata berikut</label> <input type="text" value="" id="allWord"
+					/><br/>
+				<label>dengan frasa persis</label> <input type="text" value="" id="exactWord"/> <!--a
+					href="#">tip</a--><br/>
+				<label>dengan sedikitnya salah satu kata dari</label> <input type="text" value=""
+				                                                             id="someWord0"/> atau<br/>
+				<label></label> <input type="text" value="" id="someWord1"/> atau<br/>
+				<label></label> <input type="text" value="" id="someWord2"/> <!--a href="#">tip</a--><br/>
+				<hr/>
+				<h3>Tapi jangan tampilkan</h3>
+				<label>kata/frasa yang tidak diinginkan ini</label> <input type="text" value="" id="noWord"
+					/>
+				<!--a href="#">tip</a --><br/>
+				<hr/>
+				<h3>Ingin lebih detail?</h3>
+				<label><strong>Jumlah</strong> hasil temuan pada tiap tampilan laman</label>
+				<select name="rows">
+					<option value="10" selected="selected">10 hasil temuan</option>
+					<option value="20">20 hasil temuan</option>
+					<option value="30">30 hasil temuan</option>
+					<option value="50">50 hasil temuan</option>
+					<option value="100">100 hasil temuan</option>
+				</select><br/>
+				<label>Memiliki kata dengan <strong>bentuk</strong></label>
+				<select name="type">
+					<option value="all" selected="selected">apa saja</option>
+					<tal:block tal:repeat="type staticData/getType">
+						<option value="${type/getType}">${type/getType}</option>
+					</tal:block>
+				</select><br/>
+				<label>memiliki kata dengan <strong>kelas</strong></label>
+				<select name="class">
+					<option value="all" selected="selected">apa saja</option>
+					<tal:block tal:repeat="clazz staticData/getClazz">
+						<option value="${clazz/getClazz}">${clazz/getClazz}</option>
+					</tal:block>
+				</select><br/>
+				<label>Digunakan dalam <strong>disiplin</strong> ilmu</label>
+				<select name="discipline">
+					<option value="all" selected="selected">apa saja</option>
+					<tal:block tal:repeat="discipline staticData/getDiscipline">
+						<option value="${discipline/getDiscipline}">${discipline/getDiscipline}</option>
+					</tal:block>
+				</select><br/>
+				<label>Memiliki <strong>padanan</strong> dalam bahasa</label>
+				<select name="language">
+					<option value="all" selected="selected">apa saja</option>
+					<tal:block tal:repeat="language staticData/getLanguage">
+						<option value="${language/getLanguage}">${language/getLanguage}</option>
+					</tal:block>
+				</select><br/>
+				<label>Memiliki <strong>sumber</strong> dari</label>
+				<select name="source">
+					<option value="all" selected="selected">mana saja</option>
+					<tal:block tal:repeat="source staticData/getSource">
+						<option value="${source/getCategory}">${source/getCategory}</option>
+					</tal:block>
+				</select><br/>
+				<label>Dengan penelusuran yang saya pilih ditemukan di</label>
+				<select name="siteArea">
+					<option value="/cari"
+					        tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana
+						saja di laman
+					</option>
+					<option value="/kamus"
+					        tal:attributes="selected php: formAction EQ '/kamus' ? 'selected': NULL">Kamus
+					</option>
+					<option value="/tesaurus"
+					        tal:attributes="selected php: formAction EQ '/tesaurus' ? 'selected': NULL">
+						Tesaurus
+					</option>
+					<option value="/padanan"
+					        tal:attributes="selected php: formAction EQ '/padanan' ? 'selected': NULL">
+						Padanan
+					</option>
+					<option value="/peribahasa"
+					        tal:attributes="selected php: formAction EQ '/peribahasa' ? 'selected': NULL">
+						Peribahasa
+					</option>
+					<option value="/singkatan"
+					        tal:attributes="selected php: formAction EQ '/singkatan' ? 'selected': NULL">
+						Akronim dan Singkatan
+					</option>
+				</select><br/>
+				<hr/>
+				<input type="submit" name="submitAdvancedSearch"
+				       value="Telusuri Kateglo" class="button"/>
+			</form>
+		</div>
+	</content>
+	<div class="clear"></div>
 </tal:block>
 </body>
 </html>
