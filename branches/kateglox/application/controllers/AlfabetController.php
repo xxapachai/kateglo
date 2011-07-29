@@ -1,0 +1,231 @@
+<?php
+/*
+ *  $Id$
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the GPL 2.0. For more information, see
+ * <http://code.google.com/p/kateglo/>.
+ */
+use kateglo\application\services\interfaces\Pagination;
+use kateglo\application\faces\interfaces\Search;
+use kateglo\application\services\interfaces\Entry;
+use kateglo\application\services\interfaces\CPanel;
+use kateglo\application\services\interfaces\StaticData;
+use kateglo\application\controllers\exceptions\HTTPNotFoundException;
+use kateglo\application\faces\Hit;
+/**
+ *
+ *
+ *
+ * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
+ * @link http://code.google.com/p/kateglo/
+ * @since $LastChangedDate$
+ * @version $LastChangedRevision$
+ * @author  Arthur Purnama <arthur@purnama.de>
+ * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
+ */
+class AlfabetController extends Zend_Controller_Action_Stubbles {
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\Entry;
+	 */
+	private $entry;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\CPanel;
+	 */
+	private $cpanel;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\StaticData;
+	 */
+	private $staticData;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
+
+	/**
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\Pagination;
+	 */
+	private $pagination;
+
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $limit;
+
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $offset;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 *
+	 * @Inject
+	 */
+	public function setEntry(Entry $entry) {
+		$this->entry = $entry;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\CPanel $cpanel
+	 *
+	 * @Inject
+	 */
+	public function setCPanel(CPanel $cpanel) {
+		$this->cpanel = $cpanel;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 *
+	 * @Inject
+	 */
+	public function setStaticData(StaticData $staticData) {
+		$this->staticData = $staticData;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param \kateglo\application\faces\interfaces\Search $entry
+	 *
+	 * @Inject
+	 */
+	public function setSearch(Search $search) {
+		$this->search = $search;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param \kateglo\application\services\interfaces\Pagination $pagination
+	 *
+	 * @Inject
+	 */
+	public function setPagination(Pagination $pagination) {
+		$this->pagination = $pagination;
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Controller_Action::init()
+	 */
+	public function init() {
+		parent::init();
+		$this->view->search = $this->search;
+		$this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
+				: 10);
+		$this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
+				: 0);
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/{alfabet}')
+	 * @PathParam{alfabet}(alfabet)
+	 * @Produces('text/html')
+	 */
+	public function indexHtml($alfabet) {
+		$alfabet = strtolower($alfabet);
+		$this->_helper->viewRenderer->setNoRender();
+		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		try {
+			if (strlen($alfabet) === 1) {
+				if (ctype_alpha($alfabet)) {
+					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+					if (!$this->evaluatePreCondition($cacheId)) {
+						$this->view->search->setFieldValue($searchText);
+						/** @var $hits kateglo\application\faces\Hit */
+						$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, array('fq' => 'entryExact:' . $alfabet . '*'));
+						$this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
+						$this->view->hits = $hits;
+						$this->view->alfabet = $alfabet;
+						$this->view->formAction = '/alfabet/'.$alfabet;
+						$this->content = $this->_helper->viewRenderer->view->render('alfabet/index.html');
+
+					}
+					$this->responseBuilder($cacheId);
+				} else {
+					throw new HTTPNotFoundException('Invalid Char.');
+				}
+			} else {
+				throw new HTTPNotFoundException('Invalid Char.');
+			}
+		} catch (Apache_Solr_Exception $e) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+		}
+		$this->getResponse()->appendBody($this->content);
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/{alfabet}')
+	 * @PathParam{alfabet}(alfabet)
+	 * @Produces('application/json')
+	 */
+	public function indexJson($alfabet) {
+		$alfabet = strtolower($alfabet);
+		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		try {
+			if (strlen($alfabet) === 1) {
+				if (ctype_alpha($alfabet)) {
+					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+					if (!$this->evaluatePreCondition($cacheId)) {
+						/*@var $hits kateglo\application\faces\Hit */
+						$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alfabet . '*'));
+						$pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
+						$this->content = array('hits' => $hits, 'pagination' => $pagination, 'alfabet' => $alfabet);
+					}
+					$this->responseBuilder($cacheId);
+				} else {
+					throw new HTTPNotFoundException('Invalid Char.');
+				}
+			} else {
+				throw new HTTPNotFoundException('Invalid Char.');
+			}
+		} catch (Apache_Solr_Exception $e) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->content = array('error' => 'query error');
+		}
+		$this->_helper->json($this->content);
+	}
+
+}
+
+?>

@@ -9,7 +9,7 @@
 <body tal:omit-tag="true" metal:define-macro="facet">
 <aside>
 	<h3>Telusuri di</h3>
-	<ul>
+	<ul class="telusuri">
 		<li><a href="#">semua laman</a></li>
 		<li><a href="#">kamus</a></li>
 		<li><a href="#">tesaurus</a></li>
@@ -23,11 +23,11 @@
 				<li tal:condition="php: type GT 0">
 					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
 						<a href="${formAction}/?${search/getFieldName}=type:%22${repeat/type/key}%22">${repeat/type/key}
-							(${type})</a>
+							</a>
 					</tal:block>
 					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} type:%22${repeat/type/key}%22">${repeat/type/key}
-							(${type})</a>
+						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue}+type:%22${repeat/type/key}%22">${repeat/type/key}
+							</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -40,11 +40,11 @@
 				<li tal:condition="php: clazz GT 0">
 					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
 						<a href="${formAction}/?${search/getFieldName}=class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
-							(${clazz})</a>
+							</a>
 					</tal:block>
 					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
 						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
-							(${clazz})</a>
+							</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -57,11 +57,11 @@
 				<li tal:condition="php: source GT 0">
 					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
 						<a href="${formAction}/?${search/getFieldName}=sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
-							(${source})</a>
+							</a>
 					</tal:block>
 					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
 						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
-							(${source})</a>
+							</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -74,11 +74,11 @@
 				<li tal:condition="php: discipline GT 0">
 					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
 						<a href="${formAction}/?${search/getFieldName}=discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
-							(${discipline})</a>
+							</a>
 					</tal:block>
 					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
 						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
-							(${discipline})</a>
+							</a>
 					</tal:block>
 				</li>
 			</tal:block>

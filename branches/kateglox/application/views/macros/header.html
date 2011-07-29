@@ -8,14 +8,19 @@
 </head>
 <body tal:omit-tag="true" metal:define-macro="header">
 <header>
-	<h2>Kateglo</h2>
+	<a href="/" title="Beranda Kateglo"><h2>Kateglo</h2></a>
+
 	<form name="search" action="${formAction}" method="GET" class="telusur">
 		<input type="text" name="${search/getFieldName}"
-			       value="${search/getFieldValue}"/>
-			<input class="submit" type="submit" value="${search/getButtonValue}"/>
-		<p class="pright"><a href="#">Petunjuk Penelusuran</a> <a href="${formAction}/detail">Penelusuran lanjutan</a></p>
+		       value="${search/getFieldValue}" placeholder="Ketik yang dicari, kemudian tekan tombol enter"/>
+		<input class="submit" type="submit" value="${search/getButtonValue}"/>
 
-		<p class="pleft">Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>
+		<p class="pright"><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a>
+			<tal:block tal:condition="exists: hits"><a href="${formAction}/detail">Penelusuran lanjutan</a></tal:block>
+		</p>
+		<tal:block tal:condition="exists: hits">
+			<p class="pleft">Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>
+		</tal:block>
 	</form>
 
 	<div class="clear"></div>
