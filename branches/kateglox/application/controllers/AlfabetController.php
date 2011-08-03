@@ -155,26 +155,26 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * @return void
 	 * @Get
-	 * @Path('/{alfabet}')
-	 * @PathParam{alfabet}(alfabet)
+	 * @Path('/{alphabet}')
+	 * @PathParam{alphabet}(alphabet)
 	 * @Produces('text/html')
 	 */
-	public function indexHtml($alfabet) {
-		$alfabet = strtolower($alfabet);
+	public function indexHtml($alphabet) {
+		$alphabet = strtolower($alphabet);
 		$this->_helper->viewRenderer->setNoRender();
 		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
 		try {
-			if (strlen($alfabet) === 1) {
-				if (ctype_alpha($alfabet)) {
+			if (strlen($alphabet) === 1) {
+				if (ctype_alpha($alphabet)) {
 					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 					if (!$this->evaluatePreCondition($cacheId)) {
 						$this->view->search->setFieldValue($searchText);
 						/** @var $hits kateglo\application\faces\Hit */
-						$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, array('fq' => 'entryExact:' . $alfabet . '*'));
+						$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, array('fq' => 'entryExact:' . $alphabet . '*'));
 						$this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
 						$this->view->hits = $hits;
-						$this->view->alfabet = $alfabet;
-						$this->view->formAction = '/alfabet/'.$alfabet;
+						$this->view->alphabet = $alphabet;
+						$this->view->formAction = '/alfabet/' . $alphabet;
 						$this->content = $this->_helper->viewRenderer->view->render('alfabet/index.html');
 
 					}
@@ -195,22 +195,22 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * @return void
 	 * @Get
-	 * @Path('/{alfabet}')
-	 * @PathParam{alfabet}(alfabet)
+	 * @Path('/{alphabet}')
+	 * @PathParam{alphabet}(alphabet)
 	 * @Produces('application/json')
 	 */
-	public function indexJson($alfabet) {
-		$alfabet = strtolower($alfabet);
+	public function indexJson($alphabet) {
+		$alphabet = strtolower($alphabet);
 		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
 		try {
-			if (strlen($alfabet) === 1) {
-				if (ctype_alpha($alfabet)) {
+			if (strlen($alphabet) === 1) {
+				if (ctype_alpha($alphabet)) {
 					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 					if (!$this->evaluatePreCondition($cacheId)) {
 						/*@var $hits kateglo\application\faces\Hit */
-						$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alfabet . '*'));
+						$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alphabet . '*'));
 						$pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-						$this->content = array('hits' => $hits, 'pagination' => $pagination, 'alfabet' => $alfabet);
+						$this->content = array('hits' => $hits, 'pagination' => $pagination, 'alphabet' => $alphabet);
 					}
 					$this->responseBuilder($cacheId);
 				} else {
@@ -224,6 +224,29 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 			$this->content = array('error' => 'query error');
 		}
 		$this->_helper->json($this->content);
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/{alphabet}/detail')
+	 * @PathParam{alphabet}(alphabet)
+	 * @Produces('text/html')
+	 */
+	public function detailHtml($alphabet) {
+		$this->_helper->viewRenderer->setNoRender();
+		$cacheId = __CLASS__ . '\\' . 'detailHtml';
+
+		if (!$this->evaluatePreCondition($cacheId)) {
+			$this->view->alphabet = $alphabet;
+			$this->view->formAction = '/kamus';
+			$this->view->search->setFieldValue('entryExact:'.$alphabet.'*');
+			$this->view->staticData = $this->staticData->getStaticData();
+			$this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->getResponse()->appendBody($this->content);
 	}
 
 }

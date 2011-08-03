@@ -211,11 +211,9 @@ class PadananController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function detailHtml() {
 		$this->_helper->viewRenderer->setNoRender();
-		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-		$cacheId = __CLASS__ . '\\' . 'detailHtml' . '\\' . $searchText;
+		$cacheId = __CLASS__ . '\\' . 'detailHtml';
 
 		if (!$this->evaluatePreCondition($cacheId)) {
-			$this->view->search->setFieldValue($searchText);
 			$this->view->staticData = $this->staticData->getStaticData();
 			$this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
 		}

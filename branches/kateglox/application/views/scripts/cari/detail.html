@@ -9,14 +9,27 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
-	<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+	<header>
+		<a href="/" title="Beranda Kateglo"><h2>Kateglo</h2></a>
+
+		<form name="search" action="${formAction}" method="GET" class="telusur">
+			<input type="text" name="${search/getFieldName}"
+			       value="${search/getFieldValue}" placeholder="Ketik yang dicari, kemudian tekan tombol enter"/>
+			<input class="submit" type="submit" value="${search/getButtonValue}"/>
+
+			<p class="pright"><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a>
+			</p>
+		</form>
+
+		<div class="clear"></div>
+	</header>
 	<content>
 		<div class="content">
 			Gunakan formulir penelusuran dibawah maka permohonan penelusuran detail akan ditampilkan diatas
 			<form method="GET" action="${formAction}" name="advancedSearchForm" class="advance">
 				<hr/>
 				<h3>Temukan Hasil</h3>
-				<label>mengandung seluruh kata berikut</label> <input type="text" value="" id="allWord"
+				<label>mengandung seluruh kata berikut</label> <input type="text" value="${search/getFieldValue}" id="allWord"
 					/><br/>
 				<label>dengan frasa persis</label> <input type="text" value="" id="exactWord"/> <!--a
 					href="#">tip</a--><br/>
