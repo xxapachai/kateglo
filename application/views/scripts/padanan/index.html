@@ -33,14 +33,14 @@
 													[${discipline}]
 												</sup>
 											</td>
-											<td><a href="/entri/${entry}">${entry}</a></td>
+											<td><a href="/entri/${php: urlencode(entry)}">${entry}</a></td>
 										</tr>
 									</tal:block>
 								</tal:block>
 								<tal:block tal:condition="php: count(equivalent.getDisciplines()) eq 0">
 									<tr>
 										<td><em>${equivalent/getForeign}</em></td>
-										<td><a href="/entri/${entry}">${entry}</a></td>
+										<td><a href="/entri/${php: urlencode(entry)}">${entry}</a></td>
 									</tr>
 								</tal:block>
 							</tal:block>

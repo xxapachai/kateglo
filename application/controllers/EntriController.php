@@ -100,7 +100,47 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 				$this->view->search->setFieldValue($text);
 				$this->view->formAction = '/cari';
 				/** @var $entry \kateglo\application\models\Entry */
-				$entry = $this->entry->getEntry($text);
+				$entry = $this->entry->getEntryAsArray($text);
+				$countMeaning = count($entry['meanings']);
+				for ($i = 0; $i < $countMeaning; $i++) {
+					$meaning = $entry['meanings'][$i];
+					$classes = array();
+					$classNames = array();
+					$countDefinition = count($meaning['definitions']);
+					for ($j=0; $j < $countDefinition; $j++) {
+						$definition = $meaning['definitions'][$j];
+						$definition['index'] = $j+1;
+						if (array_key_exists('class', $definition)) {
+							$classObj = $definition['class'];
+							$className = $definition['class']['class'];
+							if (in_array($className, $classNames)) {
+								$classNameIndex = array_search($className, $classNames);
+								$classes[$classNameIndex]['definitions'][] = $definition;
+							} else {
+								$classNames[] = $className;
+								$preparedArray = array();
+								$preparedArray['class'] = $classObj;
+								$preparedArray['definitions'] = array();
+								$preparedArray['definitions'][] = $definition;
+								$classes[] = $preparedArray;
+							}
+						} else {
+							if (array_key_exists('', $classes)) {
+								$classNameIndex = array_search($className, $classNames);
+								$classes[$classNameIndex]['definitions'][] = $definition;
+							} else {
+								$classNames[] = '';
+								$preparedArray = array();
+								$preparedArray['definitions'] = array();
+								$preparedArray['definitions'][] = $definition;
+								$classes[] = $preparedArray;
+							}
+						}
+					}
+					$entry['meanings'][$i]['classes'] = $classes;
+				}
+				$jsonEncode = json_encode($entry);
+				$entry = json_decode($jsonEncode);
 				$this->view->entry = $entry;
 				$this->content = $this->_helper->viewRenderer->view->render('entri/index.html');
 			} catch (DomainResultEmptyException $e) {
@@ -196,7 +236,7 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 		$entryObj = json_decode($requestEntry);
 		if ($entryObj !== null) {
 			if (property_exists($entryObj, 'id') && property_exists($entryObj, 'version') &&
-				property_exists($entryObj, 'entry')
+			    property_exists($entryObj, 'entry')
 			) {
 				$entry = new models\Entry();
 				$entry->setEntry($entryObj->entry);
@@ -254,7 +294,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	public function deleteEntry($id) {
 		if ($id !== null && is_numeric($id)) {
 			$entry = $this->entry->delete(intval($id));
-			print_r($entry); die();
+			print_r($entry);
+			die();
 			if ($this->configs->cache->entry) {
 				$this->deleteAllCache($entry);
 			}
@@ -327,7 +368,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @return void
 	 */
 	private function deleteAllCache(models\Entry $entry) {
-		print_r($entry); die();
+		print_r($entry);
+		die();
 		$cacheId = __CLASS__ . '::entryByIdAsJson' . '\\' . $entry->getId();
 		$this->cache->delete($cacheId);
 
