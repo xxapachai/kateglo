@@ -9,198 +9,146 @@
 </head>
 <body metal:use-macro="${appPath}/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
-<div class="w940">
-<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
-<content>
-	<div class="content" style="max-width: 760px;">
-		<h1 tal:content="entry/getEntry">Entry</h1>
-		<nav><a href="#">Definisi</a> <a href="#">Tesaurus</a> <a href="#">Padanan</a> <a href="#">Sumber</a> <a
-				href="#">Korpus</a> <a href="#">Diskusi (3)</a> <a href="#">share</a><br/></nav>
-		<tal:block
-				tal:condition="php: ( is_object(entry.getMeanings()) && count(entry.getMeanings()) > 0 )">
-			<tal:block tal:repeat="meaning entry/getMeanings">
-				<dl>
-					<dt>
-						<tal:block
-								tal:condition="php: ( is_object(meaning.getSyllabels()) && count(meaning.getSyllabels()) > 0 )">
-							<tal:block tal:repeat="syllabel meaning/getSyllabels">
-								${syllabel/getSyllabel}&nbsp;</tal:block>
-						</tal:block>
-						<sup>${repeat/meaning/number}</sup>
-					</dt>
-					<tal:block
-							tal:condition="php: ( is_object(meaning.getSyllabels()) && count(meaning.getSyllabels()) > 0 )">
-						<tal:block tal:repeat="syllabel meaning/getSyllabels">
+	<div class="w940">
+		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+		<content>
+			<div class="content" style="max-width: 760px;">
+				<h1>${entry/entry}</h1>
+				<nav><a href="#">Definisi</a> <a href="#">Tesaurus</a> <a href="#">Padanan</a> <a href="#">Sumber</a> <a
+						href="#">Korpus</a> <a href="#">Diskusi (3)</a> <a href="#">share</a><br/></nav>
+				<tal:block
+						tal:condition="php: ( is_array(entry.meanings) && count(entry.meanings) > 0 )">
+					<tal:block tal:repeat="meaning entry/meanings">
+						<dl>
+							<dt tal:condition="php: (( is_array(meaning.syllabels) && count(meaning.syllabels) > 0 ) || ( count(entry.meanings) > 1))">
+								<tal:block
+										tal:condition="php: ( is_array(meaning.syllabels) && count(meaning.syllabels) > 0 )">
+									<tal:block tal:repeat="syllabel meaning/syllabels">
+										${syllabel/syllabel}&nbsp;
+										<tal:block
+												tal:condition="php: ( is_array(syllabel.pronounciations) && count(syllabel.pronounciations) > 0 )">
+											<tal:block tal:repeat="pronounciation syllabel/pronounciations">
+												${pronounciation/pronounciation}&nbsp;
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+								<tal:block tal:condition="php: ( count(entry.meanings) > 1)">
+									<sup>${repeat/meaning/number}</sup>
+								</tal:block>
+							</dt>
 							<tal:block
-									tal:condition="php: ( is_object(syllabel.getPronounciations()) && count(syllabel.getPronounciations()) > 0 )">
+									tal:condition="php: ( is_array(meaning.types) && count(meaning.types) > 0 )">
 								<dt>
-									<tal:block tal:repeat="pronounciation syllabel/getPronounciations">
-										${pronounciation/getPronounciation}&nbsp;
+									<tal:block tal:repeat="type meaning/types">
+										${type/type}&nbsp;
+										<tal:block tal:condition="php: is_object(type.category)">
+											(${type/category/category})
+										</tal:block>
 									</tal:block>
 								</dt>
 							</tal:block>
-						</tal:block>
-					</tal:block>
-					<tal:block
-							tal:condition="php: ( is_object(meaning.getTypes()) && count(meaning.getTypes()) > 0 )">
-						<dt>
-							<tal:block tal:repeat="type meaning/getTypes">
-								${type/getType}&nbsp;
-								<tal:block tal:condition="exists: type/getCategory">
-									(${type/getCategory/getCategory})
+							<tal:block
+									tal:condition="php: (is_array(meaning.classes) && count(meaning.classes) > 0 )">
+								<tal:block tal:repeat="class meaning/classes">
+									<tal:block tal:condition="exists: class/class">
+										<dt>
+											<strong>
+												<em>
+													${class/class/class}&nbsp;
+													<tal:block
+															tal:condition="php: is_object(class.class.category)">
+														(${class/class/category/category})
+													</tal:block>
+												</em>
+											</strong>
+										</dt>
+									</tal:block>
+									<tal:block
+											tal:condition="php: (is_array(class.definitions) && count(class.definitions) > 0 )">
+										<dd>
+											<ol start="${php: class.definitions[0].index}">
+												<li tal:repeat="definition class/definitions">
+													<tal:block
+															tal:condition="php: ( is_array(definition.disciplines) && count(definition.disciplines) > 0 )">
+														<em>(
+															<tal:block
+																	tal:repeat="discipline definition/disciplines">
+																${discipline/discipline}&nbsp;
+															</tal:block>
+															)</em>
+													</tal:block>
+													${definition/definition}
+													<tal:block
+															tal:condition="php: ( is_array(definition.samples) && count(definition.samples) > 0 )">
+														<p tal:repeat="sample definition/samples">
+															<em>${sample/sample}</em>
+														</p>
+													</tal:block>
+												</li>
+											</ol>
+										</dd>
+									</tal:block>
 								</tal:block>
 							</tal:block>
-						</dt>
+						</dl>
+						<tal:block
+								tal:condition="php: ( is_array(meaning.synonyms) && count(meaning.synonyms) > 0 )">
+							<dl>
+								<dt>
+								<h3>Sinonim <a class="more" href="#">selengkapnya &raquo;</a></h3>
+								</dt>
+								<dd>
+									<ul>
+										<tal:block tal:repeat="synonym meaning/synonyms">
+											<li tal:define="text synonym/meaning/entry/entry"><a
+													href="/entri/${text}">${text}</a>
+											</li>
+										</tal:block>
+									</ul>
+								</dd>
+							</dl>
+						</tal:block>
+						<tal:block
+								tal:condition="php: ( is_array(meaning.antonyms) && count(meaning.antonyms) > 0 )">
+							<dl>
+								<dt>
+								<h3>Antonim <a class="more" href="#">selengkapnya &raquo;</a></h3>
+								</dt>
+								<dd>
+									<ul>
+										<tal:block tal:repeat="antonym meaning/antonyms">
+											<li tal:define="text antonym/meaning/entry/entry"><a
+													href="/entri/${text}">${text}</a>
+											</li>
+										</tal:block>
+									</ul>
+								</dd>
+							</dl>
+						</tal:block>
+						<tal:block
+								tal:condition="php: ( is_array(meaning.relations) && count(meaning.relations) > 0 )">
+							<dl>
+								<dt>
+								<h3>Relasi <a class="more" href="#">selengkapnya &raquo;</a></h3>
+								</dt>
+								<dd>
+									<ul>
+										<tal:block tal:repeat="relation meaning/relations">
+											<li tal:define="text relation/meaning/entry/entry"><a
+													href="/entri/${text}">${text}</a>
+											</li>
+										</tal:block>
+									</ul>
+								</dd>
+							</dl>
+						</tal:block>
 					</tal:block>
-					<tal:block
-							tal:condition="php: is_object(meaning.getDefinitions()  )">
-						<dd>
-							<ol>
-								<li tal:repeat="definition meaning/getDefinitions">
-									<tal:block tal:condition="php: is_object(definition.getClazz())">
-										<strong><em>${definition/getClazz/getClazz}&nbsp;
-											<tal:block
-													tal:condition="php: is_object(definition.getClazz().getCategory())">
-												(${definition/getClazz/getCategory/getCategory})&nbsp;
-											</tal:block>
-										</em></strong>
-									</tal:block>
-									<tal:block
-											tal:condition="php: ( is_object(definition.getDisciplines()) && count(definition.getDisciplines()) > 0 )">
-										<em>(
-											<tal:block tal:repeat="discipline definition/getDisciplines">
-												${discipline/getDiscipline}&nbsp;
-											</tal:block>
-											)</em>
-									</tal:block>
-									${definition/getDefinition}
-									<tal:block
-											tal:condition="php: ( is_object(definition.getSamples()) && count(definition.getSamples()) > 0 )">
-										<p tal:repeat="sample definition/getSamples">
-											<em tal:content="sample/getSample">Sample</em>
-										</p>
-									</tal:block>
-								</li>
-							</ol>
-						</dd>
-					</tal:block>
-				</dl>
-				<tal:block
-						tal:condition="php: ( is_object(meaning.getSynonyms()) && count(meaning.getSynonyms()) > 0 )">
-					<dl>
-						<dt>
-						<h3>Sinonim <a class="more" href="#">selengkapnya &raquo;</a></h3>
-						</dt>
-						<dd>
-							<ul>
-								<tal:block tal:repeat="synonym meaning/getSynonyms">
-									<li tal:define="text synonym/getSynonym/getEntry/getEntry"><a
-											href="/entri/${text}">${text}</a>
-									</li>
-								</tal:block>
-							</ul>
-						</dd>
-					</dl>
 				</tal:block>
-				<tal:block
-						tal:condition="php: ( is_object(meaning.getAntonyms()) && count(meaning.getAntonyms()) > 0 )">
-					<dl>
-						<dt>
-						<h3>Antonim <a class="more" href="#">selengkapnya &raquo;</a></h3>
-						</dt>
-						<dd>
-							<ul>
-								<tal:block tal:repeat="antonym meaning/getAntonyms">
-									<li tal:define="text antonym/getAntonym/getEntry/getEntry"><a
-											href="/entri/${text}">${text}</a>
-									</li>
-								</tal:block>
-							</ul>
-						</dd>
-					</dl>
-				</tal:block>
-				<tal:block
-						tal:condition="php: ( is_object(meaning.getRelations()) && count(meaning.getRelations()) > 0 )">
-					<dl>
-						<dt>
-						<h3>Relasi <a class="more" href="#">selengkapnya &raquo;</a></h3>
-						</dt>
-						<dd>
-							<ul>
-								<tal:block tal:repeat="relation meaning/getRelations">
-									<li tal:define="text relation/getRelation/getEntry/getEntry"><a
-											href="/entri/${text}">${text}</a>
-									</li>
-								</tal:block>
-							</ul>
-						</dd>
-					</dl>
-				</tal:block>
-			</tal:block>
-		</tal:block>
+			</div>
+		</content>
+
 	</div>
-</content>
-
-<tal:block
-		tal:condition="php: ( is_object(entry.getMeanings()) && count(entry.getMeanings()) > 0 )">
-	<dl class="meanings" tal:repeat="meaning entry/getMeanings">
-
-		<dd>
-
-			<dl>
-
-				
-				<div tal:omit-tag="true"
-				     tal:condition="php: ( is_object(meaning.getMisspelleds()) && count(meaning.getMisspelleds()) > 0 )">
-					<dt>Salah pengejaan</dt>
-					<dd>
-						<ul tal:repeat="misspelled meaning/getMisspelleds">
-							<li tal:define="text misspelled/getMisspelled/getEntry/getEntry"><a
-									href="/entri/${text}">${text}</a></li>
-						</ul>
-					</dd>
-				</div>
-				<div tal:omit-tag="true"
-				     tal:condition="php: ( is_object(meaning.getSpelled()) && count(meaning.getSpelled()) > 0 )">
-					<dt>Ejaan yang benar</dt>
-					<dd>
-                            <span tal:define="text meaning/getSpelled/getMeaning/getEntry/getEntry"><a
-		                            href="/entri/${text}">${text}</a></span>
-					</dd>
-				</div>
-			</dl>
-		</dd>
-	</dl>
-</tal:block>
-<div tal:omit-tag="true"
-     tal:condition="php: ( is_object(entry.getEquivalents()) && count(entry.getEquivalents()) gt 0 )">
-	<hr/>
-	<div>
-		<dl class="glossary" tal:repeat="equivalent entry/getEquivalents">
-			<dt>
-                    <span class="glossary-locale"
-                          tal:content="equivalent/getForeign/getLanguage/getLanguage">Language</span>
-				<span tal:content="equivalent/getForeign/getForeign">Foreign</span>
-						<span tal:omit-tag="true" tal:condition="php: count(equivalent.getDisciplines()) gt 0">
-							<span class="glossary-discipline" tal:repeat="discipline equivalent/getDisciplines">
-								[<span tal:omit-tag="true" tal:content="discipline/getDiscipline">Discipline</span>]
-							</span>
-						</span>
-			</dt>
-		</dl>
-	</div>
-</div>
-<div tal:omit-tag="true"
-     tal:condition="php: ( is_object(entry.getSources()) && count(entry.getSources()) gt 0 )">
-	<hr/>
-	<div>
-		<dl class="source" tal:repeat="source entry/getSources">
-			<dt tal:content="source/getCategory/getCategory">Category</dt>
-			<dd tal:content="structure source/getSource">Source</dd>
-		</dl>
-	</div>
-</div>
-</div>
 </tal:block>
 </body>
 </html>

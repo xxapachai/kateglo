@@ -19,7 +19,7 @@
 				<div class="result">
 					<tal:block tal:repeat="hit hits/getDocuments">
 						<p>
-							<a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a><br/>
+							<a tal:define="global entry hit/getEntry;" href="/entri/${php: urlencode(entry)}">${entry}</a><br/>
 							<tal:block tal:repeat="definition hit/getDefinitions">
 								<tal:block tal:content="definition">Definition</tal:block>
 								<br/>
