@@ -59,6 +59,59 @@ class Search implements interfaces\Search {
 	 */
 	private $filters;
 
+	/**
+	 * @var string
+	 */
+	private $filterTypeUri;
+
+	/**
+	 * @var string
+	 */
+	private $filterClassUri;
+
+	/**
+	 * @var string
+	 */
+	private $filterSourceUri;
+
+	/**
+	 * @var string
+	 */
+	private $filterDisciplineUri;
+
+	/**
+	 * @var string
+	 */
+	private $filterTypeValue;
+
+	/**
+	 * @var string
+	 */
+	private $filterClassValue;
+
+	/**
+	 * @var string
+	 */
+	private $filterSourceValue;
+
+	/**
+	 * @var string
+	 */
+	private $filterDisciplineValue;
+
+	/**
+	 * @var string
+	 */
+	private $paginationUri;
+
+	/**
+	 * @var array
+	 */
+	private $filterQuery;
+
+	/**
+	 *
+	 */
 	public function __construct() {
 		$this->filters = new ArrayCollection();
 	}
@@ -99,6 +152,70 @@ class Search implements interfaces\Search {
 	 */
 	public function getFilterName() {
 		return "filter";
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterTypeValue() {
+		return $this->filterTypeValue;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterClassValue() {
+		return $this->filterClassValue;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterSourceValue() {
+		return $this->filterSourceValue;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterDisciplineValue() {
+		return $this->filterDisciplineValue;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterTypeUri() {
+		return $this->filterTypeUri;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterClassUri() {
+		return $this->filterClassUri;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterSourceUri() {
+		return $this->filterSourceUri;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getFilterDisciplineUri() {
+		return $this->filterDisciplineUri;
 	}
 
 	/**
@@ -153,20 +270,119 @@ class Search implements interfaces\Search {
 		return $this->filters;
 	}
 
-	public function createFilters(){
-		if(is_string($this->filterUri) && trim($this->filterUri) !== ''){
+	/**
+	 * @return string
+	 */
+	public function getPaginationUri() {
+		return $this->paginationUri;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFilterQuery() {
+		return $this->filterQuery;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function createFilters() {
+		$filters = array();
+		$filtersMap = array();
+		if (is_string($this->filterUri) && trim($this->filterUri) !== '') {
 			$commaExplode = array_map('trim', explode(',', $this->filterUri));
 			$countCommaExplode = count($commaExplode);
-			for($i = 0; $i < $countCommaExplode; $i++){
-				$filterUri = implode(',', array_slice($commaExplode, 0, $i+1));
-				$nameValExplode = array_map('trim', explode(':',$commaExplode[$i]));
+			for ($i = 0; $i < $countCommaExplode; $i++) {
+				$filterUri = implode(',', array_slice($commaExplode, 0, $i + 1));
+				$nameValExplode = array_map('trim', explode(':', $commaExplode[$i]));
 				$filter = new Filter();
 				$filter->setName($nameValExplode[0]);
 				$filter->setValue($nameValExplode[1]);
 				$filter->setUri($filterUri);
+				$filters[] = $filter;
+				$filtersMap[$nameValExplode[0]] = $filter;
 			}
-			
+
 		}
+		$this->filterTypeValue = array_key_exists('t', $filtersMap) ? $filtersMap['t']->getValue() : null;
+		$this->filterClassValue = array_key_exists('c', $filtersMap) ? $filtersMap['c']->getValue() : null;
+		$this->filterSourceValue = array_key_exists('s', $filtersMap) ? $filtersMap['s']->getValue() : null;
+		$this->filterDisciplineValue = array_key_exists('d', $filtersMap) ? $filtersMap['d']->getValue() : null;
+		$queryUri = $this->fieldValue != '' ? 'query=' . $this->fieldValue . '&filter=' : 'filter=';
+		$typeUri = array();
+		foreach ($filters as $filter) {
+			if ($filter->getName() !== 't') {
+				$typeUri[] = $filter->getUri();
+			}
+		}
+		$filterTypeUri = implode(',', $typeUri);
+		if ($filterTypeUri != '') {
+			$filterTypeUri .= ',';
+		}
+		$this->filterTypeUri = $queryUri . $filterTypeUri;
+		$classUri = array();
+		foreach ($filters as $filter) {
+			if ($filter->getName() !== 'c') {
+				$classUri[] = $filter->getUri();
+			}
+		}
+		$filterClassUri = implode(',', $classUri);
+		if ($filterClassUri != '') {
+			$filterClassUri .= ',';
+		}
+		$this->filterClassUri = $queryUri . $filterClassUri;
+		$sourceUri = array();
+		foreach ($filters as $filter) {
+			if ($filter->getName() !== 's') {
+				$sourceUri[] = $filter->getUri();
+			}
+		}
+		$filterSourceUri = implode(',', $sourceUri);
+		if ($filterSourceUri != '') {
+			$filterSourceUri .= ',';
+		}
+		$this->filterSourceUri = $queryUri . $filterSourceUri;
+		$disciplineUri = array();
+		foreach ($filters as $filter) {
+			if ($filter->getName() !== 'd') {
+				$disciplineUri[] = $filter->getUri();
+			}
+		}
+		$filterDisciplineUri = implode(',', $disciplineUri);
+		if ($filterDisciplineUri != '') {
+			$filterDisciplineUri .= ',';
+		}
+		$this->filterDisciplineUri = $queryUri . $filterDisciplineUri;
+		$this->filters = new ArrayCollection($filters);
+		$this->paginationUri = ($this->fieldValue != '' ? 'query=' . $this->fieldValue . '&' : '');
+		$this->paginationUri = ($this->filterUri != '' ? $this->paginationUri . 'filter=' . $this->filterUri . '&'
+				: '');
+
+		$filterQueryArray = array();
+		$filterUriArray = array();
+		foreach ($filters as $filter) {
+			switch ($filter->getName()) {
+				case 't':
+					$filterQueryArray[] = 'typeExact:' . $filter->getValue();
+					$filterUriArray[] = 't:' . $filter->getValue();
+					break;
+				case 'c':
+					$filterQueryArray[] = 'classExact:' . $filter->getValue();
+					$filterUriArray[] = 'c:' . $filter->getValue();
+					break;
+				case 's':
+					$filterQueryArray[] = 'sourceExact:' . $filter->getValue();
+					$filterUriArray[] = 's:' . $filter->getValue();
+					break;
+				case 'd':
+					$filterQueryArray[] = 'disciplineExact:' . $filter->getValue();
+					$filterUriArray[] = 'd:' . $filter->getValue();
+					break;
+			}
+			$filter->setUri($queryUri.implode(',', $filterUriArray));
+		}
+		$this->filterQuery = implode(' ', $filterQueryArray);
 	}
 }
 

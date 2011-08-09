@@ -32,48 +32,89 @@ namespace kateglo\application\faces\interfaces;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 interface Search {
-	
+
 	const INTERFACE_NAME = __CLASS__;
-	
+
 	/**
 	 * @return the $formAction
 	 */
-	function getFormAction() ;
-	
+	function getFormAction();
+
 	/**
 	 * @param string $formAction
 	 */
-	function setFormAction($formAction) ;
-	
+	function setFormAction($formAction);
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	function getFormMethod();
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	function getFieldName();
-	
+
 	/**
-	 * 
+	 *
+	 * @return string
+	 */
+	function getFilterName();
+
+	/**
+	 *
 	 * @return string
 	 */
 	function setFieldValue($fieldValue);
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	function getFieldValue();
-	
+
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	function getButtonValue();
+
+	/**
+	 * @param string $filterUri
+	 */
+	function setFilterUri($filterUri);
+
+	/**
+	 * @return string
+	 */
+	function getFilterUri();
+
+	/**
+	 * @param \Doctrine\Common\Collections\ArrayCollection $filters
+	 */
+	function setFilters($filters);
+
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getFilters();
+
+	/**
+	 * @return array
+	 */
+	function createFilters();
+
+	/**
+	 * @return string
+	 */
+	function getPaginationUri();
+
+	/**
+	 * @return string
+	 */
+	function getFilterQuery();
 }
 
 ?>

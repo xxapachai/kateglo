@@ -23,6 +23,7 @@ use kateglo\application\faces\interfaces\Search;
 use kateglo\application\controllers\exceptions\HTTPBadRequestException;
 use kateglo\application\controllers\exceptions\HTTPNotFoundException;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
+use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\services;
 use kateglo\application\models;
 /**
@@ -48,6 +49,13 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\StaticData;
+	 */
+	private $staticData;
+
+	/**
+	 *
+	 * Enter description here ...
 	 * @var kateglo\application\faces\interfaces\Search;
 	 */
 	private $search;
@@ -61,6 +69,17 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function setEntry(services\interfaces\Entry $entry) {
 		$this->entry = $entry;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 *
+	 * @Inject
+	 */
+	public function setStaticData(StaticData $staticData) {
+		$this->staticData = $staticData;
 	}
 
 	/**
@@ -99,17 +118,16 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 			try {
 				$this->view->search->setFieldValue($text);
 				$this->view->formAction = '/cari';
-				/** @var $entry \kateglo\application\models\Entry */
 				$entry = $this->entry->getEntryAsArray($text);
 				$countMeaning = count($entry['meanings']);
 				for ($i = 0; $i < $countMeaning; $i++) {
+					$index = 0;
 					$meaning = $entry['meanings'][$i];
 					$classes = array();
 					$classNames = array();
 					$countDefinition = count($meaning['definitions']);
-					for ($j=0; $j < $countDefinition; $j++) {
+					for ($j = 0; $j < $countDefinition; $j++) {
 						$definition = $meaning['definitions'][$j];
-						$definition['index'] = $j+1;
 						if (array_key_exists('class', $definition)) {
 							$classObj = $definition['class'];
 							$className = $definition['class']['class'];
@@ -137,12 +155,183 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 							}
 						}
 					}
+					foreach($classes as &$class){
+						foreach($class['definitions'] as &$definition){
+							$definition['index'] = $index + 1;
+							$index++;
+						}
+					}
 					$entry['meanings'][$i]['classes'] = $classes;
 				}
 				$jsonEncode = json_encode($entry);
 				$entry = json_decode($jsonEncode);
 				$this->view->entry = $entry;
 				$this->content = $this->_helper->viewRenderer->view->render('entri/index.html');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
+			}
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->getResponse()->appendBody($this->content);
+	}
+
+	/**
+	 * @var string $text
+	 * @return void
+	 * @Get
+	 * @Path('/{entry}/tesaurus')
+	 * @PathParam{text}(entry)
+	 * @Produces('text/html')
+	 */
+	public function thesaurusHtml($text) {
+		$this->_helper->viewRenderer->setNoRender();
+		$cacheId = __METHOD__ . '\\' . $text;
+
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$this->view->search->setFieldValue($text);
+				$this->view->formAction = '/cari';
+				/** @var $entry \kateglo\application\models\Entry */
+				$entry = $this->entry->getEntry($text);
+				$entryArray = array();
+				$entryArray['entry'] = $entry->getEntry();
+				$entryArray['synonyms'] = array();
+				$entryArray['antonyms'] = array();
+				$entryArray['relations'] = array();
+				/** @var $meaning \kateglo\application\models\Meaning */
+				foreach ($entry->getMeanings() as $meaning) {
+					/** @var $antonym \kateglo\application\models\Antonym */
+					foreach ($meaning->getAntonyms() as $antonym) {
+						if (!in_array($antonym->getAntonym()->getEntry()->getEntry(), $entryArray['antonyms'])) {
+							$entryArray['antonyms'][] = $antonym->getAntonym()->getEntry()->getEntry();
+						}
+					}
+					/** @var $synonym \kateglo\application\models\Synonym */
+					foreach ($meaning->getSynonyms() as $synonym) {
+						if (!in_array($synonym->getSynonym()->getEntry()->getEntry(), $entryArray['synonyms'])) {
+							$entryArray['synonyms'][] = $synonym->getSynonym()->getEntry()->getEntry();
+						}
+					}
+					/** @var $relation \kateglo\application\models\Relation */
+					foreach ($meaning->getRelations() as $relation) {
+						if (!in_array($relation->getRelation()->getEntry()->getEntry(), $entryArray['relations'])) {
+							$entryArray['relations'][] = $relation->getRelation()->getEntry()->getEntry();
+						}
+					}
+				}
+
+				$jsonEncode = json_encode($entryArray);
+				$entry = json_decode($jsonEncode);
+				$this->view->entry = $entry;
+				$this->content = $this->_helper->viewRenderer->view->render('entri/thesaurus.html');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
+			}
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->getResponse()->appendBody($this->content);
+	}
+
+	/**
+	 * @var string $text
+	 * @return void
+	 * @Get
+	 * @Path('/{entry}/padanan')
+	 * @PathParam{text}(entry)
+	 * @Produces('text/html')
+	 */
+	public function equivalentHtml($text) {
+		$this->_helper->viewRenderer->setNoRender();
+		$cacheId = __METHOD__ . '\\' . $text;
+
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$this->view->search->setFieldValue($text);
+				$this->view->formAction = '/cari';
+				/** @var $entry \kateglo\application\models\Entry */
+				$entry = $this->entry->getEntryAsArray($text);
+				$static = $this->staticData->getLanguages();
+				$jsonEncode = json_encode($entry);
+				$entry = json_decode($jsonEncode);
+				$this->view->entry = $entry;
+				$this->view->static = $static;
+				$this->view->lang = '';
+				$this->content = $this->_helper->viewRenderer->view->render('entri/equivalent.html');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
+			}
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->getResponse()->appendBody($this->content);
+	}
+
+	/**
+	 * @var string $text
+	 * @return void
+	 * @Get
+	 * @Path('/{entry}/padanan/{language}')
+	 * @PathParam{text}(entry)
+	 * @PathParam{language}(language)
+	 * @Produces('text/html')
+	 */
+	public function equivalentLanguageHtml($text, $language) {
+		$this->_helper->viewRenderer->setNoRender();
+		$cacheId = __METHOD__ . '\\' . $text . '\\' . $language;
+
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$this->view->search->setFieldValue($text);
+				$this->view->formAction = '/cari';
+				/** @var $entry \kateglo\application\models\Entry */
+				$entry = $this->entry->getEntryAsArray($text);
+				$static = $this->staticData->getLanguages();
+				$jsonEncode = json_encode($entry);
+				$entryObj = json_decode($jsonEncode);
+				$newEquivalents = array();
+				foreach ($entryObj->equivalents as $equivalent) {
+					if (strtolower($equivalent->foreign->language->language) == $language) {
+						$newEquivalents[] = $equivalent;
+					}
+				}
+				$entryObj->equivalents = $newEquivalents;
+				$this->view->entry = $entryObj;
+				$this->view->static = $static;
+				$this->view->lang = $language;
+				$this->content = $this->_helper->viewRenderer->view->render('entri/equivalent.html');
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
+			}
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->getResponse()->appendBody($this->content);
+	}
+
+	/**
+	 * @var string $text
+	 * @return void
+	 * @Get
+	 * @Path('/{entry}/sumber')
+	 * @PathParam{text}(entry)
+	 * @Produces('text/html')
+	 */
+	public function sourceHtml($text) {
+		$this->_helper->viewRenderer->setNoRender();
+		$cacheId = __METHOD__ . '\\' . $text;
+
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$this->view->search->setFieldValue($text);
+				$this->view->formAction = '/cari';
+				/** @var $entry \kateglo\application\models\Entry */
+				$entry = $this->entry->getEntryAsArray($text);
+				$jsonEncode = json_encode($entry);
+				$entry = json_decode($jsonEncode);
+				$this->view->entry = $entry;
+				$this->content = $this->_helper->viewRenderer->view->render('entri/source.html');
 			} catch (DomainResultEmptyException $e) {
 				throw new HTTPNotFoundException('Entry Not Found.');
 			}

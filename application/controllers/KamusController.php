@@ -160,13 +160,16 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function indexHtml() {
 		$this->_helper->viewRenderer->setNoRender();
-		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		$searchText = $this->getRequest()->getParam($this->search->getFieldName());
+		$filterText = $this->getRequest()->getParam($this->search->getFilterName());
 		try {
-			$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+			$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $filterText . '\\' . $this->offset . '\\' . $this->limit;
 			if (!$this->evaluatePreCondition($cacheId)) {
+				$this->search->setFilterUri($filterText);
 				$this->view->search->setFieldValue($searchText);
+				$this->search->createFilters();
 				/** @var $hits kateglo\application\faces\Hit */
-				$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit);
+				$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, array('fq' => $this->search->getFilterQuery()));
 				$this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
 				$this->view->hits = $hits;
 				$this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());

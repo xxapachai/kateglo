@@ -16,7 +16,7 @@
 		<input class="submit" type="submit" value="${search/getButtonValue}"/>
 
 		<p class="pright"><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a>
-			<tal:block tal:condition="exists: hits"><a href="${formAction}/detail">Penelusuran lanjutan</a></tal:block>
+			<a href="${formAction}/detail">Penelusuran lanjutan</a>
 		</p>
 		<tal:block tal:condition="exists: hits">
 			<p class="pleft">Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>

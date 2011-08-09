@@ -7,10 +7,16 @@
 	<title>Kateglo - Filter</title>
 </head>
 <body tal:omit-tag="true" metal:define-macro="filter">
-<div class="cumb">
-	<a class="close" href="${formAction}/">&times;</a>
+<div tal:condition="php: search.getFilterUri() NE ''" class="cumb">
+	<a tal:condition="php: search.getFieldValue() EQ ''" class="close" href="${formAction}">&times;</a>
+	<a tal:condition="php: search.getFieldValue() NE ''" class="close"
+	   href="${formAction}?query=${php: urlencode(search.getFieldValue())}">&times;</a>
 
-	<p><a href="${formAction}/">Akronim</a> <a href="${formAction}/#">nomina</a> <strong>Fisika</strong></p>
+	<p>
+		<tal:block tal:repeat="filter search/getFilters">
+			<a tal:condition="not: repeat/filter/end" href="${formAction}/?${php: urlencode(filter.getUri())}">${filter/getValue}</a>
+		</tal:block>
+	</p>
 </div>
 </body>
 </html>

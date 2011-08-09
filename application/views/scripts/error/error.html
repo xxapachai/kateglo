@@ -6,10 +6,10 @@
 <title>Kateglo - Error</title>
 <meta metal:use-macro="${appPath}/views/macros/head.html/head" />
 </head>
-<body metal:use-macro="${appPath}/views/macros/body.html/body">
+<body tal:define="headerNav string: " metal:use-macro="${appPath}/views/macros/body.html/body">
 	<div tal:omit-tag="true"  metal:fill-slot="content">
 	    <div style="text-align: center;">
-			<img src="/images/404_uh_oh.jpg" alt="404" />		
+		    404
 		</div>
 	</div>
 </body>
