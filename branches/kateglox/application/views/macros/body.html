@@ -19,31 +19,31 @@
 		<div class="topleft">
 			<ul>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/' OR formAction EQ '/cari' ? 'on' : null" href="/">
+					<a tal:attributes="class php: headerNav EQ 'beranda' ? 'on' : null" href="/">
 						Beranda
 					</a></li>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/kamus' ? 'on' : null; href php: empty(searchFieldValue) ? '/kamus' : '/kamus?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'kamus' ? 'on' : null; href php: empty(searchFieldValue) ? '/kamus' : '/kamus?query='.searchFieldValue">
 						Kamus
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/tesaurus' ? 'on' : null; href php: empty(searchFieldValue) ? '/tesaurus' : '/tesaurus?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'tesaurus' ? 'on' : null; href php: empty(searchFieldValue) ? '/tesaurus' : '/tesaurus?query='.searchFieldValue">
 						Tesaurus
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/padanan' ? 'on' : null; href php: empty(searchFieldValue) ? '/padanan' : '/padanan?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'padanan' ? 'on' : null; href php: empty(searchFieldValue) ? '/padanan' : '/padanan?query='.searchFieldValue">
 						Padanan
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/peribahasa' ? 'on' : null; href php: empty(searchFieldValue) ? '/peribahasa' : '/peribahasa?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'peribahasa' ? 'on' : null; href php: empty(searchFieldValue) ? '/peribahasa' : '/peribahasa?query='.searchFieldValue">
 						Peribahasa
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: formAction EQ '/singkatan' ? 'on' : null; href php: empty(searchFieldValue) ? '/singkatan' : '/singkatan?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'singkatan' ? 'on' : null; href php: empty(searchFieldValue) ? '/singkatan' : '/singkatan?query='.searchFieldValue">
 						Singkatan
 					</a>
 				</li>
@@ -77,7 +77,7 @@
 		</ul>
 		<!-- footnav -->
 		<ul class="abc">
-			<li  class="no"><a href="/alfabet/a">A</a></li>
+			<li class="no"><a href="/alfabet/a">A</a></li>
 			<li><a href="/alfabet/b">B</a></li>
 			<li><a href="/alfabet/c">C</a></li>
 			<li><a href="/alfabet/d">D</a></li>
@@ -112,6 +112,7 @@
 
 <script type="text/javascript" src="/libs/jquery-1.6-debug.js"/>
 <script type="text/javascript" src="/libs/jquery-typewatch-2.0.0-debug.js"/>
+<script type="text/javascript" src="/libs/jquery-ui-1.8.14.custom.min.js"/>
 <script type="text/javascript" src="/javascripts/javascript.js"/>
 </body>
 </html>

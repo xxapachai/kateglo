@@ -10,10 +10,40 @@
 <aside>
 	<h3>Telusuri di</h3>
 	<ul class="telusuri">
-		<li><a href="#">semua laman</a></li>
-		<li><a href="#">kamus</a></li>
-		<li><a href="#">tesaurus</a></li>
-		<li><a href="#">padanan</a></li>
+		<tal:block tal:condition="php: search.getFieldValue() EQ ''">
+			<li tal:condition="php: facetNav NE 'cari'"><a href="/cari">semua laman</a></li>
+			<li tal:condition="php: facetNav EQ 'cari'">semua laman</li>
+			<li tal:condition="php: facetNav NE 'kamus'"><a href="/kamus">kamus</a></li>
+			<li tal:condition="php: facetNav EQ 'kamus'">kamus</li>
+			<li tal:condition="php: facetNav NE 'tesaurus'"><a href="/tesaurus">tesaurus</a></li>
+			<li tal:condition="php: facetNav EQ 'tesaurus'">tesaurus</li>
+			<li tal:condition="php: facetNav NE 'padanan'"><a href="/padanan">padanan</a></li>
+			<li tal:condition="php: facetNav EQ 'padanan'">padanan</li>
+			<li tal:condition="php: facetNav NE 'peribahasa'"><a href="/peribahasa">peribahasa</a></li>
+			<li tal:condition="php: facetNav EQ 'peribahasa'">peribahasa</li>
+			<li tal:condition="php: facetNav NE 'singkatan'"><a href="/singkatan">singkatan</a></li>
+			<li tal:condition="php: facetNav EQ 'singkatan'">singkatan</li>
+		</tal:block>
+		<tal:block tal:condition="php: search.getFieldValue() NE ''">
+			<li tal:condition="php: facetNav NE 'cari'"><a href="/cari?query=${php: urlencode(search.getFieldValue())}">semua
+				laman</a></li>
+			<li tal:condition="php: facetNav EQ 'cari'">semua laman</li>
+			<li tal:condition="php: facetNav NE 'kamus'"><a
+					href="/kamus?query=${php: urlencode(search.getFieldValue())}">kamus</a></li>
+			<li tal:condition="php: facetNav EQ 'kamus'">kamus</li>
+			<li tal:condition="php: facetNav NE 'tesaurus'"><a
+					href="/tesaurus?query=${php: urlencode(search.getFieldValue())}">tesaurus</a></li>
+			<li tal:condition="php: facetNav EQ 'tesaurus'">tesaurus</li>
+			<li tal:condition="php: facetNav NE 'padanan'"><a
+					href="/padanan?query=${php: urlencode(search.getFieldValue())}">padanan</a></li>
+			<li tal:condition="php: facetNav EQ 'padanan'">padanan</li>
+			<li tal:condition="php: facetNav NE 'peribahasa'"><a
+					href="/peribahasa?query=${php: urlencode(search.getFieldValue())}">peribahasa</a></li>
+			<li tal:condition="php: facetNav EQ 'peribahasa'">peribahasa</li>
+			<li tal:condition="php: facetNav NE 'singkatan'"><a
+					href="/singkatan?query=${php: urlencode(search.getFieldValue())}">singkatan</a></li>
+			<li tal:condition="php: facetNav EQ 'singkatan'">singkatan</li>
+		</tal:block>
 	</ul>
 	<hr/>
 	<tal:block tal:condition="php: hits.getFacet().getType().count() GT 0">
@@ -21,13 +51,13 @@
 		<ul>
 			<tal:block tal:repeat="type hits/getFacet/getType">
 				<li tal:condition="php: type GT 0">
-					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
-						<a href="${formAction}/?${search/getFieldName}=type:%22${repeat/type/key}%22">${repeat/type/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterTypeValue()) EQ repeat.type.key ">
+						${repeat/type/key}
 					</tal:block>
-					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue}+type:%22${repeat/type/key}%22">${repeat/type/key}
-							</a>
+					<tal:block tal:condition="php:trim(search.getFilterTypeValue()) NE repeat.type.key ">
+						<a href="${formAction}/?${search/getFilterTypeUri}t:${php: urlencode(repeat.type.key)}">
+							${repeat/type/key}
+						</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -38,13 +68,13 @@
 		<ul>
 			<tal:block tal:repeat="clazz hits/getFacet/getClazz">
 				<li tal:condition="php: clazz GT 0">
-					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
-						<a href="${formAction}/?${search/getFieldName}=class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterClassValue()) EQ repeat.clazz.key ">
+						${repeat/clazz/key}
 					</tal:block>
-					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} class:%22${repeat/clazz/key}%22">${repeat/clazz/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterClassValue()) NE repeat.clazz.key ">
+						<a href="${formAction}/?${search/getFilterClassUri}c:${php: urlencode(repeat.clazz.key)}">
+							${repeat/clazz/key}
+						</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -55,13 +85,13 @@
 		<ul>
 			<tal:block tal:repeat="source hits/getFacet/getSource">
 				<li tal:condition="php: source GT 0">
-					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
-						<a href="${formAction}/?${search/getFieldName}=sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterSourceValue()) EQ repeat.source.key ">
+						${repeat/source/key}
 					</tal:block>
-					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} sourceCategory:%22${repeat/source/key}%22">${repeat/source/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterSourceValue()) NE repeat.source.key ">
+						<a href="${formAction}/?${search/getFilterSourceUri}s:${php: urlencode(repeat.source.key)}">
+							${repeat/source/key}
+						</a>
 					</tal:block>
 				</li>
 			</tal:block>
@@ -72,13 +102,13 @@
 		<ul>
 			<tal:block tal:repeat="discipline hits/getFacet/getDiscipline">
 				<li tal:condition="php: discipline GT 0">
-					<tal:block tal:condition="php: trim(search.getFieldValue()) EQ '' ">
-						<a href="${formAction}/?${search/getFieldName}=discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterDisciplineValue()) EQ repeat.discipline.key ">
+						${repeat/discipline/key}
 					</tal:block>
-					<tal:block tal:condition="php: trim(search.getFieldValue()) NE '' ">
-						<a href="${formAction}/?${search/getFieldName}=${search/getFieldValue} discipline:%22${repeat/discipline/key}%22">${repeat/discipline/key}
-							</a>
+					<tal:block tal:condition="php: trim(search.getFilterDisciplineValue()) NE repeat.discipline.key ">
+						<a href="${formAction}/?${search/getFilterDisciplineUri}d:${php: urlencode(repeat.discipline.key)}">
+							${repeat/discipline/key}
+						</a>
 					</tal:block>
 				</li>
 			</tal:block>

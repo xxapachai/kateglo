@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Entri</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+</head>
+<body tal:define="headerNav string: " metal:use-macro="${appPath}/views/macros/body.html/body">
+<tal:block metal:fill-slot="content">
+	<div class="w940">
+		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+		<content>
+			<div class="content" style="max-width: 760px;">
+				<h1>${entry/entry}</h1>
+				<nav>
+					<a href="/entri/${php: urlencode(entry.entry)}">Definisi</a>
+					<a href="/entri/${php: urlencode(entry.entry)}/tesaurus">Tesaurus</a>
+					<a class="on">Padanan</a>
+					<a href="/entri/${php: urlencode(entry.entry)}/sumber">Sumber</a> <!--a
+						href="#">Korpus</a> <a href="#">Diskusi (3)</a> <a href="#">share</a -->
+					<br/>
+				</nav>
+				<tal:block
+						tal:condition="php: ( is_array(entry.equivalents) && count(entry.equivalents) > 0 )">
+					<dl>
+						<dt>
+							<section>
+								Padanan entri dalam bahasa:
+								<select onchange="document.location.href = this.value;">
+									<option value="/entri/${php: urlencode(entry.entry)}/padanan">apa saja</option>
+									<tal:block tal:repeat="language static">
+										<option tal:condition="php: lang ne urlencode(strtolower(language.getLanguage()))" value="/entri/${php: urlencode(entry.entry)}/padanan/${php: urlencode(strtolower(language.getLanguage()))}">${language/getLanguage}</option>
+										<option tal:condition="php: lang eq urlencode(strtolower(language.getLanguage()))" value="/entri/${php: urlencode(entry.entry)}/padanan/${php: urlencode(strtolower(language.getLanguage()))}" selected="selected">${language/getLanguage}</option>
+									</tal:block>
+								</select>
+							</section>
+						</dt>
+						<tal:block tal:repeat="equivalent entry/equivalents">
+							<dd>Dalam bahasa ${equivalent/foreign/language/language}:
+								<strong><a>${equivalent/foreign/foreign}</a></strong>
+								<tal:block
+										tal:condition="php: ( is_array(equivalent.disciplines) && count(equivalent.disciplines) > 0 )">
+									(
+									<tal:block tal:repeat="discipline equivalent/disciplines">
+										<tal:block tal:condition="php: repeat.discipline.index eq 0">
+											${discipline/discipline}
+										</tal:block>
+										<tal:block tal:condition="php: repeat.discipline.index gt 0">
+											, ${discipline/discipline}
+										</tal:block>
+									</tal:block>
+									)
+								</tal:block>
+							</dd>
+						</tal:block>
+					</dl>
+				</tal:block>
+			</div>
+		</content>
+	</div>
+</tal:block>
+</body>
+</html>

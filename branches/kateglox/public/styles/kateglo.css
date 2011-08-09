@@ -179,7 +179,12 @@ content ol {
 }
 
 content dt {
-	font: bold 14px OpenSansRegular, Arial, Helvetica, sans-serif;
+	font: 14px OpenSansRegular, Arial, Helvetica, sans-serif;
+}
+
+dt.class {
+	font: 12px OpenSansRegular, Arial, Helvetica, sans-serif;
+	text-transform: lowercase;
 }
 
 content dt,
@@ -243,6 +248,18 @@ nav a {
 }
 
 nav a:hover {
+	color: #333;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+
+nav a.on {
+	color: #000;
+	text-decoration: none;
+	background-color: #E5E5E5;
+}
+
+nav a.on:hover {
 	color: #333;
 	text-decoration: none;
 	background-color: #f5f5f5;

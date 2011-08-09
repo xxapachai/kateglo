@@ -7,7 +7,7 @@
 	<title>Kateglo - Beranda</title>
 	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
-<body metal:use-macro="${appPath}/views/macros/body.html/body">
+<body tal:define="headerNav string:beranda " metal:use-macro="${appPath}/views/macros/body.html/body">
 
 <tal:block metal:fill-slot="content">
 	<div class="w940 start">
