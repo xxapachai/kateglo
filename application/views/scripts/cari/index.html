@@ -14,11 +14,7 @@
 		<tal:block tal:define="facetNav string:cari " metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
 		<content>
 			<div class="content">
-				<div class="cumb">
-					<a class="close" href="#">&times;</a>
-
-					<p><a href="#">Akronim</a> <a href="#">nomina</a> <strong>Fisika</strong></p>
-				</div>
+				<tal:block metal:use-macro="${appPath}/views/macros/filter.html/filter"/>
 				<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
 				<div class="result">
 					<tal:block tal:repeat="hit hits/getDocuments">

@@ -483,8 +483,6 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	public function deleteEntry($id) {
 		if ($id !== null && is_numeric($id)) {
 			$entry = $this->entry->delete(intval($id));
-			print_r($entry);
-			die();
 			if ($this->configs->cache->entry) {
 				$this->deleteAllCache($entry);
 			}
@@ -557,8 +555,6 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @return void
 	 */
 	private function deleteAllCache(models\Entry $entry) {
-		print_r($entry);
-		die();
 		$cacheId = __CLASS__ . '::entryByIdAsJson' . '\\' . $entry->getId();
 		$this->cache->delete($cacheId);
 

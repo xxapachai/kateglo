@@ -140,12 +140,15 @@ class CariController extends Zend_Controller_Action_Stubbles {
     public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
         $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		$filterText = $this->getRequest()->getParam($this->search->getFilterName());
         try {
             $cacheId = __CLASS__ . '\\' . 'indexHtml' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
             if (!$this->evaluatePreCondition($cacheId)) {
-                $this->view->search->setFieldValue($searchText);
+				$this->search->setFilterUri($filterText);
+				$this->view->search->setFieldValue($searchText);
+				$this->search->createFilters();
                 /** @var $hits kateglo\application\faces\Hit */
-                $hits = $this->entry->searchDictionary($searchText, $this->offset, $this->limit);
+                $hits = $this->entry->searchDictionary($searchText, $this->offset, $this->limit, array('fq' => $this->search->getFilterQuery()));
                 $this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
                 $this->view->hits = $hits;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());

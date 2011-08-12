@@ -228,6 +228,11 @@ content dd ul li:after {
 	padding: 0 5px;
 }
 
+content dd ul li.end:after {
+	content: '';
+	padding: 0 5px;
+}
+
 content select {
 	border: 1px solid #e5e5e5;
 	border-bottom: 1px solid #999;
@@ -569,6 +574,14 @@ content .cumb p {
 	padding: 0 0 20px 0;
 	text-indent: -20px;
 	margin: 0 0 0 20px;
+}
+
+.result dl{
+	width: 760px;
+}
+
+.result dl dt h3 a{
+	color: #333333;
 }
 
 /* accordion */

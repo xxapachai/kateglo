@@ -267,7 +267,11 @@ class Entry implements interfaces\Entry {
 	public function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "entry:*";
+		if (array_key_exists('fq', $params)) {
+			$params['fq'] .= "entry:*";
+		} else {
+			$params['fq'] = "entry:*";
+		}
 		$params['df'] = "content";
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
@@ -301,7 +305,11 @@ class Entry implements interfaces\Entry {
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$params['fl'] = 'entry, synonym, id';
-		$params['fq'] = "synonym:*";
+		if (array_key_exists('fq', $params)) {
+			$params['fq'] = $params['fq'] . " synonym:*";
+		} else {
+			$params['fq'] = "synonym:*";
+		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
 
@@ -333,7 +341,11 @@ class Entry implements interfaces\Entry {
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "typeExact:Peribahasa";
+		if (array_key_exists('fq', $params)) {
+			$params['fq'] .= "typeExact:Peribahasa";
+		} else {
+			$params['fq'] = "typeExact:Peribahasa";
+		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
 
@@ -365,7 +377,11 @@ class Entry implements interfaces\Entry {
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
+		if (array_key_exists('fq', $params)) {
+			$params['fq'] .= " typeExact:Akronim OR typeExact:Singkatan";
+		} else {
+			$params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
+		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
 
@@ -396,7 +412,11 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params['fl'] = 'entry, equivalent, id';
-		$params['fq'] = "foreign:*";
+		if (array_key_exists('fq', $params)) {
+			$params['fq'] = $params['fq'] . " foreign:*";
+		} else {
+			$params['fq'] = "foreign:*";
+		}
 		$params['df'] = 'entryForeign';
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
