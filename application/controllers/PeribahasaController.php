@@ -144,7 +144,7 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles {
 		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
 		$filterText = $this->getRequest()->getParam($this->search->getFilterName());
 		try {
-			$cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+			$cacheId = __CLASS__ . '\\' . 'html' . '\\' . $searchText . '\\' . $filterText .  '\\' . $this->offset . '\\' . $this->limit;
 			if (!$this->evaluatePreCondition($cacheId)) {
 				$this->search->setFilterUri($filterText);
 				$this->view->search->setFieldValue($searchText);
