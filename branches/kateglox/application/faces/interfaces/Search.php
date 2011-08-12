@@ -115,6 +115,13 @@ interface Search {
 	 * @return string
 	 */
 	function getFilterQuery();
+
+	/**
+	 * @abstract
+	 * @param $filterQuery
+	 * @return void
+	 */
+	function setFilterQuery($filterQuery);
 }
 
 ?>

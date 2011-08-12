@@ -3,21 +3,29 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Kateglo - Kamus</title>
-    <meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Kamus</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body tal:define="headerNav string: " metal:use-macro="${appPath}/views/macros/body.html/body">
 <div tal:omit-tag="true" metal:fill-slot="content">
-    <div>
-        <p>Penelusuran Anda - <b tal:content="search/getFieldValue">search</b> - tidak dapat dilakukan karena memuat kesalahan sintaktis.</p>
+	<div class="w940" tal:condition="php: hits.getCount() EQ 0">
+		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+		<content>
+			<div class="content">
 
-        <p>Saran:</p>
-        <ul>
-            <li>Pastikan semua sintaks penelusuran ditulis dengan benar.</li>
-            <li>Pelajari penggunaan sintaks penelusuran.</li>
-        </ul>
-    </div>
+				<p>Penelusuran Anda - <b tal:content="search/getFieldValue">search</b> - tidak dapat dilakukan karena
+					memuat kesalahan sintaktis.</p>
+
+				<p>Saran:</p>
+				<ul style="padding: 0 0 0 60px;">
+					<li>Pastikan semua sintaks penelusuran ditulis dengan benar.</li>
+					<li>Pelajari penggunaan sintaks penelusuran.</li>
+				</ul>
+			</div>
+		</content>
+		<div class="clear"></div>
+	</div>
 </div>
 </body>
 </html>

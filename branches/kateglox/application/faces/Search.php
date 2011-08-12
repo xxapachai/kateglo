@@ -285,6 +285,14 @@ class Search implements interfaces\Search {
 	}
 
 	/**
+	 * @param $filterQuery
+	 * @return void
+	 */
+	public function setFilterQuery($filterQuery) {
+		$this->filterQuery = $filterQuery;
+	}
+
+	/**
 	 * @return void
 	 */
 	public function createFilters() {
@@ -313,7 +321,12 @@ class Search implements interfaces\Search {
 		$typeUri = array();
 		foreach ($filters as $filter) {
 			if ($filter->getName() !== 't') {
-				$typeUri[] = $filter->getUri();
+				$explodeUri = explode(',', $filter->getUri());
+				foreach ($explodeUri as $uri) {
+					$explodeAgain = explode(':', $uri);
+					if (!in_array($uri, $typeUri) && $explodeAgain[0] != 't')
+						$typeUri[] = $uri;
+				}
 			}
 		}
 		$filterTypeUri = implode(',', $typeUri);
@@ -324,7 +337,12 @@ class Search implements interfaces\Search {
 		$classUri = array();
 		foreach ($filters as $filter) {
 			if ($filter->getName() !== 'c') {
-				$classUri[] = $filter->getUri();
+				$explodeUri = explode(',', $filter->getUri());
+				foreach ($explodeUri as $uri) {
+					$explodeAgain = explode(':', $uri);
+					if (!in_array($uri, $classUri) && $explodeAgain[0] != 'c')
+						$classUri[] = $uri;
+				}
 			}
 		}
 		$filterClassUri = implode(',', $classUri);
@@ -335,7 +353,12 @@ class Search implements interfaces\Search {
 		$sourceUri = array();
 		foreach ($filters as $filter) {
 			if ($filter->getName() !== 's') {
-				$sourceUri[] = $filter->getUri();
+				$explodeUri = explode(',', $filter->getUri());
+				foreach ($explodeUri as $uri) {
+					$explodeAgain = explode(':', $uri);
+					if (!in_array($uri, $sourceUri) && $explodeAgain[0] != 's')
+						$sourceUri[] = $uri;
+				}
 			}
 		}
 		$filterSourceUri = implode(',', $sourceUri);
@@ -346,7 +369,12 @@ class Search implements interfaces\Search {
 		$disciplineUri = array();
 		foreach ($filters as $filter) {
 			if ($filter->getName() !== 'd') {
-				$disciplineUri[] = $filter->getUri();
+				$explodeUri = explode(',', $filter->getUri());
+				foreach ($explodeUri as $uri) {
+					$explodeAgain = explode(':', $uri);
+					if (!in_array($uri, $disciplineUri) && $explodeAgain[0] != 'd')
+						$disciplineUri[] = $uri;
+				}
 			}
 		}
 		$filterDisciplineUri = implode(',', $disciplineUri);
@@ -364,23 +392,23 @@ class Search implements interfaces\Search {
 		foreach ($filters as $filter) {
 			switch ($filter->getName()) {
 				case 't':
-					$filterQueryArray[] = 'typeExact:' . $filter->getValue();
+					$filterQueryArray[] = 'typeExact:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 't:' . $filter->getValue();
 					break;
 				case 'c':
-					$filterQueryArray[] = 'classExact:' . $filter->getValue();
+					$filterQueryArray[] = 'classExact:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 'c:' . $filter->getValue();
 					break;
 				case 's':
-					$filterQueryArray[] = 'sourceExact:' . $filter->getValue();
+					$filterQueryArray[] = 'sourceExact:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 's:' . $filter->getValue();
 					break;
 				case 'd':
-					$filterQueryArray[] = 'disciplineExact:' . $filter->getValue();
+					$filterQueryArray[] = 'disciplineExact:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 'd:' . $filter->getValue();
 					break;
 			}
-			$filter->setUri($queryUri.implode(',', $filterUriArray));
+			$filter->setUri($queryUri . implode(',', $filterUriArray));
 		}
 		$this->filterQuery = implode(' ', $filterQueryArray);
 	}

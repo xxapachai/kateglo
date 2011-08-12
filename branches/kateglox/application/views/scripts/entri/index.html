@@ -109,9 +109,14 @@
 								<dd>
 									<ul>
 										<tal:block tal:repeat="synonym meaning/synonyms">
-											<li tal:define="text synonym/meaning/entry/entry"><a
-													href="/entri/${php: urlencode(text)}">${text}</a>
-											</li>
+											<tal:block tal:define="text synonym/meaning/entry/entry">
+												<li tal:condition="not: repeat/synonym/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+												<li class="end" tal:condition="repeat/synonym/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+											</tal:block>
 										</tal:block>
 									</ul>
 								</dd>
@@ -128,9 +133,14 @@
 								<dd>
 									<ul>
 										<tal:block tal:repeat="antonym meaning/antonyms">
-											<li tal:define="text antonym/meaning/entry/entry"><a
-													href="/entri/${php: urlencode(text)}">${text}</a>
-											</li>
+											<tal:block tal:define="text antonym/meaning/entry/entry">
+												<li tal:condition="not: repeat/antonym/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+												<li class="end" tal:condition="repeat/antonym/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+											</tal:block>
 										</tal:block>
 									</ul>
 								</dd>
@@ -146,9 +156,14 @@
 								<dd>
 									<ul>
 										<tal:block tal:repeat="relation meaning/relations">
-											<li tal:define="text relation/meaning/entry/entry"><a
-													href="/entri/${php: urlencode(text)}">${text}</a>
-											</li>
+											<tal:block tal:define="text relation/meaning/entry/entry">
+												<li tal:condition="not: repeat/relation/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+												<li class="end" tal:condition="repeat/relation/end">
+													<a href="/entri/${php: urlencode(text)}">${text}</a>
+												</li>
+											</tal:block>
 										</tal:block>
 									</ul>
 								</dd>

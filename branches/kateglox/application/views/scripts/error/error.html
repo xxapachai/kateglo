@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Kateglo - Error</title>
-<meta metal:use-macro="${appPath}/views/macros/head.html/head" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Kateglo - Error</title>
+	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
 </head>
 <body tal:define="headerNav string: " metal:use-macro="${appPath}/views/macros/body.html/body">
-	<div tal:omit-tag="true"  metal:fill-slot="content">
-	    <div style="text-align: center;">
-		    404
-		</div>
+<div tal:omit-tag="true" metal:fill-slot="content">
+	<div class="w940">
+		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+		<content>
+			<div class="content">
+				404
+			</div>
+		</content>
+		<div class="clear"></div>
 	</div>
+</div>
 </body>
 </html>
