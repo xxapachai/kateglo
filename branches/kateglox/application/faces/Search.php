@@ -385,7 +385,7 @@ class Search implements interfaces\Search {
 		$this->filters = new ArrayCollection($filters);
 		$this->paginationUri = ($this->fieldValue != '' ? 'query=' . $this->fieldValue . '&' : '');
 		$this->paginationUri = ($this->filterUri != '' ? $this->paginationUri . 'filter=' . $this->filterUri . '&'
-				: '');
+				: $this->paginationUri);
 
 		$filterQueryArray = array();
 		$filterUriArray = array();
