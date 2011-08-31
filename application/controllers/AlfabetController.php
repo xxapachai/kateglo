@@ -166,7 +166,7 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 		try {
 			if (strlen($alphabet) === 1) {
 				if (ctype_alpha($alphabet)) {
-					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+					$cacheId = __METHOD__ . '\\' . $alphabet . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 					if (!$this->evaluatePreCondition($cacheId)) {
 						$this->view->search->setFieldValue($searchText);
 						/** @var $hits kateglo\application\faces\Hit */
@@ -205,7 +205,7 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 		try {
 			if (strlen($alphabet) === 1) {
 				if (ctype_alpha($alphabet)) {
-					$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+					$cacheId = __METHOD__ . '\\' . $alphabet . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 					if (!$this->evaluatePreCondition($cacheId)) {
 						/*@var $hits kateglo\application\faces\Hit */
 						$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alphabet . '*'));
@@ -240,7 +240,7 @@ class AlfabetController extends Zend_Controller_Action_Stubbles {
 		if (!$this->evaluatePreCondition($cacheId)) {
 			$this->view->alphabet = $alphabet;
 			$this->view->formAction = '/kamus';
-			$this->view->search->setFieldValue('entryExact:'.$alphabet.'*');
+			$this->view->search->setFieldValue('entryExact:' . $alphabet . '*');
 			$this->view->staticData = $this->staticData->getStaticData();
 			$this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
 		}
