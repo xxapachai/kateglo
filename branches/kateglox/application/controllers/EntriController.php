@@ -155,9 +155,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 							}
 						}
 					}
-					foreach($classes as &$class){
-						foreach($class['definitions'] as &$definition){
-							$definition['index'] = $index + 1;
+					for($k=0; $k < count($classes); $k++){
+						for($l=0; $l < count($classes[$k]['definitions']); $l++){
+							$classes[$k]['definitions'][$l]['index'] = $index + 1;
 							$index++;
 						}
 					}

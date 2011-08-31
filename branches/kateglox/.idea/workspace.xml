@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/WordOfTheDay.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/design-prototype/prototype2/sign up.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/macros/body.html" afterPath="$PROJECT_DIR$/application/views/macros/body.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/AlfabetController.php" afterPath="$PROJECT_DIR$/application/controllers/AlfabetController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/EntriController.php" afterPath="$PROJECT_DIR$/application/controllers/EntriController.php" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,82 +31,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="body.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/macros/body.html">
+      <file leaf-file-name="CariController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/CariController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="47" selection-start="2941" selection-end="2941" vertical-scroll-proportion="0.43589744">
+            <state line="144" column="98" selection-start="4399" selection-end="4399" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPanel.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/services/interfaces/CPanel.php">
+      <file leaf-file-name="PadananController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/PadananController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="164" column="93" selection-start="4456" selection-end="4456" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Binder.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/configs/Binder.php">
+      <file leaf-file-name="PeribahasaController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/PeribahasaController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="14" selection-start="2917" selection-end="2917" vertical-scroll-proportion="0.0">
+            <state line="146" column="93" selection-start="4092" selection-end="4092" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordOfTheDay.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/WordOfTheDay.php">
+      <file leaf-file-name="KamusController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/KamusController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="26" selection-start="2814" selection-end="2814" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="solr.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/scripts/error/solr.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="483" selection-end="1112" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="error.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/scripts/error/error.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="21" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="REST.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/utilities/REST.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="137" column="40" selection-start="3832" selection-end="3832" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="404.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/design-prototype/prototype2/404.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="suggestion.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/macros/suggestion.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="44" selection-start="1151" selection-end="1179" vertical-scroll-proportion="0.0">
+            <state line="165" column="78" selection-start="4414" selection-end="4436" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,7 +70,52 @@
       <file leaf-file-name="SingkatanController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/SingkatanController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="93" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0">
+            <state line="145" column="93" selection-start="4077" selection-end="4077" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TesaurusController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/TesaurusController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="145" column="93" selection-start="4085" selection-end="4085" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/scripts/entri/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="62" selection-start="3329" selection-end="3329" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EntriController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="164" column="17" selection-start="5231" selection-end="5231" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlfabetController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/AlfabetController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="253" column="2" selection-start="7670" selection-end="7670" vertical-scroll-proportion="0.80194175">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tpl_4e452047_index__QRY7bVGQlPQMfG529_dZiA.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cache/tal/tpl_4e452047_index__QRY7bVGQlPQMfG529_dZiA.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,22 +135,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/faces/Search.php" />
-        <option value="$PROJECT_DIR$/application/views/scripts/entri/thesaurus.html" />
-        <option value="$PROJECT_DIR$/application/views/scripts/entri/index.html" />
-        <option value="$PROJECT_DIR$/public/styles/kateglo.css" />
-        <option value="$PROJECT_DIR$/application/controllers/EntriController.php" />
-        <option value="$PROJECT_DIR$/application/views/scripts/tesaurus/index.html" />
-        <option value="$PROJECT_DIR$/application/views/macros/suggestion.html" />
-        <option value="$PROJECT_DIR$/application/controllers/PadananController.php" />
-        <option value="$PROJECT_DIR$/application/controllers/SingkatanController.php" />
-        <option value="$PROJECT_DIR$/application/services/Entry.php" />
         <option value="$PROJECT_DIR$/application/views/scripts/error/solr.html" />
         <option value="$PROJECT_DIR$/application/utilities/REST.php" />
         <option value="$PROJECT_DIR$/application/views/scripts/error/error.html" />
         <option value="$PROJECT_DIR$/application/configs/Binder.php" />
         <option value="$PROJECT_DIR$/application/models/WordOfTheDay.php" />
         <option value="$PROJECT_DIR$/application/views/macros/body.html" />
+        <option value="$PROJECT_DIR$/application/views/scripts/index/index.html" />
+        <option value="$PROJECT_DIR$/application/faces/Search.php" />
+        <option value="$PROJECT_DIR$/application/controllers/KamusController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/CariController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/PadananController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/PeribahasaController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/SingkatanController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/TesaurusController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/EntriController.php" />
+        <option value="$PROJECT_DIR$/application/controllers/AlfabetController.php" />
       </list>
     </option>
   </component>
@@ -207,7 +208,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -236,43 +236,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
+              <option name="myItemId" value="build" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,18 +253,12 @@
               <option name="myItemId" value="build" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
+              <option name="myItemId" value="design-prototype" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
+              <option name="myItemId" value="prototype2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -314,38 +272,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
+              <option name="myItemId" value="build" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="macros" />
+              <option name="myItemId" value="design-prototype" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -437,11 +374,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Purnama\StormWorkspace\kateglo\build\design-prototype\prototype2" />
       <recent name="C:\Users\Purnama\StormWorkspace\kateglo\application\models" />
       <recent name="C:\Users\Purnama\StormWorkspace\kateglo\application\views\scripts\entri" />
       <recent name="C:\Users\Purnama\StormWorkspace\kateglo\application\faces" />
       <recent name="C:\Users\Purnama\StormWorkspace\kateglo\application\views\macros" />
-      <recent name="C:\Users\Purnama\StormWorkspace\kateglo\application\controllers" />
     </key>
   </component>
   <component name="RunManager">
@@ -6202,7 +6139,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -6210,7 +6147,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3049473" sideWeight="0.32407406" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28051555" sideWeight="0.38747886" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3419257" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32656515" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -6251,7 +6188,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Welcome Back !!!!&#10;First Commit.. Bug Fix :D" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -6264,8 +6201,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Implementing Web Design for Start site&#10;Move Javascripts to the bottom" />
-    <MESSAGE value="Implementing Web Design for Start site&#10;Implementing Word of the Day (prototype!!) &#10;Implementing Amount" />
     <MESSAGE value="Implementing Did You Mean" />
     <MESSAGE value="Bug Fix HTML 5" />
     <MESSAGE value="Implement Facet for Discipline" />
@@ -6288,83 +6223,14 @@
     <MESSAGE value="CPanel Implementing REST component&#10;My first update process with REST :D muahahaha&#10;" />
     <MESSAGE value="CPanel Implementing REST component&#10;" />
     <MESSAGE value="Implementing Layout&#10;" />
+    <MESSAGE value="Word of the day" />
     <MESSAGE value="bug fix" />
+    <MESSAGE value="Welcome Back !!!!&#10;First Commit.. Bug Fix :D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tools/testing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="196" selection-end="196" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/scripts/tesaurus/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="10" selection-start="1901" selection-end="1956" vertical-scroll-proportion="-17.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/macros/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/PadananController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="43" selection-start="4746" selection-end="4746" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="273" column="9" selection-start="8971" selection-end="8971" vertical-scroll-proportion="-7.44" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="9" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/macros/body.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="47" selection-start="2941" selection-end="2941" vertical-scroll-proportion="0.43589744">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/CPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/Binder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="14" selection-start="2917" selection-end="2917" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/WordOfTheDay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="26" selection-start="2814" selection-end="2814" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/scripts/error/solr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="483" selection-end="1112" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/scripts/error/error.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="21" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/REST.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="40" selection-start="3832" selection-end="3832" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/design-prototype/prototype2/404.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -6372,14 +6238,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/macros/suggestion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="44" selection-start="1151" selection-end="1179" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="27" column="44" selection-start="1151" selection-end="1179" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/macros/body.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="79" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/scripts/index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="42" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/macros/pagination.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="16" selection-start="888" selection-end="888" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/faces/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="384" column="35" selection-start="8423" selection-end="8423" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/CariController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="98" selection-start="4399" selection-end="4399" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/PadananController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="93" selection-start="4456" selection-end="4456" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/PeribahasaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="93" selection-start="4092" selection-end="4092" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/KamusController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="165" column="78" selection-start="4414" selection-end="4436" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/SingkatanController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="93" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0" />
+        <state line="145" column="93" selection-start="4077" selection-end="4077" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/TesaurusController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="145" column="93" selection-start="4085" selection-end="4085" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/scripts/entri/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="62" selection-start="3329" selection-end="3329" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/EntriController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="17" selection-start="5231" selection-end="5231" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cache/tal/tpl_4e452047_index__QRY7bVGQlPQMfG529_dZiA.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/AlfabetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="2" selection-start="7670" selection-end="7670" vertical-scroll-proportion="0.80194175">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
