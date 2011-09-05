@@ -302,7 +302,7 @@ class Entry implements interfaces\Entry {
 		$rsm->addFieldResult('lang', 'language_version', 'version');
 		$rsm->addFieldResult('lang', 'language_name', 'language');
 		$sql = 'select * from `foreign` frg left join language lang on frg.foreign_language_id = lang.language_id ' .
-			   "where frg.foreign_name in ('" . implode("', '", array_map('addslashes', $foreigns)) . "')";
+		       "where frg.foreign_name in ('" . implode("', '", array_map('addslashes', $foreigns)) . "')";
 		/**@var $query \Doctrine\ORM\Query */
 		$query = $this->entityManager->createNativeQuery($sql, $rsm);
 		//$query->useResultCache(true, 43200, __METHOD__);
@@ -365,6 +365,29 @@ class Entry implements interfaces\Entry {
 		} else {
 			throw \Exception('Cannot create without entry.');
 		}
+	}
+
+	/**
+	 * @throws exceptions\DomainObjectNotFoundException|exceptions\DomainResultEmptyException
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function getWordOfTheDay() {
+		$query = $this->entityManager->createQuery("
+			SELECT 	wotd
+			FROM " . models\WordOfTheDay::CLASS_NAME . " wotd
+			WHERE wotd.date = CURRENT_DATE()");
+		//$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+		$result = $query->getResult();
+		if (count($result) === 1) {
+			if (!($result [0] instanceof models\WordOfTheDay)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+		/** @var $wordOfTheDay \kateglo\application\models\WordOfTheDay */
+		$wordOfTheDay = $result[0];
+		return $wordOfTheDay->getEntry();
 	}
 
 }

@@ -494,6 +494,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 
 	/**
 	 * @var string $requestEntry
+	 * @var string $entryId
+	 * @var string $meaningId
 	 * @return void
 	 * @Post
 	 * @Path('/id/{entryId}/arti/{artiId}/type')
@@ -522,6 +524,20 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 		} else {
 			throw new HTTPBadRequestException('Unidentified Identity');
 		}
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/hariini')
+	 * @Produces('text/html')
+	 */
+	public function wordOfTheDay(){
+		$this->_helper->viewRenderer->setNoRender();
+		/** @var $wordOfTheDay \kateglo\application\models\Entry */
+		$wordOfTheDay = $this->entry->wordOfTheDay();
+		$this->getResponse()->setHttpResponseCode(303);
+		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($wordOfTheDay->getEntry()));
 	}
 
 	/**

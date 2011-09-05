@@ -250,6 +250,11 @@ interface Entry {
 	 * @return \kateglo\application\models\Entry
 	 */
 	function delete($id);
+
+	/**
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function wordOfTheDay();
 }
 
 ?>

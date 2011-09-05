@@ -12,7 +12,8 @@ Ext.Loader.setPath({
     'kateglo.modules.entry.forms' : '/javascripts/cpanel/modules/entry/forms',
     'kateglo.modules.entry.grids' : '/javascripts/cpanel/modules/entry/grids',
     'kateglo.modules.entry.panels' : '/javascripts/cpanel/modules/entry/panels',
-    'kateglo.modules.entry.utils' : '/javascripts/cpanel/modules/entry/utils'
+    'kateglo.modules.entry.utils' : '/javascripts/cpanel/modules/entry/utils',
+    'kateglo.modules.wordoftheday' : '/javascripts/cpanel/modules/wordoftheday'
 });
 Ext.require(['*',
     'kateglo.borders.Header',
@@ -50,6 +51,10 @@ Ext.require(['*',
     'kateglo.modules.entry.forms.MeaningComboBox',
     'kateglo.modules.entry.panels.Equivalent',
     'kateglo.modules.entry.tree.Explorer',
+    'kateglo.modules.wordoftheday.Panel',
+    'kateglo.modules.wordoftheday.Form',
+    'kateglo.modules.wordoftheday.Grid',
+    'kateglo.menus.Content',
     'kateglo.menus.SearchEntry',
     'kateglo.menus.SearchEquivalent',
     'kateglo.menus.SearchSource',
