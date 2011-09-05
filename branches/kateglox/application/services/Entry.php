@@ -476,6 +476,13 @@ class Entry implements interfaces\Entry {
 	}
 
 	/**
+	 * @return \kateglo\application\models\Entry
+	 */
+	public function wordOfTheDay(){
+		return $this->entry->getWordOfTheDay();
+	}
+
+	/**
 	 * @param int $id
 	 * @return \Apache_Solr_Document
 	 */

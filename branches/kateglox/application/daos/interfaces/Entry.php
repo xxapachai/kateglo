@@ -116,6 +116,11 @@ interface Entry {
 	 */
 	function delete($id);
 
+	/**
+	 * @return void
+	 */
+	function getWordOfTheDay();
+
 }
 
 ?>
