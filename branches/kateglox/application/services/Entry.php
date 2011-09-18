@@ -483,6 +483,19 @@ class Entry implements interfaces\Entry {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function wordOfTheDayList(){
+		$arrayResult = array();
+		$wotdList = $this->entry->getWordOfTheDayList();
+		/** @var $wotd \kateglo\application\models\WordOfTheDay */
+		foreach($wotdList as $wotd){
+			$arrayResult[] = $wotd->toArray();
+		}
+		return $arrayResult;
+	}
+
+	/**
 	 * @param int $id
 	 * @return \Apache_Solr_Document
 	 */

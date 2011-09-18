@@ -255,6 +255,11 @@ interface Entry {
 	 * @return \kateglo\application\models\Entry
 	 */
 	public function wordOfTheDay();
+
+	/**
+	 * @return array
+	 */
+	function wordOfTheDayList();
 }
 
 ?>

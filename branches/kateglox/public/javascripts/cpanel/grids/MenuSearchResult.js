@@ -38,7 +38,6 @@ Ext.define('kateglo.grids.MenuSearchResult', {
                         Ext.MessageBox.alert('Failed', 'Ajax request Error!!');
                     }
                 });
-
             }
             else {
                 Ext.getCmp('kateglo.tabs.Entry.' + record.getId()).show();

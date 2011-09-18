@@ -121,6 +121,11 @@ interface Entry {
 	 */
 	function getWordOfTheDay();
 
+	/**
+	 * @throws exceptions\DomainObjectNotFoundException|exceptions\DomainResultEmptyException
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	function getWordOfTheDayList();
 }
 
 ?>

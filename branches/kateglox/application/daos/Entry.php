@@ -390,6 +390,26 @@ class Entry implements interfaces\Entry {
 		return $wordOfTheDay->getEntry();
 	}
 
+	/**
+	 * @throws exceptions\DomainObjectNotFoundException|exceptions\DomainResultEmptyException
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getWordOfTheDayList() {
+		$query = $this->entityManager->createQuery("
+			SELECT 	wotd
+			FROM " . models\WordOfTheDay::CLASS_NAME . " wotd");
+		//$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\WordOfTheDay)) {
+				throw new DomainObjectNotFoundException ();
+			}
+		} else {
+			throw new DomainResultEmptyException ();
+		}
+		return $result;
+	}
+
 }
 
 ?>

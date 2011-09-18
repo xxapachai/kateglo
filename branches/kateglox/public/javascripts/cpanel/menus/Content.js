@@ -22,11 +22,28 @@ Ext.define('kateglo.menus.Content', {
 			if (record.raw.id == 'wordOfTheDay') {
 				var contentContainer = Ext.getCmp('kateglo.borders.Content');
 				if (Ext.getCmp('kateglo.modules.wordoftheday.Panel') == undefined) {
-					var wordOfTheDayTab = new kateglo.modules.wordoftheday.Panel();
-					contentContainer.add(wordOfTheDayTab);
-					wordOfTheDayTab.show();
+					var box = Ext.MessageBox.wait('Loading Entry Object.', 'Please wait!');
+					Ext.Ajax.defaultHeaders = {
+						'Accept': 'application/json'
+					};
+					Ext.Ajax.request({
+						url: '/entri/hariini/list',
+						timeout: 60000,
+						success: function(response, request) {
+							responseObj = Ext.JSON.decode(response.responseText);
+							var wordOfTheDayTab = new kateglo.modules.wordoftheday.Panel({
+								recordResult: responseObj
+							});
+							contentContainer.add(wordOfTheDayTab);
+							wordOfTheDayTab.show();
+							box.hide();
+						},
+						failure: function(response, request) {
+							Ext.MessageBox.alert('Failed', 'Ajax request Error!!');
+						}
+					});
 				} else {
-					Ext.getCmp('kateglo.tabs.NewEntry').show();
+					Ext.getCmp('kateglo.modules.wordoftheday.Panel').show();
 				}
 			}
 		}

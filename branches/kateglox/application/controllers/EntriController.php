@@ -155,8 +155,8 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 							}
 						}
 					}
-					for($k=0; $k < count($classes); $k++){
-						for($l=0; $l < count($classes[$k]['definitions']); $l++){
+					for ($k = 0; $k < count($classes); $k++) {
+						for ($l = 0; $l < count($classes[$k]['definitions']); $l++) {
 							$classes[$k]['definitions'][$l]['index'] = $index + 1;
 							$index++;
 						}
@@ -532,12 +532,33 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @Path('/hariini')
 	 * @Produces('text/html')
 	 */
-	public function wordOfTheDay(){
+	public function wordOfTheDay() {
 		$this->_helper->viewRenderer->setNoRender();
 		/** @var $wordOfTheDay \kateglo\application\models\Entry */
 		$wordOfTheDay = $this->entry->wordOfTheDay();
 		$this->getResponse()->setHttpResponseCode(303);
 		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($wordOfTheDay->getEntry()));
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/hariini/list')
+	 * @Produces('application/json')
+	 */
+	public function wordOfTheDayList() {
+		$cacheId = __METHOD__;
+		if (!$this->evaluatePreCondition($cacheId)) {
+			try {
+				$list = $this->entry->wordOfTheDayList();
+				$this->content = $list;
+			} catch (DomainResultEmptyException $e) {
+				throw new HTTPNotFoundException('Entry Not Found.');
+			}
+		}
+
+		$this->responseBuilder($cacheId);
+		$this->_helper->json($this->content);
 	}
 
 	/**
