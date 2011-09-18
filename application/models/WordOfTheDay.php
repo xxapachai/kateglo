@@ -64,7 +64,7 @@ class WordOfTheDay {
 	private $date;
 
 	/**
-	 * @var kateglo\application\models\Entry
+	 * @var \kateglo\application\models\Entry
 	 * @ManyToOne(targetEntity="kateglo\application\models\Entry")
 	 * @JoinColumn(name="wordoftheday_entry_id", referencedColumnName="entry_id")
 	 */
@@ -145,6 +145,16 @@ class WordOfTheDay {
 		}
 	}
 
+	/**
+	 * @return array
+	 */
+	public function toArray() {
+		$array['id'] = $this->id;
+		$array['version'] = $this->version;
+		$array['date'] = $this->date;
+		$array['entry'] = $this->entry->toArray();
+		return $array;
+	}
 }
 
 ?>
