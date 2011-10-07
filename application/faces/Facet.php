@@ -38,42 +38,42 @@ class Facet {
      * Enter description here ...
      * @var string
      */
-    const TYPE = 'typeExact';
+    const TYPE = 'bentukPersis';
 
     /**
      *
      * Enter description here ...
      * @var string
      */
-    const TYPE_CATEGORY = 'typeCategoryExact';
+    const TYPE_CATEGORY = 'kategoriBentukPersis';
 
     /**
      *
      * Enter description here ...
      * @var string
      */
-    const CLAZZ = 'classExact';
+    const CLAZZ = 'kelasPersis';
 
     /**
      *
      * Enter description here ...
      * @var string
      */
-    const CLAZZ_CATEGORY = 'classCategoryExact';
+    const CLAZZ_CATEGORY = 'kategoriKelasPersis';
 
     /**
      *
      * Enter description here ...
      * @var string
      */
-    const DISCIPLINE = 'disciplineExact';
+    const DISCIPLINE = 'disiplinPersis';
 
     /**
      *
      * Enter description here ...
      * @var string
      */
-    const SOURCE = 'sourceCategoryExact';
+    const SOURCE = 'kategoriSumberPersis';
 
     /**
      * Enter description here ...

@@ -162,7 +162,7 @@ class Entry implements interfaces\Entry {
 	 */
 	public function randomMisspelled($limit = 6) {
 		$this->getSolr()->setCreateDocuments(false);
-		$request = $this->getSolr()->search('spelled:*', 0, $limit, array('fl' => 'entry, spelled', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
+		$request = $this->getSolr()->search('ejaan:*', 0, $limit, array('fl' => 'entri, ejaan', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
 		if ($request->getHttpStatus() == 200) {
 			return $request->response;
 		} else {
@@ -177,7 +177,7 @@ class Entry implements interfaces\Entry {
 	 */
 	public function randomEntry($limit = 5) {
 		$this->getSolr()->setCreateDocuments(false);
-		$request = $this->getSolr()->search('entry:* AND definition:* AND type:"Kata dasar mandiri"', 0, $limit, array('fl' => 'entry, definition', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
+		$request = $this->getSolr()->search('entri:* AND definisi:* ', 0, $limit, array('fl' => 'entri, definisi', 'sort' => 'random_' . rand(1, 100000) . ' asc'));
 		if ($request->getHttpStatus() == 200) {
 			return $request->response;
 		} else {
@@ -228,9 +228,9 @@ class Entry implements interfaces\Entry {
 	public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
 		$params['qf'] = array_key_exists('qf', $params) ? $params['qf']
-				: 'entry definition sample source discipline synonym antonym class classCategory misspelled relation spelled syllabel type typeCategory sourceCategory language equivalentDiscipline equivalent';
+				: 'entri definisi contoh sumber disiplin sinonim antonim kelas kategoriKelas salahEja relasi ejaan silabel bentuk kategoriBentuk kategoriSumber bahasa disiplinPadanan';
 		$params['defType'] = 'dismax';
-		$params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+		$params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entri:*';
 		$this->getSolr()->setCreateDocuments(false);
 		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
 		return $this->convertResponse2Faces(json_decode($request->getRawResponse()));
@@ -247,9 +247,9 @@ class Entry implements interfaces\Entry {
 	public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
 		$params['qf'] = array_key_exists('qf', $params) ? $params['qf']
-				: 'entry definition sample source discipline synonym antonym class classCategory misspelled relation spelled syllabel type typeCategory sourceCategory language equivalentDiscipline equivalent';
+				: 'entri definisi contoh sumber disiplin sinonim antonim kelas kategoriKelas salahEja relasi ejaan silabel bentuk kategoriBentuk kategoriSumber bahasa disiplinPadanan';
 		$params['defType'] = 'dismax';
-		$params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entry:*';
+		$params['q.alt'] = array_key_exists('q.alt', $params) ? $params['q.alt'] : 'entri:*';
 		$this->getSolr()->setCreateDocuments(false);
 		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
 		return json_decode($request->getRawResponse());
@@ -266,13 +266,13 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
+		$params['fl'] = 'entri, definisi, id';
 		if (array_key_exists('fq', $params)) {
-			$params['fq'] .= "entry:*";
+			$params['fq'] .= "entri:*";
 		} else {
-			$params['fq'] = "entry:*";
+			$params['fq'] = "entri:*";
 		}
-		$params['df'] = "content";
+		$params['df'] = "konten";
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
 
@@ -287,9 +287,9 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchDictionaryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "entry:*";
-		$params['df'] = "content";
+		$params['fl'] = 'entri, definisi, id';
+		$params['fq'] = "entri:*";
+		$params['df'] = "konten";
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
 	}
 
@@ -304,11 +304,11 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, synonym, id';
+		$params['fl'] = 'entri, sinonim, id';
 		if (array_key_exists('fq', $params)) {
-			$params['fq'] = $params['fq'] . " synonym:*";
+			$params['fq'] = $params['fq'] . " sinonim:*";
 		} else {
-			$params['fq'] = "synonym:*";
+			$params['fq'] = "sinonim:*";
 		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
@@ -324,8 +324,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchThesaurusAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, synonym, id';
-		$params['fq'] = "synonym:*";
+		$params['fl'] = 'entri, sinonim, id';
+		$params['fq'] = "sinonim:*";
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
 	}
 
@@ -340,11 +340,11 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
+		$params['fl'] = 'entri, definisi, id';
 		if (array_key_exists('fq', $params)) {
-			$params['fq'] .= "typeExact:Peribahasa";
+			$params['fq'] .= "bentukPersis:Peribahasa";
 		} else {
-			$params['fq'] = "typeExact:Peribahasa";
+			$params['fq'] = "bentukPersis:Peribahasa";
 		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
@@ -360,8 +360,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchProverbAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "typeExact:Peribahasa";
+		$params['fl'] = 'entri, definisi, id';
+		$params['fq'] = "bentukPersis:Peribahasa";
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
 	}
 
@@ -376,11 +376,11 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
+		$params['fl'] = 'entri, definisi, id';
 		if (array_key_exists('fq', $params)) {
-			$params['fq'] .= " typeExact:Akronim OR typeExact:Singkatan";
+			$params['fq'] .= " bentukPersis:Akronim OR bentukPersis:Singkatan";
 		} else {
-			$params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
+			$params['fq'] = "bentukPersis:Akronim OR bentukPersis:Singkatan";
 		}
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
@@ -396,8 +396,8 @@ class Entry implements interfaces\Entry {
 	 */
 	public function searchAcronymAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$params['fl'] = 'entry, definition, id';
-		$params['fq'] = "typeExact:Akronim OR typeExact:Singkatan";
+		$params['fl'] = 'entri, definisi, id';
+		$params['fq'] = "bentukPersis:Akronim OR bentukPersis:Singkatan";
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
 	}
 
@@ -411,13 +411,13 @@ class Entry implements interfaces\Entry {
 	 * @return \kateglo\application\faces\Hits
 	 */
 	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
-		$params['fl'] = 'entry, equivalent, id';
+		$params['fl'] = 'entri, padanan, id';
 		if (array_key_exists('fq', $params)) {
-			$params['fq'] = $params['fq'] . " foreign:*";
+			$params['fq'] = $params['fq'] . " asing:*";
 		} else {
-			$params['fq'] = "foreign:*";
+			$params['fq'] = "asing:*";
 		}
-		$params['df'] = 'entryForeign';
+		$params['df'] = 'entriAsing';
 		return $this->searchEntry($searchText, $offset, $limit, $params);
 	}
 
@@ -431,9 +431,9 @@ class Entry implements interfaces\Entry {
 	 * @return array
 	 */
 	public function searchEquivalentAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
-		$params['fl'] = 'entry, equivalent, id';
-		$params['fq'] = "foreign:*";
-		$params['df'] = 'entryForeign';
+		$params['fl'] = 'entri, padanan, id';
+		$params['fq'] = "asing:*";
+		$params['df'] = 'entriAsing';
 		return $this->searchEntryAsJSON($searchText, $offset, $limit, $params);
 	}
 
@@ -443,7 +443,7 @@ class Entry implements interfaces\Entry {
 	 */
 	public function update(models\Entry $entry) {
 		$docs = $this->searchDocumentById($entry->getId());
-		$docs->setField('entry', $entry->getEntry());
+		$docs->setField('entri', $entry->getEntry());
 		$entry = $this->entry->update($entry);
 		$this->solr->addDocument($docs);
 		$this->solr->commit();
@@ -457,7 +457,7 @@ class Entry implements interfaces\Entry {
 	public function insert(models\Entry $entry) {
 		$docs = new \Apache_Solr_Document();
 		$entry = $this->entry->insert($entry);
-		$docs->setField('entry', $entry->getEntry());
+		$docs->setField('entri', $entry->getEntry());
 		$docs->setField('id', $entry->getId());
 		$this->solr->addDocument($docs);
 		$this->solr->commit();
@@ -516,7 +516,7 @@ class Entry implements interfaces\Entry {
 	 * @return \Apache_Solr_Document
 	 */
 	private function searchDocumentById($id) {
-		$params['fl'] = 'id, entry, antonym, discipline, sample, definition, class, classCategory, misspelled, relation, synonym, spelled, syllabel, type, typeCategory, source, sourceCategory, language, equivalentDiscipline, foreign, equivalent';
+		$params['fl'] = 'id, entri, antonim, disiplin, contoh, definisi, kelas, kategoriKelas, salahEja, relasi, sinonim, ejaan, silabel, bentuk, kategoriBentuk, sumber, kategoriSumber, bahasa, disiplinPadanan, asing, padanan';
 		$params['df'] = 'id';
 		$request = $this->getSolr()->search($id, 0, 2, $params);
 		/** @var \Apache_Solr_Document $docs */
@@ -530,7 +530,7 @@ class Entry implements interfaces\Entry {
 	 * @return array
 	 */
 	private function getDefaultParams($searchText, $params = array()) {
-		if (!array_key_exists('fl', $params)) $params['fl'] = 'entry, definition, id';
+		if (!array_key_exists('fl', $params)) $params['fl'] = 'entri, definisi, id';
 		$params['q.op'] = 'AND';
 		$params['spellcheck'] = 'true';
 		$params['spellcheck.count'] = 10;
@@ -538,12 +538,12 @@ class Entry implements interfaces\Entry {
 		$params['spellcheck.maxCollationTries'] = 1000;
 		$params['spellcheck.extendedResults'] = 'true';
 		$params['mlt'] = 'true';
-		$params['mlt.fl'] = 'entry,synonym,relation,spelled,antonym,misspelled';
+		$params['mlt.fl'] = 'entri,sinonim,relasi,ejaan,antonim,salahEja';
 		$params['mlt.mindf'] = 1;
 		$params['mlt.mintf'] = 1;
 		$params['mlt.count'] = 10;
 		$params['facet'] = 'true';
-		$params['facet.field'] = array('typeExact', 'typeCategoryExact', 'classExact', 'classCategoryExact', 'sourceCategoryExact', 'disciplineExact', 'equivalentDisciplineExact');
+		$params['facet.field'] = array('bentukPersis', 'kategoriBentukPersis', 'kelasPersis', 'kategoriKelasPersis', 'kategoriSumberPersis', 'disiplinPersis', 'disiplinPadananPersis');
 		$params['spellcheck.q'] = $searchText;
 		return $params;
 	}
