@@ -120,10 +120,26 @@ class CPanel implements interfaces\CPanel {
 	 */
 	public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
+		$params['fl'] = 'id, entry, definition';
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
 		$this->getSolr()->setCreateDocuments(false);
 		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-		return json_decode($request->getRawResponse());
+		$searchResult = json_decode($request->getRawResponse());
+		$result = array();
+		foreach ($searchResult->response->docs as $entry) {
+			$array = array();
+			$array['id'] = $entry->id;
+			$array['entry'] = $entry->entry;
+			if (property_exists($entry, 'definition') && is_array($entry->definition)) {
+				$definitions = array();
+				$definitions = $entry->definition;
+				$array['definition'] = $definitions[0];
+				$array['definitions'] = $definitions;
+			}
+			$result[] = $array;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -150,24 +166,23 @@ class CPanel implements interfaces\CPanel {
 		$result = array();
 		if (count($entries) > 0) {
 			try {
-				$meanings = $this->entry->getMeanings($entries);
-				foreach ($entries as $entryId) {
+				$dbEntries = $this->entry->getMeanings($entries);
+				/** @var $entry \kateglo\application\models\Entry */
+				foreach ($dbEntries as $entry) {
 					/** @var $meaning \kateglo\application\models\Meaning */
-					foreach ($meanings as $meaning) {
-						if ($meaning->getEntry()->getId() == $entryId) {
-							$array = array();
-							$array['id'] = $meaning->getId();
-							$array['entryId'] = $meaning->getEntry()->getId();
-							$array['entry'] = $meaning->getEntry()->getEntry();
-							$definitions = $meaning->getDefinitions();
-							$array['definition'] = $definitions->first()->getDefinition();
-							$array['definitions'] = array();
-							/** @var $definition \kateglo\application\models\Definition */
-							foreach ($definitions as $definition) {
-								$array['definitions'][] = $definition->getDefinition();
-							}
-							$result[] = $array;
+					foreach ($entry->getMeanings() as $meaning) {
+						$array = array();
+						$array['id'] = $meaning->getId();
+						$array['entryId'] = $entry->getId();
+						$array['entry'] = $entry->getEntry();
+						$definitions = $meaning->getDefinitions();
+						$array['definition'] = $definitions->first()->getDefinition();
+						$array['definitions'] = array();
+						/** @var $definition \kateglo\application\models\Definition */
+						foreach ($definitions as $definition) {
+							$array['definitions'][] = $definition->getDefinition();
 						}
+						$result[] = $array;
 					}
 				}
 			} catch (DomainResultEmptyException $e) {

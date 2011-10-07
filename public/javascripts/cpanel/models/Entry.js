@@ -2,7 +2,9 @@ Ext.define("kateglo.models.Entry", {
     extend: 'Ext.data.Model',
     fields: [
         {name:'id', mapping: 'id'},
-        {name:'text', mapping: 'entry'}
+        {name:'text', mapping: 'entry'},
+        {name:'definition', mapping:'definition'},
+        {name:'definitions', mapping:'definitions'}
     ],
     idProperty: 'id'
 });

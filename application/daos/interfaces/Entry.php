@@ -126,6 +126,19 @@ interface Entry {
 	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
 	function getWordOfTheDayList();
+
+	/**
+	 * @param \DateTime $date
+	 * @param $entryId
+	 * @return \kateglo\application\models\WordOfTheDay
+	 */
+	function insertWordOfTheDay(\DateTime $date, $entryId);
+
+	/**
+	 * @param \DateTime $date
+	 * @return bool
+	 */
+	function dateIsUsedWordOfTheDay(\DateTime $date);
 }
 
 ?>

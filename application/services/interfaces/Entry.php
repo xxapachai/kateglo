@@ -260,6 +260,18 @@ interface Entry {
 	 * @return array
 	 */
 	function wordOfTheDayList();
+
+	/**
+	 * @param $jsonObj
+	 * @return \kateglo\application\models\WordOfTheDay
+	 */
+	function insertWordOfTheDay($jsonObj);
+
+	/**
+	 * @param $date
+	 * @return bool
+	 */
+	function dateIsUsedWordOfTheDay($date);
 }
 
 ?>

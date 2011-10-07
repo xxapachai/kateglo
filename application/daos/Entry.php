@@ -268,15 +268,18 @@ class Entry implements interfaces\Entry {
 	public function getMeanings($entries) {
 		/**@var $query \Doctrine\ORM\Query */
 		$query = $this->entityManager->createQuery("
-			SELECT 	meaning
-			FROM " . models\Meaning::CLASS_NAME . " meaning
-			LEFT JOIN meaning.entry entry
+			SELECT 	entry, meanings, definitions
+			FROM " . models\Entry::CLASS_NAME . " entry
+			LEFT JOIN entry.meanings meanings
+			LEFT JOIN meanings.definitions definitions
 			WHERE entry.id IN (" . implode(', ', $entries) . ")");
+		$query->setFetchMode(models\Entry::CLASS_NAME, "meanings", "EAGER");
+		$query->setFetchMode(models\Meaning::CLASS_NAME, "definitions", "EAGER");
 		//$query->useResultCache(true, 43200, __METHOD__);
 		$result = $query->getResult();
 
 		if (count($result) > 0) {
-			if (!($result [0] instanceof models\Meaning)) {
+			if (!($result [0] instanceof models\Entry)) {
 				throw new DomainObjectNotFoundException ();
 			}
 		} else {
@@ -388,6 +391,41 @@ class Entry implements interfaces\Entry {
 		/** @var $wordOfTheDay \kateglo\application\models\WordOfTheDay */
 		$wordOfTheDay = $result[0];
 		return $wordOfTheDay->getEntry();
+	}
+
+	/**
+	 * @param \DateTime $date
+	 * @param $entryId
+	 * @return \kateglo\application\models\WordOfTheDay
+	 */
+	public function insertWordOfTheDay(\DateTime $date, $entryId) {
+		$entry = $this->getById($entryId);
+		$wotd = new models\WordOfTheDay();
+		$wotd->setDate($date);
+		$wotd->setEntry($entry);
+		$this->entityManager->persist($wotd);
+		$this->entityManager->flush();
+		return $wotd;
+	}
+
+	/**
+	 * @param \DateTime $date
+	 * @return bool
+	 */
+	public function dateIsUsedWordOfTheDay(\DateTime $date){
+		$query = $this->entityManager->createQuery("
+			SELECT wotd
+			FROM ". models\WordOfTheDay::CLASS_NAME." wotd
+			WHERE wotd.date = '".$date->format(\DateTime::ISO8601)."' ");
+		$result = $query->getResult();
+		if (count($result) > 0) {
+			if (!($result [0] instanceof models\WordOfTheDay)) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		return true;
 	}
 
 	/**
