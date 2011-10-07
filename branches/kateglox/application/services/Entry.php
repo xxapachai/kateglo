@@ -496,6 +496,22 @@ class Entry implements interfaces\Entry {
 	}
 
 	/**
+	 * @param $jsonObj
+	 * @return \kateglo\application\models\WordOfTheDay
+	 */
+	public function insertWordOfTheDay($jsonObj){
+		return $this->entry->insertWordOfTheDay(new \DateTime($jsonObj->date), $jsonObj->id);
+	}
+
+	/**
+	 * @param $date
+	 * @return bool
+	 */
+	public function dateIsUsedWordOfTheDay($date){
+		return $this->entry->dateIsUsedWordOfTheDay(new \DateTime($date));
+	}
+
+	/**
 	 * @param int $id
 	 * @return \Apache_Solr_Document
 	 */

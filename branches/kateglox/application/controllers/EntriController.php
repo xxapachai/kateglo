@@ -498,9 +498,9 @@ class EntriController extends Zend_Controller_Action_Stubbles {
 	 * @var string $meaningId
 	 * @return void
 	 * @Post
-	 * @Path('/id/{entryId}/arti/{artiId}/type')
+	 * @Path('/id/{entryId}/arti/{meaningId}/type')
 	 * @PathParam{entryId}(entryId)
-	 * @PathParam{meaningId}(entryId)
+	 * @PathParam{meaningId}(meaningId)
 	 * @Produces('application/json')
 	 * @Consumes('application/json')
 	 * @ConsumeParam{requestEntry}

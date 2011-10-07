@@ -3,21 +3,11 @@ Ext.define('kateglo.modules.wordoftheday.Panel', {
 	title: 'Kata hari ini',
 	id: 'kateglo.modules.wordoftheday.Panel',
 	layout: 'border',
-	tbar: [
-		{
-			text: 'Save',
-			iconCls: 'cpanel_sprite cpanel_disk'
-		},
-		'->',
-		{
-			text: 'Reset',
-			iconCls: 'cpanel_sprite cpanel_arrow_undo'
-		}
-	],
+    closable: true,
 	initComponent: function() {
 		Ext.apply(this, {
 			items: [
-				new kateglo.modules.entry.forms.MeaningComboBox(),
+				new kateglo.modules.wordoftheday.Form(),
 				new kateglo.modules.wordoftheday.Grid({
 					recordResult: this.recordResult
 				})

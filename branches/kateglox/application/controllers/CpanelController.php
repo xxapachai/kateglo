@@ -19,6 +19,9 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\services\interfaces\StaticData;
+use kateglo\application\services\interfaces\CPanel;
+use kateglo\application\services\interfaces\Entry;
+use kateglo\application\faces\interfaces\Search;
 /**
  *
  *
@@ -35,9 +38,40 @@ class CpanelController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
+	 * @var \kateglo\application\faces\interfaces\Search;
+	 */
+	private $search;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var kateglo\application\services\interfaces\Entry;
+	 */
+	private $entry;
+
+	/**
+	 *
+	 * Enter description here ...
 	 * @var \kateglo\application\services\interfaces\StaticData;
 	 */
 	private $staticData;
+
+	/**
+	 * @var \kateglo\application\services\interfaces\CPanel
+	 */
+	private $cpanel;
+
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $limit;
+
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $offset;
 
 	/**
 	 *
@@ -51,11 +85,50 @@ class CpanelController extends Zend_Controller_Action_Stubbles {
 	}
 
 	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\Entry $entry
+	 *
+	 * @Inject
+	 */
+	public function setEntry(Entry $entry) {
+		$this->entry = $entry;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\CPanel $cpanel
+	 *
+	 * @Inject
+	 */
+	public function setCPanel(CPanel $cpanel) {
+		$this->cpanel = $cpanel;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @param \kateglo\application\faces\interfaces\Search $entry
+	 *
+	 * @Inject
+	 */
+	public function setSearch(Search $search) {
+		$this->search = $search;
+	}
+
+	/**
 	 * (non-PHPdoc)
 	 * @see Zend_Controller_Action::init()
 	 */
 	public function init() {
 		parent::init();
+		$this->view->search = $this->search;
+		$this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
+				: 10);
+		$this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
+				: 0);
+		$this->view->formAction = '/cpanel';
 	}
 
 	/**
@@ -76,7 +149,7 @@ class CpanelController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function staticJson() {
 		try {
-			$cacheId = __METHOD__ ;
+			$cacheId = __METHOD__;
 			if (!$this->evaluatePreCondition($cacheId)) {
 				$this->content = $this->staticData->getStaticDataAsArray();
 			}
@@ -86,6 +159,51 @@ class CpanelController extends Zend_Controller_Action_Stubbles {
 			$this->content = array('error' => 'query error');
 		}
 		$this->_helper->json($this->content);
+	}
+
+	/**
+	 * @return void
+	 * @Get
+	 * @Path('/entri')
+	 * @Produces('application/json')
+	 */
+	public function entryJson() {
+		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		try {
+
+			/*@var $hits array */
+			$hits = $this->cpanel->searchEntryAsJSON($searchText, $this->offset, $this->limit);
+			$this->content = $hits;
+
+		} catch (Apache_Solr_Exception $e) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->content = array('error' => 'query error');
+		}
+		$this->_helper->json($this->content);
+	}
+
+	/**
+	 * @return void
+	 * @Post
+	 * @Path('/entri')
+	 * @Produces('application/json')
+	 * @Consumes('application/x-www-form-urlencoded')
+	 */
+	public function createWordOfTheDay() {
+		$input = json_decode(json_encode($_POST));
+		$dateIsUsed = $this->entry->dateIsUsedWordOfTheDay($input->date);
+		if (!$dateIsUsed) {
+			$wotd = $this->entry->insertWordOfTheDay($input);
+			$input->id = $wotd->getId();
+			$input->date = $wotd->getDate();
+			$this->_helper->json($input);
+		}else{
+			$message = array();
+			$message['success'] = false;
+			$errors['date'] = 'Tanggal telah terpakai';
+			$message['errors'] = $errors;
+			$this->_helper->json($message);
+		}
 	}
 }
 
