@@ -45,140 +45,140 @@ class Document {
 	 * Enter description here ...
 	 * @var string
 	 */
-	const ENTRY = 'entry';
+	const ENTRY = 'entri';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const ANTONYM = 'antonym';
+	const ANTONYM = 'antonim';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const DEFINITION = 'definition';
+	const DEFINITION = 'definisi';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const CLAZZ = 'class';
+	const CLAZZ = 'kelas';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const CLAZZ_CATEGORY = 'classCategory';
+	const CLAZZ_CATEGORY = 'kategoriKelas';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const DISCIPLINE = 'discipline';
+	const DISCIPLINE = 'disiplin';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SAMPLE = 'sample';
+	const SAMPLE = 'contoh';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const MISSPELLED = 'misspelled';
+	const MISSPELLED = 'salahEja';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const RELATION = 'relation';
+	const RELATION = 'relasi';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SYNONYM = 'synonym';
+	const SYNONYM = 'sinonim';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SPELLED = 'spelled';
+	const SPELLED = 'ejaan';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SYLLABEL = 'syllabel';
+	const SYLLABEL = 'silabel';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const TYPE = 'type';
+	const TYPE = 'bentuk';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const TYPE_CATEGORY = 'type_category';
+	const TYPE_CATEGORY = 'kategoriBentuk';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SOURCE = 'source';
+	const SOURCE = 'sumber';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const SOURCE_CATEGORY = 'sourceCategory';
+	const SOURCE_CATEGORY = 'kategoriSumber';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const LANGUAGE = 'language';
+	const LANGUAGE = 'bahasa';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const EQUIVALENT_DISCIPLINE = 'equivalentDiscipline';
+	const EQUIVALENT_DISCIPLINE = 'disiplinPadanan';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const FOREIGN = 'foreign';
+	const FOREIGN = 'asing';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const EQUIVALENT = 'equivalent';
+	const EQUIVALENT = 'padanan';
 	
 	/**
 	 * Enter description here ...

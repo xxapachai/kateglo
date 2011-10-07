@@ -5,7 +5,7 @@
         <entity name="entry" query="select * from entry">
 
             <field column="entry_id" name="id"/>
-            <field column="entry_name" name="entry"/>
+            <field column="entry_name" name="entri"/>
 
             <entity name="meaning" query="select * from meaning where meaning_entry_id='${entry.entry_id}'">
 
@@ -14,26 +14,26 @@
                             query="select * from meaning where meaning_id='${antonym.antonym_antonym_id}'">
                         <entity name="antonym_meaning_entry"
                                 query="select * from entry where entry_id='${antonym_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="antonym"/>
+                            <field column="entry_name" name="antonim"/>
                         </entity>
                     </entity>
                 </entity>
 
                 <entity name="definition"
                         query="select * from definition where definition_meaning_id='${meaning.meaning_id}'">
-                    <field column="definition_text" name="definition"/>
+                    <field column="definition_text" name="definisi"/>
 
                     <entity name="definition_class"
                             query="select * from rel_definition_class where rel_definition_id='${definition.definition_id}'">
                         <entity name="class"
                                 query="select * from class where class_id='${definition_class.rel_class_id}'">
-                            <field column="class_name" name="class"/>
+                            <field column="class_name" name="kelas"/>
 
                             <entity name="rel_class_category"
                                     query="select * from rel_class_category where rel_class_id='${class.class_id}'">
                                 <entity name="class_category"
                                         query="select * from class_category where class_category_id='${rel_class_category.rel_class_category_id}'">
-                                    <field column="class_category_name" name="classCategory"/>
+                                    <field column="class_category_name" name="kategoriKelas"/>
                                 </entity>
                             </entity>
                         </entity>
@@ -42,13 +42,13 @@
                     <entity name="definition_discipline"
                             query="select * from rel_definition_discipline where rel_definition_id='${definition.definition_id}'">
                         <entity name="definition" query="select * from discipline where discipline_id='${definition_discipline.rel_discipline_id}'">
-                            <field column="discipline_name" name="discipline" />
+                            <field column="discipline_name" name="disiplin" />
                         </entity>
                     </entity>
 
                     <entity name="sample"
                             query="select * from sample where sample_definition_id='${definition.definition_id}'">
-                        <field column="sample_text" name="sample"/>
+                        <field column="sample_text" name="contoh"/>
                     </entity>
 
                 </entity>
@@ -59,7 +59,7 @@
                             query="select * from meaning where meaning_id='${misspelled.misspelled_misspelled_id}'">
                         <entity name="misspelled_meaning_entry"
                                 query="select * from entry where entry_id='${misspelled_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="misspelled"/>
+                            <field column="entry_name" name="salahEja"/>
                         </entity>
                     </entity>
                 </entity>
@@ -70,7 +70,7 @@
                             query="select * from meaning where meaning_id='${relation.relation_relation_id}'">
                         <entity name="relation_meaning_entry"
                                 query="select * from entry where entry_id='${relation_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="relation"/>
+                            <field column="entry_name" name="relasi"/>
                         </entity>
                     </entity>
                 </entity>
@@ -80,7 +80,7 @@
                             query="select * from meaning where meaning_id='${synonym.synonym_synonym_id}'">
                         <entity name="synonym_meaning_entry"
                                 query="select * from entry where entry_id='${synonym_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="synonym"/>
+                            <field column="entry_name" name="sinonim"/>
                         </entity>
                     </entity>
                 </entity>
@@ -91,26 +91,26 @@
                             query="select * from meaning where meaning_id='${spelled.misspelled_meaning_id}'">
                         <entity name="spelled_meaning_entry"
                                 query="select * from entry where entry_id='${spelled_meaning.meaning_entry_id}'">
-                            <field column="entry_name" name="spelled"/>
+                            <field column="entry_name" name="ejaan"/>
                         </entity>
                     </entity>
                 </entity>
 
                 <entity name="syllabel"
                         query="select * from syllabel where syllabel_meaning_id='${meaning.meaning_id}'">
-                    <field column="syllabel_text" name="syllabel"/>
+                    <field column="syllabel_text" name="silabel"/>
                 </entity>
 
                 <entity name="meaning_type"
                         query="select * from rel_meaning_type where rel_meaning_id='${meaning.meaning_id}'">
                     <entity name="type" query="select * from type where type_id='${meaning_type.rel_type_id}'">
-                        <field column="type_name" name="type"/>
+                        <field column="type_name" name="bentuk"/>
 
                         <entity name="rel_type_category"
                                 query="select * from rel_type_category where rel_type_id='${type.type_id}'">
                             <entity name="type_category"
                                     query="select * from type_category where type_category_id='${rel_type_category.rel_type_category_id}'">
-                                <field column="type_category_name" name="typeCategory"/>
+                                <field column="type_category_name" name="kategoriBentuk"/>
                             </entity>
                         </entity>
                     </entity>
@@ -119,28 +119,28 @@
             </entity>
 
             <entity name="source" query="select * from source where source_entry_id='${entry.entry_id}'">
-                <field column="source_text_clean" name="source"/>
+                <field column="source_text_clean" name="sumber"/>
 
                 <entity name="source_category"
                         query="select * from source_category where source_category_id = '${source.source_category_id}'">
-                    <field column="source_category_name" name="sourceCategory"/>
+                    <field column="source_category_name" name="kategoriSumber"/>
                 </entity>
             </entity>
 
             <entity name="equivalents" query="select * from equivalent where equivalent_entry_id='${entry.entry_id}'">
                 <entity name="foreign"
                         query="select * from `foreign` where foreign_id = '${equivalents.equivalent_foreign_id}'">
-                    <field column="foreign_name" name="foreign"/>
+                    <field column="foreign_name" name="asing"/>
 
                     <entity name="language"
                             query="select * from language where language_id='${foreign.foreign_language_id}'">
-                        <field column="language_name" name="language"/>
+                        <field column="language_name" name="bahasa"/>
 
                         <entity name="rel_equivalent_discipline"
                                 query="select * from rel_equivalent_discipline where rel_equivalent_id='${equivalents.equivalent_id}'">
                             <entity name="equivalent_discipline"
                                     query="select * from discipline where discipline_id='${rel_equivalent_discipline.rel_discipline_id}'">
-                                <field column="discipline_name" name="equivalentDiscipline"/>
+                                <field column="discipline_name" name="disiplinPadanan"/>
                             </entity>
 
                         </entity>
@@ -151,7 +151,7 @@
                 </entity>
                 <entity name="equivalent"
                         query="select CONCAT('{&quot;foreign&quot;:&quot;',foreign_name,'&quot;,&quot;language&quot;:&quot;',language_name,'&quot;,&quot;discipline&quot;:[',disciplines,']}') as equivalents from (select foreign_name, language_name, CASE WHEN GROUP_CONCAT(discipline_name) is null THEN '' ELSE CONCAT('&quot;', GROUP_CONCAT(discipline_name SEPARATOR '&quot;,&quot;'), '&quot;') END as disciplines from equivalent LEFT JOIN `foreign` ON foreign_id = equivalent_foreign_id LEFT JOIN language ON language_id = foreign_language_id LEFT JOIN rel_equivalent_discipline ON rel_equivalent_id = equivalent_id LEFT JOIN discipline ON discipline_id = rel_discipline_id where equivalent_id = '${equivalents.equivalent_id}' GROUP BY equivalent_id) temp">
-                    <field column="equivalents" name="equivalent"/>
+                    <field column="equivalents" name="padanan"/>
                 </entity>
             </entity>
 

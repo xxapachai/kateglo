@@ -451,73 +451,69 @@ any data added to them will be ignored outright.  -->
 
     <fields>
         <field name="id" type="string" indexed="true" stored="true" required="true"/>
-        <field name="entry" type="textgen" indexed="true" stored="true" required="true" multiValued="false"
+        <field name="entri" type="textgen" indexed="true" stored="true" required="true" multiValued="false"
                termVectors="true" termPositions="true" termOffsets="true"/>
-        <field name="antonym" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
+        <field name="antonim" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="discipline" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="sample" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="definition" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="class" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="classCategory" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="misspelled" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
+        <field name="disiplin" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="contoh" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="definisi" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="kelas" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="kategoriKelas" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="salahEja" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="relation" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
+        <field name="relasi" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="synonym" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
+        <field name="sinonim" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="spelled" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
+        <field name="ejaan" type="textgen" indexed="true" stored="true" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="syllabel" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="type" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="typeCategory" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="source" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="sourceCategory" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="language" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="equivalentDiscipline" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="foreign" type="textgen" indexed="true" stored="true" multiValued="true"/>
-        <field name="equivalent" type="string" indexed="false" stored="true" multiValued="true"/>
+        <field name="silabel" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="bentuk" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="kategoriBentuk" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="sumber" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="kategoriSumber" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="bahasa" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="disiplinPadanan" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="asing" type="textgen" indexed="true" stored="true" multiValued="true"/>
+        <field name="padanan" type="string" indexed="false" stored="true" multiValued="true"/>
 
         <field name="spell" type="textSpell" indexed="true" stored="true" multiValued="true"/>
 
-        <field name="content" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="konten" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="entryDefinition" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
-               termPositions="true" termOffsets="true"/>
-        <field name="entrySynonym" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
-               termPositions="true" termOffsets="true"/>
-        <field name="entryForeign" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="entriAsing" type="textgen" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
 
-        <field name="entryExact" type="string" indexed="true" stored="false" multiValued="false" termVectors="true"
+        <field name="entriPersis" type="string" indexed="true" stored="false" multiValued="false" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="antonymExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="antonimPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="disciplineExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="disiplinPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="classExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="kelasPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="classCategoryExact" type="string" indexed="true" stored="false" multiValued="true"
+        <field name="kategoriKelasPersis" type="string" indexed="true" stored="false" multiValued="true"
                termVectors="true" termPositions="true" termOffsets="true"/>
-        <field name="misspelledExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="salahEjaPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="relationExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="relasiPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="synonymExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="sinonimPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="spelledExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="ejaanPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="typeExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="bentukPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="typeCategoryExact" type="string" indexed="true" stored="false" multiValued="true"
+        <field name="kategoriBentukPersis" type="string" indexed="true" stored="false" multiValued="true"
                termVectors="true" termPositions="true" termOffsets="true"/>
-        <field name="sourceCategoryExact" type="string" indexed="true" stored="false" multiValued="true"
+        <field name="kategoriSumberPersis" type="string" indexed="true" stored="false" multiValued="true"
                termVectors="true" termPositions="true" termOffsets="true"/>
-        <field name="languageExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="bahasaPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
-        <field name="equivalentDisciplineExact" type="string" indexed="true" stored="false" multiValued="true"
+        <field name="disiplinPadananPersis" type="string" indexed="true" stored="false" multiValued="true"
                termVectors="true" termPositions="true" termOffsets="true"/>
-        <field name="foreignExact" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
+        <field name="asingPersis" type="string" indexed="true" stored="false" multiValued="true" termVectors="true"
                termPositions="true" termOffsets="true"/>
 
         <dynamicField name="random_*" type="random"/>
@@ -528,58 +524,52 @@ any data added to them will be ignored outright.  -->
     <uniqueKey>id</uniqueKey>
 
 
-    <defaultSearchField>entry</defaultSearchField>
+    <defaultSearchField>entri</defaultSearchField>
 
 
     <solrQueryParser defaultOperator="OR"/>
 
 
-    <copyField source="entry" dest="content"/>
-    <copyField source="antonym" dest="content"/>
-    <copyField source="discipline" dest="content"/>
-    <copyField source="sample" dest="content"/>
-    <copyField source="definition" dest="content"/>
-    <copyField source="class" dest="content"/>
-    <copyField source="classCategory" dest="content"/>
-    <copyField source="misspelled" dest="content"/>
-    <copyField source="relation" dest="content"/>
-    <copyField source="synonym" dest="content"/>
-    <copyField source="spelled" dest="content"/>
-    <copyField source="syllabel" dest="content"/>
-    <copyField source="type" dest="content"/>
-    <copyField source="typeCategory" dest="content"/>
-    <copyField source="source" dest="content"/>
-    <copyField source="sourceCategory" dest="content"/>
-    <copyField source="language" dest="content"/>
-    <copyField source="equivalentDiscipline" dest="content"/>
-    <copyField source="foreign" dest="content"/>
+    <copyField source="entri" dest="konten"/>
+    <copyField source="antonim" dest="konten"/>
+    <copyField source="disiplin" dest="konten"/>
+    <copyField source="contoh" dest="konten"/>
+    <copyField source="definisi" dest="konten"/>
+    <copyField source="kelas" dest="konten"/>
+    <copyField source="kategoriKelas" dest="konten"/>
+    <copyField source="salahEja" dest="konten"/>
+    <copyField source="relasi" dest="konten"/>
+    <copyField source="sinonim" dest="konten"/>
+    <copyField source="ejaan" dest="konten"/>
+    <copyField source="silabel" dest="konten"/>
+    <copyField source="bentuk" dest="konten"/>
+    <copyField source="kategoriBentuk" dest="konten"/>
+    <copyField source="sumber" dest="konten"/>
+    <copyField source="kategoriSumber" dest="konten"/>
+    <copyField source="bahasa" dest="konten"/>
+    <copyField source="disiplinPadanan" dest="konten"/>
+    <copyField source="asing" dest="konten"/>
 
-    <copyField source="entry" dest="entryDefinition"/>
-    <copyField source="definition" dest="entryDefinition"/>
+	<copyField source="entri" dest="entriAsing"/>
+    <copyField source="asing" dest="entriAsing"/>
+	
+    <copyField source="entri" dest="spell"/>
 
-    <copyField source="entry" dest="entrySynonym"/>
-    <copyField source="synonym" dest="entrySynonym"/>
-
-    <copyField source="entry" dest="entryForeign"/>
-    <copyField source="foreign" dest="entryForeign"/>
-
-    <copyField source="entry" dest="spell"/>
-
-    <copyField source="entry" dest="entryExact"/>
-    <copyField source="antonym" dest="antonymExact"/>
-    <copyField source="discipline" dest="disciplineExact"/>
-    <copyField source="class" dest="classExact"/>
-    <copyField source="classCategory" dest="classCategoryExact"/>
-    <copyField source="misspelled" dest="misspelledExact"/>
-    <copyField source="relation" dest="relationExact"/>
-    <copyField source="synonym" dest="synonymExact"/>
-    <copyField source="spelled" dest="spelledExact"/>
-    <copyField source="type" dest="typeExact"/>
-    <copyField source="typeCategory" dest="typeCategoryExact"/>
-    <copyField source="sourceCategory" dest="sourceCategoryExact"/>
-    <copyField source="language" dest="languageExact"/>
-    <copyField source="equivalentDiscipline" dest="equivalentDisciplineExact"/>
-    <copyField source="foreign" dest="foreignExact"/>
+    <copyField source="entri" dest="entriPersis"/>
+    <copyField source="antonim" dest="antonimPersis"/>
+    <copyField source="disiplin" dest="disiplinPersis"/>
+    <copyField source="kelas" dest="kelasPersis"/>
+    <copyField source="kategoriKelas" dest="kategoriKelasPersis"/>
+    <copyField source="salahEja" dest="salahEjaPersis"/>
+    <copyField source="relasi" dest="relasiPersis"/>
+    <copyField source="sinonim" dest="sinonimPersis"/>
+    <copyField source="ejaan" dest="ejaanPersis"/>
+    <copyField source="bentuk" dest="bentukPersis"/>
+    <copyField source="kategoriBentuk" dest="kategoriBentukPersis"/>
+    <copyField source="kategoriSumber" dest="kategoriSumberPersis"/>
+    <copyField source="bahasa" dest="bahasaPersis"/>
+    <copyField source="disiplinPadanan" dest="disiplinPadananPersis"/>
+    <copyField source="asing" dest="asingPersis"/>
 
 
 </schema>

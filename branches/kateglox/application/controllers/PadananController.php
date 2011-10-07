@@ -168,8 +168,8 @@ class PadananController extends Zend_Controller_Action_Stubbles {
 				$this->view->search->setFieldValue($searchText);
 				$this->search->createFilters();
 				$filterQuery = $this->search->getFilterQuery();
-				if (!empty($filterQuery) && strpos('disciplineExact', $this->search->getFilterQuery())) {
-					$this->search->setFilterQuery(preg_replace('disciplineExact', 'equivalentDisciplineExact', $this->search->getFilterQuery()));
+				if (!empty($filterQuery) && strpos('disiplinPersis', $this->search->getFilterQuery())) {
+					$this->search->setFilterQuery(preg_replace('disiplinPersis', 'disiplinPadananPersis', $this->search->getFilterQuery()));
 				}
 				/** @var $hits kateglo\application\faces\Hit */
 				$hits = $this->entry->searchEquivalent($searchText, $this->offset, $this->limit, array('fq' => $this->search->getFilterQuery()));

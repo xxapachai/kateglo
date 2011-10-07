@@ -392,19 +392,19 @@ class Search implements interfaces\Search {
 		foreach ($filters as $filter) {
 			switch ($filter->getName()) {
 				case 't':
-					$filterQueryArray[] = 'typeExact:"' . $filter->getValue() . '"';
+					$filterQueryArray[] = 'bentukPersis:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 't:' . $filter->getValue();
 					break;
 				case 'c':
-					$filterQueryArray[] = 'classExact:"' . $filter->getValue() . '"';
+					$filterQueryArray[] = 'kelasPersis:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 'c:' . $filter->getValue();
 					break;
 				case 's':
-					$filterQueryArray[] = 'sourceExact:"' . $filter->getValue() . '"';
+					$filterQueryArray[] = 'sumberPersis:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 's:' . $filter->getValue();
 					break;
 				case 'd':
-					$filterQueryArray[] = 'disciplineExact:"' . $filter->getValue() . '"';
+					$filterQueryArray[] = 'disiplinPersis:"' . $filter->getValue() . '"';
 					$filterUriArray[] = 'd:' . $filter->getValue();
 					break;
 			}
