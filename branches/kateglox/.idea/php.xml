@@ -2,13 +2,13 @@
 <project version="4">
   <component name="PhpProjectConfiguration">
     <sdk>
-      <PhpSdkConfig home="C:\Program Files\Zend\ZendServer\bin">
+      <PhpSdkConfig version="5.3.6" home="C:\php">
         <include_paths>
-          <path value="D:\ZendWorkspace\doctrine\Doctrine" />
-          <path value="D:\ZendWorkspace\phptal\classes" />
-          <path value="D:\ZendWorkspace\solr\Apache" />
-          <path value="D:\ZendWorkspace\zendframework\library" />
-          <path value="D:\ZendWorkspace\stubbles\src\main\php\net" />
+          <path value="C:\Users\Purnama\StormWorkspace\doctrine\Doctrine" />
+          <path value="C:\Users\Purnama\StormWorkspace\phptal\classes" />
+          <path value="C:\Users\Purnama\StormWorkspace\solr\Apache" />
+          <path value="C:\Users\Purnama\StormWorkspace\zendframework\library" />
+          <path value="C:\Users\Purnama\StormWorkspace\stubbles\src\main\php\net" />
         </include_paths>
       </PhpSdkConfig>
     </sdk>
