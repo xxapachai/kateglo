@@ -35,7 +35,7 @@ use kateglo\application\utilities\Injector;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
-	
+
 	/**
 	 * Run the application
 	 *
@@ -49,31 +49,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	 * @throws Zend_Application_Bootstrap_Exception
 	 */
 	public function run() {
-		/*@var $front Zend_Controller_Front */
-		$front = $this->getResource ( 'FrontController' );
-		
-		$dispatcher = Injector::getInstance ('Zend_Controller_Dispatcher_Interface');
-		$dispatcher->setControllerDirectory ( Injector::getInstance ( 'Zend_Config' )->resources->frontController->controllerDirectory );
-		$front->setDispatcher ( $dispatcher );
-		
-//		$router = $front->getRouter ();
-//		$route = new Zend_Controller_Router_Route ( 'entri/:text', array ('controller' => 'entri', 'text' => '' ) );
-//
-//		$router->addRoute ( 'kateglo', $route );
-		
-		$default = $front->getDefaultModule ();
-		if (null === $front->getControllerDirectory ( $default )) {
-			throw new Zend_Application_Bootstrap_Exception ( 'No default controller directory registered with front controller' );
+		/** @var $front \Zend_Controller_Front */
+		$front = $this->getResource('FrontController');
+		$front->addModuleDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'modules');
+		$dispatcher = Injector::getInstance('Zend_Controller_Dispatcher_Interface');
+		$dispatcher->setControllerDirectory(Injector::getInstance('Zend_Config')->resources->frontController->controllerDirectory);
+		$front->setDispatcher($dispatcher);
+
+		//		$router = $front->getRouter ();
+		//		$route = new Zend_Controller_Router_Route ( 'entri/:text', array ('controller' => 'entri', 'text' => '' ) );
+		//
+		//		$router->addRoute ( 'kateglo', $route );
+
+		$default = $front->getDefaultModule();
+		if (null === $front->getControllerDirectory($default)) {
+			throw new Zend_Application_Bootstrap_Exception ('No default controller directory registered with front controller');
 		}
-		
-		$front->setParam ( 'bootstrap', $this );
-		
+
+		$front->setParam('bootstrap', $this);
+
 		$talActionHelper = new Zend_Controller_Action_Helper_ViewRenderer ();
-		$talActionHelper->setView ( new Zend_View_PhpTal () );
-		$talActionHelper->setViewSuffix ( 'html' );
-		Zend_Controller_Action_HelperBroker::getStack ()->offsetSet ( - 80, $talActionHelper );
-		
-		$front->dispatch ();
+		$talActionHelper->setView(new Zend_View_PhpTal ());
+		$talActionHelper->setViewSuffix('html');
+		Zend_Controller_Action_HelperBroker::getStack()->offsetSet(-80, $talActionHelper);
+
+		$front->dispatch();
 	}
 
 }
