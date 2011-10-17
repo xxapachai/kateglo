@@ -2,13 +2,13 @@
 <project version="4">
   <component name="PhpProjectConfiguration">
     <sdk>
-      <PhpSdkConfig version="5.3.6" home="C:\php">
+      <PhpSdkConfig version="5.3.2-1ubuntu4.9" home="/usr/bin">
         <include_paths>
-          <path value="C:\Users\Purnama\StormWorkspace\doctrine\Doctrine" />
-          <path value="C:\Users\Purnama\StormWorkspace\phptal\classes" />
-          <path value="C:\Users\Purnama\StormWorkspace\solr\Apache" />
-          <path value="C:\Users\Purnama\StormWorkspace\zendframework\library" />
-          <path value="C:\Users\Purnama\StormWorkspace\stubbles\src\main\php\net" />
+          <path value="$PROJECT_DIR$/../doctrine/Doctrine" />
+          <path value="$PROJECT_DIR$/../phptal/classes" />
+          <path value="$PROJECT_DIR$/../solr/Apache" />
+          <path value="$PROJECT_DIR$/../ZendFramework/library" />
+          <path value="$PROJECT_DIR$/../stubbles/src/main/php/net" />
         </include_paths>
       </PhpSdkConfig>
     </sdk>

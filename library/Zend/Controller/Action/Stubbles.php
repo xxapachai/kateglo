@@ -124,7 +124,7 @@ abstract class Zend_Controller_Action_Stubbles extends Zend_Controller_Action {
 	 * @return void
 	 */
 	public function init() {
-		$this->view->appPath = APPLICATION_PATH;
+		$this->view->appPath = APPLICATION_PATH.'/modules';
 	}
 
 	/**
