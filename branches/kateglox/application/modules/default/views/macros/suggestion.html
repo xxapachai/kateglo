@@ -8,7 +8,7 @@
 </head>
 <body tal:omit-tag="true" metal:define-macro="suggestion">
 <div class="w940" tal:condition="php: hits.getCount() EQ 0">
-	<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
+	<tal:block metal:use-macro="${appPath}/default/views/macros/header.html/header"/>
 	<content>
 		<div class="content">
 			<p>

@@ -5,17 +5,17 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>Kateglo - Singkatan</title>
-	<meta metal:use-macro="${appPath}/views/macros/head.html/head"/>
+	<meta metal:use-macro="${appPath}/default/views/macros/head.html/head"/>
 </head>
-<body tal:define="headerNav string:singkatan " metal:use-macro="${appPath}/views/macros/body.html/body">
+<body tal:define="headerNav string:singkatan " metal:use-macro="${appPath}/default/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
 	<div class="w940" tal:condition="php: hits.getCount() GT 0">
-		<tal:block metal:use-macro="${appPath}/views/macros/header.html/header"/>
-		<tal:block tal:define="facetNav string:singkatan " metal:use-macro="${appPath}/views/macros/facet.html/facet"/>
+		<tal:block metal:use-macro="${appPath}/default/views/macros/header.html/header"/>
+		<tal:block tal:define="facetNav string:singkatan " metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/>
 		<content>
 			<div class="content">
-				<tal:block metal:use-macro="${appPath}/views/macros/filter.html/filter"/>
-				<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
+				<tal:block metal:use-macro="${appPath}/default/views/macros/filter.html/filter"/>
+				<div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
 				<div class="result">
 					<tal:block tal:repeat="hit hits/getDocuments">
 						<p>
@@ -27,12 +27,12 @@
 						</p>
 					</tal:block>
 				</div>
-				<div metal:use-macro="${appPath}/views/macros/pagination.html/pagination"/>
+				<div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
 			</div>
 		</content>
 		<div class="clear"></div>
 	</div>
-	<tal:block metal:use-macro="${appPath}/views/macros/suggestion.html/suggestion"/>
+	<tal:block metal:use-macro="${appPath}/default/views/macros/suggestion.html/suggestion"/>
 </tal:block>
 </body>
 </html>

@@ -95,7 +95,7 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 		$this->view->exception = $errors->exception;
 		$this->view->request = $errors->request;
 
-		$this->view->appPath = APPLICATION_PATH;
+		$this->view->appPath = APPLICATION_PATH.'/modules';
 		$this->view->search = $this->search;
 		$this->view->formAction = '/kamus';
 	}
