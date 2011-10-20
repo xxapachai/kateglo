@@ -9,7 +9,7 @@
       <library name="PHP 5.3.2-1ubuntu4.9">
         <CLASSES>
           <root url="file://$MODULE_DIR$/../stubbles/src/main/php/net" />
-          <root url="file://$MODULE_DIR$/../ZendFramework/library" />
+          <root url="file://$MODULE_DIR$/../zendframework/library" />
           <root url="file://$MODULE_DIR$/../phptal/classes" />
           <root url="file://$MODULE_DIR$/../doctrine/Doctrine" />
           <root url="file://$MODULE_DIR$/../solr/Apache" />

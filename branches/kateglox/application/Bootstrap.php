@@ -51,17 +51,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	public function run() {
 		/** @var $front \Zend_Controller_Front */
 		$front = $this->getResource('FrontController');
-		$front->addModuleDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'modules');
         /** @var  $dispatcher \Zend_Controller_Dispatcher_Stubbles */
 	    $dispatcher = Injector::getInstance('Zend_Controller_Dispatcher_Interface');
-		$dispatcher->setControllerDirectory(Injector::getInstance('Zend_Config')->resources->frontController->controllerDirectory, 'default');
+		//$dispatcher->setControllerDirectory(Injector::getInstance('Zend_Config')->resources->frontController->controllerDirectory, 'default');
 		$front->setDispatcher($dispatcher);
-
-		//		$router = $front->getRouter ();
-		//		$route = new Zend_Controller_Router_Route ( 'entri/:text', array ('controller' => 'entri', 'text' => '' ) );
-		//
-		//		$router->addRoute ( 'kateglo', $route );
-
+		$front->addModuleDirectory(Injector::getInstance('Zend_Config')->resources->frontController->moduleDirectory);
 		$default = $front->getDefaultModule();
 		if (null === $front->getControllerDirectory($default)) {
 			throw new Zend_Application_Bootstrap_Exception ('No default controller directory registered with front controller');
@@ -74,7 +68,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$talActionHelper->setViewSuffix('html');
 		Zend_Controller_Action_HelperBroker::getStack()->offsetSet(-80, $talActionHelper);
 
-		$front->dispatch();
+		$response = $front->dispatch();
+        if ($front->returnResponse()) {
+            return $response;
+        }
 	}
 
 }
