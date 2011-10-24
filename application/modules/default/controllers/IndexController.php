@@ -33,7 +33,8 @@ use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action_Stubbles {
+class IndexController extends Zend_Controller_Action_Stubbles
+{
 
     /**
      *
@@ -56,7 +57,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      *
      * @Inject
      */
-    public function setEntry(Entry $entry) {
+    public function setEntry(Entry $entry)
+    {
         $this->entry = $entry;
     }
 
@@ -67,7 +69,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      *
      * @Inject
      */
-    public function setSearch(Search $search) {
+    public function setSearch(Search $search)
+    {
         $this->search = $search;
     }
 
@@ -75,7 +78,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->view->search = $this->search;
     }
@@ -86,16 +90,21 @@ class IndexController extends Zend_Controller_Action_Stubbles {
      * @Path('/')
      * @Produces('text/html')
      */
-    public function indexHtml() {
+    public function indexHtml()
+    {
         if ($this->getRequest()->getParam('query') == '') {
             $this->_helper->viewRenderer->setNoRender();
-            $cacheId = __CLASS__ . '\\' . 'html' . date('d.m.Y');
+            $cacheId = __METHOD__;
 
             if (!$this->evaluatePreCondition($cacheId)) {
                 try {
-                    $this->view->formAction = '/cari';
-                    $this->view->amount = $this->entry->getTotalCount();
-                    $this->view->entry = $this->wordOfTheDay();
+                    $this->view->formAction = '/kamus';
+                    $entry = $this->entry->searchEntryAsJSON('', 0, 0);
+                    $thesaurus = $this->entry->searchThesaurusAsJSON('', 0, 0);
+                    $equivalent = $this->entry->searchEquivalentAsJSON('', 0, 0);
+                    $proverb = $this->entry->searchProverbAsJSON('', 0, 0);
+                    $acronym = $this->entry->searchAcronymAsJSON('', 0, 0);
+                    $this->view->amount =  array('entry' => $entry->response->numFound, 'thesaurus' => $thesaurus->response->numFound, 'equivalent' => $equivalent->response->numFound, 'proverb' => $proverb->response->numFound, 'acronym' => $acronym->response->numFound);
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
                 } catch (Apache_Solr_Exception $e) {
                     $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
@@ -106,34 +115,8 @@ class IndexController extends Zend_Controller_Action_Stubbles {
             $this->getResponse()->appendBody($this->content);
         } else {
             $this->getResponse()->setHttpResponseCode(303);
-            $this->getResponse()->setHeader('location', '/cari?query=' . $this->getRequest()->getParam('query'));
+            $this->getResponse()->setHeader('location', '/kamus?query=' . $this->getRequest()->getParam('query'));
         }
-    }
-
-    private
-    function wordOfTheDay() {
-        $word[18] = 'kamus';
-        $word[19] = 'tesaurus';
-        $word[20] = 'padanan';
-        $word[21] = 'terjemahan';
-        $word[22] = 'peribahasa';
-        $word[23] = 'singkatan';
-        $word[24] = 'akronim';
-        $word[16] = 'aplikasi';
-        $word[17] = 'beranda';
-
-        $entry = !empty($word[intval(date("j"))]) ? $word[intval(date("j"))] : 'kamus';
-        $result = $this->entry->getEntry($entry);
-        $return['entry'] = $result->getEntry();
-        $return['definitions'] = array();
-        foreach ($result->getMeanings() as $meaning) {
-            foreach ($meaning->getDefinitions() as $definition) {
-                $return['definitions'][] = $definition->getDefinition();
-                if (count($return['definitions']) === 4) break;
-            }
-            if (count($return['definitions']) === 4) break;
-        }
-        return $return;
     }
 
 }

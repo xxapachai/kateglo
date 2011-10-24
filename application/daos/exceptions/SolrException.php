@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\services\exceptions;
+namespace kateglo\application\daos\exceptions;
 /*
  *  $Id$
  *
@@ -23,7 +23,7 @@ namespace kateglo\application\services\exceptions;
 /**
  * 
  *
- * @package kateglo\application\services\exceptions
+ * @package kateglo\application\daos\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
