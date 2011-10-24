@@ -41,44 +41,15 @@ use kateglo\application\daos;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Entry implements interfaces\Entry {
+class Search implements interfaces\Search {
 
 	public static $CLASS_NAME = __CLASS__;
-
-	/**
-	 *
-	 * @var \kateglo\application\daos\interfaces\Entry
-	 */
-	private $entry;
 
 	/**
 	 *
 	 * @var \Apache_Solr_Service
 	 */
 	private $solr;
-
-	/**
-	 *
-	 * @params \kateglo\application\daos\interfaces\Entry $entry
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setEntry(daos\interfaces\Entry $entry) {
-		$this->entry = $entry;
-	}
-
-	/**
-	 *
-	 * @return \Apache_Solr_Service
-	 */
-	public function getSolr() {
-		if ($this->solr->ping(4)) {
-			return $this->solr;
-		} else {
-			throw new exceptions\SolrException ();
-		}
-	}
 
 	/**
 	 *
@@ -89,52 +60,6 @@ class Entry implements interfaces\Entry {
 	 */
 	public function setSolr(\Apache_Solr_Service $solr = null) {
 		$this->solr = $solr;
-	}
-
-	/**
-	 *
-	 * @param int $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	public function getEntryById($id) {
-		if (!is_numeric($id)) {
-			throw new IllegalTypeException('Entry Id: "' . $id . '" is Not Numeric');
-		}
-		$result = $this->entry->getById($id);
-		return $result;
-	}
-
-	/**
-	 *
-	 * @param id $entry
-	 * @return string
-	 */
-	public function getEntryByIdAsArray($id) {
-		if (!is_numeric($id)) {
-			throw new IllegalTypeException('Entry Id: "' . $id . '" is Not Numeric');
-		}
-		$result = $this->entry->getById($id);
-		return $result->toArray();
-	}
-
-	/**
-	 *
-	 * @param string $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	public function getEntry($entry) {
-		$result = $this->entry->getByEntry($entry);
-		return $result;
-	}
-
-	/**
-	 *
-	 * @param string $entry
-	 * @return string
-	 */
-	public function getEntryAsArray($entry) {
-		$result = $this->entry->getByEntry($entry);
-		return $result->toArray();
 	}
 
 	/**

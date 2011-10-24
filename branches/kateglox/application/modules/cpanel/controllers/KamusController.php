@@ -21,6 +21,7 @@
 use kateglo\application\services\interfaces\Pagination;
 use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
+use kateglo\application\services\interfaces\CPanel;
 use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\faces\Hit;
 /**
@@ -42,6 +43,13 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	 * @var \kateglo\application\services\interfaces\Entry;
 	 */
 	private $entry;
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var \kateglo\application\services\interfaces\CPanel;
+	 */
+	private $cpanel;
 
 	/**
 	 *
@@ -89,6 +97,17 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
+	 * @param kateglo\application\services\interfaces\CPanel $cpanel
+	 *
+	 * @Inject
+	 */
+	public function setCPanel(CPanel $cpanel) {
+		$this->cpanel = $cpanel;
+	}
+
+	/**
+	 *
+	 * Enter description here ...
 	 * @param kateglo\application\services\interfaces\Entry $entry
 	 *
 	 * @Inject
@@ -125,60 +144,23 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function init() {
 		parent::init();
-		$this->view->search = $this->search;
-		$this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
-				: 10);
-		$this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
-				: 0);
-		$this->view->formAction = '/kamus';
 	}
 
 	/**
 	 * @return void
 	 * @Get
 	 * @Path('/')
-	 * @Produces('text/html')
+	 * @Produces('extjs/json')
 	 */
-	public function indexHtml() {
-		$this->_helper->viewRenderer->setNoRender();
-		$searchText = $this->getRequest()->getParam($this->search->getFieldName());
-		$filterText = $this->getRequest()->getParam($this->search->getFilterName());
-		try {
-			$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $filterText . '\\' . $this->offset . '\\' . $this->limit;
-			if (!$this->evaluatePreCondition($cacheId)) {
-				$this->search->setFilterUri($filterText);
-				$this->view->search->setFieldValue($searchText);
-				$this->search->createFilters();
-				/** @var $hits kateglo\application\faces\Hit */
-				$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, $this->search->getFilterQuery());
-				$this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
-				$this->view->hits = $hits;
-				$this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
-
-			}
-			$this->responseBuilder($cacheId);
-		} catch (Apache_Solr_Exception $e) {
-			$this->getResponse()->setHttpResponseCode(400);
-			$this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
-		}
-		$this->getResponse()->appendBody($this->content);
-	}
-
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/')
-	 * @Produces('application/json')
-	 */
-	public function indexJson() {
+	public function indexExtJsJson() {
 		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
 		try {
 			$cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
 			if (!$this->evaluatePreCondition($cacheId)) {
 				/*@var $hits kateglo\application\faces\Hit */
-				$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
+				$hits = $this->cpanel->searchEntryAsJSON($searchText, $this->offset, $this->limit);
 				$pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-				$this->content = array('hits' => $hits, 'pagination' => $pagination);
+				$this->content = array('hits' => $hits->response->docs, 'pagination' => $pagination);
 			}
 			$this->responseBuilder($cacheId);
 		} catch (Apache_Solr_Exception $e) {
@@ -191,22 +173,25 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 * @return void
 	 * @Get
-	 * @Path('/detail')
-	 * @Produces('text/html')
+	 * @Path('/arti')
+	 * @Produces('application/json')
 	 */
-	public function detailHtml() {
-		$this->_helper->viewRenderer->setNoRender();
-		$cacheId = __METHOD__;
-
-		if (!$this->evaluatePreCondition($cacheId)) {
-			$this->view->staticData = $this->staticData->getStaticData();
-			$this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+	public function artiJson() {
+		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+		try {
+			$cacheId = __METHOD__ . '\\' . $searchText;
+			if (!$this->evaluatePreCondition($cacheId)) {
+				/*@var $hits array */
+				$hits = $this->cpanel->searchMeaningAsJSON($searchText, $this->offset, $this->limit);
+				$this->content = $hits;
+			}
+			$this->responseBuilder($cacheId);
+		} catch (Apache_Solr_Exception $e) {
+			$this->getResponse()->setHttpResponseCode(400);
+			$this->content = array('error' => 'query error');
 		}
-
-		$this->responseBuilder($cacheId);
-		$this->getResponse()->appendBody($this->content);
+		$this->_helper->json($this->content);
 	}
-
 }
 
 ?>
