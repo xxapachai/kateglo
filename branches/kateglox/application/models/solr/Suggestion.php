@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\helpers;
+namespace kateglo\application\models\solr;
 /*
  *  $Id$
  *
@@ -19,20 +19,83 @@ namespace kateglo\application\helpers;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
- 
- /**
- * 
- * 
- * @package kateglo\application\helpers
+use Doctrine\Common\Collections\ArrayCollection;
+/**
+ *
+ *
+ * @package kateglo\application\faces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
  * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- */ 
-class RouteParameter {
+ */
+class Suggestion {
 	
-	const TEXT = "text";
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const WORD = 'word';
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const FREQUENCY = 'freq';
+	
+	/**
+	 * Enter description here ...
+	 * @var string
+	 */
+	private $word;
+	
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $frequency;
+
+    /**
+     * 
+     */
+    public function __construct($word, $frequency){
+        $this->word = $word;
+        $this->frequency = $frequency;
+    }
+
+    /**
+     * @param int $frequency
+     * @return void
+     */
+    public function setFrequency($frequency) {
+        $this->frequency = $frequency;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFrequency() {
+        return $this->frequency;
+    }
+
+    /**
+     * @param string $word
+     * @return void
+     */
+    public function setWord($word) {
+        $this->word = $word;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWord() {
+        return $this->word;
+    }
 }
+
 ?>

@@ -36,21 +36,14 @@ use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 class IndexController extends Zend_Controller_Action_Stubbles
 {
 
-    /**
+  /**
      *
      * Enter description here ...
      * @var kateglo\application\services\interfaces\Entry;
      */
     private $entry;
 
-    /**
-     *
-     * Enter description here ...
-     * @var kateglo\application\faces\interfaces\Search;
-     */
-    private $search;
-
-    /**
+  /**
      *
      * Enter description here ...
      * @param kateglo\application\services\interfaces\Entry $entry
@@ -63,25 +56,12 @@ class IndexController extends Zend_Controller_Action_Stubbles
     }
 
     /**
-     *
-     * Enter description here ...
-     * @param kateglo\application\faces\interfaces\Search $entry
-     *
-     * @Inject
-     */
-    public function setSearch(Search $search)
-    {
-        $this->search = $search;
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
      */
     public function init()
     {
         parent::init();
-        $this->view->search = $this->search;
     }
 
     /**
@@ -104,7 +84,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
                     $equivalent = $this->entry->searchEquivalentAsJSON('', 0, 0);
                     $proverb = $this->entry->searchProverbAsJSON('', 0, 0);
                     $acronym = $this->entry->searchAcronymAsJSON('', 0, 0);
-                    $this->view->amount =  array('entry' => $entry->response->numFound, 'thesaurus' => $thesaurus->response->numFound, 'equivalent' => $equivalent->response->numFound, 'proverb' => $proverb->response->numFound, 'acronym' => $acronym->response->numFound);
+                    $this->view->amount = array('entry' => $entry->response->numFound, 'thesaurus' => $thesaurus->response->numFound, 'equivalent' => $equivalent->response->numFound, 'proverb' => $proverb->response->numFound, 'acronym' => $acronym->response->numFound);
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
                 } catch (Apache_Solr_Exception $e) {
                     $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
