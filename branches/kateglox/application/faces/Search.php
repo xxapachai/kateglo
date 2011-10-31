@@ -32,7 +32,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Search implements interfaces\Search {
+class Search {
 
 	public static $CLASS_NAME = __CLASS__;
 

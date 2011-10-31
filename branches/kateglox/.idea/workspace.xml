@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/daos/Search.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/modules/cpanel/controllers/IndexController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/modules/cpanel/controllers/KamusController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/services/Search.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/services/interfaces/Search.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/application/services/exceptions/SolrException.php" afterPath="$PROJECT_DIR$/application/daos/exceptions/SolrException.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/application/faces/interfaces/Search.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/application/faces/interfaces" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/Entry.php" afterPath="$PROJECT_DIR$/application/services/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/services/interfaces/Entry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/Binder.php" afterPath="$PROJECT_DIR$/application/configs/Binder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/faces/Search.php" afterPath="$PROJECT_DIR$/application/faces/Search.php" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,19 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="KamusController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/KamusController.php">
+      <file leaf-file-name="Search.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/faces/Search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="156" column="0" selection-start="4701" selection-end="4701" vertical-scroll-proportion="0.4733728">
+            <state line="34" column="13" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Search.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/faces/Search.php">
+      <file leaf-file-name="Binder.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/configs/Binder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="395" column="67" selection-start="8943" selection-end="8943" vertical-scroll-proportion="-176.48">
+            <state line="66" column="84" selection-start="3849" selection-end="3849" vertical-scroll-proportion="0.8905704">
               <folding />
             </state>
           </provider>
@@ -59,7 +53,7 @@
       <file leaf-file-name="Search.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/services/Search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="32" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.0">
+            <state line="112" column="32" selection-start="3914" selection-end="3914" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -86,7 +80,7 @@
       <file leaf-file-name="Search.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/daos/Search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="4" selection-start="2013" selection-end="2013" vertical-scroll-proportion="0.0">
+            <state line="85" column="20" selection-start="2667" selection-end="2667" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -95,7 +89,16 @@
       <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="185" column="0" selection-start="5277" selection-end="5848" vertical-scroll-proportion="-9.8">
+            <state line="189" column="24" selection-start="5361" selection-end="5361" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="93" column="5" selection-start="2817" selection-end="2817" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,7 +116,7 @@
       <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="37" selection-start="2019" selection-end="2019" vertical-scroll-proportion="-3.6">
+            <state line="63" column="37" selection-start="2020" selection-end="2020" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -133,8 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/alfabet/index.html" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/cari/detail.html" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/cari/index.html" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/entri/equivalent.html" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/entri/index.html" />
@@ -149,6 +150,8 @@
         <option value="$PROJECT_DIR$/application/daos/Search.php" />
         <option value="$PROJECT_DIR$/application/services/Search.php" />
         <option value="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" />
+        <option value="$PROJECT_DIR$/application/faces/Search.php" />
+        <option value="$PROJECT_DIR$/application/configs/Binder.php" />
       </list>
     </option>
   </component>
@@ -206,6 +209,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -353,22 +358,12 @@
               <option name="myItemId" value="modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kateglo" />
+              <option name="myItemId" value="default" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="faces" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -386,11 +381,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="faces" />
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="faces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -476,8 +485,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -485,14 +492,14 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="124" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="43" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="137" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="113" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="109" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="119" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="732" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -529,21 +536,21 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method>
         <option name="FtpUpload" enabled="false">
           <server_id />
           <server_name />
         </option>
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
@@ -616,17 +623,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1914" height="964" extended-state="6" />
+    <frame x="-1" y="24" width="1922" height="1037" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31623933" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2735043" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3049473" sideWeight="0.32407406" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2383752" sideWeight="0.27057496" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22895442" sideWeight="0.6837607" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2383752" sideWeight="0.7204059" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32656515" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
@@ -634,6 +639,8 @@
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838285" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2735043" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31623933" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32730263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24979724" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -710,112 +717,88 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="63" selection-start="818" selection-end="824" vertical-scroll-proportion="-5.5102043">
-          <folding />
-        </state>
+        <state line="18" column="63" selection-start="818" selection-end="824" vertical-scroll-proportion="-5.5102043" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/CpanelController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="0" selection-start="4735" selection-end="5391" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="184" column="0" selection-start="4735" selection-end="5391" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="5" selection-start="5445" selection-end="5445" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="206" column="5" selection-start="5445" selection-end="5445" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/KamusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="54" selection-start="4904" selection-end="4904" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="57" selection-start="3027" selection-end="3027" vertical-scroll-proportion="-9.68">
-          <folding />
-        </state>
+        <state line="181" column="54" selection-start="4904" selection-end="4904" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/faces/Hit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/KamusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="37" selection-start="2019" selection-end="2019" vertical-scroll-proportion="-3.6">
+        <state line="197" column="52" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="32" selection-start="3914" selection-end="3914" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/AlfabetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="183" column="17" selection-start="5341" selection-end="5341" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="20" selection-start="2667" selection-end="2667" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="189" column="24" selection-start="5361" selection-end="5361" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/daos/exceptions/SolrException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="36" selection-start="1153" selection-end="1153" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="36" selection-start="1153" selection-end="1153" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="0" selection-start="5277" selection-end="5848" vertical-scroll-proportion="-9.8">
-          <folding />
-        </state>
+        <state line="63" column="37" selection-start="2020" selection-end="2020" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/Search.php">
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="4" selection-start="2013" selection-end="2013" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/AlfabetController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="17" selection-start="5341" selection-end="5341" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="32" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/faces/interfaces/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="13" selection-start="2468" selection-end="2468" vertical-scroll-proportion="0.33333334">
+        <state line="93" column="5" selection-start="2817" selection-end="2817" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/faces/Search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="395" column="67" selection-start="8943" selection-end="8943" vertical-scroll-proportion="-176.48">
+        <state line="34" column="13" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/KamusController.php">
+    <entry file="file://$PROJECT_DIR$/application/configs/Binder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="0" selection-start="4701" selection-end="4701" vertical-scroll-proportion="0.4733728">
+        <state line="66" column="84" selection-start="3849" selection-end="3849" vertical-scroll-proportion="0.8905704">
           <folding />
         </state>
       </provider>
