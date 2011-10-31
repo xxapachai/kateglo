@@ -55,6 +55,7 @@ class Binder {
 		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
         $container->bind ( 'Zend_Controller_Dispatcher_Interface' )->to ( 'Zend_Controller_Dispatcher_Stubbles' );
 		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
+		$container->bind ( daos\interfaces\Search::INTERFACE_NAME )->to ( daos\Search::$CLASS_NAME );
 		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
 		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
         $container->bind ( services\interfaces\CPanel::INTERFACE_NAME )->to ( services\CPanel::$CLASS_NAME );

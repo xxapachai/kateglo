@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\faces;
+namespace kateglo\application\models\solr;
 /*
  *  $Id$
  *
@@ -31,70 +31,104 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Suggestion {
+class Spellcheck {
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const WORD = 'word';
+	const SPELLCHECK = 'spellcheck';
 	
 	/**
 	 * 
 	 * Enter description here ...
 	 * @var string
 	 */
-	const FREQUENCY = 'freq';
+	const SUGGESTIONS = 'suggestions';
+
+    /**
+	 *
+	 * Enter description here ...
+	 * @var string
+	 */
+	const SUGGESTION = 'suggestion';
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var string
+	 */
+	const CORRECTLY_SPELLED = 'correctlySpelled';
+
+	/**
+	 *
+	 * Enter description here ...
+	 * @var string
+	 */
+	const COLLATION = 'collation';
+	
+	/**
+	 * Enter description here ...
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 */
+	private $suggestions;
+	
+	/**
+	 * Enter description here ...
+	 * @var boolean
+	 */
+	private $correctlySpelled;
 	
 	/**
 	 * Enter description here ...
 	 * @var string
 	 */
-	private $word;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $frequency;
+	private $collation;
 
     /**
-     * 
-     */
-    public function __construct($word, $frequency){
-        $this->word = $word;
-        $this->frequency = $frequency;
-    }
-
-    /**
-     * @param int $frequency
+     * @param string $collation
      * @return void
      */
-    public function setFrequency($frequency) {
-        $this->frequency = $frequency;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFrequency() {
-        return $this->frequency;
-    }
-
-    /**
-     * @param string $word
-     * @return void
-     */
-    public function setWord($word) {
-        $this->word = $word;
+    public function setCollation($collation) {
+        $this->collation = $collation;
     }
 
     /**
      * @return string
      */
-    public function getWord() {
-        return $this->word;
+    public function getCollation() {
+        return $this->collation;
+    }
+
+    /**
+     * @param boolean $correctlySpelled
+     * @return void
+     */
+    public function setCorrectlySpelled($correctlySpelled) {
+        $this->correctlySpelled = $correctlySpelled;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getCorrectlySpelled() {
+        return $this->correctlySpelled;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $suggestions
+     * @return void
+     */
+    public function setSuggestions($suggestions) {
+        $this->suggestions = $suggestions;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSuggestions() {
+        return $this->suggestions;
     }
 }
 

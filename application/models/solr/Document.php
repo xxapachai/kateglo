@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\faces;
+namespace kateglo\application\models\solr;
 /*
  *  $Id$
  *
