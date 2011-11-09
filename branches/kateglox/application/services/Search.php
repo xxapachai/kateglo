@@ -20,12 +20,6 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\faces\Equivalent;
-use kateglo\application\faces\Hit;
-use kateglo\application\faces\Document;
-use kateglo\application\faces\Facet;
-use kateglo\application\faces\Spellcheck;
-use kateglo\application\faces\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\services\exceptions\IllegalTypeException;
 use kateglo\application\models;
@@ -47,20 +41,27 @@ class Search implements interfaces\Search {
 
 	/**
 	 *
-	 * @var \Apache_Solr_Service
+	 * @var \kateglo\application\daos\interfaces\Search
 	 */
-	private $solr;
+	private $search;
 
 	/**
 	 *
-	 * @param \Apache_Solr_Service $solr
+	 * @param \kateglo\application\daos\interfaces\Search
 	 * @return void
 	 *
 	 * @Inject
 	 */
-	public function setSolr(\Apache_Solr_Service $solr = null) {
-		$this->solr = $solr;
+	public function setSearch(daos\interfaces\Search $search) {
+		$this->search = $search;
 	}
+
+    /**
+     * @return \kateglo\applications\models\solr\Amount
+     */
+    public function getAmount(){
+        return $this->search->getAmount();
+    }
 
 	/**
 	 *

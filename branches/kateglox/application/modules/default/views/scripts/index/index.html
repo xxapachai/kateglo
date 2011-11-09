@@ -20,14 +20,14 @@
 			<p><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a> <a href="${formAction}/detail">Penelusuran lanjutan</a></p>
 		</form>
 
-		<p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/entry">entry-amount</strong> entri
-			<a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/thesaurus">thesaurus-amount</strong>
+		<p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/getEntry">entry-amount</strong> entri
+			<a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/getThesaurus">thesaurus-amount</strong>
 			entri <a href="/entri/tesaurus">tesaurus</a>,
-			<strong id="equivalent-amount" tal:content="amount/equivalent">equivalent-amount</strong> entri
-			<a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/proverb">proverb-amount</strong>
+			<strong id="equivalent-amount" tal:content="amount/getEquivalent">equivalent-amount</strong> entri
+			<a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/getProverb">proverb-amount</strong>
 			entri <a href="/entri/peribahasa">peribahasa</a>,
 			serta
-			<strong id="acronym-amount" tal:content="amount/acronym">acronym-amount</strong> entri
+			<strong id="acronym-amount" tal:content="amount/getAcronym">acronym-amount</strong> entri
 			<a href="/entri/singkatan">singkatan</a>.</p>
 	</div>
 </tal:block>

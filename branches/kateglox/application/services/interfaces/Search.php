@@ -31,9 +31,14 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry {
+interface Search {
 
 	const INTERFACE_NAME = __CLASS__;
+
+    /**
+     * @return \kateglo\applications\models\solr\Amount
+     */
+    function getAmount();
 
 	/**
 	 *

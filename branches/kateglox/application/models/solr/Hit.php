@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
- * @package kateglo\application\faces
+ * @package kateglo\application\models\solr
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -46,13 +46,6 @@ class Hit {
      * @var string
      */
     const START = 'start';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const TIME = 'QTime';
 
     /**
      *
