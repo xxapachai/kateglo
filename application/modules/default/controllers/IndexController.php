@@ -18,8 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\faces\interfaces\Search;
-use kateglo\application\services\interfaces\Entry;
+use kateglo\application\services\interfaces\Search;
 use kateglo\application\daos\User;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 /**
@@ -39,20 +38,20 @@ class IndexController extends Zend_Controller_Action_Stubbles
   /**
      *
      * Enter description here ...
-     * @var kateglo\application\services\interfaces\Entry;
+     * @var \kateglo\application\services\interfaces\Search
      */
-    private $entry;
+    private $search;
 
   /**
      *
      * Enter description here ...
-     * @param kateglo\application\services\interfaces\Entry $entry
+     * @param \kateglo\application\services\interfaces\Search $search
      *
      * @Inject
      */
-    public function setEntry(Entry $entry)
+    public function setSearch(Search $search)
     {
-        $this->entry = $entry;
+        $this->search = $search;
     }
 
     /**
@@ -79,12 +78,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
             if (!$this->evaluatePreCondition($cacheId)) {
                 try {
                     $this->view->formAction = '/kamus';
-                    $entry = $this->entry->searchEntryAsJSON('', 0, 0);
-                    $thesaurus = $this->entry->searchThesaurusAsJSON('', 0, 0);
-                    $equivalent = $this->entry->searchEquivalentAsJSON('', 0, 0);
-                    $proverb = $this->entry->searchProverbAsJSON('', 0, 0);
-                    $acronym = $this->entry->searchAcronymAsJSON('', 0, 0);
-                    $this->view->amount = array('entry' => $entry->response->numFound, 'thesaurus' => $thesaurus->response->numFound, 'equivalent' => $equivalent->response->numFound, 'proverb' => $proverb->response->numFound, 'acronym' => $acronym->response->numFound);
+                    $this->view->amount = $this->search->getAmount();
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
                 } catch (Apache_Solr_Exception $e) {
                     $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');

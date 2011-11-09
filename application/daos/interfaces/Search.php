@@ -31,11 +31,26 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Search {
+interface Search
+{
 
-	const INTERFACE_NAME = __CLASS__;
+    const INTERFACE_NAME = __CLASS__;
 
 
+    /**
+     * @return \kateglo\application\models\solr\Amount
+     */
+    function getAmount();
+
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function entry($searchText, $offset = 0, $limit = 10, $params = array());
 }
 
 ?>

@@ -23,7 +23,7 @@ namespace kateglo\application\models\solr;
 /**
  *
  *
- * @package kateglo\application\faces
+ * @package kateglo\application\models\solr
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -32,28 +32,7 @@ namespace kateglo\application\models\solr;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Equivalent {
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const FOREIGN = 'foreign';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const LANGUAGE = 'language';
-	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var string
-	 */
-	const DISCIPLINE = 'discipline';
-		
+
 	/**
 	 * Enter description here ...
 	 * @var string

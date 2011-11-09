@@ -25,6 +25,7 @@ use kateglo\application\models\solr\Facet;
 use kateglo\application\models\solr\Hit;
 use kateglo\application\models\solr\Spellcheck;
 use kateglo\application\models\solr\Suggestion;
+use kateglo\application\models\solr\Amount;
 /**
  *
  *
@@ -36,232 +37,255 @@ use kateglo\application\models\solr\Suggestion;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Search implements interfaces\Search {
+class Search implements interfaces\Search
+{
 
-	public static $CLASS_NAME = __CLASS__;
-
-	/**
-	 *
-	 * @var \Apache_Solr_Service
-	 */
-	private $solr;
+    public static $CLASS_NAME = __CLASS__;
 
     /**
-	 *
-	 * @return \Apache_Solr_Service
-	 */
-	public function getSolr() {
-		if ($this->solr->ping(4)) {
-			return $this->solr;
-		} else {
-			throw new exceptions\SolrException ();
-		}
-	}
-
-	/**
-	 *
-	 * @param \Apache_Solr_Service $solr
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setSolr(\Apache_Solr_Service $solr = null) {
-		$this->solr = $solr;
-	}
+     *
+     * @var \Apache_Solr_Service
+     */
+    private $solr;
 
     /**
-	 *
-	 * @param string $searchText
-	 * @param int $offset
-	 * @param int $limit
-	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
-	 */
-	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
-		$params = $this->getDefaultParams($searchText, $params);
-		$searchText = (empty ($searchText)) ? '*' : $searchText;
-		$this->getSolr()->setCreateDocuments(false);
-		$request = $this->getSolr()->search($searchText, $offset, $limit, $params);
-		return $this->convertResponse2Models(json_decode($request->getRawResponse()));
-	}
+     *
+     * @return \Apache_Solr_Service
+     */
+    public function getSolr() {
+        if ($this->solr->ping(4)) {
+            return $this->solr;
+        } else {
+            throw new exceptions\SolrException ();
+        }
+    }
 
     /**
-	 * @param string $searchText
-	 * @param array $params
-	 * @return array
-	 */
-	private function getDefaultParams($searchText, $params = array()) {
-		if (!array_key_exists('fl', $params)) $params['fl'] = 'entri, definisi, id';
-		$params['q.op'] = 'AND';
-		$params['spellcheck'] = 'true';
-		$params['spellcheck.count'] = 10;
-		$params['spellcheck.collate'] = 'true';
-		$params['spellcheck.maxCollationTries'] = 1000;
-		$params['spellcheck.extendedResults'] = 'true';
-		$params['mlt'] = 'true';
-		$params['mlt.fl'] = 'entri,sinonim,relasi,ejaan,antonim,salahEja';
-		$params['mlt.mindf'] = 1;
-		$params['mlt.mintf'] = 1;
-		$params['mlt.count'] = 10;
-		$params['facet'] = 'true';
-		$params['facet.field'] = array('bentukPersis', 'kategoriBentukPersis', 'kelasPersis', 'kategoriKelasPersis', 'kategoriSumberPersis', 'disiplinPersis', 'disiplinPadananPersis');
-		$params['spellcheck.q'] = $searchText;
-		return $params;
-	}
+     *
+     * @param \Apache_Solr_Service $solr
+     * @return void
+     *
+     * @Inject
+     */
+    public function setSolr(\Apache_Solr_Service $solr = null) {
+        $this->solr = $solr;
+    }
 
-    	/**
-	 * Enter description here ...
-	 * @param object $response
-	 * @return kateglo\application\faces\Hit
-	 */
-	private function convertResponse2Models($response) {
-		$hit = new Hit ();
-		$hit->setTime($response->responseHeader->{Hit::TIME});
-		$hit->setCount($response->response->numFound);
-		$hit->setStart($response->response->start);
-		$hit->setDocuments(new ArrayCollection ());
-		for ($i = 0; $i < count($response->response->docs); $i++) {
+    /**
+     * @return \kateglo\application\models\solr\Amount
+     */
+    public function getAmount() {
 
-			$doc = $response->response->docs [$i];
-			$document = $this->createDocuments($doc);
+        $this->getSolr()->setCreateDocuments(false);
+        $entry = json_decode($this->getSolr()->search('*', 0, 0, array())->getRawResponse());
+        $thesaurus = json_decode($this->getSolr()->search('*', 0, 0, array('fq' => 'sinonim:*'))->getRawResponse());
+        $proverb = json_decode($this->getSolr()->search('*', 0, 0, array('fq' => 'bentukPersis:Peribahasa'))->getRawResponse());
+        $acronym = json_decode($this->getSolr()->search('*', 0, 0, array('fq' => 'bentukPersis:Akronim OR bentukPersis:Singkatan'))->getRawResponse());
+        $equivalent = json_decode($this->getSolr()->search('*', 0, 0, array('fq' => 'asing:*', 'df' => 'entriAsing'))->getRawResponse());
 
-			$moreLikeThis = new Hit();
-			$moreLikeThis->setCount($response->moreLikeThis->{$document->getId()}->numFound);
-			$moreLikeThis->setStart($response->moreLikeThis->{$document->getId()}->start);
-			$moreLikeThis->setDocuments(new ArrayCollection ());
-			for ($j = 0; $j < count($response->moreLikeThis->{$document->getId()}->docs); $j++) {
+        $amount = new Amount();
+        $amount->setEntry($entry->response->numFound);
+        $amount->setThesaurus($thesaurus->response->numFound);
+        $amount->setProverb($proverb->response->numFound);
+        $amount->setAcronym($acronym->response->numFound);
+        $amount->setEquivalent($equivalent->response->numFound);
 
-				$mltDoc = $response->moreLikeThis->{$document->getId()}->docs [$j];
-				$mltDocument = $this->createDocuments($doc);
-				$moreLikeThis->getDocuments()->add($mltDocument);
-			}
-			$document->setMoreLikeThis($moreLikeThis);
-			$hit->getDocuments()->add($document);
-		}
-		$hit->setFacet(new Facet());
-		$hit->getFacet()->setClazz(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ}))));
-		$hit->getFacet()->setClazzCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::CLAZZ_CATEGORY}))));
-		$hit->getFacet()->setType(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE}))));
-		$hit->getFacet()->setTypeCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::TYPE_CATEGORY}))));
-		$hit->getFacet()->setDiscipline(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::DISCIPLINE}))));
-		$hit->getFacet()->setSource(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->{Facet::SOURCE}))));
+        return $amount;
+    }
 
-		if (isset($response->spellcheck)) {
-			$hit->setSpellcheck(new Spellcheck());
-			$spellcheck = get_object_vars($response->spellcheck->{Spellcheck::SUGGESTIONS});
-			if (array_key_exists(Spellcheck::CORRECTLY_SPELLED, $spellcheck)) {
-				$hit->getSpellcheck()->setCorrectlySpelled($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
-				unset($spellcheck[Spellcheck::CORRECTLY_SPELLED]);
-			}
-			if (array_key_exists(Spellcheck::COLLATION, $spellcheck)) {
-				$hit->getSpellcheck()->setCollation($spellcheck[Spellcheck::COLLATION]);
-				unset($spellcheck[Spellcheck::COLLATION]);
-			}
-			$suggestions = new ArrayCollection();
-			foreach ($spellcheck as $item) {
-				foreach ($item->{Spellcheck::SUGGESTION} as $suggestion) {
-					$suggestions->add(new Suggestion($suggestion->{Suggestion::WORD}, $suggestion->{Suggestion::FREQUENCY}));
-				}
-			}
-			$hit->getSpellcheck()->setSuggestions($suggestions);
-		}
-		return $hit;
-	}
+    /**
+     *
+     * @param string $searchText
+     * @param int $offset
+     * @param int $limit
+     * @param array $params
+     * @return \kateglo\application\models\solr\Hit
+     */
+    public function entry($searchText, $offset = 0, $limit = 10) {
+        $params = $this->getDefaultParams($searchText);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
 
-	/**
-	 *
-	 * @param array $fields
-	 * @return array
-	 */
-	private function convertFacets($facets) {
-		$newFacets = $facets;
-		foreach ($facets as $key => $value) {
-			if ($value == 0) {
-				unset($newFacets[$key]);
-			}
-		}
-		return $newFacets;
-	}
+    /**
+     * @param string $searchText
+     * @param array $params
+     * @return array
+     */
+    private function getDefaultParams($searchText, $params = array()) {
+        if (!array_key_exists('fl', $params)) $params['fl'] = 'entri, definisi, id';
+        $params['q.op'] = 'AND';
+        $params['spellcheck'] = 'true';
+        $params['spellcheck.count'] = 10;
+        $params['spellcheck.collate'] = 'true';
+        $params['spellcheck.maxCollationTries'] = 1000;
+        $params['spellcheck.extendedResults'] = 'true';
+        $params['mlt'] = 'true';
+        $params['mlt.fl'] = 'entri,sinonim,relasi,ejaan,antonim,salahEja';
+        $params['mlt.mindf'] = 1;
+        $params['mlt.mintf'] = 1;
+        $params['mlt.count'] = 10;
+        $params['facet'] = 'true';
+        $params['facet.field'] = array('bentukPersis', 'kategoriBentukPersis', 'kelasPersis', 'kategoriKelasPersis', 'kategoriSumberPersis', 'disiplinPersis', 'disiplinPadananPersis');
+        $params['spellcheck.q'] = $searchText;
+        return $params;
+    }
 
-	/**
-	 * @param  $fields
-	 * @return \kateglo\application\faces\Document
-	 */
-	private function createDocuments($fields) {
-		$document = new Document ();
-		$document->setId($fields->{Document::ID});
-		$document->setEntry($fields->{Document::ENTRY});
-		$document->setAntonyms($this->convert2Array($fields, Document::ANTONYM));
-		$document->setDisciplines($this->convert2Array($fields, Document::DISCIPLINE));
-		$document->setSamples($this->convert2Array($fields, Document::SAMPLE));
-		$document->setDefinitions($this->convert2Array($fields, Document::DEFINITION));
-		$document->setClasses($this->convert2Array($fields, Document::CLAZZ));
-		$document->setClassCategories($this->convert2Array($fields, Document::CLAZZ_CATEGORY));
-		$document->setMisspelleds($this->convert2Array($fields, Document::MISSPELLED));
-		$document->setRelations($this->convert2Array($fields, Document::RELATION));
-		$document->setSynonyms($this->convert2Array($fields, Document::SYNONYM));
-		$document->setSpelled(property_exists($fields, Document::SPELLED) ? $fields->{Document::SPELLED} : '');
-		$document->setSyllabels($this->convert2Array($fields, Document::SYLLABEL));
-		$document->setTypes($this->convert2Array($fields, Document::TYPE));
-		$document->setTypeCategories($this->convert2Array($fields, Document::TYPE_CATEGORY));
-		$document->setSource($this->convert2Array($fields, Document::SOURCE));
-		$document->setSourceCategories($this->convert2Array($fields, Document::SOURCE_CATEGORY));
-		$document->setLanguages($this->convert2Array($fields, Document::LANGUAGE));
-		$document->setEquivalentDisciplines($this->convert2Array($fields, Document::EQUIVALENT_DISCIPLINE));
-		$document->setForeigns($this->convert2Array($fields, Document::FOREIGN));
-		$document->setEquivalents($this->jsonConvertToEquivalent($this->convert2Array($fields, Document::EQUIVALENT)));
+    /**
+     * Enter description here ...
+     * @param object $response
+     * @return kateglo\application\faces\Hit
+     */
+    private function convertResponse2Models($response) {
+        $hit = new Hit ();
+        $hit->setTime($response->responseHeader->QTime);
+        $hit->setCount($response->response->numFound);
+        $hit->setStart($response->response->start);
+        $hit->setDocuments(new ArrayCollection ());
+        for ($i = 0; $i < count($response->response->docs); $i++) {
 
-		return $document;
-	}
+            $doc = $response->response->docs [$i];
+            $document = $this->createDocuments($doc);
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param Doctrine\Common\Collections\ArrayCollection $array
-	 * @return Doctrine\Common\Collections\ArrayCollection|NULL
-	 */
-	private function jsonConvertToEquivalent($array) {
-		if ($array instanceof ArrayCollection) {
-			$newArray = new ArrayCollection ();
-			foreach ($array as $json) {
-				$decode = json_decode($json);
-				$equivalent = new Equivalent ();
-				$equivalent->setForeign($decode->{Equivalent::FOREIGN});
-				$equivalent->setLanguage($decode->{Equivalent::LANGUAGE});
-				$disciplines = new ArrayCollection ();
-				foreach ($decode->{Equivalent::DISCIPLINE} as $discipline) {
-					$disciplines->add($discipline);
-				}
-				$equivalent->setDisciplines($disciplines);
-				$newArray->add($equivalent);
-			}
-			return $newArray;
-		} else {
-			return null;
-		}
-	}
+            $moreLikeThis = new Hit();
+            $moreLikeThis->setCount($response->moreLikeThis->{$document->getId()}->numFound);
+            $moreLikeThis->setStart($response->moreLikeThis->{$document->getId()}->start);
+            $moreLikeThis->setDocuments(new ArrayCollection ());
+            for ($j = 0; $j < count($response->moreLikeThis->{$document->getId()}->docs); $j++) {
 
-	/**
-	 * Enter description here ...
-	 * @param array $source
-	 * @param string $key
-	 * @return Doctrine\Common\Collections\ArrayCollection|NULL
-	 */
-	private function convert2Array($source, $key) {
-		if (property_exists($source, $key)) {
-			$array = new ArrayCollection ();
-			if (!is_array($source->{$key})) {
-				$array->add($source->{$key});
-			} else {
-				foreach ($source->{$key} as $item) {
-					$array->add($item);
-				}
-			}
-			return $array;
-		} else {
-			return null;
-		}
-	}
+                $mltDoc = $response->moreLikeThis->{$document->getId()}->docs [$j];
+                $mltDocument = $this->createDocuments($doc);
+                $moreLikeThis->getDocuments()->add($mltDocument);
+            }
+            $document->setMoreLikeThis($moreLikeThis);
+            $hit->getDocuments()->add($document);
+        }
+        $hit->setFacet(new Facet());
+        $hit->getFacet()->setClazz(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->kelasPersis))));
+        $hit->getFacet()->setClazzCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->kategoriKelasPersis))));
+        $hit->getFacet()->setType(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->bentukPersis))));
+        $hit->getFacet()->setTypeCategory(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->kategoriBentukPersis))));
+        $hit->getFacet()->setDiscipline(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->disiplinPersis))));
+        $hit->getFacet()->setSource(new ArrayCollection($this->convertFacets(get_object_vars($response->facet_counts->facet_fields->kategoriSumberPersis))));
+
+        if (isset($response->spellcheck)) {
+            $hit->setSpellcheck(new Spellcheck());
+            $spellcheck = get_object_vars($response->spellcheck->suggestions);
+            if (array_key_exists('correctlySpelled', $spellcheck)) {
+                $hit->getSpellcheck()->setCorrectlySpelled($spellcheck['correctlySpelled']);
+                unset($spellcheck['correctlySpelled']);
+            }
+            if (array_key_exists('collation', $spellcheck)) {
+                $hit->getSpellcheck()->setCollation($spellcheck['collation']);
+                unset($spellcheck['collation']);
+            }
+            $suggestions = new ArrayCollection();
+            foreach ($spellcheck as $item) {
+                foreach ($item->suggestion as $suggestion) {
+                    $suggestions->add(new Suggestion($suggestion->word, $suggestion->freq));
+                }
+            }
+            $hit->getSpellcheck()->setSuggestions($suggestions);
+        }
+        return $hit;
+    }
+
+    /**
+     *
+     * @param array $fields
+     * @return array
+     */
+    private function convertFacets($facets) {
+        $newFacets = $facets;
+        foreach ($facets as $key => $value) {
+            if ($value == 0) {
+                unset($newFacets[$key]);
+            }
+        }
+        return $newFacets;
+    }
+
+    /**
+     * @param  $fields
+     * @return \kateglo\application\faces\Document
+     */
+    private function createDocuments($fields) {
+        $document = new Document ();
+        $document->setId($fields->id);
+        $document->setEntry($fields->entri);
+        $document->setAntonyms($this->convert2Array($fields, 'antonim'));
+        $document->setDisciplines($this->convert2Array($fields, 'disiplin'));
+        $document->setSamples($this->convert2Array($fields, 'contoh'));
+        $document->setDefinitions($this->convert2Array($fields, 'definisi'));
+        $document->setClasses($this->convert2Array($fields, 'kelas'));
+        $document->setClassCategories($this->convert2Array($fields, 'kategoriKelas'));
+        $document->setMisspelleds($this->convert2Array($fields, 'salahEja'));
+        $document->setRelations($this->convert2Array($fields, 'relasi'));
+        $document->setSynonyms($this->convert2Array($fields, 'sinonim'));
+        $document->setSpelled(property_exists($fields, 'ejaan') ? $fields->ejaan : '');
+        $document->setSyllabels($this->convert2Array($fields, 'silabel'));
+        $document->setTypes($this->convert2Array($fields, 'bentuk'));
+        $document->setTypeCategories($this->convert2Array($fields, 'kategoriBentuk'));
+        $document->setSource($this->convert2Array($fields, 'sumber'));
+        $document->setSourceCategories($this->convert2Array($fields, 'kategoriSumber'));
+        $document->setLanguages($this->convert2Array($fields, 'bahasa'));
+        $document->setEquivalentDisciplines($this->convert2Array($fields, 'disiplinPadanan'));
+        $document->setForeigns($this->convert2Array($fields, 'asing'));
+        $document->setEquivalents($this->jsonConvertToEquivalent($this->convert2Array($fields, 'padanan')));
+
+        return $document;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param Doctrine\Common\Collections\ArrayCollection $array
+     * @return Doctrine\Common\Collections\ArrayCollection|NULL
+     */
+    private function jsonConvertToEquivalent($array) {
+        if ($array instanceof ArrayCollection) {
+            $newArray = new ArrayCollection ();
+            foreach ($array as $json) {
+                $decode = json_decode($json);
+                $equivalent = new Equivalent ();
+                $equivalent->setForeign($decode->foreign);
+                $equivalent->setLanguage($decode->language);
+                $disciplines = new ArrayCollection ();
+                foreach ($decode->discipline as $discipline) {
+                    $disciplines->add($discipline);
+                }
+                $equivalent->setDisciplines($disciplines);
+                $newArray->add($equivalent);
+            }
+            return $newArray;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Enter description here ...
+     * @param array $source
+     * @param string $key
+     * @return Doctrine\Common\Collections\ArrayCollection|NULL
+     */
+    private function convert2Array($source, $key) {
+        if (property_exists($source, $key)) {
+            $array = new ArrayCollection ();
+            if (!is_array($source->{$key})) {
+                $array->add($source->{$key});
+            } else {
+                foreach ($source->{$key} as $item) {
+                    $array->add($item);
+                }
+            }
+            return $array;
+        } else {
+            return null;
+        }
+    }
 
 }
 

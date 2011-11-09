@@ -19,7 +19,7 @@ namespace kateglo\application\models\solr;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -31,56 +31,117 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Suggestion {
+class Amount {
 
 	/**
 	 * Enter description here ...
-	 * @var string
+	 * @var int
 	 */
-	private $word;
+	private $entry;
 	
 	/**
 	 * Enter description here ...
 	 * @var int
 	 */
-	private $frequency;
+	private $thesaurus;
+	
+	/**
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $equivalent;
 
     /**
-     * 
-     */
-    public function __construct($word, $frequency){
-        $this->word = $word;
-        $this->frequency = $frequency;
-    }
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $proverb;
 
     /**
-     * @param int $frequency
-     * @return void
+	 * Enter description here ...
+	 * @var int
+	 */
+	private $acronym;
+
+
+    /**
+     * @param int $acronym
      */
-    public function setFrequency($frequency) {
-        $this->frequency = $frequency;
+    public function setAcronym($acronym)
+    {
+        $this->acronym = $acronym;
     }
 
     /**
      * @return int
      */
-    public function getFrequency() {
-        return $this->frequency;
+    public function getAcronym()
+    {
+        return $this->acronym;
     }
 
     /**
-     * @param string $word
-     * @return void
+     * @param int $entry
      */
-    public function setWord($word) {
-        $this->word = $word;
+    public function setEntry($entry)
+    {
+        $this->entry = $entry;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getWord() {
-        return $this->word;
+    public function getEntry()
+    {
+        return $this->entry;
+    }
+
+    /**
+     * @param int $equivalent
+     */
+    public function setEquivalent($equivalent)
+    {
+        $this->equivalent = $equivalent;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEquivalent()
+    {
+        return $this->equivalent;
+    }
+
+    /**
+     * @param int $proverb
+     */
+    public function setProverb($proverb)
+    {
+        $this->proverb = $proverb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProverb()
+    {
+        return $this->proverb;
+    }
+
+    /**
+     * @param int $thesaurus
+     */
+    public function setThesaurus($thesaurus)
+    {
+        $this->thesaurus = $thesaurus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getThesaurus()
+    {
+        return $this->thesaurus;
     }
 }
 

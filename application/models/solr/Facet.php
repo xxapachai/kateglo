@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
- * @package kateglo\application\faces
+ * @package kateglo\application\models\solr
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -32,48 +32,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
 class Facet {
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const TYPE = 'bentukPersis';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const TYPE_CATEGORY = 'kategoriBentukPersis';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const CLAZZ = 'kelasPersis';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const CLAZZ_CATEGORY = 'kategoriKelasPersis';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const DISCIPLINE = 'disiplinPersis';
-
-    /**
-     *
-     * Enter description here ...
-     * @var string
-     */
-    const SOURCE = 'kategoriSumberPersis';
 
     /**
      * Enter description here ...
