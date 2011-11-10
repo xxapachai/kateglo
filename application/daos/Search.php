@@ -26,6 +26,8 @@ use kateglo\application\models\solr\Hit;
 use kateglo\application\models\solr\Spellcheck;
 use kateglo\application\models\solr\Suggestion;
 use kateglo\application\models\solr\Amount;
+use kateglo\application\models\front\Pagination;
+use kateglo\application\models\front\Filter;
 /**
  *
  *
@@ -94,18 +96,28 @@ class Search implements interfaces\Search
     }
 
     /**
-     *
      * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     * @return \kateglo\application\models\solr\Hit
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Filter $filter
+     * @return kateglo\application\faces\Hit
      */
-    public function entry($searchText, $offset = 0, $limit = 10) {
+    public function entry($searchText, Pagination $pagination, Filter $filter) {
         $params = $this->getDefaultParams($searchText);
+        $params = $this->getFilterQuery($params, $filter);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $this->getSolr()->setCreateDocuments(false);
-        $request = $this->getSolr()->search($searchText, $offset, $limit, $params);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
         return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param array $params
+     * @param \kateglo\application\models\front\Filter $filter
+     * @return
+     */
+    private function getFilterQuery($params, Filter $filter){
+        //TODO: bikin filter, pindahin kesini.
+        return $params;
     }
 
     /**

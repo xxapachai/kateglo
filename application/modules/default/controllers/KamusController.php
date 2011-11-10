@@ -99,17 +99,6 @@ class KamusController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
-	 * @param \kateglo\application\faces\interfaces\Search $entry
-	 *
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
 	 * @param \kateglo\application\services\interfaces\Pagination $pagination
 	 *
 	 * @Inject
