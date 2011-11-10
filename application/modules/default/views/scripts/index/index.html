@@ -13,22 +13,23 @@
 	<div class="w940 start">
 		<h1 class="logo">Kateglo</h1>
 
-		<form name="search" action="/kamus" method="GET" class="telusur">
-			<input type="text" name="${search/getFieldName}"
-			       value="${search/getFieldValue}"/>
-			<input class="submit" type="submit" value="${search/getButtonValue}"/>
-			<p><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a> <a href="${formAction}/detail">Penelusuran lanjutan</a></p>
-		</form>
+        <form name="search" action="/kamus" method="GET" class="telusur">
+            <input type="text" name="query" value=""/>
+            <input class="submit" type="submit" value="Cari"/>
 
-		<p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/getEntry">entry-amount</strong> entri
-			<a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/getThesaurus">thesaurus-amount</strong>
-			entri <a href="/entri/tesaurus">tesaurus</a>,
-			<strong id="equivalent-amount" tal:content="amount/getEquivalent">equivalent-amount</strong> entri
-			<a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/getProverb">proverb-amount</strong>
-			entri <a href="/entri/peribahasa">peribahasa</a>,
-			serta
-			<strong id="acronym-amount" tal:content="amount/getAcronym">acronym-amount</strong> entri
-			<a href="/entri/singkatan">singkatan</a>.</p>
+            <p><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a> <a
+                    href="/kamus/detail">Penelusuran lanjutan</a></p>
+        </form>
+
+        <p>Saat ini terdapat <strong id="entry-amount" tal:content="amount/getEntry">entry-amount</strong> entri
+            <a href="/entri/kamus">kamus</a>, <strong id="thesaurus-amount" tal:content="amount/getThesaurus">thesaurus-amount</strong>
+            entri <a href="/entri/tesaurus">tesaurus</a>,
+            <strong id="equivalent-amount" tal:content="amount/getEquivalent">equivalent-amount</strong> entri
+            <a href="/entri/padanan">padanan</a>, <strong id="proverb-amount" tal:content="amount/getProverb">proverb-amount</strong>
+            entri <a href="/entri/peribahasa">peribahasa</a>,
+            serta
+            <strong id="acronym-amount" tal:content="amount/getAcronym">acronym-amount</strong> entri
+            <a href="/entri/singkatan">singkatan</a>.</p>
 	</div>
 </tal:block>
 </body>

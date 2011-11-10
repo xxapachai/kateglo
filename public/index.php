@@ -5,7 +5,7 @@ date_default_timezone_set ( "Europe/Berlin" );
 
 /** Define application environment for the application.ini */
 defined ( 'APPLICATION_ENV' ) || define ( 'APPLICATION_ENV', (getenv ( 'APPLICATION_ENV' ) ? getenv ( 'APPLICATION_ENV' ) : //'linuxDevelopment'
-'linuxDevelopment') ); //'macDevelopment'
+'windowsDevelopment') ); //'macDevelopment'
 //'production'
 
 

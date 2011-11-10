@@ -20,12 +20,12 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\faces\Equivalent;
-use kateglo\application\faces\Hit;
-use kateglo\application\faces\Document;
-use kateglo\application\faces\Facet;
-use kateglo\application\faces\Spellcheck;
-use kateglo\application\faces\Suggestion;
+use kateglo\application\models\solr\Equivalent;
+use kateglo\application\models\solr\Hit;
+use kateglo\application\models\solr\Document;
+use kateglo\application\models\solr\Facet;
+use kateglo\application\models\solr\Spellcheck;
+use kateglo\application\models\solr\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\daos;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
