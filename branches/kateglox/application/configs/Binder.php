@@ -31,7 +31,6 @@ use Doctrine\Common\Cache\ApcCache;
 use kateglo\application\daos;
 use kateglo\application\services;
 use kateglo\application\utilities;
-use kateglo\application\faces;
 /**
  *
  *
@@ -61,6 +60,7 @@ class Binder {
         $container->bind ( services\interfaces\CPanel::INTERFACE_NAME )->to ( services\CPanel::$CLASS_NAME );
 		$container->bind ( services\interfaces\StaticData::INTERFACE_NAME )->to ( services\StaticData::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
+		$container->bind ( services\interfaces\Search::INTERFACE_NAME )->to ( services\Search::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\MimeParser::INTERFACE_NAME )->to ( utilities\MimeParser::$CLASS_NAME );

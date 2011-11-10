@@ -21,7 +21,6 @@
 use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\services\interfaces\CPanel;
 use kateglo\application\services\interfaces\Entry;
-use kateglo\application\faces\interfaces\Search;
 /**
  *
  *

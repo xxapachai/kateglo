@@ -19,7 +19,6 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\helpers\RouteParameter;
-use kateglo\application\faces\interfaces\Search;
 use kateglo\application\controllers\exceptions\HTTPBadRequestException;
 use kateglo\application\controllers\exceptions\HTTPNotFoundException;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;

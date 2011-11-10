@@ -47,10 +47,9 @@ interface Search
      * @param string $searchText
      * @param int $offset
      * @param int $limit
-     * @param array $params
      * @return \kateglo\application\models\solr\Hit
      */
-    function entry($searchText, $offset = 0, $limit = 10, $params = array());
+    function entry($searchText, $offset = 0, $limit = 10);
 }
 
 ?>

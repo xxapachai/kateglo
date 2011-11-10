@@ -35,22 +35,21 @@ use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 class IndexController extends Zend_Controller_Action_Stubbles
 {
 
-  /**
+    /**
      *
      * Enter description here ...
      * @var \kateglo\application\services\interfaces\Search
      */
     private $search;
 
-  /**
+    /**
      *
      * Enter description here ...
      * @param \kateglo\application\services\interfaces\Search $search
      *
      * @Inject
      */
-    public function setSearch(Search $search)
-    {
+    public function setSearch(Search $search) {
         $this->search = $search;
     }
 
@@ -58,8 +57,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
      */
-    public function init()
-    {
+    public function init() {
         parent::init();
     }
 
@@ -69,15 +67,13 @@ class IndexController extends Zend_Controller_Action_Stubbles
      * @Path('/')
      * @Produces('text/html')
      */
-    public function indexHtml()
-    {
+    public function indexHtml() {
         if ($this->getRequest()->getParam('query') == '') {
             $this->_helper->viewRenderer->setNoRender();
             $cacheId = __METHOD__;
 
             if (!$this->evaluatePreCondition($cacheId)) {
                 try {
-                    $this->view->formAction = '/kamus';
                     $this->view->amount = $this->search->getAmount();
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
                 } catch (Apache_Solr_Exception $e) {

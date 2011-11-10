@@ -98,7 +98,6 @@ class Search implements interfaces\Search
      * @param string $searchText
      * @param int $offset
      * @param int $limit
-     * @param array $params
      * @return \kateglo\application\models\solr\Hit
      */
     public function entry($searchText, $offset = 0, $limit = 10) {

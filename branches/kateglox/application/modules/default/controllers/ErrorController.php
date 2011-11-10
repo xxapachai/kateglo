@@ -18,7 +18,7 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\faces\interfaces\Search;
+
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
 use kateglo\application\controllers\exceptions\HTTPNotFoundException;

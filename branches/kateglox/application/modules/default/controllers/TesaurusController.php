@@ -19,7 +19,6 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\services\interfaces\Pagination;
-use kateglo\application\faces\interfaces\Search;
 use kateglo\application\services\interfaces\Entry;
 use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\faces\Hit;
