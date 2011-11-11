@@ -20,8 +20,8 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 /** @noinspection PhpUndefinedNamespaceInspection */
-use kateglo\application\faces;
-use kateglo\application\faces\Page;
+use kateglo\application\models\front;
+use kateglo\application\models\front\Page;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * 
@@ -37,18 +37,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Pagination implements interfaces\Pagination {
 	
 	public static $CLASS_NAME = __CLASS__;
-	
+
+    /**
+     * @var \kateglo\application\models\front\Pagination
+     */
+    private $pagination;
+
 	/**
-	 * Enter description here ...
-	 * @param int $amount
-	 * @param int $offset
-	 * @param int $limit
-	 * @param int $pageRange
-	 * @return kateglo\application\faces\Pagination
-	 */
-	public function create($amount, $offset = 0, $limit = 10, $pageRange = 10) {
-		$pagination = $this->doCreate ( $amount, $offset, $limit, $pageRange );
-		return $pagination;
+     * @param int $amount
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @return \kateglo\application\models\front\Pagination
+     */
+	public function create($amount, front\Pagination $pagination) {
+        $this->pagination = $pagination;
+		return $this->doCreate ( $amount, $pagination->getOffset(), $pagination->getLimit(), $pagination->getPageRange() );
 	}
 	
 	/**
@@ -91,12 +93,12 @@ class Pagination implements interfaces\Pagination {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param int $pageRange
-	 * @return kateglo\application\faces\Pagination
+	 * @return kateglo\application\models\front\Pagination
 	 */
 	private function doCreate($amount, $offset = 0, $limit = 10, $pageRange = 10) {
 		$pageCollection = new ArrayCollection ();
 		
-		$pagination = new faces\Pagination ();
+		$pagination = $this->pagination;
 		$pagination->setAmount ( $amount );
 		$pagination->setLimit ( $limit );
 		$pagination->setOffset ( $offset );

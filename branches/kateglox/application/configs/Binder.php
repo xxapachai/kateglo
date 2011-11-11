@@ -61,6 +61,7 @@ class Binder {
 		$container->bind ( services\interfaces\StaticData::INTERFACE_NAME )->to ( services\StaticData::$CLASS_NAME );
 		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
 		$container->bind ( services\interfaces\Search::INTERFACE_NAME )->to ( services\Search::$CLASS_NAME );
+		$container->bind ( services\interfaces\Filter::INTERFACE_NAME )->to ( services\Filter::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );
 		$container->bind ( utilities\interfaces\MimeParser::INTERFACE_NAME )->to ( utilities\MimeParser::$CLASS_NAME );

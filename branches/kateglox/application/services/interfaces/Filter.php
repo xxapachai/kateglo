@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\daos\interfaces;
+namespace kateglo\application\services\interfaces;
 /*
  *  $Id$
  *
@@ -19,12 +19,11 @@ namespace kateglo\application\daos\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models\front\Pagination;
-use kateglo\application\models\front\Filter;
+use kateglo\application\models\front;
 /**
  *
  *
- * @package kateglo\application\daos\interfaces
+ * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -32,25 +31,17 @@ use kateglo\application\models\front\Filter;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Search
+interface Filter
 {
 
     const INTERFACE_NAME = __CLASS__;
 
-
     /**
-     * @return \kateglo\application\models\solr\Amount
+     * @abstract
+     * @param \kateglo\application\models\front\Filter $filter
+     * @return void
      */
-    function getAmount();
-
-    /**
-     *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     * @return \kateglo\application\models\solr\Hit
-     */
-    function entry($searchText, Pagination $pagination, Filter $filter);
+    function create(front\Filter $filter);
 }
 
 ?>

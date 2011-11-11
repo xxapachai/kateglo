@@ -19,10 +19,10 @@ namespace kateglo\application\services\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-
+use kateglo\application\models\front;
 /**
- * 
- * 
+ *
+ *
  * @package kateglo\application\services\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
@@ -31,44 +31,43 @@ namespace kateglo\application\services\interfaces;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Pagination {
-	
-	const INTERFACE_NAME = __CLASS__;
-	
-	/**
-	 * Enter description here ...
-	 * @param int $amount
-	 * @param int $offset
-	 * @param int $limit
-	 * @param int $pageRange
-	 * @return kateglo\application\faces\Pagination
-	 */
-	function create($amount, $offset = 0, $limit = 10, $pageRange = 10);
-	
-	/**
-	 * Enter description here ...
-	 * @param int $amount
-	 * @param int $offset
-	 * @param int $limit
-	 * @param int $pageRange
-	 * @return array
-	 */
-	function createAsArray($amount, $offset = 0, $limit = 10, $pageRange = 10);
-	
-	/**
-	 * Enter description here ...
-	 * @param int $amount
-	 * @param int $limit
-	 * @return int
-	 */
-	function pageAmount($amount, $limit);
-	
-	/**
-	 * Enter description here ...
-	 * @param int $offset
-	 * @param int $limit
-	 * @return int
-	 */
-	function currentPage($offset, $limit);
+interface Pagination
+{
+
+    const INTERFACE_NAME = __CLASS__;
+
+    /**
+     * @param int $amount
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @return \kateglo\application\models\front\Pagination
+     */
+    public function create($amount, front\Pagination $pagination);
+
+    /**
+     * Enter description here ...
+     * @param int $amount
+     * @param int $offset
+     * @param int $limit
+     * @param int $pageRange
+     * @return array
+     */
+    function createAsArray($amount, $offset = 0, $limit = 10, $pageRange = 10);
+
+    /**
+     * Enter description here ...
+     * @param int $amount
+     * @param int $limit
+     * @return int
+     */
+    function pageAmount($amount, $limit);
+
+    /**
+     * Enter description here ...
+     * @param int $offset
+     * @param int $limit
+     * @return int
+     */
+    function currentPage($offset, $limit);
 }
+
 ?>
