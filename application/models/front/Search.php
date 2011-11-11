@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\daos\interfaces;
+namespace kateglo\application\models\front;
 /*
  *  $Id$
  *
@@ -19,12 +19,12 @@ namespace kateglo\application\daos\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models\front\Pagination;
-use kateglo\application\models\front\Filter;
+
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
- * @package kateglo\application\daos\interfaces
+ * @package kateglo\application\models\front
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -32,25 +32,67 @@ use kateglo\application\models\front\Filter;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Search
+class Search
 {
-
-    const INTERFACE_NAME = __CLASS__;
-
-
-    /**
-     * @return \kateglo\application\models\solr\Amount
-     */
-    function getAmount();
 
     /**
      *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     * @return \kateglo\application\models\solr\Hit
+     * @var string
      */
-    function entry($searchText, Pagination $pagination, Filter $filter);
+    private $fieldValue;
+
+    /**
+     * Enter description here ...
+     * @var string
+     */
+    private $formAction;
+
+    /**
+     *
+     * @return string
+     */
+    public function setFieldValue($fieldValue) {
+        $this->fieldValue = $fieldValue;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFieldValue() {
+        return $this->fieldValue;
+    }
+
+    /**
+     * @return the $formAction
+     */
+    public function getFormAction() {
+        return $this->formAction;
+    }
+
+    /**
+     * @param string $formAction
+     */
+    public function setFormAction($formAction) {
+        $this->formAction = $formAction;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFieldName() {
+        return "query";
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFilterName() {
+        return "filter";
+    }
+
 }
 
 ?>

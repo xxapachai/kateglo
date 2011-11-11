@@ -21,6 +21,8 @@ namespace kateglo\application\services;
  */
 
 use kateglo\application\daos;
+use kateglo\application\models\front;
+use kateglo\application\models\front\Filter;
 /**
  *
  *
@@ -32,32 +34,43 @@ use kateglo\application\daos;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Search implements interfaces\Search {
+class Search implements interfaces\Search
+{
 
-	public static $CLASS_NAME = __CLASS__;
+    public static $CLASS_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @var \kateglo\application\daos\interfaces\Search
-	 */
-	private $search;
+    /**
+     *
+     * @var \kateglo\application\daos\interfaces\Search
+     */
+    private $search;
 
-	/**
-	 *
-	 * @param \kateglo\application\daos\interfaces\Search
-	 * @return void
-	 *
-	 * @Inject
-	 */
-	public function setSearch(daos\interfaces\Search $search) {
-		$this->search = $search;
-	}
+    /**
+     *
+     * @param \kateglo\application\daos\interfaces\Search
+     * @return void
+     *
+     * @Inject
+     */
+    public function setSearch(daos\interfaces\Search $search) {
+        $this->search = $search;
+    }
 
     /**
      * @return \kateglo\applications\models\solr\Amount
      */
-    public function getAmount(){
+    public function getAmount() {
         return $this->search->getAmount();
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Filter $filter
+     * @return \kateglo\application\models\solr\Hit
+     */
+    public function entry($searchText, front\Pagination $pagination, front\Filter $filter) {
+        return $this->search->entry($searchText, $pagination, $filter);
     }
 
 }

@@ -28,6 +28,7 @@ use kateglo\application\models\solr\Suggestion;
 use kateglo\application\models\solr\Amount;
 use kateglo\application\models\front\Pagination;
 use kateglo\application\models\front\Filter;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  *
@@ -116,7 +117,20 @@ class Search implements interfaces\Search
      * @return
      */
     private function getFilterQuery($params, Filter $filter){
-        //TODO: bikin filter, pindahin kesini.
+        $filterQueryArray = array();
+        if($filter->getTypeValue() != ""){
+            $filterQueryArray[] = 'bentukPersis:"' .$filter->getTypeValue() . '"';
+        }
+        if($filter->getClassValue() != ""){
+            $filterQueryArray[] = 'bentukPersis:"' .$filter->getClassValue() . '"';
+        }
+        if($filter->getSourceValue() != ""){
+            $filterQueryArray[] = 'bentukPersis:"' .$filter->getSourceValue() . '"';
+        }
+        if($filter->getDisciplineValue() != ""){
+            $filterQueryArray[] = 'bentukPersis:"' .$filter->getDisciplineValue() . '"';
+        }
+		$params['fq'] = implode(' ', $filterQueryArray);
         return $params;
     }
 

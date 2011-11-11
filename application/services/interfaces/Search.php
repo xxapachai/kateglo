@@ -19,7 +19,7 @@ namespace kateglo\application\services\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models;
+use kateglo\application\models\front;
 /**
  *
  *
@@ -31,15 +31,22 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Search {
+interface Search
+{
 
-	const INTERFACE_NAME = __CLASS__;
+    const INTERFACE_NAME = __CLASS__;
 
     /**
      * @return \kateglo\applications\models\solr\Amount
      */
     function getAmount();
 
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Filter $filter
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function entry($searchText, front\Pagination $pagination, front\Filter $filter);
 }
-
 ?>

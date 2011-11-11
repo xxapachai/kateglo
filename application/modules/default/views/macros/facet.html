@@ -11,8 +11,6 @@
 	<h3>Telusuri di</h3>
 	<ul class="telusuri">
 		<tal:block tal:condition="php: search.getFieldValue() EQ ''">
-			<li tal:condition="php: facetNav NE 'cari'"><a href="/cari">semua laman</a></li>
-			<li tal:condition="php: facetNav EQ 'cari'">semua laman</li>
 			<li tal:condition="php: facetNav NE 'kamus'"><a href="/kamus">kamus</a></li>
 			<li tal:condition="php: facetNav EQ 'kamus'">kamus</li>
 			<li tal:condition="php: facetNav NE 'tesaurus'"><a href="/tesaurus">tesaurus</a></li>
@@ -25,9 +23,6 @@
 			<li tal:condition="php: facetNav EQ 'singkatan'">singkatan</li>
 		</tal:block>
 		<tal:block tal:condition="php: search.getFieldValue() NE ''">
-			<li tal:condition="php: facetNav NE 'cari'"><a href="/cari?query=${php: urlencode(search.getFieldValue())}">semua
-				laman</a></li>
-			<li tal:condition="php: facetNav EQ 'cari'">semua laman</li>
 			<li tal:condition="php: facetNav NE 'kamus'"><a
 					href="/kamus?query=${php: urlencode(search.getFieldValue())}">kamus</a></li>
 			<li tal:condition="php: facetNav EQ 'kamus'">kamus</li>

@@ -33,6 +33,11 @@ namespace kateglo\application\models\front;
  */
 class Filter
 {
+    /**
+     * Enter description here ...
+     * @var string
+     */
+    private $uri;
 
     /**
      * Enter description here ...
@@ -192,6 +197,20 @@ class Filter
      */
     public function getTypeValue() {
         return $this->typeValue;
+    }
+
+    /**
+     * @param string $uri
+     */
+    public function setUri($uri) {
+        $this->uri = $uri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri() {
+        return $this->uri;
     }
 }
 
