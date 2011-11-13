@@ -10,13 +10,13 @@
 <header>
     <a href="/" title="Beranda Kateglo"><h2>Kateglo</h2></a>
 
-    <form name="search" action="${formAction}" method="GET" class="telusur">
+    <form name="search" action="${search/getFormAction}" method="GET" class="telusur">
         <input type="text" name="${search/getFieldName}"
                value="${search/getFieldValue}" placeholder="Ketik yang dicari, kemudian tekan tombol enter"/>
-        <input class="submit" type="submit" value="${search/getButtonValue}"/>
+        <input class="submit" type="submit" value="Cari"/>
 
         <p class="pright"><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a>
-            <a href="${formAction}/detail">Penelusuran lanjutan</a>
+            <a href="${search/getFormAction}/detail">Penelusuran lanjutan</a>
         </p>
         <tal:block tal:condition="exists: hits">
             <p class="pleft">Hasil penelusuran: ${hits/getCount} entri (${hits/getTimeInSeconds} detik)</p>
