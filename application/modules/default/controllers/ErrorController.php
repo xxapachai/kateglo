@@ -24,6 +24,7 @@ use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
 use kateglo\application\controllers\exceptions\HTTPNotFoundException;
 use kateglo\application\controllers\exceptions\HTTPUnsupportedMediaTypeException;
 use kateglo\application\controllers\exceptions\HTTPBadRequestException;
+use kateglo\application\models\front\Search;
 /**
  *
  *
@@ -46,30 +47,12 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
-	 * @var kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
-
-	/**
-	 *
-	 * Enter description here ...
 	 * @param Zend_Log $log
 	 *
 	 * @Inject
 	 */
 	public function setEntry(\Zend_Log $log) {
 		$this->log = $log;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\faces\interfaces\Search $entry
-	 *
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
 	}
 
 	/**
@@ -96,8 +79,8 @@ class ErrorController extends Zend_Controller_Action_Stubbles {
 		$this->view->request = $errors->request;
 
 		$this->view->appPath = APPLICATION_PATH.'/modules';
-		$this->view->search = $this->search;
-		$this->view->formAction = '/kamus';
+		$this->view->search = new Search();
+		$this->view->search->setFormAction('/kamus');
 	}
 
 	private function otherException(Exception $exception) {

@@ -19,7 +19,6 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\services\interfaces;
-use kateglo\application\faces\Hit;
 use kateglo\application\models;
 /**
  *
@@ -88,7 +87,7 @@ class KamusController extends Zend_Controller_Action_Stubbles
     /**
      *
      * Enter description here ...
-     * @param kateglo\application\services\interfaces\Entry $entry
+     * @param kateglo\application\services\interfaces\StaticData $staticData
      *
      * @Inject
      */
@@ -126,6 +125,7 @@ class KamusController extends Zend_Controller_Action_Stubbles
         $pagination = new kateglo\application\models\front\Pagination();
         $filter = new kateglo\application\models\front\Filter();
         $search = new kateglo\application\models\front\Search();
+        $search->setFormAction('/kamus');
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
                     ? intval($this->_request->getParam('limit'))
                     : 10));
@@ -140,8 +140,9 @@ class KamusController extends Zend_Controller_Action_Stubbles
                 $filter->setUri($filterText);
                 $search->setFieldValue($searchText);
                 $this->filter->create($filter);
-                /** @var $hits kateglo\application\faces\Hit */
+                /** @var $hits kateglo\application\models\front\Hit */
                 $hits = $this->search->entry($searchText, $pagination, $filter);
+                $this->view->search = $search;
                 $this->view->pagination = $this->pagination->create($hits->getCount(), $pagination);
                 $this->view->hits = $hits;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
