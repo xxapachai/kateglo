@@ -31,68 +31,114 @@ namespace kateglo\application\models\solr;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Equivalent {
+class Equivalent
+{
 
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $foreign;
-	
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $language;
-	
-	/**
-	 * Enter description here ...
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 */
-	private $disciplines;
-		
-	/**
-	 * @return the $foreign
-	 */
-	public function getForeign() {
-		return $this->foreign;
-	}
-	
-	/**
-	 * @param string $foreign
-	 */
-	public function setForeign($foreign) {
-		$this->foreign = $foreign;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-	
-	/**
-	 * @param string $entry
-	 */
-	public function setLanguage($language) {
-		$this->language = $language;
-	}
-	
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getDisciplines() {
-		return $this->disciplines;
-	}
-	
-	/**
-	 * @param \Doctrine\Common\Collections\ArrayCollection $disciplines
-	 */
-	public function setDisciplines($disciplines) {
-		$this->disciplines = $disciplines;
-	}
-	
+    /**
+     * Enter description here ...
+     * @var string
+     */
+    private $foreign;
+
+    /**
+     * Enter description here ...
+     * @var string
+     */
+    private $language;
+
+    /**
+     * Enter description here ...
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $disciplines;
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return $this->processArray(get_object_vars($this));
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function processArray($array) {
+        foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $array[$key] = $value->toArray();
+            }
+            if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
+            }
+            if ($value instanceof ArrayCollection) {
+                $array[$key] = array();
+                $elements = $value->toArray();
+                foreach($elements as $item){
+                    if (is_object($item)) {
+                        $array[$key][] = $item->toArray();
+                    }
+                    else if (is_array($item)) {
+                        $array[$key][] = $this->processArray($item);
+                    }else{
+                        $array[$key][] = $item;
+                    }
+                }
+            }
+        }
+        // If the property isn't an object or array, leave it untouched
+        return $array;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return json_encode($this->toArray());
+    }
+
+    /**
+     * @return the $foreign
+     */
+    public function getForeign() {
+        return $this->foreign;
+    }
+
+    /**
+     * @param string $foreign
+     */
+    public function setForeign($foreign) {
+        $this->foreign = $foreign;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage() {
+        return $this->language;
+    }
+
+    /**
+     * @param string $entry
+     */
+    public function setLanguage($language) {
+        $this->language = $language;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDisciplines() {
+        return $this->disciplines;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $disciplines
+     */
+    public function setDisciplines($disciplines) {
+        $this->disciplines = $disciplines;
+    }
+
 }
 
 ?>

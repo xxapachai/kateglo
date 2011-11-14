@@ -31,7 +31,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Hit {
+class Hit
+{
 
     /**
      *
@@ -89,6 +90,51 @@ class Hit {
      * @var \kateglo\application\faces\Spellcheck
      */
     private $spellcheck;
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return $this->processArray(get_object_vars($this));
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function processArray($array) {
+        foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $array[$key] = $value->toArray();
+            }
+            else if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
+            }
+            else if ($value instanceof ArrayCollection) {
+                $array[$key] = array();
+                $elements = $value->toArray();
+                foreach ($elements as $item) {
+                    if (is_object($item)) {
+                        $array[$key][] = $item->toArray();
+                    }
+                    else if (is_array($item)) {
+                        $array[$key][] = $this->processArray($item);
+                    }else{
+                        $array[$key][] = $item;
+                    }
+                }
+            }
+        }
+        // If the property isn't an object or array, leave it untouched
+        return $array;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return json_encode($this->toArray());
+    }
 
     /**
      * @return int
@@ -167,7 +213,7 @@ class Hit {
      * @return void
      */
     public function getTimeInSeconds() {
-        return number_format($this->time/1000, 3, ',', '.' );
+        return number_format($this->time / 1000, 3, ',', '.');
     }
 
     /**

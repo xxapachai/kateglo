@@ -11,12 +11,12 @@
 <tal:block metal:fill-slot="content">
     <div class="w940" tal:condition="php: hits.getCount() GT 0">
         <tal:block metal:use-macro="${appPath}/default/views/macros/header.html/header"/>
-        <!--tal:block tal:define="facetNav string:kamus "
-                   metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/ -->
+        <tal:block tal:define="facetNav string:kamus "
+                   metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/>
         <content>
             <div class="content">
                 <!-- tal:block metal:use-macro="${appPath}/default/views/macros/filter.html/filter"/ -->
-                <!-- div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/ -->
+                <div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
                 <div class="result">
                     <tal:block tal:repeat="hit hits/getDocuments">
                         <p>
@@ -29,7 +29,7 @@
                         </p>
                     </tal:block>
                 </div>
-                <!-- div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/ -->
+                <div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
             </div>
         </content>
         <div class="clear"></div>

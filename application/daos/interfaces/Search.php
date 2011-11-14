@@ -50,7 +50,7 @@ interface Search
      * @param int $limit
      * @return \kateglo\application\models\solr\Hit
      */
-    function entry($searchText, Pagination $pagination, Filter $filter);
+    function entry($searchText, Pagination $pagination, Filter $filter = null);
 }
 
 ?>

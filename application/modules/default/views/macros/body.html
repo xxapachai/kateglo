@@ -23,27 +23,27 @@
 						Beranda
 					</a></li>
 				<li>
-					<a tal:attributes="class php: headerNav EQ 'kamus' ? 'on' : null; href php: empty(searchFieldValue) ? '/kamus' : '/kamus?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'kamus' ? 'on' : null; href php: search.getFieldValue() EQ '' ? '/kamus' : '/kamus?query='.urlencode(search.getFieldValue())">
 						Kamus
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: headerNav EQ 'tesaurus' ? 'on' : null; href php: empty(searchFieldValue) ? '/tesaurus' : '/tesaurus?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'tesaurus' ? 'on' : null; href php:search.getFieldValue() EQ '' ? '/tesaurus' : '/tesaurus?query='.urlencode(search.getFieldValue())">
 						Tesaurus
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: headerNav EQ 'padanan' ? 'on' : null; href php: empty(searchFieldValue) ? '/padanan' : '/padanan?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'padanan' ? 'on' : null; href php: search.getFieldValue() EQ '' ? '/padanan' : '/padanan?query='.urlencode(search.getFieldValue())">
 						Padanan
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: headerNav EQ 'peribahasa' ? 'on' : null; href php: empty(searchFieldValue) ? '/peribahasa' : '/peribahasa?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'peribahasa' ? 'on' : null; href php: search.getFieldValue() EQ '' ? '/peribahasa' : '/peribahasa?query='.urlencode(search.getFieldValue())">
 						Peribahasa
 					</a>
 				</li>
 				<li>
-					<a tal:attributes="class php: headerNav EQ 'singkatan' ? 'on' : null; href php: empty(searchFieldValue) ? '/singkatan' : '/singkatan?query='.searchFieldValue">
+					<a tal:attributes="class php: headerNav EQ 'singkatan' ? 'on' : null; href php: search.getFieldValue() EQ '' ? '/singkatan' : '/singkatan?query='.urlencode(search.getFieldValue())">
 						Singkatan
 					</a>
 				</li>

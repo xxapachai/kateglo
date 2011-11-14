@@ -47,6 +47,6 @@ interface Search
      * @param \kateglo\application\models\front\Filter $filter
      * @return \kateglo\application\models\solr\Hit
      */
-    function entry($searchText, front\Pagination $pagination, front\Filter $filter);
+    function entry($searchText, front\Pagination $pagination, front\Filter $filter = null);
 }
 ?>

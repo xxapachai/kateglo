@@ -8,12 +8,12 @@
 </head>
 <body tal:omit-tag="true" metal:define-macro="filter">
 <div tal:condition="php: search.getFilterUri() NE ''" class="cumb">
-	<a tal:condition="php: search.getFieldValue() EQ ''" class="close" href="${formAction}">&times;</a>
+	<a tal:condition="php: search.getFieldValue() EQ ''" class="close" href="${search/getFormAction}">&times;</a>
 	<a tal:condition="php: search.getFieldValue() NE ''" class="close"
-	   href="${formAction}?query=${php: urlencode(search.getFieldValue())}">&times;</a>
+	   href="${search/getFormAction}?query=${php: urlencode(search.getFieldValue())}">&times;</a>
 	<p>
 		<tal:block tal:repeat="filter search/getFilters">
-			<a tal:condition="not: repeat/filter/end" href="${formAction}/?${php: filter.getUri()}">${filter/getValue}</a>
+			<a tal:condition="not: repeat/filter/end" href="${search/getFormAction}/?${php: filter.getUri()}">${filter/getValue}</a>
 			<strong tal:condition="repeat/filter/end">${filter/getValue}</strong>
 		</tal:block>
 	</p>
