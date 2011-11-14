@@ -102,9 +102,9 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Filter $filter
      * @return kateglo\application\faces\Hit
      */
-    public function entry($searchText, Pagination $pagination, Filter $filter) {
+    public function entry($searchText, Pagination $pagination, Filter $filter = null) {
         $params = $this->getDefaultParams($searchText);
-        $params = $this->getFilterQuery($params, $filter);
+        $params = $filter == null ? $params : $this->getFilterQuery($params, $filter);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
@@ -122,13 +122,13 @@ class Search implements interfaces\Search
             $filterQueryArray[] = 'bentukPersis:"' .$filter->getTypeValue() . '"';
         }
         if($filter->getClassValue() != ""){
-            $filterQueryArray[] = 'bentukPersis:"' .$filter->getClassValue() . '"';
+            $filterQueryArray[] = 'kelasPersis:"' .$filter->getClassValue() . '"';
         }
         if($filter->getSourceValue() != ""){
-            $filterQueryArray[] = 'bentukPersis:"' .$filter->getSourceValue() . '"';
+            $filterQueryArray[] = 'sumberPersis:"' .$filter->getSourceValue() . '"';
         }
         if($filter->getDisciplineValue() != ""){
-            $filterQueryArray[] = 'bentukPersis:"' .$filter->getDisciplineValue() . '"';
+            $filterQueryArray[] = 'disiplinPersis:"' .$filter->getDisciplineValue() . '"';
         }
 		$params['fq'] = implode(' ', $filterQueryArray);
         return $params;

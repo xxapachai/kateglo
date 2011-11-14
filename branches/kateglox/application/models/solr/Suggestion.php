@@ -31,24 +31,70 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Suggestion {
-
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $word;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $frequency;
+class Suggestion
+{
 
     /**
-     * 
+     * Enter description here ...
+     * @var string
      */
-    public function __construct($word, $frequency){
+    private $word;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $frequency;
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return $this->processArray(get_object_vars($this));
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function processArray($array) {
+        foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $array[$key] = $value->toArray();
+            }
+            if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
+            }
+            if ($value instanceof ArrayCollection) {
+                $array[$key] = array();
+                $elements = $value->toArray();
+                foreach($elements as $item){
+                    if (is_object($item)) {
+                        $array[$key][] = $item->toArray();
+                    }
+                    else if (is_array($item)) {
+                        $array[$key][] = $this->processArray($item);
+                    }else{
+                        $array[$key][] = $item;
+                    }
+                }
+            }
+        }
+        // If the property isn't an object or array, leave it untouched
+        return $array;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return json_encode($this->toArray());
+    }
+
+    /**
+     *
+     */
+    public function __construct($word, $frequency) {
         $this->word = $word;
         $this->frequency = $frequency;
     }

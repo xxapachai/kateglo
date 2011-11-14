@@ -44,14 +44,14 @@ class KamusController extends Zend_Controller_Action_Stubbles
     /**
      *
      * Enter description here ...
-     * @var \kateglo\application\faces\interfaces\Search;
+     * @var \kateglo\application\services\interfaces\Search;
      */
     private $search;
 
     /**
      *
      * Enter description here ...
-     * @var \kateglo\application\faces\interfaces\Filter;
+     * @var \kateglo\application\services\interfaces\Filter;
      */
     private $filter;
 
@@ -132,19 +132,22 @@ class KamusController extends Zend_Controller_Action_Stubbles
         $pagination->setOffset((is_numeric($this->_request->getParam('start'))
                     ? intval($this->_request->getParam('start'))
                     : 0));
-        $searchText = $this->getRequest()->getParam($search->getFieldName());
-        $filterText = $this->getRequest()->getParam($search->getFilterName());
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $filterText = urldecode($this->getRequest()->getParam($search->getFilterName()));
         try {
             $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $filterText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             if (!$this->evaluatePreCondition($cacheId)) {
                 $filter->setUri($filterText);
                 $search->setFieldValue($searchText);
                 $this->filter->create($filter);
-                /** @var $hits kateglo\application\models\front\Hit */
+                /** @var $hits \kateglo\application\models\solr\Hit */
                 $hits = $this->search->entry($searchText, $pagination, $filter);
-                $this->view->search = $search;
-                $this->view->pagination = $this->pagination->create($hits->getCount(), $pagination);
+                $pagination->setAmount($hits->getCount());
+                $this->pagination->create($pagination);
                 $this->view->hits = $hits;
+                $this->view->search = $search;
+                $this->view->filter = $filter;
+                $this->view->pagination = $pagination;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
             }
             $this->responseBuilder($cacheId);
@@ -162,14 +165,23 @@ class KamusController extends Zend_Controller_Action_Stubbles
      * @Produces('application/json')
      */
     public function indexJson() {
-        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $search = new kateglo\application\models\front\Search();
+        $pagination = new kateglo\application\models\front\Pagination();
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+                    ? intval($this->_request->getParam('limit'))
+                    : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+                    ? intval($this->_request->getParam('start'))
+                    : 0));
         try {
-            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             if (!$this->evaluatePreCondition($cacheId)) {
-                /*@var $hits kateglo\application\faces\Hit */
-                $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit);
-                $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-                $this->content = array('hits' => $hits, 'pagination' => $pagination);
+                /*@var $hits \kateglo\application\models\solr\Hit */
+                $hits = $this->search->entry($searchText, $pagination);
+                $this->pagination->create($pagination);
+                //print_r($hits);
+                $this->content = array('hits' => $hits->toArray(), 'pagination' => $pagination->toArray());
             }
             $this->responseBuilder($cacheId);
         } catch (Apache_Solr_Exception $e) {

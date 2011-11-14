@@ -31,116 +31,137 @@ namespace kateglo\application\models\solr;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Amount {
-
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $entry;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $thesaurus;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $equivalent;
+class Amount
+{
 
     /**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $proverb;
+     * Enter description here ...
+     * @var int
+     */
+    private $entry;
 
     /**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $acronym;
+     * Enter description here ...
+     * @var int
+     */
+    private $thesaurus;
 
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $equivalent;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $proverb;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $acronym;
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return $this->processArray(get_object_vars($this));
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function processArray($array) {
+        foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $array[$key] = $value->toArray();
+            }
+            if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
+            }
+        }
+        // If the property isn't an object or array, leave it untouched
+        return $array;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return json_encode($this->toArray());
+    }
 
     /**
      * @param int $acronym
      */
-    public function setAcronym($acronym)
-    {
+    public function setAcronym($acronym) {
         $this->acronym = $acronym;
     }
 
     /**
      * @return int
      */
-    public function getAcronym()
-    {
+    public function getAcronym() {
         return $this->acronym;
     }
 
     /**
      * @param int $entry
      */
-    public function setEntry($entry)
-    {
+    public function setEntry($entry) {
         $this->entry = $entry;
     }
 
     /**
      * @return int
      */
-    public function getEntry()
-    {
+    public function getEntry() {
         return $this->entry;
     }
 
     /**
      * @param int $equivalent
      */
-    public function setEquivalent($equivalent)
-    {
+    public function setEquivalent($equivalent) {
         $this->equivalent = $equivalent;
     }
 
     /**
      * @return int
      */
-    public function getEquivalent()
-    {
+    public function getEquivalent() {
         return $this->equivalent;
     }
 
     /**
      * @param int $proverb
      */
-    public function setProverb($proverb)
-    {
+    public function setProverb($proverb) {
         $this->proverb = $proverb;
     }
 
     /**
      * @return int
      */
-    public function getProverb()
-    {
+    public function getProverb() {
         return $this->proverb;
     }
 
     /**
      * @param int $thesaurus
      */
-    public function setThesaurus($thesaurus)
-    {
+    public function setThesaurus($thesaurus) {
         $this->thesaurus = $thesaurus;
     }
 
     /**
      * @return int
      */
-    public function getThesaurus()
-    {
+    public function getThesaurus() {
         return $this->thesaurus;
     }
 }

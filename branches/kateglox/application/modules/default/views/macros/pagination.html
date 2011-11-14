@@ -9,7 +9,8 @@
 <div class="pagination" tal:condition="php: is_object(pagination)">
     <tal:block tal:repeat="page pagination/getPages">
         <tal:block tal:condition="not: page/isCurrent">
-            <a href="${formAction}/?${search/getPaginationUri}start=${page/getStart}">${page/getText}</a>
+            <!--a href="${search/getFormAction}/?${search/getPaginationUri}start=${page/getStart}">${page/getText}</a-->
+            <a href="${search/getFormAction}/?query=${php: urlencode(search.getFieldValue())}&filter=${filter/getUri}&start=${page/getStart}">${page/getText}</a>
         </tal:block>
         <strong tal:condition="page/isCurrent" tal:content="page/getText">Text</strong>
     </tal:block>

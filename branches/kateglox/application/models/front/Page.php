@@ -31,99 +31,146 @@ namespace kateglo\application\models\front;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Page {
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $page;
-	
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $start;
-	
-	/**
-	 * Enter description here ...
-	 * @var string
-	 */
-	private $text;
-	
-	/**
-	 * Enter description here ...
-	 * @var boolean
-	 */
-	private $current;
-	
-	/**
-	 * Enter description here ...
-	 * @param int $page
-	 * @param int $start
-	 * @param string $text
-	 */
-	function __construct($page, $start, $text, $current) {
-		$this->page = $page;
-		$this->start = $start;
-		$this->text = $text;
-		$this->current = $current;
-	}
-	
-	/**
-	 * @return int $page
-	 */
-	public function getPage() {
-		return $this->page;
-	}
-	
-	/**
-	 * @param int $page
-	 */
-	public function setPage($page) {
-		$this->page = $page;
-	}
-	
-	/**
-	 * @return int $start
-	 */
-	public function getStart() {
-		return $this->start;
-	}
-	
-	/**
-	 * @param int $start
-	 */
-	public function setStart($start) {
-		$this->start = $start;
-	}
-	
-	/**
-	 * @return string $text
-	 */
-	public function getText() {
-		return $this->text;
-	}
-	
-	/**
-	 * @param string $text
-	 */
-	public function setText($text) {
-		$this->text = $text;
-	}
-	/**
-	 * @return boolean $current
-	 */
-	public function isCurrent() {
-		return $this->current;
-	}
+class Page
+{
 
-	/**
-	 * @param boolean $current
-	 */
-	public function setCurrent($current) {
-		$this->current = $current;
-	}
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $page;
+
+    /**
+     * Enter description here ...
+     * @var int
+     */
+    private $start;
+
+    /**
+     * Enter description here ...
+     * @var string
+     */
+    private $text;
+
+    /**
+     * Enter description here ...
+     * @var boolean
+     */
+    private $current;
+
+    /**
+     * Enter description here ...
+     * @param int $page
+     * @param int $start
+     * @param string $text
+     */
+    function __construct($page, $start, $text, $current) {
+        $this->page = $page;
+        $this->start = $start;
+        $this->text = $text;
+        $this->current = $current;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return $this->processArray(get_object_vars($this));
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    private function processArray($array) {
+        foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $array[$key] = $value->toArray();
+            }
+            if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
+            }
+            if ($value instanceof ArrayCollection) {
+                $array[$key] = array();
+                $elements = $value->toArray();
+                foreach($elements as $item){
+                    if (is_object($item)) {
+                        $array[$key][] = $item->toArray();
+                    }
+                    else if (is_array($item)) {
+                        $array[$key][] = $this->processArray($item);
+                    }else{
+                        $array[$key][] = $item;
+                    }
+                }
+            }
+        }
+        // If the property isn't an object or array, leave it untouched
+        return $array;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return json_encode($this->toArray());
+    }
+
+    /**
+     * @return int $page
+     */
+    public function getPage() {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page) {
+        $this->page = $page;
+    }
+
+    /**
+     * @return int $start
+     */
+    public function getStart() {
+        return $this->start;
+    }
+
+    /**
+     * @param int $start
+     */
+    public function setStart($start) {
+        $this->start = $start;
+    }
+
+    /**
+     * @return string $text
+     */
+    public function getText() {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text) {
+        $this->text = $text;
+    }
+
+    /**
+     * @return boolean $current
+     */
+    public function isCurrent() {
+        return $this->current;
+    }
+
+    /**
+     * @param boolean $current
+     */
+    public function setCurrent($current) {
+        $this->current = $current;
+    }
 
 
 }

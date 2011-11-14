@@ -43,30 +43,35 @@ class Filter implements interfaces\Filter
      * @return void
      */
     public function create(front\Filter $filter) {
-        $filters = array();
-        $filtersMap = array();
         if (is_string($filter->getUri()) && trim($filter->getUri()) !== '') {
             $commaExplode = array_map('trim', explode(',', $filter->getUri()));
             $countCommaExplode = count($commaExplode);
             for ($i = 0; $i < $countCommaExplode; $i++) {
-                $filterUri = implode(',', array_slice($commaExplode, 0, $i + 1));
                 $nameValExplode = array_map('trim', explode(':', $commaExplode[$i]));
                 switch ($nameValExplode[0]) {
                     case 't':
                         $filter->setTypeValue($nameValExplode[1]);
-                        $filter->setTypeUri($this->createUri($commaExplode, $commaExplode[$i]));
+                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
+                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
+                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
                         break;
                     case 'c' :
                         $filter->setClassValue($nameValExplode[1]);
-                        $filter->setClassUri($this->createUri($commaExplode, $commaExplode[$i]));
+                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
+                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
+                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
                         break;
                     case 's' :
                         $filter->setSourceValue($nameValExplode[1]);
-                        $filter->setSourceUri($this->createUri($commaExplode, $commaExplode[$i]));
+                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
+                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
+                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
                         break;
                     case 'd' :
                         $filter->setDisciplineValue($nameValExplode[1]);
-                        $filter->setDisciplineUri($this->createUri($commaExplode, $commaExplode[$i]));
+                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
+                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
+                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
                         break;
                 }
             }
@@ -74,14 +79,17 @@ class Filter implements interfaces\Filter
         }
     }
 
-    private function createUri($uriArray, $filterUri) {
-        $newUriArray = array();
-        foreach ($uriArray as $singleUri) {
-            if ($singleUri !== $filterUri) {
-                $newUriArray[] = $singleUri;
-            }
+    /**
+     * @param string $insertUri
+     * @param string $currentUri
+     * @return string
+     */
+    private function createUri($insertUri, $currentUri) {
+        if(!empty($currentUri)){
+            return $currentUri.$insertUri.',';
+        }else{
+            return $insertUri.',';
         }
-        return implode(',', $newUriArray);
     }
 
 }

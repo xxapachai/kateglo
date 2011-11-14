@@ -32,7 +32,7 @@
 				<li>Coba kurangi kata kunci.</li>
 				<tal:block
 						tal:condition="php: is_object(hits.getSpellcheck()) && hits.getSpellcheck().getSuggestions().count() EQ 0 AND hits.getSpellcheck().getCorrectlySpelled()">
-					<li>Telusuri entri <a href="/kamus?query=${search/getFieldValue}">${search/getFieldValue}</a> di <a
+					<li>Telusuri entri <a href="/kamus?query=${php: urlencode(search.getFieldValue())}">${search/getFieldValue}</a> di <a
 							href="/kamus">kamus</a>.
 					</li>
 				</tal:block>

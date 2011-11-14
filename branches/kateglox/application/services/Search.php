@@ -69,7 +69,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Filter $filter
      * @return \kateglo\application\models\solr\Hit
      */
-    public function entry($searchText, front\Pagination $pagination, front\Filter $filter) {
+    public function entry($searchText, front\Pagination $pagination, front\Filter $filter = null) {
         return $this->search->entry($searchText, $pagination, $filter);
     }
 

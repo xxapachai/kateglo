@@ -37,21 +37,11 @@ interface Pagination
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     * @param int $amount
+     * @abstract
      * @param \kateglo\application\models\front\Pagination $pagination
-     * @return \kateglo\application\models\front\Pagination
+     * @return void
      */
-    public function create($amount, front\Pagination $pagination);
-
-    /**
-     * Enter description here ...
-     * @param int $amount
-     * @param int $offset
-     * @param int $limit
-     * @param int $pageRange
-     * @return array
-     */
-    function createAsArray($amount, $offset = 0, $limit = 10, $pageRange = 10);
+    public function create(front\Pagination $pagination);
 
     /**
      * Enter description here ...
