@@ -19,7 +19,7 @@ namespace kateglo\application\services;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-/** @noinspection PhpUndefinedNamespaceInspection */
+
 use kateglo\application\models\front;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
@@ -39,43 +39,48 @@ class Filter implements interfaces\Filter
     public static $CLASS_NAME = __CLASS__;
 
     /**
-     * @param \kateglo\application\models\front\Filter $filter
+     * @param \kateglo\application\models\front\Facet $facet
      * @return void
      */
-    public function create(front\Filter $filter) {
-        if (is_string($filter->getUri()) && trim($filter->getUri()) !== '') {
-            $commaExplode = array_map('trim', explode(',', $filter->getUri()));
+    public function create(front\Facet $facet) {
+        if (is_string($facet->getUri()) && trim($facet->getUri()) !== '') {
+            $commaExplode = array_map('trim', explode(',', $facet->getUri()));
             $countCommaExplode = count($commaExplode);
             for ($i = 0; $i < $countCommaExplode; $i++) {
+                $filterUri = implode(',', array_slice($commaExplode, 0, $i + 1));
                 $nameValExplode = array_map('trim', explode(':', $commaExplode[$i]));
+                $filter = new front\Filter();
+                $filter->setValue($nameValExplode[1]);
+                $filter->setUri($filterUri);
+                $filters[] = $filter;
                 switch ($nameValExplode[0]) {
                     case 't':
-                        $filter->setTypeValue($nameValExplode[1]);
-                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
-                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
-                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
+                        $facet->setTypeValue($nameValExplode[1]);
+                        $facet->setClassUri($this->createUri($commaExplode[$i], $facet->getClassUri()));
+                        $facet->setSourceUri($this->createUri($commaExplode[$i], $facet->getSourceUri()));
+                        $facet->setDisciplineUri($this->createUri($commaExplode[$i], $facet->getDisciplineUri()));
                         break;
                     case 'c' :
-                        $filter->setClassValue($nameValExplode[1]);
-                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
-                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
-                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
+                        $facet->setClassValue($nameValExplode[1]);
+                        $facet->setTypeUri($this->createUri($commaExplode[$i], $facet->getTypeUri()));
+                        $facet->setSourceUri($this->createUri($commaExplode[$i], $facet->getSourceUri()));
+                        $facet->setDisciplineUri($this->createUri($commaExplode[$i], $facet->getDisciplineUri()));
                         break;
                     case 's' :
-                        $filter->setSourceValue($nameValExplode[1]);
-                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
-                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
-                        $filter->setDisciplineUri($this->createUri($commaExplode[$i], $filter->getDisciplineUri()));
+                        $facet->setSourceValue($nameValExplode[1]);
+                        $facet->setTypeUri($this->createUri($commaExplode[$i], $facet->getTypeUri()));
+                        $facet->setClassUri($this->createUri($commaExplode[$i], $facet->getClassUri()));
+                        $facet->setDisciplineUri($this->createUri($commaExplode[$i], $facet->getDisciplineUri()));
                         break;
                     case 'd' :
-                        $filter->setDisciplineValue($nameValExplode[1]);
-                        $filter->setTypeUri($this->createUri($commaExplode[$i], $filter->getTypeUri()));
-                        $filter->setClassUri($this->createUri($commaExplode[$i], $filter->getClassUri()));
-                        $filter->setSourceUri($this->createUri($commaExplode[$i], $filter->getSourceUri()));
+                        $facet->setDisciplineValue($nameValExplode[1]);
+                        $facet->setTypeUri($this->createUri($commaExplode[$i], $facet->getTypeUri()));
+                        $facet->setClassUri($this->createUri($commaExplode[$i], $facet->getClassUri()));
+                        $facet->setSourceUri($this->createUri($commaExplode[$i], $facet->getSourceUri()));
                         break;
                 }
             }
-
+            $facet->setFilters(new ArrayCollection($filters));
         }
     }
 
@@ -85,10 +90,10 @@ class Filter implements interfaces\Filter
      * @return string
      */
     private function createUri($insertUri, $currentUri) {
-        if(!empty($currentUri)){
-            return $currentUri.$insertUri.',';
-        }else{
-            return $insertUri.',';
+        if (!empty($currentUri)) {
+            return $currentUri . $insertUri . ',';
+        } else {
+            return $insertUri . ',';
         }
     }
 

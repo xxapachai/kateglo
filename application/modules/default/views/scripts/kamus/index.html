@@ -15,7 +15,7 @@
                    metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/>
         <content>
             <div class="content">
-                <!-- tal:block metal:use-macro="${appPath}/default/views/macros/filter.html/filter"/ -->
+                <tal:block metal:use-macro="${appPath}/default/views/macros/filter.html/filter"/>
                 <div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
                 <div class="result">
                     <tal:block tal:repeat="hit hits/getDocuments">

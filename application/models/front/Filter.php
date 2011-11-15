@@ -31,187 +31,47 @@ namespace kateglo\application\models\front;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Filter
-{
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $uri;
+class Filter {
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $typeValue;
+	/**
+	 * Enter description here ...
+	 * @var string
+	 */
+	private $value;
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $typeUri;
+	/**
+	 * Enter description here ...
+	 * @var string
+	 */
+	private $uri;
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $classValue;
+	/**
+	 * @param string $uri
+	 */
+	public function setUri($uri) {
+		$this->uri = $uri;
+	}
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $classUri;
+	/**
+	 * @return string
+	 */
+	public function getUri() {
+		return $this->uri;
+	}
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $disciplineValue;
+	/**
+	 * @param string $value
+	 */
+	public function setValue($value) {
+		$this->value = $value;
+	}
 
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $disciplineUri;
-
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $sourceValue;
-
-    /**
-     * Enter description here ...
-     * @var string
-     */
-    private $sourceUri;
-
-    /**
-     * @param string $classUri
-     */
-    public function setClassUri($classUri) {
-        $this->classUri = $classUri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClassUri() {
-        return $this->classUri;
-    }
-
-    /**
-     * @param string $classValue
-     */
-    public function setClassValue($classValue) {
-        $this->classValue = $classValue;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClassValue() {
-        return $this->classValue;
-    }
-
-    /**
-     * @param string $disciplineUri
-     */
-    public function setDisciplineUri($disciplineUri) {
-        $this->disciplineUri = $disciplineUri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDisciplineUri() {
-        return $this->disciplineUri;
-    }
-
-    /**
-     * @param string $disciplineValue
-     */
-    public function setDisciplineValue($disciplineValue) {
-        $this->disciplineValue = $disciplineValue;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDisciplineValue() {
-        return $this->disciplineValue;
-    }
-
-    /**
-     * @param string $sourceUri
-     */
-    public function setSourceUri($sourceUri) {
-        $this->sourceUri = $sourceUri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSourceUri() {
-        return $this->sourceUri;
-    }
-
-    /**
-     * @param string $sourceValue
-     */
-    public function setSourceValue($sourceValue) {
-        $this->sourceValue = $sourceValue;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSourceValue() {
-        return $this->sourceValue;
-    }
-
-    /**
-     * @param string $typeUri
-     */
-    public function setTypeUri($typeUri) {
-        $this->typeUri = $typeUri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTypeUri() {
-        return $this->typeUri;
-    }
-
-    /**
-     * @param string $typeValue
-     */
-    public function setTypeValue($typeValue) {
-        $this->typeValue = $typeValue;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTypeValue() {
-        return $this->typeValue;
-    }
-
-    /**
-     * @param string $uri
-     */
-    public function setUri($uri) {
-        $this->uri = $uri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUri() {
-        return $this->uri;
-    }
+	/**
+	 * @return string
+	 */
+	public function getValue() {
+		return $this->value;
+	}
 }
 
 ?>

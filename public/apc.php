@@ -22,7 +22,7 @@
 
  */
 
-$VERSION='$Id: apc.php 307048 2011-01-03 23:53:17Z kalle $';
+$VERSION='$Id$';
 
 ////////// READ OPTIONAL CONFIGURATION FILE ////////////
 if (file_exists("apc.conf.php")) include("apc.conf.php");

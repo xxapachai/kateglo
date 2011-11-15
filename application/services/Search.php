@@ -66,13 +66,52 @@ class Search implements interfaces\Search
     /**
      * @param $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
-     * @param \kateglo\application\models\front\Filter $filter
+     * @param \kateglo\application\models\front\Facet $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    public function entry($searchText, front\Pagination $pagination, front\Filter $filter = null) {
-        return $this->search->entry($searchText, $pagination, $filter);
+    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        return $this->search->entry($searchText, $pagination, $facet);
     }
 
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+         return $this->search->thesaurus($searchText, $pagination, $facet);
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        return $this->search->equivalent($searchText, $pagination, $facet);
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+         return $this->search->proverb($searchText, $pagination, $facet);
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+         return $this->search->acronym($searchText, $pagination, $facet);
+    }
 }
 
 ?>
