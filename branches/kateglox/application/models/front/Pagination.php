@@ -90,24 +90,14 @@ class Pagination
     private function processArray($array) {
         foreach ($array as $key => $value) {
             if (is_object($value)) {
-                $array[$key] = $value->toArray();
-            }
-            if (is_array($value)) {
-                $array[$key] = $this->processArray($value);
-            }
-            if ($value instanceof ArrayCollection) {
-                $array[$key] = array();
-                $elements = $value->toArray();
-                foreach($elements as $item){
-                    if (is_object($item)) {
-                        $array[$key][] = $item->toArray();
-                    }
-                    else if (is_array($item)) {
-                        $array[$key][] = $this->processArray($item);
-                    }else{
-                        $array[$key][] = $item;
-                    }
+                if ($value instanceof ArrayCollection) {
+                    $array[$key] = $this->processArray($value->toArray());
+                } else {
+                    $array[$key] = $value->toArray();
                 }
+            }
+            else if (is_array($value)) {
+                $array[$key] = $this->processArray($value);
             }
         }
         // If the property isn't an object or array, leave it untouched

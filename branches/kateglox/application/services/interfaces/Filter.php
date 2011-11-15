@@ -38,10 +38,10 @@ interface Filter
 
     /**
      * @abstract
-     * @param \kateglo\application\models\front\Filter $filter
+     * @param \kateglo\application\models\front\Facet $facet
      * @return void
      */
-    function create(front\Filter $filter);
+    function create(front\Facet $facet);
 }
 
 ?>

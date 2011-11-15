@@ -19,8 +19,7 @@ namespace kateglo\application\daos\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models\front\Pagination;
-use kateglo\application\models\front\Filter;
+use kateglo\application\models\front;
 /**
  *
  *
@@ -44,13 +43,49 @@ interface Search
     function getAmount();
 
     /**
-     *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
+     * @abstract
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function entry($searchText, Pagination $pagination, Filter $filter = null);
+    function entry($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null);
 }
 
 ?>

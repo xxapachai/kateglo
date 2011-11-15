@@ -123,7 +123,7 @@ class KamusController extends Zend_Controller_Action_Stubbles
     public function indexHtml() {
         $this->_helper->viewRenderer->setNoRender();
         $pagination = new kateglo\application\models\front\Pagination();
-        $filter = new kateglo\application\models\front\Filter();
+        $facet = new kateglo\application\models\front\Facet();
         $search = new kateglo\application\models\front\Search();
         $search->setFormAction('/kamus');
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
@@ -137,16 +137,16 @@ class KamusController extends Zend_Controller_Action_Stubbles
         try {
             $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $filterText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             if (!$this->evaluatePreCondition($cacheId)) {
-                $filter->setUri($filterText);
+                $facet->setUri($filterText);
                 $search->setFieldValue($searchText);
-                $this->filter->create($filter);
+                $this->filter->create($facet);
                 /** @var $hits \kateglo\application\models\solr\Hit */
-                $hits = $this->search->entry($searchText, $pagination, $filter);
+                $hits = $this->search->entry($searchText, $pagination, $facet);
                 $pagination->setAmount($hits->getCount());
                 $this->pagination->create($pagination);
                 $this->view->hits = $hits;
                 $this->view->search = $search;
-                $this->view->filter = $filter;
+                $this->view->facet = $facet;
                 $this->view->pagination = $pagination;
                 $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
             }
@@ -179,8 +179,8 @@ class KamusController extends Zend_Controller_Action_Stubbles
             if (!$this->evaluatePreCondition($cacheId)) {
                 /*@var $hits \kateglo\application\models\solr\Hit */
                 $hits = $this->search->entry($searchText, $pagination);
+                $pagination->setAmount($hits->getCount());
                 $this->pagination->create($pagination);
-                //print_r($hits);
                 $this->content = array('hits' => $hits->toArray(), 'pagination' => $pagination->toArray());
             }
             $this->responseBuilder($cacheId);

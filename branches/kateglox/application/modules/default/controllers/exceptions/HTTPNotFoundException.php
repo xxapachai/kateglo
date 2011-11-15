@@ -1,7 +1,7 @@
 <?php
 namespace kateglo\application\controllers\exceptions;
 /*
- *  $Id: HTTPMethodNotAllowedException.php 328 2011-05-08 01:16:29Z arthur.purnama $
+ *  $Id$
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ namespace kateglo\application\controllers\exceptions;
  * @package kateglo\application\controllers\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate: 2011-05-08 03:16:29 +0200 (So, 08 Mai 2011) $
+ * @since $LastChangedDate$
  * @version $LastChangedRevision
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)

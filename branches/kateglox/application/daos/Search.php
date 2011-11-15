@@ -26,8 +26,7 @@ use kateglo\application\models\solr\Hit;
 use kateglo\application\models\solr\Spellcheck;
 use kateglo\application\models\solr\Suggestion;
 use kateglo\application\models\solr\Amount;
-use kateglo\application\models\front\Pagination;
-use kateglo\application\models\front\Filter;
+use kateglo\application\models\front;
 use \Doctrine\Common\Collections\ArrayCollection;
 /**
  *
@@ -99,12 +98,12 @@ class Search implements interfaces\Search
     /**
      * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
-     * @param \kateglo\application\models\front\Filter $filter
+     * @param \kateglo\application\models\front\Facet $facet
      * @return kateglo\application\faces\Hit
      */
-    public function entry($searchText, Pagination $pagination, Filter $filter = null) {
+    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null) {
         $params = $this->getDefaultParams($searchText);
-        $params = $filter == null ? $params : $this->getFilterQuery($params, $filter);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $this->getSolr()->setCreateDocuments(false);
         $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
@@ -112,25 +111,110 @@ class Search implements interfaces\Search
     }
 
     /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $filter = "sinonim:*";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['df'] = 'entriAsing';
+        $filter = "asing:*";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $filter = "bentukPersis:Peribahasa";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $filter = "bentukPersis:Akronim OR bentukPersis:Singkatan";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
      * @param array $params
-     * @param \kateglo\application\models\front\Filter $filter
+     * @param \kateglo\application\models\front\Facet $facet
      * @return
      */
-    private function getFilterQuery($params, Filter $filter){
+    private function getFilterQuery($params, front\Facet $facet) {
         $filterQueryArray = array();
-        if($filter->getTypeValue() != ""){
-            $filterQueryArray[] = 'bentukPersis:"' .$filter->getTypeValue() . '"';
+        if ($facet->getTypeValue() != "") {
+            $filterQueryArray[] = 'bentukPersis:"' . $facet->getTypeValue() . '"';
         }
-        if($filter->getClassValue() != ""){
-            $filterQueryArray[] = 'kelasPersis:"' .$filter->getClassValue() . '"';
+        if ($facet->getClassValue() != "") {
+            $filterQueryArray[] = 'kelasPersis:"' . $facet->getClassValue() . '"';
         }
-        if($filter->getSourceValue() != ""){
-            $filterQueryArray[] = 'sumberPersis:"' .$filter->getSourceValue() . '"';
+        if ($facet->getSourceValue() != "") {
+            $filterQueryArray[] = 'sumberPersis:"' . $facet->getSourceValue() . '"';
         }
-        if($filter->getDisciplineValue() != ""){
-            $filterQueryArray[] = 'disiplinPersis:"' .$filter->getDisciplineValue() . '"';
+        if ($facet->getDisciplineValue() != "") {
+            $filterQueryArray[] = 'disiplinPersis:"' . $facet->getDisciplineValue() . '"';
         }
-		$params['fq'] = implode(' ', $filterQueryArray);
+        $params['fq'] = implode(' ', $filterQueryArray);
         return $params;
     }
 
@@ -140,7 +224,6 @@ class Search implements interfaces\Search
      * @return array
      */
     private function getDefaultParams($searchText, $params = array()) {
-        if (!array_key_exists('fl', $params)) $params['fl'] = 'entri, definisi, id';
         $params['q.op'] = 'AND';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
@@ -311,7 +394,6 @@ class Search implements interfaces\Search
             return null;
         }
     }
-
 }
 
 ?>
