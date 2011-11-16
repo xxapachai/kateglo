@@ -18,7 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\services\interfaces\Search;
+use kateglo\application\services\interfaces;
+use \kateglo\application\models\front;
 use kateglo\application\daos\User;
 use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
 /**
@@ -49,7 +50,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setSearch(Search $search) {
+    public function setSearch(interafaces\Search $search) {
         $this->search = $search;
     }
 
@@ -75,6 +76,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
             if (!$this->evaluatePreCondition($cacheId)) {
                 try {
                     $this->view->amount = $this->search->getAmount();
+                    $this->view->search = new front\Search();
                     $this->content = $this->_helper->viewRenderer->view->render($this->_helper->viewRenderer->getViewScript());
                 } catch (Apache_Solr_Exception $e) {
                     $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
