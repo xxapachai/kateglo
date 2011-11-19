@@ -18,12 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\services\interfaces\Pagination;
-use kateglo\application\services\interfaces\Entry;
-use kateglo\application\services\interfaces\CPanel;
-use kateglo\application\services\interfaces\StaticData;
-use kateglo\application\controllers\exceptions\HTTPNotFoundException;
-use kateglo\application\faces\Hit;
+use kateglo\application\services\interfaces;
+use kateglo\application\models;
 /**
  *
  *
@@ -35,218 +31,205 @@ use kateglo\application\faces\Hit;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class AlfabetController extends Zend_Controller_Action_Stubbles {
+class AlfabetController extends Zend_Controller_Action_Stubbles
+{
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\CPanel;
-	 */
-	private $cpanel;
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\StaticData;
+     */
+    private $staticData;
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\StaticData;
-	 */
-	private $staticData;
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Search;
+     */
+    private $search;
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Filter;
+     */
+    private $filter;
 
-	/**
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\Pagination;
-	 */
-	private $pagination;
+    /**
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Pagination;
+     */
+    private $pagination;
 
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $limit;
 
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $offset;
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Search $search
+     *
+     * @Inject
+     */
+    public function setSearch(interfaces\Search $search)
+    {
+        $this->search = $search;
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 *
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Filter $filter
+     *
+     * @Inject
+     */
+    public function setFilter(interfaces\Filter $filter)
+    {
+        $this->filter = $filter;
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\CPanel $cpanel
-	 *
-	 * @Inject
-	 */
-	public function setCPanel(CPanel $cpanel) {
-		$this->cpanel = $cpanel;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\StaticData $staticData
+     *
+     * @Inject
+     */
+    public function setStaticData(interfaces\StaticData $staticData)
+    {
+        $this->staticData = $staticData;
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 *
-	 * @Inject
-	 */
-	public function setStaticData(StaticData $staticData) {
-		$this->staticData = $staticData;
-	}
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Pagination $pagination
+     *
+     * @Inject
+     */
+    public function setPagination(interfaces\Pagination $pagination)
+    {
+        $this->pagination = $pagination;
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param \kateglo\application\faces\interfaces\Search $entry
-	 *
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
+    /**
+     * (non-PHPdoc)
+     * @see Zend_Controller_Action::init()
+     */
+    public function init()
+    {
+        parent::init();
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @param \kateglo\application\services\interfaces\Pagination $pagination
-	 *
-	 * @Inject
-	 */
-	public function setPagination(Pagination $pagination) {
-		$this->pagination = $pagination;
-	}
+    /**
+     * @return void
+     * @Get
+     * @Path('/{alphabet}')
+     * @PathParam{alphabet}(alphabet)
+     * @Produces('text/html')
+     */
+    public function indexHtml($alphabet)
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $alphabet = strtolower($alphabet);
+        $pagination = new kateglo\application\models\front\Pagination();
+        $facet = new kateglo\application\models\front\Facet();
+        $search = new kateglo\application\models\front\Search();
+        $search->setFormAction('/alfabet/'.$alphabet);
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+                    ? intval($this->_request->getParam('limit'))
+                    : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+                    ? intval($this->_request->getParam('start'))
+                    : 0));
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $filterText = urldecode($this->getRequest()->getParam($search->getFilterName()));
+        try {
+            if (strlen($alphabet) === 1 && ctype_alpha($alphabet)) {
+                $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $filterText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
+                if (!$this->evaluatePreCondition($cacheId)) {
+                    $facet->setUri($filterText);
+                    $search->setFieldValue($searchText);
+                    $this->filter->create($facet);
+                    /** @var $hits \kateglo\application\models\solr\Hit */
+                    $hits = $this->search->alphabet($searchText, $alphabet, $pagination, $facet);
+                    $pagination->setAmount($hits->getCount());
+                    $this->pagination->create($pagination);
+                    $this->view->alphabet = $alphabet;
+                    $this->view->hits = $hits;
+                    $this->view->search = $search;
+                    $this->view->facet = $facet;
+                    $this->view->pagination = $pagination;
+                    $this->content = $this->_helper->viewRenderer->view->render('alfabet/index.html');
+                }
+                $this->responseBuilder($cacheId);
+            } else {
+                throw new HTTPNotFoundException('Invalid Char.');
+            }
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
+        }
+        $this->getResponse()->appendBody($this->content);
+    }
 
-	/**
-	 * (non-PHPdoc)
-	 * @see Zend_Controller_Action::init()
-	 */
-	public function init() {
-		parent::init();
-		$this->view->search = $this->search;
-		$this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
-				: 10);
-		$this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
-				: 0);
-	}
+    /**
+     * @return void
+     * @Get
+     * @Path('/{alphabet}')
+     * @PathParam{alphabet}(alphabet)
+     * @Produces('application/json')
+     */
+    public function indexJson($alphabet)
+    {
+        $alphabet = strtolower($alphabet);
+        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        try {
+            if (strlen($alphabet) === 1) {
+                if (ctype_alpha($alphabet)) {
+                    $cacheId = __METHOD__ . '\\' . $alphabet . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
+                    if (!$this->evaluatePreCondition($cacheId)) {
+                        /*@var $hits kateglo\application\faces\Hit */
+                        $hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alphabet . '*'));
+                        $pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
+                        $this->content = array('hits' => $hits, 'pagination' => $pagination, 'alphabet' => $alphabet);
+                    }
+                    $this->responseBuilder($cacheId);
+                } else {
+                    throw new HTTPNotFoundException('Invalid Char.');
+                }
+            } else {
+                throw new HTTPNotFoundException('Invalid Char.');
+            }
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
+    }
 
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/{alphabet}')
-	 * @PathParam{alphabet}(alphabet)
-	 * @Produces('text/html')
-	 */
-	public function indexHtml($alphabet) {
-		$alphabet = strtolower($alphabet);
-		$this->_helper->viewRenderer->setNoRender();
-		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-		try {
-			if (strlen($alphabet) === 1) {
-				if (ctype_alpha($alphabet)) {
-					$cacheId = __METHOD__ . '\\' . $alphabet . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-					if (!$this->evaluatePreCondition($cacheId)) {
-						$this->view->search->setFieldValue($searchText);
-						/** @var $hits kateglo\application\faces\Hit */
-						$hits = $this->entry->searchEntry($searchText, $this->offset, $this->limit, array('fq' => 'entriPersis:' . $alphabet . '*'));
-						$this->view->pagination = $this->pagination->create($hits->getCount(), $this->offset, $this->limit);
-						$this->view->hits = $hits;
-						$this->view->alphabet = $alphabet;
-						$this->view->formAction = '/alfabet/' . $alphabet;
-						$this->content = $this->_helper->viewRenderer->view->render('alfabet/index.html');
+    /**
+     * @return void
+     * @Get
+     * @Path('/{alphabet}/detail')
+     * @PathParam{alphabet}(alphabet)
+     * @Produces('text/html')
+     */
+    public function detailHtml($alphabet)
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $cacheId = __CLASS__ . '\\' . 'detailHtml';
 
-					}
-					$this->responseBuilder($cacheId);
-				} else {
-					throw new HTTPNotFoundException('Invalid Char.');
-				}
-			} else {
-				throw new HTTPNotFoundException('Invalid Char.');
-			}
-		} catch (Apache_Solr_Exception $e) {
-			$this->getResponse()->setHttpResponseCode(400);
-			$this->content = $this->_helper->viewRenderer->view->render('error/solr.html');
-		}
-		$this->getResponse()->appendBody($this->content);
-	}
+        if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->alphabet = $alphabet;
+            $this->view->formAction = '/kamus';
+            $this->view->search->setFieldValue('entriPersis:' . $alphabet . '*');
+            $this->view->staticData = $this->staticData->getStaticData();
+            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+        }
 
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/{alphabet}')
-	 * @PathParam{alphabet}(alphabet)
-	 * @Produces('application/json')
-	 */
-	public function indexJson($alphabet) {
-		$alphabet = strtolower($alphabet);
-		$searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
-		try {
-			if (strlen($alphabet) === 1) {
-				if (ctype_alpha($alphabet)) {
-					$cacheId = __METHOD__ . '\\' . $alphabet . '\\' . $searchText . '\\' . $this->offset . '\\' . $this->limit;
-					if (!$this->evaluatePreCondition($cacheId)) {
-						/*@var $hits kateglo\application\faces\Hit */
-						$hits = $this->entry->searchEntryAsJSON($searchText, $this->offset, $this->limit, array('fq' => 'entry:' . $alphabet . '*'));
-						$pagination = $this->pagination->createAsArray($hits->response->{Hit::COUNT}, $this->offset, $this->limit);
-						$this->content = array('hits' => $hits, 'pagination' => $pagination, 'alphabet' => $alphabet);
-					}
-					$this->responseBuilder($cacheId);
-				} else {
-					throw new HTTPNotFoundException('Invalid Char.');
-				}
-			} else {
-				throw new HTTPNotFoundException('Invalid Char.');
-			}
-		} catch (Apache_Solr_Exception $e) {
-			$this->getResponse()->setHttpResponseCode(400);
-			$this->content = array('error' => 'query error');
-		}
-		$this->_helper->json($this->content);
-	}
-
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/{alphabet}/detail')
-	 * @PathParam{alphabet}(alphabet)
-	 * @Produces('text/html')
-	 */
-	public function detailHtml($alphabet) {
-		$this->_helper->viewRenderer->setNoRender();
-		$cacheId = __CLASS__ . '\\' . 'detailHtml';
-
-		if (!$this->evaluatePreCondition($cacheId)) {
-			$this->view->alphabet = $alphabet;
-			$this->view->formAction = '/kamus';
-			$this->view->search->setFieldValue('entriPersis:' . $alphabet . '*');
-			$this->view->staticData = $this->staticData->getStaticData();
-			$this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
-		}
-
-		$this->responseBuilder($cacheId);
-		$this->getResponse()->appendBody($this->content);
-	}
+        $this->responseBuilder($cacheId);
+        $this->getResponse()->appendBody($this->content);
+    }
 
 }
 
