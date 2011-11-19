@@ -3,68 +3,66 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Kateglo - Kamus</title>
-	<meta metal:use-macro="${appPath}/default/views/macros/head.html/head"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Kateglo - Kamus</title>
+    <meta metal:use-macro="${appPath}/default/views/macros/head.html/head"/>
 </head>
 <body tal:define="headerNav string: " metal:use-macro="${appPath}/default/views/macros/body.html/body">
 <tal:block metal:fill-slot="content">
-	<div class="w940" tal:condition="php: hits.getCount() GT 0">
-		<tal:block metal:use-macro="${appPath}/default/views/macros/header.html/header"/>
-		<tal:block tal:define="facetNav string: " metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/>
-		<content>
-			<div class="content">
-				<div class="letters">
-					<a tal:attributes="class php: alphabet EQ 'a' ? 'on' : null; href php:alphabet EQ 'a' ? null : '/alfabet/a'">A</a>
-					<a tal:attributes="class php: alphabet EQ 'b' ? 'on' : null; href php:alphabet EQ 'b' ? null : '/alfabet/b'">B</a>
-					<a tal:attributes="class php: alphabet EQ 'c' ? 'on' : null; href php:alphabet EQ 'c' ? null : '/alfabet/c'">C</a>
-					<a tal:attributes="class php: alphabet EQ 'd' ? 'on' : null; href php:alphabet EQ 'd' ? null : '/alfabet/d'">D</a>
-					<a tal:attributes="class php: alphabet EQ 'e' ? 'on' : null; href php:alphabet EQ 'e' ? null : '/alfabet/e'">E</a>
-					<a tal:attributes="class php: alphabet EQ 'f' ? 'on' : null; href php:alphabet EQ 'f' ? null : '/alfabet/f'">F</a>
-					<a tal:attributes="class php: alphabet EQ 'g' ? 'on' : null; href php:alphabet EQ 'g' ? null : '/alfabet/g'">G</a>
-					<a tal:attributes="class php: alphabet EQ 'h' ? 'on' : null; href php:alphabet EQ 'h' ? null : '/alfabet/h'">H</a>
-					<a tal:attributes="class php: alphabet EQ 'i' ? 'on' : null; href php:alphabet EQ 'i' ? null : '/alfabet/i'">I</a>
-					<a tal:attributes="class php: alphabet EQ 'j' ? 'on' : null; href php:alphabet EQ 'j' ? null : '/alfabet/j'">J</a>
-					<a tal:attributes="class php: alphabet EQ 'k' ? 'on' : null; href php:alphabet EQ 'k' ? null : '/alfabet/k'">K</a>
-					<a tal:attributes="class php: alphabet EQ 'l' ? 'on' : null; href php:alphabet EQ 'l' ? null : '/alfabet/l'">L</a>
-					<a tal:attributes="class php: alphabet EQ 'm' ? 'on' : null; href php:alphabet EQ 'm' ? null : '/alfabet/m'">M</a>
-					<a tal:attributes="class php: alphabet EQ 'n' ? 'on' : null; href php:alphabet EQ 'n' ? null : '/alfabet/n'">N</a>
-					<a tal:attributes="class php: alphabet EQ 'o' ? 'on' : null; href php:alphabet EQ 'o' ? null : '/alfabet/o'">O</a>
-					<a tal:attributes="class php: alphabet EQ 'p' ? 'on' : null; href php:alphabet EQ 'p' ? null : '/alfabet/p'">P</a>
-					<a tal:attributes="class php: alphabet EQ 'q' ? 'on' : null; href php:alphabet EQ 'q' ? null : '/alfabet/q'">Q</a>
-					<a tal:attributes="class php: alphabet EQ 'r' ? 'on' : null; href php:alphabet EQ 'r' ? null : '/alfabet/r'">R</a>
-					<a tal:attributes="class php: alphabet EQ 's' ? 'on' : null; href php:alphabet EQ 's' ? null : '/alfabet/s'">S</a>
-					<a tal:attributes="class php: alphabet EQ 't' ? 'on' : null; href php:alphabet EQ 't' ? null : '/alfabet/t'">T</a>
-					<a tal:attributes="class php: alphabet EQ 'u' ? 'on' : null; href php:alphabet EQ 'u' ? null : '/alfabet/u'">U</a>
-					<a tal:attributes="class php: alphabet EQ 'v' ? 'on' : null; href php:alphabet EQ 'v' ? null : '/alfabet/v'">V</a>
-					<a tal:attributes="class php: alphabet EQ 'w' ? 'on' : null; href php:alphabet EQ 'w' ? null : '/alfabet/w'">W</a>
-					<a tal:attributes="class php: alphabet EQ 'x' ? 'on' : null; href php:alphabet EQ 'x' ? null : '/alfabet/x'">X</a>
-					<a tal:attributes="class php: alphabet EQ 'y' ? 'on' : null; href php:alphabet EQ 'y' ? null : '/alfabet/y'">Y</a>
-					<a tal:attributes="class php: alphabet EQ 'z' ? 'on' : null; href php:alphabet EQ 'z' ? null : '/alfabet/z'">Z</a>
-				</div>
-				<div class="cumb">
-					<a class="close" href="#">&times;</a>
+    <div class="w940" tal:condition="php: hits.getCount() GT 0">
+        <tal:block metal:use-macro="${appPath}/default/views/macros/header.html/header"/>
+        <tal:block tal:define="facetNav string: " metal:use-macro="${appPath}/default/views/macros/facet.html/facet"/>
+        <content>
+            <div class="content">
+                <div class="letters">
+                    <a tal:attributes="class php: alphabet EQ 'a' ? 'on' : null; href php:alphabet EQ 'a' ? null : '/alfabet/a'">A</a>
+                    <a tal:attributes="class php: alphabet EQ 'b' ? 'on' : null; href php:alphabet EQ 'b' ? null : '/alfabet/b'">B</a>
+                    <a tal:attributes="class php: alphabet EQ 'c' ? 'on' : null; href php:alphabet EQ 'c' ? null : '/alfabet/c'">C</a>
+                    <a tal:attributes="class php: alphabet EQ 'd' ? 'on' : null; href php:alphabet EQ 'd' ? null : '/alfabet/d'">D</a>
+                    <a tal:attributes="class php: alphabet EQ 'e' ? 'on' : null; href php:alphabet EQ 'e' ? null : '/alfabet/e'">E</a>
+                    <a tal:attributes="class php: alphabet EQ 'f' ? 'on' : null; href php:alphabet EQ 'f' ? null : '/alfabet/f'">F</a>
+                    <a tal:attributes="class php: alphabet EQ 'g' ? 'on' : null; href php:alphabet EQ 'g' ? null : '/alfabet/g'">G</a>
+                    <a tal:attributes="class php: alphabet EQ 'h' ? 'on' : null; href php:alphabet EQ 'h' ? null : '/alfabet/h'">H</a>
+                    <a tal:attributes="class php: alphabet EQ 'i' ? 'on' : null; href php:alphabet EQ 'i' ? null : '/alfabet/i'">I</a>
+                    <a tal:attributes="class php: alphabet EQ 'j' ? 'on' : null; href php:alphabet EQ 'j' ? null : '/alfabet/j'">J</a>
+                    <a tal:attributes="class php: alphabet EQ 'k' ? 'on' : null; href php:alphabet EQ 'k' ? null : '/alfabet/k'">K</a>
+                    <a tal:attributes="class php: alphabet EQ 'l' ? 'on' : null; href php:alphabet EQ 'l' ? null : '/alfabet/l'">L</a>
+                    <a tal:attributes="class php: alphabet EQ 'm' ? 'on' : null; href php:alphabet EQ 'm' ? null : '/alfabet/m'">M</a>
+                    <a tal:attributes="class php: alphabet EQ 'n' ? 'on' : null; href php:alphabet EQ 'n' ? null : '/alfabet/n'">N</a>
+                    <a tal:attributes="class php: alphabet EQ 'o' ? 'on' : null; href php:alphabet EQ 'o' ? null : '/alfabet/o'">O</a>
+                    <a tal:attributes="class php: alphabet EQ 'p' ? 'on' : null; href php:alphabet EQ 'p' ? null : '/alfabet/p'">P</a>
+                    <a tal:attributes="class php: alphabet EQ 'q' ? 'on' : null; href php:alphabet EQ 'q' ? null : '/alfabet/q'">Q</a>
+                    <a tal:attributes="class php: alphabet EQ 'r' ? 'on' : null; href php:alphabet EQ 'r' ? null : '/alfabet/r'">R</a>
+                    <a tal:attributes="class php: alphabet EQ 's' ? 'on' : null; href php:alphabet EQ 's' ? null : '/alfabet/s'">S</a>
+                    <a tal:attributes="class php: alphabet EQ 't' ? 'on' : null; href php:alphabet EQ 't' ? null : '/alfabet/t'">T</a>
+                    <a tal:attributes="class php: alphabet EQ 'u' ? 'on' : null; href php:alphabet EQ 'u' ? null : '/alfabet/u'">U</a>
+                    <a tal:attributes="class php: alphabet EQ 'v' ? 'on' : null; href php:alphabet EQ 'v' ? null : '/alfabet/v'">V</a>
+                    <a tal:attributes="class php: alphabet EQ 'w' ? 'on' : null; href php:alphabet EQ 'w' ? null : '/alfabet/w'">W</a>
+                    <a tal:attributes="class php: alphabet EQ 'x' ? 'on' : null; href php:alphabet EQ 'x' ? null : '/alfabet/x'">X</a>
+                    <a tal:attributes="class php: alphabet EQ 'y' ? 'on' : null; href php:alphabet EQ 'y' ? null : '/alfabet/y'">Y</a>
+                    <a tal:attributes="class php: alphabet EQ 'z' ? 'on' : null; href php:alphabet EQ 'z' ? null : '/alfabet/z'">Z</a>
+                </div>
 
-					<p><a href="#">Akronim</a> <a href="#">nomina</a> <strong>Fisika</strong></p>
-				</div>
-				<div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
-				<div class="result">
-					<tal:block tal:repeat="hit hits/getDocuments">
-						<p>
-							<a tal:define="global entry hit/getEntry;" href="/entri/${entry}">${entry}</a><br/>
-							<tal:block tal:repeat="definition hit/getDefinitions">
-								<tal:block tal:content="definition">Definition</tal:block>
-								<br/>
-							</tal:block>
-						</p>
-					</tal:block>
-				</div>
-				<div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
-			</div>
-		</content>
-		<div class="clear"></div>
-	</div>
-	<tal:block metal:use-macro="${appPath}/default/views/macros/suggestion.html/suggestion"/>
+                <tal:block metal:use-macro="${appPath}/default/views/macros/filter.html/filter"/>
+                <div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
+                <div class="result">
+                    <tal:block tal:repeat="hit hits/getDocuments">
+                        <p>
+                            <a tal:define="global entry hit/getEntry;"
+                               href="/entri/${php: urlencode(entry)}">${entry}</a><br/>
+                            <tal:block tal:repeat="definition hit/getDefinitions">
+                                <tal:block tal:content="definition">Definition</tal:block>
+                                <br/>
+                            </tal:block>
+                        </p>
+                    </tal:block>
+                </div>
+                <div metal:use-macro="${appPath}/default/views/macros/pagination.html/pagination"/>
+            </div>
+        </content>
+        <div class="clear"></div>
+    </div>
+    <tal:block metal:use-macro="${appPath}/default/views/macros/suggestion.html/suggestion"/>
 </tal:block>
 </body>
 </html>

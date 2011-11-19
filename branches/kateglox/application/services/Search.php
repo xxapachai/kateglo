@@ -64,7 +64,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet $facet
      * @return \kateglo\application\models\solr\Hit
@@ -74,7 +74,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -84,7 +84,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -94,7 +94,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -104,13 +104,24 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
     function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null) {
          return $this->search->acronym($searchText, $pagination, $facet);
+    }
+
+    /**
+     * @param string $searchText
+     * @param string $alphabet
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null) {
+         return $this->search->alphabet($searchText, $alphabet, $pagination, $facet);
     }
 }
 

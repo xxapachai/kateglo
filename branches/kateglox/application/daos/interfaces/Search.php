@@ -44,7 +44,7 @@ interface Search
 
     /**
      * @abstract
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -53,7 +53,7 @@ interface Search
 
     /**
      * @abstract
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -62,7 +62,7 @@ interface Search
 
     /**
      * @abstract
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -71,7 +71,7 @@ interface Search
 
     /**
      * @abstract
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -80,12 +80,22 @@ interface Search
 
     /**
      * @abstract
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
     function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param string $searchText
+     * @param string $alphabet
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return void
+     */
+    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null);
 }
 
 ?>

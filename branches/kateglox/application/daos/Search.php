@@ -111,7 +111,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -132,7 +132,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -154,7 +154,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -175,7 +175,7 @@ class Search implements interfaces\Search
     }
 
     /**
-     * @param $searchText
+     * @param string $searchText
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
@@ -185,6 +185,28 @@ class Search implements interfaces\Search
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
         $filter = "bentukPersis:Akronim OR bentukPersis:Singkatan";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param string $searchText
+     * @param string $alphabet
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\solr\Facet|null $facet
+     * @return kateglo\application\faces\Hit
+     */
+    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null) {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $filter = 'entriPersis:' . $alphabet . '*';
         if (array_key_exists('fq', $params)) {
             $params['fq'] .= " " . $filter;
         } else {

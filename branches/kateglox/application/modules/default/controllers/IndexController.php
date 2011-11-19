@@ -50,7 +50,7 @@ class IndexController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setSearch(interafaces\Search $search) {
+    public function setSearch(interfaces\Search $search) {
         $this->search = $search;
     }
 
