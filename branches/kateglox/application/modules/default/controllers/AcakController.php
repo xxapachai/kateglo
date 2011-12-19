@@ -18,12 +18,8 @@
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\services\interfaces\Pagination;
-use kateglo\application\services\interfaces\Entry;
-use kateglo\application\services\interfaces\CPanel;
-use kateglo\application\services\interfaces\StaticData;
-use kateglo\application\controllers\exceptions\HTTPNotFoundException;
-use kateglo\application\faces\Hit;
+use kateglo\application\services\interfaces\Search;
+
 /**
  *
  *
@@ -35,144 +31,68 @@ use kateglo\application\faces\Hit;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class AcakController extends Zend_Controller_Action_Stubbles {
+class AcakController extends Zend_Controller_Action_Stubbles
+{
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\Entry;
-	 */
-	private $entry;
+    /**
+     *
+     * Enter description here ...
+     * @var \kateglo\application\services\interfaces\Search;
+     */
+    private $search;
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\CPanel;
-	 */
-	private $cpanel;
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Search $search
+     *
+     * @Inject
+     */
+    public function setSearch(Search $search)
+    {
+        $this->search = $search;
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\StaticData;
-	 */
-	private $staticData;
+    /**
+     * (non-PHPdoc)
+     * @see Zend_Controller_Action::init()
+     */
+    public function init()
+    {
+        parent::init();
+    }
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var \kateglo\application\faces\interfaces\Search;
-	 */
-	private $search;
+    /**
+     * @return void
+     * @Get
+     * @Path('/entri')
+     * @Produces('text/html, application/json')
+     */
+    public function entryHtml()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $hits = $this->search->randomEntry(1);
+        /** @var $doc \kateglo\application\models\solr\Document */
+        $doc = $hits->getDocuments()->get(0);
+        $this->getResponse()->setHttpResponseCode(303);
+        $this->getResponse()->setHeader('Location', '/entri/' . urlencode($doc->getEntry()));
+    }
 
-	/**
-	 * Enter description here ...
-	 * @var \kateglo\application\services\interfaces\Pagination;
-	 */
-	private $pagination;
-
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $limit;
-
-	/**
-	 * Enter description here ...
-	 * @var int
-	 */
-	private $offset;
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param \kateglo\application\services\interfaces\Entry $entry
-	 *
-	 * @Inject
-	 */
-	public function setEntry(Entry $entry) {
-		$this->entry = $entry;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\CPanel $cpanel
-	 *
-	 * @Inject
-	 */
-	public function setCPanel(CPanel $cpanel) {
-		$this->cpanel = $cpanel;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param kateglo\application\services\interfaces\Entry $entry
-	 *
-	 * @Inject
-	 */
-	public function setStaticData(StaticData $staticData) {
-		$this->staticData = $staticData;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param \kateglo\application\faces\interfaces\Search $entry
-	 *
-	 * @Inject
-	 */
-	public function setSearch(Search $search) {
-		$this->search = $search;
-	}
-
-	/**
-	 *
-	 * Enter description here ...
-	 * @param \kateglo\application\services\interfaces\Pagination $pagination
-	 *
-	 * @Inject
-	 */
-	public function setPagination(Pagination $pagination) {
-		$this->pagination = $pagination;
-	}
-
-	/**
-	 * (non-PHPdoc)
-	 * @see Zend_Controller_Action::init()
-	 */
-	public function init() {
-		parent::init();
-	}
-
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/entri')
-	 * @Produces('text/html, application/json')
-	 */
-	public function entryHtml() {
-		$this->_helper->viewRenderer->setNoRender();
-		/** @var $hits \kateglo\application\faces\Hit */
-		$hits = $this->entry->randomEntry(1);
-		$this->getResponse()->setHttpResponseCode(303);
-		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($hits->docs[0]->entry));
-	}
-
-	/**
-	 * @return void
-	 * @Get
-	 * @Path('/salaheja')
-	 * @Produces('text/html, application/json')
-	 */
-	public function misspelledHtml() {
-		$this->_helper->viewRenderer->setNoRender();
-		/** @var $hits \kateglo\application\faces\Hit */
-		$hits = $this->entry->randomMisspelled(1);
-		$this->getResponse()->setHttpResponseCode(303);
-		$this->getResponse()->setHeader('Location', '/entri/' . urlencode($hits->docs[0]->entry));
-	}
+    /**
+     * @return void
+     * @Get
+     * @Path('/salaheja')
+     * @Produces('text/html, application/json')
+     */
+    public function misspelledHtml()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $hits = $this->search->randomMisspelled(1);
+        /** @var $doc \kateglo\application\models\solr\Document */
+        $doc = $hits->getDocuments()->get(0);
+        $this->getResponse()->setHttpResponseCode(303);
+        $this->getResponse()->setHeader('Location', '/entri/' . urlencode($doc->getEntry()));
+    }
 
 }
 

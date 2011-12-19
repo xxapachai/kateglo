@@ -134,7 +134,7 @@ class Entry implements interfaces\Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function randomMisspelled($limit = 6) {
 		$this->getSolr()->setCreateDocuments(false);
@@ -149,7 +149,7 @@ class Entry implements interfaces\Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function randomEntry($limit = 5) {
 		$this->getSolr()->setCreateDocuments(false);
@@ -167,7 +167,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function searchEntryAsJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -183,7 +183,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function searchEntry($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -199,7 +199,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -218,7 +218,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params = $this->getDefaultParams($searchText, $params);
@@ -238,7 +238,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit|
+	 * @return \kateglo\application\models\solr\Hit|
 	 */
 	public function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -276,7 +276,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	public function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -312,7 +312,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hit|
+	 * @return \kateglo\application\models\solr\Hit|
 	 */
 	public function searchProverb($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -348,7 +348,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hits
+	 * @return \kateglo\application\models\solr\Hits
 	 */
 	public function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -384,7 +384,7 @@ class Entry implements interfaces\Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return \kateglo\application\faces\Hits
+	 * @return \kateglo\application\models\solr\Hits
 	 */
 	public function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array()) {
 		$params['fl'] = 'entri, padanan, id';

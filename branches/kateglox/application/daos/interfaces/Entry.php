@@ -38,7 +38,7 @@ interface Entry {
 	/**
 	 *
 	 * @param string $entry
-	 * @return kateglo\application\models\Entry
+	 * @return \kateglo\application\models\Entry
 	 */
 	function getByEntry($entry);
 

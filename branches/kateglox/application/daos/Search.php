@@ -28,6 +28,7 @@ use kateglo\application\models\solr\Suggestion;
 use kateglo\application\models\solr\Amount;
 use kateglo\application\models\front;
 use \Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -54,7 +55,8 @@ class Search implements interfaces\Search
      *
      * @return \Apache_Solr_Service
      */
-    public function getSolr() {
+    public function getSolr()
+    {
         if ($this->solr->ping(4)) {
             return $this->solr;
         } else {
@@ -69,14 +71,16 @@ class Search implements interfaces\Search
      *
      * @Inject
      */
-    public function setSolr(\Apache_Solr_Service $solr = null) {
+    public function setSolr(\Apache_Solr_Service $solr = null)
+    {
         $this->solr = $solr;
     }
 
     /**
      * @return \kateglo\application\models\solr\Amount
      */
-    public function getAmount() {
+    public function getAmount()
+    {
 
         $this->getSolr()->setCreateDocuments(false);
         $entry = json_decode($this->getSolr()->search('*', 0, 0, array())->getRawResponse());
@@ -101,7 +105,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet $facet
      * @return kateglo\application\faces\Hit
      */
-    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -116,7 +121,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -137,7 +143,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -159,7 +166,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -180,7 +188,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -200,9 +209,10 @@ class Search implements interfaces\Search
      * @param string $alphabet
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\solr\Facet|null $facet
-     * @return kateglo\application\faces\Hit
+     * @return \kateglo\application\models\solr\Hit
      */
-    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null) {
+    public function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null)
+    {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
         $searchText = (empty ($searchText)) ? '*' : $searchText;
@@ -218,11 +228,48 @@ class Search implements interfaces\Search
     }
 
     /**
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     * @throws \kateglo\application\daos\exceptions\EntryException
+     */
+    public function randomMisspelled($limit = 6)
+    {
+        $params = $this->getDefaultParams('');
+        $params['sort'] = 'random_' . rand(1, 100000) . ' asc';
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search('ejaan:*', 0, $limit, $params);
+        if ($request->getHttpStatus() == 200) {
+            return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+        } else {
+            throw new exceptions\SolrException ('Status: ' . $request->getHttpStatus() . ' Message: ' . $request->getHttpStatusMessage());
+        }
+    }
+
+    /**
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     * @throws \kateglo\application\daos\exceptions\EntryException
+     */
+    public function randomEntry($limit = 5)
+    {
+        $params = $this->getDefaultParams('');
+        $params['sort'] = 'random_' . rand(1, 100000) . ' asc';
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search('entri:* AND definisi:* ', 0, $limit, $params);
+        if ($request->getHttpStatus() == 200) {
+            return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+        } else {
+            throw new exceptions\SolrException ('Status: ' . $request->getHttpStatus() . ' Message: ' . $request->getHttpStatusMessage());
+        }
+    }
+
+    /**
      * @param array $params
      * @param \kateglo\application\models\front\Facet $facet
      * @return
      */
-    private function getFilterQuery($params, front\Facet $facet) {
+    private function getFilterQuery($params, front\Facet $facet)
+    {
         $filterQueryArray = array();
         if ($facet->getTypeValue() != "") {
             $filterQueryArray[] = 'bentukPersis:"' . $facet->getTypeValue() . '"';
@@ -245,7 +292,8 @@ class Search implements interfaces\Search
      * @param array $params
      * @return array
      */
-    private function getDefaultParams($searchText, $params = array()) {
+    private function getDefaultParams($searchText, $params = array())
+    {
         $params['q.op'] = 'AND';
         $params['spellcheck'] = 'true';
         $params['spellcheck.count'] = 10;
@@ -268,7 +316,8 @@ class Search implements interfaces\Search
      * @param object $response
      * @return kateglo\application\faces\Hit
      */
-    private function convertResponse2Models($response) {
+    private function convertResponse2Models($response)
+    {
         $hit = new Hit ();
         $hit->setTime($response->responseHeader->QTime);
         $hit->setCount($response->response->numFound);
@@ -327,7 +376,8 @@ class Search implements interfaces\Search
      * @param array $fields
      * @return array
      */
-    private function convertFacets($facets) {
+    private function convertFacets($facets)
+    {
         $newFacets = $facets;
         foreach ($facets as $key => $value) {
             if ($value == 0) {
@@ -341,7 +391,8 @@ class Search implements interfaces\Search
      * @param  $fields
      * @return \kateglo\application\faces\Document
      */
-    private function createDocuments($fields) {
+    private function createDocuments($fields)
+    {
         $document = new Document ();
         $document->setId($fields->id);
         $document->setEntry($fields->entri);
@@ -374,7 +425,8 @@ class Search implements interfaces\Search
      * @param Doctrine\Common\Collections\ArrayCollection $array
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private function jsonConvertToEquivalent($array) {
+    private function jsonConvertToEquivalent($array)
+    {
         if ($array instanceof ArrayCollection) {
             $newArray = new ArrayCollection ();
             foreach ($array as $json) {
@@ -401,7 +453,8 @@ class Search implements interfaces\Search
      * @param string $key
      * @return Doctrine\Common\Collections\ArrayCollection|NULL
      */
-    private function convert2Array($source, $key) {
+    private function convert2Array($source, $key)
+    {
         if (property_exists($source, $key)) {
             $array = new ArrayCollection ();
             if (!is_array($source->{$key})) {

@@ -20,6 +20,7 @@
  */
 use kateglo\application\services\interfaces;
 use kateglo\application\models;
+
 /**
  *
  *
@@ -69,7 +70,8 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setSearch(interfaces\Search $search) {
+    public function setSearch(interfaces\Search $search)
+    {
         $this->search = $search;
     }
 
@@ -80,7 +82,8 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setFilter(interfaces\Filter $filter) {
+    public function setFilter(interfaces\Filter $filter)
+    {
         $this->filter = $filter;
     }
 
@@ -91,7 +94,8 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setStaticData(interfaces\StaticData $staticData) {
+    public function setStaticData(interfaces\StaticData $staticData)
+    {
         $this->staticData = $staticData;
     }
 
@@ -102,7 +106,8 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      *
      * @Inject
      */
-    public function setPagination(interfaces\Pagination $pagination) {
+    public function setPagination(interfaces\Pagination $pagination)
+    {
         $this->pagination = $pagination;
     }
 
@@ -110,7 +115,8 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      * (non-PHPdoc)
      * @see Zend_Controller_Action::init()
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
     }
 
@@ -120,18 +126,19 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      * @Path('/')
      * @Produces('text/html')
      */
-    public function indexHtml() {
+    public function indexHtml()
+    {
         $this->_helper->viewRenderer->setNoRender();
         $pagination = new kateglo\application\models\front\Pagination();
         $facet = new kateglo\application\models\front\Facet();
         $search = new kateglo\application\models\front\Search();
         $search->setFormAction('/peribahasa');
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
-                    ? intval($this->_request->getParam('limit'))
-                    : 10));
+            ? intval($this->_request->getParam('limit'))
+            : 10));
         $pagination->setOffset((is_numeric($this->_request->getParam('start'))
-                    ? intval($this->_request->getParam('start'))
-                    : 0));
+            ? intval($this->_request->getParam('start'))
+            : 0));
         $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
         $filterText = urldecode($this->getRequest()->getParam($search->getFilterName()));
         try {
@@ -164,16 +171,17 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      * @Path('/')
      * @Produces('application/json')
      */
-    public function indexJson() {
+    public function indexJson()
+    {
         $search = new kateglo\application\models\front\Search();
         $pagination = new kateglo\application\models\front\Pagination();
         $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
-                    ? intval($this->_request->getParam('limit'))
-                    : 10));
+            ? intval($this->_request->getParam('limit'))
+            : 10));
         $pagination->setOffset((is_numeric($this->_request->getParam('start'))
-                    ? intval($this->_request->getParam('start'))
-                    : 0));
+            ? intval($this->_request->getParam('start'))
+            : 0));
         try {
             $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             if (!$this->evaluatePreCondition($cacheId)) {
@@ -197,11 +205,15 @@ class PeribahasaController extends Zend_Controller_Action_Stubbles
      * @Path('/detail')
      * @Produces('text/html')
      */
-    public function detailHtml() {
+    public function detailHtml()
+    {
         $this->_helper->viewRenderer->setNoRender();
-        $cacheId = __CLASS__ . '\\' . 'detailHtml';
+        $cacheId = __METHOD__;
+        $search = new kateglo\application\models\front\Search();
+        $search->setFormAction('/peribahasa');
 
         if (!$this->evaluatePreCondition($cacheId)) {
+            $this->view->search = $search;
             $this->view->staticData = $this->staticData->getStaticData();
             $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
         }
