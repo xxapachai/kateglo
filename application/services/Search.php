@@ -23,6 +23,7 @@ namespace kateglo\application\services;
 use kateglo\application\daos;
 use kateglo\application\models\front;
 use kateglo\application\models\front\Filter;
+
 /**
  *
  *
@@ -52,14 +53,16 @@ class Search implements interfaces\Search
      *
      * @Inject
      */
-    public function setSearch(daos\interfaces\Search $search) {
+    public function setSearch(daos\interfaces\Search $search)
+    {
         $this->search = $search;
     }
 
     /**
      * @return \kateglo\applications\models\solr\Amount
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         return $this->search->getAmount();
     }
 
@@ -69,7 +72,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    public function entry($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         return $this->search->entry($searchText, $pagination, $facet);
     }
 
@@ -79,8 +83,9 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null) {
-         return $this->search->thesaurus($searchText, $pagination, $facet);
+    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        return $this->search->thesaurus($searchText, $pagination, $facet);
     }
 
     /**
@@ -89,7 +94,8 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null) {
+    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
         return $this->search->equivalent($searchText, $pagination, $facet);
     }
 
@@ -99,8 +105,9 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null) {
-         return $this->search->proverb($searchText, $pagination, $facet);
+    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        return $this->search->proverb($searchText, $pagination, $facet);
     }
 
     /**
@@ -109,8 +116,9 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null) {
-         return $this->search->acronym($searchText, $pagination, $facet);
+    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        return $this->search->acronym($searchText, $pagination, $facet);
     }
 
     /**
@@ -120,8 +128,27 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null) {
-         return $this->search->alphabet($searchText, $alphabet, $pagination, $facet);
+    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        return $this->search->alphabet($searchText, $alphabet, $pagination, $facet);
+    }
+
+    /**
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     */
+    public function randomMisspelled($limit = 6)
+    {
+        return $this->search->randomMisspelled($limit);
+    }
+
+    /**
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     */
+    public function randomEntry($limit = 5)
+    {
+        return $this->search->randomEntry($limit);
     }
 }
 

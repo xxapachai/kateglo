@@ -216,19 +216,19 @@ class AlfabetController extends Zend_Controller_Action_Stubbles
      */
     public function detailHtml($alphabet)
     {
-        $this->_helper->viewRenderer->setNoRender();
-        $cacheId = __CLASS__ . '\\' . 'detailHtml';
+            $this->_helper->viewRenderer->setNoRender();
+            $cacheId = __METHOD__;
+            $search = new kateglo\application\models\front\Search();
+            $search->setFormAction('/alfabet/'.$alphabet);
 
-        if (!$this->evaluatePreCondition($cacheId)) {
-            $this->view->alphabet = $alphabet;
-            $this->view->formAction = '/kamus';
-            $this->view->search->setFieldValue('entriPersis:' . $alphabet . '*');
-            $this->view->staticData = $this->staticData->getStaticData();
-            $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
-        }
+            if (!$this->evaluatePreCondition($cacheId)) {
+                $this->view->search = $search;
+                $this->view->staticData = $this->staticData->getStaticData();
+                $this->content = $this->_helper->viewRenderer->view->render('cari/detail.html');
+            }
 
-        $this->responseBuilder($cacheId);
-        $this->getResponse()->appendBody($this->content);
+            $this->responseBuilder($cacheId);
+            $this->getResponse()->appendBody($this->content);
     }
 
 }

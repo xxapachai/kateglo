@@ -12,10 +12,10 @@
 	<header>
 		<a href="/" title="Beranda Kateglo"><h2>Kateglo</h2></a>
 
-		<form name="search" action="${formAction}" method="GET" class="telusur">
+		<form name="search" action="${search/getFormAction}" method="GET" class="telusur">
 			<input type="text" name="${search/getFieldName}"
 			       value="${search/getFieldValue}" placeholder="Ketik yang dicari, kemudian tekan tombol enter"/>
-			<input class="submit" type="submit" value="${search/getButtonValue}"/>
+			<input class="submit" type="submit" value="Cari"/>
 
 			<p class="pright"><a href="http://code.google.com/p/kateglo/wiki/PencarianKateglo">Petunjuk Penelusuran</a>
 			</p>
@@ -26,7 +26,7 @@
 	<content>
 		<div class="content">
 			Gunakan formulir penelusuran dibawah maka permohonan penelusuran detail akan ditampilkan diatas
-			<form method="GET" action="${formAction}" name="advancedSearchForm" class="advance">
+			<form method="GET" action="${search/getFormAction}" name="advancedSearchForm" class="advance">
 				<hr/>
 				<h3>Temukan Hasil</h3>
 				<label>mengandung seluruh kata berikut</label> <input type="text" value="${search/getFieldValue}" id="allWord"
@@ -89,27 +89,23 @@
 				</select><br/>
 				<label>Dengan penelusuran yang saya pilih ditemukan di</label>
 				<select name="siteArea">
-					<option value="/cari"
-					        tal:attributes="selected php: formAction EQ '/cari' ? 'selected': NULL">mana
-						saja di laman
-					</option>
 					<option value="/kamus"
-					        tal:attributes="selected php: formAction EQ '/kamus' ? 'selected': NULL">Kamus
+					        tal:attributes="selected php: search.getFormAction() EQ '/kamus' ? 'selected': NULL">Kamus
 					</option>
 					<option value="/tesaurus"
-					        tal:attributes="selected php: formAction EQ '/tesaurus' ? 'selected': NULL">
+					        tal:attributes="selected php: search.getFormAction() EQ '/tesaurus' ? 'selected': NULL">
 						Tesaurus
 					</option>
 					<option value="/padanan"
-					        tal:attributes="selected php: formAction EQ '/padanan' ? 'selected': NULL">
+					        tal:attributes="selected php: search.getFormAction() EQ '/padanan' ? 'selected': NULL">
 						Padanan
 					</option>
 					<option value="/peribahasa"
-					        tal:attributes="selected php: formAction EQ '/peribahasa' ? 'selected': NULL">
+					        tal:attributes="selected php: search.getFormAction() EQ '/peribahasa' ? 'selected': NULL">
 						Peribahasa
 					</option>
 					<option value="/singkatan"
-					        tal:attributes="selected php: formAction EQ '/singkatan' ? 'selected': NULL">
+					        tal:attributes="selected php: search.getFormAction() EQ '/singkatan' ? 'selected': NULL">
 						Akronim dan Singkatan
 					</option>
 				</select><br/>

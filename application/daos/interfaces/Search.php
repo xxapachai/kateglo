@@ -20,6 +20,7 @@ namespace kateglo\application\daos\interfaces;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models\front;
+
 /**
  *
  *
@@ -93,9 +94,23 @@ interface Search
      * @param string $alphabet
      * @param \kateglo\application\models\front\Pagination $pagination
      * @param \kateglo\application\models\front\Facet|null $facet
-     * @return void
+     * @return \kateglo\application\models\solr\Hit
      */
     function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function randomMisspelled($limit = 6);
+
+    /**
+     * @abstract
+     * @param int $limit
+     * @return \kateglo\application\models\solr\Hit
+     */
+    function randomEntry($limit = 5);
 }
 
 ?>

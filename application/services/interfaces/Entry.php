@@ -52,7 +52,7 @@ interface Entry {
 	/**
 	 *
 	 * @param string $entry
-	 * @return kateglo\application\models\Entry
+	 * @return \kateglo\application\models\Entry
 	 */
 	function getEntry($entry);
 
@@ -66,14 +66,14 @@ interface Entry {
 	/**
 	 *
 	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	function randomMisspelled($limit = 5);
 
 	/**
 	 *
 	 * @param int $limit
-	 * @return \kateglo\application\faces\Hit
+	 * @return \kateglo\application\models\solr\Hit
 	 */
 	function randomEntry($limit = 10);
 
@@ -93,7 +93,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return kateglo\application\models\solr\Hit
 	 */
 	function searchEntry($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -103,7 +103,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return kateglo\application\models\solr\Hit
 	 */
 	function searchEntryAsDisMax($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -113,7 +113,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return kateglo\application\models\solr\Hit
 	 */
 	function searchEntryAsDisMaxJSON($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -124,7 +124,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit|array
+	 * @return kateglo\application\models\solr\Hit|array
 	 */
 	function searchDictionary($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -135,7 +135,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit|array
+	 * @return kateglo\application\models\solr\Hit|array
 	 */
 	function searchDictionaryAsJSON($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -146,7 +146,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit
+	 * @return kateglo\application\models\solr\Hit
 	 */
 	function searchThesaurus($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -168,7 +168,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hit|array
+	 * @return kateglo\application\models\solr\Hit|array
 	 */
 	function searchProverb($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -190,7 +190,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hits
+	 * @return kateglo\application\models\solr\Hits
 	 */
 	function searchAcronym($searchText, $offset = 0, $limit = 10, $params = array());
 
@@ -212,7 +212,7 @@ interface Entry {
 	 * @param int $offset
 	 * @param int $limit
 	 * @param array $params
-	 * @return kateglo\application\faces\Hits
+	 * @return kateglo\application\models\solr\Hits
 	 */
 	function searchEquivalent($searchText, $offset = 0, $limit = 10, $params = array());
 
