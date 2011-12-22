@@ -20,6 +20,7 @@ namespace kateglo\application\daos\interfaces;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models\front;
+use kateglo\application\models;
 
 /**
  *
@@ -111,6 +112,28 @@ interface Search
      * @return \kateglo\application\models\solr\Hit
      */
     function randomEntry($limit = 5);
+
+    /**
+     * @abstract
+     * @param \kateglo\application\models\Entry $entry
+     * @return void
+     */
+    function update(models\Entry $entry);
+
+    /**
+     * @abstract
+     * @param \kateglo\application\models\Entry $entry
+     * @return void
+     */
+    function insert(models\Entry $entry);
+
+    /**
+     * @abstract
+     * @param int $id
+     * @return \kateglo\application\models\Entry
+     */
+    function delete($id);
+
 }
 
 ?>

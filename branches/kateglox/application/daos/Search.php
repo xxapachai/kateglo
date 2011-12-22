@@ -27,6 +27,7 @@ use kateglo\application\models\solr\Spellcheck;
 use kateglo\application\models\solr\Suggestion;
 use kateglo\application\models\solr\Amount;
 use kateglo\application\models\front;
+use kateglo\application\models;
 use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -264,6 +265,41 @@ class Search implements interfaces\Search
     }
 
     /**
+     * @param \kateglo\application\models\Entry $entry
+     * @return void
+     */
+    public function update(models\Entry $entry)
+    {
+        $docs = $this->searchDocumentById($entry->getId());
+        $docs->setField('entri', $entry->getEntry());
+        $this->solr->addDocument($docs);
+        $this->solr->commit();
+    }
+
+    /**
+     * @param \kateglo\application\models\Entry $entry
+     * @return void
+     */
+    public function insert(models\Entry $entry)
+    {
+        $docs = new \Apache_Solr_Document();
+        $docs->setField('entri', $entry->getEntry());
+        $docs->setField('id', $entry->getId());
+        $this->solr->addDocument($docs);
+        $this->solr->commit();
+    }
+
+    /**
+     * @param int $id
+     * @return \kateglo\application\models\Entry
+     */
+    public function delete($id)
+    {
+        $this->solr->deleteById($id);
+        $this->solr->commit();
+    }
+
+    /**
      * @param array $params
      * @param \kateglo\application\models\front\Facet $facet
      * @return
@@ -468,6 +504,20 @@ class Search implements interfaces\Search
         } else {
             return null;
         }
+    }
+
+    /**
+     * @param int $id
+     * @return \Apache_Solr_Document
+     */
+    private function searchDocumentById($id)
+    {
+        $params['fl'] = 'id, entri, antonim, disiplin, contoh, definisi, kelas, kategoriKelas, salahEja, relasi, sinonim, ejaan, silabel, bentuk, kategoriBentuk, sumber, kategoriSumber, bahasa, disiplinPadanan, asing, padanan';
+        $params['df'] = 'id';
+        $request = $this->getSolr()->search($id, 0, 2, $params);
+        /** @var \Apache_Solr_Document $docs */
+        $docs = $request->response->docs[0];
+        return $docs;
     }
 }
 

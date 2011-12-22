@@ -457,7 +457,7 @@ class Zend_View_PhpTal implements Zend_View_Interface
         if (count($this->_paths) == 0) { 
             throw new Zend_View_Exception('No view script directory set'); 
         } 
- 
+
         foreach ($this->_paths as $directory) { 
             if (is_readable($directory . $template)) { 
                 return $directory . $template; 

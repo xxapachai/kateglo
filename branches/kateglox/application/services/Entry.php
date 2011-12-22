@@ -49,6 +49,12 @@ class Entry implements interfaces\Entry
 
     /**
      *
+     * @var \kateglo\application\daos\interfaces\Search
+     */
+    private $search;
+
+    /**
+     *
      * @params \kateglo\application\daos\interfaces\Entry $entry
      * @return void
      *
@@ -57,6 +63,18 @@ class Entry implements interfaces\Entry
     public function setEntry(daos\interfaces\Entry $entry)
     {
         $this->entry = $entry;
+    }
+
+    /**
+     *
+     * @params \kateglo\application\daos\interfaces\Search $search
+     * @return void
+     *
+     * @Inject
+     */
+    public function setSearch(daos\interfaces\Search $search)
+    {
+        $this->search = $search;
     }
 
     /**
@@ -75,20 +93,6 @@ class Entry implements interfaces\Entry
 
     /**
      *
-     * @param id $entry
-     * @return string
-     */
-    public function getEntryByIdAsArray($id)
-    {
-        if (!is_numeric($id)) {
-            throw new IllegalTypeException('Entry Id: "' . $id . '" is Not Numeric');
-        }
-        $result = $this->entry->getById($id);
-        return $result->toArray();
-    }
-
-    /**
-     *
      * @param string $entry
      * @return \kateglo\application\models\Entry
      */
@@ -99,27 +103,13 @@ class Entry implements interfaces\Entry
     }
 
     /**
-     *
-     * @param string $entry
-     * @return string
-     */
-    public function getEntryAsArray($entry)
-    {
-        $result = $this->entry->getByEntry($entry);
-        return $result->toArray();
-    }
-
-    /**
      * @param \kateglo\application\models\Entry $entry
      * @return \kateglo\application\models\Entry
      */
     public function update(models\Entry $entry)
     {
-        $docs = $this->searchDocumentById($entry->getId());
-        $docs->setField('entri', $entry->getEntry());
+        $this->search->update($entry);
         $entry = $this->entry->update($entry);
-        $this->solr->addDocument($docs);
-        $this->solr->commit();
         return $entry;
     }
 
@@ -129,24 +119,19 @@ class Entry implements interfaces\Entry
      */
     public function insert(models\Entry $entry)
     {
-        $docs = new \Apache_Solr_Document();
         $entry = $this->entry->insert($entry);
-        $docs->setField('entri', $entry->getEntry());
-        $docs->setField('id', $entry->getId());
-        $this->solr->addDocument($docs);
-        $this->solr->commit();
+        $this->search->insert($entry);
         return $entry;
     }
 
     /**
-     * @param int $entry
+     * @param int $id
      * @return \kateglo\application\models\Entry
      */
     public function delete($id)
     {
         $entry = $this->entry->delete($id);
-        $this->solr->deleteById($id);
-        $this->solr->commit();
+        $this->search->delete($id);
         return $entry;
     }
 
@@ -188,20 +173,6 @@ class Entry implements interfaces\Entry
     public function dateIsUsedWordOfTheDay($date)
     {
         return $this->entry->dateIsUsedWordOfTheDay(new \DateTime($date));
-    }
-
-    /**
-     * @param int $id
-     * @return \Apache_Solr_Document
-     */
-    private function searchDocumentById($id)
-    {
-        $params['fl'] = 'id, entri, antonim, disiplin, contoh, definisi, kelas, kategoriKelas, salahEja, relasi, sinonim, ejaan, silabel, bentuk, kategoriBentuk, sumber, kategoriSumber, bahasa, disiplinPadanan, asing, padanan';
-        $params['df'] = 'id';
-        $request = $this->getSolr()->search($id, 0, 2, $params);
-        /** @var \Apache_Solr_Document $docs */
-        $docs = $request->response->docs[0];
-        return $docs;
     }
 
 }
