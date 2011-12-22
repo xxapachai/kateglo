@@ -159,11 +159,12 @@ class REST implements interfaces\REST
                 $requestPath = array_slice($requestPath, 1);
             }
 
-            if (trim($requestPath[max(array_keys($requestPath))]) == '') {
-                array_pop($requestPath);
-                if (count($requestPath) > 0 && trim($requestPath[max(array_keys($requestPath))]) == '') {
-                    throw new HTTPNotFoundException('Ambigous URI');
-                }
+        }
+
+        if (count($requestPath) > 0 && trim($requestPath[max(array_keys($requestPath))]) == '') {
+            array_pop($requestPath);
+            if (count($requestPath) > 0 && trim($requestPath[max(array_keys($requestPath))]) == '') {
+                throw new HTTPNotFoundException('Ambigous URI');
             }
         }
 
