@@ -31,6 +31,7 @@ use Doctrine\Common\Cache\ApcCache;
 use kateglo\application\daos;
 use kateglo\application\services;
 use kateglo\application\utilities;
+
 /**
  *
  *
@@ -42,31 +43,35 @@ use kateglo\application\utilities;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Binder {
-	
-	public static function bind(\stubBinder $container) {
-				
-		$container->bind ( 'Zend_Log' )->toProviderClass ( Log::$CLASS_NAME );
-		$container->bind ( 'Zend_Config' )->toProviderClass ( Config::$CLASS_NAME );
-		$container->bind ( 'Apache_Solr_Service' )->toProviderClass ( Solr::$CLASS_NAME );
-		$container->bind ( 'Doctrine\DBAL\Driver\Connection' )->toProviderClass ( Connection::$CLASS_NAME );
-		$container->bind ( 'Doctrine\ORM\EntityManager' )->toProviderClass ( EntityManager::$CLASS_NAME );
-		$container->bind ( 'Doctrine\Common\Cache\Cache' )->to ( 'Doctrine\Common\Cache\ApcCache' );
-        $container->bind ( 'Zend_Controller_Dispatcher_Interface' )->to ( 'Zend_Controller_Dispatcher_Stubbles' );
-		$container->bind ( daos\interfaces\Entry::INTERFACE_NAME )->to ( daos\Entry::$CLASS_NAME );
-		$container->bind ( daos\interfaces\Search::INTERFACE_NAME )->to ( daos\Search::$CLASS_NAME );
-		$container->bind ( daos\interfaces\User::INTERFACE_NAME )->to ( daos\User::$CLASS_NAME );
-		$container->bind ( services\interfaces\Entry::INTERFACE_NAME )->to ( services\Entry::$CLASS_NAME );
-        $container->bind ( services\interfaces\CPanel::INTERFACE_NAME )->to ( services\CPanel::$CLASS_NAME );
-		$container->bind ( services\interfaces\StaticData::INTERFACE_NAME )->to ( services\StaticData::$CLASS_NAME );
-		$container->bind ( services\interfaces\Pagination::INTERFACE_NAME )->to ( services\Pagination::$CLASS_NAME );
-		$container->bind ( services\interfaces\Search::INTERFACE_NAME )->to ( services\Search::$CLASS_NAME );
-		$container->bind ( services\interfaces\Filter::INTERFACE_NAME )->to ( services\Filter::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\KBBI::INTERFACE_NAME )->to ( utilities\KBBI::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\CURL::INTERFACE_NAME )->to ( utilities\CURL::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\MimeParser::INTERFACE_NAME )->to ( utilities\MimeParser::$CLASS_NAME );
-		$container->bind ( utilities\interfaces\REST::INTERFACE_NAME )->to ( utilities\REST::$CLASS_NAME );
-        $container->bind ( 'PHPTAL_Filter' )->to ( utilities\TalTidy::$CLASS_NAME );
-	}
+class Binder
+{
+
+    public static function bind(\stubBinder $container)
+    {
+
+        $container->bind('Zend_Log')->toProviderClass(Log::$CLASS_NAME);
+        $container->bind('Zend_Config')->toProviderClass(Config::$CLASS_NAME);
+        $container->bind('Apache_Solr_Service')->toProviderClass(Solr::$CLASS_NAME);
+        $container->bind('Doctrine\DBAL\Driver\Connection')->toProviderClass(Connection::$CLASS_NAME);
+        $container->bind('Doctrine\ORM\EntityManager')->toProviderClass(EntityManager::$CLASS_NAME);
+        $container->bind('Doctrine\Common\Cache\Cache')->to('Doctrine\Common\Cache\ApcCache');
+        $container->bind('Zend_Controller_Dispatcher_Interface')->to('Zend_Controller_Dispatcher_Stubbles');
+        $container->bind(daos\interfaces\Entry::INTERFACE_NAME)->to(daos\Entry::$CLASS_NAME);
+        $container->bind(daos\interfaces\Search::INTERFACE_NAME)->to(daos\Search::$CLASS_NAME);
+        $container->bind(daos\interfaces\User::INTERFACE_NAME)->to(daos\User::$CLASS_NAME);
+        $container->bind(services\interfaces\Entry::INTERFACE_NAME)->to(services\Entry::$CLASS_NAME);
+        $container->bind(services\interfaces\CPanel::INTERFACE_NAME)->to(services\CPanel::$CLASS_NAME);
+        $container->bind(services\interfaces\StaticData::INTERFACE_NAME)->to(services\StaticData::$CLASS_NAME);
+        $container->bind(services\interfaces\Pagination::INTERFACE_NAME)->to(services\Pagination::$CLASS_NAME);
+        $container->bind(services\interfaces\Search::INTERFACE_NAME)->to(services\Search::$CLASS_NAME);
+        $container->bind(services\interfaces\Filter::INTERFACE_NAME)->to(services\Filter::$CLASS_NAME);
+        $container->bind(services\interfaces\WordOfTheDay::INTERFACE_NAME)->to(services\WordOfTheDay::$CLASS_NAME);
+        $container->bind(utilities\interfaces\KBBI::INTERFACE_NAME)->to(utilities\KBBI::$CLASS_NAME);
+        $container->bind(utilities\interfaces\CURL::INTERFACE_NAME)->to(utilities\CURL::$CLASS_NAME);
+        $container->bind(utilities\interfaces\MimeParser::INTERFACE_NAME)->to(utilities\MimeParser::$CLASS_NAME);
+        $container->bind(utilities\interfaces\REST::INTERFACE_NAME)->to(utilities\REST::$CLASS_NAME);
+        $container->bind('PHPTAL_Filter')->to(utilities\TalTidy::$CLASS_NAME);
+    }
 }
+
 ?>

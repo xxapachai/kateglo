@@ -46,6 +46,13 @@ class EntriController extends Zend_Controller_Action_Stubbles
     /**
      *
      * Enter description here ...
+     * @var kateglo\application\services\interfaces\WordOfTheDay;
+     */
+    private $wotd;
+
+    /**
+     *
+     * Enter description here ...
      * @var \kateglo\application\services\interfaces\StaticData;
      */
     private $staticData;
@@ -60,6 +67,18 @@ class EntriController extends Zend_Controller_Action_Stubbles
     public function setEntry(interfaces\Entry $entry)
     {
         $this->entry = $entry;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param kateglo\application\services\interfaces\WordOfTheDay $wotd
+     *
+     * @Inject
+     */
+    public function setWotd(interfaces\WordOfTheDay $wotd)
+    {
+        $this->wotd = $wotd;
     }
 
     /**
@@ -370,8 +389,7 @@ class EntriController extends Zend_Controller_Action_Stubbles
     public function wordOfTheDay()
     {
         $this->_helper->viewRenderer->setNoRender();
-        /** @var $wordOfTheDay \kateglo\application\models\Entry */
-        $wordOfTheDay = $this->entry->wordOfTheDay();
+        $wordOfTheDay = $this->wotd->getToday();
         $this->getResponse()->setHttpResponseCode(303);
         $this->getResponse()->setHeader('Location', '/entri/' . urlencode($wordOfTheDay->getEntry()));
     }

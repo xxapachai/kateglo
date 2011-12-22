@@ -378,8 +378,9 @@ class Entry implements interfaces\Entry {
 		$query = $this->entityManager->createQuery("
 			SELECT 	wotd
 			FROM " . models\WordOfTheDay::CLASS_NAME . " wotd
-			WHERE wotd.date = CURRENT_DATE()");
+			ORDER BY wotd.id ");
 		//$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
+        $query->setMaxResults(1);
 		$result = $query->getResult();
 		if (count($result) === 1) {
 			if (!($result [0] instanceof models\WordOfTheDay)) {

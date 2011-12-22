@@ -20,6 +20,7 @@ namespace kateglo\application\services\interfaces;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models;
+
 /**
  *
  *
@@ -31,77 +32,32 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry {
+interface WordOfTheDay
+{
 
-	const INTERFACE_NAME = __CLASS__;
+    const INTERFACE_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @param int $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function getEntryById($id);
+    /**
+     * @return \kateglo\application\models\Entry
+     */
+    function getToday();
 
-	/**
-	 *
-	 * @param id $entry
-	 * @return string
-	 */
-	function getEntryByIdAsArray($id);
+    /**
+     * @return array
+     */
+    function getList();
 
-	/**
-	 *
-	 * @param string $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function getEntry($entry);
+    /**
+     * @param $jsonObj
+     * @return \kateglo\application\models\WordOfTheDay
+     */
+    function insert($jsonObj);
 
-	/**
-	 *
-	 * @param string $entry
-	 * @return string
-	 */
-	function getEntryAsArray($entry);
-
-	/**
-	 * @param \kateglo\application\models\Entry $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function update(models\Entry $entry);
-
-	/**
-	 * @param \kateglo\application\models\Entry $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function insert(models\Entry $entry);
-
-	/**
-	 * @param int $id
-	 * @return \kateglo\application\models\Entry
-	 */
-	function delete($id);
-
-	/**
-	 * @return \kateglo\application\models\Entry
-	 */
-	public function wordOfTheDay();
-
-	/**
-	 * @return array
-	 */
-	function wordOfTheDayList();
-
-	/**
-	 * @param $jsonObj
-	 * @return \kateglo\application\models\WordOfTheDay
-	 */
-	function insertWordOfTheDay($jsonObj);
-
-	/**
-	 * @param $date
-	 * @return bool
-	 */
-	function dateIsUsedWordOfTheDay($date);
+    /**
+     * @param $date
+     * @return bool
+     */
+    function dateIsUsed($date);
 }
 
 ?>
