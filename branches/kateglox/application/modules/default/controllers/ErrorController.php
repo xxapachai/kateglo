@@ -19,11 +19,11 @@
  * <http://code.google.com/p/kateglo/>.
  */
 
-use kateglo\application\controllers\exceptions\HTTPMethodNotAllowedException;
-use kateglo\application\controllers\exceptions\HTTPNotAcceptableException;
-use kateglo\application\controllers\exceptions\HTTPNotFoundException;
-use kateglo\application\controllers\exceptions\HTTPUnsupportedMediaTypeException;
-use kateglo\application\controllers\exceptions\HTTPBadRequestException;
+use kateglo\application\utilities\exceptions\HTTPMethodNotAllowedException;
+use kateglo\application\utilities\exceptions\HTTPNotAcceptableException;
+use kateglo\application\utilities\exceptions\HTTPNotFoundException;
+use kateglo\application\utilities\exceptions\HTTPUnsupportedMediaTypeException;
+use kateglo\application\utilities\exceptions\HTTPBadRequestException;
 use kateglo\application\models\front\Search;
 /**
  *

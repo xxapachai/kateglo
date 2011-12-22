@@ -20,7 +20,7 @@ namespace kateglo\application\services;
  * <http://code.google.com/p/kateglo/>.
  */
 /** @noinspection PhpUndefinedNamespaceInspection */
-use kateglo\application\faces;
+use kateglo\application\models\front;
 use Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\daos;
 /**
@@ -57,10 +57,10 @@ class StaticData implements interfaces\StaticData {
 
 	/**
 	 * Enter description here ...
-	 * @return \kateglo\application\faces\StaticData
+	 * @return \kateglo\application\models\front\StaticData
 	 */
 	public function getStaticData() {
-		$staticData = new faces\StaticData();
+		$staticData = new front\StaticData();
 		$staticData->setClazz($this->entry->getClasses());
 		$staticData->setClazzCategory($this->entry->getClassCategories());
 		$staticData->setDiscipline($this->entry->getDisciplines());
@@ -73,7 +73,7 @@ class StaticData implements interfaces\StaticData {
 
 	/**
 	 * Enter description here ...
-	 * @return \kateglo\application\faces\StaticData
+	 * @return \kateglo\application\models\front\StaticData
 	 */
 	public function getStaticDataAsArray() {
 		$staticData = array (

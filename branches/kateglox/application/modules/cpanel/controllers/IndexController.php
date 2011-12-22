@@ -21,7 +21,7 @@
 use kateglo\application\services\interfaces\StaticData;
 use kateglo\application\services\interfaces\CPanel;
 use kateglo\application\services\interfaces\Entry;
-use kateglo\application\faces\interfaces\Search;
+use kateglo\application\services\interfaces\Search;
 /**
  *
  *
@@ -33,12 +33,12 @@ use kateglo\application\faces\interfaces\Search;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class IndexController extends Zend_Controller_Action_Stubbles {
+class CPanel_IndexController extends Zend_Controller_Action_Stubbles {
 
 	/**
 	 *
 	 * Enter description here ...
-	 * @var \kateglo\application\faces\interfaces\Search;
+	 * @var \kateglo\application\services\interfaces\Search;
 	 */
 	private $search;
 
@@ -109,7 +109,7 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 	/**
 	 *
 	 * Enter description here ...
-	 * @param \kateglo\application\faces\interfaces\Search $entry
+	 * @param \kateglo\application\services\interfaces\Search $entry
 	 *
 	 * @Inject
 	 */
@@ -123,12 +123,6 @@ class IndexController extends Zend_Controller_Action_Stubbles {
 	 */
 	public function init() {
 		parent::init();
-		$this->view->search = $this->search;
-		$this->limit = (is_numeric($this->_request->getParam('limit')) ? intval($this->_request->getParam('limit'))
-				: 10);
-		$this->offset = (is_numeric($this->_request->getParam('start')) ? intval($this->_request->getParam('start'))
-				: 0);
-		$this->view->formAction = '/cpanel';
 	}
 
 	/**
