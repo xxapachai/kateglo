@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\controllers\exceptions;
+namespace kateglo\application\utilities\exceptions;
 /*
  *  $Id$
  *
@@ -23,7 +23,7 @@ namespace kateglo\application\controllers\exceptions;
  /**
  * 
  * 
- * @package kateglo\application\controllers\exceptions
+ * @package kateglo\application\utilities\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -31,7 +31,7 @@ namespace kateglo\application\controllers\exceptions;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */ 
-class HTTPNotFoundException extends \Exception {
+class HTTPNotAcceptableException extends \Exception {
 
 }
 ?>
