@@ -160,18 +160,18 @@ class Search implements interfaces\Search
      */
     public function source($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
-        /*$hits = $this->search->source($searchText, $pagination, $facet);
-        $documents = $hits->getDocuments();*/
+        $hits = $this->search->source($searchText, $pagination, $facet);
+        $documents = $hits->getDocuments();
         $entryIds = array();
         /** @var $document \kateglo\application\models\solr\Document */
-        /*foreach ($documents as $document) {
+        foreach ($documents as $document) {
             $entryIds[] = $document->getId();
         }
         $sources = new ArrayCollection();
-        if (count($entryIds) > 0) {*/
+        if (count($entryIds) > 0) {
             $sources = $this->entry->getSourceFromEntryIds($entryIds);
-        /*}
-        return $sources;*/
+        }
+        return $sources;
     }
 
     /**
