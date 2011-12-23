@@ -23,6 +23,7 @@ namespace kateglo\application\services;
 use kateglo\application\daos;
 use kateglo\application\models\front;
 use kateglo\application\models\front\Filter;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  *
@@ -48,6 +49,12 @@ class Search implements interfaces\Search
 
     /**
      *
+     * @var \kateglo\application\daos\interfaces\Entry
+     */
+    private $entry;
+
+    /**
+     *
      * @param \kateglo\application\daos\interfaces\Search
      * @return void
      *
@@ -56,6 +63,18 @@ class Search implements interfaces\Search
     public function setSearch(daos\interfaces\Search $search)
     {
         $this->search = $search;
+    }
+
+    /**
+     *
+     * @param \kateglo\application\daos\interfaces\Search
+     * @return void
+     *
+     * @Inject
+     */
+    public function setEntry(daos\interfaces\Entry $entry)
+    {
+        $this->entry = $entry;
     }
 
     /**
@@ -83,7 +102,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function thesaurus($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         return $this->search->thesaurus($searchText, $pagination, $facet);
     }
@@ -94,7 +113,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function equivalent($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         return $this->search->equivalent($searchText, $pagination, $facet);
     }
@@ -105,7 +124,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function proverb($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         return $this->search->proverb($searchText, $pagination, $facet);
     }
@@ -116,7 +135,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function acronym($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         return $this->search->acronym($searchText, $pagination, $facet);
     }
@@ -128,9 +147,53 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \kateglo\application\models\solr\Hit
      */
-    function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null)
+    public function alphabet($searchText, $alphabet, front\Pagination $pagination, front\Facet $facet = null)
     {
         return $this->search->alphabet($searchText, $alphabet, $pagination, $facet);
+    }
+
+    /**
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function source($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        /*$hits = $this->search->source($searchText, $pagination, $facet);
+        $documents = $hits->getDocuments();*/
+        $entryIds = array();
+        /** @var $document \kateglo\application\models\solr\Document */
+        /*foreach ($documents as $document) {
+            $entryIds[] = $document->getId();
+        }
+        $sources = new ArrayCollection();
+        if (count($entryIds) > 0) {*/
+            $sources = $this->entry->getSourceFromEntryIds($entryIds);
+        /*}
+        return $sources;*/
+    }
+
+    /**
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        $hits = $this->search->foreign($searchText, $pagination, $facet);
+        $documents = $hits->getDocuments();
+        $entryIds = array();
+        /** @var $document \kateglo\application\models\solr\Document */
+        foreach ($documents as $document) {
+            $entryIds[] = $document->getId();
+        }
+        $foreigns = new ArrayCollection();
+        if (count($entryIds) > 0) {
+            $foreigns = $this->entry->getForeignFromEntryIds($entryIds);
+        }
+        return $foreigns;
     }
 
     /**

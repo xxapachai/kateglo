@@ -81,7 +81,7 @@ class Foreign {
     }
 
     /**
-     * @return the $version
+     * @return int
      */
     public function getVersion() {
         return $this->version;
@@ -95,14 +95,14 @@ class Foreign {
     }
 
     /**
-     * @return the $id
+     * @return string
      */
     public function getId() {
         return $this->id;
     }
 
     /**
-     * @return the $foreign
+     * @return string
      */
     public function getForeign() {
         return $this->foreign;

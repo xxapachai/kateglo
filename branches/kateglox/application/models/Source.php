@@ -95,14 +95,14 @@ class Source {
     }
 
     /**
-     * @return the $id
+     * @return int
      */
     public function getId() {
         return $this->id;
     }
 
     /**
-     * @return the $version
+     * @return int
      */
     public function getVersion() {
         return $this->version;
@@ -116,7 +116,7 @@ class Source {
     }
 
     /**
-     * @return the $url
+     * @return string
      */
     public function getUrl() {
         return $this->url;
@@ -130,7 +130,7 @@ class Source {
     }
 
     /**
-     * @return the $category
+     * @return string
      */
     public function getSource() {
         return $this->source;
@@ -144,7 +144,7 @@ class Source {
     }
 
     /**
-     * @return the $clean
+     * @return string
      */
     public function getClean() {
         return $this->clean;
