@@ -129,9 +129,9 @@ class KamusController extends Zend_Controller_Action_Stubbles
     public function indexHtml()
     {
         $this->_helper->viewRenderer->setNoRender();
-        $pagination = new kateglo\application\models\front\Pagination();
-        $facet = new kateglo\application\models\front\Facet();
-        $search = new kateglo\application\models\front\Search();
+        $pagination = new models\front\Pagination();
+        $facet = new models\front\Facet();
+        $search = new models\front\Search();
         $search->setFormAction('/kamus');
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
             ? intval($this->_request->getParam('limit'))
@@ -173,8 +173,8 @@ class KamusController extends Zend_Controller_Action_Stubbles
      */
     public function indexJson()
     {
-        $search = new kateglo\application\models\front\Search();
-        $pagination = new kateglo\application\models\front\Pagination();
+        $search = new models\front\Search();
+        $pagination = new models\front\Pagination();
         $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
         $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
             ? intval($this->_request->getParam('limit'))
@@ -209,7 +209,7 @@ class KamusController extends Zend_Controller_Action_Stubbles
     {
         $this->_helper->viewRenderer->setNoRender();
         $cacheId = __METHOD__;
-        $search = new kateglo\application\models\front\Search();
+        $search = new models\front\Search();
         $search->setFormAction('/kamus');
 
         if (!$this->evaluatePreCondition($cacheId)) {

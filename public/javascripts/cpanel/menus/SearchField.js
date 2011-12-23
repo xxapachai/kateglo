@@ -1,7 +1,7 @@
 Ext.define('kateglo.menus.SearchField', {
-    extend: 'kateglo.utils.SearchField',
+    extend:'kateglo.utils.SearchField',
 
-    onTrigger1Click : function() {
+    onTrigger1Click:function () {
         var me = this,
             store = me.store,
             proxy = store.getProxy(),
@@ -20,12 +20,12 @@ Ext.define('kateglo.menus.SearchField', {
         }
     },
 
-    onTrigger2Click : function() {
+    onTrigger2Click:function () {
         //console.log(this);
         var me = this,
-                store = me.store,
-                proxy = store.getProxy(),
-                value = me.getValue();
+            store = me.store,
+            proxy = store.getProxy(),
+            value = me.getValue();
 
         if (value.length < 1) {
             me.onTrigger1Click();
@@ -34,12 +34,12 @@ Ext.define('kateglo.menus.SearchField', {
         proxy.extraParams[me.paramName] = value;
         proxy.extraParams.start = 0;
         store.load({
-            scope: this,
-            callback: function(records, operation, success){
-                resultContainer = this.up().getComponent('resultContainer');
-                if(success){
+            scope:this,
+            callback:function (records, operation, success) {
+                resultContainer = this.up().getComponent(1);
+                if (success) {
                     resultContainer.insert(0, resultContainer.showResultText);
-                }else{
+                } else {
                     resultContainer.insert(0, resultContainer.errorResultText);
                 }
             }

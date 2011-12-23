@@ -99,6 +99,24 @@ interface Search
 
     /**
      * @abstract
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function source($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
      * @param $limit
      * @return \kateglo\application\models\solr\Hit
      */
@@ -107,7 +125,7 @@ interface Search
     /**
      * @abstract
      * @param $limit
-          * @return \kateglo\application\models\solr\Hit
+     * @return \kateglo\application\models\solr\Hit
      */
     function randomEntry($limit);
 }

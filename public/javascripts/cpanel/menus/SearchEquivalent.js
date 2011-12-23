@@ -27,12 +27,13 @@ Ext.define('kateglo.menus.SearchEquivalent', {
             ],
             items:[
                 new kateglo.menus.SearchField({
+                    id: 'searchEquivalentSearchField',
                     region: 'north',
                     emptyText: 'Ketik yang dicari, kemudian tekan enter',
                     store : this.store
                 }),
                 {
-                    id: 'resultContainer',
+                    id: 'searchEquivalentResultContainer',
                     scope: this,
                     region: 'center',
                     layout: 'fit',
@@ -61,7 +62,7 @@ Ext.define('kateglo.menus.SearchEquivalent', {
     errorResultText:{
         html: '<div style="margin: 10px; text-align: center; color: #888;"><i>Error pada basis data. Pastikan semua kata dieja dengan benar atau coba beberapa saat lagi.</i></div>'
     },
-    store: new kateglo.stores.Entry()
+    store: new kateglo.stores.search.Foreign()
 
 
 });

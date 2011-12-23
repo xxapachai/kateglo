@@ -101,6 +101,24 @@ interface Search
 
     /**
      * @abstract
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function source($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null);
+
+    /**
+     * @abstract
      * @param int $limit
      * @return \kateglo\application\models\solr\Hit
      */

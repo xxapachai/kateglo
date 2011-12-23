@@ -1,19 +1,20 @@
-Ext.Loader.setConfig({enabled: true, disableCaching: true});
+Ext.Loader.setConfig({enabled:true, disableCaching:true});
 Ext.Loader.setPath({
-    'kateglo.borders': '/javascripts/cpanel/borders',
-    'kateglo.menus' : '/javascripts/cpanel/menus',
-    'kateglo.models' : '/javascripts/cpanel/models',
-    'kateglo.stores' : '/javascripts/cpanel/stores',
-    'kateglo.utils' : '/javascripts/cpanel/utils',
-    'kateglo.grids' : '/javascripts/cpanel/grids',
-    'kateglo.tabs' : '/javascripts/cpanel/tabs',
-    'kateglo.forms' : '/javascripts/cpanel/forms',
-    'kateglo.modules.entry.tree' : '/javascripts/cpanel/modules/entry/tree',
-    'kateglo.modules.entry.forms' : '/javascripts/cpanel/modules/entry/forms',
-    'kateglo.modules.entry.grids' : '/javascripts/cpanel/modules/entry/grids',
-    'kateglo.modules.entry.panels' : '/javascripts/cpanel/modules/entry/panels',
-    'kateglo.modules.entry.utils' : '/javascripts/cpanel/modules/entry/utils',
-    'kateglo.modules.wordoftheday' : '/javascripts/cpanel/modules/wordoftheday'
+    'kateglo.borders':'/javascripts/cpanel/borders',
+    'kateglo.menus':'/javascripts/cpanel/menus',
+    'kateglo.models':'/javascripts/cpanel/models',
+    'kateglo.stores':'/javascripts/cpanel/stores',
+    'kateglo.utils':'/javascripts/cpanel/utils',
+    'kateglo.grids':'/javascripts/cpanel/grids',
+    'kateglo.tabs':'/javascripts/cpanel/tabs',
+    'kateglo.forms':'/javascripts/cpanel/forms',
+    'kateglo.stores.search':'/javascripts/cpanel/stores/search',
+    'kateglo.modules.entry.tree':'/javascripts/cpanel/modules/entry/tree',
+    'kateglo.modules.entry.forms':'/javascripts/cpanel/modules/entry/forms',
+    'kateglo.modules.entry.grids':'/javascripts/cpanel/modules/entry/grids',
+    'kateglo.modules.entry.panels':'/javascripts/cpanel/modules/entry/panels',
+    'kateglo.modules.entry.utils':'/javascripts/cpanel/modules/entry/utils',
+    'kateglo.modules.wordoftheday':'/javascripts/cpanel/modules/wordoftheday'
 });
 Ext.require(['*',
     'kateglo.borders.Header',
@@ -27,7 +28,9 @@ Ext.require(['*',
     'kateglo.models.Equivalent',
     'kateglo.models.Foreign',
     'kateglo.models.WordOfTheDay',
-    'kateglo.stores.Entry',
+    'kateglo.stores.search.Entry',
+    'kateglo.stores.search.Foreign',
+    'kateglo.stores.search.Source',
     'kateglo.stores.Type',
     'kateglo.stores.Language',
     'kateglo.stores.Discipline',
@@ -63,12 +66,12 @@ Ext.require(['*',
     'kateglo.menus.SearchField',
     'kateglo.grids.MenuSearchResult'
 ]);
-Ext.onReady(function() {
+Ext.onReady(function () {
 
     Ext.QuickTips.init();
     Ext.create('Ext.Viewport', {
-        layout: 'border',
-        items: [
+        layout:'border',
+        items:[
             new kateglo.borders.Header(),
             new kateglo.borders.Menu(),
             new kateglo.borders.Content()

@@ -20,6 +20,7 @@ namespace kateglo\application\daos\interfaces;
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\models;
+
 /**
  *
  *
@@ -31,114 +32,129 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry {
+interface Entry
+{
 
-	const INTERFACE_NAME = __CLASS__;
+    const INTERFACE_NAME = __CLASS__;
 
-	/**
-	 *
-	 * @param string $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function getByEntry($entry);
+    /**
+     *
+     * @param string $entry
+     * @return \kateglo\application\models\Entry
+     */
+    function getByEntry($entry);
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getTypes();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getTypes();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getTypeCategories();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getTypeCategories();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getClasses();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getClasses();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getClassCategories();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getClassCategories();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getSourceCategories();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getSourceCategories();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getDisciplines();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getDisciplines();
 
-	/**
-	 * Enter description here ...
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getLanguages();
+    /**
+     * Enter description here ...
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getLanguages();
 
-	/**
-	 * Enter description here ...
-	 * @param $entries \Doctrine\Common\Collections\ArrayCollection
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getMeanings($entries);
+    /**
+     * Enter description here ...
+     * @param $entries \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getMeanings($entries);
 
-	/**
-	 * Enter description here ...
-	 * @param $foreigns \Doctrine\Common\Collections\ArrayCollection
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getForeigns($foreigns);
+    /**
+     * Enter description here ...
+     * @param $foreigns \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getForeigns($foreigns);
 
-	/**
-	 * @param \kateglo\application\models\Entry $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function update(models\Entry $entry);
+    /**
+     * Enter description here ...
+     * @param $entryIds \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getForeignFromEntryIds($entryIds);
 
-	/**
-	 * @param \kateglo\application\models\Entry $entry
-	 * @return \kateglo\application\models\Entry
-	 */
-	function insert(models\Entry $entry);
+    /**
+     * Enter description here ...
+     * @param $entryIds \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getSourceFromEntryIds($entryIds);
 
-	/**
-	 * @param int id
-	 * @return \kateglo\application\models\Entry
-	 */
-	function delete($id);
+    /**
+     * @param \kateglo\application\models\Entry $entry
+     * @return \kateglo\application\models\Entry
+     */
+    function update(models\Entry $entry);
 
-	/**
-	 * @return void
-	 */
-	function getWordOfTheDay();
+    /**
+     * @param \kateglo\application\models\Entry $entry
+     * @return \kateglo\application\models\Entry
+     */
+    function insert(models\Entry $entry);
 
-	/**
-	 * @throws exceptions\DomainObjectNotFoundException|exceptions\DomainResultEmptyException
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	function getWordOfTheDayList();
+    /**
+     * @param int id
+     * @return \kateglo\application\models\Entry
+     */
+    function delete($id);
 
-	/**
-	 * @param \DateTime $date
-	 * @param $entryId
-	 * @return \kateglo\application\models\WordOfTheDay
-	 */
-	function insertWordOfTheDay(\DateTime $date, $entryId);
+    /**
+     * @return void
+     */
+    function getWordOfTheDay();
 
-	/**
-	 * @param \DateTime $date
-	 * @return bool
-	 */
-	function dateIsUsedWordOfTheDay(\DateTime $date);
+    /**
+     * @throws exceptions\DomainObjectNotFoundException|exceptions\DomainResultEmptyException
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getWordOfTheDayList();
+
+    /**
+     * @param \DateTime $date
+     * @param $entryId
+     * @return \kateglo\application\models\WordOfTheDay
+     */
+    function insertWordOfTheDay(\DateTime $date, $entryId);
+
+    /**
+     * @param \DateTime $date
+     * @return bool
+     */
+    function dateIsUsedWordOfTheDay(\DateTime $date);
 }
 
 ?>

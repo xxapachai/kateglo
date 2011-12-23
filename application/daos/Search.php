@@ -229,6 +229,52 @@ class Search implements interfaces\Search
     }
 
     /**
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function source($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['df'] = 'sumber';
+        $filter = "sumber:*";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
+     * @param string $searchText
+     * @param \kateglo\application\models\front\Pagination $pagination
+     * @param \kateglo\application\models\front\Facet|null $facet
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    {
+        $params = $this->getDefaultParams($searchText);
+        $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
+        $searchText = (empty ($searchText)) ? '*' : $searchText;
+        $params['df'] = 'asing';
+        $filter = "asing:*";
+        if (array_key_exists('fq', $params)) {
+            $params['fq'] .= " " . $filter;
+        } else {
+            $params['fq'] = $filter;
+        }
+        $this->getSolr()->setCreateDocuments(false);
+        $request = $this->getSolr()->search($searchText, $pagination->getOffset(), $pagination->getLimit(), $params);
+        return $this->convertResponse2Models(json_decode($request->getRawResponse()));
+    }
+
+    /**
      * @param int $limit
      * @return \kateglo\application\models\solr\Hit
      * @throws \kateglo\application\daos\exceptions\EntryException
