@@ -4,30 +4,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/search" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/purnamaa.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/modules/cpanel/controllers/CariController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Entry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Source.js" />
-      <change type="MOVED" beforePath="C:\PropDev\StormWorkspace\kateglo\public\javascripts\cpanel\stores\Entry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Foreign.js" />
+    <list default="true" readonly="true" id="91a7700a-3500-457a-96ed-4f7a08fd1085" name="Default" comment="Refactoring Control Panel">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Entry.php" afterPath="$PROJECT_DIR$/application/daos/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/Search.php" afterPath="$PROJECT_DIR$/application/daos/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/Entry.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/daos/interfaces/Search.php" afterPath="$PROJECT_DIR$/application/daos/interfaces/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Foreign.php" afterPath="$PROJECT_DIR$/application/models/Foreign.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Source.php" afterPath="$PROJECT_DIR$/application/models/Source.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/CPanel.php" afterPath="$PROJECT_DIR$/application/services/CPanel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/Search.php" afterPath="$PROJECT_DIR$/application/services/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/services/interfaces/Search.php" afterPath="$PROJECT_DIR$/application/services/interfaces/Search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js" afterPath="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,19 +28,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Search.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/services/Search.php">
+      <file leaf-file-name="Entry.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="163" column="45" selection-start="5630" selection-end="5630" vertical-scroll-proportion="0.0">
+            <state line="377" column="34" selection-start="12773" selection-end="12773" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entry.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
+      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="377" column="34" selection-start="12773" selection-end="12773" vertical-scroll-proportion="0.26840317">
+            <state line="13" column="76" selection-start="407" selection-end="407" vertical-scroll-proportion="0.26153848">
               <folding />
             </state>
           </provider>
@@ -106,7 +85,7 @@
       <file leaf-file-name="CariController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/CariController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="75" selection-start="5032" selection-end="5032" vertical-scroll-proportion="-7.36">
+            <state line="140" column="75" selection-start="5031" selection-end="5031" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,7 +94,7 @@
       <file leaf-file-name="data-config.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/solr/data-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="62" selection-start="7025" selection-end="7031" vertical-scroll-proportion="-11.24">
+            <state line="121" column="62" selection-start="7025" selection-end="7031" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,7 +103,7 @@
       <file leaf-file-name="schema.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/solr/schema.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="473" column="27" selection-start="27094" selection-end="27100" vertical-scroll-proportion="-11.44">
+            <state line="473" column="27" selection-start="27094" selection-end="27100" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,57 +132,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/services/interfaces/Pagination.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Facet.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Spellcheck.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Suggestion.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/kamus/index.html" />
-        <option value="$PROJECT_DIR$/application/models/front/Page.php" />
-        <option value="$PROJECT_DIR$/application/models/front/Pagination.php" />
-        <option value="$PROJECT_DIR$/application/services/interfaces/Filter.php" />
-        <option value="$PROJECT_DIR$/application/models/front/Filter.php" />
-        <option value="$PROJECT_DIR$/application/models/front/Facet.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/macros/facet.html" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/macros/filter.html" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/macros/pagination.html" />
-        <option value="$PROJECT_DIR$/application/services/Filter.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Hit.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Amount.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Equivalent.php" />
-        <option value="$PROJECT_DIR$/application/models/solr/Document.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/cari/detail.html" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/PadananController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/PeribahasaController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/TesaurusController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/peribahasa/index.html" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/AlfabetController.php" />
-        <option value="$PROJECT_DIR$/application/modules/cpanel/controllers/AcakController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/AcakController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/SingkatanController.php" />
-        <option value="$PROJECT_DIR$/application/services/interfaces/WordOfTheDay.php" />
-        <option value="$PROJECT_DIR$/application/services/WordOfTheDay.php" />
-        <option value="$PROJECT_DIR$/application/configs/Binder.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/EntriController.php" />
-        <option value="$PROJECT_DIR$/application/models/front/StaticData.php" />
-        <option value="$PROJECT_DIR$/application/services/StaticData.php" />
-        <option value="$PROJECT_DIR$/application/modules/cpanel/controllers/IndexController.php" />
-        <option value="$PROJECT_DIR$/application/utilities/exceptions/HTTPBadRequestException.php" />
-        <option value="$PROJECT_DIR$/application/utilities/exceptions/HTTPMethodNotAllowedException.php" />
-        <option value="$PROJECT_DIR$/application/utilities/exceptions/HTTPNotAcceptableException.php" />
-        <option value="$PROJECT_DIR$/application/utilities/exceptions/HTTPNotFoundException.php" />
-        <option value="$PROJECT_DIR$/application/utilities/exceptions/HTTPUnsupportedMediaTypeException.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/ErrorController.php" />
-        <option value="$PROJECT_DIR$/application/utilities/REST.php" />
-        <option value="$PROJECT_DIR$/library/Zend/View/PhpTal.php" />
-        <option value="$PROJECT_DIR$/application/services/interfaces/Entry.php" />
-        <option value="$PROJECT_DIR$/application/services/Entry.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/KamusController.php" />
-        <option value="$PROJECT_DIR$/application/services/CPanel.php" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js" />
-        <option value="$PROJECT_DIR$/application/models/Foreign.php" />
-        <option value="$PROJECT_DIR$/application/services/interfaces/Search.php" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/Entry.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Foreign.js" />
         <option value="$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Entry.js" />
@@ -219,6 +147,7 @@
         <option value="$PROJECT_DIR$/application/modules/cpanel/controllers/CariController.php" />
         <option value="$PROJECT_DIR$/application/services/Search.php" />
         <option value="$PROJECT_DIR$/application/daos/Entry.php" />
+        <option value="$PROJECT_DIR$/public/index.php" />
       </list>
     </option>
   </component>
@@ -291,7 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -616,6 +544,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -703,7 +632,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\purnamaa\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\Purnama\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>true</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -711,16 +640,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\PropDev\StormWorkspace\kateglo" />
-          <option name="myCopyRoot" value="C:\PropDev\StormWorkspace\kateglo" />
+          <option name="myVcsRoot" value="C:\Users\Purnama\StormWorkspace\kateglo" />
+          <option name="myCopyRoot" value="C:\Users\Purnama\StormWorkspace\kateglo" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\PropDev\StormWorkspace\kateglo" />
-          <option name="myCopyRoot" value="C:\PropDev\StormWorkspace\kateglo" />
+          <option name="myVcsRoot" value="C:\Users\Purnama\StormWorkspace\kateglo" />
+          <option name="myCopyRoot" value="C:\Users\Purnama\StormWorkspace\kateglo" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -760,8 +689,8 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31712964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24626069" sideWeight="0.37224668" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24626069" sideWeight="0.62004405" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553419" sideWeight="0.39977974" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2553419" sideWeight="0.592511" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -858,381 +787,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/models/front/Page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="5" selection-start="3115" selection-end="3115" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/front/Pagination.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="20" selection-start="2312" selection-end="2312" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="60" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/front/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="23" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/macros/facet.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="120" selection-start="5036" selection-end="5041" vertical-scroll-proportion="-10.302631" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/macros/filter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="7" selection-start="1150" selection-end="1150" vertical-scroll-proportion="-9.153846" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/macros/pagination.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="7" selection-start="1087" selection-end="1087" vertical-scroll-proportion="-11.769231" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/front/Facet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="5" selection-start="4970" selection-end="4970" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="7" selection-start="1776" selection-end="1776" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/front/Filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="17" selection-start="1674" selection-end="1674" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/kamus/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="28" selection-start="1671" selection-end="1671" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/tesaurus/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/macros/body.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="18" selection-start="465" selection-end="465" vertical-scroll-proportion="-3.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/PadananController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.993228" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Amount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="48" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Hit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="1091" selection-end="1139" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Spellcheck.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="13" selection-start="2709" selection-end="2709" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Suggestion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="13" selection-start="2445" selection-end="2445" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Document.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="7" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.47968397" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Facet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="13" selection-start="3043" selection-end="3043" vertical-scroll-proportion="1.7460496" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/solr/Equivalent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="48" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.40293455" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="42" selection-start="2067" selection-end="2067" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/macros/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/cari/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="80" selection-start="5025" selection-end="5025" vertical-scroll-proportion="-10.176471" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/PadananController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="40" selection-start="7418" selection-end="7418" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/PeribahasaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="43" selection-start="7424" selection-end="7424" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/peribahasa/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="70" selection-start="1316" selection-end="1316" vertical-scroll-proportion="-14.384615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/EntriController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/AlfabetController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="5" selection-start="2653" selection-end="2932" vertical-scroll-proportion="-18.68" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/TesaurusController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1063" selection-end="1139" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/AcakController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="22" selection-start="3797" selection-end="3797" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/AcakController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="43" selection-start="2981" selection-end="2981" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SingkatanController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="76" selection-start="1510" selection-end="1510" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/WordOfTheDay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="4" selection-start="1698" selection-end="1698" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/Binder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="100" selection-start="3709" selection-end="3709" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/EntriController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="391" column="48" selection-start="14924" selection-end="14924" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/WordOfTheDay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="38" selection-start="2545" selection-end="2545" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diverse/Filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/front/StaticData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="42" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/StaticData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="5" selection-start="2049" selection-end="2049" vertical-scroll-proportion="-24.48" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/exceptions/HTTPBadRequestException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/exceptions/HTTPNotFoundException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/exceptions/HTTPNotAcceptableException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/exceptions/HTTPMethodNotAllowedException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="1182" selection-end="1182" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/exceptions/HTTPUnsupportedMediaTypeException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="39" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/utilities/REST.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="0" selection-start="4645" selection-end="4645" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/Zend/View/PhpTal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="459" column="0" selection-start="13463" selection-end="13463" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/views/scripts/index/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="31" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.019252548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="7" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Pagination.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="10" selection-start="1577" selection-end="1577" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/KamusController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="12" selection-start="4238" selection-end="4369" vertical-scroll-proportion="0.6375991">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/CPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="10" selection-start="1536" selection-end="1536" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/CPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="38" selection-start="4141" selection-end="4141" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/KamusController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.6964893">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/CpanelController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="44" selection-start="3519" selection-end="3519" vertical-scroll-proportion="0.23782559">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/grids/MenuSearchResult.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/borders/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchField.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="58" selection-start="1230" selection-end="1230" vertical-scroll-proportion="-25.84">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Equivalent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="5" selection-start="3011" selection-end="3011" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Foreign.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="9" selection-start="4523" selection-end="4523" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/models/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="80" selection-end="80" vertical-scroll-proportion="0.038505096">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Entry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/Foreign.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEquivalent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="37" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="37" selection-start="3084" selection-end="3084" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/ErrorController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="33" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.0" />
@@ -1240,98 +794,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="59" selection-start="4134" selection-end="4134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="59" selection-start="9903" selection-end="9903" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="106" column="59" selection-start="4134" selection-end="4134" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Foreign.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="23" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="3" column="23" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="33" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="43" selection-start="2435" selection-end="2435" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Source.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="21" selection-start="3597" selection-end="3597" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="13" selection-start="4487" selection-end="4487" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="13" selection-start="3587" selection-end="3587" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/solr/data-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="62" selection-start="7025" selection-end="7031" vertical-scroll-proportion="-11.24">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/CariController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="75" selection-start="5032" selection-end="5032" vertical-scroll-proportion="-7.36">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/solr/schema.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="473" column="27" selection-start="27094" selection-end="27100" vertical-scroll-proportion="-11.44">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Source.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="32" column="33" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/services/Search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="45" selection-start="5630" selection-end="5630" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="163" column="45" selection-start="5626" selection-end="5626" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="59" selection-start="9903" selection-end="9903" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/stores/search/Source.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="24" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/cpanel/menus/SearchSource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="43" selection-start="2435" selection-end="2435" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Source.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="21" selection-start="3597" selection-end="3597" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/daos/interfaces/Entry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="13" selection-start="3587" selection-end="3587" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/cpanel/controllers/CariController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="75" selection-start="5031" selection-end="5031" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/solr/data-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="62" selection-start="7025" selection-end="7031" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/solr/schema.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="473" column="27" selection-start="27094" selection-end="27100" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/services/interfaces/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="13" selection-start="4487" selection-end="4487" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/daos/Entry.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="377" column="34" selection-start="12773" selection-end="12773" vertical-scroll-proportion="0.26840317">
+        <state line="377" column="34" selection-start="12773" selection-end="12773" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="76" selection-start="407" selection-end="407" vertical-scroll-proportion="0.26153848">
           <folding />
         </state>
       </provider>
