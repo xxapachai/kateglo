@@ -177,7 +177,7 @@ require_once ('Apache/Solr/Service.php');
  *
  * @var string
  */
-$zfPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'ZendFramework' . DIRECTORY_SEPARATOR . 'library' );
+$zfPath = realpath ( $wwwRoot . DIRECTORY_SEPARATOR . 'zendframework' . DIRECTORY_SEPARATOR . 'library' );
 
 /** Ensure libraries is on include_path */
 set_include_path ( implode ( PATH_SEPARATOR, array (realpath ( $zfPath ), realpath ( $libraryPath ), get_include_path (), $doctrinePath ) ) );
