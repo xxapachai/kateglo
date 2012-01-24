@@ -32,42 +32,26 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry
+interface Meaning
 {
 
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     *
-     * @param int $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $id
+     * @param null $version
+     * @return \kateglo\application\models\Meaning
      */
-    function getEntryById($id);
+    function getById($id, $version = null);
 
     /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $meaningId
+     * @param $meaningVersion
+     * @param array $types
      */
-    function getEntry($entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function update(models\Entry $entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function insert(models\Entry $entry);
-
-    /**
-     * @param int $id
-     * @return \kateglo\application\models\Entry
-     */
-    function delete($id);
+    function updateTypes($meaningId, $meaningVersion, array $types);
 }
 
 ?>

@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -34,7 +35,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Entity
  * @Table(name="meaning")
  */
-class Meaning {
+class Meaning
+{
 
     const CLASS_NAME = __CLASS__;
 
@@ -114,7 +116,8 @@ class Meaning {
      *
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->definitions = new ArrayCollection ();
         $this->types = new ArrayCollection ();
         $this->antonyms = new ArrayCollection ();
@@ -127,21 +130,24 @@ class Meaning {
     /**
      * @return the $id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return the $version
      */
-    public function getVersion() {
+    public function getVersion()
+    {
         return $this->version;
     }
 
     /**
      * @param int $version
      */
-    public function setVersion($version) {
+    public function setVersion($version)
+    {
         $this->version = $version;
     }
 
@@ -150,7 +156,8 @@ class Meaning {
      * @param kateglo\application\models\Entry $entry
      * @return void
      */
-    public function setEntry(Entry $entry) {
+    public function setEntry(Entry $entry)
+    {
         $this->entry = $entry;
     }
 
@@ -158,7 +165,8 @@ class Meaning {
      *
      * @return \kateglo\application\models\Entry
      */
-    public function getEntry() {
+    public function getEntry()
+    {
         return $this->entry;
     }
 
@@ -166,7 +174,8 @@ class Meaning {
      *
      * @return void
      */
-    public function removeEntry() {
+    public function removeEntry()
+    {
         if ($this->entry !== null) {
             /*@var $entry kateglo\application\models\Entry */
             $entry = $this->entry;
@@ -180,7 +189,8 @@ class Meaning {
      * @param kateglo\application\models\Definition $definition
      * @return void
      */
-    public function addDefinition(Definition $definition) {
+    public function addDefinition(Definition $definition)
+    {
         if (!$this->definitions->contains($definition)) {
             $this->definitions [] = $definition;
             $definition->setMeaning($this);
@@ -192,7 +202,8 @@ class Meaning {
      * @param kateglo\application\models\Definition $definition
      * @return void
      */
-    public function removeDefinition(Definition $definition) {
+    public function removeDefinition(Definition $definition)
+    {
         /*@var $removed kateglo\application\models\Definition */
         $removed = $this->definitions->removeElement($definition);
         if ($removed !== null) {
@@ -204,7 +215,8 @@ class Meaning {
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function getDefinitions() {
+    public function getDefinitions()
+    {
         return $this->definitions;
     }
 
@@ -213,7 +225,8 @@ class Meaning {
      * @param kateglo\application\models\Type $type
      * @return void
      */
-    public function addType(Type $type) {
+    public function addType(Type $type)
+    {
         if (!$this->types->contains($type)) {
             $this->types [] = $type;
             $type->addMeaning($this);
@@ -225,11 +238,11 @@ class Meaning {
      * @param kateglo\application\models\Type $type
      * @return void
      */
-    private function removeType(Type $type) {
-        /*@var $removed kateglo\application\models\Type */
-        $removed = $this->types->removeElement($type);
-        if ($removed !== null) {
-            $removed->removeMeaning($this);
+    public function removeType(Type $type)
+    {
+        if ($this->types->contains($type)) {
+            $this->types->removeElement($type);
+            $type->removeMeaning($this);
         }
     }
 
@@ -237,7 +250,8 @@ class Meaning {
      *
      * @return kateglo\application\models\Type
      */
-    public function getTypes() {
+    public function getTypes()
+    {
         return $this->types;
     }
 
@@ -246,7 +260,8 @@ class Meaning {
      * @param kateglo\application\models\Antonym $antonym
      * @return void
      */
-    public function addAntonym(Antonym $antonym) {
+    public function addAntonym(Antonym $antonym)
+    {
         if (!$this->antonyms->contains($antonym)) {
             $this->antonyms [] = $antonym;
             $antonym->setMeaning($this);
@@ -258,7 +273,8 @@ class Meaning {
      * @param kateglo\application\models\Antonym $antonym
      * @return void
      */
-    public function removeAntonym(Antonym $antonym) {
+    public function removeAntonym(Antonym $antonym)
+    {
         /*@var $removed kateglo\application\models\Antonym */
         $removed = $this->antonyms->removeElement($antonym);
         if ($removed !== null) {
@@ -270,7 +286,8 @@ class Meaning {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getAntonyms() {
+    public function getAntonyms()
+    {
         return $this->antonyms;
     }
 
@@ -279,7 +296,8 @@ class Meaning {
      * @param kateglo\application\models\Synonym $synonym
      * @return void
      */
-    public function addSynonym(Synonym $synonym) {
+    public function addSynonym(Synonym $synonym)
+    {
         if (!$this->synonyms->contains($synonym)) {
             $this->synonyms [] = $synonym;
             $synonym->setMeaning($this);
@@ -291,7 +309,8 @@ class Meaning {
      * @param kateglo\application\models\Synonym $synonym
      * @return void
      */
-    public function removeSynonym(Synonym $synonym) {
+    public function removeSynonym(Synonym $synonym)
+    {
         /*@var $removed kateglo\application\models\Synonym */
         $removed = $this->synonyms->removeElement($synonym);
         if ($removed !== null) {
@@ -303,7 +322,8 @@ class Meaning {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getSynonyms() {
+    public function getSynonyms()
+    {
         return $this->synonyms;
     }
 
@@ -312,7 +332,8 @@ class Meaning {
      * @param kateglo\application\models\Relation $relation
      * @return void
      */
-    public function addRelation(Relation $relation) {
+    public function addRelation(Relation $relation)
+    {
         if (!$this->relations->contains($relation)) {
             $this->relations [] = $relation;
             $relation->setMeaning($this);
@@ -324,7 +345,8 @@ class Meaning {
      * @param kateglo\application\models\Relation $relation
      * @return void
      */
-    public function removeRelation(Relation $relation) {
+    public function removeRelation(Relation $relation)
+    {
         /*@var $removed kateglo\application\models\Relation */
         $removed = $this->relations->removeElement($relation);
         if ($removed !== null) {
@@ -336,7 +358,8 @@ class Meaning {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getRelations() {
+    public function getRelations()
+    {
         return $this->relations;
     }
 
@@ -345,7 +368,8 @@ class Meaning {
      * @param kateglo\application\models\Syllabel $syllabel
      * @return void
      */
-    public function addSyllabel(Syllabel $syllabel) {
+    public function addSyllabel(Syllabel $syllabel)
+    {
         if (!$this->syllabels->contains($syllabel)) {
             $this->syllabels [] = $syllabel;
             $syllabel->setMeaning($this);
@@ -357,7 +381,8 @@ class Meaning {
      * @param kateglo\application\models\Syllabel $syllabel
      * @return void
      */
-    public function removeSyllabel(Syllabel $syllabel) {
+    public function removeSyllabel(Syllabel $syllabel)
+    {
         /*@var $removed kateglo\application\models\Syllabel */
         $removed = $this->syllabels->removeElement($syllabel);
         if ($removed !== null) {
@@ -369,7 +394,8 @@ class Meaning {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getSyllabels() {
+    public function getSyllabels()
+    {
         return $this->syllabels;
     }
 
@@ -378,7 +404,8 @@ class Meaning {
      * @param kateglo\application\models\Misspelled $misspelled
      * @return void
      */
-    public function addMisspelled(Misspelled $misspelled) {
+    public function addMisspelled(Misspelled $misspelled)
+    {
         if (!$this->misspelleds->contains($misspelled)) {
             $this->misspelleds [] = $misspelled;
             $misspelled->setMeaning($this);
@@ -390,7 +417,8 @@ class Meaning {
      * @param kateglo\application\models\Misspelled $misspelled
      * @return void
      */
-    public function removeMisspelled(Misspelled $misspelled) {
+    public function removeMisspelled(Misspelled $misspelled)
+    {
         /*@var $removed kateglo\application\models\Misspelled */
         $removed = $this->misspelleds->removeElement($misspelled);
         if ($removed !== null) {
@@ -402,7 +430,8 @@ class Meaning {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getMisspelleds() {
+    public function getMisspelleds()
+    {
         return $this->misspelleds;
     }
 
@@ -410,7 +439,8 @@ class Meaning {
      *
      * @return kateglo\application\models\Misspelled
      */
-    public function getSpelled() {
+    public function getSpelled()
+    {
         return $this->spelled;
     }
 
@@ -419,7 +449,8 @@ class Meaning {
      * Enter description here ...
      * @param kateglo\application\models\Misspelled $spelled
      */
-    public function setSpelled(Misspelled $spelled) {
+    public function setSpelled(Misspelled $spelled)
+    {
         if ($this->spelled !== $spelled) {
             $this->spelled = $spelled;
             $spelled->setMisspelled($this);
@@ -429,10 +460,11 @@ class Meaning {
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         $array['id'] = $this->id;
         $array['version'] = $this->version;
-        
+
         $array['definitions'] = array();
         $definitions = $this->getDefinitions();
         foreach ($definitions as $definition) {

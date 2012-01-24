@@ -43,12 +43,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
     private $search;
 
     /**
-     * Enter description here ...
-     * @var \kateglo\application\services\interfaces\Pagination;
-     */
-    private $pagination;
-
-    /**
      *
      * Enter description here ...
      * @param \kateglo\application\faces\interfaces\Search $entry
@@ -58,18 +52,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
     public function setSearch(interfaces\Search $search)
     {
         $this->search = $search;
-    }
-
-    /**
-     *
-     * Enter description here ...
-     * @param \kateglo\application\services\interfaces\Pagination $pagination
-     *
-     * @Inject
-     */
-    public function setPagination(interfaces\Pagination $pagination)
-    {
-        $this->pagination = $pagination;
     }
 
     /**

@@ -24,6 +24,7 @@ use kateglo\application\daos\exceptions\DomainResultEmptyException;
 use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
 use kateglo\application\models;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\OptimisticLockException;
 
 /**
  *
@@ -63,52 +64,50 @@ class Entry implements interfaces\Entry
      *
      * @see kateglo\application\daos\interfaces\Entry::getById()
      * @param int $id
+     * @param null $version
      * @return kateglo\application\models\Entry
      */
-    public function getById($id)
+    public function getById($id, $version = null)
     {
-        $query = $this->entityManager->createQuery("
-			SELECT 	entry
-			FROM " . models\Entry::CLASS_NAME . " entry
-			WHERE entry.id = :id");
-        $query->setParameter('id', $id);
-        //$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
-        $result = $query->getResult();
-        if (count($result) === 1) {
-            if (!($result [0] instanceof models\Entry)) {
-                throw new DomainObjectNotFoundException ();
-            }
+        if (is_int($version)) {
+            $result = $this->entityManager->find(models\Entry::CLASS_NAME, $id, LockMode::OPTIMISTIC, $version);
         } else {
-            throw new DomainResultEmptyException ();
+            $result = $this->entityManager->find(models\Entry::CLASS_NAME, $id);
+        }
+        if (!($result instanceof models\Entry)) {
+            throw new DomainObjectNotFoundException ();
         }
 
-        return $result [0];
+        return $result;
     }
 
     /**
      *
      * @see kateglo\application\daos\interfaces\Entry::getByEntry()
      * @param string $entry
+     * @param null $version
      * @return kateglo\application\models\Entry
      */
-    public function getByEntry($entry)
+    public function getByEntry($entry, $version = null)
     {
+        /** @var $query \Doctrine\ORM\Query */
         $query = $this->entityManager->createQuery("
 			SELECT 	entry
 			FROM " . models\Entry::CLASS_NAME . " entry
 			WHERE entry.entry = :entry");
         $query->setParameter('entry', $entry);
-        //$query->useResultCache(true, 43200, __METHOD__.':'.$entry);
-        $result = $query->getResult();
-        if (count($result) === 1) {
-            if (!($result [0] instanceof models\Entry)) {
-                throw new DomainObjectNotFoundException ();
-            }
+        /** @var $result \kateglo\application\models\Entry */
+        $result = $query->getFirstResult();
+        if (!($result instanceof models\Entry)) {
+            throw new DomainObjectNotFoundException ();
         } else {
-            throw new DomainResultEmptyException ();
+            if (is_int($version)) {
+                if ($result->getVersion() != $version) {
+                    throw OptimisticLockException::lockFailedVersionMissmatch(\kateglo\application\models\Entry::CLASS_NAME, $version, $result->getVersion());
+                }
+            }
+            return $result;
         }
-
-        return $result [0];
     }
 
     /**
@@ -398,8 +397,10 @@ class Entry implements interfaces\Entry
     public function update(models\Entry $entry)
     {
         if ($entry->getId() !== null) {
-            $entry = $this->entityManager->merge($entry);
-            $this->entityManager->persist($entry);
+            /** @var $updateEntry \kateglo\application\models\Entry */
+            $updateEntry = $this->entityManager->find(models\Entry::CLASS_NAME, $entry->getId(), LockMode::OPTIMISTIC, $entry->getVersion());
+            $updateEntry->setEntry($entry->getEntry());
+            $this->entityManager->persist($updateEntry);
             $this->entityManager->flush();
             return $entry;
         } else {

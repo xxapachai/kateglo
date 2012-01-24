@@ -1,7 +1,7 @@
 <?php
-namespace kateglo\application\services\interfaces;
+namespace kateglo\application\daos\interfaces;
 /*
- *  $Id$
+ *  $Id: Entry.php 466 2011-12-23 17:09:27Z arthur.purnama $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,50 +24,33 @@ use kateglo\application\models;
 /**
  *
  *
- * @package kateglo\application\services\interfaces
+ * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
- * @since $LastChangedDate$
- * @version $LastChangedRevision$
+ * @since $LastChangedDate: 2011-12-23 18:09:27 +0100 (Fr, 23 Dez 2011) $
+ * @version $LastChangedRevision: 466 $
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry
+interface Type
 {
 
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     *
-     * @param int $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $id
+     * @param null $version
+     * @return \kateglo\application\models\Type
      */
-    function getEntryById($id);
+    function getById($id, $version = null);
 
     /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param \kateglo\application\models\Type $type
+     * @return \kateglo\application\models\Type
      */
-    function getEntry($entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function update(models\Entry $entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function insert(models\Entry $entry);
-
-    /**
-     * @param int $id
-     * @return \kateglo\application\models\Entry
-     */
-    function delete($id);
+    function update(models\Type $type);
 }
 
 ?>

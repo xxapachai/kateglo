@@ -3,14 +3,14 @@ Ext.define("kateglo.stores.Type", {
     model: 'kateglo.models.Type',
     proxy: {
         type: 'rest',
-        url : '/cpanel/static',
+        url : '/cpanel/static/types',
         noCache: false,
         headers: {
             Accept: 'application/json'
         },
         reader: {
             type: 'json',
-            root: 'type'
+            model: 'kateglo.models.Type'
         }
     }
 });
