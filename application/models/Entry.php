@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -34,227 +35,245 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Entity
  * @Table(name="entry")
  */
-class Entry {
+class Entry
+{
 
-	const CLASS_NAME = __CLASS__;
+    const CLASS_NAME = __CLASS__;
 
-	/**
-	 * @var int
-	 * @Id
-	 * @Column(type="integer", name="entry_id")
-	 * @GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+    /**
+     * @var int
+     * @Id
+     * @Column(type="integer", name="entry_id")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-	/**
-	 *
-	 * Enter description here ...
-	 * @var int
-	 * @Version
-	 * @Column(type="integer", name="entry_version")
-	 */
-	private $version;
+    /**
+     *
+     * Enter description here ...
+     * @var int
+     * @Version
+     * @Column(type="integer", name="entry_version")
+     */
+    private $version;
 
-	/**
-	 *
-	 * @var string
-	 * @Column(type="string", name="entry_name", unique=true, length=255)
-	 */
-	private $entry;
+    /**
+     *
+     * @var string
+     * @Column(type="string", name="entry_name", unique=true, length=255)
+     */
+    private $entry;
 
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"all"})
-	 */
-	private $meanings;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @OneToMany(targetEntity="kateglo\application\models\Meaning", mappedBy="entry", cascade={"all"})
+     */
+    private $meanings;
 
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"all"})
-	 */
-	private $sources;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @OneToMany(targetEntity="kateglo\application\models\Source", mappedBy="entry", cascade={"all"})
+     */
+    private $sources;
 
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection
-	 * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="entry", cascade={"all"})
-	 */
-	private $equivalents;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @OneToMany(targetEntity="kateglo\application\models\Equivalent", mappedBy="entry", cascade={"all"})
+     */
+    private $equivalents;
 
-	/**
-	 *
-	 * Constructor
-	 *
-	 */
-	public function __construct() {
-		$this->meanings = new ArrayCollection ();
-		$this->sources = new ArrayCollection ();
-		$this->equivalents = new ArrayCollection ();
-	}
+    /**
+     *
+     * Constructor
+     *
+     */
+    public function __construct()
+    {
+        $this->meanings = new ArrayCollection ();
+        $this->sources = new ArrayCollection ();
+        $this->equivalents = new ArrayCollection ();
+    }
 
-	/**
-	 * @param int $id
-	 */
-	public function setId($id) {
-		$this->id = $id;
-	}
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
-	/**
-	 * @return the $id
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * @return int $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @return the $version
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+    /**
+     * @return the $version
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
 
-	/**
-	 * @param int $version
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-	}
+    /**
+     * @param int $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
 
-	/**
-	 * @return the $entry
-	 */
-	public function getEntry() {
-		return $this->entry;
-	}
+    /**
+     * @return the $entry
+     */
+    public function getEntry()
+    {
+        return $this->entry;
+    }
 
-	/**
-	 * @param string $entry
-	 * @return void
-	 */
-	public function setEntry($entry) {
-		$this->entry = $entry;
-	}
+    /**
+     * @param string $entry
+     * @return void
+     */
+    public function setEntry($entry)
+    {
+        $this->entry = $entry;
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function addMeaning(Meaning $meaning) {
-		$this->meanings [] = $meaning;
-		$meaning->setEntry($this);
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function addMeaning(Meaning $meaning)
+    {
+        $this->meanings [] = $meaning;
+        $meaning->setEntry($this);
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Meaning $meaning
-	 * @return void
-	 */
-	public function removeMeaning(Meaning $meaning) {
-		/*@var $removed kateglo\application\models\Meaning */
-		$removed = $this->meanings->removeElement($meaning);
-		if ($removed !== null) {
-			$removed->removeEntry();
-		}
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Meaning $meaning
+     * @return void
+     */
+    public function removeMeaning(Meaning $meaning)
+    {
+        /*@var $removed kateglo\application\models\Meaning */
+        $removed = $this->meanings->removeElement($meaning);
+        if ($removed !== null) {
+            $removed->removeEntry();
+        }
+    }
 
-	/**
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getMeanings() {
-		return $this->meanings;
-	}
+    /**
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMeanings()
+    {
+        return $this->meanings;
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Source $source
-	 * @return void
-	 */
-	public function addSource(Source $source) {
-		$this->sources [] = $source;
-		$source->setEntry($this);
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Source $source
+     * @return void
+     */
+    public function addSource(Source $source)
+    {
+        $this->sources [] = $source;
+        $source->setEntry($this);
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Source $source
-	 * @return void
-	 */
-	public function removeSource(Source $source) {
-		/*@var $removed kateglo\application\models\Source */
-		$removed = $this->sources->removeElement($source);
-		if ($removed !== null) {
-			$removed->removeEntry();
-		}
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Source $source
+     * @return void
+     */
+    public function removeSource(Source $source)
+    {
+        /*@var $removed kateglo\application\models\Source */
+        $removed = $this->sources->removeElement($source);
+        if ($removed !== null) {
+            $removed->removeEntry();
+        }
+    }
 
-	/**
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getSources() {
-		return $this->sources;
-	}
+    /**
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSources()
+    {
+        return $this->sources;
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Equivalent $equivalent
-	 * @return void
-	 */
-	public function addEquivalent(Equivalent $equivalent) {
-		$this->equivalents [] = $equivalent;
-		$equivalent->setEntry($this);
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Equivalent $equivalent
+     * @return void
+     */
+    public function addEquivalent(Equivalent $equivalent)
+    {
+        $this->equivalents [] = $equivalent;
+        $equivalent->setEntry($this);
+    }
 
-	/**
-	 *
-	 * @param \kateglo\application\models\Equivalent $equivalent
-	 * @return void
-	 */
-	public function removeEquivalent(Equivalent $equivalent) {
-		/*@var $removed kateglo\application\models\Equivalent */
-		$removed = $this->equivalents->removeElement($equivalent);
-		if ($removed !== null) {
-			$removed->removeEntry();
-		}
-	}
+    /**
+     *
+     * @param \kateglo\application\models\Equivalent $equivalent
+     * @return void
+     */
+    public function removeEquivalent(Equivalent $equivalent)
+    {
+        /*@var $removed kateglo\application\models\Equivalent */
+        $removed = $this->equivalents->removeElement($equivalent);
+        if ($removed !== null) {
+            $removed->removeEntry();
+        }
+    }
 
-	/**
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getEquivalents() {
-		return $this->equivalents;
-	}
+    /**
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEquivalents()
+    {
+        return $this->equivalents;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function toArray() {
-		$array['id'] = $this->id;
-		$array['version'] = $this->version;
-		$array['entry'] = $this->entry;
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array['id'] = $this->id;
+        $array['version'] = $this->version;
+        $array['entry'] = $this->entry;
 
-		$array['meanings'] = array();
-		$meanings = $this->getMeanings();
-		foreach ($meanings as $meaning) {
-			$array['meanings'][] = $meaning->toArray();
-		}
+        $array['meanings'] = array();
+        $meanings = $this->getMeanings();
+        foreach ($meanings as $meaning) {
+            $array['meanings'][] = $meaning->toArray();
+        }
 
-		$array['equivalents'] = array();
-		$equivalents = $this->getEquivalents();
-		foreach ($equivalents as $equivalent) {
-			$array['equivalents'][] = $equivalent->toArray();
-		}
+        $array['equivalents'] = array();
+        $equivalents = $this->getEquivalents();
+        foreach ($equivalents as $equivalent) {
+            $array['equivalents'][] = $equivalent->toArray();
+        }
 
-		$array['sources'] = array();
-		$sources = $this->getSources();
-		foreach ($sources as $source) {
-			$array['sources'][] = $source->toArray();
-		}
+        $array['sources'] = array();
+        $sources = $this->getSources();
+        foreach ($sources as $source) {
+            $array['sources'][] = $source->toArray();
+        }
 
-		return $array;
-	}
+        return $array;
+    }
 }
 
 ?>
