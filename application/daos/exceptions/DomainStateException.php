@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\services\interfaces;
+namespace kateglo\application\daos\exceptions;
 /*
  *  $Id$
  *
@@ -19,55 +19,18 @@ namespace kateglo\application\services\interfaces;
  * and is licensed under the GPL 2.0. For more information, see
  * <http://code.google.com/p/kateglo/>.
  */
-use kateglo\application\models;
-
-/**
- *
- *
- * @package kateglo\application\services\interfaces
+ 
+ /**
+ * 
+ * 
+ * @package kateglo\application\daos\exceptions
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
  * @version $LastChangedRevision$
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
- */
-interface Entry
-{
-
-    const INTERFACE_NAME = __CLASS__;
-
-    /**
-     *
-     * @param int $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function getEntryById($id);
-
-    /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function getEntry($entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function update(models\Entry $entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function insert(models\Entry $entry);
-
-    /**
-     * @param int $id
-     * @return \kateglo\application\models\Entry
-     */
-    function delete($id);
+ */ 
+class DomainStateException extends \Exception {
 }
-
 ?>

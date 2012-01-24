@@ -38,11 +38,18 @@ interface Entry
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $id
+     * @param null $version
      */
-    function getByEntry($entry);
+    function getById($id, $version = null);
+
+    /**
+     * @abstract
+     * @param $entry
+     * @param null $version
+     */
+    function getByEntry($entry, $version = null);
 
     /**
      * Enter description here ...

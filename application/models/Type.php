@@ -20,6 +20,7 @@ namespace kateglo\application\models;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *
  *
@@ -34,7 +35,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Entity
  * @Table(name="type")
  */
-class Type {
+class Type
+{
 
     const CLASS_NAME = __CLASS__;
 
@@ -82,7 +84,8 @@ class Type {
      */
     private $categories;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->meanings = new ArrayCollection ();
         $this->categories = new ArrayCollection ();
     }
@@ -91,21 +94,24 @@ class Type {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return the $version
      */
-    public function getVersion() {
+    public function getVersion()
+    {
         return $this->version;
     }
 
     /**
      * @param int $version
      */
-    public function setVersion($version) {
+    public function setVersion($version)
+    {
         $this->version = $version;
     }
 
@@ -114,7 +120,8 @@ class Type {
      * @param string $type
      * @return void
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
     }
 
@@ -122,7 +129,8 @@ class Type {
      *
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
@@ -131,7 +139,8 @@ class Type {
      * @param kateglo\application\models\Meaning $meaning
      * @return void
      */
-    public function addMeaning(Meaning $meaning) {
+    public function addMeaning(Meaning $meaning)
+    {
         if (!$this->meanings->contains($meaning)) {
             $this->meanings [] = $meaning;
             $meaning->addType($this);
@@ -140,14 +149,14 @@ class Type {
 
     /**
      *
-     * @param kateglo\application\models\Meaning $meaning
+     * @param \kateglo\application\models\Meaning $meaning
      * @return void
      */
-    public function removeMeaning(Meaning $meaning) {
-        /*@var $removed kateglo\application\models\Meaning */
-        $removed = $this->meanings->removeElement($meaning);
-        if ($removed !== null) {
-            $removed->removeType($this);
+    public function removeMeaning(Meaning $meaning)
+    {
+        if ($this->meanings->contains($meaning)) {
+            $this->meanings->removeElement($meaning);
+            $meaning->removeType($this);
         }
     }
 
@@ -155,16 +164,18 @@ class Type {
      *
      * @return Doctrine\Common\Collections\ArrayCollection
      */
-    public function getMeanings() {
+    public function getMeanings()
+    {
         return $this->meanings;
     }
 
     /**
      *
-     * @param kateglo\application\models\TypeCategory $category
+     * @param \kateglo\application\models\TypeCategory $category
      * @return void
      */
-    public function setCategory(TypeCategory $category) {
+    public function setCategory(TypeCategory $category)
+    {
         if (!$this->categories->contains($category)) {
             $this->categories [0] = $category;
             $category->addType($this);
@@ -176,7 +187,8 @@ class Type {
      * @param kateglo\application\models\TypeCategory $category
      * @return void
      */
-    public function removeCategory() {
+    public function removeCategory()
+    {
         $removed = $this->categories->removeElement($this->categories->get(0));
         if ($removed !== null) {
             $removed->removeType($this);
@@ -187,14 +199,16 @@ class Type {
      *
      * @return kateglo\application\models\TypeCategory
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->categories->get(0);
     }
 
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         $array['id'] = $this->id;
         $array['version'] = $this->version;
         $array['type'] = $this->type;

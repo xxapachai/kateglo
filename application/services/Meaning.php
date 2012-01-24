@@ -36,16 +36,22 @@ use kateglo\application\daos;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-class Entry implements interfaces\Entry
+class Meaning implements interfaces\Meaning
 {
 
     public static $CLASS_NAME = __CLASS__;
 
     /**
      *
-     * @var \kateglo\application\daos\interfaces\Entry
+     * @var \kateglo\application\daos\interfaces\Meaning
      */
-    private $entry;
+    private $meaning;
+
+    /**
+     *
+     * @var \kateglo\application\daos\interfaces\Type
+     */
+    private $type;
 
     /**
      *
@@ -55,14 +61,26 @@ class Entry implements interfaces\Entry
 
     /**
      *
-     * @params \kateglo\application\daos\interfaces\Entry $entry
+     * @params \kateglo\application\daos\interfaces\Meaning $meaning
      * @return void
      *
      * @Inject
      */
-    public function setEntry(daos\interfaces\Entry $entry)
+    public function setMeaning(daos\interfaces\Meaning $meaning)
     {
-        $this->entry = $entry;
+        $this->meaning = $meaning;
+    }
+
+    /**
+     *
+     * @params \kateglo\application\daos\interfaces\Meaning $meaning
+     * @return void
+     *
+     * @Inject
+     */
+    public function setType(daos\interfaces\Type $type)
+    {
+        $this->type = $type;
     }
 
     /**
@@ -77,62 +95,40 @@ class Entry implements interfaces\Entry
         $this->search = $search;
     }
 
+
     /**
-     *
-     * @param int $entry
-     * @return \kateglo\application\models\Entry
+     * @param $id
+     * @param null $version
+     * @throws exceptions\IllegalTypeException
      */
-    public function getEntryById($id)
+    public function getById($id, $version = null)
     {
         if (!is_numeric($id)) {
-            throw new IllegalTypeException('Entry Id: "' . $id . '" is Not Numeric');
+            throw new IllegalTypeException('Meaning Id: "' . $id . '" is Not Numeric');
         }
-        $result = $this->entry->getById($id);
+        if (!is_null($version) && !is_numeric($version)) {
+            throw new IllegalTypeException('Meaning Version: "' . $version . '" is Not Numeric');
+        }
+        $result = $this->entry->getById($id, $version);
         return $result;
     }
 
     /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
+     * @param $meaningId
+     * @param $meaningVersion
+     * @param array $types
      */
-    public function getEntry($entry)
+    public function updateTypes($id, $version, array $types)
     {
-        $result = $this->entry->getByEntry($entry);
-        return $result;
-    }
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    public function update(models\Entry $entry)
-    {
-        $this->search->update($entry);
-        $entry = $this->entry->update($entry);
-        return $entry;
-    }
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    public function insert(models\Entry $entry)
-    {
-        $entry = $this->entry->insert($entry);
-        $this->search->insert($entry);
-        return $entry;
-    }
-
-    /**
-     * @param int $id
-     * @return \kateglo\application\models\Entry
-     */
-    public function delete($id)
-    {
-        $entry = $this->entry->delete($id);
-        $this->search->delete($id);
-        return $entry;
+        if (!is_numeric($id)) {
+            throw new IllegalTypeException('Meaning Id: "' . $id . '" is Not Numeric');
+        }
+        if (!is_numeric($version)) {
+            throw new IllegalTypeException('Meaning Version: "' . $version . '" is Not Numeric');
+        }
+        $meaning = $this->meaning->updateTypes($id, $version, $types);
+        $this->search->update($meaning->getEntry());
+        return $meaning;
     }
 
 }

@@ -38,7 +38,7 @@ Ext.define('kateglo.modules.entry.tree.Explorer', {
                                     'Content-Type': 'application/json'
                                 };
                                 Ext.Ajax.request({
-                                    url: '/entri/id/'+tabPanel.recordResult.id,
+                                    url: 'cpanel/entri/id/'+tabPanel.recordResult.id,
                                     method: 'DELETE',
                                     timeout: 60000,
                                     success: function(response, request) {

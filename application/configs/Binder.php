@@ -59,6 +59,8 @@ class Binder
         $container->bind(daos\interfaces\Entry::INTERFACE_NAME)->to(daos\Entry::$CLASS_NAME);
         $container->bind(daos\interfaces\Search::INTERFACE_NAME)->to(daos\Search::$CLASS_NAME);
         $container->bind(daos\interfaces\User::INTERFACE_NAME)->to(daos\User::$CLASS_NAME);
+        $container->bind(daos\interfaces\Meaning::INTERFACE_NAME)->to(daos\Meaning::$CLASS_NAME);
+        $container->bind(daos\interfaces\Type::INTERFACE_NAME)->to(daos\Type::$CLASS_NAME);
         $container->bind(services\interfaces\Entry::INTERFACE_NAME)->to(services\Entry::$CLASS_NAME);
         $container->bind(services\interfaces\CPanel::INTERFACE_NAME)->to(services\CPanel::$CLASS_NAME);
         $container->bind(services\interfaces\StaticData::INTERFACE_NAME)->to(services\StaticData::$CLASS_NAME);
@@ -66,6 +68,7 @@ class Binder
         $container->bind(services\interfaces\Search::INTERFACE_NAME)->to(services\Search::$CLASS_NAME);
         $container->bind(services\interfaces\Filter::INTERFACE_NAME)->to(services\Filter::$CLASS_NAME);
         $container->bind(services\interfaces\WordOfTheDay::INTERFACE_NAME)->to(services\WordOfTheDay::$CLASS_NAME);
+        $container->bind(services\interfaces\Meaning::INTERFACE_NAME)->to(services\Meaning::$CLASS_NAME);
         $container->bind(utilities\interfaces\KBBI::INTERFACE_NAME)->to(utilities\KBBI::$CLASS_NAME);
         $container->bind(utilities\interfaces\CURL::INTERFACE_NAME)->to(utilities\CURL::$CLASS_NAME);
         $container->bind(utilities\interfaces\MimeParser::INTERFACE_NAME)->to(utilities\MimeParser::$CLASS_NAME);

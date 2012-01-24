@@ -20,7 +20,7 @@ Ext.define('kateglo.forms.NewEntry', {
                     'Content-Type': 'application/json'
                 };
                 Ext.Ajax.request({
-                    url: '/entri',
+                    url: '/cpanel/entri',
                     method: 'PUT',
                     timeout: 60000,
                     jsonData: {

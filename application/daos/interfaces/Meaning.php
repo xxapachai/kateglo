@@ -1,5 +1,5 @@
 <?php
-namespace kateglo\application\services\interfaces;
+namespace kateglo\application\daos\interfaces;
 /*
  *  $Id$
  *
@@ -24,7 +24,7 @@ use kateglo\application\models;
 /**
  *
  *
- * @package kateglo\application\services\interfaces
+ * @package kateglo\application\daos\interfaces
  * @license <http://www.gnu.org/licenses/old-licenses/gpl-2.0.html> GPL 2.0
  * @link http://code.google.com/p/kateglo/
  * @since $LastChangedDate$
@@ -32,42 +32,34 @@ use kateglo\application\models;
  * @author  Arthur Purnama <arthur@purnama.de>
  * @copyright Copyright (c) 2009 Kateglo (http://code.google.com/p/kateglo/)
  */
-interface Entry
+interface Meaning
 {
 
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     *
-     * @param int $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $id
+     * @param null $version
+     * @return \kateglo\application\models\Meaning
      */
-    function getEntryById($id);
+    function getById($id, $version = null);
 
     /**
-     *
-     * @param string $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param \kateglo\application\models\Meaning $meaning
+     * @return \kateglo\application\daos\interfaces\Meaning
      */
-    function getEntry($entry);
+    function update(models\Meaning $meaning);
 
     /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
+     * @abstract
+     * @param $id
+     * @param $version
+     * @param array $types
+     * @return \kateglo\application\models\Meaning
      */
-    function update(models\Entry $entry);
-
-    /**
-     * @param \kateglo\application\models\Entry $entry
-     * @return \kateglo\application\models\Entry
-     */
-    function insert(models\Entry $entry);
-
-    /**
-     * @param int $id
-     * @return \kateglo\application\models\Entry
-     */
-    function delete($id);
+    function updateTypes($id, $version, array $types);
 }
 
 ?>
