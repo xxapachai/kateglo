@@ -20,11 +20,12 @@ namespace kateglo\application\daos;
  * <http://code.google.com/p/kateglo/>.
  */
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\OptimisticLockException;
 use kateglo\application\daos\exceptions\DomainResultEmptyException;
 use kateglo\application\daos\exceptions\DomainObjectNotFoundException;
 use kateglo\application\models;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\OptimisticLockException;
 
 /**
  *
@@ -397,8 +398,7 @@ class Entry implements interfaces\Entry
     public function update(models\Entry $entry)
     {
         if ($entry->getId() !== null) {
-            /** @var $updateEntry \kateglo\application\models\Entry */
-            $updateEntry = $this->entityManager->find(models\Entry::CLASS_NAME, $entry->getId(), LockMode::OPTIMISTIC, $entry->getVersion());
+            $updateEntry = $this->getById($entry->getId());
             $updateEntry->setEntry($entry->getEntry());
             $this->entityManager->persist($updateEntry);
             $this->entityManager->flush();

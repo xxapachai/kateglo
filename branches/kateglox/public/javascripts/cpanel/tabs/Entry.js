@@ -11,6 +11,7 @@ Ext.define('kateglo.tabs.Entry', {
                 new kateglo.modules.entry.tree.Explorer({
                     id: 'entryExplorer'+this.recordResult.id,
                     region: 'east',
+                    layout: 'fit',
                     recordResult: this.recordResult
                 }),
                 new Ext.panel.Panel({

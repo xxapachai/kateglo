@@ -10,30 +10,37 @@ Ext.define('kateglo.modules.entry.forms.Type', {
                 var form = this.up('form').getForm();
                 var formPanel = this.up('form');
                 var tabPanel = this.up('panel').up('panel').up('panel');
+                var contentPanel = this.up('panel').up('panel');
+                var treePanel = contentPanel.up().getComponent(0);
                 var box = Ext.MessageBox.wait('Updating Types for Entry Object.', 'Please wait!');
                 Ext.Ajax.defaultHeaders = {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
                 };
                 Ext.Ajax.request({
-                    url: '/cpanel/entri/meaning/'+ form.recordResult.id +'/types',
-                    method: 'PUT',
-                    timeout: 60000,
-                    jsonData: {
-                        id: form.recordResult.id,
-                        version: form.recordResult.version,
-                        types: form.getValues().type
+                    url:'/cpanel/entri/meaning/' + form.recordResult.id + '/types',
+                    method:'PUT',
+                    timeout:60000,
+                    jsonData:{
+                        id:form.recordResult.id,
+                        version:form.recordResult.version,
+                        types:form.getValues().type
                     },
-                    success: function(response, request) {
+                    success:function (response, request) {
                         responseObj = Ext.JSON.decode(response.responseText);
                         form.recordResult = responseObj;
                         formPanel.setTitle(formPanel.origTitle);
                         tabPanel.setTitle(tabPanel.origTitle);
-                        console.log(tabPanel);
+                        contentPanel.insert(0, new kateglo.modules.entry.forms.Type({
+                            recordResult:form.recordResult,
+                            recordNode: formPanel.recordNode
+                        }));
+                        treePanel.recordResult.meanings[formPanel.recordNode] = form.recordResult
+                        formPanel.destroy();
                         box.hide();
                         kateglo.utils.Message.msg('Success', 'Types saved');
                     },
-                    failure: function(response, request) {
+                    failure:function (response, request) {
                         box.hide();
                         Ext.Msg.alert('Failed', 'something is wrong');
                     }
@@ -73,7 +80,7 @@ Ext.define('kateglo.modules.entry.forms.Type', {
                         value:initVal,
                         listeners:{
                             change:{
-                                scope: this,
+                                scope:this,
                                 fn:kateglo.modules.entry.utils.Form.change
                             }
                         }
