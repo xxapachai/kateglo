@@ -51,15 +51,6 @@ interface Meaning
      * @return \kateglo\application\daos\interfaces\Meaning
      */
     function update(models\Meaning $meaning);
-
-    /**
-     * @abstract
-     * @param $id
-     * @param $version
-     * @param array $types
-     * @return \kateglo\application\models\Meaning
-     */
-    function updateTypes($id, $version, array $types);
 }
 
 ?>
