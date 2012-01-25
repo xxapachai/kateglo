@@ -94,35 +94,6 @@ class Meaning implements interfaces\Meaning
             throw new DomainStateException("Wrong State!");
         }
     }
-
-    /**
-     * @param $id
-     * @param $version
-     * @param array $types
-     * @return \kateglo\application\models\Meaning
-     * @throws exceptions\DomainStateException
-     */
-    public function updateTypes($id, $version, array $types)
-    {
-        $meaning = $this->getById($id, $version);
-        /** @var $type \kateglo\application\models\Type */
-        foreach ($meaning->getTypes() as $type) {
-            if (in_array($type->getId(), $types)) {
-                foreach (array_keys($types, $type->getId()) as $key) {
-                    unset($types[$key]);
-                }
-            } else {
-                $meaning->removeType($type);
-            }
-        }
-        foreach ($types as $typeId) {
-            $type = $this->entityManager->find(models\Type::CLASS_NAME, $typeId);
-            $meaning->addType($type);
-        }
-        $this->update($meaning);
-
-        return $meaning;
-    }
 }
 
 ?>

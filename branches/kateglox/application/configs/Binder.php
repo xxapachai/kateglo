@@ -49,12 +49,12 @@ class Binder
     public static function bind(\stubBinder $container)
     {
 
-        $container->bind('Zend_Log')->toProviderClass(Log::$CLASS_NAME);
-        $container->bind('Zend_Config')->toProviderClass(Config::$CLASS_NAME);
-        $container->bind('Apache_Solr_Service')->toProviderClass(Solr::$CLASS_NAME);
-        $container->bind('Doctrine\DBAL\Driver\Connection')->toProviderClass(Connection::$CLASS_NAME);
-        $container->bind('Doctrine\ORM\EntityManager')->toProviderClass(EntityManager::$CLASS_NAME);
-        $container->bind('Doctrine\Common\Cache\Cache')->to('Doctrine\Common\Cache\ApcCache');
+        $container->bind('Zend_Log')->toProviderClass(Log::$CLASS_NAME)->asSingleton();
+        $container->bind('Zend_Config')->toProviderClass(Config::$CLASS_NAME)->asSingleton();
+        $container->bind('Apache_Solr_Service')->toProviderClass(Solr::$CLASS_NAME)->asSingleton();
+        $container->bind('Doctrine\DBAL\Driver\Connection')->toProviderClass(Connection::$CLASS_NAME)->asSingleton();
+        $container->bind('Doctrine\ORM\EntityManager')->toProviderClass(EntityManager::$CLASS_NAME)->asSingleton();
+        $container->bind('Doctrine\Common\Cache\Cache')->to('Doctrine\Common\Cache\ApcCache')->asSingleton();
         $container->bind('Zend_Controller_Dispatcher_Interface')->to('Zend_Controller_Dispatcher_Stubbles');
         $container->bind(daos\interfaces\Entry::INTERFACE_NAME)->to(daos\Entry::$CLASS_NAME);
         $container->bind(daos\interfaces\Search::INTERFACE_NAME)->to(daos\Search::$CLASS_NAME);

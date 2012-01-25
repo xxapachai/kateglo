@@ -73,7 +73,7 @@ class Meaning implements interfaces\Meaning
 
     /**
      *
-     * @params \kateglo\application\daos\interfaces\Meaning $meaning
+     * @params \kateglo\application\daos\interfaces\Type $type
      * @return void
      *
      * @Inject
@@ -99,6 +99,7 @@ class Meaning implements interfaces\Meaning
     /**
      * @param $id
      * @param null $version
+     * @return \kateglo\application\models\Meaning
      * @throws exceptions\IllegalTypeException
      */
     public function getById($id, $version = null)
@@ -114,9 +115,10 @@ class Meaning implements interfaces\Meaning
     }
 
     /**
-     * @param $meaningId
-     * @param $meaningVersion
+     * @param $id
+     * @param $version
      * @param array $types
+     * @return \kateglo\application\models\Meaning
      */
     public function updateTypes($id, $version, array $types)
     {
@@ -126,7 +128,23 @@ class Meaning implements interfaces\Meaning
         if (!is_numeric($version)) {
             throw new IllegalTypeException('Meaning Version: "' . $version . '" is Not Numeric');
         }
-        $meaning = $this->meaning->updateTypes($id, $version, $types);
+
+        $meaning = $this->meaning->getById($id, $version);
+        /** @var $type \kateglo\application\models\Type */
+        foreach ($meaning->getTypes() as $type) {
+            if (in_array($type->getId(), $types)) {
+                foreach (array_keys($types, $type->getId()) as $key) {
+                    unset($types[$key]);
+                }
+            } else {
+                $meaning->removeType($type);
+            }
+        }
+        foreach ($types as $typeId) {
+            $type = $this->type->getById($typeId);
+            $meaning->addType($type);
+        }
+        $this->meaning->update($meaning);
         $this->search->update($meaning->getEntry());
         return $meaning;
     }
