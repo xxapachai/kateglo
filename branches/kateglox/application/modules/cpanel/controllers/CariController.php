@@ -19,6 +19,7 @@
  * <http://code.google.com/p/kateglo/>.
  */
 use kateglo\application\services\interfaces;
+use \Doctrine\Common\Collections\ArrayCollection;
 use kateglo\application\models;
 
 /**
@@ -45,13 +46,32 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
     /**
      *
      * Enter description here ...
-     * @param \kateglo\application\faces\interfaces\Search $entry
+     * @var \kateglo\application\services\interfaces\Meaning;
+     */
+    private $meaning;
+
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Search $search
      *
      * @Inject
      */
     public function setSearch(interfaces\Search $search)
     {
         $this->search = $search;
+    }
+
+    /**
+     *
+     * Enter description here ...
+     * @param \kateglo\application\services\interfaces\Meaning $meaning
+     *
+     * @Inject
+     */
+    public function setMeaning(interfaces\Meaning $meaning)
+    {
+        $this->meaning = $meaning;
     }
 
     /**
@@ -81,7 +101,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
             ? intval($this->_request->getParam('start'))
             : 0));
         try {
-            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             $hits = $this->search->entry($searchText, $pagination);
             $result = array();
             $documents = $hits->getDocuments();
@@ -93,7 +112,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
                 $result[] = $array;
             }
             $this->content = array('total' => $hits->getCount(), 'hits' => $result);
-            $this->responseBuilder($cacheId);
         } catch (Apache_Solr_Exception $e) {
             $this->getResponse()->setHttpResponseCode(400);
             $this->content = array('error' => 'query error');
@@ -109,33 +127,31 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
      */
     public function sumber()
     {
-            $search = new models\front\Search();
-            $pagination = new models\front\Pagination();
-            $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
-            $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
-                ? intval($this->_request->getParam('limit'))
-                : 10));
-            $pagination->setOffset((is_numeric($this->_request->getParam('start'))
-                ? intval($this->_request->getParam('start'))
-                : 0));
-            try {
-                $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
-                $sources = $this->search->source($searchText, $pagination);
-                $result = array();
-                /** @var $source \kateglo\application\models\Source */
-                foreach ($sources as $source) {
-                    $array = array();
-                    $array['id'] = $source->getId();
-                    $array['entry'] = $source->getClean();
-                    $result[] = $array;
-                }
-                $this->content = array('total' => count($sources), 'hits' => $result);
-                $this->responseBuilder($cacheId);
-            } catch (Apache_Solr_Exception $e) {
-                $this->getResponse()->setHttpResponseCode(400);
-                $this->content = array('error' => 'query error');
+        $search = new models\front\Search();
+        $pagination = new models\front\Pagination();
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+            ? intval($this->_request->getParam('limit'))
+            : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+            ? intval($this->_request->getParam('start'))
+            : 0));
+        try {
+            $sources = $this->search->source($searchText, $pagination);
+            $result = array();
+            /** @var $source \kateglo\application\models\Source */
+            foreach ($sources as $source) {
+                $array = array();
+                $array['id'] = $source->getId();
+                $array['entry'] = $source->getClean();
+                $result[] = $array;
             }
-            $this->_helper->json($this->content);
+            $this->content = array('total' => count($sources), 'hits' => $result);
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
     }
 
     /**
@@ -156,7 +172,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
             ? intval($this->_request->getParam('start'))
             : 0));
         try {
-            $cacheId = __METHOD__ . '\\' . $searchText . '\\' . $pagination->getOffset() . '\\' . $pagination->getLimit();
             $foreigns = $this->search->foreign($searchText, $pagination);
             $result = array();
             /** @var $foreign \kateglo\application\models\Foreign */
@@ -167,7 +182,6 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
                 $result[] = $array;
             }
             $this->content = array('total' => count($foreigns), 'hits' => $result);
-            $this->responseBuilder($cacheId);
         } catch (Apache_Solr_Exception $e) {
             $this->getResponse()->setHttpResponseCode(400);
             $this->content = array('error' => 'query error');
@@ -176,27 +190,145 @@ class CPanel_CariController extends Zend_Controller_Action_Stubbles
     }
 
     /**
+     * @var int $id
      * @return void
      * @Get
-     * @Path('/arti')
+     * @Path('/sinonim/{meaningId}')
+     * @PathParam{meaningId}(meaningId)
      * @Produces('application/json')
      */
-    public function artiJson()
+    public function synonym($meaningId)
     {
-        $searchText = $this->getRequest()->getParam($this->view->search->getFieldName());
+        $search = new models\front\Search();
+        $pagination = new models\front\Pagination();
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+            ? intval($this->_request->getParam('limit'))
+            : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+            ? intval($this->_request->getParam('start'))
+            : 0));
         try {
-            $cacheId = __METHOD__ . '\\' . $searchText;
-            if (!$this->evaluatePreCondition($cacheId)) {
-                /*@var $hits array */
-                $hits = $this->cpanel->searchMeaningAsJSON($searchText, $this->offset, $this->limit);
-                $this->content = $hits;
+            $hits = $this->search->entry($searchText, $pagination);
+            $result = array();
+            $entryIds = array();
+            $documents = $hits->getDocuments();
+            /** @var $document \kateglo\application\models\solr\Document */
+            foreach ($documents as $document) {
+                $entryIds[] = $document->getId();
             }
-            $this->responseBuilder($cacheId);
+            if (count($entryIds) > 0) {
+                $result = $this->createResult($this->meaning->getSynonymExclusives($meaningId, $entryIds));
+            }
+            $this->content = $result;
         } catch (Apache_Solr_Exception $e) {
             $this->getResponse()->setHttpResponseCode(400);
             $this->content = array('error' => 'query error');
         }
         $this->_helper->json($this->content);
+    }
+
+    /**
+     * @var int $id
+     * @return void
+     * @Get
+     * @Path('/antonim/{meaningId}')
+     * @PathParam{meaningId}(meaningId)
+     * @Produces('application/json')
+     */
+    public function antonym($meaningId)
+    {
+        $search = new models\front\Search();
+        $pagination = new models\front\Pagination();
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+            ? intval($this->_request->getParam('limit'))
+            : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+            ? intval($this->_request->getParam('start'))
+            : 0));
+        try {
+            $hits = $this->search->entry($searchText, $pagination);
+            $result = array();
+            $entryIds = array();
+            $documents = $hits->getDocuments();
+            /** @var $document \kateglo\application\models\solr\Document */
+            foreach ($documents as $document) {
+                $entryIds[] = $document->getId();
+            }
+            if (count($entryIds) > 0) {
+                $result = $this->createResult($this->meaning->getAntonymExclusives($meaningId, $entryIds));
+            }
+            $this->content = $result;
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
+    }
+
+    /**
+     * @var int $id
+     * @return void
+     * @Get
+     * @Path('/relasi/{meaningId}')
+     * @PathParam{meaningId}(meaningId)
+     * @Produces('application/json')
+     */
+    public function relation($meaningId)
+    {
+        $search = new models\front\Search();
+        $pagination = new models\front\Pagination();
+        $searchText = urldecode($this->getRequest()->getParam($search->getFieldName()));
+        $pagination->setLimit((is_numeric($this->_request->getParam('limit'))
+            ? intval($this->_request->getParam('limit'))
+            : 10));
+        $pagination->setOffset((is_numeric($this->_request->getParam('start'))
+            ? intval($this->_request->getParam('start'))
+            : 0));
+        try {
+            $hits = $this->search->entry($searchText, $pagination);
+            $result = array();
+            $entryIds = array();
+            $documents = $hits->getDocuments();
+            /** @var $document \kateglo\application\models\solr\Document */
+            foreach ($documents as $document) {
+                $entryIds[] = $document->getId();
+            }
+            if (count($entryIds) > 0) {
+                $result = $this->createResult($this->meaning->getRelationExclusives($meaningId, $entryIds));
+            }
+            $this->content = $result;
+        } catch (Apache_Solr_Exception $e) {
+            $this->getResponse()->setHttpResponseCode(400);
+            $this->content = array('error' => 'query error');
+        }
+        $this->_helper->json($this->content);
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $meanings
+     * @return array
+     */
+    private function createResult(ArrayCollection $meanings)
+    {
+        $result = array();
+        /** @var $meaning \kateglo\application\models\Meaning */
+        foreach ($meanings as $meaning) {
+            $array = array();
+            $array['id'] = $meaning->getId();
+            $array['entryId'] = $meaning->getEntry()->getId();
+            $array['entry'] = $meaning->getEntry()->getEntry();
+            $definitions = $meaning->getDefinitions();
+            $array['definition'] = $definitions->first()->getDefinition();
+            $array['definitions'] = array();
+            /** @var $definition \kateglo\application\models\Definition */
+            foreach ($definitions as $definition) {
+                $array['definitions'][] = $definition->getDefinition();
+            }
+            $result[] = $array;
+        }
+        return $result;
     }
 }
 

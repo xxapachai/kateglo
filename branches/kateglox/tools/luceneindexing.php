@@ -113,23 +113,23 @@ function insertSolr(&$docStart, $segment = 2000) {
 				}
 				
 				/*@var $equivalent kateglo\application\models\Equivalent */
-				foreach ( $entry->getEquivalents () as $equivalent ) {
-					$doc->addField ( 'foreign', $equivalent->getForeign()->getForeign() );	
-					$equivalentData['foreign'] = $equivalent->getForeign()->getForeign();
-					
-					$doc->addField ( 'language', $equivalent->getForeign()->getLanguage()->getLanguage() );
-					$equivalentData['language'] = $equivalent->getForeign()->getLanguage()->getLanguage();
-					
-					$disciplineData = array();
-					/*@var $discipline kateglo\application\models\Discipline */
-					foreach ($equivalent->getDisciplines() as $disciplineEq) {
-						$doc->addField ( 'equivalentDiscipline', $disciplineEq->getDiscipline() );
-						$disciplineData[] = $disciplineEq->getDiscipline();
-					}				
-					$equivalentData['discipline'] = $disciplineData;
-					
-					$doc->addField('equivalent', json_encode($equivalentData));
-				}
+								foreach ( $entry->getEquivalents () as $equivalent ) {
+									$doc->addField ( 'foreign', $equivalent->getForeign()->getForeign() );
+									$equivalentData['foreign'] = $equivalent->getForeign()->getForeign();
+
+									$doc->addField ( 'language', $equivalent->getForeign()->getLanguage()->getLanguage() );
+									$equivalentData['language'] = $equivalent->getForeign()->getLanguage()->getLanguage();
+
+									$disciplineData = array();
+									/*@var $discipline kateglo\application\models\Discipline */
+									foreach ($equivalent->getDisciplines() as $disciplineEq) {
+										$doc->addField ( 'equivalentDiscipline', $disciplineEq->getDiscipline() );
+										$disciplineData[] = $disciplineEq->getDiscipline();
+									}
+									$equivalentData['discipline'] = $disciplineData;
+
+									$doc->addField('equivalent', json_encode($equivalentData));
+								}
 				
 				$solr->addDocument ( $doc );
 				

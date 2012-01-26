@@ -225,7 +225,7 @@ class Definition {
 	
 	/**
 	 *
-	 * @return kateglo\application\models\Clazz
+	 * @return \kateglo\application\models\Clazz
 	 */
 	public function getClazz() {
 		return $this->clazz->get ( 0 );

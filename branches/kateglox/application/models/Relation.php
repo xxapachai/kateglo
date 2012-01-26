@@ -130,7 +130,7 @@ class Relation {
 
     /**
      *
-     * @return kateglo\application\models\Meaning
+     * @return \kateglo\application\models\Meaning
      */
     public function getRelation() {
         return $this->relation;

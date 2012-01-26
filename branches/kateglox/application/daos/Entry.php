@@ -98,10 +98,11 @@ class Entry implements interfaces\Entry
 			WHERE entry.entry = :entry");
         $query->setParameter('entry', $entry);
         /** @var $result \kateglo\application\models\Entry */
-        $result = $query->getFirstResult();
-        if (!($result instanceof models\Entry)) {
+        $result = $query->getResult();
+        if (!($result[0] instanceof models\Entry)) {
             throw new DomainObjectNotFoundException ();
         } else {
+            $result = $result[0];
             if (is_int($version)) {
                 if ($result->getVersion() != $version) {
                     throw OptimisticLockException::lockFailedVersionMissmatch(\kateglo\application\models\Entry::CLASS_NAME, $version, $result->getVersion());

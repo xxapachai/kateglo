@@ -68,7 +68,7 @@ class Meaning implements interfaces\Meaning
      *
      * @param int $id
      * @param int $version
-     * @return kateglo\application\models\Meaning
+     * @return \kateglo\application\models\Meaning
      */
     public function getById($id, $version = null)
     {
@@ -82,6 +82,93 @@ class Meaning implements interfaces\Meaning
         }
 
         return $result;
+    }
+
+    /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSynonymExclusives($meaningId, array $entryIds)
+    {
+        $meaning = $this->getById($meaningId);
+        $synonymIds = array();
+        /** @var $synonym \kateglo\application\models\Synonym */
+        foreach ($meaning->getSynonyms() as $synonym) {
+            $synonymIds[] = $synonym->getSynonym()->getId();
+        }
+        $dql = "SELECT  meaning
+                FROM " . models\Meaning::CLASS_NAME . " meaning
+                    LEFT JOIN meaning.entry entry
+                    LEFT JOIN meaning.definitions definitions
+                WHERE entry.id IN (" . implode(', ', $entryIds) . ") ";
+        if (count($synonymIds) > 0) {
+            $dql .= " AND meaning.id NOT IN (" . implode(', ', $synonymIds) . ") ";
+        }
+        $query = $this->entityManager->createQuery($dql);
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "entry", "EAGER");
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "definitions", "EAGER");
+        $result = $query->getResult();
+
+        return new ArrayCollection($result);
+    }
+
+    /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getAntonymExclusives($meaningId, array $entryIds)
+    {
+        $meaning = $this->getById($meaningId);
+        $antonymIds = array();
+        /** @var $antonym \kateglo\application\models\Antonym */
+        foreach ($meaning->getAntonyms() as $antonym) {
+            $antonymIds[] = $antonym->getAntonym()->getId();
+        }
+        $dql = "SELECT  meaning
+                FROM " . models\Meaning::CLASS_NAME . " meaning
+                    LEFT JOIN meaning.entry entry
+                    LEFT JOIN meaning.definitions definitions
+                WHERE entry.id IN (" . implode(', ', $entryIds) . ") ";
+        if (count($antonymIds) > 0) {
+            $dql .= " AND meaning.id NOT IN (" . implode(', ', $antonymIds) . ") ";
+        }
+        $query = $this->entityManager->createQuery($dql);
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "entry", "EAGER");
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "definitions", "EAGER");
+        $result = $query->getResult();
+
+        return new ArrayCollection($result);
+    }
+
+    /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getRelationExclusives($meaningId, array $entryIds)
+    {
+        $meaning = $this->getById($meaningId);
+        $relationIds = array();
+        /** @var $relation \kateglo\application\models\Relation */
+        foreach ($meaning->getRelations() as $relation) {
+            $relationIds[] = $synonym->getSynonym()->getId();
+        }
+        $dql = "SELECT  meaning
+                FROM " . models\Meaning::CLASS_NAME . " meaning
+                    LEFT JOIN meaning.entry entry
+                    LEFT JOIN meaning.definitions definitions
+                WHERE entry.id IN (" . implode(', ', $entryIds) . ") ";
+        if (count($relationIds) > 0) {
+            $dql .= " AND meaning.id NOT IN (" . implode(', ', $relationIds) . ") ";
+        }
+        $query = $this->entityManager->createQuery($dql);
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "entry", "EAGER");
+        $query->setFetchMode(models\Meaning::CLASS_NAME, "definitions", "EAGER");
+        $result = $query->getResult();
+
+        return new ArrayCollection($result);
     }
 
     public function update(models\Meaning $meaning)

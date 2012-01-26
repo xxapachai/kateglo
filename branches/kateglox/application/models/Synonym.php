@@ -121,7 +121,7 @@ class Synonym {
      */
     public function removeMeaning() {
         if ($this->meaning !== null) {
-            /*@var $entry kateglo\application\models\Meaning */
+            /** @var $meaning \kateglo\application\models\Meaning */
             $meaning = $this->meaning;
             $this->meaning = null;
             $meaning->removeSynonym($this);
@@ -130,7 +130,7 @@ class Synonym {
 
     /**
      *
-     * @return kateglo\application\models\Meaning
+     * @return \kateglo\application\models\Meaning
      */
     public function getSynonym() {
         return $this->synonym;

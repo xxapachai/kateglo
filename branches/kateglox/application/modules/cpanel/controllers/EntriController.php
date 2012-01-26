@@ -94,17 +94,12 @@ class Cpanel_EntriController extends Zend_Controller_Action_Stubbles
      */
     public function getById($id)
     {
-        $cacheId = __METHOD__ . '\\' . $id;
-        if (!$this->evaluatePreCondition($cacheId)) {
-            try {
-                $entry = $this->entry->getEntryById($id);
-                $this->content = $entry->toArray();
-            } catch (DomainResultEmptyException $e) {
-                throw new HTTPNotFoundException('Entry Not Found.');
-            }
+        try {
+            $entry = $this->entry->getEntryById($id);
+            $this->content = $entry->toArray();
+        } catch (DomainResultEmptyException $e) {
+            throw new HTTPNotFoundException('Entry Not Found.');
         }
-
-        $this->responseBuilder($cacheId);
         $this->_helper->json($this->content);
     }
 
