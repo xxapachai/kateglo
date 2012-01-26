@@ -437,7 +437,7 @@ class Meaning
 
     /**
      *
-     * @return kateglo\application\models\Misspelled
+     * @return \kateglo\application\models\Misspelled
      */
     public function getSpelled()
     {

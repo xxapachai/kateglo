@@ -184,7 +184,6 @@ class Type
 
     /**
      *
-     * @param kateglo\application\models\TypeCategory $category
      * @return void
      */
     public function removeCategory()
@@ -197,7 +196,7 @@ class Type
 
     /**
      *
-     * @return kateglo\application\models\TypeCategory
+     * @return \kateglo\application\models\TypeCategory
      */
     public function getCategory()
     {

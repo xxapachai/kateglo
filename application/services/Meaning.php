@@ -115,6 +115,36 @@ class Meaning implements interfaces\Meaning
     }
 
     /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSynonymExclusives($meaningId, array $entryIds)
+    {
+        return $this->meaning->getSynonymExclusives($meaningId, $entryIds);
+    }
+
+    /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getAntonymExclusives($meaningId, array $entryIds)
+    {
+        return $this->meaning->getAntonymExclusives($meaningId, $entryIds);
+    }
+
+    /**
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getRelationExclusives($meaningId, array $entryIds)
+    {
+        return $this->meaning->getRelationExclusives($meaningId, $entryIds);
+    }
+
+    /**
      * @param $id
      * @param $version
      * @param array $types

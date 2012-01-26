@@ -158,14 +158,14 @@ class Source {
     }
 
     /**
-     * @return kateglo\application\models\SourceCategory
+     * @return \kateglo\application\models\SourceCategory
      */
     public function getCategory() {
         return $this->category;
     }
 
     /**
-     * @param kateglo\application\models\SourceCategory $category
+     * @param \kateglo\application\models\SourceCategory $category
      * @return void
      */
     public function setCategory(SourceCategory $category) {
@@ -186,14 +186,14 @@ class Source {
     }
 
     /**
-     * @return kateglo\application\models\Entry
+     * @return \kateglo\application\models\Entry
      */
     public function getEntry() {
         return $this->entry;
     }
 
     /**
-     * @param kateglo\application\models\Entry $entry
+     * @param \kateglo\application\models\Entry $entry
      * @return void
      */
     public function setEntry(Entry $entry) {

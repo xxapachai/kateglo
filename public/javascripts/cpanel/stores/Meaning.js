@@ -4,7 +4,7 @@ Ext.define("kateglo.stores.Meaning", {
     pageSize: 10000000,
     proxy: {
         type: 'rest',
-        url : '/kamus/arti',
+        url : '/cpanel/kamus/arti',
         noCache: false,
         headers: {
             Accept: 'application/json'

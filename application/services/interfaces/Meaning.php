@@ -39,7 +39,7 @@ interface Meaning
 
     /**
      * @abstract
-     * @param $id
+     * @param int $id
      * @param null $version
      * @return \kateglo\application\models\Meaning
      */
@@ -47,8 +47,32 @@ interface Meaning
 
     /**
      * @abstract
-     * @param $meaningId
-     * @param $meaningVersion
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getSynonymExclusives($meaningId, array $entryIds);
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getAntonymExclusives($meaningId, array $entryIds);
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getRelationExclusives($meaningId, array $entryIds);
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param int $meaningVersion
      * @param array $types
      */
     function updateTypes($meaningId, $meaningVersion, array $types);

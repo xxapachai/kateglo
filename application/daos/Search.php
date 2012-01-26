@@ -234,7 +234,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    function source($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function source($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
@@ -257,7 +257,7 @@ class Search implements interfaces\Search
      * @param \kateglo\application\models\front\Facet|null $facet
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null)
+    public function foreign($searchText, front\Pagination $pagination, front\Facet $facet = null)
     {
         $params = $this->getDefaultParams($searchText);
         $params = $facet == null ? $params : $this->getFilterQuery($params, $facet);
@@ -317,7 +317,7 @@ class Search implements interfaces\Search
     public function update(models\Entry $entry)
     {
         $docs = $this->searchDocumentById($entry->getId());
-        $docs->setField('entri', $entry->getEntry());
+        $this->setFields($docs, $entry);
         $this->solr->addDocument($docs);
         $this->solr->commit();
     }
@@ -329,7 +329,6 @@ class Search implements interfaces\Search
     public function insert(models\Entry $entry)
     {
         $docs = new \Apache_Solr_Document();
-        $docs->setField('entri', $entry->getEntry());
         $docs->setField('id', $entry->getId());
         $this->solr->addDocument($docs);
         $this->solr->commit();
@@ -343,6 +342,105 @@ class Search implements interfaces\Search
     {
         $this->solr->deleteById($id);
         $this->solr->commit();
+    }
+
+    /**
+     * @param \Apache_Solr_Document $docs
+     * @param \kateglo\application\models\Entry $entry
+     */
+    private function setFields(\Apache_Solr_Document $docs, models\Entry $entry)
+    {
+        $docs->setField('entri', $entry->getEntry());
+        /** @var $meaning \kateglo\application\models\Meaning */
+        foreach ($entry->getMeanings() as $meaning) {
+            /** @var $antonym \kateglo\application\models\Antonym */
+            foreach ($meaning->getAntonyms() as $antonym) {
+                $docs->addField('antonim', $antonym->getAntonym()->getEntry()->getEntry());
+            }
+
+            /** @var $definition \kateglo\application\models\Definition */
+            foreach ($meaning->getDefinitions() as $definition) {
+                $docs->addField('definisi', $definition->getDefinition());
+
+                if ($definition->getClazz() instanceof models\Clazz) {
+                    $docs->addField('kelas', $definition->getClazz()->getClazz());
+
+                    if ($definition->getClazz()->getCategory() instanceof models\ClazzCategory) {
+                        $docs->addField('kategoriKelas', $definition->getClazz()->getCategory()->getCategory());
+                    }
+                }
+
+                /** @var $discipline \kateglo\application\models\Discipline */
+                foreach ($definition->getDisciplines() as $discipline) {
+                    $docs->addField('disiplin', $discipline->getDiscipline());
+                }
+
+                /** @var $sample \kateglo\application\models\Sample */
+                foreach ($definition->getSamples() as $sample) {
+                    $docs->addField('contoh', $sample->getSample());
+                }
+
+            }
+
+            /** @var $misspelled \kateglo\application\models\Misspelled */
+            foreach ($meaning->getMisspelleds() as $misspelled) {
+                $docs->addField('salahEja', $misspelled->getMisspelled()->getEntry()->getEntry());
+            }
+
+            /** @var $relation \kateglo\application\models\Relation */
+            foreach ($meaning->getRelations() as $relation) {
+                $docs->addField('relasi', $relation->getRelation()->getEntry()->getEntry());
+            }
+
+            /** @var $synonym \kateglo\application\models\Synonym */
+            foreach ($meaning->getSynonyms() as $synonym) {
+                $docs->addField('sinonim', $synonym->getSynonym()->getEntry()->getEntry());
+            }
+
+            if ($meaning->getSpelled() instanceof models\Misspelled) {
+                $docs->setField('ejaan', $meaning->getSpelled()->getMeaning()->getEntry()->getEntry());
+            }
+
+            /** @var $syllabel \kateglo\application\models\Syllabel */
+            foreach ($meaning->getSyllabels() as $syllabel) {
+                $docs->addField('silabel', $syllabel->getSyllabel());
+            }
+
+            /** @var $type \kateglo\application\models\Type */
+            foreach ($meaning->getTypes() as $type) {
+                $docs->addField('bentuk', $type->getType());
+
+                if ($type->getCategory() instanceof models\TypeCategory) {
+                    $docs->addField('kategoriBentuk', $type->getCategory()->getCategory());
+                }
+            }
+
+            /** @var $source \kateglo\application\models\Source */
+            foreach ($entry->getSources() as $source) {
+                $docs->addField('sumber', strip_tags(html_entity_decode($source->getSource(), ENT_QUOTES, 'UTF-8')));
+
+                $docs->addField('kategoriSumber', $source->getCategory()->getCategory());
+            }
+
+            /** @var $equivalent \kateglo\application\models\Equivalent */
+            foreach ($entry->getEquivalents() as $equivalent) {
+                $docs->addField('asing', $equivalent->getForeign()->getForeign());
+                $equivalentData['foreign'] = $equivalent->getForeign()->getForeign();
+
+                $docs->addField('bahasa', $equivalent->getForeign()->getLanguage()->getLanguage());
+                $equivalentData['language'] = $equivalent->getForeign()->getLanguage()->getLanguage();
+
+                $disciplineData = array();
+                /** @var $disciplineEq \kateglo\application\models\Discipline */
+                foreach ($equivalent->getDisciplines() as $disciplineEq) {
+                    $docs->addField('disiplinPadanan', $disciplineEq->getDiscipline());
+                    $disciplineData[] = $disciplineEq->getDiscipline();
+                }
+                $equivalentData['discipline'] = $disciplineData;
+
+                $docs->addField('padanan', json_encode($equivalentData));
+            }
+        }
     }
 
     /**

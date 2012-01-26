@@ -101,7 +101,7 @@ class Misspelled {
     }
 
     /**
-     * @return kateglo\application\models\Meaning
+     * @return \kateglo\application\models\Meaning
      */
     public function getMeaning() {
         return $this->meaning;
@@ -130,7 +130,7 @@ class Misspelled {
 
     /**
      *
-     * @return kateglo\application\models\Meaning
+     * @return \kateglo\application\models\Meaning
      */
     public function getMisspelled() {
         return $this->misspelled;

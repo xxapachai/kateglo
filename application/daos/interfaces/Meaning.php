@@ -45,6 +45,31 @@ interface Meaning
      */
     function getById($id, $version = null);
 
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getSynonymExclusives($meaningId, array $entryIds);
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getAntonymExclusives($meaningId, array $entryIds);
+
+    /**
+     * @abstract
+     * @param int $meaningId
+     * @param array $entryIds
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    function getRelationExclusives($meaningId, array $entryIds);
+
     /**
      * @abstract
      * @param \kateglo\application\models\Meaning $meaning

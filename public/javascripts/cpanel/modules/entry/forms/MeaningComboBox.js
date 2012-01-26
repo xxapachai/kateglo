@@ -16,7 +16,7 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                     anchor: '100%',
                     hideTrigger: true,
                     forceSelection: true,
-                    store: new kateglo.stores.Meaning(),
+                    store: this.store,
                     emptyText: 'Ketik yang dicari, pilih salah satu dari hasil yang ditampilkan, kemudian tekan enter',
                     listConfig: {
                         getInnerTpl: function() {
@@ -30,13 +30,7 @@ Ext.define('kateglo.modules.entry.forms.MeaningComboBox', {
                     },
                     listeners:{
                         scope: this,
-                        select: function(field, value) {
-                            var store = field.up().up().getComponent(1).getStore();
-                            if (store.getById(value[0].getId()) == null) {
-                                store.add(value[0]);
-                            }
-                            field.selectText(0, field.value.length);
-                        }
+                        select: this.selectCallback
                     }
                 })
             ]
