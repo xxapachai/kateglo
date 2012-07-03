@@ -1,17 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="PhpProjectConfiguration">
-    <sdk>
-      <PhpSdkConfig version="5.3.1" home="/Applications/XAMPP/xamppfiles/bin">
-        <include_paths>
-          <path value="$PROJECT_DIR$/../doctrine/Doctrine" />
-          <path value="$PROJECT_DIR$/../phptal/classes" />
-          <path value="$PROJECT_DIR$/../solr/Apache" />
-          <path value="$PROJECT_DIR$/../ZendFramework/library" />
-          <path value="$PROJECT_DIR$/../stubbles/src/main/php/net" />
-        </include_paths>
-      </PhpSdkConfig>
-    </sdk>
-  </component>
-</project>
+<project version="4" />
 
