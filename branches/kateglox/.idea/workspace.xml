@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="7fad7703-02e1-4f4f-8603-084b2e534c9a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/apache/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/apache" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/bootstrap/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/bootstrap" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/diverse/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/diverse" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/mysql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/php/manifests" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/templates" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/Vagrantfile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/manifests/main.pp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/apache/manifests/init.pp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/bootstrap/manifests/init.pp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/diverse/manifests/init.pp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/php/manifests/init.pp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="C:\Users\Purnama\StormWorkspace\kateglo\logs" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kateglo.iws" />
@@ -88,6 +67,20 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="kateglo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kateglo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vagrant" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -205,6 +198,11 @@
       <created>1341314021617</created>
       <updated>1341314021617</updated>
     </task>
+    <task id="LOCAL-00001" summary="vagrant and puppets setting">
+      <created>1341341757102</created>
+      <updated>1341341757102</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
