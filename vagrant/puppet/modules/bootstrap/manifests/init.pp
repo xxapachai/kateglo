@@ -13,9 +13,4 @@ class bootstrap {
         file { '/home/vagrant/downloads':
         ensure => 'directory',
     }
-
-    # create kateglo directory
-        file { '/home/vagrant/kateglo':
-          ensure => 'directory',
-    }
 }
