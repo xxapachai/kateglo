@@ -11,4 +11,5 @@ node default{
     include mysql
 	include java
 	include solr
+	include kateglo
 }

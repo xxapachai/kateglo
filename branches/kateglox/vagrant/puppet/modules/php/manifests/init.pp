@@ -64,6 +64,16 @@ class php {
         notify  => Exec['apache2ctl graceful'],
     }
 
+    file {"/etc/php5/cli/conf.d/suhosin.ini":
+        content => template('php/suhosin.ini.erb'),
+        owner   => 'root',
+        group   => 'root',
+        mode    => 0644,
+        require => Package['php5-suhosin'],
+        ensure => 'present',
+        notify  => Exec['apache2ctl graceful'],
+    }
+
     # Maximum amount of memory a script may consume (128MB)
     # http://php.net/memory-limit
     # memory_limit = 128M
