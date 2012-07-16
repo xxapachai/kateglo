@@ -1,11 +1,21 @@
 class bootstrap {
-  # this makes puppet and vagrant shut up about the puppet group
-  group { 'puppet':
-    ensure => 'present'
-  }
+    # this makes puppet and vagrant shut up about the puppet group
+        group { 'puppet':
+        ensure => 'present'
+    }
 
-  # make sure the packages are up to date before beginning
-  exec { 'apt-get update':
-    command => '/usr/bin/apt-get update'
-  }
+    # make sure the packages are up to date before beginning
+        exec { 'apt-get update':
+        command => '/usr/bin/apt-get update'
+    }
+
+    # create download directory
+        file { '/home/vagrant/downloads':
+        ensure => 'directory',
+    }
+
+    # create kateglo directory
+        file { '/home/vagrant/kateglo':
+          ensure => 'directory',
+    }
 }
