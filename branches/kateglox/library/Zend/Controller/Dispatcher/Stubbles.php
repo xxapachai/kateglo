@@ -98,7 +98,7 @@ class Zend_Controller_Dispatcher_Stubbles extends Zend_Controller_Dispatcher_Sta
 		Injector::get()->bind('Zend_Controller_Action_Interface')->to($className);
 		/** @var $controller Zend_Controller_Action_Stubbles */
 		$controller = Injector::getInstance($className);
-		$classObject = new stubReflectionClass($className);
+		$classObject = new \net\stubbles\lang\reflect\ReflectionClass($className);
 
 		$controller->setRequest($request)->setResponse($response)->setInvokeArgs($this->getParams());
 		$controller->setHelper(new Zend_Controller_Action_HelperBroker ($controller));

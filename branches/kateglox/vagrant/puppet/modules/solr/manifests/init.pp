@@ -18,17 +18,43 @@ class solr {
 			subscribe => [File['/etc/default/jetty']],
 	}
 
+	$mysqlConnector = 'mysql-connector-java-5.1.21'
+
+	exec { "mysql connector" :
+	    cwd => "/home/vagrant/downloads/",
+	    command => "wget http://ftp.dc.aleron.net/pub/mysql/Connector-J/${mysqlConnector}.tar.gz",
+	    unless => "test -f /home/vagrant/downloads/${mysqlConnector}.tar.gz",
+	    timeout => 0,
+	    require => [Package["jetty"], Package["mysql-server"], File["/home/vagrant/downloads"]]
+	}
+
+	exec { "mysql connector extract":
+        cwd     => "/home/vagrant/downloads",
+        command => "tar -xvzf /home/vagrant/downloads/${mysqlConnector}.tar.gz",
+        unless  => "test -d /home/vagrant/downloads/${mysqlConnector}",
+        require => [ Exec["mysql connector"] ],
+	}
+
+    exec {"mysql connector link library":
+        cwd => "/home/vagrant/downloads/${mysqlConnector}/",
+        command => "ln -s ${mysqlConnector}-bin.jar /usr/share/jetty/lib/",
+        unless => "test -h /usr/share/jetty/lib/${mysqlConnector}-bin.jar",
+        require => [Exec["mysql connector extract"]],
+    }
+
     $solrPackage =  'apache-solr-3.6.0'
 
 	exec {"solr wget":
-        command => "/usr/bin/wget http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist/lucene/solr/3.6.0/${solrPackage}.tgz -O /home/vagrant/downloads/${solrPackage}.tgz",
+	    cwd => "/home/vagrant/downloads",
+        command => "wget http://mirror.softaculous.com/apache/lucene/solr/3.6.0/${solrPackage}.tgz",
         unless  => "test -f /home/vagrant/downloads/${solrPackage}.tgz",
-        require => [ Package["jetty"] ],
+        timeout => 0,
+        require => [ Package["jetty"], File["/home/vagrant/downloads"] ],
     }
 
     exec {"solr extract":
         cwd     => "/home/vagrant/downloads",
-        command => "/bin/tar xvzf /home/vagrant/downloads/${solrPackage}.tgz",
+        command => "tar -xvzf /home/vagrant/downloads/${solrPackage}.tgz",
         unless  => "test -d /home/vagrant/downloads/${solrPackage}",
         require => [ Package["jetty"], Exec["solr wget"] ],
     }
@@ -42,7 +68,7 @@ class solr {
 	
 	file { "/home/vagrant/solr":
 		ensure => directory,
-		recurse => true,
+		recurse => inf,
 		owner => "jetty",
 		group => "jetty",
 		require => Exec["solr move"]
@@ -84,6 +110,13 @@ class solr {
         mode    => 0644,
         require => Exec['solr rename'],
         ensure => 'present',
+    }
+
+    exec {"mysql connector copy library":
+        cwd => "/home/vagrant/downloads/${mysqlConnector}/",
+        command => "cp ${mysqlConnector}-bin.jar /home/vagrant/solr/dist/",
+        unless => "test -f /home/vagrant/solr/dist/${mysqlConnector}-bin.jar",
+        require => [Exec["mysql connector extract"], Exec["solr copy war"]],
     }
 
 }

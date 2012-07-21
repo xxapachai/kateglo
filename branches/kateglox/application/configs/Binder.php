@@ -46,7 +46,7 @@ use kateglo\application\utilities;
 class Binder
 {
 
-    public static function bind(\stubBinder $container)
+    public static function bind(\net\stubbles\ioc\Binder $container)
     {
 
         $container->bind('Zend_Log')->toProviderClass(Log::$CLASS_NAME)->asSingleton();
