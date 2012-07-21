@@ -36,7 +36,7 @@ class Injector {
 	
 	/**
 	 * 
-	 * @var stubBinder
+	 * @var \net\stubbles\ioc\Binder
 	 */
 	private static $container;
 	
@@ -46,7 +46,7 @@ class Injector {
 	 * @return Object<T>
 	 */
 	public static function getInstance($className) {
-		if (! (self::$container instanceof \stubBinder)) {
+		if (! (self::$container instanceof \net\stubbles\ioc\Binder)) {
 			self::set ();
 		}
 		$object = self::$container->getInjector ()->getInstance ( $className );
@@ -58,12 +58,12 @@ class Injector {
 	
 	/**
 	 *
-	 * @param stubBinder $container
+	 * @param \net\stubbles\ioc\Binder $container
 	 */
-	public static function set(stubBinder $container = null) {
+	public static function set(\net\stubbles\ioc\Binder $container = null) {
 		if ($container === null) {
-			if (! (self::$container instanceof \stubBinder)) {
-				self::$container = new \stubBinder ();
+			if (! (self::$container instanceof \net\stubbles\ioc\Binder)) {
+				self::$container = new \net\stubbles\ioc\Binder ();
 				Binder::bind ( self::$container );
 			}
 		} else {
@@ -73,10 +73,10 @@ class Injector {
 	
 	/**
 	 *
-	 * @param stubBinder $container
+	 * @param \net\stubbles\ioc\Binder $container
 	 */
-	public static function get(stubBinder $container = null) {
-		if (! (self::$container instanceof \stubBinder)) {
+	public static function get(\net\stubbles\ioc\Binder $container = null) {
+		if (! (self::$container instanceof \net\stubbles\ioc\Binder)) {
 			self::set ();
 		}
 		return self::$container;

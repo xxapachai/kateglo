@@ -37,13 +37,13 @@ interface REST {
 	const INTERFACE_NAME = __CLASS__;
 
 	/**
-	 * @param \stubReflectionClass $classObject
+	 * @param \net\stubbles\lang\reflect\ReflectionClass $classObject
 	 * @return void
 	 */
-	function setClassObject(\stubReflectionClass $classObject);
+	function setClassObject(\net\stubbles\lang\reflect\ReflectionClass $classObject);
 
 	/**
-	 * @return \stubReflectionClass
+	 * @return \net\stubbles\lang\reflect\ReflectionClass
 	 */
 	function getClassObject();
 

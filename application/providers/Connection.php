@@ -33,7 +33,7 @@ use Doctrine\DBAL\DriverManager;
  *
  * @Singleton
  */
-class Connection extends \stubBaseObject implements \stubInjectionProvider {
+class Connection extends \net\stubbles\lang\BaseObject implements \net\stubbles\ioc\InjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 	

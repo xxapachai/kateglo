@@ -42,7 +42,7 @@ class REST implements interfaces\REST
     public static $CLASS_NAME = __CLASS__;
 
     /**
-     * @var \stubReflectionClass
+     * @var \net\stubbles\lang\reflect\ReflectionClass
      */
     private $classObject;
 
@@ -72,16 +72,16 @@ class REST implements interfaces\REST
     private $actionPath;
 
     /**
-     * @param \stubReflectionClass $classObject
+     * @param \net\stubbles\lang\reflect\ReflectionClass $classObject
      * @return void
      */
-    public function setClassObject(\stubReflectionClass $classObject)
+    public function setClassObject(\net\stubbles\lang\reflect\ReflectionClass $classObject)
     {
         $this->classObject = $classObject;
     }
 
     /**
-     * @return \stubReflectionClass
+     * @return \net\stubbles\lang\reflect\ReflectionClass
      */
     public function getClassObject()
     {
@@ -208,7 +208,7 @@ class REST implements interfaces\REST
         $actions = $this->classObject->getMethods();
         $actionPaths = array();
         $countActionUri = count($actionUriArray);
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actions as $action) {
             if ($action->hasAnnotation('Path')) {
                 $actionPath = array_map('urlencode', array_slice(explode('/', $action->getAnnotation('Path')->getValue()), 1));
@@ -258,7 +258,7 @@ class REST implements interfaces\REST
         $methodArray = array('GET', 'POST', 'PUT', 'DELETE');
         $allowArray = array();
         foreach ($methodArray as $method) {
-            /** @var \stubReflectionMethod $action */
+            /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
             foreach ($actionPaths as $action) {
                 if ($action->hasAnnotation(ucfirst(strtolower($method)))) {
                     !in_array($method, $allowArray) ? $allowArray[] = $method : null;
@@ -284,7 +284,7 @@ class REST implements interfaces\REST
         if (strtoupper($serverMethod) === 'HEAD') {
             $serverMethod = 'GET';
         }
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actionPaths as $action) {
             if ($action->hasAnnotation(ucfirst(strtolower($serverMethod)))) {
                 $actionMethods->add($action);
@@ -305,7 +305,7 @@ class REST implements interfaces\REST
     private function getActionConsumes(ArrayCollection $actionMethods)
     {
         $actionConsumes = new ArrayCollection();
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actionMethods as $action) {
             if ($action->hasAnnotation('Consumes')) {
                 $actionConsumes->add($action);
@@ -326,7 +326,7 @@ class REST implements interfaces\REST
     private function getActionProduces(ArrayCollection $actionMethods)
     {
         $actionProduces = new ArrayCollection();
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actionMethods as $action) {
             if ($action->hasAnnotation('Produces')) {
                 $actionProduces->add($action);
@@ -349,7 +349,7 @@ class REST implements interfaces\REST
         $supportedMediaAsArray = array();
         $mediaActionSet = array();
 
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actionMethods as $action) {
             $getRawConsumes = $action->getAnnotation('Consumes')->getValue();
             if (!empty($getRawConsumes)) {
@@ -384,14 +384,14 @@ class REST implements interfaces\REST
     /**
      * @throws Exception|kateglo\application\controllers\exceptions\HTTPNotAcceptableException
      * @param Doctrine\Common\Collections\ArrayCollection $actionMethods
-     * @return \stubReflectionMethod
+     * @return \net\stubbles\lang\reflect\ReflectionMethod
      */
     private function decideProducesMedia(ArrayCollection $actionMethods)
     {
         $supportedMediaAsArray = array();
         $mediaActionSet = array();
 
-        /** @var \stubReflectionMethod $action */
+        /** @var \net\stubbles\lang\reflect\ReflectionMethod $action */
         foreach ($actionMethods as $action) {
             $getRawProduces = $action->getAnnotation('Produces')->getValue();
             if (!empty($getRawProduces)) {
@@ -423,17 +423,17 @@ class REST implements interfaces\REST
     }
 
     /**
-     * @param \stubReflectionMethod $method
+     * @param \net\stubbles\lang\reflect\ReflectionMethod $method
      * @return array
      */
-    private function createArguments(\stubReflectionMethod $method)
+    private function createArguments(\net\stubbles\lang\reflect\ReflectionMethod $method)
     {
         $serverMethod = strtoupper($this->request->getMethod());
         $actionPath = array_map('urlencode', array_slice(explode('/', $method->getAnnotation('Path')->getValue()), 1));
         $args = array();
 
         $methodParameters = $method->getParameters();
-        /** @var \stubReflectionParameter $parameter */
+        /** @var \net\stubbles\lang\reflect\ReflectionParameter $parameter */
         foreach ($methodParameters as $parameter) {
             $args[$parameter->getName()] = $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null;
 

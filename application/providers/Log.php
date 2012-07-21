@@ -33,7 +33,7 @@ namespace kateglo\application\providers;
  *
  * @Singleton
  */
-class Log extends \stubBaseObject implements \stubInjectionProvider {
+class Log extends \net\stubbles\lang\BaseObject implements \net\stubbles\ioc\InjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 	

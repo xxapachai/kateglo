@@ -30,12 +30,14 @@ class php {
 
     exec { "pear install pear.phpunit.de/PHP_CodeCoverage":
             require => Exec["pear clear-cache"],
-            creates => "/usr/share/php/PHP/CodeCoverage"
+            creates => "/usr/share/php/PHP/CodeCoverage",
+            timeout => 0,
     }
 
     exec { "pear install pear.phpunit.de/PHPUnit":
             require => Exec["pear install pear.phpunit.de/PHP_CodeCoverage"],
-            creates => "/usr/share/php/PHPUnit"
+            creates => "/usr/share/php/PHPUnit",
+            timeout => 0,
     }
 
     exec { "pecl install apc":

@@ -33,7 +33,7 @@ namespace kateglo\application\providers;
  *
  * @Singleton
  */
-class Solr extends \stubBaseObject implements \stubInjectionProvider {
+class Solr extends \net\stubbles\lang\BaseObject implements \net\stubbles\ioc\InjectionProvider {
 	
 	public static $CLASS_NAME = __CLASS__;
 
