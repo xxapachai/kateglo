@@ -26,6 +26,7 @@ class kateglo {
 
     file { '/home/vagrant/kateglo/cache':
         ensure => 'directory',
+        recurse => inf,
         group => 'www-data',
         owner => 'www-data',
         require => [Exec["checkout kateglo"]]
@@ -54,7 +55,7 @@ class kateglo {
 
     exec { "create kateglo db":
       unless => "mysql -u root kateglox",
-      command => "mysql -u root -e \"create database kateglox; grant all on kateglox.* to root@% ;\"",
+      command => "mysql -u root -e \"create database kateglox; grant all on kateglox.* to root ;\"",
       group => "root",
       user => "root",
       require => [Service["mysql"], Package["mysql-server"]],
@@ -71,6 +72,8 @@ class kateglo {
         refreshonly => true,
         command => "mysql -u root kateglox < kateglox.sql",
         cwd => "/home/vagrant/",
+        group => "root", user => "root",
+        logoutput => true,
         timeout => 0,
         require => File["/home/vagrant/kateglox.sql"],
         subscribe => File["/home/vagrant/kateglox.sql"],
@@ -183,19 +186,21 @@ class kateglo {
         notify => Service["jetty"],
     }
 
-    #exec { "solr full import":
-    #    command => "curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
-    #    refreshonly => true,
-    #    owner => "jetty", group => "jetty",
-    #    subscribe => [File["/home/vagrant/solr/conf/synonyms.txt"], File["/home/vagrant/solr/conf/stopwords.txt"],
-    #         File["/home/vagrant/solr/conf/spellings.txt"], File["/home/vagrant/solr/conf/solrconfig.xml"],
-    #         File["/home/vagrant/solr/conf/schema.xml"], File["/home/vagrant/solr/conf/protwords.txt"],
-    #         File["/home/vagrant/solr/conf/elevate.xml"], File["/home/vagrant/solr/conf/data-config.xml"]],
-    #    require => [File["/home/vagrant/solr/conf/synonyms.txt"], File["/home/vagrant/solr/conf/stopwords.txt"],
-    #        File["/home/vagrant/solr/conf/spellings.txt"], File["/home/vagrant/solr/conf/solrconfig.xml"],
-    #        File["/home/vagrant/solr/conf/schema.xml"], File["/home/vagrant/solr/conf/protwords.txt"],
-    #        File["/home/vagrant/solr/conf/elevate.xml"], File["/home/vagrant/solr/conf/data-config.xml"], Exec["import kateglo dump"]],
-    #
-    #}
+    exec {"wait for jetty":
+      require => Service["jetty"],
+      command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
+    }
+
+    exec { "solr full import":
+        command => "curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
+        logoutput => true,
+        unless => "test -f /home/vagrant/solr/data/index/*.fdx",
+        require => [File["/home/vagrant/solr/conf/synonyms.txt"], File["/home/vagrant/solr/conf/stopwords.txt"],
+            File["/home/vagrant/solr/conf/spellings.txt"], File["/home/vagrant/solr/conf/solrconfig.xml"],
+            File["/home/vagrant/solr/conf/schema.xml"], File["/home/vagrant/solr/conf/protwords.txt"],
+            File["/home/vagrant/solr/conf/elevate.xml"], File["/home/vagrant/solr/conf/data-config.xml"],
+            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"]],
+
+    }
 
 }
