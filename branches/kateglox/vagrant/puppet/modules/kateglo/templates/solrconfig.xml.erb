@@ -76,21 +76,21 @@
        files in that directory which completely match the regex
        (anchored on both ends) will be included.
     -->
-  <lib dir="/home/vagrant/solr/dist/" regex="apache-solr-cell-\d.*\.jar" />
-    <lib dir="/home/vagrant/solr/contrib/extraction/lib" regex=".*\.jar" />
+  <lib dir="/home/<%= globalUser %>/solr/dist/" regex="apache-solr-cell-\d.*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/contrib/extraction/lib" regex=".*\.jar" />
 
-    <lib dir="/home/vagrant/solr/dist/" regex="apache-solr-clustering-\d.*\.jar" />
-    <lib dir="/home/vagrant/solr/contrib/clustering/lib/" regex=".*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/dist/" regex="apache-solr-clustering-\d.*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/contrib/clustering/lib/" regex=".*\.jar" />
 
-    <lib dir="/home/vagrant/solr/dist/" regex="apache-solr-dataimporthandler-\d.*\.jar" />
-    <lib dir="/home/vagrant/solr/contrib/dataimporthandler/lib/" regex=".*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/dist/" regex="apache-solr-dataimporthandler-\d.*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/contrib/dataimporthandler/lib/" regex=".*\.jar" />
 
-    <lib dir="/home/vagrant/solr/dist/" regex="apache-solr-langid-\d.*\.jar" />
-    <lib dir="/home/vagrant/solr/contrib/langid/lib/" regex=".*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/dist/" regex="apache-solr-langid-\d.*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/contrib/langid/lib/" regex=".*\.jar" />
 
-    <lib dir="/home/vagrant/solr/dist/" regex="apache-solr-velocity-\d.*\.jar" />
-    <lib dir="/home/vagrant/solr/contrib/velocity/lib" regex=".*\.jar" />
-    <lib dir="/home/vagrant/solr/dist/" regex="mysql-connector-java-\d.*\-bin.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/dist/" regex="apache-solr-velocity-\d.*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/contrib/velocity/lib" regex=".*\.jar" />
+    <lib dir="/home/<%= globalUser %>/solr/dist/" regex="mysql-connector-java-\d.*\-bin.jar" />
 
 
     <!-- If a 'dir' option (with or without a regex) is used and nothing
@@ -1109,7 +1109,7 @@ Lucene will flush based on whichever limit is hit first.  -->
      -->
 	<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
 	<lst name="defaults">
-	<str name="config">/home/vagrant/solr/conf/data-config.xml</str>
+<str name="config">/home/<%= globalUser %>/solr/conf/data-config.xml</str>
 	</lst>
 	</requestHandler>
   

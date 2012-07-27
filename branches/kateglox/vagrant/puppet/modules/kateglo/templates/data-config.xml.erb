@@ -1,6 +1,6 @@
 <dataConfig>
-    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1/kateglox" user="root"
-                password=""/>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1/kateglox" user="<%= solrDBUser %>"
+                password="<%= solrDBPassword %>"/>
     <document name="entries">
         <entity name="entry" query="select * from entry">
 

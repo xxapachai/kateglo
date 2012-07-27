@@ -11,7 +11,7 @@ class bootstrap {
     }
 
     # create download directory
-        file { '/home/vagrant/downloads':
+        file { "/home/${globalUser}/downloads":
         ensure => 'directory',
     }
 }
