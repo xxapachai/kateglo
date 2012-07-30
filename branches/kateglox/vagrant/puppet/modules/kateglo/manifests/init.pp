@@ -32,7 +32,8 @@ class kateglo {
         require => [Exec["checkout kateglo"]]
     }
 
-    exec { "curl -s http://getcomposer.org/installer | php" :
+    exec { "get composer" :
+        command => "curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
         cwd => "/home/${globalUser}/kateglo",
         user => "www-data",
         group => "www-data",
@@ -45,11 +46,11 @@ class kateglo {
     exec { "php composer.phar install" :
         cwd => "/home/${globalUser}/kateglo",
         creates => "/home/${globalUser}/kateglo/vendor",
-        user => "root",
-        group => "root",
+        user => "www-data",
+        group => "www-data",
         timeout => 0,
         logoutput => true,
-        require => [Package["php5"],Exec["curl -s http://getcomposer.org/installer | php"]],
+        require => [Package["php5"],Exec["get composer"]],
         notify => Exec["apache2ctl graceful"],
     }
 
@@ -142,6 +143,7 @@ class kateglo {
         $solrDBUser = "root"
         $solrDBPassword = ""
     }
+
     file { "/home/${globalUser}/solr/conf/data-config.xml":
         ensure => present,
         content => template("kateglo/data-config.xml.erb"),
@@ -149,6 +151,14 @@ class kateglo {
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
+    }
+
+    file { "/home/${globalUser}/kateglo/application/configs/application.ini":
+        ensure => present,
+        content => template("kateglo/application.ini.erb"),
+        owner => "www-data", group => "www-data",
+        mode => "0644",
+        require => [Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
     }
 
     file { "/home/${globalUser}/solr/conf/elevate.xml":
