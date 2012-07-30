@@ -40,7 +40,7 @@ class kateglo {
         timeout => 0,
         creates => "/home/${globalUser}/kateglo/composer.phar",
         logoutput => true,
-        require => [Package["curl"],Exec["checkout kateglo"]],
+        require => [Package["curl"],Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
     }
 
     exec { "php composer.phar install" :
