@@ -1,0 +1,42 @@
+[production]
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+;resources.frontController.controllerDirectory = APPLICATION_PATH "/modules/default/controllers"
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
+database.adapter = pdo_mysql
+database.host = localhost
+database.port = 3306
+database.username = <%= solrDBUser %>
+database.password = <%= solrDBPassword %>
+database.charset = UTF8
+database.name = kateglox
+errorLog = "/home/<%= globalUser %>/log/error.log"
+cache.tal = APPLICATION_PATH "/../cache/tal/"
+cache.doctrine.proxy = APPLICATION_PATH "/../cache/doctrine/"
+cache.doctrine.namespace = kateglo\cache\doctrine
+cache.entry = 0
+solr.host = localhost
+solr.port = 8080
+solr.path = /solr/
+curl.timeout = 15
+curl.proxy = ""
+curl.proxyUserPwd = ""
+
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+database.adapter = pdo_mysql
+database.host = 127.0.0.1
+database.port = 3306
+database.username = root
+database.password = 
+database.name = kateglox
