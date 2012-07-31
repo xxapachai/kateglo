@@ -226,6 +226,15 @@ class kateglo {
       command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
     }
 
+    exec{ "restart jetty":
+        require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],
+                    File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
+                    File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
+                    File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
+                    Exec["import kateglo dump"], Service["jetty"], exec["wait for jetty"]],
+        command => "sudo service jetty restart",
+    }
+
     exec { "solr full import":
         command => "sudo curl http://localhost:8080/solr/dataimport?command=full-import",
         logoutput => true,
@@ -234,7 +243,7 @@ class kateglo {
             File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
             File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
             File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
-            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"]],
+            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"], Exec["restart jetty"]],
 
     }
 

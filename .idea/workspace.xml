@@ -4,7 +4,6 @@
     <list default="true" readonly="true" id="7fad7703-02e1-4f4f-8603-084b2e534c9a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,7 +37,7 @@
       <file leaf-file-name="init.pp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="224" column="36" selection-start="7775" selection-end="7775" vertical-scroll-proportion="0.18047337">
+            <state line="233" column="64" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0295858">
               <folding />
             </state>
           </provider>
@@ -664,7 +663,11 @@
       <created>1343718923103</created>
       <updated>1343718923103</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Making Puppet configurable">
+      <created>1343729324103</created>
+      <updated>1343729324103</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -866,7 +869,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="36" selection-start="7775" selection-end="7775" vertical-scroll-proportion="0.18047337">
+        <state line="233" column="64" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0295858">
           <folding />
         </state>
       </provider>
