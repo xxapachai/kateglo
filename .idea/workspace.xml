@@ -37,7 +37,7 @@
       <file leaf-file-name="init.pp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="233" column="64" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0295858">
+            <state line="233" column="41" selection-start="8457" selection-end="8457" vertical-scroll-proportion="0.65384614">
               <folding />
             </state>
           </provider>
@@ -667,7 +667,11 @@
       <created>1343729324103</created>
       <updated>1343729324103</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Making Puppet configurable">
+      <created>1343735281103</created>
+      <updated>1343735281103</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -869,7 +873,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="233" column="64" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0295858">
+        <state line="233" column="41" selection-start="8457" selection-end="8457" vertical-scroll-proportion="0.65384614">
           <folding />
         </state>
       </provider>
