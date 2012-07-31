@@ -242,7 +242,7 @@ class kateglo {
             File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
             File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
             File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
-            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"], Exec["restart jetty"]],
+            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"], Exec["restart jetty"], Service["mysql"]],
 
     }
 
