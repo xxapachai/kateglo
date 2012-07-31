@@ -235,7 +235,7 @@ class kateglo {
     }
 
     exec { "solr full import":
-        command => "sudo curl http://localhost:8080/solr/dataimport?command=full-import",
+        command => "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
         logoutput => true,
         unless => "test -f /home/${globalUser}/solr/data/index/*.fdx",
         require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],

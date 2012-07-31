@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="7fad7703-02e1-4f4f-8603-084b2e534c9a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" afterPath="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" />
     </list>
     <ignored path="kateglo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="init.pp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="init.pp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="244" column="120" selection-start="9355" selection-end="9355" vertical-scroll-proportion="-14.44">
+            <state line="237" column="46" selection-start="8616" selection-end="8616" vertical-scroll-proportion="0.3164179">
               <folding />
             </state>
           </provider>
@@ -79,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="init.pp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="init.pp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="138" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.5277778">
+            <state line="36" column="30" selection-start="992" selection-end="994" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,8 +130,8 @@
         <option value="$PROJECT_DIR$/vagrant/puppet/modules/php/templates/apc.ini.erb" />
         <option value="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/templates/application.ini.erb" />
         <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" />
         <option value="$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp" />
+        <option value="$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp" />
       </list>
     </option>
   </component>
@@ -703,7 +703,11 @@
       <created>1343756208102</created>
       <updated>1343756208102</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Making Puppet configurable">
+      <created>1343758049102</created>
+      <updated>1343758049102</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -888,16 +892,16 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
+    <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="244" column="120" selection-start="9355" selection-end="9355" vertical-scroll-proportion="-14.44">
+        <state line="36" column="30" selection-start="992" selection-end="994" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/mysql/manifests/init.pp">
+    <entry file="file://$PROJECT_DIR$/vagrant/puppet/modules/kateglo/manifests/init.pp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="138" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.5277778">
+        <state line="237" column="46" selection-start="8616" selection-end="8616" vertical-scroll-proportion="0.3164179">
           <folding />
         </state>
       </provider>
