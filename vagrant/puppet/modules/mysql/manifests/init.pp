@@ -34,7 +34,7 @@ class mysql {
         if $mysqlUserPassword != "" {
             exec { "create user":
                 unless => "mysqladmin -u${mysqlUser} -p\"${mysqlUserPassword}\" status",
-                command => "mysql -u root -p\"${mysqlRootPassword}\" -e \"create user ${mysqlUser} identified by ${mysqlUserPassword};\"",
+                command => "mysql -u root -p\"${mysqlRootPassword}\" -e \"create user '${mysqlUser}' identified by '${mysqlUserPassword}' ;\"",
                 group => "root",
                 user => "root",
                 logoutput => true,
