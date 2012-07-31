@@ -33,10 +33,11 @@ class mysql {
     if $mysqlUser != "" {
         if $mysqlUserPassword != "" {
             exec { "create user":
-                unless => "mysqladmin -u${mysqlUser} ${mysqlAddPassword} status",
+                unless => "mysqladmin -u${mysqlUser} -p\"${mysqlUserPassword}\" status",
                 command => "mysql -u root -p\"${mysqlRootPassword}\" -e \"create user ${mysqlUser} identified by ${mysqlUserPassword};\"",
                 group => "root",
                 user => "root",
+                logoutput => true,
                 require => [Service["mysql"], Package["mysql-server"], Exec["set-mysql-root-password"]],
             }
         }

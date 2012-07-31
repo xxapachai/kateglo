@@ -33,7 +33,7 @@ class kateglo {
     }
 
     exec { "get composer" :
-        command => "sudo \"www-data\" curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
+        command => "sudo -u \"www-data\" curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
         cwd => "/home/${globalUser}/kateglo",
         timeout => 0,
         creates => "/home/${globalUser}/kateglo/composer.phar",
@@ -41,11 +41,9 @@ class kateglo {
         require => [Package["curl"],Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
     }
 
-    exec { "php composer.phar install" :
+    exec { "sudo -u \"www-data\" php composer.phar install" :
         cwd => "/home/${globalUser}/kateglo",
         creates => "/home/${globalUser}/kateglo/vendor",
-        user => "www-data",
-        group => "www-data",
         timeout => 0,
         logoutput => true,
         require => [Package["php5"],Exec["get composer"]],
@@ -224,6 +222,7 @@ class kateglo {
 
     exec {"wait for jetty":
       require => Service["jetty"],
+      subscribe => Service["jetty"],
       command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
     }
 
