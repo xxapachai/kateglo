@@ -33,10 +33,8 @@ class kateglo {
     }
 
     exec { "get composer" :
-        command => "curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
+        command => "sudo \"www-data\" curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
         cwd => "/home/${globalUser}/kateglo",
-        user => "www-data",
-        group => "www-data",
         timeout => 0,
         creates => "/home/${globalUser}/kateglo/composer.phar",
         logoutput => true,
@@ -226,11 +224,11 @@ class kateglo {
 
     exec {"wait for jetty":
       require => Service["jetty"],
-      command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
+      command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
     }
 
     exec { "solr full import":
-        command => "curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
+        command => "sudo curl http://localhost:8080/solr/dataimport?command=full-import",
         logoutput => true,
         unless => "test -f /home/${globalUser}/solr/data/index/*.fdx",
         require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],
