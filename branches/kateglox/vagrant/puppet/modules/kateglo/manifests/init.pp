@@ -220,19 +220,18 @@ class kateglo {
         notify => Service["jetty"],
     }
 
-    exec {"wait for jetty":
-      require => Service["jetty"],
-      subscribe => Service["jetty"],
-      command => "wget --spider --tries 10 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
-    }
-
     exec{ "restart jetty":
         require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],
                     File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
                     File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
                     File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
-                    Exec["import kateglo dump"], Service["jetty"], exec["wait for jetty"]],
+                    Exec["import kateglo dump"], Service["jetty"]],
         command => "sudo service jetty restart",
+    }
+
+    exec {"wait for jetty":
+      require => [Service["jetty"], Exec["restart jetty"]],
+      command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
     }
 
     exec { "solr full import":
