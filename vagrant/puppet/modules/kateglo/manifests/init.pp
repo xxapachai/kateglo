@@ -79,15 +79,28 @@ class kateglo {
         notify => Exec["import kateglo dump"],
     }
 
-    exec { "import kateglo dump":
-        refreshonly => true,
-        command => "mysql -u root -p\"${mysqlRootPassword}\" kateglox < kateglox.sql",
-        cwd => "/home/${globalUser}/",
-        group => "root", user => "root",
-        logoutput => true,
-        timeout => 0,
-        require => File["/home/${globalUser}/kateglox.sql"],
-        subscribe => File["/home/${globalUser}/kateglox.sql"],
+    if $mysqlRootPassword != "" {
+        exec { "import kateglo dump":
+            refreshonly => true,
+            command => "mysql -u root -p\"${mysqlRootPassword}\" kateglox < kateglox.sql",
+            cwd => "/home/${globalUser}/",
+            group => "root", user => "root",
+            logoutput => true,
+            timeout => 0,
+            require => File["/home/${globalUser}/kateglox.sql"],
+            subscribe => File["/home/${globalUser}/kateglox.sql"],
+        }
+    } else {
+        exec { "import kateglo dump":
+            refreshonly => true,
+            command => "mysql -u root kateglox < kateglox.sql",
+            cwd => "/home/${globalUser}/",
+            group => "root", user => "root",
+            logoutput => true,
+            timeout => 0,
+            require => File["/home/${globalUser}/kateglox.sql"],
+            subscribe => File["/home/${globalUser}/kateglox.sql"],
+        }
     }
 
     # ServerAdmin webmaster@localhost
