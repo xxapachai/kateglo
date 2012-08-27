@@ -244,7 +244,7 @@ class kateglo {
 
     exec {"wait for jetty":
       require => [Service["jetty"], Exec["restart jetty"]],
-      command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://localhost:8080/solr/",
+      command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
     }
 
     exec { "solr full import":

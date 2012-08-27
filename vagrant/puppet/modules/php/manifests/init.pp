@@ -15,7 +15,7 @@ class php {
 
     # upgrade PEAR
     exec { "pear upgrade":
-        require => Package["php-pear"]
+        require => Package["php-pear"],
     }
 
     # set auto discover

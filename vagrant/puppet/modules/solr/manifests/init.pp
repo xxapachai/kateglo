@@ -69,7 +69,6 @@ class solr {
 	file { "/home/${globalUser}/solr":
 		ensure => directory,
 		recurse => inf,
-		refreshonly => true,
 		owner => "jetty",
 		group => "jetty",
 		require => Exec["solr move"]
