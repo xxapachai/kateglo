@@ -242,21 +242,28 @@ class kateglo {
         command => "sudo service jetty restart",
     }
 
-    exec {"wait for jetty":
-      require => [Service["jetty"], Exec["restart jetty"]],
-      command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
-    }
+    if $globalUser == 'vagrant'{
+        exec {"wait for jetty":
+          require => [Service["jetty"], Exec["restart jetty"]],
+          command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
+        }
 
-    exec { "solr full import":
-        command => "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
-        logoutput => true,
-        unless => "test -f /home/${globalUser}/solr/data/index/*.fdx",
-        require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],
-            File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
-            File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
-            File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
-            Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"], Exec["restart jetty"], Service["mysql"]],
+        exec { "solr full import":
+            command => "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
+            logoutput => true,
+            unless => "test -f /home/${globalUser}/solr/data/index/*.fdx",
+            require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],
+                File["/home/${globalUser}/solr/conf/spellings.txt"], File["/home/${globalUser}/solr/conf/solrconfig.xml"],
+                File["/home/${globalUser}/solr/conf/schema.xml"], File["/home/${globalUser}/solr/conf/protwords.txt"],
+                File["/home/${globalUser}/solr/conf/elevate.xml"], File["/home/${globalUser}/solr/conf/data-config.xml"],
+                Exec["import kateglo dump"], Service["jetty"], Exec["wait for jetty"], Exec["restart jetty"], Service["mysql"]],
 
+        }
+    }else{
+       notify{ "restart jetty and do full import":
+        message: 'Please restart jetty with "sudo service jetty restart" and do full import with "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import"',
+
+       }
     }
 
 }
