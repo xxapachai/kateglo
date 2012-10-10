@@ -260,8 +260,8 @@ class kateglo {
 
         }
     }else{
-       notify{ "restart jetty and do full import":
-        message: 'Please restart jetty with "sudo service jetty restart" and do full import with "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import"',
+       notify { "restart jetty and do full import":
+        message => 'Please restart jetty with "sudo service jetty restart" and do full import with "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import"',
 
        }
     }
