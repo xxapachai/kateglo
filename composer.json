@@ -3,7 +3,7 @@
         "doctrine/orm" : "2.2.2",
         "room13/PhpSolrClient" : "dev-master",
         "stubbles/core" : "v2.0.0",
-        "zendframework/zendframework1": "1.11.9",
+        "zendframework/zendframework1": "1.12.0",
         "phptal/phptal" : "dev-html5_with_ns"
     }
 }
