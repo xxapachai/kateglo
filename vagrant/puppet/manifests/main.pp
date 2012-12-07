@@ -7,6 +7,11 @@ $globalUser = 'vagrant'
 $mysqlRootPassword = ""
 $mysqlUser = ""
 $mysqlUserPassword = ""
+if $globalUser == "vagrant" {
+	$jettyUser = $globalUser
+} else {
+	$jettyUser = "jetty"
+}
 
 node default{
     include bootstrap
@@ -14,7 +19,7 @@ node default{
     include apache
     include php
     include mysql
-	include java
-	include solr
-	include kateglo
+    include java
+    include solr
+    include kateglo
 }

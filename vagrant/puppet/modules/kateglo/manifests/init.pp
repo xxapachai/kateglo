@@ -1,10 +1,19 @@
 class kateglo {
 
-    file { "/home/${globalUser}/log":
-        ensure => "directory",
-        group => "www-data",
-        owner => "www-data",
-        require => [Package["apache2"]]
+    if $globalUser != "vagrant" {
+        file { "/home/${globalUser}/log":
+            ensure => "directory",
+            group => "www-data",
+            owner => "www-data",
+            require => [Package["apache2"]]
+        }
+    }else{
+        file { "/home/${globalUser}/log":
+            ensure => "directory",
+            group => "${globalUser}",
+            owner => "${globalUser}",
+            require => [Package["apache2"]]
+        }
     }
 
     exec { "checkout kateglo" :
@@ -15,33 +24,60 @@ class kateglo {
         require => [Package["apache2"], Package["subversion"]],
     }
 
-    file { "/home/${globalUser}/kateglo":
-        ensure => "directory",
-        recurse => inf,
-        group => "www-data",
-        owner => "www-data",
-        require => [Exec["checkout kateglo"]]
+    if $globalUser != "vagrant" {
+        file { "/home/${globalUser}/kateglo":
+            ensure => "directory",
+            recurse => inf,
+            group => "www-data",
+            owner => "www-data",
+            require => [Exec["checkout kateglo"]]
+        }
+
+
+        file { "/home/${globalUser}/kateglo/cache":
+            ensure => "directory",
+            recurse => inf,
+            group => "www-data",
+            owner => "www-data",
+            require => [Exec["checkout kateglo"]]
+        }
+
+        exec { "get composer" :
+            command => "sudo -u \"www-data\" curl -s http://getcomposer.org/installer | sudo php",
+            cwd => "/home/${globalUser}/kateglo",
+            timeout => 0,
+            creates => "/home/${globalUser}/kateglo/composer.phar",
+            logoutput => true,
+            require => [Package["curl"],Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
+        }
+    }else{
+        file { "/home/${globalUser}/kateglo":
+            ensure => "directory",
+            recurse => inf,
+            group => "${globalUser}",
+            owner => "${globalUser}",
+            require => [Exec["checkout kateglo"]]
+        }
+
+        file { "/home/${globalUser}/kateglo/cache":
+            ensure => "directory",
+            recurse => inf,
+            group => "${globalUser}",
+            owner => "${globalUser}",
+            require => [Exec["checkout kateglo"]]
+        }
+
+        exec { "get composer" :
+            command => "curl -s http://getcomposer.org/installer | php",
+            cwd => "/home/${globalUser}/kateglo",
+            timeout => 0,
+            creates => "/home/${globalUser}/kateglo/composer.phar",
+            logoutput => true,
+            require => [Package["curl"],Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
+        }
     }
 
-
-    file { "/home/${globalUser}/kateglo/cache":
-        ensure => "directory",
-        recurse => inf,
-        group => "www-data",
-        owner => "www-data",
-        require => [Exec["checkout kateglo"]]
-    }
-
-    exec { "get composer" :
-        command => "sudo -u \"www-data\" curl -s http://getcomposer.org/installer | sudo -u\"www-data\" php",
-        cwd => "/home/${globalUser}/kateglo",
-        timeout => 0,
-        creates => "/home/${globalUser}/kateglo/composer.phar",
-        logoutput => true,
-        require => [Package["curl"],Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
-    }
-
-    exec { "sudo -u \"www-data\" php composer.phar install" :
+    exec { "php composer.phar install" :
         cwd => "/home/${globalUser}/kateglo",
         creates => "/home/${globalUser}/kateglo/vendor",
         timeout => 0,
@@ -95,7 +131,6 @@ class kateglo {
             refreshonly => true,
             command => "mysql -u root kateglox < kateglox.sql",
             cwd => "/home/${globalUser}/",
-            group => "root", user => "root",
             logoutput => true,
             timeout => 0,
             require => File["/home/${globalUser}/kateglox.sql"],
@@ -156,24 +191,34 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/data-config.xml":
         ensure => present,
         content => template("kateglo/data-config.xml.erb"),
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
     }
 
-    file { "/home/${globalUser}/kateglo/application/configs/application.ini":
-        ensure => present,
-        content => template("kateglo/application.ini.erb"),
-        owner => "www-data", group => "www-data",
-        mode => "0644",
-        require => [Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
+    if $globalUser != "vagrant"{
+        file { "/home/${globalUser}/kateglo/application/configs/application.ini":
+            ensure => present,
+            content => template("kateglo/application.ini.erb"),
+            owner => "www-data", group => "www-data",
+            mode => "0644",
+            require => [Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
+        }
+    }else{
+        file { "/home/${globalUser}/kateglo/application/configs/application.ini":
+            ensure => present,
+            content => template("kateglo/application.ini.erb"),
+            owner => "vagrant", group => "vagrant",
+            mode => "0644",
+            require => [Exec["checkout kateglo"], File["/home/${globalUser}/kateglo"]],
+        }
     }
 
     file { "/home/${globalUser}/solr/conf/elevate.xml":
         ensure => present,
         source => "puppet:///modules/kateglo/elevate.xml",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -182,7 +227,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/protwords.txt":
         ensure => present,
         source => "puppet:///modules/kateglo/protwords.txt",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -191,7 +236,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/schema.xml":
         ensure => present,
         source => "puppet:///modules/kateglo/schema.xml",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -200,7 +245,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/solrconfig.xml":
         ensure => present,
         content => template("kateglo/solrconfig.xml.erb"),
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -209,7 +254,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/spellings.txt":
         ensure => present,
         source => "puppet:///modules/kateglo/spellings.txt",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -218,7 +263,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/stopwords.txt":
         ensure => present,
         source => "puppet:///modules/kateglo/stopwords.txt",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -227,7 +272,7 @@ class kateglo {
     file { "/home/${globalUser}/solr/conf/synonyms.txt":
         ensure => present,
         source => "puppet:///modules/kateglo/synonyms.txt",
-        owner => "jetty", group => "jetty",
+        owner => "${jettyUser}", group => "${jettyUser}",
         mode => "0644",
         require => File["/etc/default/jetty"],
         notify => Service["jetty"],
@@ -245,11 +290,11 @@ class kateglo {
     if $globalUser == 'vagrant'{
         exec {"wait for jetty":
           require => [Service["jetty"], Exec["restart jetty"]],
-          command => "wget --spider --tries 50 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
+          command => "sudo wget --spider --tries 50 --retry-connrefused --no-check-certificate http://127.0.0.1:8080/solr/",
         }
 
         exec { "solr full import":
-            command => "sudo curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
+            command => "curl http://127.0.0.1:8080/solr/dataimport?command=full-import",
             logoutput => true,
             unless => "test -f /home/${globalUser}/solr/data/index/*.fdx",
             require => [File["/home/${globalUser}/solr/conf/synonyms.txt"], File["/home/${globalUser}/solr/conf/stopwords.txt"],

@@ -56,4 +56,16 @@ class apache {
         notify  => Exec['apache2ctl graceful'],
     }
 
+    if $globalUser == "vagrant"{
+    	file {"/etc/apache2/envvars":
+    		content => template('apache/envvars.erb'),
+        	owner   => 'root',
+        	group   => 'root',
+        	mode    => 0644,
+        	require => Package['apache2'],
+        	ensure => 'present',
+        	notify  => Exec['apache2ctl graceful'],
+    	}
+    }
+
 }
